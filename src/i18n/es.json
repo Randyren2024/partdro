@@ -1,0 +1,258 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "windowCleaning": "Limpieza de Ventanas",
+    "solarCleaning": "Limpieza de Paneles Solares",
+    "solutions": "Soluciones",
+    "cases": "Casos",
+    "news": "Noticias",
+    "about": "Sobre Nosotros",
+    "contact": "Contáctenos",
+    "documents": "Documentos"
+  },
+  "hero": {
+    "title": "Soluciones Profesionales de Limpieza con Drones",
+    "subtitle": "Limpieza Eficiente, Segura e Inteligente para Ventanas y Paneles Solares",
+    "cta": "Solicitar Presupuesto",
+    "ctaSecondary": "Más Información"
+  },
+  "stats": {
+    "countries": "Países Atendidos",
+    "years": "Años de Experiencia",
+    "patents": "Patentes",
+    "team": "Miembros del Equipo"
+  },
+  "products": {
+    "title": "Nuestros Productos",
+    "subtitle": "Drones de limpieza inteligentes diseñados para máxima eficiencia",
+    "viewAll": "Ver Todos",
+    "viewDetails": "Ver Detalles",
+    "specs": "Especificaciones",
+    "features": "Características Principales",
+    "category": {
+      "window": "Limpieza de Ventanas",
+      "solar": "Limpieza de Paneles Solares"
+    }
+  },
+  "cases": {
+    "title": "Casos de Aplicación",
+    "subtitle": "Vea nuestros drones en acción en todo el mundo",
+    "location": "Ubicación",
+    "viewAll": "Ver Todos los Casos"
+  },
+  "news": {
+    "title": "Últimas Noticias",
+    "subtitle": "Manténgase actualizado con nuestros últimos desarrollos",
+    "readMore": "Leer Más",
+    "viewAll": "Ver Todas las Noticias"
+  },
+  "contact": {
+    "title": "Contáctenos",
+    "subtitle": "Póngase en contacto con nuestro equipo",
+    "name": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "phone": "Número de Teléfono",
+    "company": "Nombre de la Empresa",
+    "type": "Tipo de Consulta",
+    "typeContact": "Consulta General",
+    "typeBooking": "Reserva de Servicio",
+    "typeFranchise": "Consulta de Franquicia",
+    "message": "Mensaje",
+    "submit": "Enviar",
+    "success": "¡Gracias! Nos pondremos en contacto pronto."
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Liderando el futuro de la tecnología de limpieza con drones"
+  },
+  "documents": {
+    "title": "Documentos Técnicos",
+    "subtitle": "Descargue manuales, guías y especificaciones",
+    "download": "Descargar"
+  },
+  "footer": {
+    "company": "Empresa",
+    "products": "Productos",
+    "support": "Soporte",
+    "followUs": "Síguenos",
+    "copyright": "Todos los derechos reservados."
+  },
+  "topBar": {
+    "phone": "Teléfono",
+    "email": "Correo",
+    "franchise": "Franquicia Global"
+  },
+  "d15r": {
+    "hero": {
+      "kicker": "Serie de Drones de Limpieza JIUSI D15R",
+      "title1": "UAV de Lavado Multifuncional",
+      "title2": "Nacido para la limpieza.",
+      "lead": "Limpieza eficiente en el aire y operación segura no tripulada a gran altura y aplicación en múltiples escenarios. El D15R lleva la limpieza de alta presión controlada a fachadas de edificios, paneles fotovoltaicos, aerogeneradores y otras superficies en altura.",
+      "ctaPrimary": "Explorar D15R",
+      "ctaSecondary": "Hablar con Partdro",
+      "stats": {
+        "0": "Hasta 20 MPa de presión pico",
+        "1": "Hasta 1.000 m²/h de limpieza ligera",
+        "2": "Manguera de agua atada de 100 m"
+      },
+      "badgeTitle": "Nacido para la limpieza.",
+      "badgeText": "Una plataforma aérea de limpieza modular creada para trabajos en altura repetibles."
+    },
+    "strip": {
+      "0": { "value": "15 L/min", "label": "Caudal de pulverización" },
+      "1": { "value": "100 m", "label": "Longitud de la manguera" },
+      "2": { "value": "45 min", "label": "Tiempo de vuelo en muro cortina" },
+      "3": { "value": "55 min", "label": "Tiempo de vuelo en paneles fotovoltaicos" },
+      "4": { "value": "12 m/s", "label": "Velocidad máxima del viento" }
+    },
+    "why": {
+      "eyebrow": "Alta eficiencia",
+      "title": "Limpieza rápida de alta presión a 1.000 m²/h.",
+      "lead": "La limpieza artificial (escaladores, andamios) sigue siendo el método principal de limpieza, con riesgos operativos, limpieza ineficiente, poca flexibilidad operativa y alto costo. El dron de limpieza D15R presenta un diseño modular con dos tipos de accesorios de limpieza y cuatro boquillas de diferentes ángulos, lo que brinda una solución de limpieza aérea de alta presión conveniente, eficiente y para múltiples escenarios.",
+      "cards": {
+        "0": { "title": "Suministro de agua atado", "desc": "Operación prolongada e ininterrumpida sin limitaciones de capacidad del tanque de agua." },
+        "1": { "title": "Lavado rápido máximo de 1.000 m²/h", "desc": "Lavado rápido en vuelo estacionario; el D15R puede equiparse opcionalmente con brazos pulverizadores oscilantes dobles para una cobertura de 1.000 m²/h." },
+        "2": { "title": "Presión pico instantánea de 20 MPa", "desc": "Eliminación rápida y eficaz de manchas rebeldes mediante lavado a alta presión." },
+        "3": { "title": "Instalación y despliegue rápidos", "desc": "Diseño plegable para transporte y almacenamiento fáciles; modo de liberación rápida para despliegue en 1 minuto." },
+        "4": { "title": "4 boquillas diferentes de serie", "desc": "Ángulos de pulverización de 0°, 15°, 25° y 40° — un tubo de boquilla, múltiples tipos de agua, cambio de tipos de agua de 0-40° a voluntad." },
+        "5": { "title": "Adaptable a 2 cargas diferentes", "desc": "El D15R se puede adaptar a dos tipos de accesorios de limpieza: boquillas de ángulo ajustable y boquillas oscilantes." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Múltiples escenarios — Diseño modular",
+      "title": "Adaptable a múltiples configuraciones.",
+      "lead": "El dron de limpieza D15R presenta un diseño modular, compatible con dos tipos de accesorios de limpieza: boquillas de ángulo ajustable y boquillas oscilantes. Equipado con cuatro boquillas de diferentes ángulos, brinda una solución de limpieza aérea de alta presión conveniente, eficiente y para múltiples escenarios.",
+      "items": {
+        "0": { "title": "Boquilla de agua (fija)", "desc": "La boquilla de 1500 mm mantiene el fuselaje alejado de la pared, segura y fiable. La boquilla puede oscilar horizontalmente a izquierda y derecha." },
+        "1": { "title": "Boquilla oscilante", "desc": "El rango de oscilación de la boquilla es de ±15°, y la velocidad de oscilación se puede ajustar en el control remoto según el nivel de suciedad." },
+        "2": { "title": "Brazo pulverizador oscilante doble", "desc": "Kit opcional que combina boquillas de espuma y agua para conmutación remota con una tecla sin aterrizar. Completa el ablandamiento con espuma y el enjuague con agua en un solo vuelo." }
+      }
+    },
+    "output": {
+      "eyebrow": "Rendimiento de limpieza",
+      "unitTitle": "Capacidad máxima de limpieza ligera de 1.000 m²/h",
+      "note": "El folleto del producto especifica 500 m²/h para limpieza profunda. El rendimiento real depende de la superficie de trabajo, el nivel de contaminación, el líquido de limpieza y las condiciones de operación.",
+      "rows": {
+        "0": { "label": "Presión de agua pico", "value": "20 MPa (instantánea)" },
+        "1": { "label": "Presión nominal de agua", "value": "10 MPa" },
+        "2": { "label": "Caudal de pulverización", "value": "15 L/min" },
+        "3": { "label": "Distancia de la boquilla a la superficie", "value": "2-3 m" },
+        "4": { "label": "Peso máximo de despegue", "value": "≤ 24.9 kg" }
+      }
+    },
+    "spray": {
+      "eyebrow": "Múltiples escenarios — Adaptable a múltiples boquillas",
+      "title": "4 tipos de boquillas de pulverización, instalación sin herramientas.",
+      "lead": "El diseño modular de boquillas satisface las necesidades de los clientes para tareas de limpieza diversificadas. Un tubo de boquilla, múltiples tipos de agua — cambio de tipos de agua de 0-40° a voluntad.",
+      "nozzles": {
+        "0": { "angle": "Alta presión de chorro de 0°", "desc": "Para enjuagar grietas, manchas rebeldes, etc." },
+        "1": { "angle": "Chorro de agua en abanico de 15°", "desc": "Para enjuague rápido de manchas." },
+        "2": { "angle": "Descarga de agua en abanico de 25°", "desc": "Enjuague rápido de arena y tierra, mayor eficiencia." },
+        "3": { "angle": "Abanico amplio de 40°", "desc": "Para enjuagar grandes áreas después de pulverizar detergente." }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Inteligencia — Planificación inteligente de rutas",
+      "title": "D15R 5.0 — Operación autónoma con planificación de rutas.",
+      "lead": "La nueva versión actualizada D15R 5.0 añade planificación inteligente de rutas para lograr una operación autónoma. Puede establecer rutas para diferentes escenarios de limpieza, mejorando enormemente la eficiencia y flexibilidad de trabajo del dron de limpieza.",
+      "items": {
+        "0": { "title": "Cobertura integral sin puntos ciegos", "desc": "Toda la fachada puede cubrirse con precisión según la ruta y altura establecidas, evitando omisiones y puntos ciegos que pueden ocurrir durante la inspección manual o el vuelo ordinario." },
+        "1": { "title": "Alta precisión con RTK", "desc": "Combinado con tecnologías avanzadas de posicionamiento como el posicionamiento RTK, el UAV puede mantener una actitud de vuelo estable y precisión de posición, obteniendo así imágenes y datos de medición de alta precisión." },
+        "2": { "title": "Alto grado de automatización", "desc": "La ruta se puede planificar de antemano a través de la estación de control en tierra, y el dron puede volar automáticamente según la ruta preestablecida sin control manual en tiempo real." },
+        "3": { "title": "Operación remota", "desc": "El operador puede controlar y monitorear el dron desde un lugar seguro lejos de fachadas peligrosas, con medidas oportunas en caso de emergencia." }
+      }
+    },
+    "safety": {
+      "eyebrow": "Seguridad — Operaciones en altura sin personal",
+      "title": "Dual RTK + radar de seguimiento de pared para un vuelo seguro.",
+      "lead": "Permite operaciones en altura sin personal. Reemplaza el trabajo manual en altura con operación de dron controlada remotamente, módulos duales RTK integrados para posicionamiento a nivel centimétrico y un sistema de percepción inteligente con radar de seguimiento de pared.",
+      "cards": {
+        "0": { "title": "Reemplazo del trabajo manual en altura", "desc": "El control remoto por parte del personal puede completar todo tipo de tareas complejas de limpieza en altura, eliminando los riesgos potenciales del trabajo en altura." },
+        "1": { "title": "Dual RTK de alta precisión integrado", "desc": "Equipado con módulos duales RTK de alta precisión, puede emitir datos de posicionamiento a nivel centimétrico, garantizando un posicionamiento preciso y fiable y una operación segura." },
+        "2": { "title": "Sistema de Percepción Inteligente", "desc": "El radar de seguimiento de pared montado en la parte delantera detecta información de distancia en tiempo real adelante, mantiene una distancia segura y garantiza un vuelo más seguro." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Múltiples escenarios — Operación estable en altura",
+      "title": "Varias boquillas, cubriendo ángulos difíciles.",
+      "lead": "Diseño modular para diferentes cargas, operación estable en altura, operación flexible y cobertura multiángulo de superficies inferiores y superiores.",
+      "items": {
+        "0": { "title": "Diseño modular", "desc": "Los soportes y boquillas óptimos pueden personalizarse según diferentes tareas para satisfacer las necesidades de configuración de diversos requisitos de limpieza en altura." },
+        "1": { "title": "Operación estable en altura", "desc": "Equipado con dual RTK y un sistema de bucle cerrado 'Percepción-Decisión-Ejecución', adaptándose a diversos requisitos de limpieza basados en la altura." },
+        "2": { "title": "Operación flexible", "desc": "Desplazamiento flexible, sin temor a distancias estrechas entre edificios y otros espacios complejos." },
+        "3": { "title": "Cobertura multiángulo de superficies inferiores y superiores", "desc": "Admite diferentes configuraciones, puede cubrir fácilmente las superficies inferiores y superiores y otras superficies complejas." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparación entre el D15R y el trabajo manual tradicional",
+      "title": "El D15R ofrece ventajas significativas en seguridad, eficiencia y costo.",
+      "colD15r": "Sistema de limpieza aérea D15R",
+      "colManual": "Operación manual tradicional",
+      "rows": {
+        "0": { "label": "Seguridad", "d15r": "La operación con dron reemplaza el trabajo manual en altura, reduciendo considerablemente el riesgo", "manual": "La operación manual tiene riesgos de seguridad potenciales" },
+        "1": { "label": "Eficiencia de limpieza", "d15r": "1.000 m²/h, limpieza rápida de alta presión, admite operación ininterrumpida", "manual": "Velocidad de limpieza lenta, tiempo de operación prolongado" },
+        "2": { "label": "Costo", "d15r": "Inversión única en equipos y bajos costos operativos a largo plazo", "manual": "Alto costo de mano de obra, cada vez requiere mucha inversión de personal y tiempo" },
+        "3": { "label": "Resultado de limpieza", "d15r": "Limpieza de alta presión a 20 MPa, con agentes de limpieza profesionales, elimina a fondo manchas rebeldes y puntos de moho", "manual": "Difícil de limpiar a fondo, afecta la estética del edificio y la vida útil del material" },
+        "4": { "label": "Tiempo de instalación", "d15r": "Instalación rápida en 1 min", "manual": "Consume tiempo y mano de obra: montar andamios o andamios colgantes" },
+        "5": { "label": "Flexibilidad operativa", "d15r": "2 tipos de montaje, 4 boquillas, cobertura multiángulo y multiescenario", "manual": "Poca flexibilidad, difícil cubrir todas las superficies de trabajo" }
+      }
+    },
+    "applications": {
+      "eyebrow": "Estudios de caso",
+      "title": "Proyectos de mantenimiento en el mundo real.",
+      "lead": "El folleto del producto documenta casos de uso en fachadas de edificios, paneles fotovoltaicos y entornos de aerogeneradores.",
+      "badges": {
+        "case": "Estudio de caso",
+        "operation": "Operación",
+        "application": "Aplicación"
+      },
+      "cases": {
+        "0": { "badge": "case", "title": "Mantenimiento de fachada de edificio en Dongguan" },
+        "1": { "badge": "case", "title": "Limpieza de pared exterior de un edificio en Songgang" },
+        "2": { "badge": "case", "title": "Mantenimiento de pared exterior de un edificio en Shenzhen" },
+        "3": { "badge": "case", "title": "Mantenimiento de edificio en Shenzhen" },
+        "4": { "badge": "operation", "title": "Flujo de trabajo de limpieza aérea de fachadas" },
+        "5": { "badge": "application", "title": "Limpieza de paneles fotovoltaicos" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Limpieza de edificios", "desc": "Mantenimiento de fachadas exteriores y muros cortina" },
+      "1": { "title": "Limpieza fotovoltaica", "desc": "Lavado de paneles solares en grandes áreas" },
+      "2": { "title": "Limpieza de aerogeneradores", "desc": "Mantenimiento de superficies en altura" },
+      "3": { "title": "Limpieza de señales de carretera", "desc": "Infraestructura vial de difícil acceso" }
+    },
+    "specs": {
+      "eyebrow": "Parámetros del producto",
+      "title": "D15R de un vistazo.",
+      "lead": "Los valores de especificación indicados a continuación están transcritos del folleto del producto D15R V6.0.",
+      "items": {
+        "0": { "label": "Modelo", "value": "D15R" },
+        "1": { "label": "Dimensiones generales (brazos + hélices desplegados)", "value": "1945 × 1945 × 730 mm" },
+        "2": { "label": "Dimensiones generales (solo brazos desplegados)", "value": "1150 × 1150 × 730 mm" },
+        "3": { "label": "Caudal de pulverización", "value": "15 L/min" },
+        "4": { "label": "Longitud de la manguera", "value": "100 m" },
+        "5": { "label": "Tiempo de vuelo", "value": "45 min muro cortina / 55 min PV / 30 min aerogenerador" },
+        "6": { "label": "Distancia de la boquilla a la superficie", "value": "2-3 m (ajustable)" },
+        "7": { "label": "Batería", "value": "14S 22000 mAh" },
+        "8": { "label": "Tubo pulverizador", "value": "1500 mm" },
+        "9": { "label": "Velocidad máxima de vuelo horizontal", "value": "15 m/s" },
+        "10": { "label": "Temperatura de trabajo", "value": "-10°C a 40°C" },
+        "11": { "label": "Humedad de operación", "value": "0-90%" },
+        "12": { "label": "Velocidad máxima del viento", "value": "12 m/s" },
+        "13": { "label": "Presión nominal de agua", "value": "10 MPa" },
+        "14": { "label": "Presión máxima de agua (instantánea)", "value": "20 MPa" },
+        "15": { "label": "Limpieza ligera", "value": "1000 m²/h" },
+        "16": { "label": "Limpieza profunda", "value": "500 m²/h" },
+        "17": { "label": "Tiempo de carga", "value": "40 minutos" },
+        "18": { "label": "Peso máximo de despegue", "value": "≤ 24.9 kg" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Serie de Drones de Limpieza JIUSI D15R",
+      "title": "Nacido para la limpieza.",
+      "text": "Hable con Partdro sobre la configuración de limpieza adecuada, el montaje de boquillas y el escenario de aplicación para su proyecto.",
+      "visit": "Visite partdro.com"
+    }
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "windowCleaning": "Window Cleaning",
+    "solarCleaning": "Solar Panel Cleaning",
+    "solutions": "Solutions",
+    "cases": "Cases",
+    "news": "News",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "documents": "Documents"
+  },
+  "hero": {
+    "title": "Professional Drone Cleaning Solutions",
+    "subtitle": "Professional D15R window cleaning drone with RTK precision positioning and 20MPa pressure.",
+    "cta": "Get a Quote",
+    "ctaSecondary": "Learn More"
+  },
+  "stats": {
+    "countries": "Countries Served",
+    "years": "Years Experience",
+    "patents": "Patents",
+    "team": "Team Members"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Professional high-altitude cleaning drones, designed for skyscraper facades.",
+    "viewAll": "View All",
+    "viewDetails": "View Details",
+    "specs": "Specifications",
+    "features": "Key Features",
+    "category": {
+      "window": "Window Cleaning",
+      "solar": "Solar Panel Cleaning"
+    }
+  },
+  "cases": {
+    "title": "Application Cases",
+    "subtitle": "See our drones in action around the world",
+    "location": "Location",
+    "viewAll": "View All Cases"
+  },
+  "news": {
+    "title": "Latest News",
+    "subtitle": "Stay updated with our latest developments",
+    "readMore": "Read More",
+    "viewAll": "View All News"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "company": "Company Name",
+    "type": "Inquiry Type",
+    "typeContact": "General Inquiry",
+    "typeBooking": "Service Booking",
+    "typeFranchise": "Franchise Inquiry",
+    "message": "Message",
+    "submit": "Submit",
+    "success": "Thank you! We will get back to you soon."
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Leading the future of drone cleaning technology"
+  },
+  "documents": {
+    "title": "Technical Documents",
+    "subtitle": "Download manuals, guides, and specifications",
+    "download": "Download"
+  },
+  "footer": {
+    "company": "Company",
+    "products": "Products",
+    "support": "Support",
+    "followUs": "Follow Us",
+    "copyright": "All rights reserved."
+  },
+  "topBar": {
+    "phone": "Phone",
+    "email": "Email",
+    "franchise": "Global Franchise"
+  },
+  "d15r": {
+    "hero": {
+      "kicker": "JIUSI Cleaning Drone Series D15R",
+      "title1": "Multi-functional Washing UAV",
+      "title2": "Born for cleanliness.",
+      "lead": "Efficient cleaning in the air & High-altitude unmanned safe operation & Multi-scenario application. The D15R brings controlled, high-pressure cleaning to building facades, photovoltaic panels, wind turbines and other high-altitude surfaces.",
+      "ctaPrimary": "Explore D15R",
+      "ctaSecondary": "Talk to Partdro",
+      "stats": {
+        "0": "Up to 20 MPa peak pressure",
+        "1": "Up to 1,000 m²/h light cleaning",
+        "2": "100 m tethered water hose"
+      },
+      "badgeTitle": "Born for cleanliness.",
+      "badgeText": "A modular aerial cleaning platform built for repeatable high-altitude work."
+    },
+    "strip": {
+      "0": { "value": "15 L/min", "label": "Spray flow rate" },
+      "1": { "value": "100 m", "label": "Hose length" },
+      "2": { "value": "45 min", "label": "Curtain wall flight time" },
+      "3": { "value": "55 min", "label": "PV panel flight time" },
+      "4": { "value": "12 m/s", "label": "Max wind speed" }
+    },
+    "why": {
+      "eyebrow": "High efficiency",
+      "title": "1,000 m²/h high pressure fast cleaning.",
+      "lead": "Artificial cleaning (spiderman, cradles) is still the main cleaning method, facing operational risk, inefficient cleaning, poor operational flexibility and high cost. The D15R cleaning drone features a modular design with two types of cleaning attachments and four nozzles of different angles, providing a convenient, efficient, multi-scenario aerial high-pressure cleaning solution.",
+      "cards": {
+        "0": { "title": "Tethered water supply", "desc": "Long uninterrupted operation without any limitation of water tank capacity." },
+        "1": { "title": "1,000 m²/h max. Quick Wash", "desc": "Fast washing under hovering, D15R can be equipped with dual swinging spray booms optionally for 1,000 m²/h coverage." },
+        "2": { "title": "20 MPa Instantaneous Peak Pressure", "desc": "Fast and effective removal of stubborn stains with high-pressure washing." },
+        "3": { "title": "Rapid installation and deployment", "desc": "Folding design for easy transportation and storage; quick release mode for 1-minute deployment." },
+        "4": { "title": "4 different nozzles as standard", "desc": "0°, 15°, 25° and 40° spray angles — one nozzle pipe, multiple water types, switching of water types from 0-40° at will." },
+        "5": { "title": "Adaptable to 2 different loads", "desc": "D15R can be adapted to two types of cleaning attachments: adjustable-angle nozzles and oscillating nozzles." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Multi-scenario — Modular design",
+      "title": "Adaptable to multiple configurations.",
+      "lead": "The D15R cleaning drone features a modular design, compatible with two types of cleaning attachments: adjustable-angle nozzles and oscillating nozzles. Equipped with four nozzles of different angles, it provides a convenient, efficient, and multi-scenario aerial high-pressure cleaning solution.",
+      "items": {
+        "0": { "title": "Water nozzle (Fixed)", "desc": "1500 mm nozzle keeps the fuselage away from the wall, safe and reliable. The nozzle can swing left and right horizontally." },
+        "1": { "title": "Oscillating nozzle", "desc": "The swing range of the nozzle is ±15°, and the speed of the swing can be adjusted on the remote control according to the stain level." },
+        "2": { "title": "Dual swinging spray boom", "desc": "Optional kit combines foam and water nozzles for one-key remote switching without landing. Completes full foam softening and water rinsing in one flight." }
+      }
+    },
+    "output": {
+      "eyebrow": "Cleaning output",
+      "unitTitle": "1,000 m²/h maximum light-cleaning capacity",
+      "note": "The product brochure specifies 500 m²/h for deep cleaning. Actual output depends on the work surface, contamination level, cleaning liquid and operating conditions.",
+      "rows": {
+        "0": { "label": "Peak water pressure", "value": "20 MPa (instantaneous)" },
+        "1": { "label": "Rated water pressure", "value": "10 MPa" },
+        "2": { "label": "Spray flow", "value": "15 L/min" },
+        "3": { "label": "Nozzle-to-surface distance", "value": "2-3 m" },
+        "4": { "label": "Maximum take-off weight", "value": "≤ 24.9 kg" }
+      }
+    },
+    "spray": {
+      "eyebrow": "Multi-scenario — Adaptable to multiple nozzles",
+      "title": "4 types of spray nozzles, tool-free installation.",
+      "lead": "The modular nozzle design meets the needs of customers for diversified cleaning tasks. One nozzle pipe, multiple water types — switching of water types from 0-40° at will.",
+      "nozzles": {
+        "0": { "angle": "0° high jet pressure", "desc": "For flushing crevices, stubborn stains, etc." },
+        "1": { "angle": "15° fan-shaped water jet", "desc": "For quick rinsing of stains." },
+        "2": { "angle": "25° fan-shaped water discharge", "desc": "Rapid rinsing of sand and soil, higher efficiency." },
+        "3": { "angle": "40° broad fan", "desc": "For rinsing large areas after spraying detergent." }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Intelligence — Intelligent route planning",
+      "title": "D15R 5.0 — Autonomous operation with route planning.",
+      "lead": "The new upgraded version D15R 5.0 adds intelligent route planning to achieve autonomous operation. It can set routes for different cleaning scenarios, greatly improving the work efficiency and flexibility of the cleaning drone.",
+      "items": {
+        "0": { "title": "Comprehensive coverage without blind spots", "desc": "The entire facade can be accurately covered according to the set route and height, avoiding omissions and blind spots that may occur during manual inspection or ordinary flight." },
+        "1": { "title": "High precision with RTK", "desc": "Combined with advanced positioning technologies such as RTK positioning, the UAV can maintain a stable flight attitude and position accuracy, thereby obtaining high-precision images and measurement data." },
+        "2": { "title": "High degree of automation", "desc": "The route can be planned in advance through the ground control station, and the drone can fly automatically according to the preset path without real-time manual control." },
+        "3": { "title": "Remote operation", "desc": "The operator can control and monitor the drone from a safe location away from dangerous facades, with timely measures in case of emergency." }
+      }
+    },
+    "safety": {
+      "eyebrow": "Safety — Manual-free high-altitude operations",
+      "title": "Dual RTK + wall-following radar for secure flight.",
+      "lead": "Enabling manual-free high-altitude operations. Replacing manual overhead work with remote-controlled drone operation, built-in dual RTK modules for centimeter-level positioning, and an intelligent perception system with wall-following radar.",
+      "cards": {
+        "0": { "title": "Replacing manual overhead work", "desc": "Remote control of personnel can complete all kinds of complex cleaning tasks at high altitude, eliminating the potential risks of working at height." },
+        "1": { "title": "Built-in high-precision dual RTK", "desc": "Equipped with high-precision dual RTK modules, it can output centimeter-level positioning data, ensuring accurate and reliable positioning and safe operation." },
+        "2": { "title": "Intelligent Perception System", "desc": "Front-mounted wall-following radar senses real-time distance information ahead, maintains a safe distance, and ensures more secure flight." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Multi-scenario — Stable operation at high altitude",
+      "title": "Various nozzles, covering difficult angles.",
+      "lead": "Modular design for different loads, stable operation at high altitude, flexible operation, and multi-angle coverage of bottom and top surfaces.",
+      "items": {
+        "0": { "title": "Modular design", "desc": "Optimal mounts and nozzles can be customized according to different tasks to meet the configuration needs of various altitude cleaning requirements." },
+        "1": { "title": "Stable operation at high altitude", "desc": "Comes with dual RTK and a 'Perception-Decision-Execution' closed-loop system, adapting to various height-based cleaning requirements." },
+        "2": { "title": "Flexible operation", "desc": "Flexible traveling, not afraid of narrow building distance and other complex building spaces." },
+        "3": { "title": "Multi-angle coverage of bottom and top surfaces", "desc": "Supporting different configurations, it can easily cover the bottom and top surfaces and other complex surfaces." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparison of D15R and traditional manual work operation",
+      "title": "D15R offers significant advantages in safety, efficiency and cost.",
+      "colD15r": "D15R Aerial cleaning System",
+      "colManual": "Traditional manual operation",
+      "rows": {
+        "0": { "label": "Security", "d15r": "Drone operation replaces manual work at height, greatly reducing the risk", "manual": "Manual operation has potential safety hazards" },
+        "1": { "label": "Cleaning efficiency", "d15r": "1,000 m²/h, high-pressure fast cleaning, support uninterrupted operation", "manual": "Slow cleaning speed, long operation time" },
+        "2": { "label": "Cost", "d15r": "One-time equipment investment & low long-term operating costs", "manual": "High labor cost, each time requires a lot of manpower and time investment" },
+        "3": { "label": "Cleaning effect", "d15r": "20 MPa high-pressure cleaning, with professional cleaning agents, thoroughly remove stubborn stains and mold spots", "manual": "Difficult to clean thoroughly, affecting the aesthetics of the building and the life of the material" },
+        "4": { "label": "Installation time", "d15r": "Quick installation for 1 min", "manual": "Time-consuming and labor-intensive: to set up scaffolding or cradles" },
+        "5": { "label": "Operational flexibility", "d15r": "2 types of mounting, 4 nozzles, multi-angle and multi-scene coverage", "manual": "Poor flexibility, difficult to cover all work surfaces" }
+      }
+    },
+    "applications": {
+      "eyebrow": "Case studies",
+      "title": "Real-world maintenance projects.",
+      "lead": "The product brochure documents use cases across building facades, photovoltaic panels and wind turbine environments.",
+      "badges": {
+        "case": "Case study",
+        "operation": "Operation",
+        "application": "Application"
+      },
+      "cases": {
+        "0": { "badge": "case", "title": "Maintenance of a building facade in Dongguan" },
+        "1": { "badge": "case", "title": "Exterior wall cleaning of a building in Songgang" },
+        "2": { "badge": "case", "title": "Exterior wall maintenance of a building in Shenzhen" },
+        "3": { "badge": "case", "title": "Building maintenance for a building in Shenzhen" },
+        "4": { "badge": "operation", "title": "Aerial facade cleaning workflow" },
+        "5": { "badge": "application", "title": "Photovoltaic panel cleaning" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Building cleaning", "desc": "Exterior facade and curtain wall maintenance" },
+      "1": { "title": "Photovoltaic cleaning", "desc": "Large-area solar panel washing" },
+      "2": { "title": "Wind turbine cleaning", "desc": "High-altitude surface maintenance" },
+      "3": { "title": "Highway sign cleaning", "desc": "Hard-to-reach roadside infrastructure" }
+    },
+    "specs": {
+      "eyebrow": "Product Parameter",
+      "title": "D15R at a glance.",
+      "lead": "Specification values transcribed from the D15R product brochure V6.0.",
+      "items": {
+        "0": { "label": "Model", "value": "D15R" },
+        "1": { "label": "Overall dimensions (arms + propellers deployed)", "value": "1945 × 1945 × 730 mm" },
+        "2": { "label": "Overall dimensions (arms deployed only)", "value": "1150 × 1150 × 730 mm" },
+        "3": { "label": "Spray flow rate", "value": "15 L/min" },
+        "4": { "label": "Hose length", "value": "100 m" },
+        "5": { "label": "Flight time", "value": "45 min curtain wall / 55 min PV / 30 min wind turbine" },
+        "6": { "label": "Nozzle-to-surface distance", "value": "2-3 m (adjustable)" },
+        "7": { "label": "Battery", "value": "14S 22000 mAh" },
+        "8": { "label": "Spray pipe", "value": "1500 mm" },
+        "9": { "label": "Maximum horizontal flight speed", "value": "15 m/s" },
+        "10": { "label": "Working temperature", "value": "-10°C to 40°C" },
+        "11": { "label": "Operating humidity", "value": "0-90%" },
+        "12": { "label": "Maximum wind speed", "value": "12 m/s" },
+        "13": { "label": "Rated water pressure", "value": "10 MPa" },
+        "14": { "label": "Max water pressure (instantaneous)", "value": "20 MPa" },
+        "15": { "label": "Light cleaning", "value": "1000 m²/h" },
+        "16": { "label": "Deep cleaning", "value": "500 m²/h" },
+        "17": { "label": "Charging time", "value": "40 minutes" },
+        "18": { "label": "Maximum take-off weight", "value": "≤ 24.9 kg" }
+      }
+    },
+    "cta": {
+      "eyebrow": "JIUSI Cleaning Drone Series D15R",
+      "title": "Born for cleanliness.",
+      "text": "Talk with Partdro about the right cleaning configuration, nozzle setup and application scenario for your project.",
+      "visit": "Visit partdro.com"
+    }
+  }
+}

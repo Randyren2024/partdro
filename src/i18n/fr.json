@@ -1,0 +1,258 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "products": "Produits",
+    "windowCleaning": "Nettoyage de Fenêtres",
+    "solarCleaning": "Nettoyage de Panneaux Solaires",
+    "solutions": "Solutions",
+    "cases": "Études de Cas",
+    "news": "Actualités",
+    "about": "À Propos",
+    "contact": "Contactez-Nous",
+    "documents": "Documents"
+  },
+  "hero": {
+    "title": "Solutions Professionnelles de Nettoyage par Drone",
+    "subtitle": "Nettoyage Efficace, Sûre et Intelligente pour Fenêtres et Panneaux Solaires",
+    "cta": "Demander un Devis",
+    "ctaSecondary": "En Savoir Plus"
+  },
+  "stats": {
+    "countries": "Pays Desservis",
+    "years": "Années d'Expérience",
+    "patents": "Brevets",
+    "team": "Membres de l'Équipe"
+  },
+  "products": {
+    "title": "Nos Produits",
+    "subtitle": "Drones de nettoyage intelligents conçus pour une efficacité maximale",
+    "viewAll": "Voir Tout",
+    "viewDetails": "Voir les Détails",
+    "specs": "Spécifications",
+    "features": "Caractéristiques Principales",
+    "category": {
+      "window": "Nettoyage de Fenêtres",
+      "solar": "Nettoyage de Panneaux Solaires"
+    }
+  },
+  "cases": {
+    "title": "Études de Cas",
+    "subtitle": "Découvrez nos drones en action à travers le monde",
+    "location": "Emplacement",
+    "viewAll": "Voir Toutes les Études"
+  },
+  "news": {
+    "title": "Dernières Actualités",
+    "subtitle": "Restez informé de nos derniers développements",
+    "readMore": "Lire la Suite",
+    "viewAll": "Voir Toutes les Actualités"
+  },
+  "contact": {
+    "title": "Contactez-Nous",
+    "subtitle": "Contactez notre équipe",
+    "name": "Nom Complet",
+    "email": "Adresse Email",
+    "phone": "Numéro de Téléphone",
+    "company": "Nom de l'Entreprise",
+    "type": "Type de Demande",
+    "typeContact": "Demande Générale",
+    "typeBooking": "Réservation de Service",
+    "typeFranchise": "Demande de Franchise",
+    "message": "Message",
+    "submit": "Envoyer",
+    "success": "Merci ! Nous vous répondrons bientôt."
+  },
+  "about": {
+    "title": "À Propos",
+    "subtitle": "Leader de l'avenir de la technologie de nettoyage par drone"
+  },
+  "documents": {
+    "title": "Documents Techniques",
+    "subtitle": "Téléchargez manuels, guides et spécifications",
+    "download": "Télécharger"
+  },
+  "footer": {
+    "company": "Entreprise",
+    "products": "Produits",
+    "support": "Support",
+    "followUs": "Suivez-Nous",
+    "copyright": "Tous droits réservés."
+  },
+  "topBar": {
+    "phone": "Téléphone",
+    "email": "Email",
+    "franchise": "Franchise Mondiale"
+  },
+  "d15r": {
+    "hero": {
+      "kicker": "Série de Drones de Nettoyage JIUSI D15R",
+      "title1": "UAV de Lavage Multifonctionnel",
+      "title2": "Né pour la propreté.",
+      "lead": "Nettoyage efficace dans les airs et opération sûre sans pilote en hauteur et application multi-scénarios. Le D15R apporte un nettoyage haute pression contrôlé aux façades de bâtiments, panneaux photovoltaïques, éoliennes et autres surfaces en hauteur.",
+      "ctaPrimary": "Découvrir le D15R",
+      "ctaSecondary": "Parler avec Partdro",
+      "stats": {
+        "0": "Jusqu'à 20 MPa de pression crête",
+        "1": "Jusqu'à 1 000 m²/h en nettoyage léger",
+        "2": "Tuyau d'eau amarré de 100 m"
+      },
+      "badgeTitle": "Né pour la propreté.",
+      "badgeText": "Une plateforme de nettoyage aérien modulaire conçue pour des travaux en hauteur répétables."
+    },
+    "strip": {
+      "0": { "value": "15 L/min", "label": "Débit de pulvérisation" },
+      "1": { "value": "100 m", "label": "Longueur du tuyau" },
+      "2": { "value": "45 min", "label": "Temps de vol pour mur-rideau" },
+      "3": { "value": "55 min", "label": "Temps de vol pour panneaux PV" },
+      "4": { "value": "12 m/s", "label": "Vitesse de vent maximale" }
+    },
+    "why": {
+      "eyebrow": "Haute efficacité",
+      "title": "Nettoyage rapide haute pression à 1 000 m²/h.",
+      "lead": "Le nettoyage manuel (travailleurs en hauteur, nacelles) est toujours la principale méthode de nettoyage, confronté à des risques opérationnels, un nettoyage inefficace, une faible flexibilité opérationnelle et des coûts élevés. Le drone de nettoyage D15R présente un design modulaire avec deux types d'accessoires de nettoyage et quatre buses de différents angles, offrant une solution de nettoyage aérien haute pression pratique, efficace et multi-scénarios.",
+      "cards": {
+        "0": { "title": "Alimentation en eau amarrée", "desc": "Fonctionnement prolongé et ininterrompu sans limitation de capacité du réservoir d'eau." },
+        "1": { "title": "Max. lavage rapide 1 000 m²/h", "desc": "Lavage rapide en vol stationnaire ; le D15R peut être équipé en option de rampes de pulvérisation doubles oscillantes pour une couverture de 1 000 m²/h." },
+        "2": { "title": "Pression crête instantanée de 20 MPa", "desc": "Élimination rapide et efficace des taches tenaces par lavage haute pression." },
+        "3": { "title": "Installation et déploiement rapides", "desc": "Design pliable pour un transport et un stockage faciles ; mode à libération rapide pour un déploiement en 1 minute." },
+        "4": { "title": "4 buses différentes en standard", "desc": "Angles de pulvérisation de 0°, 15°, 25° et 40° — un tube de buse, plusieurs types d'eau, commutation des types d'eau de 0-40° à volonté." },
+        "5": { "title": "Adaptable à 2 charges différentes", "desc": "Le D15R peut être adapté à deux types d'accessoires de nettoyage : buses à angle réglable et buses oscillantes." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Multi-scénarios — Design modulaire",
+      "title": "Adaptable à plusieurs configurations.",
+      "lead": "Le drone de nettoyage D15R présente un design modulaire, compatible avec deux types d'accessoires de nettoyage : buses à angle réglable et buses oscillantes. Équipé de quatre buses de différents angles, il offre une solution de nettoyage aérien haute pression pratique, efficace et multi-scénarios.",
+      "items": {
+        "0": { "title": "Buse à eau (fixe)", "desc": "La buse de 1500 mm maintient le fuselage éloigné du mur, sûre et fiable. La buse peut osciller horizontalement à gauche et à droite." },
+        "1": { "title": "Buse oscillante", "desc": "La plage d'oscillation de la buse est de ±15°, et la vitesse d'oscillation peut être ajustée sur la télécommande selon le niveau de salissure." },
+        "2": { "title": "Rampe de pulvérisation double oscillante", "desc": "Kit en option combinant buses à mousse et à eau pour une commutation à distance par un bouton sans atterrissage. Achève le ramollissement complet à la mousse et le rinçage à l'eau en un seul vol." }
+      }
+    },
+    "output": {
+      "eyebrow": "Performance de nettoyage",
+      "unitTitle": "Capacité maximale en nettoyage léger de 1 000 m²/h",
+      "note": "La brochure du produit spécifie 500 m²/h pour le nettoyage en profondeur. Le rendement réel dépend de la surface de travail, du niveau de contamination, du liquide de nettoyage et des conditions d'exploitation.",
+      "rows": {
+        "0": { "label": "Pression d'eau crête", "value": "20 MPa (instantanée)" },
+        "1": { "label": "Pression d'eau nominale", "value": "10 MPa" },
+        "2": { "label": "Débit de pulvérisation", "value": "15 L/min" },
+        "3": { "label": "Distance buse-surface", "value": "2-3 m" },
+        "4": { "label": "Poids maximal au décollage", "value": "≤ 24.9 kg" }
+      }
+    },
+    "spray": {
+      "eyebrow": "Multi-scénarios — Adaptable à plusieurs buses",
+      "title": "4 types de buses de pulvérisation, installation sans outil.",
+      "lead": "Le design modulaire des buses répond aux besoins des clients pour des tâches de nettoyage diversifiées. Un tube de buse, plusieurs types d'eau — commutation des types d'eau de 0-40° à volonté.",
+      "nozzles": {
+        "0": { "angle": "Jet haute pression 0°", "desc": "Pour rincer les interstices, taches tenaces, etc." },
+        "1": { "angle": "Jet d'eau en éventail 15°", "desc": "Pour le rinçage rapide des taches." },
+        "2": { "angle": "Évacuation d'eau en éventail 25°", "desc": "Rinçage rapide du sable et de la terre, efficacité plus élevée." },
+        "3": { "angle": "Éventail large 40°", "desc": "Pour le rinçage de grandes surfaces après pulvérisation de détergent." }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Intelligence — Planification intelligente des itinéraires",
+      "title": "D15R 5.0 — Exploitation autonome avec planification d'itinéraires.",
+      "lead": "La nouvelle version améliorée D15R 5.0 ajoute la planification intelligente des itinéraires pour réaliser une exploitation autonome. Elle peut définir des itinéraires pour différents scénarios de nettoyage, améliorant considérablement l'efficacité de travail et la flexibilité du drone de nettoyage.",
+      "items": {
+        "0": { "title": "Couverture complète sans angles morts", "desc": "L'ensemble de la façade peut être couvert avec précision selon l'itinéraire et la hauteur définis, évitant les omissions et les angles morts qui peuvent survenir lors de l'inspection manuelle ou du vol ordinaire." },
+        "1": { "title": "Haute précision avec RTK", "desc": "Combiné à des technologies de positionnement avancées telles que le positionnement RTK, l'UAV peut maintenir une attitude de vol stable et une précision de position, obtenant ainsi des images et des données de mesure haute précision." },
+        "2": { "title": "Degré élevé d'automatisation", "desc": "L'itinéraire peut être planifié à l'avance via la station de contrôle au sol, et le drone peut voler automatiquement selon le chemin prédéfini sans pilotage manuel en temps réel." },
+        "3": { "title": "Exploitation à distance", "desc": "L'opérateur peut contrôler et surveiller le drone depuis un endroit sûr éloigné des façades dangereuses, avec des mesures opportunes en cas d'urgence." }
+      }
+    },
+    "safety": {
+      "eyebrow": "Sécurité — Opérations en hauteur sans personnel",
+      "title": "Double RTK + radar de suivi de façade pour un vol sécurisé.",
+      "lead": "Permet des opérations en hauteur sans personnel. Remplace le travail manuel en hauteur par l'exploitation de drone télécommandé, modules RTK doubles intégrés pour un positionnement au centimètre près, et un système de perception intelligente avec radar de suivi de façade.",
+      "cards": {
+        "0": { "title": "Remplacement du travail manuel en hauteur", "desc": "La télécommande par le personnel peut accomplir toutes sortes de tâches de nettoyage complexes en hauteur, éliminant les risques potentiels du travail en hauteur." },
+        "1": { "title": "Double RTK haute précision intégré", "desc": "Équipé de modules RTK doubles haute précision, il peut émettre des données de positionnement au centimètre près, garantissant un positionnement précis et fiable et une exploitation sûre." },
+        "2": { "title": "Système de Perception Intelligente", "desc": "Le radar de suivi de façade monté à l'avant détecte les informations de distance en temps réel vers l'avant, maintient une distance sûre et garantit un vol plus sécurisé." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Multi-scénarios — Exploitation stable en hauteur",
+      "title": "Diverses buses, couvrant des angles difficiles.",
+      "lead": "Design modulaire pour différentes charges, exploitation stable en hauteur, manipulation flexible et couverture multi-angles des surfaces inférieures et supérieures.",
+      "items": {
+        "0": { "title": "Design modulaire", "desc": "Les supports et buses optimaux peuvent être personnalisés selon différentes tâches pour répondre aux besoins de configuration de diverses exigences de nettoyage en hauteur." },
+        "1": { "title": "Exploitation stable en hauteur", "desc": "Équipé de double RTK et d'un système en boucle fermée 'Perception-Décision-Exécution', s'adaptant à diverses exigences de nettoyage basées sur la hauteur." },
+        "2": { "title": "Manipulation flexible", "desc": "Déplacement flexible, pas peur des distances étroites entre bâtiments et autres espaces complexes." },
+        "3": { "title": "Couverture multi-angles des surfaces inférieures et supérieures", "desc": "Prenant en charge différentes configurations, il peut facilement couvrir les surfaces inférieures et supérieures et autres surfaces complexes." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparaison entre le D15R et le travail manuel traditionnel",
+      "title": "Le D15R offre des avantages significatifs en sécurité, efficacité et coût.",
+      "colD15r": "Système de nettoyage aérien D15R",
+      "colManual": "Exploitation manuelle traditionnelle",
+      "rows": {
+        "0": { "label": "Sécurité", "d15r": "L'exploitation du drone remplace le travail manuel en hauteur, réduisant considérablement le risque", "manual": "L'exploitation manuelle présente des risques de sécurité potentiels" },
+        "1": { "label": "Efficacité de nettoyage", "d15r": "1 000 m²/h, nettoyage rapide haute pression, prend en charge un fonctionnement ininterrompu", "manual": "Vitesse de nettoyage plus lente, temps d'exploitation plus long" },
+        "2": { "label": "Coût", "d15r": "Investissement unique dans l'équipement et faibles coûts d'exploitation à long terme", "manual": "Coût de main-d'œuvre élevé, chaque intervention nécessite beaucoup de personnel et de temps" },
+        "3": { "label": "Résultat de nettoyage", "d15r": "Nettoyage haute pression à 20 MPa, avec des agents de nettoyage professionnels, élimine en profondeur les taches tenaces et les moisissures", "manual": "Difficile à nettoyer en profondeur, affecte l'esthétique du bâtiment et la durée de vie du matériau" },
+        "4": { "label": "Temps d'installation", "d15r": "Installation rapide en 1 min", "manual": "Consomme du temps et de la main-d'œuvre : monter des échafaudages ou des nacelles" },
+        "5": { "label": "Flexibilité opérationnelle", "d15r": "2 types de montage, 4 buses, couverture multi-angles et multi-scénarios", "manual": "Faible flexibilité, difficile de couvrir toutes les surfaces de travail" }
+      }
+    },
+    "applications": {
+      "eyebrow": "Études de cas",
+      "title": "Projets de maintenance dans le monde réel.",
+      "lead": "La brochure du produit documente des cas d'utilisation sur les façades de bâtiments, les panneaux photovoltaïques et les environnements d'éoliennes.",
+      "badges": {
+        "case": "Étude de cas",
+        "operation": "Opération",
+        "application": "Application"
+      },
+      "cases": {
+        "0": { "badge": "case", "title": "Maintenance d'une façade de bâtiment à Dongguan" },
+        "1": { "badge": "case", "title": "Nettoyage de mur extérieur d'un bâtiment à Songgang" },
+        "2": { "badge": "case", "title": "Maintenance de mur extérieur d'un bâtiment à Shenzhen" },
+        "3": { "badge": "case", "title": "Maintenance de bâtiment à Shenzhen" },
+        "4": { "badge": "operation", "title": "Flux de travail de nettoyage aérien de façade" },
+        "5": { "badge": "application", "title": "Nettoyage de panneaux photovoltaïques" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Nettoyage de bâtiments", "desc": "Maintenance de façades extérieures et de murs-rideaux" },
+      "1": { "title": "Nettoyage photovoltaïque", "desc": "Lavage de panneaux solaires sur de grandes surfaces" },
+      "2": { "title": "Nettoyage d'éoliennes", "desc": "Maintenance de surfaces en hauteur" },
+      "3": { "title": "Nettoyage de panneaux autoroutiers", "desc": "Infrastructures routières difficiles d'accès" }
+    },
+    "specs": {
+      "eyebrow": "Paramètres du produit",
+      "title": "Le D15R en un coup d'œil.",
+      "lead": "Les valeurs de spécification ci-dessous sont retranscrites de la brochure produit D15R V6.0.",
+      "items": {
+        "0": { "label": "Modèle", "value": "D15R" },
+        "1": { "label": "Dimensions générales (bras + hélices déployés)", "value": "1945 × 1945 × 730 mm" },
+        "2": { "label": "Dimensions générales (bras déployés seuls)", "value": "1150 × 1150 × 730 mm" },
+        "3": { "label": "Débit de pulvérisation", "value": "15 L/min" },
+        "4": { "label": "Longueur du tuyau", "value": "100 m" },
+        "5": { "label": "Temps de vol", "value": "45 min mur-rideau / 55 min PV / 30 min éolienne" },
+        "6": { "label": "Distance buse-surface", "value": "2-3 m (réglable)" },
+        "7": { "label": "Batterie", "value": "14S 22000 mAh" },
+        "8": { "label": "Tube de pulvérisation", "value": "1500 mm" },
+        "9": { "label": "Vitesse de vol horizontale maximale", "value": "15 m/s" },
+        "10": { "label": "Température de fonctionnement", "value": "-10°C à 40°C" },
+        "11": { "label": "Humidité de fonctionnement", "value": "0-90%" },
+        "12": { "label": "Vitesse de vent maximale", "value": "12 m/s" },
+        "13": { "label": "Pression d'eau nominale", "value": "10 MPa" },
+        "14": { "label": "Pression d'eau maximale (instantanée)", "value": "20 MPa" },
+        "15": { "label": "Nettoyage léger", "value": "1000 m²/h" },
+        "16": { "label": "Nettoyage en profondeur", "value": "500 m²/h" },
+        "17": { "label": "Temps de charge", "value": "40 minutes" },
+        "18": { "label": "Poids maximal au décollage", "value": "≤ 24.9 kg" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Série de Drones de Nettoyage JIUSI D15R",
+      "title": "Né pour la propreté.",
+      "text": "Échangez avec Partdro sur la configuration de nettoyage, le montage des buses et le scénario d'application adaptés à votre projet.",
+      "visit": "Visitez partdro.com"
+    }
+  }
+}

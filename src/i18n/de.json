@@ -1,0 +1,258 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "windowCleaning": "Fensterreinigung",
+    "solarCleaning": "Solarreinigung",
+    "solutions": "Lösungen",
+    "cases": "Fallstudien",
+    "news": "Neuigkeiten",
+    "about": "Über Uns",
+    "contact": "Kontakt",
+    "documents": "Dokumente"
+  },
+  "hero": {
+    "title": "Professionelle Drohnen-Reinigungslösungen",
+    "subtitle": "Effiziente, sichere und intelligente Reinigung für Fenster und Solaranlagen",
+    "cta": "Angebot Anfordern",
+    "ctaSecondary": "Mehr Erfahren"
+  },
+  "stats": {
+    "countries": "Länder Bedient",
+    "years": "Jahre Erfahrung",
+    "patents": "Patente",
+    "team": "Teammitglieder"
+  },
+  "products": {
+    "title": "Unsere Produkte",
+    "subtitle": "Intelligente Reinigungsdrohnen für maximale Effizienz",
+    "viewAll": "Alle Ansehen",
+    "viewDetails": "Details Ansehen",
+    "specs": "Spezifikationen",
+    "features": "Hauptmerkmale",
+    "category": {
+      "window": "Fensterreinigung",
+      "solar": "Solarreinigung"
+    }
+  },
+  "cases": {
+    "title": "Fallstudien",
+    "subtitle": "Sehen Sie unsere Drohnen in Aktion auf der ganzen Welt",
+    "location": "Standort",
+    "viewAll": "Alle Fallstudien Ansehen"
+  },
+  "news": {
+    "title": "Neueste Neuigkeiten",
+    "subtitle": "Bleiben Sie über unsere neuesten Entwicklungen informiert",
+    "readMore": "Weiterlesen",
+    "viewAll": "Alle Neuigkeiten Ansehen"
+  },
+  "contact": {
+    "title": "Kontaktieren Sie Uns",
+    "subtitle": "Nehmen Sie Kontakt mit unserem Team auf",
+    "name": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefonnummer",
+    "company": "Firmenname",
+    "type": "Anfrageart",
+    "typeContact": "Allgemeine Anfrage",
+    "typeBooking": "Servicebuchung",
+    "typeFranchise": "Franchise-Anfrage",
+    "message": "Nachricht",
+    "submit": "Absenden",
+    "success": "Vielen Dank! Wir werden uns bald bei Ihnen melden."
+  },
+  "about": {
+    "title": "Über Uns",
+    "subtitle": "Führung der Zukunft der Drohnen-Reinigungstechnologie"
+  },
+  "documents": {
+    "title": "Technische Dokumente",
+    "subtitle": "Laden Sie Handbücher, Anleitungen und Spezifikationen herunter",
+    "download": "Herunterladen"
+  },
+  "footer": {
+    "company": "Unternehmen",
+    "products": "Produkte",
+    "support": "Support",
+    "followUs": "Folgen Sie Uns",
+    "copyright": "Alle Rechte vorbehalten."
+  },
+  "topBar": {
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "franchise": "Globale Franchise"
+  },
+  "d15r": {
+    "hero": {
+      "kicker": "JIUSI Reinigungsdrohnen-Serie D15R",
+      "title1": "Multifunktionales Reinigungs-UAV",
+      "title2": "Für Sauberkeit geboren.",
+      "lead": "Effiziente Reinigung aus der Luft und sicherer unbemannter Einsatz in großer Höhe und Anwendung in mehreren Szenarien. Die D15R bringt kontrollierte Hochdruckreinigung an Gebäudefassaden, Photovoltaikmodule, Windkraftanlagen und andere Oberflächen in großer Höhe.",
+      "ctaPrimary": "D15R entdecken",
+      "ctaSecondary": "Mit Partdro sprechen",
+      "stats": {
+        "0": "Bis zu 20 MPa Spitzendruck",
+        "1": "Bis zu 1.000 m²/h bei leichter Reinigung",
+        "2": "100 m Schleppwasserschlauch"
+      },
+      "badgeTitle": "Für Sauberkeit geboren.",
+      "badgeText": "Eine modulare Reinigungsplattform für die Luft, konzipiert für wiederholbare Höhenarbeiten."
+    },
+    "strip": {
+      "0": { "value": "15 L/min", "label": "Sprühdurchfluss" },
+      "1": { "value": "100 m", "label": "Schlauchlänge" },
+      "2": { "value": "45 min", "label": "Flugzeit Vorhangfassade" },
+      "3": { "value": "55 min", "label": "Flugzeit PV-Module" },
+      "4": { "value": "12 m/s", "label": "Max. Windgeschwindigkeit" }
+    },
+    "why": {
+      "eyebrow": "Hohe Effizienz",
+      "title": "Schnelle Hochdruckreinigung mit 1.000 m²/h.",
+      "lead": "Die manuelle Reinigung (Höhenarbeiter, Gondeln) ist immer noch das Hauptreinigungsverfahren, mit operativen Risiken, ineffizienter Reinigung, geringer Flexibilität und hohen Kosten. Die D15R-Reinigungsdrohne zeichnet sich durch ein modulares Design mit zwei Arten von Reinigungsaufsätzen und vier Düsen mit unterschiedlichen Winkeln aus und bietet eine praktische, effiziente Luft-Hochdruckreinigungslösung für mehrere Szenarien.",
+      "cards": {
+        "0": { "title": "Schleppwasserschlauch", "desc": "Langer ununterbrochener Betrieb ohne Begrenzung durch die Tankkapazität." },
+        "1": { "title": "Max. Schnellreinigung 1.000 m²/h", "desc": "Schnelles Reinigen im Schwebeflug; die D15R kann optional mit doppelten schwenkbaren Sprüharmen ausgestattet werden für eine Abdeckung von 1.000 m²/h." },
+        "2": { "title": "20 MPa momentaner Spitzendruck", "desc": "Schnelle und wirksame Entfernung hartnäckiger Verschmutzungen durch Hochdruckreinigung." },
+        "3": { "title": "Schnelle Installation und Einsatzbereitschaft", "desc": "Faltbares Design für einfachen Transport und Lagerung; Schnellverschluss-Modus für Einsatzbereitschaft in 1 Minute." },
+        "4": { "title": "4 verschiedene Düsen serienmäßig", "desc": "Sprühwinkel von 0°, 15°, 25° und 40° — ein Düsenrohr, mehrere Wasserarten, Umschalten der Wasserarten von 0-40° nach Belieben." },
+        "5": { "title": "Anpassbar an 2 verschiedene Lasten", "desc": "Die D15R kann an zwei Arten von Reinigungsaufsätzen angepasst werden: winkelverstellbare Düsen und schwenkende Düsen." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Mehrere Szenarien — Modulares Design",
+      "title": "Anpassbar an mehrere Konfigurationen.",
+      "lead": "Die D15R-Reinigungsdrohne zeichnet sich durch ein modulares Design aus, kompatibel mit zwei Arten von Reinigungsaufsätzen: winkelverstellbare Düsen und schwenkende Düsen. Ausgestattet mit vier Düsen unterschiedlicher Winkel bietet sie eine praktische, effiziente Luft-Hochdruckreinigungslösung für mehrere Szenarien.",
+      "items": {
+        "0": { "title": "Wasserdüse (fest)", "desc": "Die 1500-mm-Düse hält den Rumpf von der Wand fern, sicher und zuverlässig. Die Düse kann horizontal links und rechts schwenken." },
+        "1": { "title": "Schwenkdüse", "desc": "Der Schwenkbereich der Düse beträgt ±15°, und die Schwenkgeschwindigkeit kann über die Fernbedienung je nach Verschmutzungsgrad eingestellt werden." },
+        "2": { "title": "Doppelter schwenkbarer Sprüharm", "desc": "Optionales Kit kombiniert Schaum- und Wasserdüsen für ferngesteuertes Umschalten mit einem Tastendruck ohne Landung. Absolviert vollständige Schaumaufweichung und Wasserspülung in einem Flug." }
+      }
+    },
+    "output": {
+      "eyebrow": "Reinigungsleistung",
+      "unitTitle": "Maximale Kapazität bei leichter Reinigung: 1.000 m²/h",
+      "note": "Die Produktbroschüre gibt 500 m²/h für die Grundreinigung an. Die tatsächliche Leistung hängt von der Arbeitsfläche, dem Verschmutzungsgrad, der Reinigungsflüssigkeit und den Einsatzbedingungen ab.",
+      "rows": {
+        "0": { "label": "Spitzenwasserdruck", "value": "20 MPa (momentan)" },
+        "1": { "label": "Nennwasserdruck", "value": "10 MPa" },
+        "2": { "label": "Sprühdurchfluss", "value": "15 L/min" },
+        "3": { "label": "Abstand Düse–Oberfläche", "value": "2-3 m" },
+        "4": { "label": "Max. Startgewicht", "value": "≤ 24.9 kg" }
+      }
+    },
+    "spray": {
+      "eyebrow": "Mehrere Szenarien — Anpassbar an mehrere Düsen",
+      "title": "4 Arten von Sprühdüsen, werkzeuglose Installation.",
+      "lead": "Das modulare Düsendesign erfüllt die Bedürfnisse der Kunden nach vielfältigen Reinigungsaufgaben. Ein Düsenrohr, mehrere Wasserarten — Umschalten der Wasserarten von 0-40° nach Belieben.",
+      "nozzles": {
+        "0": { "angle": "Hochdruckstrahl 0°", "desc": "Zum Spülen von Fugen, hartnäckigen Verschmutzungen usw." },
+        "1": { "angle": "Fächerförmiger Wasserstrahl 15°", "desc": "Zum schnellen Abspülen von Verschmutzungen." },
+        "2": { "angle": "Fächerförmiger Wasserauslass 25°", "desc": "Schnelles Abspülen von Sand und Erde, höhere Effizienz." },
+        "3": { "angle": "Breiter Fächer 40°", "desc": "Zum Spülen großer Flächen nach dem Auftragen von Reinigungsmittel." }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Intelligenz — Intelligente Routenplanung",
+      "title": "D15R 5.0 — Autonomer Betrieb mit Routenplanung.",
+      "lead": "Die neue weiterentwickelte Version D15R 5.0 fügt intelligente Routenplanung hinzu, um autonomen Betrieb zu ermöglichen. Sie kann Routen für verschiedene Reinigungsszenarien festlegen und verbessert damit erheblich die Arbeitseffizienz und Flexibilität der Reinigungsdrohne.",
+      "items": {
+        "0": { "title": "Umfassende Abdeckung ohne tote Winkel", "desc": "Die gesamte Fassade kann gemäß festgelegter Route und Höhe genau abgedeckt werden, wodurch Auslassungen und tote Winkel vermieden werden, die bei manueller Inspektion oder gewöhnlichem Flug auftreten können." },
+        "1": { "title": "Hohe Präzision mit RTK", "desc": "In Kombination mit fortschrittlichen Positionierungstechnologien wie der RTK-Positionierung kann das UAV eine stabile Fluglage und Positionsgenauigkeit aufrechterhalten und dadurch hochpräzise Bilder und Messdaten erhalten." },
+        "2": { "title": "Hoher Automatisierungsgrad", "desc": "Die Route kann im Voraus über die Bodenstation geplant werden, und die Drohne kann automatisch nach dem voreingestellten Pfad fliegen ohne Echtzeit-Manualsteuerung." },
+        "3": { "title": "Fernbetrieb", "desc": "Der Bediener kann die Drohne von einem sicheren Ort aus fern von gefährlichen Fassaden steuern und überwachen, mit rechtzeitigen Maßnahmen im Notfall." }
+      }
+    },
+    "safety": {
+      "eyebrow": "Sicherheit — Manuelle Höhenarbeiten entfallen",
+      "title": "Duales RTK + Wandfolg-Radar für sicheren Flug.",
+      "lead": "Ermöglicht mannlose Höhenarbeiten. Ersetzt manuelle Arbeiten in der Höhe durch ferngesteuerten Drohnenbetrieb, integrierte duale RTK-Module für Zentimeter-genaue Positionierung und ein intelligentes Wahrnehmungssystem mit Wandfolg-Radar.",
+      "cards": {
+        "0": { "title": "Ersatz für manuelle Höhenarbeiten", "desc": "Fernsteuerung durch Personal kann alle Arten komplexer Reinigungsaufgaben in der Höhe erledigen und beseitigt die potenziellen Risiken des Arbeitens in der Höhe." },
+        "1": { "title": "Integriertes hochpräzises duales RTK", "desc": "Ausgestattet mit hochpräzisen dualen RTK-Modulen kann es Zentimeter-genaue Positionsdaten ausgeben und sorgt für genaue und zuverlässige Positionierung und sicheren Betrieb." },
+        "2": { "title": "Intelligentes Wahrnehmungssystem", "desc": "Vorne montiertes Wandfolg-Radar erkennt Echtzeit-Entfernungsinformationen nach vorne, hält einen sicheren Abstand ein und gewährleistet einen sichereren Flug." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Mehrere Szenarien — Stabiler Betrieb in der Höhe",
+      "title": "Verschiedene Düsen, Abdeckung schwieriger Winkel.",
+      "lead": "Modulares Design für unterschiedliche Lasten, stabiler Betrieb in der Höhe, flexible Handhabung und mehrwinklige Abdeckung von Unter- und Oberflächen.",
+      "items": {
+        "0": { "title": "Modulares Design", "desc": "Optimale Halterungen und Düsen können je nach verschiedenen Aufgaben individuell angepasst werden, um die Konfigurationsanforderungen verschiedener Höhenreinigungsaufgaben zu erfüllen." },
+        "1": { "title": "Stabiler Betrieb in der Höhe", "desc": "Ausgestattet mit dualem RTK und einem geschlossenen Regelkreis 'Wahrnehmung-Entscheidung-Ausführung', anpassbar an verschiedene höhenbasierte Reinigungsanforderungen." },
+        "2": { "title": "Flexible Handhabung", "desc": "Flexible Bewegung, keine Angst vor engen Gebäudeabständen und anderen komplexen Gebäuderäumen." },
+        "3": { "title": "Mehrwinklige Abdeckung von Unter- und Oberflächen", "desc": "Unterstützt verschiedene Konfigurationen, kann mühelos Unter- und Oberflächen sowie andere komplexe Oberflächen abdecken." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Vergleich zwischen D15R und traditioneller manueller Arbeit",
+      "title": "D15R bietet erhebliche Vorteile bei Sicherheit, Effizienz und Kosten.",
+      "colD15r": "D15R Luftreinigungssystem",
+      "colManual": "Traditionelle manuelle Arbeitsweise",
+      "rows": {
+        "0": { "label": "Sicherheit", "d15r": "Drohnenbetrieb ersetzt manuelle Arbeit in der Höhe und reduziert das Risiko erheblich", "manual": "Manuelle Arbeit birgt potenzielle Sicherheitsrisiken" },
+        "1": { "label": "Reinigungseffizienz", "d15r": "1.000 m²/h, schnelle Hochdruckreinigung, unterstützt ununterbrochenen Betrieb", "manual": "Langsame Reinigungsgeschwindigkeit, lange Einsatzzeit" },
+        "2": { "label": "Kosten", "d15r": "Einmalige Ausrüstungsinvestition und niedrige langfristige Betriebskosten", "manual": "Hohe Arbeitskosten, jeder Einsatz erfordert viel Personal- und Zeitaufwand" },
+        "3": { "label": "Reinigungsergebnis", "d15r": "20 MPa Hochdruckreinigung mit professionellen Reinigungsmitteln, entfernt hartnäckige Verschmutzungen und Schimmelstellen gründlich", "manual": "Schwer gründlich zu reinigen, beeinträchtigt die Ästhetik des Gebäudes und die Lebensdauer des Materials" },
+        "4": { "label": "Montagezeit", "d15r": "Schnelle Installation in 1 Min.", "manual": "Zeitaufwendig und arbeitsintensiv: Gerüste oder Gondeln aufbauen" },
+        "5": { "label": "Operative Flexibilität", "d15r": "2 Montagearten, 4 Düsen, mehrwinklige und multiszenario Abdeckung", "manual": "Geringe Flexibilität, schwer alle Arbeitsflächen zu abzudecken" }
+      }
+    },
+    "applications": {
+      "eyebrow": "Fallstudien",
+      "title": "Wartungsprojekte aus der Praxis.",
+      "lead": "Die Produktbroschüre dokumentiert Anwendungsfälle an Gebäudefassaden, Photovoltaikmodulen und Windkraftanlagen.",
+      "badges": {
+        "case": "Fallstudie",
+        "operation": "Einsatz",
+        "application": "Anwendung"
+      },
+      "cases": {
+        "0": { "badge": "case", "title": "Wartung einer Gebäudefassade in Dongguan" },
+        "1": { "badge": "case", "title": "Aussenwandreinigung eines Gebäudes in Songgang" },
+        "2": { "badge": "case", "title": "Aussenwandwartung eines Gebäudes in Shenzhen" },
+        "3": { "badge": "case", "title": "Gebäudewartung eines Gebäudes in Shenzhen" },
+        "4": { "badge": "operation", "title": "Arbeitsablauf der Luft-Fassadenreinigung" },
+        "5": { "badge": "application", "title": "Reinigung von Photovoltaikmodulen" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Gebäudereinigung", "desc": "Wartung von Aussenfassaden und Vorhangfassaden" },
+      "1": { "title": "Photovoltaikreinigung", "desc": "Reinigung grossflächiger Solarmodule" },
+      "2": { "title": "Windkraftanlagenreinigung", "desc": "Wartung von Oberflächen in grosser Höhe" },
+      "3": { "title": "Reinigung von Autobahnschildern", "desc": "Schwer erreichbare Verkehrsinfrastruktur" }
+    },
+    "specs": {
+      "eyebrow": "Produktparameter",
+      "title": "Die D15R auf einen Blick.",
+      "lead": "Die folgenden Spezifikationswerte sind der Produktbroschüre D15R V6.0 entnommen.",
+      "items": {
+        "0": { "label": "Modell", "value": "D15R" },
+        "1": { "label": "Gesamtabmessungen (Arme + Propeller ausgeklappt)", "value": "1945 × 1945 × 730 mm" },
+        "2": { "label": "Gesamtabmessungen (nur Arme ausgeklappt)", "value": "1150 × 1150 × 730 mm" },
+        "3": { "label": "Sprühdurchfluss", "value": "15 L/min" },
+        "4": { "label": "Schlauchlänge", "value": "100 m" },
+        "5": { "label": "Flugzeit", "value": "45 min Vorhangfassade / 55 min PV / 30 min Windkraftanlage" },
+        "6": { "label": "Abstand Düse–Oberfläche", "value": "2-3 m (einstellbar)" },
+        "7": { "label": "Akku", "value": "14S 22000 mAh" },
+        "8": { "label": "Sprührohr", "value": "1500 mm" },
+        "9": { "label": "Max. horizontale Fluggeschwindigkeit", "value": "15 m/s" },
+        "10": { "label": "Arbeitstemperatur", "value": "-10°C bis 40°C" },
+        "11": { "label": "Luftfeuchtigkeit im Betrieb", "value": "0-90%" },
+        "12": { "label": "Max. Windgeschwindigkeit", "value": "12 m/s" },
+        "13": { "label": "Nennwasserdruck", "value": "10 MPa" },
+        "14": { "label": "Max. Wasserdruck (momentan)", "value": "20 MPa" },
+        "15": { "label": "Leichte Reinigung", "value": "1000 m²/h" },
+        "16": { "label": "Grundreinigung", "value": "500 m²/h" },
+        "17": { "label": "Ladezeit", "value": "40 Minuten" },
+        "18": { "label": "Max. Startgewicht", "value": "≤ 24.9 kg" }
+      }
+    },
+    "cta": {
+      "eyebrow": "JIUSI Reinigungsdrohnen-Serie D15R",
+      "title": "Für Sauberkeit geboren.",
+      "text": "Sprechen Sie mit Partdro über die passende Reinigungskonfiguration, Düsenausstattung und das richtige Anwendungsszenario für Ihr Projekt.",
+      "visit": "Besuchen Sie partdro.com"
+    }
+  }
+}

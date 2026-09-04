@@ -1,0 +1,26 @@
+node_modules
+dist
+*.log
+.DS_Store
+*.pyc
+.vscode
+.idea
+extracted_*.json
+*_page.html
+# Environment variables
+.env
+.env.local
+.env.*.local
+# Temp debug screenshots (root level)
+/audit-full.png
+/review-full.png
+/screenshot-full.png
+/af718-*.png
+/w20-*.png
+# Large original source images (use .webp versions instead)
+public/images/*.jpg
+public/images/*.JPG
+public/images/Taurus 80e*.png
+
+# Local Netlify folder
+.netlify
