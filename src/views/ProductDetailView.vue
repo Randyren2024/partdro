@@ -23,7 +23,7 @@
             <p class="lead" :data-edit-key="'d15r.hero.lead'">{{ t('d15r.hero.lead') }}</p>
             <div class="btns">
               <a class="btn primary" href="#specs" :data-edit-key="'d15r.hero.ctaPrimary'">{{ t('d15r.hero.ctaPrimary') }}</a>
-              <a class="btn secondary" href="mailto:info@partdro.com?subject=D15R%20Cleaning%20Drone%20Inquiry" :data-edit-key="'d15r.hero.ctaSecondary'">{{ t('d15r.hero.ctaSecondary') }}</a>
+              <a class="btn secondary" href="mailto:info@partdro.com?subject=D15R%20Cleaning%20Drone%20Inquiry" :data-edit-key="'d15r.hero.ctaSecondary'" @click="trackEvent('generate_lead', { location: 'hero' })">{{ t('d15r.hero.ctaSecondary') }}</a>
             </div>
             <div class="hero-stat-row">
               <div v-for="(s, i) in heroStats" :key="i" class="mini-stat" :data-edit-key="`d15r.hero.stats.${i}`">{{ s }}</div>
@@ -259,7 +259,7 @@
               <p :data-edit-key="'d15r.cta.text'">{{ t('d15r.cta.text') }}</p>
             </div>
             <div class="btns" style="margin-top:0;min-width:220px">
-              <a class="btn primary" href="mailto:info@partdro.com?subject=D15R%20Cleaning%20Drone%20Inquiry">info@partdro.com</a>
+              <a class="btn primary" href="mailto:info@partdro.com?subject=D15R%20Cleaning%20Drone%20Inquiry" @click="trackEvent('generate_lead', { location: 'cta_box' })">info@partdro.com</a>
               <RouterLink class="btn secondary" to="/" :data-edit-key="'d15r.cta.visit'">{{ t('d15r.cta.visit') }}</RouterLink>
             </div>
           </div>
@@ -284,6 +284,7 @@ import i18nInstance from '../i18n'
 import { useAuthStore } from '../stores/auth'
 import { saveEditableD15r, imgOverridesByLang } from '../composables/useLandingContent'
 import InlineEditor from '../components/admin/InlineEditor.vue'
+import { trackEvent } from '../composables/useTracking'
 
 const auth = useAuthStore()
 const { t, locale } = useI18n()

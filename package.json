@@ -21,6 +21,7 @@
     "pinia-plugin-persistedstate": "^4.7.1",
     "stripe": "^22.2.3",
     "vue": "^3.4.0",
+    "vue-i18n": "^9.14.5",
     "vue-router": "^4.2.0",
     "vue3-map-chart": "^0.2.0"
   },

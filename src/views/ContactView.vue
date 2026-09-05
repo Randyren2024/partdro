@@ -26,7 +26,7 @@
                 <MailOutlined />
                 <div>
                   <p><strong>Email</strong></p>
-                  <p>info@partdro.com</p>
+                  <p><a href="mailto:info@partdro.com" @click="trackEvent('generate_lead', { location: 'contact_info' })">info@partdro.com</a></p>
                 </div>
               </div>
               <div class="contact-info__item">
@@ -55,6 +55,7 @@
 import { useI18n } from 'vue-i18n'
 import { PhoneOutlined, MailOutlined, EnvironmentOutlined, ClockCircleOutlined } from '@ant-design/icons-vue'
 import InquiryForm from '../components/common/InquiryForm.vue'
+import { trackEvent } from '../composables/useTracking'
 
 const { t } = useI18n()
 </script>

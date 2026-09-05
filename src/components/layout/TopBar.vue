@@ -6,10 +6,10 @@
           <PhoneOutlined />
           {{ t('topBar.phone') }}: +86 16788684420
         </span>
-        <span class="top-bar__item">
+        <a class="top-bar__item" href="mailto:info@partdro.com" @click="trackEvent('generate_lead', { location: 'topbar' })">
           <MailOutlined />
           info@partdro.com
-        </span>
+        </a>
       </div>
       <div class="top-bar__right">
         <a-button type="primary" size="small" ghost>
@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { PhoneOutlined, MailOutlined, RightOutlined } from '@ant-design/icons-vue'
+import { trackEvent } from '../../composables/useTracking'
 
 const { t } = useI18n()
 </script>

@@ -21,6 +21,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { trackEvent } from './composables/useTracking'
 import { useLandingContent } from './composables/useLandingContent'
 import enUS from 'ant-design-vue/es/locale/en_US'
 import esES from 'ant-design-vue/es/locale/es_ES'
@@ -41,6 +42,10 @@ const antLocale = computed(() => locales[locale.value] || enUS)
 useLandingContent()
 
 const openWhatsApp = () => {
+  trackEvent('whatsapp_chat_initiated', {
+    channel: 'whatsapp',
+    phone: '8616788684420',
+  })
   const message = 'Hello! I would like to learn more about Partdro drone solutions.'
   window.open(`https://wa.me/8616788684420?text=${encodeURIComponent(message)}`, '_blank')
 }

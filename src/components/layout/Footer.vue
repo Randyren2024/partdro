@@ -45,7 +45,7 @@
           <h4>{{ t('contact.title') }}</h4>
           <ul class="footer__contact-list">
             <li><PhoneOutlined /> +86 16788684420</li>
-            <li><MailOutlined /> info@partdro.com</li>
+            <li><a href="mailto:info@partdro.com" @click="trackEvent('generate_lead', { location: 'footer' })"><MailOutlined /> info@partdro.com</a></li>
             <li><EnvironmentOutlined /> Shenzhen, China</li>
           </ul>
         </div>
@@ -70,6 +70,7 @@ import {
   MailOutlined,
   EnvironmentOutlined,
 } from '@ant-design/icons-vue'
+import { trackEvent } from '../../composables/useTracking'
 
 const { t } = useI18n()
 const currentYear = computed(() => new Date().getFullYear())

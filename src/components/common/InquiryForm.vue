@@ -37,6 +37,7 @@
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '../../supabase/client'
+import { trackEvent } from '../../composables/useTracking'
 
 const { t } = useI18n()
 const loading = ref(false)
@@ -60,6 +61,7 @@ const handleSubmit = async () => {
       type: form.type,
       message: form.message,
     })
+    trackEvent('contact_form_submission', { form_type: form.type })
     success.value = true
     Object.assign(form, { name: '', email: '', phone: '', type: 'contact', message: '' })
   } catch {
