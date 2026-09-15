@@ -60,11 +60,93 @@
     "typeFranchise": "Franchise-Anfrage",
     "message": "Nachricht",
     "submit": "Absenden",
-    "success": "Vielen Dank! Wir werden uns bald bei Ihnen melden."
+    "success": "Vielen Dank! Wir werden uns bald bei Ihnen melden.",
+    "info": {
+      "heading": "Kontaktinformationen",
+      "phoneLabel": "Telefon",
+      "phoneValue": "+86 16788684420",
+      "emailLabel": "E-Mail",
+      "emailValue": "info{'@'}partdro.com",
+      "addressLabel": "Adresse",
+      "addressValue": "Shenzhen, Guangdong, China",
+      "hoursLabel": "Geschäftszeiten",
+      "hoursValue": "Mo - Fr: 9:00 - 18:00 Uhr"
+    }
   },
   "about": {
-    "title": "Über Uns",
-    "subtitle": "Führung der Zukunft der Drohnen-Reinigungstechnologie"
+    "hero": {
+      "title": "Premium-Drohnenlösungen für jede Mission",
+      "subtitle": "Ihr vertrauenswürdiger Partner für Consumer- und Enterprise-UAV-Lösungen"
+    },
+    "intro": {
+      "title": "Über Partdro",
+      "subtitle": "Ihr vertrauenswürdiger Partner für Premium-Drohnenlösungen",
+      "p1": "Partdro ist ein spezialisierter Drohnenhändler, der modernste UAV-Technologie mit den Anforderungen von Verbrauchern und Unternehmen weltweit verbindet. Von Luftbildfotografie-Enthusiasten bis hin zu Inspektionsteams von Unternehmen bieten wir Premium-Drohnenlösungen mit professioneller Unterstützung.",
+      "p2": "Dank enger Lieferkettenverbindungen zu führenden Drohnenherstellern bieten wir wettbewerbsfähige Preise, schnellen Versand und lokalen After-Sales-Support. Ob Hobbyist, professioneller Fotograf oder Betriebsleiter – Partdro hat die richtige UAV für Ihre Mission."
+    },
+    "journey": {
+      "title": "Unser Weg",
+      "subtitle": "Von Drohnen-Enthusiasten zu Branchenführern",
+      "items": {
+        "0": {
+          "year": "2015-2018",
+          "title": "DJI Team für Intelligente Wahrnehmungssysteme",
+          "desc": "Kernmitglied, Pionier der Massenproduktion von 8.000 Einheiten/Tag. DJI hielt 90% Marktanteil bei Consumer- und Agrardrohnen."
+        },
+        "1": {
+          "year": "2018-2022",
+          "title": "Alibaba DAMO Academy",
+          "desc": "Architekt des Robotik-Teams, Bericht an Professor Tan Ping (3D-Vision-Experte). Fokus auf räumliche Intelligenz und Robotiktechnologien."
+        },
+        "2": {
+          "year": "2022",
+          "title": "Roboter-Rasenmäher-Unternehmen",
+          "desc": "Mitgründung des Unternehmens mit Investitionen von Herrn Lei Jun (Xiaomi) und Herrn Zeng Liqing (Tencent). Erfolgreiche Massenproduktion und Export ins Ausland."
+        },
+        "3": {
+          "year": "2024",
+          "title": "Partdro AgriTech",
+          "desc": "Ausweitung der Expertise auf die großflächige Landwirtschaft. Partnerschaft mit der Australisch-Chinesischen Agrarvereinigung. Aufbau einer Produktmatrix mit Agrarrobotern und Rasenmähern."
+        }
+      }
+    },
+    "team": {
+      "title": "Führungsteam",
+      "subtitle": "Expertise, die Innovation vorantreibt",
+      "name": "Herr Gan",
+      "position": "Gründer & CEO",
+      "bio1": "Spitzenexperte in der Drohnen- und Robotikbranche mit über 15 Jahren tiefgreifender Erfahrung. Ehemaliges Kernmitglied des DJI-Teams für intelligente Wahrnehmungssysteme und Architekt bei Alibaba DAMO Academy.",
+      "bio2": "Leitete die branchenweit erste Massenproduktion von 8.000 Einheiten/Tag bei DJI und war Mitgründer eines Roboter-Rasenmäher-Unternehmens, das Investitionen von Herrn Lei Jun (Xiaomi) und Herrn Zeng Liqing (Tencent) erhielt."
+    },
+    "values": {
+      "title": "Unsere Werte",
+      "subtitle": "Was uns vorantreibt",
+      "items": {
+        "0": { "title": "Technische Exzellenz", "desc": "Die höchsten Standards bei Produktauswahl und technischer Validierung, um sicherzustellen, dass jede Lösung strenge Qualitätsanforderungen erfüllt." },
+        "1": { "title": "Kundenpartnerschaft", "desc": "Kunden als langfristige Partner betrachten und umfassende Unterstützung von der Produktauswahl bis zum After-Sales-Service bieten." },
+        "2": { "title": "Marktintelligenz", "desc": "Tiefes Verständnis sowohl der chinesischen Fertigungskapazitäten als auch der globalen Marktbedürfnisse für eine optimale Produkt-Markt-Passung." },
+        "3": { "title": "Lokalisierter Service", "desc": "Aufbau tiefer, lokalisierter Servicestrukturen, um globale Kunden wirklich mit Komplettlösungen statt nur Produkten zu bedienen." }
+      }
+    },
+    "stats": {
+      "title": "Warum Wir",
+      "subtitle": "Unsere nachgewiesene Erfolgsbilanz",
+      "items": {
+        "0": { "title": "10+ Jahre Erfahrung", "desc": "Tiefgreifende Expertise in der UAV-Technologie, kontinuierliche Innovation seit 2014." },
+        "1": { "title": "Mehrere Produktlinien", "desc": "Umfassende Lösungen für Consumer-, Enterprise- und Agrardrohnen sowie Zubehör." },
+        "2": { "title": "Globale Reichweite", "desc": "Kunden in Ozeanien und weltweit mit lokalisiertem Support." },
+        "3": { "title": "Vertrauenswürdige Partner", "desc": "Starke Partnerschaften mit führenden Drohnenherstellern und Vertriebsnetzen." }
+      }
+    },
+    "cta": {
+      "title": "Bereit, Ihre Landwirtschaft zu Transformieren?",
+      "description": "Ob Sie Agrarroboter, intelligente Navigationssysteme oder maßgeschneiderte Lösungen benötigen – unser Team hilft Ihnen gerne, die perfekte Technologie für Ihre Anforderungen zu finden.",
+      "contactBtn": "Kontakt Aufnehmen",
+      "demoBtn": "Demo Anfragen",
+      "email": "info{'@'}partdro.com",
+      "phone": "+86 16788684420",
+      "location": "Shenzhen, China"
+    }
   },
   "documents": {
     "title": "Technische Dokumente",
@@ -76,7 +158,14 @@
     "products": "Produkte",
     "support": "Support",
     "followUs": "Folgen Sie Uns",
-    "copyright": "Alle Rechte vorbehalten."
+    "copyright": "Alle Rechte vorbehalten.",
+    "cta": {
+      "eyebrow": "Partdro Drohnenlösungen",
+      "title": "Finden wir die passende Reinigungslösung für Ihr Projekt.",
+      "text": "Sprechen Sie mit Partdro über die richtige Konfiguration, den Düsenaufbau und das Anwendungsszenario für Ihre Arbeit.",
+      "mail": "info{'@'}partdro.com",
+      "visit": "Produkte entdecken"
+    }
   },
   "topBar": {
     "phone": "Telefon",

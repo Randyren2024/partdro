@@ -1,7 +1,7 @@
 <template>
   <section class="inquiry-form">
     <a-card :bordered="false" class="inquiry-form__card">
-      <h3>{{ t('contact.title') }}</h3>
+      <h3 :data-edit-key="'contact.title'">{{ t('contact.title') }}</h3>
       <a-form :model="form" layout="vertical" @finish="handleSubmit">
         <a-form-item name="name" :rules="[{ required: true }]">
           <a-input v-model:value="form.name" :placeholder="t('contact.name')" />

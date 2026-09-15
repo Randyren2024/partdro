@@ -1,18 +1,5 @@
 <template>
   <div class="d15r-landing">
-    <!-- 内联编辑浮层（仅 admin 登录后激活） -->
-    <InlineEditor
-      :edit-mode="editMode"
-      :dirty="dirty"
-      :saving="saving"
-      @update:dirty="dirty = $event"
-      @update:saving="saving = $event"
-      @lang-change="handleLangChange"
-      @reload="handleReload"
-      @changed="handleChanged"
-      @changed-img="handleChangedImg"
-      @saved="handleSaved"
-    />
     <main id="top">
       <!-- Hero -->
       <section class="hero">
@@ -280,14 +267,15 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import i18nInstance from '../i18n'
 import { useAuthStore } from '../stores/auth'
-import { saveEditableD15r, imgOverridesByLang } from '../composables/useLandingContent'
-import InlineEditor from '../components/admin/InlineEditor.vue'
+import { imgOverridesByLang } from '../composables/useLandingContent'
 import { trackEvent } from '../composables/useTracking'
 
 const auth = useAuthStore()
 const { t, locale } = useI18n()
+
+// 编辑模式下禁用 lightbox（点击用于编辑而非放大）
+const editMode = computed(() => auth.isLoggedIn)
 
 const IMG_BASE = '/d15r/images/'
 const img = (name: string) => IMG_BASE + name
@@ -296,67 +284,17 @@ const nozzleImages = ['page005_img001.png', 'page005_img002.png', 'page005_img00
 const caseImages = ['page010_img002.png', 'page011_img002.png', 'page012_img002.png', 'page013_img002.png', 'page009_img001.png', 'page011_img001.png']
 const scenarioImages = ['page014_img002.png', 'page014_img001.png', 'page014_img004.png', 'page014_img003.png']
 
-// ====== 内联编辑相关 ======
-const editMode = computed(() => auth.isLoggedIn)
-const dirty = ref(false)
-const saving = ref(false)
+// ====== 图片覆盖（全局 useInlineEdit 通过 imgOverridesByLang 管理） ======
+const currentImgOverrides = computed(() => imgOverridesByLang[locale.value as string] ?? {})
 
-// 当前语言的图片覆盖（从 imgOverridesByLang 读/写）
-const currentImgOverrides = computed({
-  get: () => imgOverridesByLang[locale.value as string] ?? {},
-  set: (v) => { imgOverridesByLang[locale.value as string] = v },
-})
-
-// 应用图片覆盖到 img() 调用
+// 应用图片覆盖：支持完整 URL、/ 开头路径、或纯文件名
 function imgEdit(name: string, key?: string): string {
-  if (key && currentImgOverrides.value[key]) return img(currentImgOverrides.value[key])
+  if (key && currentImgOverrides.value[key]) {
+    const v = currentImgOverrides.value[key]
+    if (v.startsWith('http') || v.startsWith('/')) return v
+    return img(v)
+  }
   return img(name)
-}
-
-// 处理文本编辑：直接修改 vue-i18n 消息树
-function applyTextEdit(key: string, value: string) {
-  const parts = key.split('.') // e.g. ['d15r', 'hero', 'kicker']
-  const messages = i18nInstance.global.getLocaleMessage(locale.value as string) as any
-  let node = messages
-  for (let i = 0; i < parts.length - 1; i++) {
-    node = node[parts[i]]
-  }
-  node[parts[parts.length - 1]] = value
-  i18nInstance.global.setLocaleMessage(locale.value as string, messages)
-}
-function handleChanged(key: string, value: string) {
-  applyTextEdit(key, value)
-  dirty.value = true
-}
-function handleChangedImg(key: string, value: string) {
-  const cur = { ...currentImgOverrides.value }
-  cur[key] = value
-  currentImgOverrides.value = cur
-  dirty.value = true
-}
-async function handleSaved() {
-  saving.value = true
-  try {
-    const messages = i18nInstance.global.getLocaleMessage(locale.value as string) as any
-    const d15rTree = JSON.parse(JSON.stringify(messages.d15r || {}))
-    await saveEditableD15r(
-      locale.value as string,
-      d15rTree,
-      currentImgOverrides.value,
-    )
-    dirty.value = false
-  } catch (e: any) {
-    console.error('Save failed:', e)
-  } finally {
-    saving.value = false
-  }
-}
-function handleReload() {
-  dirty.value = false
-  location.reload()
-}
-function handleLangChange(l: string) {
-  locale.value = l
 }
 
 

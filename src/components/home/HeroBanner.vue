@@ -2,26 +2,27 @@
   <section class="hero">
     <div class="hero__bg">
       <img
-        src="https://images.unsplash.com/photo-1508615039623-a25605d2b022?w=1920&q=80"
+        :src="imgEdit('https://images.unsplash.com/photo-1508615039623-a25605d2b022?w=1920&q=80', 'hero.bgImg')"
         alt="Drone cleaning"
+        data-edit-img="hero.bgImg"
       />
       <div class="hero__overlay"></div>
     </div>
     <div class="container hero__content">
       <div class="hero__text">
-        <h1>{{ t("hero.title") }}</h1>
-        <p>{{ t("hero.subtitle") }}</p>
+        <h1 :data-edit-key="'hero.title'">{{ t("hero.title") }}</h1>
+        <p :data-edit-key="'hero.subtitle'">{{ t("hero.subtitle") }}</p>
         <div class="hero__buttons">
           <a-button type="primary" size="large" @click="$router.push('/contact')">
-            {{ t("hero.cta") }}
+            <span :data-edit-key="'hero.cta'">{{ t("hero.cta") }}</span>
           </a-button>
           <a-button size="large" ghost @click="$router.push('/products')">
-            {{ t("hero.ctaSecondary") }}
+            <span :data-edit-key="'hero.ctaSecondary'">{{ t("hero.ctaSecondary") }}</span>
           </a-button>
         </div>
       </div>
       <div class="hero__product-wrapper">
-        <img src="/d15r_hero.jpeg" alt="Partdro D15R Cleaning Drone" class="hero__product-img" />
+        <img :src="imgEdit('/d15r_hero.jpeg', 'hero.productImg')" alt="Partdro D15R Cleaning Drone" class="hero__product-img" data-edit-img="hero.productImg" />
       </div>
     </div>
   </section>
@@ -29,8 +30,18 @@
 
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
+import { imgOverridesByLang } from "../../composables/useLandingContent";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+// 通用图片覆盖：key 命中则用覆盖值（完整 URL / / 路径 / 纯文件名）
+function imgEdit(defaultSrc: string, key: string): string {
+  const overrides = imgOverridesByLang[locale.value as string] || {};
+  const v = overrides[key];
+  if (!v) return defaultSrc;
+  if (v.startsWith("http") || v.startsWith("/")) return v;
+  return `/d15r/images/${v}`;
+}
 </script>
 
 <style scoped>

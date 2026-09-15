@@ -1,0 +1,18 @@
+{
+  "fetched_at": "2026-09-13T18:10:00.000Z",
+  "source": "kimi-webbridge",
+  "post_url": "https://www.reddit.com/r/drones/comments/eqwihb/best_drone_for_a_pressure_washing_business/",
+  "post_title": "Best drone for a pressure washing business : r/drones",
+  "comment_count": 9,
+  "comments": [
+    {"i":0,"author":"obxhead","score":3,"body":"Needless to say, this will take some serious capital to get up and running. I wouldn't be surprised to hear numbers like $150k needed up front to get most of what you need to even start this business.\n\nI would search for suppliers that are already advertising this tech and speak directly to them."},
+    {"i":1,"author":"johnnydooley1","score":2,"body":"Thanks for your input. I am currently speaking with a few and the price of the drone itself ranges from 15 -20k. I'm hoping to get it up and running for about 40k."},
+    {"i":2,"author":"Prima13","score":2,"body":"Honestly, of the 10,000 or so ideas I had when drones appeared on the market, pressure washing was not one of them. Interesting idea."},
+    {"i":3,"author":"[已删除]","score":2,"body":"Hmm, how are you going to maintain pressure on your target when it's expended as thrust? You'd need a heavy tether powered drone just to get this idea started. Interesting challenges."},
+    {"i":4,"author":"[已删除]","score":1,"body":"Something like this?\n\nhttps://www.youtube.com/watch?v=nRxU6Dk7978"},
+    {"i":5,"author":"johnnydooley1","score":2,"body":"Exactly, this one costs 15k."},
+    {"i":6,"author":"[已删除]","score":2,"body":"This is softwashing, essentially allowing soap or cleaning agent to do the work.\n\nPressure washing is much harder as it exerts force and the drone will move in the oposite direction.\n\nI would question the point of a drone for this application. If you have a tethered water supply then you have no need for it to be 'portable' as such and then you can simply build an arm that would do this.\n\nInteresting idea, I believe something similar was mentioned regarding fire fighting drones before."},
+    {"i":7,"author":"HikeTheSky","score":1,"body":"I don't think this is a good idea since drones have a lot of electronics in them and water is kind of a no no for that."},
+    {"i":8,"author":"Jordaneer","score":1,"body":"You can seal them up, DJI already makes an agricultural spraying drone"}
+  ]
+}

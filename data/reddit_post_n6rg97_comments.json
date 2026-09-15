@@ -1,0 +1,14 @@
+{
+  "fetched_at": "2026-09-13T18:14:00.000Z",
+  "source": "kimi-webbridge",
+  "post_url": "https://www.reddit.com/r/drones/comments/n6rg97/a_question_for_the_drone_community/",
+  "post_title": "A question for the drone community : r/drones",
+  "comment_count": 5,
+  "comments": [
+    {"i":0,"author":"Cpnbro","score":3,"body":"I have never heard of this. The closest I've seen is footage of a drone (which might have been in experimental phase, unsure) putting out a small fire with a jet of something. I think I also saw one drone doing the opposite with a flame thrower...\n\nI honestly don't think that they are built to do this. However, I would think that with some of the higher powered drones which can lift cargo, they could be easily modified to spray a solution. Good luck op!"},
+    {"i":1,"author":"VendoThefastlane","score":1,"body":"Thanks! The best prototype I saw was tethered with a water hose but otherwise remote controlled. Another had a rotating brush that could be pressed against a window.\n\nThe idea for modification is a good one though and seems especially possible for a drive with a brush attachment. Would anyone know if any companies that partner to design and produce new models for a customer to distribute?"},
+    {"i":2,"author":"LucyEleanor","score":1,"body":"Is the tether a deal breaker? I've seen a couple with power washers but they all had small (probably 3/8\") water hoses running to them in flight."},
+    {"i":3,"author":"LEO_TROLLSTOY","score":2,"body":"Involving water into any of that is ungrateful work and Im guessing it will not be profitable. You cant pull a hose filled with water very high and you cant take up much water to do serious cleaning. then there is the issue of water pressure. If you compress water on ground, the hose will be very rigid and screw up the drone (its fine for low altitudes but forget about getting that hose very high as it will get very heavy and rigid). If you compress it at the drone it weal eat a batteries like m&m's.\n\nMy best bet would be a rotating brush. If I was to do it, I would find a local university or someone tech savvy, create blueprints and send them to be produced somewhere. It wont be an easy task.\n\nI saw the video you mentioned and I would approach it differently. I would use a cleaning robot like roomba and just put it there to vacuum and wash and use drones as the deployment mechanism if its very high. And I'm not joking. It would absolutely do the job securely with no reinventing the wheel"},
+    {"i":4,"author":"LEO_TROLLSTOY","score":2,"body":"Basically, this: https://www.joelbeeby.com/nebra"}
+  ]
+}

@@ -60,11 +60,93 @@
     "typeFranchise": "Demande de Franchise",
     "message": "Message",
     "submit": "Envoyer",
-    "success": "Merci ! Nous vous répondrons bientôt."
+    "success": "Merci ! Nous vous répondrons bientôt.",
+    "info": {
+      "heading": "Informations de Contact",
+      "phoneLabel": "Téléphone",
+      "phoneValue": "+86 16788684420",
+      "emailLabel": "Email",
+      "emailValue": "info{'@'}partdro.com",
+      "addressLabel": "Adresse",
+      "addressValue": "Shenzhen, Guangdong, China",
+      "hoursLabel": "Horaires d'Ouverture",
+      "hoursValue": "Lun - Ven : 9h00 - 18h00"
+    }
   },
   "about": {
-    "title": "À Propos",
-    "subtitle": "Leader de l'avenir de la technologie de nettoyage par drone"
+    "hero": {
+      "title": "Solutions de Drones Premium pour Chaque Mission",
+      "subtitle": "Votre partenaire de confiance pour les solutions UAV grand public et professionnelles"
+    },
+    "intro": {
+      "title": "À Propos de Partdro",
+      "subtitle": "Votre partenaire de confiance pour des solutions de drones premium",
+      "p1": "Partdro est un distributeur spécialisé de drones qui relie la technologie UAV de pointe aux besoins des consommateurs et des entreprises du monde entier. Des passionnés de photographie aérienne aux équipes d'inspection d'entreprise, nous proposons des solutions de drones premium soutenues par un support d'experts.",
+      "p2": "Grâce à des liens étroits avec la chaîne d'approvisionnement des principaux fabricants de drones, nous offrons des prix compétitifs, une expédition rapide et un support après-vente local. Que vous soyez amateur, photographe professionnel ou responsable des opérations d'entreprise, Partdro a l'UAV adapté à votre mission."
+    },
+    "journey": {
+      "title": "Notre Parcours",
+      "subtitle": "De passionnés de drones à leaders de l'industrie",
+      "items": {
+        "0": {
+          "year": "2015-2018",
+          "title": "Équipe des Systèmes de Perception Intelligente de DJI",
+          "desc": "Membre clé, pionnier de la production de masse de 8 000 unités/jour. DJI détenait 90% de part de marché sur les drones grand public et agricoles."
+        },
+        "1": {
+          "year": "2018-2022",
+          "title": "Alibaba DAMO Academy",
+          "desc": "Architecte de l'équipe robotique, sous la direction du Professeur Tan Ping (expert en vision 3D). Axé sur l'intelligence spatiale et les technologies robotiques."
+        },
+        "2": {
+          "year": "2022",
+          "title": "Entreprise de Tondeuses Robotisées",
+          "desc": "Co-fondation avec des investissements de M. Lei Jun (Xiaomi) et M. Zeng Liqing (Tencent). Production de masse réussie et exportation à l'international."
+        },
+        "3": {
+          "year": "2024",
+          "title": "Partdro AgriTech",
+          "desc": "Extension de l'expertise à l'agriculture à grande échelle. Partenariat avec l'Association Agricole Australie-Chine. Établissement d'une gamme de produits incluant robots agricoles et tondeuses."
+        }
+      }
+    },
+    "team": {
+      "title": "Équipe de Direction",
+      "subtitle": "L'expertise au service de l'innovation",
+      "name": "M. Gan",
+      "position": "Fondateur et CEO",
+      "bio1": "Expert de premier plan dans l'industrie des drones et de la robotique avec plus de 15 ans d'expérience approfondie. Ancien membre clé de l'équipe des systèmes de perception intelligente de DJI et architecte chez Alibaba DAMO Academy.",
+      "bio2": "A dirigé la production de masse inédite de 8 000 unités/jour chez DJI et a co-fondé une entreprise de tondeuses robotisées qui a obtenu des investissements de M. Lei Jun (Xiaomi) et M. Zeng Liqing (Tencent)."
+    },
+    "values": {
+      "title": "Nos Valeurs",
+      "subtitle": "Ce qui nous fait avancer",
+      "items": {
+        "0": { "title": "Excellence Technique", "desc": "Maintenir les normes les plus élevées dans la sélection des produits et la validation technique, en garantissant que chaque solution respecte des critères de qualité rigoureux." },
+        "1": { "title": "Partenariat Client", "desc": "Considérer les clients comme des partenaires à long terme, en offrant un support complet de la sélection du produit au service après-vente." },
+        "2": { "title": "Intelligence du Marché", "desc": "Compréhension approfondie des capacités de fabrication chinoises et des besoins du marché mondial pour un adéquation produit-marché optimale." },
+        "3": { "title": "Service Localisé", "desc": "Construire des systèmes de service approfondis et localisés pour servir véritablement les clients mondiaux avec des solutions complètes, pas seulement des produits." }
+      }
+    },
+    "stats": {
+      "title": "Pourquoi Nous Choisir",
+      "subtitle": "Notre bilan éprouvé",
+      "items": {
+        "0": { "title": "10+ Ans d'Expérience", "desc": "Expertise approfondie en technologie UAV, innovation continue depuis 2014." },
+        "1": { "title": "Plusieurs Gammes de Produits", "desc": "Solutions complètes couvrant les drones grand public, professionnels, agricoles et accessoires." },
+        "2": { "title": "Portée Mondiale", "desc": "Au service des clients en Océanie et dans le monde entier avec un support localisé." },
+        "3": { "title": "Partenaires de Confiance", "desc": "Partenariats solides avec les principaux fabricants de drones et réseaux de distribution." }
+      }
+    },
+    "cta": {
+      "title": "Prêt à Transformer Votre Agriculture ?",
+      "description": "Que vous ayez besoin de robots agricoles, de systèmes de navigation intelligents ou de solutions personnalisées, notre équipe est prête à vous aider à trouver la technologie parfaite pour vos besoins.",
+      "contactBtn": "Nous Contacter",
+      "demoBtn": "Demander une Démo",
+      "email": "info{'@'}partdro.com",
+      "phone": "+86 16788684420",
+      "location": "Shenzhen, Chine"
+    }
   },
   "documents": {
     "title": "Documents Techniques",
@@ -76,7 +158,14 @@
     "products": "Produits",
     "support": "Support",
     "followUs": "Suivez-Nous",
-    "copyright": "Tous droits réservés."
+    "copyright": "Tous droits réservés.",
+    "cta": {
+      "eyebrow": "Solutions de Drones Partdro",
+      "title": "Trouvons la bonne solution de nettoyage pour votre projet.",
+      "text": "Parlez à Partdro de la configuration, du choix des buses et du scénario d'application adaptés à votre travail.",
+      "mail": "info{'@'}partdro.com",
+      "visit": "Découvrir les produits"
+    }
   },
   "topBar": {
     "phone": "Téléphone",

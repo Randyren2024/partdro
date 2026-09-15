@@ -2,6 +2,9 @@
   <a-config-provider :locale="antLocale">
     <router-view />
 
+    <!-- 全局内联编辑器（admin 登录后所有页面可编辑） -->
+    <InlineEditor />
+
     <!-- Floating WhatsApp Button -->
     <a-tooltip title="Chat on WhatsApp" placement="left">
       <a-button
@@ -23,6 +26,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { trackEvent } from './composables/useTracking'
 import { useLandingContent } from './composables/useLandingContent'
+import InlineEditor from './components/admin/InlineEditor.vue'
 import enUS from 'ant-design-vue/es/locale/en_US'
 import esES from 'ant-design-vue/es/locale/es_ES'
 import deDE from 'ant-design-vue/es/locale/de_DE'

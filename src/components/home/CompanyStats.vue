@@ -7,7 +7,7 @@
             <component :is="item.icon" />
           </div>
           <div class="stats__number">{{ item.value }}+</div>
-          <div class="stats__label">{{ t(`stats.${item.key}`) }}</div>
+          <div class="stats__label" :data-edit-key="`stats.${item.key}`">{{ t(`stats.${item.key}`) }}</div>
         </div>
       </div>
     </div>

@@ -1,0 +1,17 @@
+{
+  "fetched_at": "2026-09-13T18:12:00.000Z",
+  "source": "kimi-webbridge",
+  "post_url": "https://www.reddit.com/r/robotics/comments/gr23ht/window_cleaning_drone_this_project_gave_me_too/",
+  "post_title": "Window Cleaning Drone - This project gave me too much headache long time ago : r/robotics",
+  "comment_count": 8,
+  "comments": [
+    {"i":0,"author":"bmiga","score":4,"body":"I think it needs some pid tunning."},
+    {"i":1,"author":"s_morbi2","score":1,"body":"could be but the main problem was higher payload and that caused low stability."},
+    {"i":2,"author":"LaVieEstBizarre","score":2,"body":"Heavy payload is not a real stability problem. Use better control and use balancing masses. Everything is too unbalanced mass wise so the spinning causes unnecessary torques on the drone."},
+    {"i":3,"author":"s_morbi2","score":1,"body":"That true"},
+    {"i":4,"author":"Uryogu","score":1,"body":"I think there is quite a market for a drone like this, but for cleaning solar panels on roofs."},
+    {"i":5,"author":"s_morbi2","score":1,"body":"Ya, people suggested that application also when I was working on this."},
+    {"i":6,"author":"thingythangabang","score":1,"body":"There is some existing research which actively stabilizes a drone by actuating a hanging mass (I believe the mass was the drone's battery pack). You might be able to use that or something similar to get more stability given the heavier payloads being carried."},
+    {"i":7,"author":"s_morbi2","score":1,"body":"Thats cool, using a hanging mass to dampen the oscillation in opposite direction. It sounds risky because too much turning can create inertia but will check that."}
+  ]
+}

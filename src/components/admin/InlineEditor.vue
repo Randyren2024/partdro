@@ -66,28 +66,21 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch, type CSSProperties } from "vue";
 import { useI18n } from "vue-i18n";
+import { message } from "ant-design-vue";
 import { useAuthStore } from "../../stores/auth";
-import { saveEditableD15r } from "../../composables/useLandingContent";
-
-interface Props {
-  editMode: boolean;
-  dirty: boolean;
-  saving: boolean;
-}
-const props = defineProps<Props>();
-const emit = defineEmits<{
-  (e: "update:dirty", v: boolean): void;
-  (e: "update:saving", v: boolean): void;
-  (e: "lang-change", lang: string): void;
-  (e: "reload"): void;
-  (e: "changed", key: string, value: string): void;
-  (e: "changed-img", key: string, value: string): void;
-  (e: "saved"): void;
-}>();
+import {
+  dirty,
+  saving,
+  applyTextEdit,
+  applyImgEdit,
+  saveAll,
+  reload,
+} from "../../composables/useInlineEdit";
 
 const auth = useAuthStore();
 const { locale } = useI18n();
 
+const editMode = computed(() => auth.isLoggedIn);
 const lang = ref<string>((locale.value as string) || "en");
 
 watch(
@@ -144,7 +137,7 @@ const panelStyle = computed<CSSProperties>(() => {
 });
 
 function onDocClick(e: MouseEvent) {
-  if (!props.editMode) return;
+  if (!editMode.value) return;
   const target = e.target as HTMLElement;
   if (!target) return;
 
@@ -185,8 +178,7 @@ function onDocClick(e: MouseEvent) {
 
 function commitText() {
   if (!activeText.value) return;
-  emit("changed", activeText.value.key, activeText.value.value);
-  props.dirty || emit("update:dirty", true);
+  applyTextEdit(activeText.value.key, activeText.value.value);
   activeText.value = null;
 }
 function cancelText() {
@@ -194,22 +186,24 @@ function cancelText() {
 }
 function commitImg() {
   if (!activeImg.value) return;
-  let v = activeImg.value.value;
-  const match = v.match(/\/d15r\/images\/([^?#]+)/);
-  if (match) v = match[1];
-  emit("changed-img", activeImg.value.key, v);
-  props.dirty || emit("update:dirty", true);
+  // 原样保存（完整 URL、/ 开头路径、或纯文件名均可）
+  applyImgEdit(activeImg.value.key, activeImg.value.value);
   activeImg.value = null;
 }
 function cancelImg() {
   activeImg.value = null;
 }
 
-function onSave() {
-  emit("saved");
+async function onSave() {
+  try {
+    await saveAll();
+    message.success("Changes saved");
+  } catch (e: any) {
+    message.error("Save failed: " + (e?.message || "Unknown error"));
+  }
 }
 function onReload() {
-  emit("reload");
+  reload();
 }
 async function onLogout() {
   await auth.logout();
@@ -217,7 +211,7 @@ async function onLogout() {
 
 watch(lang, (l) => {
   if (l !== locale.value) {
-    emit("lang-change", l);
+    locale.value = l;
   }
 });
 
@@ -232,7 +226,7 @@ const HOVER_CSS = `
 }
 `;
 watch(
-  () => props.editMode,
+  () => editMode.value,
   (v) => {
     if (v) {
       if (!document.getElementById(HOVER_STYLE_ID)) {

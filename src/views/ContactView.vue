@@ -2,8 +2,8 @@
   <div class="contact-page">
     <div class="page-header">
       <div class="container">
-        <h1>{{ t('contact.title') }}</h1>
-        <p>{{ t('contact.subtitle') }}</p>
+        <h1 :data-edit-key="'contact.title'">{{ t('contact.title') }}</h1>
+        <p :data-edit-key="'contact.subtitle'">{{ t('contact.subtitle') }}</p>
       </div>
     </div>
     <div class="page-section">
@@ -14,33 +14,33 @@
           </a-col>
           <a-col :span="10">
             <div class="contact-info">
-              <h3>Contact Information</h3>
+              <h3 :data-edit-key="'contact.info.heading'">{{ t('contact.info.heading') }}</h3>
               <div class="contact-info__item">
                 <PhoneOutlined />
                 <div>
-                  <p><strong>Phone</strong></p>
-                  <p>+86 16788684420</p>
+                  <p><strong :data-edit-key="'contact.info.phoneLabel'">{{ t('contact.info.phoneLabel') }}</strong></p>
+                  <p :data-edit-key="'contact.info.phoneValue'">{{ t('contact.info.phoneValue') }}</p>
                 </div>
               </div>
               <div class="contact-info__item">
                 <MailOutlined />
                 <div>
-                  <p><strong>Email</strong></p>
-                  <p><a href="mailto:info@partdro.com" @click="trackEvent('generate_lead', { location: 'contact_info' })">info@partdro.com</a></p>
+                  <p><strong :data-edit-key="'contact.info.emailLabel'">{{ t('contact.info.emailLabel') }}</strong></p>
+                  <p><a href="mailto:info@partdro.com" :data-edit-key="'contact.info.emailValue'" @click="trackEvent('generate_lead', { location: 'contact_info' })">{{ t('contact.info.emailValue') }}</a></p>
                 </div>
               </div>
               <div class="contact-info__item">
                 <EnvironmentOutlined />
                 <div>
-                  <p><strong>Address</strong></p>
-                  <p>Shenzhen, Guangdong, China</p>
+                  <p><strong :data-edit-key="'contact.info.addressLabel'">{{ t('contact.info.addressLabel') }}</strong></p>
+                  <p :data-edit-key="'contact.info.addressValue'">{{ t('contact.info.addressValue') }}</p>
                 </div>
               </div>
               <div class="contact-info__item">
                 <ClockCircleOutlined />
                 <div>
-                  <p><strong>Business Hours</strong></p>
-                  <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                  <p><strong :data-edit-key="'contact.info.hoursLabel'">{{ t('contact.info.hoursLabel') }}</strong></p>
+                  <p :data-edit-key="'contact.info.hoursValue'">{{ t('contact.info.hoursValue') }}</p>
                 </div>
               </div>
             </div>

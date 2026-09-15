@@ -8,7 +8,7 @@ const i18n = createI18n({
   legacy: false,
   locale: localStorage.getItem('lang') || 'en',
   fallbackLocale: 'en',
-  messages: { en, es, de, fr },
+  messages: JSON.parse(JSON.stringify({ en, es, de, fr })),
 })
 
 export default i18n

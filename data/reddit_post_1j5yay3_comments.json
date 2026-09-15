@@ -1,0 +1,17 @@
+{
+  "fetched_at": "2026-09-13T18:08:00.000Z",
+  "source": "kimi-webbridge",
+  "post_url": "https://www.reddit.com/r/Entrepreneur/comments/1j5yay3/drone_pressure_washing_for_individuals_in_dubai/",
+  "post_title": "Drone Pressure Washing for Individuals in Dubai – Would You Use It? : r/Entrepreneur",
+  "comment_count": 8,
+  "comments": [
+    {"i":0,"author":"[已删除]","score":2,"body":""},
+    {"i":1,"author":"ali-hussain","score":1,"body":""},
+    {"i":2,"author":"coastalcloud621","score":2,"body":"Great idea. The way I see it: why pay for a man and a ladder when you can pay for a bot that understands the job, delineating modes of cleaning for brick, vs glass vs concrete. Lmk if you want to collaborate."},
+    {"i":3,"author":"ExogamousUnfolding","score":2,"body":"Equal and opposite reaction - probably should research that"},
+    {"i":4,"author":"ali-hussain","score":1,"body":"How much are you willing to pay extra for a one-time wash? This is defining much money you can make. How much are more you willing to pay for living in an equivalent place that does a better job keeping their window clean? This is the upperbound imposed by your competition commercial window washing drones. You will also need to solve multiple tech and engineering problems since you won't have permission to access the roof and will need to optimize for deployment and very short jobs.\n\nYour problem isn't exactly that there is dust on the windows. Sure that's the root problem but that's not what's bothering you. In the second case the root problem is that your photos are compromised because of the dusty windows. That is a significantly easier problem to solve. Don't need to clean any windows for that. You can just use image processing over multiple photos. Don't have to use much actual AI. Hell, you can use AI and create a program focused on insta worthy photos in rooms with large glass windows. Start by trying to sell to real estate agents."},
+    {"i":5,"author":"hatrickhero87","score":1,"body":"Drone window washing services already exist in Dubai."},
+    {"i":6,"author":"Acceptable_Set_3934","score":1,"body":"Never heard or saw any"},
+    {"i":7,"author":"That-Raspberry-730","score":1,"body":"What about the dirty water spreading to the windows below that flat?"}
+  ]
+}

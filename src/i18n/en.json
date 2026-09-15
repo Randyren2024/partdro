@@ -60,11 +60,93 @@
     "typeFranchise": "Franchise Inquiry",
     "message": "Message",
     "submit": "Submit",
-    "success": "Thank you! We will get back to you soon."
+    "success": "Thank you! We will get back to you soon.",
+    "info": {
+      "heading": "Contact Information",
+      "phoneLabel": "Phone",
+      "phoneValue": "+86 16788684420",
+      "emailLabel": "Email",
+      "emailValue": "info{'@'}partdro.com",
+      "addressLabel": "Address",
+      "addressValue": "Shenzhen, Guangdong, China",
+      "hoursLabel": "Business Hours",
+      "hoursValue": "Mon - Fri: 9:00 AM - 6:00 PM"
+    }
   },
   "about": {
-    "title": "About Us",
-    "subtitle": "Leading the future of drone cleaning technology"
+    "hero": {
+      "title": "Premium Drone Solutions for Every Mission",
+      "subtitle": "Your trusted partner for consumer and enterprise UAV solutions"
+    },
+    "intro": {
+      "title": "About Partdro",
+      "subtitle": "Your trusted partner for premium drone solutions",
+      "p1": "Partdro is a specialized drone retailer bridging cutting-edge UAV technology with the needs of consumers and businesses worldwide. From aerial photography enthusiasts to enterprise inspection teams, we provide premium drone solutions backed by expert support.",
+      "p2": "With deep supply chain connections to leading drone manufacturers, we offer competitive pricing, fast shipping, and local after-sales support. Whether you're a hobbyist, a professional photographer, or an enterprise operations manager, Partdro has the right UAV for your mission."
+    },
+    "journey": {
+      "title": "Our Journey",
+      "subtitle": "From drone enthusiasts to industry leaders",
+      "items": {
+        "0": {
+          "year": "2015-2018",
+          "title": "DJI Intelligent Perception System Team",
+          "desc": "Core member, pioneered mass production of 8,000 units/day. DJI held 90% market share in consumer and agricultural drones."
+        },
+        "1": {
+          "year": "2018-2022",
+          "title": "Alibaba DAMO Academy",
+          "desc": "Architect for robotics team, reported to Professor Tan Ping (3D vision expert). Focused on spatial intelligence and robotics technologies."
+        },
+        "2": {
+          "year": "2022",
+          "title": "Robotic Lawn Mower Company",
+          "desc": "Co-founded company with investment from Mr. Lei Jun (Xiaomi) and Mr. Zeng Liqing (Tencent). Achieved successful mass production and overseas export."
+        },
+        "3": {
+          "year": "2024",
+          "title": "Partdro AgriTech",
+          "desc": "Extended expertise to large-scale agriculture. Partnered with Australia-China Agricultural Association. Established product matrix including agricultural robots and lawn mowers."
+        }
+      }
+    },
+    "team": {
+      "title": "Leadership Team",
+      "subtitle": "Expertise driving innovation",
+      "name": "Mr. Gan",
+      "position": "Founder & CEO",
+      "bio1": "Top-tier expert in the drone and robotics industry with over 15 years of deep experience. Former core member of DJI's intelligent perception system team and architect at Alibaba DAMO Academy.",
+      "bio2": "Led industry-first mass production of 8,000 units/day at DJI and co-founded a robotic lawn mower company that secured investment from Mr. Lei Jun (Xiaomi) and Mr. Zeng Liqing (Tencent)."
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "What drives us forward",
+      "items": {
+        "0": { "title": "Technical Excellence", "desc": "Maintaining the highest standards in product selection and technical validation, ensuring every solution meets rigorous quality benchmarks." },
+        "1": { "title": "Customer Partnership", "desc": "Viewing clients as long-term partners, providing comprehensive support from product selection to after-sales service." },
+        "2": { "title": "Market Intelligence", "desc": "Deep understanding of both Chinese manufacturing capabilities and global market needs for optimal product-market fit." },
+        "3": { "title": "Localized Service", "desc": "Building deep, localized service systems to truly serve global customers with complete solutions, not just products." }
+      }
+    },
+    "stats": {
+      "title": "Why Choose Us",
+      "subtitle": "Our proven track record",
+      "items": {
+        "0": { "title": "10+ Years Experience", "desc": "Deep expertise in UAV technology, continuously innovating since 2014." },
+        "1": { "title": "Multiple Product Lines", "desc": "Comprehensive solutions covering consumer, enterprise, agriculture drones and accessories." },
+        "2": { "title": "Global Reach", "desc": "Serving customers across Oceania and globally with localized support." },
+        "3": { "title": "Trusted Partners", "desc": "Strong partnerships with leading drone manufacturers and distribution networks." }
+      }
+    },
+    "cta": {
+      "title": "Ready to Transform Your Agriculture?",
+      "description": "Whether you need agricultural robots, intelligent navigation systems, or customized solutions, our team is ready to help you find the perfect technology for your needs.",
+      "contactBtn": "Contact Us",
+      "demoBtn": "Request Demo",
+      "email": "info{'@'}partdro.com",
+      "phone": "+86 16788684420",
+      "location": "Shenzhen, China"
+    }
   },
   "documents": {
     "title": "Technical Documents",
@@ -76,7 +158,14 @@
     "products": "Products",
     "support": "Support",
     "followUs": "Follow Us",
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "cta": {
+      "eyebrow": "Partdro Drone Solutions",
+      "title": "Let's find the right cleaning solution for your project.",
+      "text": "Talk with Partdro about the right configuration, nozzle setup and application scenario for your work.",
+      "mail": "info{'@'}partdro.com",
+      "visit": "Explore Products"
+    }
   },
   "topBar": {
     "phone": "Phone",
