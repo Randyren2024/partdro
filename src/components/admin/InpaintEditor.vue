@@ -12,7 +12,7 @@
             title="保存到服务端的文件名"
             spellcheck="false"
           />
-          <label class="ipe-auto-toggle" title="涂抹后自动触发 inpainting">
+          <label v-if="!isAgnes" class="ipe-auto-toggle" title="涂抹后自动触发 inpainting">
             <input type="checkbox" v-model="autoInpaint" />
             <span>Auto</span>
           </label>
@@ -24,6 +24,7 @@
             @change="onModelChange(($event.target as HTMLSelectElement).value)"
           >
             <option v-for="m in serverModels" :key="m.name" :value="m.name">{{ m.name }}</option>
+            <option :value="AGNES_MODEL">☁ {{ AGNES_MODEL }}（云端图生图）</option>
           </select>
           <button class="ipe-icon-btn" title="Close (Esc)" @click="emit('close')">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
@@ -31,8 +32,8 @@
         </div>
       </div>
 
-      <!-- 服务未启动提示 -->
-      <div v-if="serverOnline === false" class="ipe-server-warn">
+      <!-- 服务未启动提示（Agnes 云端模式不依赖本地服务，不显示） -->
+      <div v-if="serverOnline === false && !isAgnes" class="ipe-server-warn">
         IOPaint 服务未连接 ({{ IOPAINT_URL }})。请在 WSL2 中启动：
         <code>source ~/iopaint/.venv/bin/activate &amp;&amp; iopaint start --host 0.0.0.0 --port 8080 --model lama --device cpu --no-half --input /home/user1102/partdro/public/d15r/images --output-dir /home/user1102/partdro/public/d15r/images/inpainted</code>
       </div>
@@ -68,7 +69,7 @@
         <!-- 处理中遮罩：半透明 + spinner，对齐原生处理时的动态反馈（放在 stage 层级，不随缩放变形） -->
         <div v-if="processing" class="ipe-processing-overlay">
           <div class="ipe-spinner" />
-          <span class="ipe-processing-text">Inpainting...</span>
+          <span class="ipe-processing-text">{{ processingText }}</span>
         </div>
         <div v-if="phase === 'loading'" class="ipe-status">Loading image...</div>
         <div v-else-if="phase === 'error'" class="ipe-status ipe-status-error">
@@ -81,14 +82,15 @@
         </div>
       </div>
 
-      <!-- AnyText 等 need_prompt 模型：文字输入条（悬浮于工具条上方） -->
+      <!-- need_prompt 模型（AnyText）或 Agnes 云端模式：文字输入条（悬浮于工具条上方） -->
       <div v-if="phase === 'ready' && needPrompt" class="ipe-promptbar">
-        <span class="ipe-promptbar-label">Text</span>
+        <span class="ipe-promptbar-label">{{ isAgnes ? 'Prompt' : 'Text' }}</span>
         <input
           v-model="prompt"
           class="ipe-promptbar-input"
-          placeholder="要替换成的文字，如：D15R PRO"
+          :placeholder="promptPlaceholder"
           spellcheck="false"
+          @keydown.enter="!processing && runInpaint()"
         />
       </div>
 
@@ -138,7 +140,7 @@
         >
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
         </button>
-        <button v-if="!autoInpaint" class="ipe-run" :disabled="phase !== 'ready' || processing" @click="runInpaint">
+        <button v-if="!autoInpaint || isAgnes" class="ipe-run" :disabled="phase !== 'ready' || processing" @click="runInpaint">
           {{ processing ? 'Run…' : 'Run' }}
         </button>
       </div>
@@ -165,6 +167,9 @@ import {
   listServerModels,
   blobToBase64,
   IOPAINT_URL,
+  runAgnesEdit,
+  AGNES_MODEL,
+  pickAgnesRatio,
 } from "../../composables/useInpainting";
 
 const props = defineProps<{ imageUrl: string }>();
@@ -186,9 +191,18 @@ const saving = ref(false);
 const currentIsResult = ref(false);
 const currentModel = ref("lama");
 const modelLoading = ref(false);
+const isAgnes = computed(() => currentModel.value === AGNES_MODEL);
 const needPrompt = computed(
-  () => serverModels.value.find((m) => m.name === currentModel.value)?.need_prompt ?? false,
+  () =>
+    isAgnes.value ||
+    (serverModels.value.find((m) => m.name === currentModel.value)?.need_prompt ?? false),
 );
+const promptPlaceholder = computed(() =>
+  isAgnes.value
+    ? "编辑指令，如：把背景换成干净的浅色摄影棚，保持产品不变"
+    : "要替换成的文字，如：D15R PRO",
+);
+const processingText = computed(() => (isAgnes.value ? "Generating..." : "Inpainting..."));
 const autoInpaint = ref(true); // 涂抹后自动触发 inpainting（原生默认行为）
 let autoTimer: ReturnType<typeof setTimeout> | null = null;
 const imgW = ref(0); // 原生同款左上角尺寸徽标
@@ -263,6 +277,12 @@ async function loadCurrentModel() {
 }
 
 async function onModelChange(name: string) {
+  if (name === AGNES_MODEL) {
+    // 云端模型不走 IOPaint switchModel，纯前端分支切换
+    currentModel.value = name;
+    message.info("云端图生图：输入编辑指令后点 Run（无需涂抹）。整图重生成，注意核对产品细节。");
+    return;
+  }
   const prev = currentModel.value;
   currentModel.value = name;
   if (name === prev) return;
@@ -445,6 +465,7 @@ function endDraw() {
 }
 
 function scheduleAutoInpaint() {
+  if (isAgnes.value) return; // 云端整图重生成成本高，不跟随涂抹自动触发，仅手动 Run
   if (autoTimer) clearTimeout(autoTimer);
   autoTimer = setTimeout(() => {
     autoTimer = null;
@@ -632,7 +653,7 @@ async function runInpaint() {
     message.error("Image not loaded yet.");
     return;
   }
-  if (!strokes.value.length) {
+  if (!isAgnes.value && !strokes.value.length) {
     message.warning("Mask is empty. Paint the area to inpaint first.");
     return;
   }
@@ -642,6 +663,21 @@ async function runInpaint() {
     autoTimer = null;
   }
   try {
+    // Agnes 云端分支：指令驱动整图重生成，无需 mask
+    if (isAgnes.value) {
+      const p = prompt.value.trim();
+      if (!p) {
+        message.warning("请先在 Prompt 输入框填写编辑指令。");
+        processing.value = false;
+        return;
+      }
+      const blob = await runAgnesEdit(currentDataUrl, p, {
+        ratio: pickAgnesRatio(imgW.value, imgH.value),
+      });
+      showResult(blob);
+      message.success("Agnes 生成完成。可继续编辑或 Save to Server。");
+      return;
+    }
     let maskBase64: string;
     try {
       maskBase64 = extractMaskBase64();
