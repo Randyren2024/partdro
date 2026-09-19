@@ -55,11 +55,20 @@
           <span v-else class="ie-pop-noimg">No image</span>
         </div>
         <div class="ie-pop-actions">
+          <button class="ie-btn ie-btn-ghost" @click="openInpaint" :disabled="!activeImg.value">🪄 Inpaint</button>
           <button class="ie-btn ie-btn-ghost" @click="cancelImg">Cancel</button>
           <button class="ie-btn ie-btn-primary" @click="commitImg">Save</button>
         </div>
       </div>
     </div>
+
+    <!-- Inpainting 编辑器（IOPaint 核心交互的 Vue 重写） -->
+    <InpaintEditor
+      v-if="inpaintOpen && activeImg"
+      :image-url="imgPreviewUrl(activeImg.value)"
+      @close="inpaintOpen = false"
+      @saved="onInpaintSaved"
+    />
   </div>
 </template>
 
@@ -76,6 +85,7 @@ import {
   saveAll,
   reload,
 } from "../../composables/useInlineEdit";
+import InpaintEditor from "./InpaintEditor.vue";
 
 const auth = useAuthStore();
 const { locale } = useI18n();
@@ -141,8 +151,9 @@ function onDocClick(e: MouseEvent) {
   const target = e.target as HTMLElement;
   if (!target) return;
 
-  // 点击面板内部不处理
+  // 点击面板内部不处理（.ie-panel 是编辑小面板，.ipe-overlay 是 InpaintEditor 弹层）
   if (target.closest(".ie-panel")) return;
+  if (target.closest(".ipe-overlay")) return;
 
   const textEl = target.closest("[data-edit-key]") as HTMLElement | null;
   const imgEl = target.closest("[data-edit-img]") as HTMLElement | null;
@@ -204,6 +215,25 @@ async function onSave() {
 }
 function onReload() {
   reload();
+}
+
+// ====== Inpainting（核心交互在 InpaintEditor.vue 中）======
+const inpaintOpen = ref(false);
+
+function openInpaint() {
+  if (!activeImg.value || !activeImg.value.value) {
+    message.warning("No image to inpaint");
+    return;
+  }
+  inpaintOpen.value = true;
+}
+
+/** InpaintEditor 保存到服务端后回填文件名，用户在图片面板点 Save 即可应用 */
+function onInpaintSaved(filename: string) {
+  inpaintOpen.value = false;
+  if (activeImg.value) {
+    activeImg.value.value = filename;
+  }
 }
 async function onLogout() {
   await auth.logout();
@@ -421,4 +451,5 @@ onBeforeUnmount(() => {
 .ie-btn-primary:hover {
   background: #74e6f4;
 }
+
 </style>
