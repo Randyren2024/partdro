@@ -1,7 +1,7 @@
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '../supabase/client'
-import type { Product, Post, Case, Document, Lang } from '../types'
+import type { Product, Post, Case, Document, Lang, ProductCategory } from '../types'
 
 /* ============================================================
  * 内部工具：根据当前语言合并 Lang 子表到主记录
@@ -101,7 +101,7 @@ function useLocale(): { locale: { value: Lang }; bindLocale: (reload: () => void
 
 /* ---------- Products ---------- */
 
-export function useProducts(category?: 'window' | 'solar') {
+export function useProducts(category?: ProductCategory) {
   const { locale, bindLocale } = useLocale()
   const data = ref<Product[]>([])
   const loading = ref(false)

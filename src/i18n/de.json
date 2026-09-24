@@ -2,8 +2,6 @@
   "nav": {
     "home": "Startseite",
     "products": "Produkte",
-    "windowCleaning": "Fensterreinigung",
-    "solarCleaning": "Solarreinigung",
     "solutions": "Lösungen",
     "cases": "Fallstudien",
     "news": "Neuigkeiten",
@@ -30,9 +28,11 @@
     "viewDetails": "Details Ansehen",
     "specs": "Spezifikationen",
     "features": "Hauptmerkmale",
+    "all": "Alle",
     "category": {
-      "window": "Fensterreinigung",
-      "solar": "Solarreinigung"
+      "agricultural": "Agrardrohne",
+      "cargo": "Frachtdrohne",
+      "cleaning": "Reinigungsdrohne"
     }
   },
   "cases": {

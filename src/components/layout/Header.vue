@@ -11,9 +11,25 @@
             {{ t("nav.home") }}
           </router-link>
 
-          <router-link to="/products" class="header__nav-item" @click="mobileOpen = false">
-            {{ t("nav.products") }}
-          </router-link>
+          <div class="header__dropdown">
+            <router-link to="/products" class="header__nav-item" @click="mobileOpen = false">
+              {{ t("nav.products") }}
+            </router-link>
+            <div class="header__dropdown-menu">
+              <router-link to="/products" class="header__dropdown-item" @click="mobileOpen = false">
+                {{ t("products.all") }}
+              </router-link>
+              <router-link
+                v-for="cat in CATEGORIES"
+                :key="cat"
+                :to="`/products?category=${cat}`"
+                class="header__dropdown-item"
+                @click="mobileOpen = false"
+              >
+                {{ t(`products.category.${cat}`) }}
+              </router-link>
+            </div>
+          </div>
 
           <router-link to="/cases" class="header__nav-item" @click="mobileOpen = false">
             {{ t("nav.cases") }}
@@ -49,6 +65,9 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons-vue";
 import LangSwitcher from "../common/LangSwitcher.vue";
+import type { ProductCategory } from "../../types";
+
+const CATEGORIES: ProductCategory[] = ["agricultural", "cargo", "cleaning"];
 
 const { t } = useI18n();
 const scrolled = ref(false);
@@ -118,6 +137,37 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 .header__nav-item.router-link-active {
   color: var(--color-primary);
 }
+.header__dropdown {
+  position: relative;
+}
+.header__dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 8px 0;
+}
+.header__dropdown:hover .header__dropdown-menu {
+  display: block;
+}
+.header__dropdown-item {
+  display: block;
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+  transition: color 0.2s, background 0.2s;
+}
+.header__dropdown-item:hover,
+.header__dropdown-item.router-link-active {
+  color: var(--color-primary);
+  background: rgba(0, 0, 0, 0.03);
+}
 .header__actions {
   display: flex;
   align-items: center;
@@ -154,6 +204,18 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
   .header__nav-item {
     width: 100%;
     padding: 14px 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header__dropdown-menu {
+    display: block;
+    position: static;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    min-width: 0;
+  }
+  .header__dropdown-item {
+    padding: 12px 16px 12px 36px;
     border-bottom: 1px solid var(--color-border);
   }
   .header__mobile-toggle {

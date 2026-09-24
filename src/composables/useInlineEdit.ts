@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import i18nInstance from '../i18n'
-import { imgOverridesByLang, saveAllNamespaces } from './useLandingContent'
+import { imgOverridesByLang, videoOverridesByLang, saveAllNamespaces } from './useLandingContent'
 
 // 模块级单例状态（跨组件共享）
 export const dirty = ref(false)
@@ -29,12 +29,20 @@ export function applyImgEdit(key: string, value: string) {
   dirty.value = true
 }
 
+/** 写入视频覆盖（key 为命名空间路径，value 为 MP4/WebM 直链或 YouTube/Bilibili 链接；空串清除） */
+export function applyVideoEdit(key: string, value: string) {
+  const lang = i18nInstance.global.locale.value as string
+  if (!videoOverridesByLang[lang]) videoOverridesByLang[lang] = {}
+  videoOverridesByLang[lang] = { ...videoOverridesByLang[lang], [key]: value }
+  dirty.value = true
+}
+
 /** 保存所有命名空间到 Supabase */
 export async function saveAll(): Promise<void> {
   saving.value = true
   try {
     const lang = i18nInstance.global.locale.value as string
-    await saveAllNamespaces(lang)
+    await saveAllNamespaces(lang, videoOverridesByLang[lang] || {})
     dirty.value = false
   } catch (e) {
     console.error('Save failed:', e)

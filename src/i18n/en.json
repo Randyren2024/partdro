@@ -2,8 +2,6 @@
   "nav": {
     "home": "Home",
     "products": "Products",
-    "windowCleaning": "Window Cleaning",
-    "solarCleaning": "Solar Panel Cleaning",
     "solutions": "Solutions",
     "cases": "Cases",
     "news": "News",
@@ -30,9 +28,11 @@
     "viewDetails": "View Details",
     "specs": "Specifications",
     "features": "Key Features",
+    "all": "All",
     "category": {
-      "window": "Window Cleaning",
-      "solar": "Solar Panel Cleaning"
+      "agricultural": "Agricultural Drone",
+      "cargo": "Cargo Drone",
+      "cleaning": "Cleaning Drone"
     }
   },
   "cases": {

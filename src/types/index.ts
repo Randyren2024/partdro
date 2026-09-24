@@ -1,9 +1,11 @@
 export type Lang = 'en' | 'es' | 'de' | 'fr'
 
+export type ProductCategory = 'agricultural' | 'cargo' | 'cleaning'
+
 export interface Product {
   id: number
   slug: string
-  category: 'window' | 'solar'
+  category: ProductCategory
   image_url: string
   gallery: string[]
   specs: Record<string, string>

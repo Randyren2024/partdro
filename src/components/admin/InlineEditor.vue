@@ -5,7 +5,7 @@
     <div class="edit-toolbar">
       <div class="tb-left">
         <span class="tb-badge">EDIT MODE</span>
-        <span class="tb-hint">Hover to edit · Click text/image to modify</span>
+        <span class="tb-hint">Hover to edit · Click text/image to modify · ☰ Sections to reorder</span>
       </div>
       <div class="tb-right">
         <a-select v-model:value="lang" size="small" style="width: 100px">
@@ -48,7 +48,7 @@
         <input
           v-model="activeImg.value"
           class="ie-input"
-          placeholder="Image URL or filename in /d15r/images/"
+          :placeholder="`Image URL, or filename in ${ns === 'd15r' ? '/d15r/images/' : `/images/${ns}/`}`"
         />
         <div class="ie-pop-preview">
           <img v-if="activeImg.value" :src="imgPreviewUrl(activeImg.value)" alt="preview" />
@@ -58,6 +58,26 @@
           <button class="ie-btn ie-btn-ghost" @click="openInpaint" :disabled="!activeImg.value">🪄 Inpaint</button>
           <button class="ie-btn ie-btn-ghost" @click="cancelImg">Cancel</button>
           <button class="ie-btn ie-btn-primary" @click="commitImg">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 视频编辑面板 -->
+    <div v-if="activeVideo" class="ie-panel ie-panel-video" :style="panelStyle" @click.stop>
+      <div class="ie-panel-arrow" :class="{ right: panelPlacement === 'right' }" />
+      <div class="ie-panel-inner">
+        <div class="ie-pop-key">{{ activeVideo.key }}</div>
+        <input
+          v-model="activeVideo.value"
+          class="ie-input"
+          placeholder="MP4/WebM URL, or YouTube / Bilibili link (empty = remove)"
+        />
+        <div class="ie-pop-hint" :class="{ warn: !videoParsed && activeVideo.value }">
+          {{ videoTypeHint }}
+        </div>
+        <div class="ie-pop-actions">
+          <button class="ie-btn ie-btn-ghost" @click="cancelVideo">Cancel</button>
+          <button class="ie-btn ie-btn-primary" @click="commitVideo">Save</button>
         </div>
       </div>
     </div>
@@ -75,6 +95,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch, type CSSProperties } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 import { message } from "ant-design-vue";
 import { useAuthStore } from "../../stores/auth";
 import {
@@ -82,16 +103,23 @@ import {
   saving,
   applyTextEdit,
   applyImgEdit,
+  applyVideoEdit,
   saveAll,
   reload,
 } from "../../composables/useInlineEdit";
+import { videoOverridesByLang } from "../../composables/useLandingContent";
+import { parseVideoUrl } from "../../composables/useVideo";
 import InpaintEditor from "./InpaintEditor.vue";
 
 const auth = useAuthStore();
 const { locale } = useI18n();
+const route = useRoute();
 
 const editMode = computed(() => auth.isLoggedIn);
 const lang = ref<string>((locale.value as string) || "en");
+
+// 当前产品命名空间：决定相对图片文件名的解析目录
+const ns = computed(() => (route.params.slug as string) || "d15r");
 
 watch(
   () => locale.value,
@@ -103,21 +131,32 @@ watch(
 function imgPreviewUrl(p: string) {
   if (!p) return "";
   if (p.startsWith("http") || p.startsWith("/")) return p;
-  return `/d15r/images/${p}`;
+  return ns.value === "d15r" ? `/d15r/images/${p}` : `/images/${ns.value}/${p}`;
 }
 
 const activeText = ref<{ key: string; value: string; x: number; y: number } | null>(null);
 const activeImg = ref<{ key: string; value: string; x: number; y: number } | null>(null);
+const activeVideo = ref<{ key: string; value: string; x: number; y: number } | null>(null);
+
+const videoParsed = computed(() => parseVideoUrl(activeVideo.value?.value));
+const videoTypeHint = computed(() => {
+  const v = videoParsed.value;
+  if (!activeVideo.value?.value) return "Empty = hide the video section";
+  if (!v) return "Unrecognized URL — use an MP4/WebM link or a YouTube / Bilibili link";
+  if (v.type === "file") return "Direct video file";
+  if (v.type === "youtube") return "YouTube embed";
+  return "Bilibili embed";
+});
 
 // 面板定位：用视口坐标（和 getBoundingClientRect 一致），fixed 定位
 const panelPlacement = computed(() => {
-  const x = activeText.value?.x ?? activeImg.value?.x ?? 0;
+  const x = activeText.value?.x ?? activeImg.value?.x ?? activeVideo.value?.x ?? 0;
   return x > window.innerWidth * 0.6 ? "right" : "left";
 });
 
 const panelStyle = computed<CSSProperties>(() => {
-  const anchorX = activeText.value?.x ?? activeImg.value?.x ?? 0;
-  const anchorY = activeText.value?.y ?? activeImg.value?.y ?? 0;
+  const anchorX = activeText.value?.x ?? activeImg.value?.x ?? activeVideo.value?.x ?? 0;
+  const anchorY = activeText.value?.y ?? activeImg.value?.y ?? activeVideo.value?.y ?? 0;
   const w = activeText.value ? 440 : 380;
   const arrowOffset = 14;
 
@@ -151,20 +190,36 @@ function onDocClick(e: MouseEvent) {
   const target = e.target as HTMLElement;
   if (!target) return;
 
-  // 点击面板内部不处理（.ie-panel 是编辑小面板，.ipe-overlay 是 InpaintEditor 弹层）
+  // 点击面板内部不处理（.ie-panel 是编辑小面板，.ipe-overlay 是 InpaintEditor 弹层，.section-panel 是区块排序面板）
   if (target.closest(".ie-panel")) return;
   if (target.closest(".ipe-overlay")) return;
+  if (target.closest(".section-panel")) return;
 
   const textEl = target.closest("[data-edit-key]") as HTMLElement | null;
   const imgEl = target.closest("[data-edit-img]") as HTMLElement | null;
+  const videoEl = target.closest("[data-edit-video]") as HTMLElement | null;
 
   if (textEl) {
     const key = textEl.dataset.editKey!;
     const rect = textEl.getBoundingClientRect();
     activeImg.value = null;
+    activeVideo.value = null;
     activeText.value = {
       key,
       value: textEl.textContent?.trim() ?? "",
+      x: rect.left + rect.width / 2,
+      y: rect.top,
+    };
+    e.stopPropagation();
+  } else if (videoEl) {
+    const key = videoEl.dataset.editVideo!;
+    const rect = videoEl.getBoundingClientRect();
+    activeText.value = null;
+    activeImg.value = null;
+    const current = videoOverridesByLang[locale.value as string]?.[key] ?? "";
+    activeVideo.value = {
+      key,
+      value: current,
       x: rect.left + rect.width / 2,
       y: rect.top,
     };
@@ -173,6 +228,7 @@ function onDocClick(e: MouseEvent) {
     const key = imgEl.dataset.editImg!;
     const rect = imgEl.getBoundingClientRect();
     activeText.value = null;
+    activeVideo.value = null;
     activeImg.value = {
       key,
       value:
@@ -184,6 +240,7 @@ function onDocClick(e: MouseEvent) {
   } else {
     activeText.value = null;
     activeImg.value = null;
+    activeVideo.value = null;
   }
 }
 
@@ -203,6 +260,14 @@ function commitImg() {
 }
 function cancelImg() {
   activeImg.value = null;
+}
+function commitVideo() {
+  if (!activeVideo.value) return;
+  applyVideoEdit(activeVideo.value.key, activeVideo.value.value.trim());
+  activeVideo.value = null;
+}
+function cancelVideo() {
+  activeVideo.value = null;
 }
 
 async function onSave() {
@@ -248,8 +313,8 @@ watch(lang, (l) => {
 // 编辑模式切换时，动态注入/移除 hover CSS
 const HOVER_STYLE_ID = "__inline_editor_hover_css__";
 const HOVER_CSS = `
-[data-edit-key], [data-edit-img] { transition: outline 0.15s ease; }
-[data-edit-key]:hover, [data-edit-img]:hover {
+[data-edit-key], [data-edit-img], [data-edit-video] { transition: outline 0.15s ease; }
+[data-edit-key]:hover, [data-edit-img]:hover, [data-edit-video]:hover {
   outline: 2px dashed rgba(57,191,212,0.6);
   outline-offset: 2px;
   cursor: pointer;
@@ -367,6 +432,13 @@ onBeforeUnmount(() => {
   color: #39bfd4;
   font-family: monospace;
   word-break: break-all;
+}
+.ie-pop-hint {
+  font-size: 0.72rem;
+  color: #8fd6a4;
+}
+.ie-pop-hint.warn {
+  color: #e6b455;
 }
 .ie-textarea {
   width: 100%;

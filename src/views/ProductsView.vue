@@ -8,6 +8,24 @@
     </div>
     <div class="page-section">
       <div class="container">
+        <div class="product-filter">
+          <button
+            class="product-filter__tab"
+            :class="{ 'product-filter__tab--active': !activeCategory }"
+            @click="setCategory(null)"
+          >
+            {{ t('products.all') }}
+          </button>
+          <button
+            v-for="cat in CATEGORIES"
+            :key="cat"
+            class="product-filter__tab"
+            :class="{ 'product-filter__tab--active': activeCategory === cat }"
+            @click="setCategory(cat)"
+          >
+            {{ t(`products.category.${cat}`) }}
+          </button>
+        </div>
         <div class="product-grid">
           <div class="product-card" v-for="product in filteredProducts" :key="product.slug">
             <div class="product-card__image">
@@ -31,15 +49,60 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { useProducts } from '../composables/useSupabase'
+import type { ProductCategory } from '../types'
+
+const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
 
 const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
 const { data: products } = useProducts()
-const filteredProducts = computed(() => products.value ?? [])
+
+const activeCategory = computed<ProductCategory | null>(() =>
+  CATEGORIES.includes(route.query.category as ProductCategory)
+    ? (route.query.category as ProductCategory)
+    : null
+)
+
+const filteredProducts = computed(() =>
+  (products.value ?? []).filter(p => !activeCategory.value || p.category === activeCategory.value)
+)
+
+const setCategory = (cat: ProductCategory | null) => {
+  router.replace({ query: { ...route.query, category: cat ?? undefined } })
+}
 </script>
 
 <style scoped>
+.product-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.product-filter__tab {
+  padding: 8px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.product-filter__tab:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.product-filter__tab--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

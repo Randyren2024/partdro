@@ -24,3 +24,7 @@ public/images/Taurus 80e*.png
 
 # Local Netlify folder
 .netlify
+# Python venv (iopaint) and browser debug snapshots
+iopaint/.venv/
+iopaint/start.log
+.playwright-mcp/

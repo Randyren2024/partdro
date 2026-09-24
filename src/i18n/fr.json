@@ -2,8 +2,6 @@
   "nav": {
     "home": "Accueil",
     "products": "Produits",
-    "windowCleaning": "Nettoyage de Fenêtres",
-    "solarCleaning": "Nettoyage de Panneaux Solaires",
     "solutions": "Solutions",
     "cases": "Études de Cas",
     "news": "Actualités",
@@ -30,9 +28,11 @@
     "viewDetails": "Voir les Détails",
     "specs": "Spécifications",
     "features": "Caractéristiques Principales",
+    "all": "Tous",
     "category": {
-      "window": "Nettoyage de Fenêtres",
-      "solar": "Nettoyage de Panneaux Solaires"
+      "agricultural": "Drone Agricole",
+      "cargo": "Drone de Fret",
+      "cleaning": "Drone de Nettoyage"
     }
   },
   "cases": {

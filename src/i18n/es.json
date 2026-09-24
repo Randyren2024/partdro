@@ -2,8 +2,6 @@
   "nav": {
     "home": "Inicio",
     "products": "Productos",
-    "windowCleaning": "Limpieza de Ventanas",
-    "solarCleaning": "Limpieza de Paneles Solares",
     "solutions": "Soluciones",
     "cases": "Casos",
     "news": "Noticias",
@@ -30,9 +28,11 @@
     "viewDetails": "Ver Detalles",
     "specs": "Especificaciones",
     "features": "Características Principales",
+    "all": "Todos",
     "category": {
-      "window": "Limpieza de Ventanas",
-      "solar": "Limpieza de Paneles Solares"
+      "agricultural": "Dron Agrícola",
+      "cargo": "Dron de Carga",
+      "cleaning": "Dron de Limpieza"
     }
   },
   "cases": {

@@ -38,8 +38,7 @@ import { useProducts } from '../../composables/useSupabase'
 const { t } = useI18n()
 const { data: products } = useProducts()
 
-const categoryLabel = (cat: string) =>
-  cat === 'window' ? t('products.category.window') : t('products.category.solar')
+const categoryLabel = (cat: string) => t(`products.category.${cat}`)
 </script>
 
 <style scoped>

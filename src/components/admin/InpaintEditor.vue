@@ -35,7 +35,7 @@
       <!-- 服务未启动提示（Agnes 云端模式不依赖本地服务，不显示） -->
       <div v-if="serverOnline === false && !isAgnes" class="ipe-server-warn">
         IOPaint 服务未连接 ({{ IOPAINT_URL }})。请在 WSL2 中启动：
-        <code>source ~/iopaint/.venv/bin/activate &amp;&amp; iopaint start --host 0.0.0.0 --port 8080 --model lama --device cpu --no-half --input /home/user1102/partdro/public/d15r/images --output-dir /home/user1102/partdro/public/d15r/images/inpainted</code>
+        <code>source ~/partdro/iopaint/.venv/bin/activate &amp;&amp; iopaint start --host 0.0.0.0 --port 8080 --model lama --device cpu --no-half --input /home/user1102/partdro/public/d15r/images --output-dir /home/user1102/partdro/public/d15r/images/inpainted</code>
       </div>
 
       <!-- 画布区：canvas 常驻挂载（ref 必须在 onload 前就存在），状态用浮层显示 -->

@@ -11,6 +11,11 @@ const router = createRouter({
       component: () => import('../views/admin/AdminLoginView.vue'),
     },
     {
+      path: '/admin/products',
+      name: 'admin-products',
+      component: () => import('../views/admin/AdminProductsView.vue'),
+    },
+    {
       path: '/admin/editor',
       redirect: '/products/d15r',
     },
@@ -76,6 +81,10 @@ router.beforeEach(async (to) => {
   if (!auth.ready) await auth.init()
   if (to.name === 'admin-login' && auth.isLoggedIn) {
     return { path: '/products/d15r' }
+  }
+  // 管理端页面（除登录页外）需要登录
+  if (to.path.startsWith('/admin') && to.name !== 'admin-login' && !auth.isLoggedIn) {
+    return { path: '/admin/login' }
   }
   return true
 })

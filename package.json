@@ -19,14 +19,17 @@
     "ant-design-vue": "^4.0.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
+    "sortablejs": "^1.15.7",
     "stripe": "^22.2.3",
     "vue": "^3.4.0",
     "vue-i18n": "^9.14.5",
     "vue-router": "^4.2.0",
-    "vue3-map-chart": "^0.2.0"
+    "vue3-map-chart": "^0.2.0",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
+    "@types/sortablejs": "^1.15.9",
     "@vitejs/plugin-vue": "^5.0.0",
     "netlify-cli": "^26.1.0",
     "playwright": "^1.60.0",
