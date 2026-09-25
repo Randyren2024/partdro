@@ -73,6 +73,19 @@ const tt = (p: string) => t(`${ns.value}.${p}`)
 
 watch(ns, (v) => registerProductNamespace(v), { immediate: true })
 
+// SEO: 按产品命名空间更新 title / description / og 标签（该 slug 无 i18n 内容时保持默认）
+watch([ns, locale], () => {
+  const titleKey = `${ns.value}.hero.title1`
+  const title1 = t(titleKey)
+  if (title1 === titleKey) return
+  document.title = `${title1} | Partdro`
+  const lead = t(`${ns.value}.hero.lead`)
+  const desc = lead.length > 160 ? `${lead.slice(0, 157)}...` : lead
+  document.querySelector('meta[name="description"]')?.setAttribute('content', desc)
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title)
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', desc)
+}, { immediate: true })
+
 const IMG_BASE = computed(() => (ns.value === 'd15r' ? '/d15r/images/' : `/images/${ns.value}/`))
 const img = (name: string) => IMG_BASE.value + name
 

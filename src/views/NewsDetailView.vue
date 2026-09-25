@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
 import { usePost } from '../composables/useSupabase'
@@ -29,6 +30,17 @@ import { usePost } from '../composables/useSupabase'
 const route = useRoute()
 const slug = () => route.params.slug as string
 const { data: post } = usePost(slug)
+
+// 数据到达后更新页面 title / description / og 标签
+watch(post, (p) => {
+  if (!p) return
+  const title = `${p.title} | Partdro`
+  const desc = p.summary || ''
+  document.title = title
+  document.querySelector('meta[name="description"]')?.setAttribute('content', desc)
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', title)
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', desc)
+})
 </script>
 
 <style scoped>

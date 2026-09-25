@@ -20,6 +20,12 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
+# 动态 sitemap（Netlify Function，含 Supabase 产品/新闻 slug；必须声明在 SPA catch-all 之前）
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/.netlify/functions/sitemap"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

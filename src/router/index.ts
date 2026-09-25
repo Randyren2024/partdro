@@ -76,6 +76,30 @@ const router = createRouter({
   },
 })
 
+// 按路由动态更新 title 与 canonical（SPA 的 SEO 基础）
+const SITE_URL = 'https://www.droneworld.tech'
+const routeTitles: Record<string, string> = {
+  home: 'Partdro - Premium Drone Solutions | B2C & B2B',
+  products: 'UAV Products | Partdro',
+  cases: 'Case Studies | Partdro',
+  news: 'News & Insights | Partdro',
+  documents: 'Documents & Downloads | Partdro',
+  about: 'About Us | Partdro',
+  contact: 'Contact Us | Partdro',
+}
+
+router.afterEach((to) => {
+  const title = routeTitles[to.name as string]
+  if (title) document.title = title
+  let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+  if (!canonical) {
+    canonical = document.createElement('link')
+    canonical.rel = 'canonical'
+    document.head.appendChild(canonical)
+  }
+  canonical.href = `${SITE_URL}${to.path}`
+})
+
 router.beforeEach(async (to) => {
   const auth = useAuthStore()
   if (!auth.ready) await auth.init()
