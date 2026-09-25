@@ -73,8 +73,9 @@ const tt = (p: string) => t(`${ns.value}.${p}`)
 
 watch(ns, (v) => registerProductNamespace(v), { immediate: true })
 
-// SEO: 按产品命名空间更新 title / description / og 标签（该 slug 无 i18n 内容时保持默认）
-watch([ns, locale], () => {
+// SEO: 按产品命名空间更新 title / description / og 标签
+// 依赖 t() 的返回值作为 watch 源：landing_content 异步合并后标题会随之更新
+watch([ns, locale, () => t(`${ns.value}.hero.title1`), () => t(`${ns.value}.hero.lead`)], () => {
   const titleKey = `${ns.value}.hero.title1`
   const title1 = t(titleKey)
   if (title1 === titleKey) return

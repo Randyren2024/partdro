@@ -61,7 +61,7 @@
           <a-form-item label="Category" required>
             <a-select v-model:value="form.category">
               <a-select-option value="agricultural">Agricultural Drone</a-select-option>
-              <a-select-option value="cargo">Cargo Drone</a-select-option>
+              <a-select-option value="cargo">Delivery Drone</a-select-option>
               <a-select-option value="cleaning">Cleaning Drone</a-select-option>
             </a-select>
           </a-form-item>

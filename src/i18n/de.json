@@ -31,7 +31,7 @@
     "all": "Alle",
     "category": {
       "agricultural": "Agrardrohne",
-      "cargo": "Frachtdrohne",
+      "cargo": "Lieferdrohne",
       "cleaning": "Reinigungsdrohne"
     }
   },
@@ -161,8 +161,8 @@
     "copyright": "Alle Rechte vorbehalten.",
     "cta": {
       "eyebrow": "Partdro Drohnenlösungen",
-      "title": "Finden wir die passende Reinigungslösung für Ihr Projekt.",
-      "text": "Sprechen Sie mit Partdro über die richtige Konfiguration, den Düsenaufbau und das Anwendungsszenario für Ihre Arbeit.",
+      "title": "Finden wir die passende Drohnenlösung für Ihr Projekt.",
+      "text": "Sprechen Sie mit Partdro über die richtige Konfiguration und das Anwendungsszenario für Ihre Arbeit.",
       "mail": "info{'@'}partdro.com",
       "visit": "Produkte entdecken"
     }

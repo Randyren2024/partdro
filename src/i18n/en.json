@@ -31,7 +31,7 @@
     "all": "All",
     "category": {
       "agricultural": "Agricultural Drone",
-      "cargo": "Cargo Drone",
+      "cargo": "Delivery Drone",
       "cleaning": "Cleaning Drone"
     }
   },
@@ -161,8 +161,8 @@
     "copyright": "All rights reserved.",
     "cta": {
       "eyebrow": "Partdro Drone Solutions",
-      "title": "Let's find the right cleaning solution for your project.",
-      "text": "Talk with Partdro about the right configuration, nozzle setup and application scenario for your work.",
+      "title": "Let's find the right drone solution for your project.",
+      "text": "Talk with Partdro about the right configuration and application scenario for your work.",
       "mail": "info{'@'}partdro.com",
       "visit": "Explore Products"
     }

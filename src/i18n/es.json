@@ -31,7 +31,7 @@
     "all": "Todos",
     "category": {
       "agricultural": "Dron Agrícola",
-      "cargo": "Dron de Carga",
+      "cargo": "Dron de Reparto",
       "cleaning": "Dron de Limpieza"
     }
   },
@@ -161,8 +161,8 @@
     "copyright": "Todos los derechos reservados.",
     "cta": {
       "eyebrow": "Soluciones de Drones Partdro",
-      "title": "Encontremos la solución de limpieza adecuada para su proyecto.",
-      "text": "Hable con Partdro sobre la configuración, el montaje de boquillas y el escenario de aplicación adecuados para su trabajo.",
+      "title": "Encontremos la solución de dron adecuada para su proyecto.",
+      "text": "Hable con Partdro sobre la configuración y el escenario de aplicación adecuados para su trabajo.",
       "mail": "info{'@'}partdro.com",
       "visit": "Explorar Productos"
     }
