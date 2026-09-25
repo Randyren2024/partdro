@@ -1,6 +1,7 @@
 import { watch, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '../supabase/client'
+import { callFunction } from '../lib/netlifyApi'
 import i18nInstance from '../i18n'
 import en from '../i18n/en.json'
 import es from '../i18n/es.json'
@@ -242,13 +243,7 @@ export async function saveEditableNamespace(
   // 空保存保护：无任何差异且数据库也没有已存内容时跳过（防清空/防冗余行）
   const prev = cache.get(`${ns}::${lang}`)
   if (Object.keys(diff).length === 0 && (!prev || Object.keys(prev).length === 0)) return
-  const { error } = await supabase
-    .from('landing_content')
-    .upsert(
-      { namespace: ns, lang, content: diff },
-      { onConflict: 'namespace,lang' },
-    )
-  if (error) throw error
+  await callFunction('landing-content', { namespace: ns, lang, content: diff })
   cache.set(`${ns}::${lang}`, diff)
   applyNamespaceOverrides(lang, ns, diff)
 }

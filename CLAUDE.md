@@ -9,12 +9,28 @@ npm install        # install dependencies
 npm run dev        # Vite dev server on port 5173 (vite.config.ts)
 npm run build      # production build — this IS the type check (vue-tsc is broken on this Node version)
 npm run preview    # preview the production build
-npm run netlify:dev # Netlify dev (SPA redirects + headers from netlify.toml; proxies vite on targetPort 3000)
+npm run netlify:dev # Netlify dev (SPA redirects + headers from netlify.toml; proxies vite on targetPort 5173, serves /.netlify/functions + /api/*)
 ```
 
 - No test framework is set up. Playwright is installed as a devDependency (`@playwright/test`).
-- **Broken npm scripts** (their `scripts/` files/dirs don't exist in this repo — do not use): `optimize-images`, `generate-favicons`, `test:functions`. `netlify.toml` also declares `netlify/functions`, but that directory has not been created yet.
+- **Broken npm scripts** (their `scripts/` files don't exist — do not use): `optimize-images`, `generate-favicons`.
 - **Stale docs**: `README.md` describes an old `partdro_vue` structure (port 3001, no Supabase/i18n). `AGENTS.md` documents the prior "landing-page-from-source" workflow (d15r PDF → screenshots via `scripts/screenshot-full.mjs`, image redaction with PIL) and references a `CLAUDE.md`/`scripts/` from the old `~/Desktop/partdro_final` repo — none of that exists here. Trust the code, not these docs.
+
+## Netlify Functions (admin / secrets)
+
+Privileged writes and third-party keys do **not** run in the browser:
+
+| Endpoint | File | Purpose |
+|---|---|---|
+| `POST /api/landing-content` | `netlify/functions/landing-content.ts` | service_role upsert of `landing_content` |
+| `POST /api/admin-products` | `netlify/functions/admin-products.ts` | product list/create/update/delete (delete → RPC `admin_delete_product`) |
+| `POST /api/agnes-image` | `netlify/functions/agnes-image.ts` | Agnes image edit proxy (`AGNES_API_KEY` server-side only) |
+
+- Shared auth: `netlify/shared/verifyAdmin.ts` — Bearer access_token → `auth.getUser` → `admins` table via service_role. Requires env `SUPABASE_SERVICE_ROLE_KEY`, `AGNES_API_KEY` (no `VITE_` prefix) at runtime; `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` for client construction.
+- Frontend helper: `src/lib/netlifyApi.ts` (`callFunction`). Public content reads and Supabase Auth still use the anon client directly.
+- `scripts/admin-functions.sql` must be run once in Supabase Dashboard (defines `admin_delete_product`).
+- `/api/*` redirect is declared **before** the SPA `/*` catch-all in `netlify.toml`.
+- `ws` is a runtime dependency: Node 20 has no global WebSocket; functions pass it into supabase-js `realtime.transport`.
 
 ## Architecture
 

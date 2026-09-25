@@ -99,7 +99,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
-import { supabase } from '../../supabase/client'
+import { callFunction } from '../../lib/netlifyApi'
 import { useAuthStore } from '../../stores/auth'
 
 const LANGS = ['en', 'es', 'de', 'fr'] as const
@@ -137,12 +137,8 @@ const form = ref(emptyForm())
 async function load() {
   loading.value = true
   try {
-    const { data, error } = await supabase
-      .from('products')
-      .select('*, product_langs(lang, name, short_desc)')
-      .order('sort_order', { ascending: true })
-    if (error) throw error
-    rows.value = data ?? []
+    const res = await callFunction<{ rows: any[] }>('admin-products', { action: 'list' })
+    rows.value = res.rows ?? []
   } catch (e: any) {
     message.error('Load failed: ' + (e?.message || 'unknown'))
   } finally {
@@ -172,30 +168,19 @@ async function submitCreate() {
   }
   creating.value = true
   try {
-    const { data, error } = await supabase
-      .from('products')
-      .insert({
-        slug,
-        category: form.value.category,
-        sort_order: form.value.sort_order,
-        published: form.value.published,
-        image_url: '/images/placeholder.svg',
-        gallery: [],
-        specs: {},
-        features: [],
-      })
-      .select('id')
-      .single()
-    if (error) throw error
-    const langs = LANGS.map((l) => ({
-      product_id: data.id,
-      lang: l,
-      name: form.value.langs[l].name.trim() || form.value.langs.en.name.trim(),
-      short_desc: form.value.langs[l].short_desc.trim(),
-      description: form.value.langs[l].description.trim() || form.value.langs[l].short_desc.trim(),
-    }))
-    const { error: lerr } = await supabase.from('product_langs').insert(langs)
-    if (lerr) throw lerr
+    await callFunction('admin-products', {
+      action: 'create',
+      slug,
+      category: form.value.category,
+      sort_order: form.value.sort_order,
+      published: form.value.published,
+      langs: LANGS.map((l) => ({
+        lang: l,
+        name: form.value.langs[l].name.trim() || form.value.langs.en.name.trim(),
+        short_desc: form.value.langs[l].short_desc.trim(),
+        description: form.value.langs[l].description.trim() || form.value.langs[l].short_desc.trim(),
+      })),
+    })
     message.success('Product created')
     createOpen.value = false
     router.push(`/products/${slug}`)
@@ -207,24 +192,18 @@ async function submitCreate() {
 }
 
 async function togglePublished(record: any, v: boolean) {
-  const { error } = await supabase.from('products').update({ published: v }).eq('id', record.id)
-  if (error) {
-    message.error('Update failed: ' + error.message)
-    return
+  try {
+    await callFunction('admin-products', { action: 'update', id: record.id, published: v })
+    record.published = v
+  } catch (e: any) {
+    message.error('Update failed: ' + (e?.message || 'unknown'))
   }
-  record.published = v
 }
 
 async function deleteProduct(record: any) {
-  const { id, slug } = record
+  const { id } = record
   try {
-    await supabase.from('product_langs').delete().eq('product_id', id)
-    await supabase.from('cases').update({ product_id: null }).eq('product_id', id)
-    await supabase.from('documents').update({ product_id: null }).eq('product_id', id)
-    await supabase.from('inquiries').update({ product_id: null }).eq('product_id', id)
-    await supabase.from('landing_content').delete().eq('namespace', slug)
-    const { error } = await supabase.from('products').delete().eq('id', id)
-    if (error) throw error
+    await callFunction('admin-products', { action: 'delete', id })
     rows.value = rows.value.filter((r) => r.id !== id)
     message.success('Product deleted')
   } catch (e: any) {

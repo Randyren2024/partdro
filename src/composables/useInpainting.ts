@@ -1,16 +1,12 @@
+import { callFunction } from '../lib/netlifyApi'
+
 // IOPaint 服务地址（WSL2 中运行，Windows 浏览器通过 localhost 访问）
 export const IOPAINT_URL = (import.meta.env.VITE_IOPAINT_URL as string) || 'http://localhost:8080'
 
 // ====== Agnes 云端图生图（指令式整图编辑，与 IOPaint 的 mask 精确重绘互补） ======
-// 官方文档: https://wiki.agnes-ai.com/zh-Hans/docs/agnes-image-21-flash
-// 要点: endpoint 为 apihub 子域名；图生图 image 数组必须放 extra_body.image；
-//       response_format 也要放 extra_body 内（顶层放会报错）；勿传 tags
+// 经 Netlify Function /api/agnes-image 代理，API Key 只存在服务端环境变量
+// AGNES_API_KEY（不再使用 VITE_AGNES_API_KEY，避免打进前端 bundle）
 export const AGNES_MODEL = 'agnes-image-2.1-flash'
-const AGNES_URL = 'https://apihub.agnes-ai.com/v1/images/generations'
-
-function agnesKey(): string {
-  return ((import.meta.env.VITE_AGNES_API_KEY as string) || '').trim()
-}
 
 /** 按图片宽高比从 Agnes 支持的档位中选最近 ratio */
 export function pickAgnesRatio(w: number, h: number): string {
@@ -33,7 +29,7 @@ export function pickAgnesRatio(w: number, h: number): string {
 
 /**
  * Agnes 图生图：整图 + 编辑指令 → 新图
- * 按官方要求：image 数组与 response_format 均放 extra_body；
+ * 请求发到本站 /api/agnes-image（Netlify Function），由服务端持有密钥转发；
  * image 支持公共 URL 或 Data URI Base64（画布 dataURL 直传）
  */
 export async function runAgnesEdit(
@@ -41,29 +37,12 @@ export async function runAgnesEdit(
   promptText: string,
   opts?: { ratio?: string; size?: string },
 ): Promise<Blob> {
-  const key = agnesKey()
-  if (!key) {
-    throw new Error('未配置 VITE_AGNES_API_KEY：请在 .env.local 中填入 Agnes API Key 并重启 dev server')
-  }
-  const res = await fetch(AGNES_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
-    body: JSON.stringify({
-      model: AGNES_MODEL,
-      prompt: promptText,
-      size: opts?.size || '2K',
-      ...(opts?.ratio ? { ratio: opts.ratio } : {}),
-      extra_body: {
-        image: [imageDataUrl],
-        response_format: 'b64_json',
-      },
-    }),
+  const json = await callFunction<any>('agnes-image', {
+    prompt: promptText,
+    image: imageDataUrl,
+    ...(opts?.ratio ? { ratio: opts.ratio } : {}),
+    ...(opts?.size ? { size: opts.size } : {}),
   })
-  if (!res.ok) {
-    const text = await res.text().catch(() => '')
-    throw new Error(`Agnes error ${res.status}: ${text.slice(0, 200)}`)
-  }
-  const json = await res.json()
   const item = json?.data?.[0]
   if (item?.b64_json) {
     const bin = atob(item.b64_json)

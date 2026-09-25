@@ -28,3 +28,5 @@ public/images/Taurus 80e*.png
 iopaint/.venv/
 iopaint/start.log
 .playwright-mcp/
+# netlify dev Edge Functions bootstrap
+deno.lock

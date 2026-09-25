@@ -8,8 +8,7 @@
     "preview": "vite preview",
     "optimize-images": "node scripts/optimize-images.js",
     "generate-favicons": "node scripts/generate-favicons.js && node scripts/generate-mstiles.js",
-    "netlify:dev": "netlify dev",
-    "test:functions": "node scripts/test-functions.js"
+    "netlify:dev": "netlify dev"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.0",
@@ -25,11 +24,14 @@
     "vue-i18n": "^9.14.5",
     "vue-router": "^4.2.0",
     "vue3-map-chart": "^0.2.0",
-    "vuedraggable": "^4.1.0"
+    "vuedraggable": "^4.1.0",
+    "ws": "^8.21.3"
   },
   "devDependencies": {
+    "@netlify/functions": "^4.3.0",
     "@playwright/test": "^1.60.0",
     "@types/sortablejs": "^1.15.9",
+    "@types/ws": "^8.18.1",
     "@vitejs/plugin-vue": "^5.0.0",
     "netlify-cli": "^26.1.0",
     "playwright": "^1.60.0",
