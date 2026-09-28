@@ -58,7 +58,7 @@ const { t, locale } = useI18n()
 // ====== 主题（深色 / 浅色） ======
 type Theme = 'dark' | 'light'
 const THEME_KEY = 'lp-theme'
-const theme = ref<Theme>((localStorage.getItem(THEME_KEY) as Theme) || 'dark')
+const theme = ref<Theme>((localStorage.getItem(THEME_KEY) as Theme) || 'light')
 function toggleTheme() {
   theme.value = theme.value === 'dark' ? 'light' : 'dark'
   localStorage.setItem(THEME_KEY, theme.value)
@@ -72,20 +72,6 @@ const ns = computed(() => (route.params.slug as string) || 'd15r')
 const tt = (p: string) => t(`${ns.value}.${p}`)
 
 watch(ns, (v) => registerProductNamespace(v), { immediate: true })
-
-// SEO: 按产品命名空间更新 title / description / og 标签
-// 依赖 t() 的返回值作为 watch 源：landing_content 异步合并后标题会随之更新
-watch([ns, locale, () => t(`${ns.value}.hero.title1`), () => t(`${ns.value}.hero.lead`)], () => {
-  const titleKey = `${ns.value}.hero.title1`
-  const title1 = t(titleKey)
-  if (title1 === titleKey) return
-  document.title = `${title1} | Partdro`
-  const lead = t(`${ns.value}.hero.lead`)
-  const desc = lead.length > 160 ? `${lead.slice(0, 157)}...` : lead
-  document.querySelector('meta[name="description"]')?.setAttribute('content', desc)
-  document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title)
-  document.querySelector('meta[property="og:description"]')?.setAttribute('content', desc)
-}, { immediate: true })
 
 const IMG_BASE = computed(() => (ns.value === 'd15r' ? '/d15r/images/' : `/images/${ns.value}/`))
 const img = (name: string) => IMG_BASE.value + name
@@ -123,6 +109,40 @@ function imgEdit(name: string, key?: string): string {
   }
   return img(name)
 }
+
+// SEO: 按产品命名空间更新 title / description / og 标签
+// 依赖 t() 的返回值作为 watch 源：landing_content 异步合并后标题会随之更新
+const SITE_URL = 'https://www.droneworld.tech'
+// 产品名：slug → 标题文案（型号段 y160/sl80/yp800/d15r 全大写）
+const productLabel = computed(() =>
+  ns.value
+    .split('-')
+    .map((w) => (/^[a-z]+\d+[a-z]*$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' '),
+)
+
+watch([ns, locale, () => t(`${ns.value}.hero.title1`), () => t(`${ns.value}.hero.lead`)], () => {
+  const titleKey = `${ns.value}.hero.title1`
+  const title1 = t(titleKey)
+  if (title1 === titleKey) return
+  const name = productLabel.value
+  document.title = `${name} - ${title1} | Partdro`
+  const lead = t(`${ns.value}.hero.lead`)
+  const desc = `${name} - ${lead}`
+  const trimmed = desc.length > 160 ? `${desc.slice(0, 157)}...` : desc
+  const heroImg = SITE_URL + imgEdit('page001_img001.png', `${ns.value}.hero.mainImg`)
+  const url = `${SITE_URL}${route.path}`
+  const setMeta = (selector: string, content: string) =>
+    document.querySelector(selector)?.setAttribute('content', content)
+  setMeta('meta[name="description"]', trimmed)
+  setMeta('meta[property="og:title"]', document.title)
+  setMeta('meta[property="og:description"]', trimmed)
+  setMeta('meta[property="og:url"]', url)
+  setMeta('meta[property="og:image"]', heroImg)
+  setMeta('meta[name="twitter:title"]', document.title)
+  setMeta('meta[name="twitter:description"]', trimmed)
+  setMeta('meta[name="twitter:image"]', heroImg)
+}, { immediate: true })
 
 // ====== 视频模块 ======
 const currentVideoOverrides = computed(() => videoOverridesByLang[locale.value as string] ?? {})

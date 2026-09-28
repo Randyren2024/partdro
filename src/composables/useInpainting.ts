@@ -1,61 +1,86 @@
-import { callFunction } from '../lib/netlifyApi'
-
 // IOPaint 服务地址（WSL2 中运行，Windows 浏览器通过 localhost 访问）
 export const IOPAINT_URL = (import.meta.env.VITE_IOPAINT_URL as string) || 'http://localhost:8080'
 
-// ====== Agnes 云端图生图（指令式整图编辑，与 IOPaint 的 mask 精确重绘互补） ======
-// 经 Netlify Function /api/agnes-image 代理，API Key 只存在服务端环境变量
-// AGNES_API_KEY（不再使用 VITE_AGNES_API_KEY，避免打进前端 bundle）
-export const AGNES_MODEL = 'agnes-image-2.1-flash'
+// ====== 本地 Flux / wanx 局部重绘（mask 驱动，iopaint/ 目录下的 Flask 服务） ======
+// 服务端: partdro\iopaint\app.py（Flask:5000，已放开 CORS）；启动: python iopaint\app.py
+// 浏览器直连，不经 Netlify Function（服务只在本机可达）
+export const FLUX_EDIT_URL = (import.meta.env.VITE_FLUX_EDIT_URL as string) || 'http://localhost:5000'
+export const FLUX_MODEL = 'flux'
+export const WANX_MODEL = 'wanx'
 
-/** 按图片宽高比从 Agnes 支持的档位中选最近 ratio */
-export function pickAgnesRatio(w: number, h: number): string {
-  const r = w / h
-  const table: Array<[string, number]> = [
-    ['1:1', 1], ['3:4', 3 / 4], ['4:3', 4 / 3], ['16:9', 16 / 9],
-    ['9:16', 9 / 16], ['2:3', 2 / 3], ['3:2', 3 / 2], ['21:9', 21 / 9],
-  ]
-  let best = '1:1'
-  let diff = Infinity
-  for (const [name, v] of table) {
-    const d = Math.abs(Math.log(r / v))
-    if (d < diff) {
-      diff = d
-      best = name
-    }
+/** 探活本地编辑服务（GET /，3s 超时） */
+export async function probeFluxServer(): Promise<boolean> {
+  try {
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), 3000)
+    const res = await fetch(`${FLUX_EDIT_URL}/`, { signal: ctrl.signal })
+    clearTimeout(timer)
+    return res.ok
+  } catch {
+    return false
   }
-  return best
+}
+
+/** 结果图归一化为 PNG（FLUX Space 可能返回 webp，而保存文件名固定 .png） */
+async function normalizeToPng(blob: Blob): Promise<Blob> {
+  if (blob.type === "image/png") return blob;
+  try {
+    const bmp = await createImageBitmap(blob);
+    const c = document.createElement("canvas");
+    c.width = bmp.width;
+    c.height = bmp.height;
+    c.getContext("2d")!.drawImage(bmp, 0, 0);
+    bmp.close();
+    return await new Promise<Blob>((resolve, reject) =>
+      c.toBlob((b) => (b ? resolve(b) : reject(new Error("toBlob failed"))), "image/png"),
+    );
+  } catch {
+    return blob; // 解码失败时原样返回，画布仍可渲染
+  }
 }
 
 /**
- * Agnes 图生图：整图 + 编辑指令 → 新图
- * 请求发到本站 /api/agnes-image（Netlify Function），由服务端持有密钥转发；
- * image 支持公共 URL 或 Data URI Base64（画布 dataURL 直传）
+ * 本地局部重绘：原图 + mask + 提示词 → 新图
+ * POST {FLUX_EDIT_URL}/api/edit，body: {original_image, mask, prompt, model}
+ * - flux：HF Space FLUX.1-Fill-dev（免费，走队列可能较慢）
+ * - wanx：通义 wanx2.1-imageedit（按量计费，服务端限 512–4096px / prompt≤800字符）
+ * @param opts.image   原图 dataURI（带 data: 前缀）
+ * @param opts.mask    mask dataURI（白=重绘区，与原图同尺寸）
+ * @param opts.prompt  描述涂抹区域要改成的内容
+ * @param opts.model   'flux' | 'wanx'
  */
-export async function runAgnesEdit(
-  imageDataUrl: string,
-  promptText: string,
-  opts?: { ratio?: string; size?: string },
-): Promise<Blob> {
-  const json = await callFunction<any>('agnes-image', {
-    prompt: promptText,
-    image: imageDataUrl,
-    ...(opts?.ratio ? { ratio: opts.ratio } : {}),
-    ...(opts?.size ? { size: opts.size } : {}),
-  })
-  const item = json?.data?.[0]
-  if (item?.b64_json) {
-    const bin = atob(item.b64_json)
-    const bytes = new Uint8Array(bin.length)
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
-    return new Blob([bytes], { type: 'image/png' })
+export async function runLocalEdit(opts: {
+  image: string
+  mask: string
+  prompt: string
+  model: string
+}): Promise<Blob> {
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), 300_000) // flux HF 队列高峰可能排队数分钟
+  try {
+    const res = await fetch(`${FLUX_EDIT_URL}/api/edit`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        original_image: opts.image,
+        mask: opts.mask,
+        prompt: opts.prompt,
+        model: opts.model,
+      }),
+      signal: ctrl.signal,
+    })
+    if (!res.ok) throw new Error(`Flux edit HTTP ${res.status}`)
+    const json = await res.json().catch(() => null)
+    if (!json?.success || !json.image) {
+      throw new Error(json?.error || '本地编辑服务返回失败')
+    }
+    return await normalizeToPng(await (await fetch(json.image)).blob())
+  } catch (e: any) {
+    if (e?.name === 'AbortError') throw new Error('本地编辑超时（5 分钟），请稍后重试')
+    throw e
+  } finally {
+    clearTimeout(timer)
   }
-  if (item?.url) {
-    const r = await fetch(item.url)
-    if (!r.ok) throw new Error(`Agnes result download error ${r.status}`)
-    return await r.blob()
-  }
-  throw new Error('Agnes 响应中没有图像数据')
 }
 
 /**

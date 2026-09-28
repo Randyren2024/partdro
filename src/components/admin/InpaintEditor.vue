@@ -12,7 +12,7 @@
             title="保存到服务端的文件名"
             spellcheck="false"
           />
-          <label v-if="!isAgnes" class="ipe-auto-toggle" title="涂抹后自动触发 inpainting">
+          <label v-if="!isLocalEdit" class="ipe-auto-toggle" title="涂抹后自动触发 inpainting">
             <input type="checkbox" v-model="autoInpaint" />
             <span>Auto</span>
           </label>
@@ -24,7 +24,8 @@
             @change="onModelChange(($event.target as HTMLSelectElement).value)"
           >
             <option v-for="m in serverModels" :key="m.name" :value="m.name">{{ m.name }}</option>
-            <option :value="AGNES_MODEL">☁ {{ AGNES_MODEL }}（云端图生图）</option>
+            <option :value="FLUX_MODEL">☁ FLUX Fill（免费 · 局部重绘）</option>
+            <option :value="WANX_MODEL">☁ wanx2.1 图像编辑（付费 · 局部重绘）</option>
           </select>
           <button class="ipe-icon-btn" title="Close (Esc)" @click="emit('close')">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
@@ -32,10 +33,14 @@
         </div>
       </div>
 
-      <!-- 服务未启动提示（Agnes 云端模式不依赖本地服务，不显示） -->
-      <div v-if="serverOnline === false && !isAgnes" class="ipe-server-warn">
+      <!-- 服务未启动提示（按当前模型分流：IOPaint 本地 / Flux 本地编辑服务） -->
+      <div v-if="serverOnline === false && !isLocalEdit" class="ipe-server-warn">
         IOPaint 服务未连接 ({{ IOPAINT_URL }})。请在 WSL2 中启动：
-        <code>source ~/partdro/iopaint/.venv/bin/activate &amp;&amp; iopaint start --host 0.0.0.0 --port 8080 --model lama --device cpu --no-half --input /home/user1102/partdro/public/d15r/images --output-dir /home/user1102/partdro/public/d15r/images/inpainted</code>
+        <code>source ~/partdro/iopaint/.venv/bin/activate &amp;&amp; nohup iopaint start --host 0.0.0.0 --port 8080 --model lama --device cpu --no-half --input /mnt/c/Users/81102/Desktop/partdro/public/d15r/images --output-dir /mnt/c/Users/81102/Desktop/partdro/public/d15r/images/inpainted &gt; ~/partdro/iopaint/start.log 2&gt;&amp;1 &amp;</code>
+      </div>
+      <div v-if="fluxOnline === false && isLocalEdit" class="ipe-server-warn">
+        本地编辑服务未连接 ({{ FLUX_EDIT_URL }})。请启动：
+        <code>python "C:\Users\81102\Desktop\partdro\iopaint\app.py"</code>
       </div>
 
       <!-- 画布区：canvas 常驻挂载（ref 必须在 onload 前就存在），状态用浮层显示 -->
@@ -82,9 +87,9 @@
         </div>
       </div>
 
-      <!-- need_prompt 模型（AnyText）或 Agnes 云端模式：文字输入条（悬浮于工具条上方） -->
+      <!-- need_prompt 模型（AnyText）或本地 Flux/wanx：文字输入条（悬浮于工具条上方） -->
       <div v-if="phase === 'ready' && needPrompt" class="ipe-promptbar">
-        <span class="ipe-promptbar-label">{{ isAgnes ? 'Prompt' : 'Text' }}</span>
+        <span class="ipe-promptbar-label">{{ isLocalEdit ? 'Prompt' : 'Text' }}</span>
         <input
           v-model="prompt"
           class="ipe-promptbar-input"
@@ -140,7 +145,7 @@
         >
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
         </button>
-        <button v-if="!autoInpaint || isAgnes" class="ipe-run" :disabled="phase !== 'ready' || processing" @click="runInpaint">
+        <button v-if="!autoInpaint || isLocalEdit" class="ipe-run" :disabled="phase !== 'ready' || processing" @click="runInpaint">
           {{ processing ? 'Run…' : 'Run' }}
         </button>
       </div>
@@ -167,9 +172,11 @@ import {
   listServerModels,
   blobToBase64,
   IOPAINT_URL,
-  runAgnesEdit,
-  AGNES_MODEL,
-  pickAgnesRatio,
+  runLocalEdit,
+  probeFluxServer,
+  FLUX_EDIT_URL,
+  FLUX_MODEL,
+  WANX_MODEL,
 } from "../../composables/useInpainting";
 
 const props = defineProps<{ imageUrl: string }>();
@@ -185,24 +192,27 @@ const prompt = ref("");
 // ====== 状态 ======
 const phase = ref<"loading" | "ready" | "error">("loading");
 const serverOnline = ref<boolean | null>(null);
+const fluxOnline = ref<boolean | null>(null);
 const brushSize = ref(24);
 const processing = ref(false);
 const saving = ref(false);
 const currentIsResult = ref(false);
 const currentModel = ref("lama");
 const modelLoading = ref(false);
-const isAgnes = computed(() => currentModel.value === AGNES_MODEL);
+const isLocalEdit = computed(
+  () => currentModel.value === FLUX_MODEL || currentModel.value === WANX_MODEL,
+);
 const needPrompt = computed(
   () =>
-    isAgnes.value ||
+    isLocalEdit.value ||
     (serverModels.value.find((m) => m.name === currentModel.value)?.need_prompt ?? false),
 );
 const promptPlaceholder = computed(() =>
-  isAgnes.value
-    ? "编辑指令，如：把背景换成干净的浅色摄影棚，保持产品不变"
+  isLocalEdit.value
+    ? "描述涂抹区域要改成的内容，如：把文字换成 D15R PRO"
     : "要替换成的文字，如：D15R PRO",
 );
-const processingText = computed(() => (isAgnes.value ? "Generating..." : "Inpainting..."));
+const processingText = computed(() => (isLocalEdit.value ? "Generating..." : "Inpainting..."));
 const autoInpaint = ref(true); // 涂抹后自动触发 inpainting（原生默认行为）
 let autoTimer: ReturnType<typeof setTimeout> | null = null;
 const imgW = ref(0); // 原生同款左上角尺寸徽标
@@ -248,8 +258,10 @@ let currentStroke: Stroke | null = null;
 let lastPos: { x: number; y: number } | null = null;
 
 // ====== 初始化 ======
+let probeTimer: number | undefined;
 onMounted(async () => {
   serverOnline.value = await probeServer();
+  fluxOnline.value = await probeFluxServer();
   loadCurrentModel();
   // 拉取服务端真实模型列表（AnyText 下载后才会出现在这里）
   try {
@@ -261,8 +273,14 @@ onMounted(async () => {
   loadImage();
   window.addEventListener("keydown", onKeydown);
   window.addEventListener("keyup", onKeyup);
+  // 掉线时每 8s 自动重探，服务恢复后横幅自动消失
+  probeTimer = window.setInterval(async () => {
+    if (!serverOnline.value) serverOnline.value = await probeServer();
+    if (!fluxOnline.value) fluxOnline.value = await probeFluxServer();
+  }, 8000);
 });
 onBeforeUnmount(() => {
+  if (probeTimer) clearInterval(probeTimer);
   window.removeEventListener("keydown", onKeydown);
   window.removeEventListener("keyup", onKeyup);
   if (autoTimer) clearTimeout(autoTimer);
@@ -277,10 +295,14 @@ async function loadCurrentModel() {
 }
 
 async function onModelChange(name: string) {
-  if (name === AGNES_MODEL) {
-    // 云端模型不走 IOPaint switchModel，纯前端分支切换
+  if (name === FLUX_MODEL || name === WANX_MODEL) {
+    // 本地编辑服务无模型状态，纯前端分支切换
     currentModel.value = name;
-    message.info("云端图生图：输入编辑指令后点 Run（无需涂抹）。整图重生成，注意核对产品细节。");
+    fluxOnline.value = await probeFluxServer();
+    message.info(
+      "本地局部重绘：先涂抹区域再点 Run（手动触发，生成较慢）。" +
+        (name === WANX_MODEL ? "wanx 按量计费。" : "FLUX 免费走队列。"),
+    );
     return;
   }
   const prev = currentModel.value;
@@ -465,7 +487,7 @@ function endDraw() {
 }
 
 function scheduleAutoInpaint() {
-  if (isAgnes.value) return; // 云端整图重生成成本高，不跟随涂抹自动触发，仅手动 Run
+  if (isLocalEdit.value) return; // flux/wanx 生成慢（数十秒~数分钟），不跟随涂抹自动触发，仅手动 Run
   if (autoTimer) clearTimeout(autoTimer);
   autoTimer = setTimeout(() => {
     autoTimer = null;
@@ -653,7 +675,8 @@ async function runInpaint() {
     message.error("Image not loaded yet.");
     return;
   }
-  if (!isAgnes.value && !strokes.value.length) {
+  // 所有分支均需 mask（IOPaint / AnyText / 本地 flux / wanx 都是局部重绘）
+  if (!strokes.value.length) {
     message.warning("Mask is empty. Paint the area to inpaint first.");
     return;
   }
@@ -663,26 +686,29 @@ async function runInpaint() {
     autoTimer = null;
   }
   try {
-    // Agnes 云端分支：指令驱动整图重生成，无需 mask
-    if (isAgnes.value) {
-      const p = prompt.value.trim();
-      if (!p) {
-        message.warning("请先在 Prompt 输入框填写编辑指令。");
-        processing.value = false;
-        return;
-      }
-      const blob = await runAgnesEdit(currentDataUrl, p, {
-        ratio: pickAgnesRatio(imgW.value, imgH.value),
-      });
-      showResult(blob);
-      message.success("Agnes 生成完成。可继续编辑或 Save to Server。");
-      return;
-    }
     let maskBase64: string;
     try {
       maskBase64 = extractMaskBase64();
     } catch {
       throw new Error("Canvas is tainted by a cross-origin image. Only same-origin (/d15r/images/...) images can be inpainted.");
+    }
+    // 本地 Flux / wanx 分支：带 mask 局部重绘，无需 IOPaint
+    if (isLocalEdit.value) {
+      const p = prompt.value.trim();
+      if (!p) {
+        message.warning("请先在 Prompt 输入框填写要改成的内容。");
+        processing.value = false;
+        return;
+      }
+      const blob = await runLocalEdit({
+        image: currentDataUrl,
+        mask: maskBase64,
+        prompt: p,
+        model: currentModel.value,
+      });
+      showResult(blob);
+      message.success("本地编辑完成。可继续涂抹迭代，或 Save to Server。");
+      return;
     }
     // need_prompt 模型（如 AnyText）随请求携带文字；sd_steps 降到 20 以适配 CPU
     const opts = needPrompt.value

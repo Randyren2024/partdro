@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLUX Fill 局部重绘</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #16213e, #0f3460);
+            border-bottom: 1px solid #333;
+        }
+        .header h1 { font-size: 24px; color: #e94560; }
+        .header p { font-size: 13px; color: #888; margin-top: 4px; }
+        .main {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .panel {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #333;
+        }
+        .left-panel { flex: 1; min-width: 0; }
+        .right-panel { width: 340px; display: flex; flex-direction: column; gap: 12px; }
+
+        .upload-area {
+            border: 2px dashed #555;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+        }
+        .upload-area:hover { border-color: #e94560; background: rgba(233,69,96,0.05); }
+        .upload-area.has-image { padding: 10px; border-style: solid; border-color: #444; }
+        .upload-area p { color: #888; font-size: 14px; }
+        #uploadInput { display: none; }
+
+        .canvas-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+        }
+        #mainCanvas, #maskCanvas {
+            display: block;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        #mainCanvas {
+            position: relative;
+            z-index: 1;
+        }
+        #maskCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            cursor: crosshair;
+            opacity: 0.5;
+        }
+        #resultCanvas {
+            display: block;
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .toolbar label { font-size: 13px; color: #aaa; }
+        .toolbar input[type=range] { width: 80px; }
+        .toolbar button {
+            padding: 6px 14px;
+            border: 1px solid #555;
+            border-radius: 6px;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .toolbar button:hover { border-color: #e94560; }
+        .toolbar button.active { background: #e94560; border-color: #e94560; color: #fff; }
+
+        .prompt-area {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .prompt-area input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            font-size: 14px;
+            outline: none;
+        }
+        .prompt-area input:focus { border-color: #e94560; }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #e94560, #c23152);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(233,69,96,0.4); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .status {
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+            display: none;
+        }
+        .status.loading { display: block; background: rgba(233,69,96,0.1); color: #e94560; }
+        .status.error { display: block; background: rgba(255,0,0,0.1); color: #ff6b6b; }
+        .status.success { display: block; background: rgba(0,200,83,0.1); color: #00c853; }
+
+        .params-section {
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .params-section h3 { font-size: 13px; color: #888; margin-bottom: 8px; }
+        .param-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .param-row label { font-size: 12px; color: #aaa; }
+        .param-row span { font-size: 12px; color: #e94560; min-width: 30px; text-align: right; }
+        .param-row input[type=range] { flex: 1; margin: 0 8px; }
+
+        .section-title {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #333;
+        }
+        .result-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .btn-secondary {
+            padding: 8px 16px;
+            background: #0f3460;
+            color: #e0e0e0;
+            border: 1px solid #e94560;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+        }
+        .btn-secondary:hover { background: #e94560; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FLUX Fill 局部重绘</h1>
+        <p>上传图片 → 涂抹要修改的区域 → 输入提示词 → 生成</p>
+    </div>
+
+    <div class="main">
+        <div class="left-panel panel">
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('uploadInput').click()">
+                <p>点击或拖拽上传图片</p>
+            </div>
+            <input type="file" id="uploadInput" accept="image/*">
+
+            <div id="editorArea" style="display:none;">
+                <div class="toolbar">
+                    <label>画笔:</label>
+                    <input type="range" id="brushSize" min="2" max="80" value="20">
+                    <span id="brushSizeVal">20</span>
+                    <button id="btnDraw" class="active" onclick="setMode('draw')">画笔</button>
+                    <button id="btnErase" onclick="setMode('erase')">橡皮</button>
+                    <button id="btnClear" onclick="clearMask()">清除</button>
+                    <button id="btnUndo" onclick="undo()">撤销</button>
+                    <label style="margin-left:12px;">蒙版透明度:</label>
+                    <input type="range" id="maskOpacity" min="0.1" max="0.8" step="0.05" value="0.5">
+                    <span id="maskOpacityVal">0.50</span>
+                </div>
+
+                <div class="prompt-area">
+                    <input type="text" id="promptInput" placeholder="描述你想要的效果，如：给小狗戴上一顶红色帽子">
+                </div>
+
+                <div class="canvas-wrapper" id="canvasWrapper">
+                    <canvas id="mainCanvas"></canvas>
+                    <canvas id="maskCanvas"></canvas>
+                </div>
+
+                <div style="margin-top:12px; text-align:center;">
+                    <button class="btn-primary" id="btnGenerate" onclick="generate()">
+                        开始生成
+                    </button>
+                </div>
+                <div class="status" id="statusBar"></div>
+
+                <div id="resultArea" style="display:none; margin-top:12px;">
+                    <div class="section-title">生成结果</div>
+                    <canvas id="resultCanvas"></canvas>
+                    <div class="result-actions">
+                        <button class="btn-secondary" onclick="applyResult()">应用到原图</button>
+                        <button class="btn-secondary" onclick="downloadResult()">下载结果</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="panel params-section">
+                <h3>模型</h3>
+                <div class="param-row">
+                    <label>选择模型</label>
+                    <select id="modelSelect" onchange="onModelChange()" style="flex:1;margin:0 8px;background:#1a1a2e;border:1px solid #444;color:#e0e0e0;border-radius:4px;padding:4px 6px;font-size:12px;">
+                        <option value="flux">FLUX Fill [dev]（免费）</option>
+                        <option value="wanx">万相2.1 图像编辑（付费）</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel params-section" id="fluxParams">
+                <h3>FLUX 生成参数</h3>
+                <div class="param-row">
+                    <label>Steps</label>
+                    <input type="range" id="steps" min="10" max="50" value="28">
+                    <span id="stepsVal">28</span>
+                </div>
+                <div class="param-row">
+                    <label>Guidance</label>
+                    <input type="range" id="guidanceScale" min="1" max="30" step="1" value="30">
+                    <span id="guidanceScaleVal">30</span>
+                </div>
+            </div>
+
+            <div class="panel params-section" id="wanxParams" style="display:none;">
+                <h3>万相2.1 图像编辑</h3>
+                <div style="font-size:12px;color:#888;line-height:1.6;">
+                    局部重绘模式（description_edit_with_mask），按输入图原尺寸输出。<br>
+                    提示词限 800 字符，建议写明"添加/修改"或删除后的画面内容。<br>
+                    按量计费，走账户余额。
+                </div>
+            </div>
+
+            <div class="panel" style="font-size:12px; color:#666; line-height:1.6;">
+                <h3 style="font-size:13px;color:#888;margin-bottom:6px;">使用说明</h3>
+                1. 上传一张图片（不小于512×512）<br>
+                2. 用<b style="color:#e94560;">画笔涂抹</b>要修改的区域<br>
+                3. 输入提示词描述效果（万相限800字符）<br>
+                4. 选择模型，点击"开始生成"<br>
+                5. 等待返回结果，可"应用到原图"继续编辑<br>
+                <span style="color:#555;">FLUX：免费无限，效果稳定。<br>万相2.1：走余额按量计费，语义理解强。</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mainCanvas = document.getElementById('mainCanvas');
+        const maskCanvas = document.getElementById('maskCanvas');
+        const mainCtx = mainCanvas.getContext('2d');
+        const maskCtx = maskCanvas.getContext('2d');
+
+        let originalImage = null;
+        let originalFileB64 = null;
+        let drawing = false;
+        let mode = 'draw';
+        let brushRadius = 20;
+        let history = [];
+        let maxHistory = 30;
+
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadInput = document.getElementById('uploadInput');
+
+        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.style.borderColor = '#e94560'; });
+        uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = '#555'; });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#555';
+            if (e.dataTransfer.files.length > 0) loadImage(e.dataTransfer.files[0]);
+        });
+
+        uploadInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) loadImage(e.target.files[0]);
+        });
+
+        function loadImage(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalFileB64 = e.target.result;
+                const img = new Image();
+                img.onload = () => {
+                    originalImage = img;
+                    let w = img.width, h = img.height;
+                    const maxW = document.querySelector('.left-panel').clientWidth - 40;
+                    if (w > maxW) { h = h * maxW / w; w = maxW; }
+
+                    mainCanvas.width = w;
+                    mainCanvas.height = h;
+                    maskCanvas.width = w;
+                    maskCanvas.height = h;
+
+                    mainCtx.drawImage(img, 0, 0, w, h);
+                    maskCtx.clearRect(0, 0, w, h);
+                    history = [];
+
+                    uploadArea.style.display = 'none';
+                    document.getElementById('editorArea').style.display = 'block';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function getCanvasPos(e) {
+            const rect = maskCanvas.getBoundingClientRect();
+            const scaleX = maskCanvas.width / rect.width;
+            const scaleY = maskCanvas.height / rect.height;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        function saveState() {
+            const data = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height);
+            history.push(data);
+            if (history.length > maxHistory) history.shift();
+        }
+
+        function startDraw(e) {
+            e.preventDefault();
+            drawing = true;
+            saveState();
+            const pos = getCanvasPos(e);
+            draw(pos.x, pos.y);
+        }
+
+        function moveDraw(e) {
+            if (!drawing) return;
+            e.preventDefault();
+            const pos = getCanvasPos(e);
+            draw(pos.x, pos.y);
+        }
+
+        function endDraw() { drawing = false; }
+
+        function draw(x, y) {
+            brushRadius = parseInt(document.getElementById('brushSize').value);
+            maskCtx.globalCompositeOperation = mode === 'erase' ? 'destination-out' : 'source-over';
+            maskCtx.beginPath();
+            maskCtx.arc(x, y, brushRadius, 0, Math.PI * 2);
+            if (mode === 'draw') {
+                maskCtx.fillStyle = 'rgba(255, 0, 0, 1)';
+            } else {
+                maskCtx.fillStyle = 'rgba(0, 0, 0, 1)';
+            }
+            maskCtx.fill();
+        }
+
+        maskCanvas.addEventListener('mousedown', startDraw);
+        maskCanvas.addEventListener('mousemove', moveDraw);
+        maskCanvas.addEventListener('mouseup', endDraw);
+        maskCanvas.addEventListener('mouseleave', endDraw);
+        maskCanvas.addEventListener('touchstart', startDraw, { passive: false });
+        maskCanvas.addEventListener('touchmove', moveDraw, { passive: false });
+        maskCanvas.addEventListener('touchend', endDraw);
+
+        function setMode(m) {
+            mode = m;
+            document.getElementById('btnDraw').classList.toggle('active', m === 'draw');
+            document.getElementById('btnErase').classList.toggle('active', m === 'erase');
+        }
+
+        function clearMask() {
+            saveState();
+            maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
+        }
+
+        function undo() {
+            if (history.length === 0) return;
+            const data = history.pop();
+            maskCtx.putImageData(data, 0, 0);
+        }
+
+        function getMaskB64(targetW, targetH) {
+            const tmpCanvas = document.createElement('canvas');
+            tmpCanvas.width = targetW || maskCanvas.width;
+            tmpCanvas.height = targetH || maskCanvas.height;
+            const tmpCtx = tmpCanvas.getContext('2d');
+
+            tmpCtx.fillStyle = '#000000';
+            tmpCtx.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+
+            const maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height);
+            const tmpData = tmpCtx.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height);
+
+            const scaleX = maskCanvas.width / tmpCanvas.width;
+            const scaleY = maskCanvas.height / tmpCanvas.height;
+
+            for (let ty = 0; ty < tmpCanvas.height; ty++) {
+                for (let tx = 0; tx < tmpCanvas.width; tx++) {
+                    const sx = Math.floor(tx * scaleX);
+                    const sy = Math.floor(ty * scaleY);
+                    const si = (sy * maskCanvas.width + sx) * 4;
+                    const ti = (ty * tmpCanvas.width + tx) * 4;
+                    if (maskData.data[si + 3] > 10) {
+                        tmpData.data[ti] = 255;
+                        tmpData.data[ti + 1] = 255;
+                        tmpData.data[ti + 2] = 255;
+                        tmpData.data[ti + 3] = 255;
+                    }
+                }
+            }
+
+            tmpCtx.putImageData(tmpData, 0, 0);
+            return tmpCanvas.toDataURL('image/png');
+        }
+
+        function getOriginalB64() {
+            return originalFileB64 || mainCanvas.toDataURL('image/png');
+        }
+
+        async function generate() {
+            const prompt = document.getElementById('promptInput').value.trim();
+            if (!prompt) {
+                showStatus('请输入提示词', 'error');
+                return;
+            }
+
+            const origW = originalImage.naturalWidth;
+            const origH = originalImage.naturalHeight;
+            const maskB64 = getMaskB64(origW, origH);
+            const tmpMask = new Image();
+            tmpMask.src = maskB64;
+            await new Promise(r => tmpMask.onload = r);
+
+            const hasMask = (() => {
+                const tc = document.createElement('canvas');
+                tc.width = tmpMask.width;
+                tc.height = tmpMask.height;
+                const tctx = tc.getContext('2d');
+                tctx.drawImage(tmpMask, 0, 0);
+                const d = tctx.getImageData(0, 0, tc.width, tc.height).data;
+                for (let i = 0; i < d.length; i += 4) {
+                    if (d[i] > 128) return true;
+                }
+                return false;
+            })();
+
+            if (!hasMask) {
+                showStatus('请先用画笔涂抹要修改的区域', 'error');
+                return;
+            }
+
+            const originalB64 = getOriginalB64();
+
+            const modelName = document.getElementById('modelSelect').value === 'wanx' ? '万相2.1图像编辑' : 'FLUX Fill';
+            showStatus(`正在调用 ${modelName} 生成中，请耐心等待...`, 'loading');
+            document.getElementById('btnGenerate').disabled = true;
+
+            try {
+                const model = document.getElementById('modelSelect').value;
+                const payload = {
+                    original_image: originalB64,
+                    mask: maskB64,
+                    prompt: prompt,
+                    model: model,
+                };
+                if (model !== 'wanx') {
+                    payload.guidance_scale = parseFloat(document.getElementById('guidanceScale').value);
+                    payload.steps = parseInt(document.getElementById('steps').value);
+                }
+                const resp = await fetch('/api/edit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await resp.json();
+
+                if (result.success && result.image) {
+                    const img = new Image();
+                    img.onload = () => {
+                        const rc = document.getElementById('resultCanvas');
+                        rc.width = img.width;
+                        rc.height = img.height;
+                        rc.getContext('2d').drawImage(img, 0, 0);
+                        document.getElementById('resultArea').style.display = 'block';
+                        showStatus('生成完成！', 'success');
+                    };
+                    img.src = result.image;
+                } else {
+                    showStatus('生成失败: ' + (result.error || '未知错误'), 'error');
+                    if (result.raw) console.error('Raw response:', result.raw);
+                }
+            } catch (err) {
+                showStatus('请求失败: ' + err.message, 'error');
+            } finally {
+                document.getElementById('btnGenerate').disabled = false;
+            }
+        }
+
+        function onModelChange() {
+            const model = document.getElementById('modelSelect').value;
+            document.getElementById('fluxParams').style.display = model === 'flux' ? 'block' : 'none';
+            document.getElementById('wanxParams').style.display = model === 'wanx' ? 'block' : 'none';
+        }
+
+        function showStatus(msg, type) {
+            const bar = document.getElementById('statusBar');
+            bar.textContent = msg;
+            bar.className = 'status ' + type;
+        }
+
+        function applyResult() {
+            const rc = document.getElementById('resultCanvas');
+            mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+            mainCtx.drawImage(rc, 0, 0, mainCanvas.width, mainCanvas.height);
+            clearMask();
+            document.getElementById('resultArea').style.display = 'none';
+            showStatus('已应用到原图，可继续涂抹编辑', 'success');
+        }
+
+        function downloadResult() {
+            const rc = document.getElementById('resultCanvas');
+            const link = document.createElement('a');
+            link.download = 'inpainting_result.png';
+            link.href = rc.toDataURL('image/png');
+            link.click();
+        }
+
+        document.getElementById('brushSize').addEventListener('input', (e) => {
+            document.getElementById('brushSizeVal').textContent = e.target.value;
+        });
+
+        document.getElementById('maskOpacity').addEventListener('input', (e) => {
+            maskCanvas.style.opacity = e.target.value;
+            document.getElementById('maskOpacityVal').textContent = parseFloat(e.target.value).toFixed(2);
+        });
+
+        ['steps', 'guidanceScale'].forEach(id => {
+            document.getElementById(id).addEventListener('input', (e) => {
+                const valId = id + 'Val';
+                const el = document.getElementById(valId);
+                if (el) el.textContent = parseFloat(e.target.value).toFixed(0);
+            });
+        });
+    </script>
+</body>
+</html>

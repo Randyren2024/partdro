@@ -24,9 +24,9 @@ Privileged writes and third-party keys do **not** run in the browser:
 |---|---|---|
 | `POST /api/landing-content` | `netlify/functions/landing-content.ts` | service_role upsert of `landing_content` |
 | `POST /api/admin-products` | `netlify/functions/admin-products.ts` | product list/create/update/delete (delete → RPC `admin_delete_product`) |
-| `POST /api/agnes-image` | `netlify/functions/agnes-image.ts` | Agnes image edit proxy (`AGNES_API_KEY` server-side only) |
 
-- Shared auth: `netlify/shared/verifyAdmin.ts` — Bearer access_token → `auth.getUser` → `admins` table via service_role. Requires env `SUPABASE_SERVICE_ROLE_KEY`, `AGNES_API_KEY` (no `VITE_` prefix) at runtime; `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` for client construction.
+- Shared auth: `netlify/shared/verifyAdmin.ts` — Bearer access_token → `auth.getUser` → `admins` table via service_role. Requires env `SUPABASE_SERVICE_ROLE_KEY` at runtime; `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` for client construction.
+- Image editing in the admin editor is **local-network, not Netlify**: IOPaint (`VITE_IOPAINT_URL`, WSL2 :8080; venv at WSL `~/partdro/iopaint/.venv`, service writes into the Windows repo via `/mnt/c/.../partdro/public/d15r/images/inpainted`) for lama/cv2/AnyText inpainting, and the in-repo Flask service (`iopaint/app.py`, `VITE_FLUX_EDIT_URL` default `http://localhost:5000`) for FLUX Fill / wanx mask-based edits — browser calls both directly (CORS-opened).
 - Frontend helper: `src/lib/netlifyApi.ts` (`callFunction`). Public content reads and Supabase Auth still use the anon client directly.
 - `scripts/admin-functions.sql` must be run once in Supabase Dashboard (defines `admin_delete_product`).
 - `/api/*` redirect is declared **before** the SPA `/*` catch-all in `netlify.toml`.
