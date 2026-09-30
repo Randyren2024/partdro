@@ -1,5 +1,6 @@
 node_modules
 dist
+/product_files/
 *.log
 .DS_Store
 *.pyc

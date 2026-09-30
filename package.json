@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "optimize-images": "node scripts/optimize-images.js",
-    "generate-favicons": "node scripts/generate-favicons.js && node scripts/generate-mstiles.js",
+    "generate-favicons": "node scripts/generate-favicons.js",
     "netlify:dev": "netlify dev"
   },
   "dependencies": {

@@ -32,7 +32,7 @@ async function getJSON(url, tries = 8) {
 async function fetchAllByLink() {
   const all = [];
   let before = null;
-  for (let page = 0; page < 10; page++) {
+  for (let page = 0; page < 25; page++) {
     const p = new URLSearchParams({ link_id: linkId, size: '100', sort: 'desc', sort_type: 'created_utc' });
     if (before) p.set('before', String(before));
     const url = `https://api.pullpush.io/reddit/search/comment/?${p.toString()}`;

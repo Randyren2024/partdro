@@ -2,7 +2,7 @@
   <header class="header" :class="{ 'header--scrolled': scrolled }">
     <div class="container header__inner">
       <router-link to="/" class="header__logo">
-        <img src="/partdro_logo.png" alt="Partdro" />
+        <img src="/droneworld_logo.png" alt="Partdro" />
       </router-link>
 
       <nav class="header__nav" :class="{ 'header__nav--open': mobileOpen }">

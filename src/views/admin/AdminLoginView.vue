@@ -2,7 +2,7 @@
   <div class="auth-screen">
     <div class="auth-card">
       <div class="brand">
-        <img src="/partdro_logo.png" alt="Partdro" />
+        <img src="/droneworld_logo.png" alt="Partdro" />
         <h1>Admin Sign In</h1>
         <p class="muted">Visual editor for the D15R landing page</p>
       </div>
