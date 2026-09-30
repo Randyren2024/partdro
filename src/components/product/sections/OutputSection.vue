@@ -3,7 +3,7 @@
     <div class="lp-container metric-grid grid">
       <div class="metric-card">
         <div class="eyebrow" :data-edit-key="`${ns}.output.eyebrow`">{{ tt('output.eyebrow') }}</div>
-        <div class="big-number">1,000</div>
+        <div class="big-number" :data-edit-key="`${ns}.output.bigNumber`">{{ bigNumber }}</div>
         <h3 :data-edit-key="`${ns}.output.unitTitle`">{{ tt('output.unitTitle') }}</h3>
         <p class="metric-note" style="margin-top:14px" :data-edit-key="`${ns}.output.note`">{{ tt('output.note') }}</p>
       </div>
@@ -21,6 +21,11 @@ import { computed } from 'vue'
 import { useLandingSection } from '../sectionContext'
 
 const { ns, tt } = useLandingSection()
+// 大数字可编辑（output.bigNumber）；旧数据无此键时回退 '1,000'（d15r 等存量页不变）
+const bigNumber = computed(() => {
+  const v = tt('output.bigNumber')
+  return v === `${ns.value}.output.bigNumber` ? '1,000' : v
+})
 const outputRows = computed(() =>
   [0, 1, 2, 3, 4].map((i) => ({
     label: tt(`output.rows.${i}.label`),
