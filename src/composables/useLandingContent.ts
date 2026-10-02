@@ -133,6 +133,8 @@ async function loadAndMerge(lang: string) {
 
   // 布局语言无关：当前语言没有 __layout 的 ns，从 en 行补拉
   await ensureLayoutFromEn(lang)
+  // 图片/视频覆盖：当前语言缺键时从 en 行按键级补齐（当前语言已覆盖的键优先）
+  await ensureMediaFromEn(lang)
   // 产品页命名空间：en 也无 __layout 时，新产品保持空白；d15r legacy 回退全量
   const productNs = ['d15r', ...dynamicNamespaces]
   for (const ns of productNs) {
@@ -164,6 +166,61 @@ async function ensureLayoutFromEn(lang: string) {
   )
   for (const r of results) {
     if (r) layoutByNs[r.ns] = r.layout
+  }
+}
+
+/** 取某个命名空间的 en 行内容（带缓存），供媒体回退使用。 */
+async function getEnContent(ns: string): Promise<any> {
+  const cacheKey = `${ns}::en`
+  const cached = cache.get(cacheKey)
+  if (cached) return cached
+  try {
+    const { data, error } = await supabase
+      .from('landing_content')
+      .select('content')
+      .eq('namespace', ns)
+      .eq('lang', 'en')
+      .maybeSingle()
+    if (error || !data?.content) return null
+    cache.set(cacheKey, data.content)
+    return data.content
+  } catch {
+    return null
+  }
+}
+
+/**
+ * 图片/视频覆盖语言回退：__images/__videos 不走 vue-i18n fallbackLocale，
+ * 非 en 语言没有 (ns, lang) 行（或行内缺键）时，从 en 行按键级补齐。
+ * 当前语言已覆盖的键优先，管理端按 lang 保存的部分覆盖不受影响。
+ */
+async function ensureMediaFromEn(lang: string) {
+  if (lang === 'en') return
+  const results = await Promise.all(
+    allNamespaces().map(async (ns) => {
+      const content = await getEnContent(ns)
+      if (!content) return null
+      const images = content[IMAGES_KEY]
+      const videos = content[VIDEOS_KEY]
+      if (!isPlainObject(images) && !isPlainObject(videos)) return null
+      return {
+        images: isPlainObject(images) ? (images as Record<string, string>) : null,
+        videos: isPlainObject(videos) ? (videos as Record<string, string>) : null,
+      }
+    }),
+  )
+  for (const r of results) {
+    if (!r) continue
+    if (r.images) {
+      for (const [k, v] of Object.entries(r.images)) {
+        if (!(k in imgOverridesByLang[lang])) imgOverridesByLang[lang][k] = v
+      }
+    }
+    if (r.videos) {
+      for (const [k, v] of Object.entries(r.videos)) {
+        if (!(k in videoOverridesByLang[lang])) videoOverridesByLang[lang][k] = v
+      }
+    }
   }
 }
 
