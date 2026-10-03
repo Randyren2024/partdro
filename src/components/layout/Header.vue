@@ -51,6 +51,10 @@
 
       <div class="header__actions">
         <LangSwitcher />
+        <router-link to="/contact" class="header__contact">
+          {{ t('nav.contact') }}
+          <RightOutlined />
+        </router-link>
         <div class="header__mobile-toggle" @click="mobileOpen = !mobileOpen">
           <MenuOutlined v-if="!mobileOpen" />
           <CloseOutlined v-else />
@@ -63,7 +67,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { MenuOutlined, CloseOutlined } from "@ant-design/icons-vue";
+import { MenuOutlined, CloseOutlined, RightOutlined } from "@ant-design/icons-vue";
 import LangSwitcher from "../common/LangSwitcher.vue";
 import type { ProductCategory } from "../../types";
 
@@ -86,15 +90,17 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #fff;
-  height: var(--header-height);
+  background: rgba(255, 255, 255, 0.92);
+  height: 74px;
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s;
+  border-bottom: 1px solid rgba(9, 45, 54, 0.08);
+  backdrop-filter: blur(16px);
+  transition: box-shadow 0.3s, background 0.3s;
 }
 .header--scrolled {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 32px rgba(9, 45, 54, 0.08);
 }
 .header__inner {
   display: flex;
@@ -108,7 +114,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
   gap: 10px;
 }
 .header__logo img {
-  height: 40px;
+  height: 34px;
 }
 .header__brand {
   font-size: 22px;
@@ -122,12 +128,12 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 .header__nav-items {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 .header__nav-item {
-  padding: 8px 16px;
-  font-size: 15px;
-  font-weight: 500;
+  padding: 9px 13px;
+  font-size: 13px;
+  font-weight: 650;
   color: var(--color-text);
   cursor: pointer;
   transition: color 0.2s;
@@ -137,6 +143,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 .header__nav-item.router-link-active {
   color: var(--color-primary);
 }
+.header__nav-item.router-link-active { background: rgba(20, 134, 153, 0.08); border-radius: 999px; }
 .header__dropdown {
   position: relative;
 }
@@ -147,9 +154,10 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
   left: 0;
   min-width: 180px;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  padding: 8px 0;
+  border-radius: 14px;
+  box-shadow: 0 16px 32px rgba(8, 43, 51, 0.14);
+  padding: 8px;
+  border: 1px solid rgba(9, 45, 54, 0.08);
 }
 .header__dropdown:hover .header__dropdown-menu {
   display: block;
@@ -171,8 +179,10 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 .header__actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
+.header__contact { display:inline-flex; align-items:center; gap:7px; padding:10px 15px; border-radius:999px; background:#12343a; color:#fff; font-size:13px; font-weight:700; transition:transform .2s, background .2s; }
+.header__contact:hover { color:#fff; background:var(--color-primary); transform:translateY(-1px); }
 .header__mobile-toggle {
   display: none;
   font-size: 22px;
@@ -183,7 +193,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
   .header__nav {
     display: none;
     position: fixed;
-    top: var(--header-height);
+    top: 74px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -221,5 +231,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
   .header__mobile-toggle {
     display: block;
   }
+  .header__contact { display:none; }
 }
 </style>
