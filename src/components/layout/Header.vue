@@ -114,7 +114,10 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
   gap: 10px;
 }
 .header__logo img {
-  height: 34px;
+  height: 46px;
+  width: auto;
+  max-width: 190px;
+  object-fit: contain;
 }
 .header__brand {
   font-size: 22px;
