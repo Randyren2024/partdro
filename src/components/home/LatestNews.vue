@@ -43,24 +43,26 @@ const { data: posts } = usePosts({ limit: 3 })
 </script>
 
 <style scoped>
+.news { background:linear-gradient(180deg, #f1f6f6 0%, #fbfdfd 100%); }
 .news__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 22px;
 }
 .news__card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(11, 59, 66, .1);
+  box-shadow: 0 10px 26px rgba(11, 59, 66, 0.05);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .news__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 42px rgba(11, 59, 66, 0.12);
 }
 .news__card-image {
-  height: 200px;
+  height: 218px;
   overflow: hidden;
 }
 .news__card-image img {
@@ -73,20 +75,23 @@ const { data: posts } = usePosts({ limit: 3 })
   transform: scale(1.05);
 }
 .news__card-body {
-  padding: 24px;
+  padding: 23px 25px 26px;
 }
 .news__card-meta {
   display: flex;
   gap: 16px;
-  font-size: 12px;
-  color: var(--color-text-light);
+  font-size: 10px;
+  color: var(--color-primary);
+  font-weight:750;
+  letter-spacing:.1em;
+  text-transform:uppercase;
   margin-bottom: 10px;
 }
 .news__card-body h3 {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 720;
   margin-bottom: 10px;
-  color: var(--color-dark);
+  color: #183940;
   line-height: 1.5;
 }
 .news__card-body p {
@@ -100,7 +105,7 @@ const { data: posts } = usePosts({ limit: 3 })
   align-items: center;
   gap: 6px;
   color: var(--color-primary);
-  font-weight: 500;
+  font-weight: 750;
   font-size: 14px;
   transition: gap 0.2s;
 }
@@ -111,6 +116,7 @@ const { data: posts } = usePosts({ limit: 3 })
   text-align: center;
   margin-top: 48px;
 }
+.news__cta :deep(.ant-btn) { height:48px; padding:0 24px; border-radius:999px; font-weight:700; }
 
 @media (max-width: 992px) {
   .news__grid {

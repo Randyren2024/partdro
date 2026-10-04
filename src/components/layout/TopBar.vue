@@ -31,12 +31,13 @@ const { t } = useI18n()
 
 <style scoped>
 .top-bar {
-  background: var(--color-primary);
+  background: #0b292f;
   color: #fff;
   height: var(--topbar-height);
   display: flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: .01em;
 }
 .top-bar__inner {
   display: flex;
@@ -46,11 +47,12 @@ const { t } = useI18n()
 }
 .top-bar__left {
   display: flex;
-  gap: 24px;
+  gap: 22px;
 }
 .top-bar__item {
   display: flex;
   align-items: center;
   gap: 6px;
 }
+@media (max-width: 640px) { .top-bar__left .top-bar__item:first-child { display:none; } .top-bar__right { display:none; } .top-bar__inner { justify-content:center; } }
 </style>

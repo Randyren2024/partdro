@@ -10,6 +10,7 @@
     </div>
     <div class="container hero__content">
       <div class="hero__text">
+        <div class="hero__eyebrow"><span></span> INDUSTRIAL DRONE SYSTEMS</div>
         <h1 :data-edit-key="'hero.title'">{{ t("hero.title") }}</h1>
         <p :data-edit-key="'hero.subtitle'">{{ t("hero.subtitle") }}</p>
         <div class="hero__buttons">
@@ -20,6 +21,7 @@
             <span :data-edit-key="'hero.ctaSecondary'">{{ t("hero.ctaSecondary") }}</span>
           </a-button>
         </div>
+        <div class="hero__proof"><span>RTK PRECISION</span><span>GLOBAL DELIVERY</span><span>24/7 SUPPORT</span></div>
       </div>
       <div class="hero__product-wrapper">
         <img :src="imgEdit('/d15r_hero.jpeg', 'hero.productImg')" alt="Partdro D15R Cleaning Drone" class="hero__product-img" data-edit-img="hero.productImg" />
@@ -47,7 +49,7 @@ function imgEdit(defaultSrc: string, key: string): string {
 <style scoped>
 .hero {
   position: relative;
-  min-height: 600px;
+  min-height: min(760px, calc(100vh - var(--topbar-height)));
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -64,31 +66,36 @@ function imgEdit(defaultSrc: string, key: string): string {
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(20, 134, 153, 0.85) 0%, rgba(22, 22, 22, 0.7) 100%);
+  background: linear-gradient(90deg, rgba(4, 29, 35, .94) 0%, rgba(6, 42, 48, .8) 42%, rgba(6, 35, 42, .25) 100%);
 }
+.hero__bg::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 77% 45%, rgba(20, 192, 195, .24), transparent 28%); mix-blend-mode:screen; }
+.hero::after { content:""; position:absolute; right:5%; top:17%; width:34vw; height:34vw; border:1px solid rgba(126, 234, 225, .18); border-radius:50%; pointer-events:none; }
 .hero__content {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
+  gap: 44px;
   width: 100%;
-  padding: 80px 20px;
+  padding: 96px 20px 88px;
 }
 .hero__text {
   flex: 1;
-  max-width: 560px;
+  max-width: 630px;
 }
+.hero__eyebrow { display:flex; align-items:center; gap:10px; color:#86e1df; font-size:11px; font-weight:800; letter-spacing:.18em; margin-bottom:20px; }
+.hero__eyebrow span { width:36px; height:2px; background:#72d8d6; }
 .hero__text h1 {
-  font-size: 48px;
-  font-weight: 700;
+  font-size: clamp(3rem, 5vw, 5.2rem);
+  font-weight: 760;
   color: #fff;
   line-height: 1.2;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  letter-spacing: -.055em;
 }
 .hero__text p {
-  font-size: 18px;
+  font-size: 19px;
   color: rgba(255, 255, 255, 0.85);
   margin-bottom: 36px;
   line-height: 1.7;
@@ -97,6 +104,11 @@ function imgEdit(defaultSrc: string, key: string): string {
   display: flex;
   gap: 16px;
 }
+.hero__buttons :deep(.ant-btn) { height:48px; padding:0 23px; border-radius:999px; font-weight:700; box-shadow:none; }
+.hero__buttons :deep(.ant-btn-primary) { background:#6dd2d0 !important; border-color:#6dd2d0 !important; color:#093139 !important; }
+.hero__proof { display:flex; gap:18px; flex-wrap:wrap; margin-top:35px; color:rgba(255,255,255,.72); font-size:10px; font-weight:750; letter-spacing:.13em; }
+.hero__proof span { display:flex; align-items:center; gap:7px; }
+.hero__proof span::before { content:""; width:5px; height:5px; border-radius:50%; background:#6dd2d0; }
 .hero__buttons .ant-btn:not(.ant-btn-primary) {
   border-color: #fff;
   color: #fff;
@@ -108,15 +120,17 @@ function imgEdit(defaultSrc: string, key: string): string {
 }
 .hero__product-wrapper {
   flex-shrink: 0;
-  width: 480px;
+  width: min(39vw, 540px);
   display: flex;
   justify-content: center;
 }
 .hero__product-img {
   max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 28px 55px rgba(0, 0, 0, 0.48));
+  animation: float 6s ease-in-out infinite;
 }
+@keyframes float { 50% { transform:translateY(-11px); } }
 
 @media (max-width: 992px) {
   .hero__content {
@@ -124,6 +138,7 @@ function imgEdit(defaultSrc: string, key: string): string {
     text-align: center;
     padding: 60px 20px;
   }
+  .hero::after { width:65vw; height:65vw; right:-20%; }
   .hero__text h1 {
     font-size: 36px;
   }
@@ -135,4 +150,5 @@ function imgEdit(defaultSrc: string, key: string): string {
     max-width: 420px;
   }
 }
+@media (max-width:576px) { .hero__proof { justify-content:center; gap:11px; } .hero__proof span { font-size:9px; } }
 </style>

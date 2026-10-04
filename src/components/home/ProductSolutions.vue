@@ -45,22 +45,24 @@ const categoryLabel = (cat: string) => t(`products.category.${cat}`)
 .solutions__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 22px;
 }
 .solutions__card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(11, 59, 66, .1);
+  box-shadow: 0 12px 28px rgba(11, 59, 66, 0.06);
+  transition: transform 0.35s, box-shadow 0.35s, border-color .35s;
 }
 .solutions__card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px);
+  border-color: rgba(8, 127, 140, .32);
+  box-shadow: 0 24px 44px rgba(11, 59, 66, 0.14);
 }
 .solutions__card-image {
   position: relative;
-  height: 220px;
+  height: 244px;
   overflow: hidden;
 }
 .solutions__card-image img {
@@ -74,23 +76,25 @@ const categoryLabel = (cat: string) => t(`products.category.${cat}`)
 }
 .solutions__card-category {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  background: var(--color-primary);
+  top: 16px;
+  left: 16px;
+  background: rgba(8, 41, 47, .9);
   color: #fff;
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing:.1em;
+  text-transform:uppercase;
 }
 .solutions__card-body {
-  padding: 24px;
+  padding: 24px 25px 26px;
 }
 .solutions__card-body h3 {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 21px;
+  font-weight: 720;
   margin-bottom: 10px;
-  color: var(--color-dark);
+  color: #183940;
 }
 .solutions__card-body p {
   font-size: 14px;
@@ -103,7 +107,7 @@ const categoryLabel = (cat: string) => t(`products.category.${cat}`)
   align-items: center;
   gap: 6px;
   color: var(--color-primary);
-  font-weight: 500;
+  font-weight: 750;
   font-size: 14px;
   transition: gap 0.2s;
 }
@@ -114,6 +118,7 @@ const categoryLabel = (cat: string) => t(`products.category.${cat}`)
   text-align: center;
   margin-top: 48px;
 }
+.solutions__cta :deep(.ant-btn) { height:48px; padding:0 24px; border-radius:999px; font-weight:700; }
 
 @media (max-width: 992px) {
   .solutions__grid {
