@@ -61,6 +61,7 @@
     "message": "Nachricht",
     "submit": "Absenden",
     "success": "Vielen Dank! Wir werden uns bald bei Ihnen melden.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns eine E-Mail.",
     "info": {
       "heading": "Kontaktinformationen",
       "phoneLabel": "Telefon",
@@ -342,6 +343,145 @@
       "title": "Für Sauberkeit geboren.",
       "text": "Sprechen Sie mit Partdro über die passende Reinigungskonfiguration, Düsenausstattung und das richtige Anwendungsszenario für Ihr Projekt.",
       "visit": "Besuchen Sie partdro.com"
+    }
+  },
+  "c15": {
+    "hero": {
+      "kicker": "Reinigung aus der Luft",
+      "title1": "Allround-Reinigung aus der Luft,",
+      "title2": "Sicherer & intelligenter",
+      "lead": "Die Partdro C15 Reinigungsdrohne liefert 16-MPa-Hochdruckreinigung für Fassaden, Glasvorhangfassaden und Rotorblätter von Windkraftanlagen — mit einem 120-m-Hochdruckschlauch und bis zu 100 m Arbeitshöhe, gesteuert von nur einer Person.",
+      "ctaPrimary": "Angebot einholen",
+      "ctaSecondary": "Vertrieb kontaktieren",
+      "badgeTitle": "Direkt ab Werk",
+      "badgeText": "Weltweiter Versand und Support",
+      "stats": {
+        "0": "21 kg",
+        "1": "16 MPa",
+        "2": "100 m"
+      }
+    },
+    "strip": {
+      "0": { "value": "21 kg", "label": "Drohnengewicht (inkl. Akku)" },
+      "1": { "value": "16 MPa", "label": "Nenndruck" },
+      "2": { "value": "20 L/min", "label": "Nenndurchfluss" },
+      "3": { "value": "120 m", "label": "Hochdruckschlauch" },
+      "4": { "value": "100 m", "label": "Max. Arbeitshöhe" }
+    },
+    "why": {
+      "eyebrow": "Ihre Vorteile",
+      "title": "Gebaut für anspruchsvolle Reinigungsaufgaben.",
+      "lead": "Sechs Gründe, warum Fachbetriebe die C15 statt Gerüst- und Seilzugteams wählen.",
+      "cards": {
+        "0": { "title": "Schlauchgebundene Wasserversorgung", "desc": "Externer Wasseranschluss ermöglicht Dauerbetrieb ohne häufiges Nachfüllen." },
+        "1": { "title": "Hochdruckreinigung", "desc": "16 MPa Maximaldruck entfernt hartnäckigen Schmutz mühelos bei 20 L/min." },
+        "2": { "title": "Extra grosser Aktionsradius", "desc": "120 m Schlauch und bis zu 100 m Arbeitshöhe decken grossflächige Fassaden ab." },
+        "3": { "title": "Leichter Ein-Personen-Betrieb", "desc": "Die 21-kg-Zelle lässt sich von einer Person leicht transportieren und fliegen." },
+        "4": { "title": "Korrosionsbeständiges Waschsystem", "desc": "Kompatibel mit mehreren Reinigungsmitteln und bleibt wie neu." },
+        "5": { "title": "IP67-Schutzklasse", "desc": "Widerstandsfähig gegen Wind, Regen und Staub für zuverlässige Aussenarbeit." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Engineering",
+      "title": "Leicht und flexibel, einfach zu bedienen.",
+      "lead": "Eine kompakte Zelle, konzipiert für die Realität der Fassadenarbeit: schnell aufgebaut, einfach zu warten, leicht in engen Bereichen zu positionieren.",
+      "items": {
+        "0": { "title": "Leichtes Design", "desc": "21 kg inklusive Akku für komfortablen Ein-Personen-Betrieb." },
+        "1": { "title": "Modulare Struktur", "desc": "Schnellaufbau und einfache Wartung zwischen den Einsätzen." },
+        "2": { "title": "Kompakter Rumpf", "desc": "Problemlose Bedienung in engen oder komplexen Bereichen." }
+      }
+    },
+    "output": {
+      "eyebrow": "Leistung",
+      "title": "Reinigungsleistung, die skaliert.",
+      "bigNumber": "100 m",
+      "unitTitle": "Max. Arbeitshöhe",
+      "note": "Gemessene Werte des C15-Hochdruckwaschsystems.",
+      "rows": {
+        "0": { "label": "Nenndruck", "value": "16 MPa" },
+        "1": { "label": "Nenndurchfluss", "value": "20 L/min" },
+        "2": { "label": "Sprüharmlänge", "value": "1,6 m" },
+        "3": { "label": "Hochdruckschlauch", "value": "120 m" },
+        "4": { "label": "Max. Fluggeschwindigkeit", "value": "10 m/s" }
+      }
+    },
+    "safety": {
+      "eyebrow": "Sicherheit",
+      "title": "Volle Übersicht für sicherere Einsätze.",
+      "lead": "Mehrschichtige Sensorik hält die Drohne auf sicherem Abstand und gibt dem Bediener eine klare Sicht auf jeden Fleck.",
+      "cards": {
+        "0": { "title": "Millimeterwellen-Radar", "desc": "Erkennt den Gebäudeabstand präzise für einen stabilen Sicherheitsabstand." },
+        "1": { "title": "Echtzeit-FPV-Feed", "desc": "Macht auch schwer erreichbare Flecken für den Bediener klar sichtbar." },
+        "2": { "title": "RTK-Hochpräzisionspositionierung", "desc": "Zentimetergenaue Präzision für volle Flugkontrolle." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Im Einsatz",
+      "title": "Jeder Winkel abgedeckt.",
+      "lead": "Vom Sprüharm bis zum Sensorbehälter ist jedes Teil der C15 für die Fassadenarbeit gebaut.",
+      "items": {
+        "0": { "title": "Vorne", "desc": "Die Hochdruckdüse folgt der Verschmutzungslinie über die Fassade." },
+        "1": { "title": "Seitlich", "desc": "Der 1,6-m-Sprüharm überstreicht eine breite, gleichmässige Waschbahn." },
+        "2": { "title": "Oben", "desc": "Der Schlauch liefert kontinuierlich Wasser von der Bodenversorgung." },
+        "3": { "title": "Detail", "desc": "IP67-Module widerstehen Wind, Regen und Staub." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Vergleich",
+      "title": "Drohne vs. manuelle Fassadenreinigung.",
+      "colD15r": "Partdro C15",
+      "colManual": "Manuelle Methode",
+      "rows": {
+        "0": { "label": "Effizienz", "d15r": "Grosse Fassaden in Minuten", "manual": "Langsam, Abschnitt für Abschnitt" },
+        "1": { "label": "Kosten pro m²", "d15r": "Kein Gerüst erforderlich", "manual": "Gerüst- und Gondelmiete" },
+        "2": { "label": "Sicherheitsrisiko", "d15r": "Bediener bleibt am Boden", "manual": "Arbeiter in der Höhe" },
+        "3": { "label": "Konstante Qualität", "d15r": "Stabiler 16-MPa-Strahl", "manual": "Je nach Team unterschiedlich" },
+        "4": { "label": "Erreichbare Höhen", "d15r": "Bis zu 100 m Arbeitshöhe", "manual": "Durch Ausrüstung begrenzt" },
+        "5": { "label": "Aufbauzeit", "d15r": "Minuten", "manual": "Stunden des Aufbaus" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Hochhausreinigung", "desc": "Fassaden und Vorhangfassaden waschen ohne Gondeln oder Seilzug." },
+      "1": { "title": "Windkraftanlagen-Wartung", "desc": "Rotorblätter und Gondeln im gesamten Windpark reinigen." },
+      "2": { "title": "Glasvorhangfassaden-Reinigung", "desc": "Schlauchgebundene Wasserversorgung hält den Strahl in voller Höhe stabil." },
+      "3": { "title": "FPV-Präzisionszielung", "desc": "Der Echtzeit-Kamerafeed macht schwer erreichbare Flecken klar sichtbar." }
+    },
+    "video": {
+      "eyebrow": "Sehen Sie es in Aktion",
+      "title": "C15 im Einsatz.",
+      "url": "https://txgcloud.obs.cn-east-3.myhuaweicloud.com/Overseas/%E6%B5%B7%E5%A4%96%E7%8B%AC%E7%AB%8B%E7%AB%99%E5%BB%BA%E7%AB%99%E7%B4%A0%E6%9D%90/C15/C15%E6%B8%85%E6%B4%97%E7%89%87%E6%AE%B5.mp4"
+    },
+    "specs": {
+      "eyebrow": "Spezifikationen",
+      "title": "Technische Spezifikationen.",
+      "lead": "Wichtige Kenndaten der C15 Reinigungsplattform für die Luft.",
+      "items": {
+        "0": { "label": "Drohnengewicht (inkl. Akku)", "value": "21 kg" },
+        "1": { "label": "Sprüharmlänge", "value": "1,6 m" },
+        "2": { "label": "Max. Fluggeschwindigkeit", "value": "10 m/s" },
+        "3": { "label": "Hochdruckschlauchlänge", "value": "120 m" },
+        "4": { "label": "Max. Arbeitshöhe", "value": "100 m" },
+        "5": { "label": "Akkukapazität", "value": "20 Ah" },
+        "6": { "label": "Nenndruck", "value": "16 MPa" },
+        "7": { "label": "Nenndurchfluss", "value": "20 L/min" },
+        "8": { "label": "Schutzklasse", "value": "IP67" },
+        "9": { "label": "Positionierung", "value": "RTK-Hochpräzision" },
+        "10": { "label": "Hinderniswahrnehmung", "value": "Millimeterwellen-Radar" },
+        "11": { "label": "Lagebewusstsein", "value": "Echtzeit-FPV-Kamera" },
+        "12": { "label": "Zelle", "value": "Hochfestes Aluminium" },
+        "13": { "label": "Montage", "value": "Modular, Schnellverschluss" },
+        "14": { "label": "Wasserversorgung", "value": "Schlauchgebundener Anschluss" },
+        "15": { "label": "Reinigungsmittel", "value": "Mehrere Typen kompatibel" },
+        "16": { "label": "Bedienung", "value": "Ein-Personen" },
+        "17": { "label": "Waschsystem", "value": "Korrosionsbeständig" },
+        "18": { "label": "Anwendungen", "value": "Fassaden & Windkraftanlagen" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Jetzt starten",
+      "title": "Bereit, es in Aktion zu sehen?",
+      "text": "Sprechen Sie mit unserem Team über Demos, Preise und den Einsatz für Ihre Gebäude oder Windparks.",
+      "visit": "Zurück zur Startseite"
     }
   }
 }

@@ -61,6 +61,7 @@
     "message": "Message",
     "submit": "Envoyer",
     "success": "Merci ! Nous vous répondrons bientôt.",
+    "error": "Une erreur s'est produite. Veuillez réessayer ou nous envoyer un e-mail.",
     "info": {
       "heading": "Informations de Contact",
       "phoneLabel": "Téléphone",

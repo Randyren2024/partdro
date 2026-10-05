@@ -61,6 +61,7 @@
     "message": "Message",
     "submit": "Submit",
     "success": "Thank you! We will get back to you soon.",
+    "error": "Something went wrong. Please try again or email us directly.",
     "info": {
       "heading": "Contact Information",
       "phoneLabel": "Phone",
@@ -342,6 +343,145 @@
       "title": "Born for cleanliness.",
       "text": "Talk with Partdro about the right cleaning configuration, nozzle setup and application scenario for your project.",
       "visit": "Visit partdro.com"
+    }
+  },
+  "c15": {
+    "hero": {
+      "kicker": "Aerial Cleaning",
+      "title1": "All-Around Aerial Cleaning,",
+      "title2": "Safer & Smarter",
+      "lead": "The Partdro C15 cleaning drone delivers 16 MPa high-pressure washing to facades, glass curtain walls and wind turbine blades — with a 120 m high-pressure hose and up to 100 m operating height, all controlled by a single operator.",
+      "ctaPrimary": "Get a Quote",
+      "ctaSecondary": "Contact Sales",
+      "badgeTitle": "Factory direct",
+      "badgeText": "Worldwide shipping and support",
+      "stats": {
+        "0": "21 kg",
+        "1": "16 MPa",
+        "2": "100 m"
+      }
+    },
+    "strip": {
+      "0": { "value": "21 kg", "label": "Drone weight (incl. battery)" },
+      "1": { "value": "16 MPa", "label": "Rated pressure" },
+      "2": { "value": "20 L/min", "label": "Rated flow rate" },
+      "3": { "value": "120 m", "label": "High-pressure hose" },
+      "4": { "value": "100 m", "label": "Max operating height" }
+    },
+    "why": {
+      "eyebrow": "Why choose it",
+      "title": "Built for demanding cleaning jobs.",
+      "lead": "Six reasons contractors pick the C15 over scaffolding and rope-access teams.",
+      "cards": {
+        "0": { "title": "Tethered water supply", "desc": "External water hookup enables continuous operation without frequent refills." },
+        "1": { "title": "High-pressure cleaning", "desc": "16 MPa maximum pressure easily removes stubborn dirt at 20 L/min." },
+        "2": { "title": "Extra-long operating radius", "desc": "120 m hose and up to 100 m working height cover large-area facades." },
+        "3": { "title": "Lightweight single-person operation", "desc": "21 kg airframe is easy for one operator to transport and fly." },
+        "4": { "title": "Corrosion-resistant washing system", "desc": "Compatible with multiple cleaning agents and stays like new." },
+        "5": { "title": "IP67-rated protection", "desc": "Resistant to wind, rain and dust for reliable outdoor work." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Engineering",
+      "title": "Lightweight and flexible, easy to operate.",
+      "lead": "A compact airframe designed around the realities of facade work: fast to assemble, simple to maintain, easy to position in tight spaces.",
+      "items": {
+        "0": { "title": "Lightweight design", "desc": "21 kg including battery for comfortable single-person operation." },
+        "1": { "title": "Modular structure", "desc": "Quick assembly and easy maintenance between jobs." },
+        "2": { "title": "Compact body", "desc": "Smooth operation in narrow or complex spaces." }
+      }
+    },
+    "output": {
+      "eyebrow": "Performance",
+      "title": "Output that scales.",
+      "bigNumber": "100 m",
+      "unitTitle": "Max operating height",
+      "note": "Measured figures for the C15 high-pressure washing system.",
+      "rows": {
+        "0": { "label": "Rated pressure", "value": "16 MPa" },
+        "1": { "label": "Rated flow rate", "value": "20 L/min" },
+        "2": { "label": "Spray boom length", "value": "1.6 m" },
+        "3": { "label": "High-pressure hose", "value": "120 m" },
+        "4": { "label": "Max flight speed", "value": "10 m/s" }
+      }
+    },
+    "safety": {
+      "eyebrow": "Safety",
+      "title": "Full awareness for safer operations.",
+      "lead": "Layered sensing keeps the drone at a safe distance while giving the operator a clear view of every stain.",
+      "cards": {
+        "0": { "title": "Millimeter-wave radar", "desc": "Accurately detects building distance for a stable standoff." },
+        "1": { "title": "Real-time FPV feed", "desc": "Makes even hard-to-reach stains clearly visible to the operator." },
+        "2": { "title": "RTK high-precision positioning", "desc": "Centimeter-level accuracy for complete flight control." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "In the field",
+      "title": "Every angle covered.",
+      "lead": "From the spray boom to the sensor pod, every part of the C15 is built for facade work.",
+      "items": {
+        "0": { "title": "Front", "desc": "High-pressure nozzle tracks the stain line across the facade." },
+        "1": { "title": "Side", "desc": "1.6 m spray boom sweeps a wide, even washing path." },
+        "2": { "title": "Top", "desc": "Tethered hose feeds continuous water from the ground supply." },
+        "3": { "title": "Detail", "desc": "IP67-rated modules resist wind, rain and dust." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparison",
+      "title": "Drone vs. manual facade cleaning.",
+      "colD15r": "Partdro C15",
+      "colManual": "Manual method",
+      "rows": {
+        "0": { "label": "Efficiency", "d15r": "Large facades in minutes", "manual": "Slow, section by section" },
+        "1": { "label": "Cost per m²", "d15r": "No scaffolding required", "manual": "Scaffolding and gondola rental" },
+        "2": { "label": "Safety risk", "d15r": "Operator stays on the ground", "manual": "Workers at height" },
+        "3": { "label": "Quality consistency", "d15r": "Stable 16 MPa jet", "manual": "Varies by crew" },
+        "4": { "label": "Access to heights", "d15r": "Up to 100 m working height", "manual": "Restricted by equipment" },
+        "5": { "label": "Setup time", "d15r": "Minutes", "manual": "Hours of rigging" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "High-Rise Building Cleaning", "desc": "Wash facades and curtain walls without gondolas or rope access." },
+      "1": { "title": "Wind Turbine Maintenance", "desc": "Clean blades and nacelles across the entire wind farm." },
+      "2": { "title": "Glass Curtain Wall Cleaning", "desc": "Tethered water supply keeps the jet stable at full height." },
+      "3": { "title": "FPV Precision Targeting", "desc": "Real-time camera feed makes hard-to-reach stains clearly visible." }
+    },
+    "video": {
+      "eyebrow": "Watch it work",
+      "title": "C15 in action.",
+      "url": "https://txgcloud.obs.cn-east-3.myhuaweicloud.com/Overseas/%E6%B5%B7%E5%A4%96%E7%8B%AC%E7%AB%8B%E7%AB%99%E5%BB%BA%E7%AB%99%E7%B4%A0%E6%9D%90/C15/C15%E6%B8%85%E6%B4%97%E7%89%87%E6%AE%B5.mp4"
+    },
+    "specs": {
+      "eyebrow": "Specifications",
+      "title": "Technical specifications.",
+      "lead": "Key figures for the C15 aerial cleaning platform.",
+      "items": {
+        "0": { "label": "Drone weight (incl. battery)", "value": "21 kg" },
+        "1": { "label": "Spray boom length", "value": "1.6 m" },
+        "2": { "label": "Max flight speed", "value": "10 m/s" },
+        "3": { "label": "High-pressure hose length", "value": "120 m" },
+        "4": { "label": "Max operating height", "value": "100 m" },
+        "5": { "label": "Battery capacity", "value": "20 Ah" },
+        "6": { "label": "Rated pressure", "value": "16 MPa" },
+        "7": { "label": "Rated flow rate", "value": "20 L/min" },
+        "8": { "label": "Protection rating", "value": "IP67" },
+        "9": { "label": "Positioning", "value": "RTK high-precision" },
+        "10": { "label": "Obstacle sensing", "value": "Millimeter-wave radar" },
+        "11": { "label": "Situational awareness", "value": "Real-time FPV camera" },
+        "12": { "label": "Airframe", "value": "High-strength aluminum" },
+        "13": { "label": "Assembly", "value": "Modular, quick-release" },
+        "14": { "label": "Water supply", "value": "Tethered external hookup" },
+        "15": { "label": "Cleaning agents", "value": "Multi-agent compatible" },
+        "16": { "label": "Operation", "value": "Single-person" },
+        "17": { "label": "Washing system", "value": "Corrosion-resistant" },
+        "18": { "label": "Applications", "value": "Facades & wind turbines" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Get started",
+      "title": "Ready to see it clean?",
+      "text": "Talk to our team about demos, pricing and deployment for your buildings or wind farms.",
+      "visit": "Back to home"
     }
   }
 }

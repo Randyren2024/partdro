@@ -25,7 +25,7 @@ const cache = new Map<string, any>()
 // 所有可编辑的静态顶层命名空间
 export const EDITABLE_NAMESPACES = [
   'nav', 'hero', 'stats', 'products', 'cases', 'news', 'contact',
-  'about', 'documents', 'footer', 'topBar', 'd15r',
+  'about', 'documents', 'footer', 'topBar', 'd15r', 'c15',
 ]
 
 // 新产品动态命名空间（/admin/products 创建后注册，i18n 基底来自 defaultLandingTemplate）

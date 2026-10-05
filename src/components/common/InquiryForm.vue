@@ -29,6 +29,7 @@
         </a-form-item>
       </a-form>
       <a-alert v-if="success" type="success" :message="t('contact.success')" show-icon style="margin-top: 12px" />
+      <a-alert v-if="errorMsg" type="error" :message="errorMsg" show-icon style="margin-top: 12px" />
     </a-card>
   </section>
 </template>
@@ -42,6 +43,7 @@ import { trackEvent } from '../../composables/useTracking'
 const { t } = useI18n()
 const loading = ref(false)
 const success = ref(false)
+const errorMsg = ref('')
 
 const form = reactive({
   name: '',
@@ -53,19 +55,27 @@ const form = reactive({
 
 const handleSubmit = async () => {
   loading.value = true
+  success.value = false
+  errorMsg.value = ''
   try {
-    await supabase.from('inquiries').insert({
+    const { error } = await supabase.from('inquiries').insert({
       name: form.name,
       email: form.email,
       phone: form.phone,
       type: form.type,
       message: form.message,
     })
+    if (error) {
+      console.error('[contact form] insert failed:', error.code, error.message)
+      errorMsg.value = t('contact.error')
+      return
+    }
     trackEvent('contact_form_submission', { form_type: form.type })
     success.value = true
     Object.assign(form, { name: '', email: '', phone: '', type: 'contact', message: '' })
-  } catch {
-    // handle error silently
+  } catch (e) {
+    console.error('[contact form] unexpected error:', e)
+    errorMsg.value = t('contact.error')
   } finally {
     loading.value = false
   }

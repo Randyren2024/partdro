@@ -61,6 +61,7 @@
     "message": "Mensaje",
     "submit": "Enviar",
     "success": "¡Gracias! Nos pondremos en contacto pronto.",
+    "error": "Algo salió mal. Inténtelo de nuevo o escríbanos por correo.",
     "info": {
       "heading": "Información de Contacto",
       "phoneLabel": "Teléfono",
