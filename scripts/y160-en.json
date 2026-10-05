@@ -1,0 +1,172 @@
+{
+  "cta": {
+    "text": "Talk to our team about demos, pricing and deployment for your transport routes.",
+    "title": "Ready to move heavy cargo by air?",
+    "visit": "Back to home",
+    "eyebrow": "Get started"
+  },
+  "why": {
+    "lead": "Six reasons operators pick the Y160 for demanding cargo missions.",
+    "cards": {
+      "0": {
+        "desc": "Rapid stabilization and precise hovering for instant stop-and-release.",
+        "title": "Intelligent anti-sway"
+      },
+      "1": {
+        "desc": "Ground-release support simplifies unloading and streamlines operations.",
+        "title": "Automatic hook release"
+      },
+      "2": {
+        "desc": "Live load measurement prevents overloading for safer operations.",
+        "title": "Real-time weighing"
+      },
+      "3": {
+        "desc": "A one-stop mission platform orchestrates entire drone fleets.",
+        "title": "Multi-drone coordination"
+      },
+      "4": {
+        "desc": "Backend data synchronization and remote emergency control.",
+        "title": "4G network communication"
+      },
+      "5": {
+        "desc": "One-click control handover with a 30 km effective range.",
+        "title": "Dual-controller operation"
+      }
+    },
+    "title": "Heavy lifting, under control.",
+    "eyebrow": "Why choose it"
+  },
+  "hero": {
+    "lead": "Industrial delivery drone with a 15 m lifting cable and 165 kg professional lifting capacity - a coaxial dual-rotor airframe for stable, precise cargo operations.",
+    "stats": {
+      "0": "165 kg",
+      "1": "15 m cable",
+      "2": "30 km range"
+    },
+    "kicker": "Partdro Delivery Drone",
+    "title1": "Cargo in Control",
+    "title2": "Y160 Delivery Drone"
+  },
+  "strip": {
+    "0": {
+      "label": "Max payload",
+      "value": "165 kg"
+    },
+    "1": {
+      "label": "Lifting cable",
+      "value": "15 m"
+    },
+    "2": {
+      "label": "LiDAR sensing",
+      "value": "360°"
+    },
+    "3": {
+      "label": "Dual-controller range",
+      "value": "30 km"
+    },
+    "4": {
+      "label": "Fleet communication",
+      "value": "4G"
+    }
+  },
+  "safety": {
+    "lead": "LiDAR and mmWave phased-array radar combine into a perception system where one plus one is greater than two.",
+    "cards": {
+      "0": {
+        "desc": "Ultra-wide hemispherical FOV with 850,000 points per second of high-precision point clouds.",
+        "title": "360° LiDAR"
+      },
+      "1": {
+        "desc": "Accurately detects terrain variations; reliable in fog and mud.",
+        "title": "mmWave phased-array radar"
+      },
+      "2": {
+        "desc": "Rapid stabilization with precise hovering for instant stop-and-release.",
+        "title": "Smart anti-sway"
+      }
+    },
+    "title": "Omnidirectional sensing, intelligent decisions.",
+    "eyebrow": "Safety"
+  },
+  "__images": {
+    "y160-delivery-drone.designed.img": "applications.jpg",
+    "y160-delivery-drone.hero.mainImg": "hero.png",
+    "y160-delivery-drone.intelligence.img": "mission-platform.jpg"
+  },
+  "__layout": [
+    {
+      "id": "hero",
+      "visible": true
+    },
+    {
+      "id": "strip",
+      "visible": true
+    },
+    {
+      "id": "why",
+      "visible": true
+    },
+    {
+      "id": "designed",
+      "visible": true
+    },
+    {
+      "id": "intelligence",
+      "visible": true
+    },
+    {
+      "id": "safety",
+      "visible": true
+    },
+    {
+      "id": "specs",
+      "visible": true
+    },
+    {
+      "id": "cta",
+      "visible": true
+    }
+  ],
+  "designed": {
+    "lead": "A coaxial dual-rotor airframe engineered for stability and safety under heavy loads.",
+    "items": {
+      "0": {
+        "desc": "Enhanced stability and safety with single-axis thrust up to 150 kg.",
+        "title": "Coaxial dual-rotor design"
+      },
+      "1": {
+        "desc": "34000 mAh 18S packs with mutual backup across editions.",
+        "title": "High-voltage smart batteries"
+      },
+      "2": {
+        "desc": "Efficient cooling sustains high-intensity missions.",
+        "title": "Grille heat dissipation"
+      }
+    },
+    "title": "Built to lift.",
+    "eyebrow": "Engineering"
+  },
+  "intelligence": {
+    "lead": "Plan, monitor and control every delivery from a single platform.",
+    "items": {
+      "0": {
+        "desc": "Dispatch and supervise multiple aircraft in one workflow.",
+        "title": "Multi-drone coordination"
+      },
+      "1": {
+        "desc": "Reliable connectivity far beyond line of sight.",
+        "title": "4G network communication"
+      },
+      "2": {
+        "desc": "Flight status and mission data flow to your operations center.",
+        "title": "Backend data synchronization"
+      },
+      "3": {
+        "desc": "Immediate intervention from anywhere in the mission.",
+        "title": "Remote emergency control"
+      }
+    },
+    "title": "One-stop mission platform.",
+    "eyebrow": "Autonomy"
+  }
+}

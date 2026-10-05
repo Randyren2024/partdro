@@ -1,0 +1,64 @@
+{
+  "__images": {
+    "c15.designed.img": "design.jpg",
+    "c15.hero.mainImg": "product.png",
+    "c15.multiangle.img": "strength.jpg",
+    "c15.scenarios.0.img": "app-highrise.jpg",
+    "c15.scenarios.1.img": "app-wind.jpg",
+    "c15.scenarios.2.img": "banner-drone.jpg",
+    "c15.scenarios.3.img": "radar.jpg"
+  },
+  "__layout": [
+    {
+      "id": "hero",
+      "visible": true
+    },
+    {
+      "id": "strip",
+      "visible": true
+    },
+    {
+      "id": "why",
+      "visible": true
+    },
+    {
+      "id": "designed",
+      "visible": true
+    },
+    {
+      "id": "output",
+      "visible": true
+    },
+    {
+      "id": "safety",
+      "visible": true
+    },
+    {
+      "id": "multiangle",
+      "visible": true
+    },
+    {
+      "id": "compare",
+      "visible": true
+    },
+    {
+      "id": "scenarios",
+      "visible": true
+    },
+    {
+      "id": "video",
+      "visible": true
+    },
+    {
+      "id": "specs",
+      "visible": true
+    },
+    {
+      "id": "cta",
+      "visible": true
+    }
+  ],
+  "__videos": {
+    "c15.video.url": "https://txgcloud.obs.cn-east-3.myhuaweicloud.com/Overseas/%E6%B5%B7%E5%A4%96%E7%8B%AC%E7%AB%8B%E7%AB%99%E5%BB%BA%E7%AB%99%E7%B4%A0%E6%9D%90/C15/C15%E6%B8%85%E6%B4%97%E7%89%87%E6%AE%B5.mp4"
+  }
+}

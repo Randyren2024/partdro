@@ -1,0 +1,205 @@
+{
+  "cta": {
+    "text": "Talk to our team about demos, pricing and deployment for your transport routes.",
+    "title": "Ready to streamline your low-altitude logistics?",
+    "visit": "Back to home",
+    "eyebrow": "Get started"
+  },
+  "why": {
+    "lead": "Why the YP800 fits complex transport environments.",
+    "cards": {
+      "0": {
+        "desc": "Wrap-around folding airframe for convenient transport.",
+        "title": "Folding structure"
+      },
+      "1": {
+        "desc": "Airframe constructed from aviation-grade aluminum alloy.",
+        "title": "Aviation-grade aluminum"
+      },
+      "2": {
+        "desc": "Release hook, smart hoisting or cargo box to fit the mission.",
+        "title": "Multiple configurations"
+      },
+      "3": {
+        "desc": "Side-mounted dual 34Ah batteries with mutual redundancy.",
+        "title": "Redundant power"
+      },
+      "4": {
+        "desc": "A 12 kW dual-channel air-cooled charger supports continuous cycling.",
+        "title": "Fast charging"
+      },
+      "5": {
+        "desc": "Real-time flight status awareness and backend data synchronization.",
+        "title": "Intelligent operation"
+      }
+    },
+    "title": "Versatile transport, one platform.",
+    "eyebrow": "Why choose it"
+  },
+  "hero": {
+    "lead": "Next-generation low-altitude transportation with multiple power options, diverse transport configurations, long endurance and intelligent operation.",
+    "stats": {
+      "0": "62 kg",
+      "1": "6000 m",
+      "2": "52 L box"
+    },
+    "kicker": "Partdro Delivery Drone",
+    "title1": "Low-Altitude Transport",
+    "title2": "YP800 Delivery Drone"
+  },
+  "spray": {
+    "lead": "Swap between configurations to match the payload and the mission.",
+    "title": "Three ways to carry.",
+    "eyebrow": "Transport configurations",
+    "nozzles": {
+      "0": {
+        "desc": "Standard 15 m high-strength cable with 62 kg maximum payload; simple structure for convenient maintenance.",
+        "angle": "Ground-contact release hook"
+      },
+      "1": {
+        "desc": "One-click emergency release, weight detection and up to 30 m cable length.",
+        "angle": "Smart hoisting system"
+      },
+      "2": {
+        "desc": "52 L capacity with convenient opening and closing and weight detection for safe operations.",
+        "angle": "Cargo box"
+      },
+      "3": {
+        "desc": "Side-mounted dual 34Ah batteries with mutual redundancy.",
+        "angle": "Redundant power"
+      }
+    }
+  },
+  "strip": {
+    "0": {
+      "label": "Max payload",
+      "value": "62 kg"
+    },
+    "1": {
+      "label": "Max flight range",
+      "value": "6000 m"
+    },
+    "2": {
+      "label": "Hoisting cable",
+      "value": "30 m"
+    },
+    "3": {
+      "label": "Cargo box",
+      "value": "52 L"
+    },
+    "4": {
+      "label": "Dual-control range",
+      "value": "30 km"
+    }
+  },
+  "safety": {
+    "lead": "Automotive-grade sensing and passive protection on every flight.",
+    "cards": {
+      "0": {
+        "desc": "Durable and reliable with a maximum detection range of 150 m; proactively scans terrain changes.",
+        "title": "Automotive-grade 4D radar"
+      },
+      "1": {
+        "desc": "Opens immediately when the propellers stop in emergencies, ensuring safe landing.",
+        "title": "Parachute system"
+      },
+      "2": {
+        "desc": "Continuous payload monitoring prevents overloading.",
+        "title": "Weight detection"
+      }
+    },
+    "title": "Safety and security, built in.",
+    "eyebrow": "Safety"
+  },
+  "__images": {
+    "yp800-delivery-drone.designed.img": "design.jpg",
+    "yp800-delivery-drone.hero.mainImg": "hero.jpg",
+    "yp800-delivery-drone.spray.dualImg1": "scene-1.jpg",
+    "yp800-delivery-drone.spray.dualImg2": "safety.jpg",
+    "yp800-delivery-drone.intelligence.img": "collaboration.jpg",
+    "yp800-delivery-drone.spray.nozzles.0.img": "hook.jpg",
+    "yp800-delivery-drone.spray.nozzles.1.img": "hoisting.jpg",
+    "yp800-delivery-drone.spray.nozzles.2.img": "cargo-box.jpg",
+    "yp800-delivery-drone.spray.nozzles.3.img": "battery.jpg"
+  },
+  "__layout": [
+    {
+      "id": "hero",
+      "visible": true
+    },
+    {
+      "id": "strip",
+      "visible": true
+    },
+    {
+      "id": "why",
+      "visible": true
+    },
+    {
+      "id": "designed",
+      "visible": true
+    },
+    {
+      "id": "spray",
+      "visible": true
+    },
+    {
+      "id": "intelligence",
+      "visible": true
+    },
+    {
+      "id": "safety",
+      "visible": true
+    },
+    {
+      "id": "specs",
+      "visible": true
+    },
+    {
+      "id": "cta",
+      "visible": true
+    }
+  ],
+  "designed": {
+    "lead": "A quadrotor platform purpose-built for transport missions in mountains, waterways and urban spaces.",
+    "items": {
+      "0": {
+        "desc": "Simple, robust layout that is easy to maintain.",
+        "title": "Quadrotor design"
+      },
+      "1": {
+        "desc": "Folds for convenient transport and storage.",
+        "title": "Wrap-around folding"
+      },
+      "2": {
+        "desc": "Lightweight, durable airframe construction.",
+        "title": "Aviation-grade aluminum"
+      }
+    },
+    "title": "Designed for complex environments.",
+    "eyebrow": "Engineering"
+  },
+  "intelligence": {
+    "lead": "Efficient management of transport missions with real-time flight status awareness.",
+    "items": {
+      "0": {
+        "desc": "Synchronize operational data through the network module.",
+        "title": "Backend data sync"
+      },
+      "1": {
+        "desc": "30 km maximum effective range easily handles complex scenarios.",
+        "title": "One drone, dual control"
+      },
+      "2": {
+        "desc": "Live flight status throughout the mission.",
+        "title": "Real-time awareness"
+      },
+      "3": {
+        "desc": "Continuous payload monitoring enhances operational safety.",
+        "title": "Weight detection"
+      }
+    },
+    "title": "Every mission under control.",
+    "eyebrow": "Efficient collaboration"
+  }
+}

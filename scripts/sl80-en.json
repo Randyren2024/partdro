@@ -1,0 +1,205 @@
+{
+  "cta": {
+    "text": "Talk to our team about demos, pricing and deployment for your transport routes.",
+    "title": "Ready to deliver to hard-to-reach places?",
+    "visit": "Back to home",
+    "eyebrow": "Get started"
+  },
+  "why": {
+    "lead": "Why operators choose the SL80 for demanding transport missions.",
+    "cards": {
+      "0": {
+        "desc": "Enhanced operational safety with coordinated operation capability.",
+        "title": "Dual-operator control"
+      },
+      "1": {
+        "desc": "Four 56Ah 18S semi-solid-state batteries as standard.",
+        "title": "Strong endurance"
+      },
+      "2": {
+        "desc": "Reach remote sites far beyond visual line of sight.",
+        "title": "Long-range capability"
+      },
+      "3": {
+        "desc": "Ultra-wide hemispherical FOV with 850,000 points per second.",
+        "title": "360° LiDAR"
+      },
+      "4": {
+        "desc": "Automatic deployment for safer landing in abnormal situations.",
+        "title": "Parachute protection"
+      },
+      "5": {
+        "desc": "Accurate operation in complex terrain and harsh weather.",
+        "title": "All-terrain ready"
+      }
+    },
+    "title": "Strong advantages where it matters.",
+    "eyebrow": "Why choose it"
+  },
+  "hero": {
+    "lead": "Four high-energy-density semi-solid-state batteries as standard, 80 kg payload capacity and up to 30 minutes of flight endurance for mountainous transportation and emergency supply delivery.",
+    "stats": {
+      "0": "80 kg",
+      "1": "30 min",
+      "2": "4 batteries"
+    },
+    "kicker": "Partdro Delivery Drone",
+    "title1": "Heavy Cargo, Long Endurance",
+    "title2": "SL80 Delivery Drone"
+  },
+  "spray": {
+    "lead": "The hardware and systems that make every transport mission efficient and safe.",
+    "title": "Mission-ready modules.",
+    "eyebrow": "Core capability",
+    "nozzles": {
+      "0": {
+        "desc": "Two operators share one mission for enhanced safety and reliability.",
+        "angle": "Dual-operator control"
+      },
+      "1": {
+        "desc": "Four semi-solid-state batteries power long transport cycles.",
+        "angle": "Strong endurance"
+      },
+      "2": {
+        "desc": "Long-distance links keep remote sites connected.",
+        "angle": "Long-range capability"
+      },
+      "3": {
+        "desc": "Propellers stop, the parachute deploys, cargo lands safely.",
+        "angle": "Parachute protection"
+      }
+    }
+  },
+  "strip": {
+    "0": {
+      "label": "Max payload",
+      "value": "80 kg"
+    },
+    "1": {
+      "label": "Flight endurance",
+      "value": "30 min"
+    },
+    "2": {
+      "label": "Semi-solid-state batteries",
+      "value": "4 x 56Ah"
+    },
+    "3": {
+      "label": "LiDAR sensing",
+      "value": "360°"
+    },
+    "4": {
+      "label": "Smart charger",
+      "value": "12 kW"
+    }
+  },
+  "safety": {
+    "lead": "LiDAR and mmWave phased-array radar combine into a perception system where one plus one is greater than two.",
+    "cards": {
+      "0": {
+        "desc": "Detects terrain variations for stable flight; reliable in fog and mud.",
+        "title": "mmWave phased-array radar"
+      },
+      "1": {
+        "desc": "360° horizontal and 90° vertical FOV with 850,000 points per second.",
+        "title": "360° LiDAR"
+      },
+      "2": {
+        "desc": "Automatic deployment as propellers stop ensures safer landing.",
+        "title": "Parachute system"
+      }
+    },
+    "title": "Omnidirectional sensing, intelligent decision-making.",
+    "eyebrow": "Safety"
+  },
+  "__images": {
+    "sl80-delivery-drone.designed.img": "battery.jpg",
+    "sl80-delivery-drone.hero.mainImg": "hero.jpg",
+    "sl80-delivery-drone.spray.dualImg1": "app-emergency.jpg",
+    "sl80-delivery-drone.spray.dualImg2": "app-mountain.jpg",
+    "sl80-delivery-drone.intelligence.img": "lidar.jpg",
+    "sl80-delivery-drone.spray.nozzles.0.img": "control.jpg",
+    "sl80-delivery-drone.spray.nozzles.1.img": "endurance.jpg",
+    "sl80-delivery-drone.spray.nozzles.2.img": "app-island.jpg",
+    "sl80-delivery-drone.spray.nozzles.3.img": "parachute.jpg"
+  },
+  "__layout": [
+    {
+      "id": "hero",
+      "visible": true
+    },
+    {
+      "id": "strip",
+      "visible": true
+    },
+    {
+      "id": "why",
+      "visible": true
+    },
+    {
+      "id": "designed",
+      "visible": true
+    },
+    {
+      "id": "spray",
+      "visible": true
+    },
+    {
+      "id": "intelligence",
+      "visible": true
+    },
+    {
+      "id": "safety",
+      "visible": true
+    },
+    {
+      "id": "specs",
+      "visible": true
+    },
+    {
+      "id": "cta",
+      "visible": true
+    }
+  ],
+  "designed": {
+    "lead": "A 4-battery bay design built for long endurance.",
+    "items": {
+      "0": {
+        "desc": "Standard configuration with four 56Ah 18S semi-solid-state batteries.",
+        "title": "Four-battery bay"
+      },
+      "1": {
+        "desc": "High-density battery technology for enhanced performance.",
+        "title": "High-density cells"
+      },
+      "2": {
+        "desc": "Grille structure design for efficient heat dissipation.",
+        "title": "Grille cooling"
+      }
+    },
+    "title": "Advanced power, efficient operations.",
+    "eyebrow": "Engineering"
+  },
+  "intelligence": {
+    "lead": "Mature flight control technology for precise operation in complex conditions.",
+    "items": {
+      "0": {
+        "desc": "Rapid stabilization and precise hovering for instant stop-and-release.",
+        "title": "Intelligent anti-sway"
+      },
+      "1": {
+        "desc": "Simplifies unloading and streamlines operations.",
+        "title": "Automatic hook release"
+      },
+      "2": {
+        "desc": "Prevents overloading for safer operations.",
+        "title": "Real-time weighing"
+      },
+      "3": {
+        "desc": "Multi-drone coordination with 4G communication and remote emergency control.",
+        "title": "One-stop mission platform"
+      }
+    },
+    "title": "Intelligent flight control.",
+    "eyebrow": "Autonomy"
+  }
+}
