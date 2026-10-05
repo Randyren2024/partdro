@@ -1,6 +1,5 @@
 <template>
   <div class="default-layout">
-    <TopBar />
     <Header />
     <main>
       <router-view />
@@ -10,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import TopBar from '../components/layout/TopBar.vue'
 import Header from '../components/layout/Header.vue'
 import Footer from '../components/layout/Footer.vue'
 </script>

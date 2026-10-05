@@ -49,7 +49,7 @@ function imgEdit(defaultSrc: string, key: string): string {
 <style scoped>
 .hero {
   position: relative;
-  min-height: min(760px, calc(100vh - var(--topbar-height)));
+  min-height: min(760px, 100vh);
   display: flex;
   align-items: center;
   overflow: hidden;
