@@ -20,7 +20,7 @@
               </div>
               <h3>{{ post.title }}</h3>
               <p>{{ post.summary }}</p>
-              <router-link :to="`/news/${post.slug}`" class="news__link">
+              <router-link :to="lp('/news/' + post.slug)" class="news__link">
                 {{ t('news.readMore') }} <RightOutlined />
               </router-link>
             </div>
@@ -35,8 +35,10 @@
 import { useI18n } from 'vue-i18n'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { usePosts } from '../composables/useSupabase'
+import { useLocalePath } from '../composables/useLocalePath'
 
 const { t } = useI18n()
+const lp = useLocalePath()
 const { data: posts } = usePosts()
 </script>
 

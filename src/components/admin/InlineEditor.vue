@@ -48,7 +48,7 @@
         <input
           v-model="activeImg.value"
           class="ie-input"
-          :placeholder="`Image URL, or filename in ${ns === 'd15r' ? '/d15r/images/' : `/images/${ns}/`}`"
+          :placeholder="`Image URL, or filename in ${ns === 'd15r' ? '/d15r/images/' : ns === 'about' || ns === 'contact' ? '/images/' : `/images/${ns}/`}`"
         />
         <div class="ie-pop-preview">
           <img v-if="activeImg.value" :src="imgPreviewUrl(activeImg.value)" alt="preview" />
@@ -118,8 +118,13 @@ const route = useRoute();
 const editMode = computed(() => auth.isLoggedIn);
 const lang = ref<string>((locale.value as string) || "en");
 
-// 当前产品命名空间：决定相对图片文件名的解析目录
-const ns = computed(() => (route.params.slug as string) || "d15r");
+// 当前命名空间：产品页用 slug，静态页用路由名（about/contact），默认 d15r
+const ns = computed(() => {
+  if (route.params.slug) return route.params.slug as string;
+  const name = route.name as string | undefined;
+  if (name === 'about' || name === 'contact') return name;
+  return 'd15r';
+});
 
 watch(
   () => locale.value,
@@ -131,7 +136,10 @@ watch(
 function imgPreviewUrl(p: string) {
   if (!p) return "";
   if (p.startsWith("http") || p.startsWith("/")) return p;
-  return ns.value === "d15r" ? `/d15r/images/${p}` : `/images/${ns.value}/${p}`;
+  // d15r 产品图在 /d15r/images/，about/contact 静态图在 /images/
+  if (ns.value === "d15r") return `/d15r/images/${p}`;
+  if (ns.value === "about" || ns.value === "contact") return `/images/${p}`;
+  return `/images/${ns.value}/${p}`;
 }
 
 const activeText = ref<{ key: string; value: string; x: number; y: number } | null>(null);

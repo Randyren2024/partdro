@@ -4,7 +4,9 @@
   "description": "Partdro - Premium Drone Solutions",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npx playwright install chromium && vite build && node scripts/inject-seo-links.mjs && node scripts/prerender.mjs",
+    "prerender": "node scripts/prerender.mjs",
+    "prerender:all": "node scripts/prerender.mjs --all",
     "preview": "vite preview",
     "optimize-images": "node scripts/optimize-images.js",
     "generate-favicons": "node scripts/generate-favicons.js",

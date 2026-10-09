@@ -35,7 +35,7 @@
             <div class="product-card__body">
               <h3>{{ product.name }}</h3>
               <p>{{ product.short_desc }}</p>
-              <router-link :to="`/products/${product.slug}`" class="product-card__link">
+              <router-link :to="lp('/products/' + product.slug)" class="product-card__link">
                 {{ t('products.viewDetails') }} <RightOutlined />
               </router-link>
             </div>
@@ -52,6 +52,7 @@ import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { useProducts } from '../composables/useSupabase'
+import { useLocalePath } from '../composables/useLocalePath'
 import type { ProductCategory } from '../types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
@@ -59,6 +60,7 @@ const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
+const lp = useLocalePath()
 const { data: products } = useProducts()
 
 const activeCategory = computed<ProductCategory | null>(() =>

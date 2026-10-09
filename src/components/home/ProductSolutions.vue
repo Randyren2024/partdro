@@ -13,7 +13,7 @@
           <div class="solutions__card-body">
             <h3>{{ product.name }}</h3>
             <p>{{ product.short_desc }}</p>
-            <router-link :to="`/products/${product.slug}`" class="solutions__card-link">
+            <router-link :to="lp('/products/' + product.slug)" class="solutions__card-link">
               {{ t('products.viewDetails') }}
               <RightOutlined />
             </router-link>
@@ -22,7 +22,7 @@
       </div>
 
       <div class="solutions__cta">
-        <a-button type="primary" size="large" @click="$router.push('/products')">
+        <a-button type="primary" size="large" @click="$router.push(lp('/products'))">
           {{ t('products.viewAll') }}
         </a-button>
       </div>
@@ -34,8 +34,10 @@
 import { useI18n } from 'vue-i18n'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { useProducts } from '../../composables/useSupabase'
+import { useLocalePath } from '../../composables/useLocalePath'
 
 const { t } = useI18n()
+const lp = useLocalePath()
 const { data: products } = useProducts()
 
 const categoryLabel = (cat: string) => t(`products.category.${cat}`)

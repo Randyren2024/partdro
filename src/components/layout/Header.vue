@@ -1,28 +1,28 @@
 <template>
   <header class="header" :class="{ 'header--scrolled': scrolled }">
     <div class="container header__inner">
-      <router-link to="/" class="header__logo">
+      <router-link :to="lp('/')" class="header__logo">
         <img src="/droneworld_logo.png" alt="Partdro" />
       </router-link>
 
       <nav class="header__nav" :class="{ 'header__nav--open': mobileOpen }">
         <div class="header__nav-items">
-          <router-link to="/" class="header__nav-item" @click="mobileOpen = false">
+          <router-link :to="lp('/')" class="header__nav-item" @click="mobileOpen = false">
             {{ t("nav.home") }}
           </router-link>
 
           <div class="header__dropdown">
-            <router-link to="/products" class="header__nav-item" @click="mobileOpen = false">
+            <router-link :to="lp('/products')" class="header__nav-item" @click="mobileOpen = false">
               {{ t("nav.products") }}
             </router-link>
             <div class="header__dropdown-menu">
-              <router-link to="/products" class="header__dropdown-item" @click="mobileOpen = false">
+              <router-link :to="lp('/products')" class="header__dropdown-item" @click="mobileOpen = false">
                 {{ t("products.all") }}
               </router-link>
               <router-link
                 v-for="cat in CATEGORIES"
                 :key="cat"
-                :to="`/products?category=${cat}`"
+                :to="{ path: lp('/products'), query: { category: cat } }"
                 class="header__dropdown-item"
                 @click="mobileOpen = false"
               >
@@ -31,19 +31,19 @@
             </div>
           </div>
 
-          <router-link to="/cases" class="header__nav-item" @click="mobileOpen = false">
+          <router-link :to="lp('/cases')" class="header__nav-item" @click="mobileOpen = false">
             {{ t("nav.cases") }}
           </router-link>
-          <router-link to="/documents" class="header__nav-item" @click="mobileOpen = false">
+          <router-link :to="lp('/documents')" class="header__nav-item" @click="mobileOpen = false">
             {{ t("nav.documents") }}
           </router-link>
-          <router-link to="/news" class="header__nav-item" @click="mobileOpen = false">
+          <router-link :to="lp('/news')" class="header__nav-item" @click="mobileOpen = false">
             {{ t("nav.news") }}
           </router-link>
-          <router-link to="/about" class="header__nav-item" @click="mobileOpen = false">
+          <router-link :to="lp('/about')" class="header__nav-item" @click="mobileOpen = false">
             {{ t("nav.about") }}
           </router-link>
-          <router-link to="/contact" class="header__nav-item" @click="mobileOpen = false">
+          <router-link :to="lp('/contact')" class="header__nav-item" @click="mobileOpen = false">
             {{ t("nav.contact") }}
           </router-link>
         </div>
@@ -51,7 +51,7 @@
 
       <div class="header__actions">
         <LangSwitcher />
-        <router-link to="/contact" class="header__contact">
+        <router-link :to="lp('/contact')" class="header__contact">
           {{ t('nav.contact') }}
           <RightOutlined />
         </router-link>
@@ -69,11 +69,13 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { MenuOutlined, CloseOutlined, RightOutlined } from "@ant-design/icons-vue";
 import LangSwitcher from "../common/LangSwitcher.vue";
+import { useLocalePath } from "../../composables/useLocalePath";
 import type { ProductCategory } from "../../types";
 
 const CATEGORIES: ProductCategory[] = ["agricultural", "cargo", "cleaning"];
 
 const { t } = useI18n();
+const lp = useLocalePath();
 const scrolled = ref(false);
 const mobileOpen = ref(false);
 

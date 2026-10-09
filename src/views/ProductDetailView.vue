@@ -96,7 +96,7 @@ const altBase = computed(() => (ns.value === 'd15r' ? 'D15R' : 'Partdro product'
 const alt = (desc: string) => `${altBase.value} ${desc}`
 const mailtoHref = computed(() => {
   const subject = ns.value === 'd15r' ? 'D15R Cleaning Drone Inquiry' : `${ns.value} drone inquiry`
-  return `mailto:info@partdro.com?subject=${encodeURIComponent(subject)}`
+  return `mailto:info@droneworld.tech?subject=${encodeURIComponent(subject)}`
 })
 
 const currentImgOverrides = computed(() => imgOverridesByLang[locale.value as string] ?? {})

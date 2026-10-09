@@ -16,7 +16,7 @@
             </div>
             <h3>{{ post.title }}</h3>
             <p>{{ post.summary }}</p>
-            <router-link :to="`/news/${post.slug}`" class="news__card-link">
+            <router-link :to="lp('/news/' + post.slug)" class="news__card-link">
               {{ t('news.readMore') }}
               <RightOutlined />
             </router-link>
@@ -25,7 +25,7 @@
       </div>
 
       <div class="news__cta">
-        <a-button type="primary" size="large" @click="$router.push('/news')">
+        <a-button type="primary" size="large" @click="$router.push(lp('/news'))">
           {{ t('news.viewAll') }}
         </a-button>
       </div>
@@ -37,8 +37,10 @@
 import { useI18n } from 'vue-i18n'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { usePosts } from '../../composables/useSupabase'
+import { useLocalePath } from '../../composables/useLocalePath'
 
 const { t } = useI18n()
+const lp = useLocalePath()
 const { data: posts } = usePosts({ limit: 3 })
 </script>
 

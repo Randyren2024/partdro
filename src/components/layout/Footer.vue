@@ -11,7 +11,7 @@
           </div>
           <div class="cta-card__actions">
             <a class="cta-btn cta-btn--primary" :href="'mailto:' + mail" @click="trackEvent('generate_lead', { location: 'footer_cta' })">{{ mail }}</a>
-            <router-link class="cta-btn cta-btn--ghost" to="/products" :data-edit-key="'footer.cta.visit'">{{ t('footer.cta.visit') }}</router-link>
+            <router-link class="cta-btn cta-btn--ghost" :to="lp('/products')" :data-edit-key="'footer.cta.visit'">{{ t('footer.cta.visit') }}</router-link>
           </div>
         </div>
       </div>
@@ -38,24 +38,24 @@
           <div class="footer__col">
             <h4>{{ t('footer.products') }}</h4>
             <ul>
-              <li><router-link to="/products">{{ t('nav.products') }}</router-link></li>
-              <li><router-link to="/cases">{{ t('nav.cases') }}</router-link></li>
+              <li><router-link :to="lp('/products')">{{ t('nav.products') }}</router-link></li>
+              <li><router-link :to="lp('/cases')">{{ t('nav.cases') }}</router-link></li>
             </ul>
           </div>
 
           <div class="footer__col">
             <h4>{{ t('footer.support') }}</h4>
             <ul>
-              <li><router-link to="/documents">{{ t('nav.documents') }}</router-link></li>
-              <li><router-link to="/contact">{{ t('nav.contact') }}</router-link></li>
+              <li><router-link :to="lp('/documents')">{{ t('nav.documents') }}</router-link></li>
+              <li><router-link :to="lp('/contact')">{{ t('nav.contact') }}</router-link></li>
             </ul>
           </div>
 
           <div class="footer__col">
             <h4>{{ t('footer.company') }}</h4>
             <ul>
-              <li><router-link to="/about">{{ t('nav.about') }}</router-link></li>
-              <li><router-link to="/news">{{ t('nav.news') }}</router-link></li>
+              <li><router-link :to="lp('/about')">{{ t('nav.about') }}</router-link></li>
+              <li><router-link :to="lp('/news')">{{ t('nav.news') }}</router-link></li>
             </ul>
           </div>
 
@@ -63,7 +63,7 @@
             <h4>{{ t('contact.title') }}</h4>
             <ul class="footer__contact-list">
               <li><PhoneOutlined /> +86 16788684420</li>
-              <li><a href="mailto:info@partdro.com" @click="trackEvent('generate_lead', { location: 'footer' })"><MailOutlined /> info@partdro.com</a></li>
+              <li><a href="mailto:info@droneworld.tech" @click="trackEvent('generate_lead', { location: 'footer' })"><MailOutlined /> info@droneworld.tech</a></li>
               <li><EnvironmentOutlined /> Shenzhen, China</li>
             </ul>
           </div>
@@ -91,13 +91,15 @@ import {
   EnvironmentOutlined,
 } from '@ant-design/icons-vue'
 import { trackEvent } from '../../composables/useTracking'
+import { stripLocalePrefix, useLocalePath } from '../../composables/useLocalePath'
 
 const { t } = useI18n()
 const route = useRoute()
+const lp = useLocalePath()
 const currentYear = computed(() => new Date().getFullYear())
 const mail = computed(() => t('footer.cta.mail'))
-// D15R 落地页自带同款 lp-cta 收尾卡，全局 CTA 对其隐藏避免重复
-const showCta = computed(() => route.path !== '/products/d15r')
+// D15R 落地页自带同款 lp-cta 收尾卡，全局 CTA 对其隐藏避免重复（按去前缀后的裸路径判断）
+const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r')
 </script>
 
 <style scoped>
