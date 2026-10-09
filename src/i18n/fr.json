@@ -397,6 +397,12 @@
         "18": { "label": "Poids maximal au décollage", "value": "≤ 24.9 kg" }
       }
     },
+    "video": {
+      "eyebrow": "Voyez-le en action",
+      "title": "Le D15R en action.",
+      "title2": "Avant & après : façade extérieure.",
+      "title3": "La vidéo produit du D15R."
+    },
     "cta": {
       "eyebrow": "Série de Drones de Nettoyage Partdro D15R",
       "title": "Né pour la propreté.",

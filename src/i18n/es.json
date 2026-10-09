@@ -397,6 +397,12 @@
         "18": { "label": "Peso máximo de despegue", "value": "≤ 24.9 kg" }
       }
     },
+    "video": {
+      "eyebrow": "Véalo en acción",
+      "title": "D15R en acción.",
+      "title2": "Antes y después: fachada exterior.",
+      "title3": "El vídeo del producto D15R."
+    },
     "cta": {
       "eyebrow": "Serie de Drones de Limpieza Partdro D15R",
       "title": "Nacido para la limpieza.",

@@ -156,6 +156,19 @@ const videoUrl = computed(() => {
 const videoPoster = computed(() => currentImgOverrides.value[`${ns.value}.video.poster`] || undefined)
 const parsedVideo = computed(() => parseVideoUrl(videoUrl.value))
 const videoResolved = computed(() => !!parsedVideo.value)
+// 附加视频（url2/url3）：CMS __videos 优先，i18n 兜底；标题取 video.title2/title3
+const extraVideos = computed(() => {
+  const out: { parsed: { type: string; url: string }; title: string }[] = []
+  for (const i of [2, 3]) {
+    const key = `${ns.value}.video.url${i}`
+    const override = currentVideoOverrides.value[key]
+    const def = t(key)
+    const raw = override || (def === key ? '' : (def as string))
+    const parsed = parseVideoUrl(raw)
+    if (parsed) out.push({ parsed: { type: parsed.type, url: parsed.url }, title: tt(`video.title${i}`) })
+  }
+  return out
+})
 
 const lightboxSrc = ref('')
 const lightboxAlt = ref('')
@@ -191,5 +204,6 @@ provide(landingSectionKey, {
   videoResolved,
   parsedVideo,
   videoPoster,
+  extraVideos,
 })
 </script>

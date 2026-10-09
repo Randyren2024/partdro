@@ -16,6 +16,7 @@ export interface LandingSectionContext {
   videoResolved: ComputedRef<boolean>
   parsedVideo: ComputedRef<any>
   videoPoster: ComputedRef<string | undefined>
+  extraVideos: ComputedRef<{ parsed: { type: string; url: string }; title: string }[]>
 }
 
 export const landingSectionKey: InjectionKey<LandingSectionContext> = Symbol('landingSection')

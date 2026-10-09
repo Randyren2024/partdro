@@ -308,6 +308,22 @@
   box-shadow:none;
   border:1px dashed #b9c2cc;
 }
+/* 附加视频网格 */
+.d15r-landing .video-more {
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:20px;
+  margin-top:26px;
+}
+.d15r-landing .video-more__title {
+  margin-top:10px;
+  font-size:15px;
+  font-weight:600;
+  color:#1c2733;
+}
+@media (max-width:640px) {
+  .d15r-landing .video-more { grid-template-columns:1fr; }
+}
 .d15r-landing .video-placeholder {
   position:absolute;
   inset:0;
