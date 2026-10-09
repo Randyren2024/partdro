@@ -220,10 +220,10 @@ const teamMembers = computed(() =>
     position: t(`about.team.members.${i}.position`),
     bio1: t(`about.team.members.${i}.bio1`),
     bio2: t(`about.team.members.${i}.bio2`),
-    img:
-      i === 1
-        ? imgEdit('/images/randy-at-dji.webp', 'about.team.members.1.img')
-        : '',
+    img: imgEdit(
+      i === 0 ? '/images/mr-gan.webp' : '/images/randy-at-dji.webp',
+      `about.team.members.${i}.img`,
+    ),
   })),
 )
 
@@ -487,6 +487,7 @@ const statItems = computed(() =>
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
 }
 
 .team-card {
