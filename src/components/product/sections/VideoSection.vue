@@ -7,7 +7,7 @@
       </div>
       <div
         class="video-frame"
-        :class="{ 'video-frame--empty': !videoResolved }"
+        :class="{ 'video-frame--empty': !videoResolved, 'video-frame--editing': editMode }"
         :data-edit-video="`${ns}.video.url`"
       >
         <template v-if="videoResolved">
