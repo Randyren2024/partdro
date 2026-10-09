@@ -14,20 +14,25 @@ interface SlugRow {
   slug: string
 }
 
-async function fetchSlugs(table: 'products' | 'posts'): Promise<string[]> {
+interface PostRow extends SlugRow {
+  published_at?: string | null
+}
+
+async function fetchSlugs(table: 'products' | 'posts'): Promise<(SlugRow | PostRow)[]> {
   const url = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL
   const anonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
   if (!url || !anonKey) return []
   try {
-    const res = await fetch(`${url}/rest/v1/${table}?select=slug&published=eq.true`, {
+    // posts 额外取 published_at，为新闻条目输出 <lastmod>
+    const select = table === 'posts' ? 'slug,published_at' : 'slug'
+    const res = await fetch(`${url}/rest/v1/${table}?select=${select}&published=eq.true`, {
       headers: {
         apikey: anonKey,
         Authorization: `Bearer ${anonKey}`,
       },
     })
     if (!res.ok) return []
-    const rows = (await res.json()) as SlugRow[]
-    return rows.map((r) => r.slug).filter(Boolean)
+    return ((await res.json()) as (SlugRow | PostRow)[]).filter((r) => r.slug)
   } catch {
     return []
   }
@@ -58,7 +63,9 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
   }
 
   // Supabase 查询失败时降级为纯静态路由，保证 sitemap 始终可用
-  const [productSlugs, postSlugs] = await Promise.all([fetchSlugs('products'), fetchSlugs('posts')])
+  const [productRows, postRows] = await Promise.all([fetchSlugs('products'), fetchSlugs('posts')])
+  const productSlugs = productRows.map((r) => r.slug)
+  const postSlugs = postRows.filter((r): r is PostRow => 'published_at' in r)
 
   // 栏目与产品页：4 种语言均有本地化内容
   const localizedPaths = [
@@ -72,9 +79,13 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     '/contact',
   ]
 
-  // 新闻文章：翻译情况不确定，仅登记英语版本，避免声明不存在的语言版本
+  // 新闻文章：翻译情况不确定，仅登记英语版本，避免声明不存在的语言版本；
+  // <lastmod> 取发布时间，帮助 Google 识别新旧内容、排定重抓优先级
   const newsEntries = postSlugs.map(
-    (s) => `  <url>\n    <loc>${SITE_URL}/news/${escapeXml(s)}</loc>\n  </url>`,
+    (p) =>
+      `  <url>\n    <loc>${SITE_URL}/news/${escapeXml(p.slug)}</loc>${
+        p.published_at ? `\n    <lastmod>${escapeXml(p.published_at)}</lastmod>` : ''
+      }\n  </url>`,
   )
 
   const body =

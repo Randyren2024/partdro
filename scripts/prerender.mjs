@@ -11,8 +11,8 @@
 //
 // 复用仓库已有的 Playwright，零新增依赖。
 // 用法：随 npm run build 自动执行，也可单独运行：
-//   node scripts/prerender.mjs           # 首页 + 主要栏目 + 全部产品页（4 语言）
-//   node scripts/prerender.mjs --all     # 追加全部 /news/<slug> 文章页（仅英语，避免构建过慢）
+//   node scripts/prerender.mjs   # 首页 + 主要栏目 + 全部产品页（4 语言）+ 全部新闻文章页（仅英语）
+//   环境变量 PRERENDER_CONCURRENCY 可调整并发数（默认 4）
 import { createServer } from 'node:http'
 import { readFileSync, writeFileSync, existsSync, statSync, mkdirSync } from 'node:fs'
 import { resolve, join, extname, dirname } from 'node:path'
@@ -22,7 +22,6 @@ const DIST = resolve(process.cwd(), 'dist')
 const DIST_INDEX = join(DIST, 'index.html')
 const PORT = Number(process.env.PRERENDER_PORT || 4177)
 const BASE = `http://localhost:${PORT}`
-const INCLUDE_ALL = process.argv.includes('--all')
 const SITE = 'https://www.droneworld.tech'
 
 const LOCALES = ['en', 'es', 'de', 'fr']
@@ -130,11 +129,11 @@ async function collectRoutes() {
   productSlugs = [...new Set(productSlugs)].filter(Boolean)
   for (const s of productSlugs) routes.push(`/products/${s}`)
 
-  if (INCLUDE_ALL) {
-    const newsSlugs = [...new Set(await fetchSitemapSlugs('/news'))].filter(Boolean)
-    for (const s of newsSlugs) routes.push(`/news/${s}`)
-    console.log(`[prerender] --all：追加 ${newsSlugs.length} 条新闻页（仅英语）`)
-  }
+  // 新闻详情页同样默认预渲染（仅英语）：slug 来自线上 sitemap（Netlify 函数动态读 Supabase），
+  // 因此刚发布的文章在下一次构建即会被渲染，列表页链接也会随之更新。
+  let newsSlugs = await fetchSitemapSlugs('/news')
+  newsSlugs = [...new Set(newsSlugs)].filter(Boolean)
+  for (const s of newsSlugs) routes.push(`/news/${s}`)
 
   return [...new Set(routes)]
 }
@@ -149,15 +148,22 @@ function stripRuntimePixels(html) {
     .replace(new RegExp(`<img\\b[^>]*(?:${hosts})[^>]*>`, 'gi'), '')
 }
 
-/** 注入 canonical 与 hreflang alternates（含 x-default），并移除运行时留下的旧标签 */
+/** 注入 canonical 与 hreflang alternates（含 x-default），并移除运行时留下的旧标签。
+ *  新闻详情页例外：只发 canonical 不发 hreflang——老文章未必有 4 语翻译
+ *  （运行时回退显示英语），声明 alternates 会与实际内容不符；列表页 /news 不受影响。 */
 function injectSeo(html, route, locale) {
   const cleaned = stripRuntimePixels(html)
-  const alts = LOCALES.map(
-    (l) => `<link rel="alternate" hreflang="${l}" href="${SITE}${withPrefix(route, l)}" />`,
-  )
-  alts.push(
-    `<link rel="alternate" hreflang="x-default" href="${SITE}${withPrefix(route, DEFAULT_LOCALE)}" />`,
-  )
+  const isNewsDetail = route.startsWith('/news/')
+  const alts = isNewsDetail
+    ? []
+    : LOCALES.map(
+        (l) => `<link rel="alternate" hreflang="${l}" href="${SITE}${withPrefix(route, l)}" />`,
+      )
+  if (!isNewsDetail) {
+    alts.push(
+      `<link rel="alternate" hreflang="x-default" href="${SITE}${withPrefix(route, DEFAULT_LOCALE)}" />`,
+    )
+  }
   const block = [`<link rel="canonical" href="${SITE}${withPrefix(route, locale)}" />`, ...alts].join(
     '\n    ',
   )
@@ -189,64 +195,81 @@ async function waitForApiSettled(page, state) {
   return false
 }
 
+// 并发渲染：新闻页默认渲染后总量超过 140 页，串行需 10 分钟级；
+// 4 个并发把构建压到 3 分钟级。可用 PRERENDER_CONCURRENCY 调整。
+const CONCURRENCY = Math.max(1, Number(process.env.PRERENDER_CONCURRENCY || 4))
+
 async function renderAll(tasks) {
   const browser = await chromium.launch()
   const rendered = []
-  try {
-    for (const { route, locale } of tasks) {
-      const url = withPrefix(route, locale)
-      const context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
-      const page = await context.newPage()
-      // 追踪 Supabase REST / Storage 请求，作为「内容已就绪」的确定信号
-      const state = { seen: false, inflight: new Set() }
-      const isDataApi = (u) => u.includes('/rest/v1/') || u.includes('/storage/v1/')
-      page.on('request', (r) => {
-        if (isDataApi(r.url())) {
-          state.seen = true
-          state.inflight.add(r)
-        }
-      })
-      page.on('requestfinished', (r) => state.inflight.delete(r))
-      page.on('requestfailed', (r) => state.inflight.delete(r))
-      try {
-        // 用 domcontentloaded 而非 load：个别资源（缺失图片的重试等）可能永不结束，
-        // 页面就绪与否交给下面的数据等待 + 正文等待 + 图片等待（均带超时）判定。
-        await page.goto(`${BASE}${url}`, { waitUntil: 'domcontentloaded', timeout: 60000 })
-        await page
-          .waitForFunction(
-            () => {
-              const app = document.getElementById('app')
-              return !!app && app.innerText.replace(/\s+/g, '').length > 150
-            },
-            { timeout: 20000 },
-          )
-          .catch(() => console.warn(`[prerender]   ${url} 正文等待超时，仍尝试落盘`))
-        const settled = await waitForApiSettled(page, state)
-        if (!settled) console.warn(`[prerender]   ${url} 数据请求未确认结束，按现状落盘`)
-        await page.waitForTimeout(600)
-        // 等图片加载（带兜底超时，避免坏图挂死）
-        await page
-          .evaluate(async () => {
-            const imgs = Array.from(document.images).filter((i) => !i.complete)
-            await Promise.race([
-              Promise.all(imgs.map((i) => new Promise((r) => ((i.onload = r), (i.onerror = r))))),
-              new Promise((r) => setTimeout(r, 8000)),
-            ])
-          })
-          .catch(() => {})
-        const html = injectSeo(
-          await page.evaluate(() => '<!doctype html>\n' + document.documentElement.outerHTML),
-          route,
-          locale,
-        )
-        rendered.push({ route, locale, html })
-        console.log(`[prerender] ✓ ${url} (${html.length} bytes)`)
-      } catch (e) {
-        console.warn(`[prerender] ✗ ${url}: ${e.message}`)
-      } finally {
-        await context.close()
+
+  async function renderOne({ route, locale }) {
+    const url = withPrefix(route, locale)
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+    const page = await context.newPage()
+    // 追踪 Supabase REST / Storage 请求，作为「内容已就绪」的确定信号
+    const state = { seen: false, inflight: new Set() }
+    const isDataApi = (u) => u.includes('/rest/v1/') || u.includes('/storage/v1/')
+    page.on('request', (r) => {
+      if (isDataApi(r.url())) {
+        state.seen = true
+        state.inflight.add(r)
       }
+    })
+    page.on('requestfinished', (r) => state.inflight.delete(r))
+    page.on('requestfailed', (r) => state.inflight.delete(r))
+    try {
+      // 用 domcontentloaded 而非 load：个别资源（缺失图片的重试等）可能永不结束，
+      // 页面就绪与否交给下面的数据等待 + 正文等待 + 图片等待（均带超时）判定。
+      await page.goto(`${BASE}${url}`, { waitUntil: 'domcontentloaded', timeout: 60000 })
+      await page
+        .waitForFunction(
+          () => {
+            const app = document.getElementById('app')
+            return !!app && app.innerText.replace(/\s+/g, '').length > 150
+          },
+          { timeout: 20000 },
+        )
+        .catch(() => console.warn(`[prerender]   ${url} 正文等待超时，仍尝试落盘`))
+      const settled = await waitForApiSettled(page, state)
+      if (!settled) console.warn(`[prerender]   ${url} 数据请求未确认结束，按现状落盘`)
+      await page.waitForTimeout(600)
+      // 等图片加载（带兜底超时，避免坏图挂死）
+      await page
+        .evaluate(async () => {
+          const imgs = Array.from(document.images).filter((i) => !i.complete)
+          await Promise.race([
+            Promise.all(imgs.map((i) => new Promise((r) => ((i.onload = r), (i.onerror = r))))),
+            new Promise((r) => setTimeout(r, 8000)),
+          ])
+        })
+        .catch(() => {})
+      const html = injectSeo(
+        await page.evaluate(() => '<!doctype html>\n' + document.documentElement.outerHTML),
+        route,
+        locale,
+      )
+      rendered.push({ route, locale, html })
+      console.log(`[prerender] ✓ ${url} (${html.length} bytes)`)
+    } catch (e) {
+      console.warn(`[prerender] ✗ ${url}: ${e.message}`)
+    } finally {
+      await context.close()
     }
+  }
+
+  try {
+    // 共享游标的 worker 池（单线程取任务无竞态）
+    let next = 0
+    const workers = Array.from(
+      { length: Math.min(CONCURRENCY, tasks.length) },
+      async () => {
+        while (next < tasks.length) {
+          await renderOne(tasks[next++])
+        }
+      },
+    )
+    await Promise.all(workers)
   } finally {
     await browser.close()
   }
