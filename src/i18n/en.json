@@ -1,4 +1,34 @@
 {
+  "meta": {
+    "home": {
+      "title": "Partdro - Premium Drone Solutions {'|'} B2C & B2B",
+      "description": "Partdro is a specialized drone retailer offering premium UAV solutions for consumers and businesses. Explore high-performance drones for aerial cleaning, industrial inspection, agriculture, and delivery."
+    },
+    "products": {
+      "title": "UAV Products {'|'} Partdro",
+      "description": "Browse Partdro's UAV product line: cleaning drones, delivery drones, agricultural drones and accessories, with full specifications and real-world applications."
+    },
+    "cases": {
+      "title": "Case Studies {'|'} Partdro",
+      "description": "Real-world drone application cases from Partdro customers worldwide, covering facade cleaning, delivery and agricultural operations."
+    },
+    "news": {
+      "title": "News & Insights {'|'} Partdro",
+      "description": "The latest Partdro news, product releases and UAV industry insights."
+    },
+    "documents": {
+      "title": "Documents & Downloads {'|'} Partdro",
+      "description": "Download Partdro product brochures, specification sheets, manuals and certificates."
+    },
+    "about": {
+      "title": "About Us {'|'} Partdro",
+      "description": "Learn about Partdro: our journey, leadership team, values and global UAV service network serving customers across Oceania and beyond."
+    },
+    "contact": {
+      "title": "Contact Us {'|'} Partdro",
+      "description": "Contact Partdro for drone solutions, quotations and after-sales support. Reach our team by email, phone or WhatsApp."
+    }
+  },
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -50,6 +80,7 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "Get in touch with our team",
+    "formTitle": "Send Us a Message",
     "name": "Full Name",
     "email": "Email Address",
     "phone": "Phone Number",
@@ -67,7 +98,7 @@
       "phoneLabel": "Phone",
       "phoneValue": "+86 16788684420",
       "emailLabel": "Email",
-      "emailValue": "info{'@'}partdro.com",
+      "emailValue": "info{'@'}droneworld.tech",
       "addressLabel": "Address",
       "addressValue": "Shenzhen, Guangdong, China",
       "hoursLabel": "Business Hours",
@@ -144,7 +175,7 @@
       "description": "Whether you need agricultural robots, intelligent navigation systems, or customized solutions, our team is ready to help you find the perfect technology for your needs.",
       "contactBtn": "Contact Us",
       "demoBtn": "Request Demo",
-      "email": "info{'@'}partdro.com",
+      "email": "info{'@'}droneworld.tech",
       "phone": "+86 16788684420",
       "location": "Shenzhen, China"
     }
@@ -164,7 +195,7 @@
       "eyebrow": "Partdro Drone Solutions",
       "title": "Let's find the right drone solution for your project.",
       "text": "Talk with Partdro about the right configuration and application scenario for your work.",
-      "mail": "info{'@'}partdro.com",
+      "mail": "info{'@'}droneworld.tech",
       "visit": "Explore Products"
     }
   },
@@ -175,7 +206,7 @@
   },
   "d15r": {
     "hero": {
-      "kicker": "JIUSI Cleaning Drone Series D15R",
+      "kicker": "Partdro Cleaning Drone Series D15R",
       "title1": "Multi-functional Washing UAV",
       "title2": "Born for cleanliness.",
       "lead": "Efficient cleaning in the air & High-altitude unmanned safe operation & Multi-scenario application. The D15R brings controlled, high-pressure cleaning to building facades, photovoltaic panels, wind turbines and other high-altitude surfaces.",
@@ -312,6 +343,24 @@
       "2": { "title": "Wind turbine cleaning", "desc": "High-altitude surface maintenance" },
       "3": { "title": "Highway sign cleaning", "desc": "Hard-to-reach roadside infrastructure" }
     },
+    "kit": {
+      "eyebrow": "Standard package",
+      "title": "Everything in the box.",
+      "lead": "Every D15R ships as a complete aerial cleaning system — drone, power, water supply and control, ready to fly out of the case.",
+      "items": {
+        "0": "Direct injection unit + swing cleaning unit (4 nozzles: 0° / 15° / 25° / 40°)",
+        "1": "Charger 3200 W (2CH) 110-240 V",
+        "2": "Remote controller",
+        "3": "Wall-imitating radar",
+        "4": "RTK positioning module",
+        "5": "Brushless high-pressure pump + 100 m explosion-proof hose + 2 water bags + hose storage rack",
+        "6": "Air transport case",
+        "7": "A2 MINI camera",
+        "8": "14S battery + explosion-proof battery bag"
+      },
+      "optionalTitle": "Optional: double-nozzle double-swing device",
+      "optionalDesc": "Full-process foam softening and clean-water rinsing, 0-30° swing angle and high-frequency swinging for higher efficiency — swing angle and speed adjustable on the remote control."
+    },
     "specs": {
       "eyebrow": "Product Parameter",
       "title": "D15R at a glance.",
@@ -339,7 +388,7 @@
       }
     },
     "cta": {
-      "eyebrow": "JIUSI Cleaning Drone Series D15R",
+      "eyebrow": "Partdro Cleaning Drone Series D15R",
       "title": "Born for cleanliness.",
       "text": "Talk with Partdro about the right cleaning configuration, nozzle setup and application scenario for your project.",
       "visit": "Visit partdro.com"

@@ -1,0 +1,11 @@
+看完这个视频，为它生成 YouTube 发布元数据。只输出一个 JSON 对象，不要任何解释、不要 markdown 代码块。
+{
+  "title":        "中文标题，60字以内，具体、有信息量，不写标题党",
+  "title_en":     "英文标题，90字符以内",
+  "summary":      "一句话概括这条视频讲了什么",
+  "description":  "中文描述 150~400字：开头钩子→内容要点（带时间点）→结尾CTA，不要 markdown",
+  "tags":         ["8~15个标签"],
+  "category":     "27 或 28（27=Howto 28=Science and Technology）",
+  "language":     "zh-CN",
+  "thumb_hint":   "封面图画面建议"
+}

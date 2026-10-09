@@ -13,6 +13,7 @@ import CompareSection from './sections/CompareSection.vue'
 import ApplicationsSection from './sections/ApplicationsSection.vue'
 import ScenariosSection from './sections/ScenariosSection.vue'
 import VideoSection from './sections/VideoSection.vue'
+import KitSection from './sections/KitSection.vue'
 import SpecsSection from './sections/SpecsSection.vue'
 import CtaSection from './sections/CtaSection.vue'
 
@@ -30,6 +31,7 @@ export const SECTION_COMPONENTS: Record<SectionId, Component> = {
   applications: ApplicationsSection,
   scenarios: ScenariosSection,
   video: VideoSection,
+  kit: KitSection,
   specs: SpecsSection,
   cta: CtaSection,
 }

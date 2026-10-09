@@ -1,4 +1,34 @@
 {
+  "meta": {
+    "home": {
+      "title": "Partdro - Premium-Drohnenlösungen {'|'} B2C & B2B",
+      "description": "Partdro ist ein spezialisierter Drohnenhändler für hochwertige UAV-Lösungen für Privat- und Geschäftskunden: Fassadenreinigung, industrielle Inspektion, Landwirtschaft und Lieferung."
+    },
+    "products": {
+      "title": "UAV-Produkte {'|'} Partdro",
+      "description": "Entdecken Sie die UAV-Produktpalette von Partdro: Reinigungsdrohnen, Lieferdrohnen, Agrardrohnen und Zubehör mit vollständigen technischen Daten."
+    },
+    "cases": {
+      "title": "Fallstudien {'|'} Partdro",
+      "description": "Praxisbeispiele von Partdro-Kunden weltweit: Fassadenreinigung, Lieferung und landwirtschaftliche Einsätze."
+    },
+    "news": {
+      "title": "Neuigkeiten & Einblicke {'|'} Partdro",
+      "description": "Aktuelle Partdro-Neuigkeiten, Produktneuheiten und Einblicke in die UAV-Branche."
+    },
+    "documents": {
+      "title": "Dokumente & Downloads {'|'} Partdro",
+      "description": "Laden Sie Partdro-Prospekte, Datenblätter, Handbücher und Zertifikate herunter."
+    },
+    "about": {
+      "title": "Über Uns {'|'} Partdro",
+      "description": "Erfahren Sie mehr über Partdro: unsere Geschichte, das Führungsteam, unsere Werte und unser globales UAV-Servicenetz."
+    },
+    "contact": {
+      "title": "Kontakt {'|'} Partdro",
+      "description": "Kontaktieren Sie Partdro für Drohnenlösungen, Angebote und Kundendienst – per E-Mail, Telefon oder WhatsApp."
+    }
+  },
   "nav": {
     "home": "Startseite",
     "products": "Produkte",
@@ -50,6 +80,7 @@
   "contact": {
     "title": "Kontaktieren Sie Uns",
     "subtitle": "Nehmen Sie Kontakt mit unserem Team auf",
+    "formTitle": "Senden Sie uns eine Nachricht",
     "name": "Vollständiger Name",
     "email": "E-Mail-Adresse",
     "phone": "Telefonnummer",
@@ -67,7 +98,7 @@
       "phoneLabel": "Telefon",
       "phoneValue": "+86 16788684420",
       "emailLabel": "E-Mail",
-      "emailValue": "info{'@'}partdro.com",
+      "emailValue": "info{'@'}droneworld.tech",
       "addressLabel": "Adresse",
       "addressValue": "Shenzhen, Guangdong, China",
       "hoursLabel": "Geschäftszeiten",
@@ -144,7 +175,7 @@
       "description": "Ob Sie Agrarroboter, intelligente Navigationssysteme oder maßgeschneiderte Lösungen benötigen – unser Team hilft Ihnen gerne, die perfekte Technologie für Ihre Anforderungen zu finden.",
       "contactBtn": "Kontakt Aufnehmen",
       "demoBtn": "Demo Anfragen",
-      "email": "info{'@'}partdro.com",
+      "email": "info{'@'}droneworld.tech",
       "phone": "+86 16788684420",
       "location": "Shenzhen, China"
     }
@@ -164,7 +195,7 @@
       "eyebrow": "Partdro Drohnenlösungen",
       "title": "Finden wir die passende Drohnenlösung für Ihr Projekt.",
       "text": "Sprechen Sie mit Partdro über die richtige Konfiguration und das Anwendungsszenario für Ihre Arbeit.",
-      "mail": "info{'@'}partdro.com",
+      "mail": "info{'@'}droneworld.tech",
       "visit": "Produkte entdecken"
     }
   },
@@ -175,7 +206,7 @@
   },
   "d15r": {
     "hero": {
-      "kicker": "JIUSI Reinigungsdrohnen-Serie D15R",
+      "kicker": "Partdro Reinigungsdrohnen-Serie D15R",
       "title1": "Multifunktionales Reinigungs-UAV",
       "title2": "Für Sauberkeit geboren.",
       "lead": "Effiziente Reinigung aus der Luft und sicherer unbemannter Einsatz in großer Höhe und Anwendung in mehreren Szenarien. Die D15R bringt kontrollierte Hochdruckreinigung an Gebäudefassaden, Photovoltaikmodule, Windkraftanlagen und andere Oberflächen in großer Höhe.",
@@ -312,6 +343,24 @@
       "2": { "title": "Windkraftanlagenreinigung", "desc": "Wartung von Oberflächen in grosser Höhe" },
       "3": { "title": "Reinigung von Autobahnschildern", "desc": "Schwer erreichbare Verkehrsinfrastruktur" }
     },
+    "kit": {
+      "eyebrow": "Standardpaket",
+      "title": "Alles im Koffer.",
+      "lead": "Jeder D15R wird als komplettes Luftreinigungssystem geliefert — Drohne, Strom, Wasserversorgung und Steuerung, startklar aus dem Koffer.",
+      "items": {
+        "0": "Direkteinspritzmodul + Schwingreinigungsmodul (4 Düsen: 0° / 15° / 25° / 40°)",
+        "1": "Ladegerät 3200 W (2CH) 110-240 V",
+        "2": "Fernsteuerung",
+        "3": "Wandfolgeradar",
+        "4": "RTK-Positionierungsmodul",
+        "5": "Bürstenlose Hochdruckpumpe + 100 m explosionssicherer Schlauch + 2 Wasserbeutel + Schlauchhalterung",
+        "6": "Transportkoffer",
+        "7": "A2-MINI-Kamera",
+        "8": "14S-Akku + explosionssichere Akkutasche"
+      },
+      "optionalTitle": "Optional: Doppeldüsen-Doppelschwing-Modul",
+      "optionalDesc": "Ganzer Prozess aus Schaumaufweichung und Klarspülung, Schwingwinkel 0-30° und hochfrequentes Schwingen für höhere Effizienz — Winkel und Geschwindigkeit an der Fernsteuerung einstellbar."
+    },
     "specs": {
       "eyebrow": "Produktparameter",
       "title": "Die D15R auf einen Blick.",
@@ -339,7 +388,7 @@
       }
     },
     "cta": {
-      "eyebrow": "JIUSI Reinigungsdrohnen-Serie D15R",
+      "eyebrow": "Partdro Reinigungsdrohnen-Serie D15R",
       "title": "Für Sauberkeit geboren.",
       "text": "Sprechen Sie mit Partdro über die passende Reinigungskonfiguration, Düsenausstattung und das richtige Anwendungsszenario für Ihr Projekt.",
       "visit": "Besuchen Sie partdro.com"

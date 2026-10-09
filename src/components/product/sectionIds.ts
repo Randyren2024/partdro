@@ -12,6 +12,7 @@ export const SECTION_IDS = [
   'applications',
   'scenarios',
   'video',
+  'kit',
   'specs',
   'cta',
 ] as const
@@ -32,6 +33,7 @@ export const SECTION_LABELS: Record<SectionId, string> = {
   applications: 'Applications',
   scenarios: 'Use cases',
   video: 'Video',
+  kit: 'Kit contents',
   specs: 'Specifications',
   cta: 'Call to action',
 }

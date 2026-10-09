@@ -1,4 +1,34 @@
 {
+  "meta": {
+    "home": {
+      "title": "Partdro - Soluciones Premium con Drones {'|'} B2C y B2B",
+      "description": "Partdro es un distribuidor especializado en drones con soluciones UAV premium para particulares y empresas: limpieza de fachadas, inspección industrial, agricultura y entrega."
+    },
+    "products": {
+      "title": "Productos UAV {'|'} Partdro",
+      "description": "Descubra la gama de productos UAV de Partdro: drones de limpieza, drones de entrega, drones agrícolas y accesorios con especificaciones completas."
+    },
+    "cases": {
+      "title": "Casos de Estudio {'|'} Partdro",
+      "description": "Casos reales de aplicación de drones de clientes de Partdro en todo el mundo: limpieza de fachadas, entrega y agricultura."
+    },
+    "news": {
+      "title": "Noticias e Ideas {'|'} Partdro",
+      "description": "Últimas noticias de Partdro, lanzamientos de productos e ideas sobre el sector de los UAV."
+    },
+    "documents": {
+      "title": "Documentos y Descargas {'|'} Partdro",
+      "description": "Descargue folletos, fichas técnicas, manuales y certificados de los productos Partdro."
+    },
+    "about": {
+      "title": "Sobre Nosotros {'|'} Partdro",
+      "description": "Conozca Partdro: nuestra trayectoria, equipo directivo, valores y red mundial de servicio UAV."
+    },
+    "contact": {
+      "title": "Contáctenos {'|'} Partdro",
+      "description": "Contacte con Partdro para soluciones con drones, presupuestos y soporte posventa por correo electrónico, teléfono o WhatsApp."
+    }
+  },
   "nav": {
     "home": "Inicio",
     "products": "Productos",
@@ -50,6 +80,7 @@
   "contact": {
     "title": "Contáctenos",
     "subtitle": "Póngase en contacto con nuestro equipo",
+    "formTitle": "Envíenos un Mensaje",
     "name": "Nombre Completo",
     "email": "Correo Electrónico",
     "phone": "Número de Teléfono",
@@ -67,7 +98,7 @@
       "phoneLabel": "Teléfono",
       "phoneValue": "+86 16788684420",
       "emailLabel": "Correo Electrónico",
-      "emailValue": "info{'@'}partdro.com",
+      "emailValue": "info{'@'}droneworld.tech",
       "addressLabel": "Dirección",
       "addressValue": "Shenzhen, Guangdong, China",
       "hoursLabel": "Horario de Atención",
@@ -144,7 +175,7 @@
       "description": "Ya sea que necesite robots agrícolas, sistemas de navegación inteligentes o soluciones personalizadas, nuestro equipo está listo para ayudarle a encontrar la tecnología perfecta para sus necesidades.",
       "contactBtn": "Contáctenos",
       "demoBtn": "Solicitar Demostración",
-      "email": "info{'@'}partdro.com",
+      "email": "info{'@'}droneworld.tech",
       "phone": "+86 16788684420",
       "location": "Shenzhen, China"
     }
@@ -164,7 +195,7 @@
       "eyebrow": "Soluciones de Drones Partdro",
       "title": "Encontremos la solución de dron adecuada para su proyecto.",
       "text": "Hable con Partdro sobre la configuración y el escenario de aplicación adecuados para su trabajo.",
-      "mail": "info{'@'}partdro.com",
+      "mail": "info{'@'}droneworld.tech",
       "visit": "Explorar Productos"
     }
   },
@@ -175,7 +206,7 @@
   },
   "d15r": {
     "hero": {
-      "kicker": "Serie de Drones de Limpieza JIUSI D15R",
+      "kicker": "Serie de Drones de Limpieza Partdro D15R",
       "title1": "UAV de Lavado Multifuncional",
       "title2": "Nacido para la limpieza.",
       "lead": "Limpieza eficiente en el aire y operación segura no tripulada a gran altura y aplicación en múltiples escenarios. El D15R lleva la limpieza de alta presión controlada a fachadas de edificios, paneles fotovoltaicos, aerogeneradores y otras superficies en altura.",
@@ -312,6 +343,24 @@
       "2": { "title": "Limpieza de aerogeneradores", "desc": "Mantenimiento de superficies en altura" },
       "3": { "title": "Limpieza de señales de carretera", "desc": "Infraestructura vial de difícil acceso" }
     },
+    "kit": {
+      "eyebrow": "Paquete estándar",
+      "title": "Todo viene en la caja.",
+      "lead": "Cada D15R se entrega como un sistema completo de limpieza aérea: dron, energía, suministro de agua y control, listo para volar desde su maleta.",
+      "items": {
+        "0": "Unidad de inyección directa + unidad de limpieza oscilante (4 boquillas: 0° / 15° / 25° / 40°)",
+        "1": "Cargador 3200 W (2CH) 110-240 V",
+        "2": "Mando a distancia",
+        "3": "Radar de seguimiento de pared",
+        "4": "Módulo de posicionamiento RTK",
+        "5": "Bomba de alta presión sin escobillas + manguera antiexplosión de 100 m + 2 bolsas de agua + soporte de manguera",
+        "6": "Maleta de transporte",
+        "7": "Cámara A2 MINI",
+        "8": "Batería 14S + bolsa antiexplosión para la batería"
+      },
+      "optionalTitle": "Opcional: dispositivo de doble boquilla y doble oscilación",
+      "optionalDesc": "Proceso completo de ablandado con espuma y aclarado con agua limpia, ángulo de oscilación de 0-30° y oscilación de alta frecuencia para mayor eficiencia; ángulo y velocidad ajustables en el mando."
+    },
     "specs": {
       "eyebrow": "Parámetros del producto",
       "title": "D15R de un vistazo.",
@@ -339,7 +388,7 @@
       }
     },
     "cta": {
-      "eyebrow": "Serie de Drones de Limpieza JIUSI D15R",
+      "eyebrow": "Serie de Drones de Limpieza Partdro D15R",
       "title": "Nacido para la limpieza.",
       "text": "Hable con Partdro sobre la configuración de limpieza adecuada, el montaje de boquillas y el escenario de aplicación para su proyecto.",
       "visit": "Visite partdro.com"
