@@ -145,10 +145,20 @@
     "team": {
       "title": "Leadership Team",
       "subtitle": "Expertise driving innovation",
-      "name": "Mr. Gan",
-      "position": "Founder & CEO",
-      "bio1": "Top-tier expert in the drone and robotics industry with over 15 years of deep experience. Former core member of DJI's intelligent perception system team and architect at Alibaba DAMO Academy.",
-      "bio2": "Led industry-first mass production of 8,000 units/day at DJI and co-founded a robotic lawn mower company that secured investment from Mr. Lei Jun (Xiaomi) and Mr. Zeng Liqing (Tencent)."
+      "members": {
+        "0": {
+          "name": "Mr. Gan",
+          "position": "Founder & CEO",
+          "bio1": "Top-tier expert in the drone and robotics industry with over 15 years of deep experience. Former core member of DJI's intelligent perception system team and architect at Alibaba DAMO Academy.",
+          "bio2": "Led industry-first mass production of 8,000 units/day at DJI and co-founded a robotic lawn mower company that secured investment from Mr. Lei Jun (Xiaomi) and Mr. Zeng Liqing (Tencent)."
+        },
+        "1": {
+          "name": "Randy Ren",
+          "position": "Drone Industry Expert",
+          "bio1": "Randy Ren brings many years of experience in the drone industry, with deep knowledge of drone products and their real-world applications.",
+          "bio2": "At Partdro, he helps customers worldwide select and deploy the right drone solutions for their business."
+        }
+      }
     },
     "values": {
       "title": "Our Values",

@@ -145,10 +145,20 @@
     "team": {
       "title": "Équipe de Direction",
       "subtitle": "L'expertise au service de l'innovation",
-      "name": "M. Gan",
-      "position": "Fondateur et CEO",
-      "bio1": "Expert de premier plan dans l'industrie des drones et de la robotique avec plus de 15 ans d'expérience approfondie. Ancien membre clé de l'équipe des systèmes de perception intelligente de DJI et architecte chez Alibaba DAMO Academy.",
-      "bio2": "A dirigé la production de masse inédite de 8 000 unités/jour chez DJI et a co-fondé une entreprise de tondeuses robotisées qui a obtenu des investissements de M. Lei Jun (Xiaomi) et M. Zeng Liqing (Tencent)."
+      "members": {
+        "0": {
+          "name": "M. Gan",
+          "position": "Fondateur et CEO",
+          "bio1": "Expert de premier plan dans l'industrie des drones et de la robotique avec plus de 15 ans d'expérience approfondie. Ancien membre clé de l'équipe des systèmes de perception intelligente de DJI et architecte chez Alibaba DAMO Academy.",
+          "bio2": "A dirigé la production de masse inédite de 8 000 unités/jour chez DJI et a co-fondé une entreprise de tondeuses robotisées qui a obtenu des investissements de M. Lei Jun (Xiaomi) et M. Zeng Liqing (Tencent)."
+        },
+        "1": {
+          "name": "Randy Ren",
+          "position": "Expert de l'Industrie des Drones",
+          "bio1": "Randy Ren possède de nombreuses années d'expérience dans l'industrie des drones, avec une connaissance approfondie des produits drones et de leurs applications réelles.",
+          "bio2": "Chez Partdro, il aide les clients du monde entier à choisir et déployer la solution drone adaptée à leur activité."
+        }
+      }
     },
     "values": {
       "title": "Nos Valeurs",

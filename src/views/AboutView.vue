@@ -4,11 +4,11 @@
     <section class="hero-section">
       <div class="hero-image-container">
         <img
-          :src="imgEdit('/images/about-hero.png', 'about.hero.img')"
-          alt="Partdro AgriTech - About Us"
+          :src="imgEdit('/images/c500-delivery-drone/hero.png', 'about.hero.img')"
+          alt="Partdro - About Us"
           class="hero-img"
           data-edit-img="about.hero.img"
-          @error="(e) => handleImageError(e, '/images/3U9A0093.webp')"
+          @error="(e) => handleImageError(e, '/images/placeholder.svg')"
         />
         <div class="hero-overlay">
           <h1 class="hero-title" :data-edit-key="'about.hero.title'">{{ t('about.hero.title') }}</h1>
@@ -31,10 +31,10 @@
           </div>
           <div class="intro-image">
             <img
-              :src="imgEdit('/images/about-intro.png', 'about.intro.img')"
-              alt="Agricultural Technology"
+              :src="imgEdit('/images/y160-delivery-drone/hero.png', 'about.intro.img')"
+              alt="Partdro drone technology"
               data-edit-img="about.intro.img"
-              @error="(e) => handleImageError(e, '/images/harvest-1543064.webp')"
+              @error="(e) => handleImageError(e, '/images/placeholder.svg')"
             />
           </div>
         </div>
@@ -55,7 +55,7 @@
             class="timeline-item"
           >
             <div class="timeline-logo">
-              <img :src="item.logo" :alt="item.title" @error="(e) => e.target.src = item.logo.replace('.webp', '.png')" />
+              <FlagOutlined class="timeline-logo-icon" />
             </div>
             <div class="timeline-year" :data-edit-key="`about.journey.items.${index}.year`">{{ item.year }}</div>
             <div class="timeline-content">
@@ -75,23 +75,17 @@
           <p class="section-subtitle" :data-edit-key="'about.team.subtitle'">{{ t('about.team.subtitle') }}</p>
         </div>
         <div class="team-grid">
-          <div
-            class="team-card"
-          >
+          <div v-for="(m, index) in teamMembers" :key="index" class="team-card">
             <div class="team-image">
-              <img
-                :src="imgEdit('/images/mr-gan-founder.webp', 'about.team.img')"
-                alt="Mr. Gan - Founder & CEO of Partdro AgriTech"
-                data-edit-img="about.team.img"
-                @error="(e) => handleImageError(e, '/images/mr-gan-founder.webp')"
-              />
+              <img v-if="m.img" :src="m.img" :alt="m.name" class="team-photo" />
+              <UserOutlined v-else class="team-avatar" />
             </div>
             <div class="team-info">
-              <h3 class="team-name" :data-edit-key="'about.team.name'">{{ t('about.team.name') }}</h3>
-              <p class="team-position" :data-edit-key="'about.team.position'">{{ t('about.team.position') }}</p>
+              <h3 class="team-name" :data-edit-key="`about.team.members.${index}.name`">{{ m.name }}</h3>
+              <p class="team-position" :data-edit-key="`about.team.members.${index}.position`">{{ m.position }}</p>
               <div class="team-bio">
-                <p :data-edit-key="'about.team.bio1'">{{ t('about.team.bio1') }}</p>
-                <p :data-edit-key="'about.team.bio2'">{{ t('about.team.bio2') }}</p>
+                <p :data-edit-key="`about.team.members.${index}.bio1`">{{ m.bio1 }}</p>
+                <p :data-edit-key="`about.team.members.${index}.bio2`">{{ m.bio2 }}</p>
               </div>
             </div>
           </div>
@@ -109,7 +103,7 @@
         <div class="values-grid">
           <div class="value-card" v-for="(value, index) in valueItems" :key="index">
             <div class="value-icon" :class="`value-${index + 1}`">
-              <img :src="value.icon" :alt="value.title" />
+              <component :is="value.icon" />
             </div>
             <h3 class="value-title" :data-edit-key="`about.values.items.${index}.title`">{{ value.title }}</h3>
             <p class="value-description" :data-edit-key="`about.values.items.${index}.desc`">{{ value.desc }}</p>
@@ -128,7 +122,7 @@
         <div class="stats-grid">
           <div class="stat-card" v-for="(stat, index) in statItems" :key="index">
             <div class="stat-icon" :class="`stat-${index + 1}`">
-              <img :src="stat.icon" :alt="stat.title" />
+              <component :is="stat.icon" />
             </div>
             <h3 class="stat-title" :data-edit-key="`about.stats.items.${index}.title`">{{ stat.title }}</h3>
             <p class="stat-description" :data-edit-key="`about.stats.items.${index}.desc`">{{ stat.desc }}</p>
@@ -146,7 +140,7 @@
             {{ t('about.cta.description') }}
           </p>
           <div class="contact-actions">
-            <a-button type="primary" size="large" class="contact-btn" @click="router.push('/contact')">
+            <a-button type="primary" size="large" class="contact-btn" @click="router.push(lp('/contact'))">
               <span :data-edit-key="'about.cta.contactBtn'">{{ t('about.cta.contactBtn') }}</span>
             </a-button>
             <a-button size="large" class="secondary-btn" @click="openWhatsApp">
@@ -169,11 +163,24 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import {
+  FlagOutlined,
+  UserOutlined,
+  TrophyOutlined,
+  TeamOutlined,
+  GlobalOutlined,
+  CustomerServiceOutlined,
+  FieldTimeOutlined,
+  AppstoreOutlined,
+  SafetyCertificateOutlined,
+} from '@ant-design/icons-vue'
 import { trackEvent } from '../composables/useTracking'
 import { imgOverridesByLang } from '../composables/useLandingContent'
+import { useLocalePath } from '../composables/useLocalePath'
 
 const { t, locale } = useI18n()
 const router = useRouter()
+const lp = useLocalePath()
 
 // 通用图片覆盖：key 命中则用覆盖值（完整 URL / / 路径 / 纯文件名）
 function imgEdit(defaultSrc: string, key: string): string {
@@ -181,7 +188,8 @@ function imgEdit(defaultSrc: string, key: string): string {
   const v = overrides[key]
   if (!v) return defaultSrc
   if (v.startsWith('http') || v.startsWith('/')) return v
-  return `/d15r/images/${v}`
+  // about 命名空间的图片在 /images/，不在 /d15r/images/
+  return `/images/${v}`
 }
 
 const handleImageError = (e: Event, fallback: string) => {
@@ -197,30 +205,30 @@ const openWhatsApp = () => {
   window.open(`https://wa.me/8616788684420?text=${encodeURIComponent(message)}`, '_blank')
 }
 
-// 时间线 logo（本地静态资源，非文案）
-const timelineLogos = [
-  '/dji_logo.webp',
-  '/alibaba_damo_academy_logo.webp',
-  '/logo.webp',
-  '/logo.webp',
-]
-
 const journeyItems = computed(() =>
-  timelineLogos.map((logo, i) => ({
-    logo,
+  [0, 1, 2, 3].map((i) => ({
     year: t(`about.journey.items.${i}.year`),
     title: t(`about.journey.items.${i}.title`),
     desc: t(`about.journey.items.${i}.desc`),
   })),
 )
 
-// 价值观图标（本地静态资源，非文案）
-const valueIcons = [
-  '/images/icons/technical-excellence.png',
-  '/images/icons/customer-partnership.png',
-  '/images/icons/market-intelligence.png',
-  '/images/icons/localized-service.png',
-]
+// 团队成员：0 = Mr. Gan（无照片用图标），1 = Randy Ren（照片可被 CMS 覆盖）
+const teamMembers = computed(() =>
+  [0, 1].map((i) => ({
+    name: t(`about.team.members.${i}.name`),
+    position: t(`about.team.members.${i}.position`),
+    bio1: t(`about.team.members.${i}.bio1`),
+    bio2: t(`about.team.members.${i}.bio2`),
+    img:
+      i === 1
+        ? imgEdit('/images/randy-at-dji.webp', 'about.team.members.1.img')
+        : '',
+  })),
+)
+
+// 价值观图标（Ant Design 图标组件）
+const valueIcons = [TrophyOutlined, TeamOutlined, GlobalOutlined, CustomerServiceOutlined]
 
 const valueItems = computed(() =>
   valueIcons.map((icon, i) => ({
@@ -230,13 +238,8 @@ const valueItems = computed(() =>
   })),
 )
 
-// 业绩数据图标（本地静态资源，非文案）
-const statIcons = [
-  '/images/icons/technical-excellence.png',
-  '/images/icons/market-intelligence.png',
-  '/images/icons/localized-service.png',
-  '/images/icons/customer-partnership.png',
-]
+// 业绩数据图标（Ant Design 图标组件）
+const statIcons = [FieldTimeOutlined, AppstoreOutlined, GlobalOutlined, SafetyCertificateOutlined]
 
 const statItems = computed(() =>
   statIcons.map((icon, i) => ({
@@ -420,10 +423,9 @@ const statItems = computed(() =>
   padding-bottom: 20px;
 }
 
-.timeline-logo img {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
+.timeline-logo-icon {
+  font-size: 32px;
+  color: var(--color-primary);
 }
 
 .timeline-year {
@@ -474,8 +476,17 @@ const statItems = computed(() =>
 }
 
 .team-grid {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .team-card {
@@ -494,12 +505,9 @@ const statItems = computed(() =>
   justify-content: center;
 }
 
-.team-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  padding: 20px;
+.team-avatar {
+  font-size: 120px;
+  color: #c9d4dd;
 }
 
 .team-info {
@@ -568,10 +576,9 @@ const statItems = computed(() =>
   background: rgba(24, 136, 200, 0.08);
 }
 
-.value-icon img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+.value-icon .anticon {
+  font-size: 40px;
+  color: var(--color-primary);
 }
 
 .value-1 { background: linear-gradient(135deg, rgba(24, 136, 200, 0.08), rgba(26, 157, 228, 0.12)); }
@@ -627,10 +634,9 @@ const statItems = computed(() =>
   margin-bottom: 16px;
 }
 
-.stat-icon img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
+.stat-icon .anticon {
+  font-size: 48px;
+  color: var(--color-primary);
 }
 
 .stat-title {
@@ -694,9 +700,8 @@ const statItems = computed(() =>
     padding-bottom: 12px;
   }
 
-  .timeline-logo img {
-    width: 30px;
-    height: 30px;
+  .timeline-logo-icon {
+    font-size: 20px;
   }
 
   .timeline-year {

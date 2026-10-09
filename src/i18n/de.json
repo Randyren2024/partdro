@@ -145,10 +145,20 @@
     "team": {
       "title": "Führungsteam",
       "subtitle": "Expertise, die Innovation vorantreibt",
-      "name": "Herr Gan",
-      "position": "Gründer & CEO",
-      "bio1": "Spitzenexperte in der Drohnen- und Robotikbranche mit über 15 Jahren tiefgreifender Erfahrung. Ehemaliges Kernmitglied des DJI-Teams für intelligente Wahrnehmungssysteme und Architekt bei Alibaba DAMO Academy.",
-      "bio2": "Leitete die branchenweit erste Massenproduktion von 8.000 Einheiten/Tag bei DJI und war Mitgründer eines Roboter-Rasenmäher-Unternehmens, das Investitionen von Herrn Lei Jun (Xiaomi) und Herrn Zeng Liqing (Tencent) erhielt."
+      "members": {
+        "0": {
+          "name": "Herr Gan",
+          "position": "Gründer & CEO",
+          "bio1": "Spitzenexperte in der Drohnen- und Robotikbranche mit über 15 Jahren tiefgreifender Erfahrung. Ehemaliges Kernmitglied des DJI-Teams für intelligente Wahrnehmungssysteme und Architekt bei Alibaba DAMO Academy.",
+          "bio2": "Leitete die branchenweit erste Massenproduktion von 8.000 Einheiten/Tag bei DJI und war Mitgründer eines Roboter-Rasenmäher-Unternehmens, das Investitionen von Herrn Lei Jun (Xiaomi) und Herrn Zeng Liqing (Tencent) erhielt."
+        },
+        "1": {
+          "name": "Randy Ren",
+          "position": "Drohnenbrachen-Experte",
+          "bio1": "Randy Ren bringt viele Jahre Erfahrung in der Drohnenbranche mit und verfügt über tiefes Wissen über Drohnenprodukte und deren reale Anwendungen.",
+          "bio2": "Bei Partdro hilft er Kunden weltweit, die passende Drohnenlösung für ihr Geschäft auszuwählen und einzusetzen."
+        }
+      }
     },
     "values": {
       "title": "Unsere Werte",
