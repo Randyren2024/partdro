@@ -2,6 +2,7 @@
 import { chromium } from 'playwright'
 
 const port = process.argv[2] || '5173'
+const base = port.startsWith('http') ? port : `http://localhost:${port}`
 const browser = await chromium.launch()
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
 const broken = new Map()
@@ -11,7 +12,7 @@ page.on('response', (res) => {
     broken.set(url, null)
   }
 })
-await page.goto(`http://localhost:${port}/products/c500-delivery-drone`, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => {})
+await page.goto(`${base}/products/c500-delivery-drone`, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => {})
 await page.waitForTimeout(3000)
 // 滚动到底触发懒加载
 await page.evaluate(async () => {
