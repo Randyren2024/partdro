@@ -1,17 +1,52 @@
 // 通过 Kimi WebBridge 抓取 Reddit 搜索 JSON —— 短语查询 + 相关性过滤
 // 用法: node scripts/wb-search-reddit.mjs
+//   可选: --profile cargo   cargo（运载/重载无人机）语义空间（默认 clean 清洗无人机）
+//   可选: --out <path>      输出文件（cargo 默认 data/cargo/posts_webbridge.json）
 //   可选: --queries 5   只跑前5个查询
-//   可选: --no-merge    不合并进 reddit_d15r.json
+//   可选: --no-merge    不合并进 reddit_d15r.json（cargo 默认不合并）
 //   可选: --time all    时间范围: hour/day/week/month/year/all (默认 year)
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs';
 
 const DAEMON = 'http://127.0.0.1:10086/command';
-const SESSION = 'reddit-search';
-const OUT = 'data/reddit_d15r_search.json';
-const MERGE_FILE = 'data/reddit_d15r.json';
+
+const args = process.argv.slice(2);
+const arg = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 && args[i + 1] ? args[i + 1] : d; };
+const profile = arg('profile', 'clean');
+const SESSION = profile === 'cargo' ? 'reddit-cargo' : 'reddit-search';
+const OUT = arg('out', profile === 'cargo' ? 'data/cargo/posts_webbridge.json' : 'data/reddit_d15r_search.json');
+const MERGE_FILE = profile === 'cargo' ? null : 'data/reddit_d15r.json';
+
+// cargo（运载/重载无人机）查询矩阵：新鲜帖优先
+const QUERIES_CARGO = [
+  '"cargo drone"', '"cargo drones"', '"heavy lift drone"', '"heavy-lift drone"',
+  '"heavy lifting drone"', '"heavy payload drone"', '"payload drone"', '"drone payload"',
+  '"drone delivery"', '"delivery drone"', '"drone logistics"', '"drone freight"',
+  '"drone transport"', '"drone cargo"', '"drone that can lift"', '"drone that can carry"',
+  '"payload drop"', '"drone winch"', '"heavy lift" drone', '"heavy payload" drone',
+  '"drone delivery business"', '"drone delivery startup"',
+  '"agricultural drone"', '"spraying drone"',
+  'FlyCart', 'Zipline drone', 'Wingcopter', 'Matternet', 'EHang drone',
+  '"Elroy Air"', 'Dronamics', 'Sabrewing', 'Flytrex', 'Freefly', 'Agras',
+  'Volocopter', '"Manna drone"', 'JOUAV',
+];
+
+// cargo 相关性词表（与 collect_pullpush_curl.mjs 保持一致）
+const CARGO_KEEP = [
+  'cargo', 'payload', 'heavy lift', 'heavy-lift', 'heavy lifting', 'deliver', 'delivery',
+  'logistics', 'freight', 'transport', 'carry', 'carries', 'haul', 'shipping', 'parcel',
+  'package', 'supply drop', 'last mile', 'last-mile', 'spray', 'agricultur', 'crop',
+  ' kg', 'kgs', 'kilogram', 'pounds', ' lbs', 'lift capacity', 'lifting capacity',
+  'payload capacity',
+];
+const CARGO_BRANDS = [
+  'flycart', 'zipline', 'wingcopter', 'matternet', 'ehang', 'elroy air', 'dronamics',
+  'sabrewing', 'flytrex', 'freefly', 'gryphon dynamics', 'inspired flight', 'skyfront',
+  'jouav', 'agras', 'volocopter', 'manna drone', 'prime air', 'malloy aeronautics',
+];
+const CARGO_NOISE_RE = /light ?show|firework|shahed|kamikaze|loitering muni|missile|armed drone|attack drone|airsoft|contraband|smuggl|star citizen|elite dangerous|space engineers|factorio|kerbal|war thunder|helldivers|death stranding|murder drones|\bgta\b|prison/;
 
 // 短语查询（带引号强制精确匹配）+ 单独的 subreddit 限定搜索
-const QUERIES = [
+const QUERIES_CLEAN = [
   '"window cleaning drone"',
   '"window washing drone"',
   '"drone window cleaning"',
@@ -42,11 +77,12 @@ const CLEANING_TERMS = [
   'drone pressure', 'drone power', 'drone soft', 'drone cleaning',
   'clean drone', 'drone wash', 'wash drone',
 ];
-const SUBJECT_TERMS = ['drone', 'uav'];
-const BRAND_TERMS = ['jiusi', 'aerones', 'lucid bot', 'lucidbot'];
+const SUBJECT_TERMS = profile === 'cargo'
+  ? ['drone', 'drones', 'uav', 'uas', 'vtol', 'multirotor', 'copter', 'drohne']
+  : ['drone', 'uav'];
+const BRAND_TERMS = profile === 'cargo' ? CARGO_BRANDS : ['jiusi', 'aerones', 'lucid bot', 'lucidbot'];
 
-const args = process.argv.slice(2);
-const arg = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 && args[i + 1] ? args[i + 1] : d; };
+const QUERIES = profile === 'cargo' ? QUERIES_CARGO : QUERIES_CLEAN;
 const maxQueries = parseInt(arg('queries', String(QUERIES.length)), 10);
 const timeRange = arg('time', 'year');
 const doMerge = !args.includes('--no-merge');
@@ -107,6 +143,12 @@ function makeFetchCode(query, time) {
 
 function relevant(p) {
   const t = `${p.title} ${p.selftext}`.toLowerCase();
+  if (profile === 'cargo') {
+    if (CARGO_NOISE_RE.test(t)) return false;
+    // 品牌查询直接通过
+    if (CARGO_BRANDS.some(w => t.includes(w))) return true;
+    return SUBJECT_TERMS.some(w => t.includes(w)) && CARGO_KEEP.some(w => t.includes(w));
+  }
   // 品牌查询直接通过
   if (BRAND_TERMS.some(w => t.includes(w))) return true;
   return SUBJECT_TERMS.some(w => t.includes(w)) && CLEANING_TERMS.some(w => t.includes(w));
@@ -122,7 +164,7 @@ console.log(`Queries: ${queries.length}, time: ${timeRange}, merge: ${doMerge}`)
 
 console.log('\n[health] checking daemon...');
 try {
-  const nav = await cmd('navigate', { url: 'https://www.reddit.com', newTab: true, group_title: 'Reddit Search' });
+  const nav = await cmd('navigate', { url: 'https://www.reddit.com', newTab: true, group_title: profile === 'cargo' ? 'Reddit cargo 搜索' : 'Reddit Search' });
   if (!nav.ok && !nav.success) throw new Error('navigate failed');
   console.log('[health] daemon OK, tab opened');
 } catch (e) {
@@ -167,7 +209,7 @@ const newSubs = [...collected.values()];
 
 let mergedTotal = newSubs.length;
 let mergedFile = null;
-if (doMerge && existsSync(MERGE_FILE)) {
+if (doMerge && MERGE_FILE && existsSync(MERGE_FILE)) {
   mergedFile = JSON.parse(readFileSync(MERGE_FILE, 'utf8'));
   const existing = new Map((mergedFile.submissions || []).map(s => [s.id, s]));
   let added = 0;

@@ -70,7 +70,7 @@
         </div>
 
         <div class="footer__bottom">
-          <p>&copy; {{ currentYear }} Partdro. {{ t('footer.copyright') }}</p>
+          <p>&copy; {{ currentYear }} Drone World Partdro. {{ t('footer.copyright') }}</p>
         </div>
       </div>
     </footer>

@@ -2,18 +2,29 @@
 """
 Merge all Reddit cleaning-drone data into unified JSON files.
 
+Usage: python scripts/merge_data.py [--profile clean|cargo] [--dir data/v2_deep]
+  clean（默认）: data/merged_posts.json + data/merged_comments.json（旧校验 + 归档逻辑）
+  cargo:        <dir>/merged_posts.json（跳过评论合并/旧校验/归档）
+
 Outputs:
-  data/merged_posts.json   — all unique posts (clean + filtered)
-  data/merged_comments.json — all comment files combined by post ID
+  merged_posts.json   — all unique posts (clean + filtered)
+  merged_comments.json — all comment files combined by post ID (clean only)
 """
 
 import json
 import os
 import re
+import sys
 from datetime import datetime, timezone
 
+args = sys.argv[1:]
+def _arg(name, default):
+    return args[args.index(name) + 1] if name in args and args.index(name) + 1 < len(args) else default
+
+PROFILE = _arg('--profile', 'clean')
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
-V2_DIR = os.path.join(DATA_DIR, 'v2_deep')
+V2_DIR = _arg('--dir', 'data/v2_deep')
+OUT_DIR = V2_DIR if PROFILE == 'cargo' else DATA_DIR
 
 def load_json(path):
     with open(path) as f:
@@ -27,7 +38,8 @@ def safe_utc(val):
 
 # --- Step 1: Merge posts ---
 pp = load_json(os.path.join(V2_DIR, 'posts_pullpush.json'))
-wb = load_json(os.path.join(V2_DIR, 'posts_webbridge.json'))
+wb_path = os.path.join(V2_DIR, 'posts_webbridge.json')
+wb = load_json(wb_path) if os.path.exists(wb_path) else {'submissions': [], 'total': 0}
 clean = load_json(os.path.join(V2_DIR, 'posts_all.json'))
 clean_ids = {s['id'] for s in clean['submissions']}
 
@@ -57,68 +69,76 @@ merged_posts = {
     'submissions': posts_list,
 }
 
-out_posts = os.path.join(DATA_DIR, 'merged_posts.json')
+out_posts = os.path.join(OUT_DIR, 'merged_posts.json')
 with open(out_posts, 'w') as f:
     json.dump(merged_posts, f, ensure_ascii=False, indent=2)
-print(f'merged_posts.json: {len(posts_list)} posts ({clean_count} clean + {filtered_count} filtered)')
+print(f'{out_posts}: {len(posts_list)} posts ({clean_count} clean + {filtered_count} filtered)')
 
-# --- Step 2: Merge comments ---
-comment_files = sorted([
-    f for f in os.listdir(DATA_DIR)
-    if f.startswith('reddit_post_') and f.endswith('_comments.json')
-])
-
-merged_comments = {}
-for cf in comment_files:
-    data = load_json(os.path.join(DATA_DIR, cf))
-    post_url = data.get('post_url', '')
-    match = re.search(r'/comments/([a-z0-9]+)/', post_url)
-    post_id = match.group(1) if match else cf.replace('reddit_post_', '').replace('_comments.json', '')
-    merged_comments[post_id] = {
-        'post_url': post_url,
-        'post_title': data.get('post_title', ''),
-        'source': data.get('source', 'unknown'),
-        'fetched_at': data.get('fetched_at', ''),
-        'comment_count': data.get('comment_count', len(data.get('comments', []))),
-        'comments': data.get('comments', []),
-    }
-
-out_comments = os.path.join(DATA_DIR, 'merged_comments.json')
-with open(out_comments, 'w') as f:
-    json.dump(merged_comments, f, ensure_ascii=False, indent=2)
-total_comments = sum(c['comment_count'] for c in merged_comments.values())
-print(f'merged_comments.json: {len(merged_comments)} posts, {total_comments} comments')
-
-# --- Step 3: Validation ---
-errors = []
-if len(posts_list) != 1561:
-    errors.append(f'Expected 1561 total posts, got {len(posts_list)}')
-if filtered_count != 541:
-    errors.append(f'Expected 541 filtered posts, got {filtered_count}')
-if len(merged_comments) != 6:
-    errors.append(f'Expected 6 comment entries, got {len(merged_comments)}')
-missing_clean = clean_ids - set(all_posts.keys())
-if missing_clean:
-    errors.append(f'{len(missing_clean)} clean posts missing from merged')
-if len(posts_list) != len(set(p['id'] for p in posts_list)):
-    errors.append('Duplicate post IDs found!')
-
-if errors:
-    print('\nVALIDATION ERRORS:')
-    for e in errors:
-        print(f'  - {e}')
+# --- Step 2: Merge comments (clean profile only) ---
+if PROFILE == 'cargo':
+    print('cargo profile: skip comments merge (comments phase handled separately)')
 else:
-    print('\nValidation passed.')
+    comment_files = sorted([
+        f for f in os.listdir(DATA_DIR)
+        if f.startswith('reddit_post_') and f.endswith('_comments.json')
+    ])
 
-# --- Step 4: Archive old files ---
-archive_dir = os.path.join(DATA_DIR, 'archive')
-os.makedirs(archive_dir, exist_ok=True)
-archived = []
-for af in ['reddit_d15r.json', 'reddit_d15r_search.json', 'reddit_d15r.csv', 'reddit_d15r_search.csv']:
-    src = os.path.join(DATA_DIR, af)
-    if os.path.exists(src):
-        os.rename(src, os.path.join(archive_dir, af))
-        archived.append(af)
-        print(f'Archived: {af}')
-if not archived:
-    print('No files to archive.')
+    merged_comments = {}
+    for cf in comment_files:
+        data = load_json(os.path.join(DATA_DIR, cf))
+        post_url = data.get('post_url', '')
+        match = re.search(r'/comments/([a-z0-9]+)/', post_url)
+        post_id = match.group(1) if match else cf.replace('reddit_post_', '').replace('_comments.json', '')
+        merged_comments[post_id] = {
+            'post_url': post_url,
+            'post_title': data.get('post_title', ''),
+            'source': data.get('source', 'unknown'),
+            'fetched_at': data.get('fetched_at', ''),
+            'comment_count': data.get('comment_count', len(data.get('comments', []))),
+            'comments': data.get('comments', []),
+        }
+
+    out_comments = os.path.join(OUT_DIR, 'merged_comments.json')
+    with open(out_comments, 'w') as f:
+        json.dump(merged_comments, f, ensure_ascii=False, indent=2)
+    total_comments = sum(c['comment_count'] for c in merged_comments.values())
+    print(f'{out_comments}: {len(merged_comments)} posts, {total_comments} comments')
+
+# --- Step 3: Validation (clean profile only; cargo numbers grow per batch) ---
+if PROFILE == 'clean':
+    errors = []
+    if len(posts_list) != 1561:
+        errors.append(f'Expected 1561 total posts, got {len(posts_list)}')
+    if filtered_count != 541:
+        errors.append(f'Expected 541 filtered posts, got {filtered_count}')
+    if len(merged_comments) != 6:
+        errors.append(f'Expected 6 comment entries, got {len(merged_comments)}')
+    missing_clean = clean_ids - set(all_posts.keys())
+    if missing_clean:
+        errors.append(f'{len(missing_clean)} clean posts missing from merged')
+    if len(posts_list) != len(set(p['id'] for p in posts_list)):
+        errors.append('Duplicate post IDs found!')
+
+    if errors:
+        print('\nVALIDATION ERRORS:')
+        for e in errors:
+            print(f'  - {e}')
+    else:
+        print('\nValidation passed.')
+else:
+    dup = len(posts_list) - len(set(p['id'] for p in posts_list))
+    print(f'\ncargo validation: {"OK" if dup == 0 else f"{dup} duplicate IDs!"} (total {len(posts_list)})')
+
+# --- Step 4: Archive old files (clean profile only) ---
+if PROFILE == 'clean':
+    archive_dir = os.path.join(DATA_DIR, 'archive')
+    os.makedirs(archive_dir, exist_ok=True)
+    archived = []
+    for af in ['reddit_d15r.json', 'reddit_d15r_search.json', 'reddit_d15r.csv', 'reddit_d15r_search.csv']:
+        src = os.path.join(DATA_DIR, af)
+        if os.path.exists(src):
+            os.rename(src, os.path.join(archive_dir, af))
+            archived.append(af)
+            print(f'Archived: {af}')
+    if not archived:
+        print('No files to archive.')

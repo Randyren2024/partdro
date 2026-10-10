@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 # 生成分析 digest：按时间倒序，每帖一行压缩格式，供 AI 分批细读
-# 用法: python3 scripts/make_digest.py [批数]  （默认 4）
+# 用法: python3 scripts/make_digest.py [批数] [--dir data/v2_deep]  （默认 4 批）
 import json, sys
 
-parts = int(sys.argv[1]) if len(sys.argv) > 1 else 4
+args = sys.argv[1:]
+parts = int(args[0]) if args and args[0].isdigit() else 4
+DIR = args[args.index('--dir') + 1] if '--dir' in args and args.index('--dir') + 1 < len(args) else 'data/v2_deep'
 
-data = json.load(open('data/v2_deep/posts_all.json'))
+data = json.load(open(f'{DIR}/posts_all.json'))
 posts = [p for p in data['submissions'] if p.get('created_utc')]
 for p in posts:
     try:
@@ -33,7 +35,7 @@ for i in range(parts):
         if body:
             line += f" || {body}"
         lines.append(line)
-    open(f'data/v2_deep/digest_part{i+1}.txt', 'w').write('\n'.join(lines))
+    open(f'{DIR}/digest_part{i+1}.txt', 'w').write('\n'.join(lines))
     print(f'digest_part{i+1}.txt: {len(part)} 帖, {sum(len(l) for l in lines)//1024}KB')
 
 # 高价值样本（score>=10 或 评论>=10 单独一份细读）
@@ -49,5 +51,5 @@ for j, p in enumerate(hi):
     if body:
         line += f" || {body}"
     lines.append(line)
-open('data/v2_deep/digest_highvalue.txt', 'w').write('\n'.join(lines))
+open(f'{DIR}/digest_highvalue.txt', 'w').write('\n'.join(lines))
 print(f'digest_highvalue.txt: {len(hi)} 帖 (score>=10 或评论>=10), {sum(len(l) for l in lines)//1024}KB')

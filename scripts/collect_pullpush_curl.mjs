@@ -4,12 +4,15 @@
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
-const DIR = 'data/v2_deep';
-const LEGACY_FILES = ['data/reddit_d15r.json', 'data/reddit_d15r_search.json'];
-const DUMP_FILE = `${DIR}/posts_pullpush.json`;
-
 const args = process.argv.slice(2);
 const arg = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 && args[i + 1] ? args[i + 1] : d; };
+// --profile clean（默认，清洗无人机）| cargo（运载/重载无人机）
+// --dir 数据目录：clean 默认 data/v2_deep，cargo 默认 data/cargo
+const profile = arg('profile', 'clean');
+const DIR = arg('dir', profile === 'cargo' ? 'data/cargo' : 'data/v2_deep');
+const LEGACY_FILES = profile === 'cargo' ? [] : ['data/reddit_d15r.json', 'data/reddit_d15r_search.json'];
+const DUMP_FILE = `${DIR}/posts_pullpush.json`;
+
 const fromIdx = parseInt(arg('from', '0'), 10);
 const toIdx = parseInt(arg('to', '99999'), 10);
 const pages = parseInt(arg('pages', '2'), 10);
@@ -19,7 +22,7 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 // ---------- 查询列表（与 collect_v2.mjs 对齐，索引一致） ----------
 const BRANDS = ['aerones', 'lucidbot', 'lucid bots', 'jiusi', 'apellix', 'lavo bot', 'sherpa drone'];
-const QUERIES = [
+const QUERIES_CLEAN = [
   { q: '"window cleaning drone"', lang: 'en' }, { q: '"window washing drone"', lang: 'en' },
   { q: '"drone window cleaning"', lang: 'en' }, { q: '"drone window washing"', lang: 'en' },
   { q: '"facade cleaning drone"', lang: 'en' }, { q: '"drone facade cleaning"', lang: 'en' },
@@ -100,6 +103,94 @@ const CLEAN_EN = [
   'drones cleaning', 'cleaning robots',
 ];
 
+// ---------- cargo（运载/重载无人机）语义空间 ----------
+const CARGO_BRANDS = [
+  'flycart', 'zipline', 'wingcopter', 'matternet', 'ehang', 'elroy air', 'dronamics',
+  'sabrewing', 'flytrex', 'freefly', 'gryphon dynamics', 'inspired flight', 'skyfront',
+  'jouav', 'agras', 'volocopter', 'manna drone', 'prime air', 'malloy aeronautics',
+];
+
+const CARGO_QUERIES = [
+  // EN 核心：运载/重载/物流/交付
+  { q: '"cargo drone"', lang: 'en' }, { q: '"cargo drones"', lang: 'en' },
+  { q: '"drone cargo"', lang: 'en' }, { q: '"heavy lift drone"', lang: 'en' },
+  { q: '"heavy lift drones"', lang: 'en' }, { q: '"heavy-lift drone"', lang: 'en' },
+  { q: '"heavy lifting drone"', lang: 'en' }, { q: '"heavy payload drone"', lang: 'en' },
+  { q: '"payload drone"', lang: 'en' }, { q: '"drone payload"', lang: 'en' },
+  { q: '"drone delivery"', lang: 'en' }, { q: '"delivery drone"', lang: 'en' },
+  { q: '"delivery drones"', lang: 'en' }, { q: '"drone logistics"', lang: 'en' },
+  { q: '"drone freight"', lang: 'en' }, { q: '"drone transport"', lang: 'en' },
+  { q: '"heavy drone"', lang: 'en' }, { q: '"drone that can carry"', lang: 'en' },
+  { q: '"drone that can lift"', lang: 'en' }, { q: '"payload drop"', lang: 'en' },
+  { q: '"drone winch"', lang: 'en' }, { q: '"heavy lift" drone', lang: 'en' },
+  { q: '"heavy payload" drone', lang: 'en' }, { q: '"drone delivery business"', lang: 'en' },
+  { q: '"drone delivery startup"', lang: 'en' },
+  // 邻近需求：农业重载（喷洒/吊运）
+  { q: '"agricultural drone"', lang: 'en' }, { q: '"spraying drone"', lang: 'en' },
+  // 竞品/玩家品牌
+  { q: 'FlyCart', lang: 'en' }, { q: '"DJI FlyCart"', lang: 'en' }, { q: 'Zipline', lang: 'en' },
+  { q: 'Wingcopter', lang: 'en' }, { q: 'Matternet', lang: 'en' }, { q: 'EHang', lang: 'en' },
+  { q: '"Elroy Air"', lang: 'en' }, { q: 'Dronamics', lang: 'en' }, { q: 'Sabrewing', lang: 'en' },
+  { q: 'Flytrex', lang: 'en' }, { q: '"Prime Air" drone', lang: 'en' }, { q: 'Freefly', lang: 'en' },
+  { q: '"Gryphon Dynamics"', lang: 'en' }, { q: '"Inspired Flight"', lang: 'en' },
+  { q: 'Skyfront', lang: 'en' }, { q: 'JOUAV', lang: 'en' }, { q: 'Agras', lang: 'en' },
+  { q: 'Volocopter', lang: 'en' }, { q: '"Manna drone"', lang: 'en' },
+  // 行业子版：物流/供应链/农业/建筑/创业
+  { q: 'cargo', sub: 'drones', lang: 'en' }, { q: 'payload', sub: 'drones', lang: 'en' },
+  { q: '"heavy lift"', sub: 'drones', lang: 'en' }, { q: '"heavy lift"', sub: 'Multicopter', lang: 'en' },
+  { q: 'payload', sub: 'Multicopter', lang: 'en' }, { q: 'cargo', sub: 'diydrones', lang: 'en' },
+  { q: '"heavy lift"', sub: 'diydrones', lang: 'en' }, { q: 'delivery', sub: 'drones', lang: 'en' },
+  { q: 'delivery', sub: 'diydrones', lang: 'en' }, { q: 'drone', sub: 'logistics', lang: 'en' },
+  { q: 'drone', sub: 'supplychain', lang: 'en' }, { q: 'drone', sub: 'FreightBrokers', lang: 'en' },
+  { q: 'drone', sub: 'farming', lang: 'en' }, { q: 'drone', sub: 'agriculture', lang: 'en' },
+  { q: 'drone', sub: 'Construction', lang: 'en' }, { q: 'drone', sub: 'Entrepreneur', lang: 'en' },
+  { q: 'drone', sub: 'sweatystartup', lang: 'en' }, { q: 'spray', sub: 'drones', lang: 'en' },
+  { q: 'agricultural', sub: 'drones', lang: 'en' }, { q: 'cargo', sub: 'dronedelivery', lang: 'en' },
+  { q: 'delivery', sub: 'drone_delivery', lang: 'en' },
+  // 多语种
+  { q: '"dron de carga"', lang: 'es' }, { q: '"drones de carga"', lang: 'es' },
+  { q: '"entrega con drones"', lang: 'es' }, { q: '"dron agrícola"', lang: 'es' },
+  { q: '"drone de livraison"', lang: 'fr' }, { q: '"livraison par drone"', lang: 'fr' },
+  { q: '"Lieferdrohne"', lang: 'de' }, { q: '"Lastendrohne"', lang: 'de' },
+  { q: '"Transportdrohne"', lang: 'de' }, { q: '"consegna con drone"', lang: 'it' },
+  { q: '"drone per consegne"', lang: 'it' },
+  // ---- 批次2（索引78+）：C500 工业重载场景（木材/吊装/应急/高山运输） ----
+  { q: '"logging drone"', lang: 'en' }, { q: '"drone logging"', lang: 'en' },
+  { q: '"forestry drone"', lang: 'en' }, { q: '"timber" drone', lang: 'en' },
+  { q: '"drone lifting"', lang: 'en' }, { q: '"lifting drone"', lang: 'en' },
+  { q: '"drone hoist"', lang: 'en' }, { q: '"flying crane"', lang: 'en' },
+  { q: '"drone crane"', lang: 'en' }, { q: '"drone hauling"', lang: 'en' },
+  { q: '"drone transport" heavy', lang: 'en' },
+  { q: '"disaster relief" drone', lang: 'en' }, { q: '"humanitarian drone"', lang: 'en' },
+  { q: '"drone aid delivery"', lang: 'en' },
+  { q: '"cargo drone" mountain', lang: 'en' }, { q: '"heavy lift drone" mountains', lang: 'en' },
+  { q: '"drone" "off-grid" cargo', lang: 'en' },
+  { q: 'BVLOS cargo', lang: 'en' }, { q: '"drone cargo" FAA', lang: 'en' },
+  { q: '"Malloy Aeronautics"', lang: 'en' },
+];
+
+const CARGO_KEEP = [
+  'cargo', 'payload', 'heavy lift', 'heavy-lift', 'heavy lifting', 'deliver', 'delivery',
+  'logistics', 'freight', 'transport', 'carry', 'carries', 'haul', 'shipping', 'parcel',
+  'package', 'supply drop', 'last mile', 'last-mile', 'spray', 'agricultur', 'crop',
+  ' kg', 'kgs', 'kilogram', 'pounds', ' lbs', 'lift capacity', 'lifting capacity',
+  'payload capacity',
+];
+
+// 军事攻击/光秀/游戏/走私等噪音，无条件排除
+const CARGO_NOISE_RE = /light ?show|firework|shahed|kamikaze|loitering muni|missile|armed drone|attack drone|airsoft|contraband|smuggl|star citizen|elite dangerous|space engineers|factorio|kerbal|war thunder|helldivers|death stranding|murder drones|\bgta\b|prison/;
+
+function cargoRelevant(p) {
+  const t = `${p.title} ${p.selftext}`.toLowerCase();
+  if (CARGO_NOISE_RE.test(t)) return false;
+  if (CARGO_BRANDS.some(b => t.includes(b))) return true;
+  const hasSubject = /drone|drones|uav|uas\b|quadcopter|multirotor|hexacopter|octocopter|copter|vtol|fixed.?wing|drohne|dron\b|lieferdrohne|lastendrohne|transportdrohne/.test(t);
+  if (!hasSubject) return false;
+  return CARGO_KEEP.some(c => t.includes(c));
+}
+
+const QUERIES = profile === 'cargo' ? CARGO_QUERIES : QUERIES_CLEAN;
+
 function detectLang(t) {
   if (/limpieza|limpiar/.test(t)) return 'es';
   if (/nettoyage|nettoyer/.test(t)) return 'fr';
@@ -109,6 +200,7 @@ function detectLang(t) {
 }
 
 function relevant(p) {
+  if (profile === 'cargo') return cargoRelevant(p);
   const t = `${p.title} ${p.selftext}`.toLowerCase();
   // 排除噪音：扫地拖地机器人 + Ozmo网球记者/动画角色 + Anybots杂谈（除非同时涉及窗墙/光伏/高楼/无人机）
   if (/\bozmo\b|deebot|ecovacs|yeedi|roborock|roomba|irobot|robot vacuum|robot mop|mopping|anybots/.test(t) && !/window|facade|solar|skyscraper|high ?rise|drone|uav/.test(t)) return false;
