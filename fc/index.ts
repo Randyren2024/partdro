@@ -5,11 +5,7 @@ import { handler as landingContentHandler } from '../netlify/functions/landing-c
 import { handler as adminProductsHandler } from '../netlify/functions/admin-products'
 import { handler as sitemapHandler } from '../netlify/functions/sitemap'
 
-const CORS_HEADERS: Record<string, string> = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
-  'Access-Control-Allow-Headers': 'Authorization,Content-Type',
-}
+// CORS 统一由 FC 触发器 corsConfig 处理（函数再返回 Allow-Origin 会重复冲突）
 
 interface FcHttpEvent {
   path?: string
@@ -43,12 +39,15 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
   const method = (fcEvent.httpMethod || fcEvent.requestContext?.http?.method || 'GET').toUpperCase()
 
   if (method === 'OPTIONS') {
-    return { statusCode: 204, headers: CORS_HEADERS, body: '' }
+    return { statusCode: 204, body: '' }
   }
 
   const event: NetlifyEvent = {
     httpMethod: method,
-    headers: fcEvent.headers || {},
+    // FC 保留 header 原始大小写（Accept/User-Agent），统一小写以兼容大小写敏感查找
+    headers: Object.fromEntries(
+      Object.entries(fcEvent.headers || {}).map(([k, v]) => [k.toLowerCase(), v]),
+    ),
     body: fcEvent.body ?? null,
     isBase64Encoded: !!fcEvent.isBase64Encoded,
   }
@@ -64,5 +63,5 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
     res = { statusCode: 404, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'Not found' }) }
   }
 
-  return { ...res, headers: { ...(res.headers || {}), ...CORS_HEADERS } }
+  return res
 }
