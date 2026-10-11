@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-fc
 /product_files/
 *.log
 .DS_Store
