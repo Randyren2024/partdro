@@ -59,4 +59,7 @@ jobs:
           aliyun fc PUT "/2023-03-30/functions/${{ secrets.ALIYUN_FC_FUNCTION }}" \
             --region cn-hongkong \
             --header "Content-Type=application/json" \
+            --retry-count 3 \
+            --read-timeout 120 \
+            --connect-timeout 30 \
             --body "{\"code\":{\"ossBucketName\":\"${{ secrets.ALIYUN_OSS_BUCKET }}\",\"ossObjectName\":\"fc-code.zip\"}}"
