@@ -1,0 +1,39 @@
+name: h2 test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: curl h2 tests
+        run: |
+          set -x
+          curl -sS -o /dev/null -w "custom h2: %{http_version} %{http_code}\n" --http2 https://www.droneworld.tech/ --max-time 30 || true
+          curl -sS -o /dev/null -w "bucket h2: %{http_version} %{http_code}\n" --http2 https://partdro-site.oss-cn-hongkong.aliyuncs.com/ --max-time 30 || true
+          curl -sS -o /dev/null -w "aliyun h2: %{http_version} %{http_code}\n" --http2 https://www.aliyun.com/ --max-time 30 || true
+          curl -sS -o /dev/null -w "custom h1: %{http_version} %{http_code}\n" --http1.1 https://www.droneworld.tech/ --max-time 30 || true
+      - name: node h2 tests
+        run: |
+          cat > /tmp/h2.mjs <<'EOF'
+          import http2 from 'node:http2'
+          async function test(name, authority) {
+            return new Promise(res => {
+              const c = http2.connect('https://' + authority)
+              c.on('error', e => { console.log(name, 'CONN ERROR:', e.message.slice(0,100)); res() })
+              const r = c.request({ ':method': 'GET', ':path': '/', ':scheme': 'https', ':authority': authority })
+              r.on('response', h => console.log(name, 'status:', h[':status']))
+              r.on('end', () => { console.log(name, 'END ok'); c.close(); res() })
+              r.on('error', e => { console.log(name, 'REQ ERROR:', e.message.slice(0,100)); res() })
+              setTimeout(() => { console.log(name, 'TIMEOUT'); res() }, 15000)
+            })
+          }
+          await test('custom-h2', 'www.droneworld.tech')
+          await test('bucket-h2', 'partdro-site.oss-cn-hongkong.aliyuncs.com')
+          await test('aliyun-h2', 'www.aliyun.com')
+          EOF
+          node /tmp/h2.mjs
