@@ -49,6 +49,8 @@ jobs:
             --delete -e oss-cn-hongkong.aliyuncs.com -f
 
       - name: Build FC bundle
+        env:
+          ALIYUN_OSS_BUCKET: ${{ secrets.ALIYUN_OSS_BUCKET }}
         run: |
           node scripts/build-fc.mjs
           (cd dist-fc && zip -q -r fc-code.zip index.js)
