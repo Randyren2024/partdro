@@ -33,30 +33,26 @@ jobs:
 
       - name: Install Aliyun CLI
         run: |
-          curl -sL https://github.com/aliyun/aliyun-cli/releases/download/v3.5.1/aliyun-cli-linux-3.5.1.tgz -o /tmp/aliyun-cli.tgz
+          curl -sL https://github.com/aliyun/aliyun-cli/releases/download/v3.5.1/aliyun-cli-linux-3.5.1-amd64.tgz -o /tmp/aliyun-cli.tgz
           tar -xzf /tmp/aliyun-cli.tgz -C /tmp
           sudo install /tmp/aliyun /usr/local/bin/aliyun
-          aliyun configure --mode AK \
-            --aki "${{ secrets.ALIYUN_AK }}" \
-            --skey "${{ secrets.ALIYUN_SK }}" \
+          aliyun configure set --mode AK \
+            --access-key-id "${{ secrets.ALIYUN_AK }}" \
+            --access-key-secret "${{ secrets.ALIYUN_SK }}" \
             --region cn-hongkong
-
-      - name: Install ossutil
-        run: |
-          curl -sL https://gosspublic.alicdn.com/ossutil/1.7.19/ossutil64 -o /tmp/ossutil64
-          chmod +x /tmp/ossutil64
-          /tmp/ossutil64 config -e oss-cn-hongkong.aliyuncs.com \
-            -i "${{ secrets.ALIYUN_AK }}" -k "${{ secrets.ALIYUN_SK }}" -f
 
       - name: Build FC bundle
         run: |
           node scripts/build-fc.mjs
           (cd dist-fc && zip -q -r fc-code.zip index.js)
-          /tmp/ossutil64 cp dist-fc/fc-code.zip "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/fc-code.zip" --force
+          aliyun oss cp dist-fc/fc-code.zip \
+            "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/fc-code.zip" \
+            -e oss-cn-hongkong.aliyuncs.com -f
 
       - name: Sync dist to OSS
         run: |
-          /tmp/ossutil64 sync dist/ "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/" --delete --force
+          aliyun oss sync dist/ "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/" \
+            --delete -e oss-cn-hongkong.aliyuncs.com -f
 
       - name: Deploy FC function code
         run: |
