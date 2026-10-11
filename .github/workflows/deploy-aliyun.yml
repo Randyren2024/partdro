@@ -56,10 +56,18 @@ jobs:
 
       - name: Deploy FC function code
         run: |
-          aliyun fc PUT "/2023-03-30/functions/${{ secrets.ALIYUN_FC_FUNCTION }}" \
-            --region cn-hongkong \
-            --header "Content-Type=application/json" \
-            --retry-count 3 \
-            --read-timeout 120 \
-            --connect-timeout 30 \
-            --body "{\"code\":{\"ossBucketName\":\"${{ secrets.ALIYUN_OSS_BUCKET }}\",\"ossObjectName\":\"fc-code.zip\"}}"
+          for i in 1 2 3 4 5; do
+            if aliyun fc PUT "/2023-03-30/functions/${{ secrets.ALIYUN_FC_FUNCTION }}" \
+              --region cn-hongkong \
+              --header "Content-Type=application/json" \
+              --read-timeout 120 \
+              --connect-timeout 30 \
+              --body "{\"code\":{\"ossBucketName\":\"${{ secrets.ALIYUN_OSS_BUCKET }}\",\"ossObjectName\":\"fc-code.zip\"}}"; then
+              echo "FC code deployed (attempt $i)"
+              exit 0
+            fi
+            echo "attempt $i failed, retrying in 20s..."
+            sleep 20
+          done
+          echo "FC code deploy failed after 5 attempts"
+          exit 1
