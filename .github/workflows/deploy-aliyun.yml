@@ -41,6 +41,11 @@ jobs:
             --access-key-secret "${{ secrets.ALIYUN_SK }}" \
             --region cn-hongkong
 
+      - name: Sync dist to OSS
+        run: |
+          aliyun oss sync dist/ "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/" \
+            --delete -e oss-cn-hongkong.aliyuncs.com -f
+
       - name: Build FC bundle
         run: |
           node scripts/build-fc.mjs
@@ -48,11 +53,6 @@ jobs:
           aliyun oss cp dist-fc/fc-code.zip \
             "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/fc-code.zip" \
             -e oss-cn-hongkong.aliyuncs.com -f
-
-      - name: Sync dist to OSS
-        run: |
-          aliyun oss sync dist/ "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/" \
-            --delete -e oss-cn-hongkong.aliyuncs.com -f
 
       - name: Deploy FC function code
         run: |
