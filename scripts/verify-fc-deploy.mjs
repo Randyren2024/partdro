@@ -153,11 +153,14 @@ await checkFile('/images/news/d15r-cleaning-drone-product-film.jpg', { minBytes:
 
 // --- 故障 D：index.html 双规范 ---
 {
-  const r = await fetchPage('/de/cases/index.html').catch(() => null)
-  if (!r) record('index.html 双规范', 'FAIL', '请求异常')
-  else if (r.status >= 300 && r.status < 400) record('index.html 双规范', 'PASS', `完整路径 301 → 无斜杠 ✓`)
-  else if (r.status === 200 && r.canonical === expectedCanonical('/de/cases')) record('index.html 双规范', 'WARN', `200 直出且 canonical 无斜杠（内容一致，建议后续 301 收敛）`)
-  else record('index.html 双规范', 'FAIL', `HTTP ${r.status} canonical=${r.canonical}（若为首页回退则目录路由仍坏）`)
+  // 手动重定向：fetchPage 的 follow 会把 301 后的 200 误判为"直出"
+  const res = await fetch(SITE + '/de/cases/index.html', { redirect: 'manual' }).catch(() => null)
+  const status = res?.status ?? 0
+  const loc = res?.headers?.get('location') || ''
+  if (!res) record('index.html 双规范', 'FAIL', '请求异常')
+  else if (status >= 300 && status < 400 && loc.endsWith('/de/cases')) record('index.html 双规范', 'PASS', `完整路径 301 → ${loc} ✓`)
+  else if (status === 200) record('index.html 双规范', 'WARN', '200 直出（建议 301 收敛到无斜杠）')
+  else record('index.html 双规范', 'FAIL', `HTTP ${status} loc=${loc}（若为首页回退则目录路由仍坏）`)
 }
 
 // --- 故障 E：http 与裸域重定向 ---
