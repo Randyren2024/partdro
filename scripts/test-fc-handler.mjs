@@ -1,5 +1,7 @@
 // FC handler 本地路由模拟测试（不依赖 OSS 对象内容）
-import { handler } from '../dist-fc/index.js'
+// 本地模拟：OSS 内网 endpoint 仅阿里云内网可达，测试走公网 endpoint
+process.env.OSS_INTERNAL = 'false'
+const { handler } = await import('../dist-fc/index.js')
 
 const ev = (rawPath, method = 'GET', headers = {}) => JSON.stringify({ rawPath, httpMethod: method, headers })
 
@@ -11,6 +13,10 @@ const cases = [
   ['/de/cases', 'POST', [], (r) => r.statusCode === 405],
   ['/api/landing-content', 'OPTIONS', [], (r) => r.statusCode === 204],
   ['/this-does-not-exist', 'GET', [], (r) => r.statusCode === 404 || r.statusCode === 503],
+  // 主机规范化
+  ['/about', 'GET', [['x-forwarded-proto', 'http']], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/about'],
+  ['/about', 'GET', [['host', 'droneworld.tech']], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/about'],
+  ['/about', 'GET', [['host', 'abc.123.cn-hongkong.fc.devsapp.net']], (r) => r.statusCode !== 301],
 ]
 
 let fail = 0

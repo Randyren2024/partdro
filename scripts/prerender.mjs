@@ -121,17 +121,52 @@ async function fetchSitemapSlugs(prefix) {
   }
 }
 
+// 新闻 slug 首选 Supabase 直读：线上 sitemap 来自「上一次部署」，迁移/首部署窗口期
+// 可能 404 或缺新闻条目（本次 FC 切换时 CI 就因此漏渲染了全部新闻页）。
+function loadEnv() {
+  const env = { ...process.env }
+  const envFile = resolve(process.cwd(), '.env')
+  if (existsSync(envFile)) {
+    for (const line of readFileSync(envFile, 'utf8').split('\n')) {
+      const m = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*)\s*$/)
+      if (m && !(m[1] in env)) env[m[1]] = m[2].replace(/^["']|["']$/g, '')
+    }
+  }
+  return env
+}
+
+async function fetchSupabaseNewsSlugs() {
+  const env = loadEnv()
+  const url = env.VITE_SUPABASE_URL || env.SUPABASE_URL
+  const anonKey = env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY
+  if (!url || !anonKey) return []
+  try {
+    const res = await fetch(`${url}/rest/v1/posts?select=slug&published=eq.true`, {
+      headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
+    })
+    if (!res.ok) return []
+    return (await res.json()).map((r) => r.slug).filter(Boolean)
+  } catch (e) {
+    console.warn('[prerender] Supabase 新闻 slug 读取失败:', e.message)
+    return []
+  }
+}
+
 async function collectRoutes() {
   const routes = [...STATIC_ROUTES]
+
+  // C500 Google Ads 落地页：router 静态路径（不在 Supabase products 表，sitemap 抓不到）
+  routes.push('/products/c500-partdro-eavision')
 
   let productSlugs = readInjectedSlugs('/products')
   if (!productSlugs.length) productSlugs = await fetchSitemapSlugs('/products')
   productSlugs = [...new Set(productSlugs)].filter(Boolean)
   for (const s of productSlugs) routes.push(`/products/${s}`)
 
-  // 新闻详情页同样默认预渲染（仅英语）：slug 来自线上 sitemap（Netlify 函数动态读 Supabase），
-  // 因此刚发布的文章在下一次构建即会被渲染，列表页链接也会随之更新。
-  let newsSlugs = await fetchSitemapSlugs('/news')
+  // 新闻详情页同样默认预渲染（仅英语）：slug 首选 Supabase 直读（不受线上部署状态影响），
+  // 失败时回退线上 sitemap。
+  let newsSlugs = await fetchSupabaseNewsSlugs()
+  if (!newsSlugs.length) newsSlugs = await fetchSitemapSlugs('/news')
   newsSlugs = [...new Set(newsSlugs)].filter(Boolean)
   for (const s of newsSlugs) routes.push(`/news/${s}`)
 

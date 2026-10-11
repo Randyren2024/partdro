@@ -63,7 +63,7 @@ interface FcHttpEvent {
   path?: string
   rawPath?: string
   httpMethod?: string
-  requestContext?: { http?: { path?: string; method?: string } }
+  requestContext?: { domainName?: string; http?: { path?: string; method?: string } }
   headers?: Record<string, string>
   body?: string | null
   isBase64Encoded?: boolean
@@ -173,7 +173,10 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
     return { statusCode: 204, body: '' }
   }
 
-  const host = fcEvent.headers?.host || fcEvent.headers?.Host || SITE_FALLBACK_HOST
+  const host =
+    fcEvent.requestContext?.domainName || fcEvent.headers?.host || fcEvent.headers?.Host || SITE_FALLBACK_HOST
+  // FC 网关不透传 x-forwarded-proto（headers 只有客户端头），event 里也拿不到 scheme，
+  // 因此自定义域名协议设为 HTTPS-only（见 fc-domain-setup.mjs），这里一律按 https 处理。
 
   if (path === '/sitemap.xml') {
     const event: NetlifyEvent = { httpMethod: method, headers: {}, body: null, isBase64Encoded: false }
@@ -193,5 +196,16 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
   if (method !== 'GET' && method !== 'HEAD') {
     return { statusCode: 405, headers: { 'Content-Type': 'text/plain' }, body: 'Method Not Allowed' }
   }
+  const hostRedirect = canonicalHostRedirect(host, path)
+  if (hostRedirect) return hostRedirect
   return serveStatic(path, host)
+}
+
+/** 主机规范化：仅对自有域名生效，FC 触发器域名（fcapp.run/devsapp.net）不受影响。
+ *  裸域 droneworld.tech → www（证书与 SEO 规范均以 www 为主机）。
+ *  http→https 由网关层保证（自定义域名 protocol=HTTPS），event 无 scheme 可判。 */
+function canonicalHostRedirect(host: string, path: string): NetlifyResponse | null {
+  if (host !== SITE_FALLBACK_HOST && host !== 'droneworld.tech' && !host.endsWith('.droneworld.tech')) return null
+  if (host !== SITE_FALLBACK_HOST) return redirect(301, `https://${SITE_FALLBACK_HOST}${path}`)
+  return null
 }
