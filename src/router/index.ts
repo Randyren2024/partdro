@@ -17,6 +17,11 @@ const siteChildren = [
     component: () => import('../views/ProductsView.vue'),
   },
   {
+    path: 'products/c500-partdro-eavision',
+    name: 'c500-eavision',
+    component: () => import('../views/C500EavisionView.vue'),
+  },
+  {
     path: 'products/:slug',
     name: 'product-detail',
     component: () => import('../views/ProductDetailView.vue'),
@@ -69,6 +74,11 @@ const router = createRouter({
     {
       path: '/admin/editor',
       redirect: '/products/d15r',
+    },
+    // C500 历史短链（含 Google Ads 旧 finalUrl）→ 实际产品页
+    {
+      path: '/products/c500',
+      redirect: '/products/c500-delivery-drone',
     },
     // 站内路由：可选语言前缀 /de /es /fr；英语（默认语言）不带前缀，
     // 保持根路径已收录 URL 不变，同时让每种语言拥有独立可抓取 URL。

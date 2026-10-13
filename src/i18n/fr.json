@@ -409,5 +409,204 @@
       "text": "Échangez avec Partdro sur la configuration de nettoyage, le montage des buses et le scénario d'application adaptés à votre projet.",
       "visit": "Visitez partdro.com"
     }
+  },
+  "c500eavision": {
+    "meta": {
+      "title": "Robot volant lourd C500 {'|'} Partdro",
+      "description": "Le robot volant lourd EAVISION C500 : 240 kg de charge utile maximale, transmission vidéo 4G+ sur 30 km, décisions autonomes de bout en bout et levage en grappe pour la logistique en haute altitude."
+    },
+    "nav": {
+      "intro": "Aperçu",
+      "specs": "Caractéristiques",
+      "aria": "Navigation de la page C-500",
+      "scrollAria": "Barre de défilement de la page"
+    },
+    "hero": {
+      "eyebrow": "Charge lourde sans limites, intelligence doublée",
+      "title": "Robot volant lourd C500",
+      "summary": "240 kg de charge ultra-élevée | Décisions autonomes de bout en bout | Levage en grappe",
+      "watchVideo": "Regarder la vidéo",
+      "videoDialog": "Vidéo du produit",
+      "closeVideo": "Fermer la vidéo"
+    },
+    "overview": {
+      "paragraphs": {
+        "0": "Le tout nouveau EAVISION C500 a une charge utile maximale de 240 kg par aéronef. Sa conception à quatre rotors et huit hélices offre une poussée totale de 720 kg pour une stabilité et une fiabilité exceptionnelles. Les modes bi-batterie et quadri-batterie se commutent avec souplesse, et la charge ultra-rapide le remplit en seulement 7 minutes.",
+        "1": "La vision à neuf caméras et le radar multi-sources sont profondément fusionnés pour bâtir un périmètre de perception tous azimuts. Un paradigme de réseau de neurones de bout en bout redéfinit le système de logistique aérienne.",
+        "2": "Élimination automatique du balancement et couverture totale des limites de sécurité. Prend en charge la transmission vidéo 4G+ sur 30 km. La collaboration de plusieurs aéronefs repousse les limites de la charge utile."
+      },
+      "technologyAlt": "Intégrer l'intelligence incarnée dans le vol à charge lourde : une base technologique à cinq couches — cerveau de décision, mésencéphale de perception, cervelet de commande de vol, cellule intégrée et système d'exploitation — qui donne un véritable robot volant lourd."
+    },
+    "abilities": {
+      "0": { "title": "Charge utile maximale par aéronef : 240 kg" },
+      "1": { "title": "Vitesse de vol maximale", "alt": "Vitesse de vol maximale 90 km/h" },
+      "2": { "title": "Stabilité structurelle", "detail": "Traverse moulée intégrée avant et arrière" },
+      "3": { "title": "Système de perception tous azimuts à grand modèle de bout en bout" },
+      "4": { "title": "Paradigme de réseau de neurones de bout en bout", "detail": "Redéfinir le système de logistique aérienne" },
+      "5": { "title": "Prend en charge le fonctionnement bi-batterie/quadri-batterie" },
+      "6": { "title": "Collaboration de plusieurs aéronefs", "detail": "Charge utile maximale 720 kg" },
+      "7": { "title": "Des applications au-delà, des capacités au-delà du visible" }
+    },
+    "powerMetrics": {
+      "0": { "unit": "kg", "label": "Charge utile maximale par aéronef" },
+      "1": { "unit": "km/h", "label": "Vitesse horizontale maximale" },
+      "2": { "unit": "m", "label": "Altitude de vol maximale" },
+      "3": { "unit": "niveau", "label": "Résistance au vent" }
+    },
+    "stories": {
+      "performance": { "title": "Innovation de puissance, stabilité de la cellule" },
+      "energy": { "title": "L'énergie définit les limites de la charge utile" },
+      "perception": { "title": "Perception sans limites, précision au millimètre" },
+      "decision": { "title": "Les décisions autonomes de bout en bout redéfinissent le système de logistique aérienne" },
+      "cluster": { "title": "Le système de levage en grappe repousse les limites de la charge lourde" },
+      "functions": { "title": "Des configurations plus complètes, plus de fonctions" }
+    },
+    "galleries": {
+      "power": {
+        "label": "Innovation de puissance, stabilité de la cellule",
+        "items": {
+          "0": { "title": "Quatre rotors, huit hélices, double garantie", "detail": "Hélices pliantes en fibre de carbone de 73 pouces | Moteurs à fil plat entièrement nouveaux | Poussée totale des quatre rotors 720 kg" },
+          "1": {
+            "title": "Amortissement extrême des vibrations, stabilité structurelle",
+            "detailParts": {
+              "0": { "text": "Traverse moulée intégrée et verrous de sécurité des hélices | Rigidité de la cellule augmentée de 300 %" },
+              "1": { "text": ", transmission des vibrations réduite de 70 %" }
+            }
+          }
+        }
+      },
+      "energy": {
+        "label": "L'énergie définit les limites de la charge utile",
+        "items": {
+          "0": { "title": "Énergie puissante, charge rapide efficace", "detail": "Batterie ultra-rapide CTB de 50 Ah : prend en charge les modes bi-batterie et quadri-batterie ; charge rapide 5,5C : charge complète en seulement 7 minutes" },
+          "1": { "title": "Longue autonomie, exploitation sans effort", "detail": "Distance de vol maximale 35 km" },
+          "2": {
+            "title": "Conditions de haute altitude",
+            "detailParts": {
+              "0": { "text": "À 3 000 m, charge utile max. 240 kg ; à 4 500 m, charge utile max. 200 kg ; à 6 000 m (altitude d'exploitation maximale)" },
+              "1": { "text": "charge utile max. 160 kg" }
+            },
+            "detailNote": "(Pour chaque augmentation de 1 000 m d'altitude, la densité de l'air diminue d'environ 10 %.)"
+          }
+        }
+      },
+      "perception": {
+        "label": "Perception sans limites, précision au millimètre",
+        "items": {
+          "0": { "title": "Vision à neuf caméras", "detail": "Deux systèmes de vision panoramique à 4 caméras + FPV 4K = image panoramique 360° en temps réel à neuf caméras, transmise directement sans latence" },
+          "1": { "title": "Système de perception radar multi-sources", "detail": "LiDAR frontal à nuage de 920 000 points avec une densité de nuage de points 3,5× la moyenne du secteur. Double radar à ondes millimétriques en haut et en bas pour une perception plus précise, avec une portée de détection allant jusqu'à 150 m" },
+          "2": { "title": "Système de perception tous azimuts à grand modèle de bout en bout", "detail": "La vision à neuf caméras et le radar multi-sources sont profondément fusionnés pour bâtir un périmètre de perception tous azimuts" },
+          "3": { "title": "Évitement d'obstacles de la cargaison, élimination automatique du balancement", "detail": "La surveillance en temps réel de l'environnement, de l'état de puissance et de la cargaison réduit continuellement les risques potentiels" }
+        }
+      },
+      "cluster": {
+        "label": "Le système de levage en grappe repousse les limites de la charge lourde",
+        "items": {
+          "0": {
+            "title": "Collaboration de plusieurs aéronefs, couverture tous azimuts",
+            "titleParts": {
+              "0": { "text": "Collaboration de plusieurs aéronefs" },
+              "1": { "text": ", couverture tous azimuts" }
+            }
+          },
+          "1": { "title": "Collaboration de deux aéronefs, charge utile jusqu'à 400 kg" },
+          "2": { "title": "Collaboration de quatre aéronefs, charge utile jusqu'à 720 kg" }
+        }
+      },
+      "functions": {
+        "label": "Des configurations plus complètes, plus de fonctions",
+        "items": {
+          "0": {
+            "title": "Signal de transmission vidéo",
+            "detailParts": {
+              "0": { "text": "Jusqu'à 30 km" },
+              "1": { "text": " transmission vidéo 4G+ | Double commande par aéronef\nAutonomie de la station relais 8 heures" }
+            }
+          },
+          "1": { "title": "Commande vocale intelligente", "detail": "Activation vocale et commande par instructions vocales" },
+          "2": { "title": "Solution de levage intelligent cyclique", "detail": "Centrée sur l'humain, séparation homme-machine pour un vol plus sûr et des opérations sereines" },
+          "3": { "title": "Parachute en option", "detail": "Amortit l'impact à l'atterrissage pour réduire les risques et les pertes" },
+          "4": { "title": "Système de largage intelligent", "detail": "Câble de treuil électrique s'étendant et se rétractant librement" }
+        }
+      }
+    },
+    "decisions": {
+      "0": { "title": "De bout en bout : voit, décide et vole tout seul", "detail": "Apprentissage par imitation de trajectoires expertes et agents d'apprentissage | Flow Matching, modèles du monde et pré-entraînement par reconstruction, avec des billions d'opérations par seconde sur l'appareil" },
+      "1": { "title": "Itinéraires intelligents", "detail": "Vole de plus en plus vite, optimisant continuellement les itinéraires" },
+      "2": { "title": "Rejeu de trajectoire", "detail": "Rappel en un clic d'itinéraires efficaces, réduisant la charge de travail" }
+    },
+    "applications": {
+      "heading": "Des applications au-delà, des capacités au-delà du visible",
+      "0": { "title": "Transport photovoltaïque" },
+      "1": { "title": "Transport de bois" },
+      "2": { "title": "Transport d'acier" },
+      "3": { "title": "Transport de fournitures d'urgence" }
+    },
+    "packages": {
+      "heading": "EAVISION C-500",
+      "0": { "description": "Kit de levage standard (version chargeur), 133 888 ¥. Comprend le système de levage EAVISION C500, 4 batteries intelligentes CTB, télécommande (version cargo) et 2 dissipateurs de charge." },
+      "1": { "description": "Kit de levage standard (version station de charge), 143 888 ¥. Comprend le système de levage EAVISION C500, 4 batteries intelligentes CTB, télécommande (version cargo), 2 dissipateurs de charge et 2 générateurs." },
+      "2": { "description": "Kit de largage intelligent (version chargeur), 155 888 ¥. Comprend le système de largage intelligent EAVISION C500, 4 batteries intelligentes CTB, télécommande (version cargo) et 2 dissipateurs de charge." },
+      "3": { "description": "Kit de largage intelligent (version station de charge), 165 888 ¥. Comprend le système de largage intelligent EAVISION C500, 4 batteries intelligentes CTB, télécommande (version cargo), 2 dissipateurs de charge et 2 générateurs." }
+    },
+    "specifications": {
+      "title": "Caractéristiques du robot volant lourd C-500",
+      "0": { "label": "Charge utile maximale" },
+      "1": { "label": "Poids à vide (hors batteries)" },
+      "2": { "label": "Configuration de puissance", "value": "Quatre rotors, huit hélices avec double sécurité de puissance" },
+      "3": { "label": "Hélices", "value": "Hélices pliantes en fibre de carbone de 73 pouces" },
+      "4": { "label": "Poussée totale des quatre rotors" },
+      "5": { "label": "Vitesse de vol maximale" },
+      "6": { "label": "Résistance au vent", "value": "Niveau 6" },
+      "7": { "label": "Indice de protection global" },
+      "8": { "label": "Température de fonctionnement", "value": "-20 °C à 50 °C" },
+      "9": { "label": "Configuration de la batterie", "value": "Batterie ultra-rapide CTB de 50 Ah, prend en charge les modes bi-batterie et quadri-batterie" },
+      "10": { "label": "Performance de charge", "value": "Charge rapide 5,5C, charge complète en seulement 7 minutes" },
+      "11": { "label": "Autonomie", "value": "Distance de vol maximale 35 km" },
+      "12": { "label": "Système de perception", "value": "Vision à neuf caméras (2× vision panoramique à 4 caméras + FPV 4K), LiDAR à nuage de 920 000 points, radar à ondes millimétriques en haut et en bas" },
+      "13": { "label": "Portée de détection", "value": "150 m" },
+      "14": { "label": "Transmission vidéo", "value": "Transmission vidéo 4G+ jusqu'à 30 km" },
+      "15": { "label": "Levage en grappe", "value": "Collaboration de deux aéronefs jusqu'à 400 kg ; collaboration de quatre aéronefs jusqu'à 720 kg" }
+    },
+    "noteIntro": {
+      "0": "* Veuillez vérifier, confirmer et respecter strictement les lois et réglementations locales avant de voler.",
+      "1": "** Toutes les vidéos et images de cette page ont été tournées dans le strict respect des lois et réglementations locales applicables. Veuillez vous familiariser avec les lois et réglementations locales et vous assurer que l'aéronef dispose des certifications requises avant de voler.",
+      "2": "*** L'aspect réel du produit est celui de l'article livré.",
+      "3": "**** La charge utile du drone est mesurée au niveau de la mer. L'application évalue intelligemment la sécurité du poids chargé en fonction de l'état actuel de l'aéronef, de l'état de la batterie et des conditions environnementales. Chargez selon l'état de poids affiché dans l'application ; sinon, la sécurité du vol pourrait être affectée."
+    },
+    "notes": {
+      "aria": "Remarques d'utilisation du produit et conditions des données",
+      "0": { "text": "1. Cette valeur a été mesurée avec le C500 en état quadri-batterie sans charge, équipé du système de levage, à une altitude équivalente au niveau de la mer, à une température ambiante de 25 °C sans vent, en volant vers l'avant à 20 m/s jusqu'à l'épuisement de la batterie et un atterrissage forcé. Les données sont fournies à titre indicatif ; les résultats peuvent varier dans des proportions diverses selon l'environnement extérieur, le mode d'utilisation et la version du firmware. Veuillez prêter attention aux invites de l'application pendant le vol réel." },
+      "1": { "text": "2. La distance de transmission de 30 km n'est atteinte que selon la norme FCC. La Chine continentale applique la norme SRRC, avec une distance maximale de communication vidéo de 20 km. Les données ci-dessus ont été mesurées dans un environnement extérieur dégagé et sans interférences et représentent la distance de communication maximale pour un vol aller sans retour selon chaque norme. Veuillez prêter attention aux invites de retour de l'application pendant le vol réel." },
+      "2": { "text": "3. Obtenu par comparaison avec des drones cargo traditionnels ; les conclusions peuvent varier selon les conditions d'essai." },
+      "3": { "text": "4. La vitesse de vol maximale dépend du nombre de batteries et du poids de la charge. Volez en toute sécurité en suivant strictement les invites et avertissements de l'application." },
+      "4": { "text": "5. La capacité de charge du drone diminue à mesure que l'altitude de décollage augmente. Une altitude de 6 000 m est l'altitude de vol sûre maximale du drone (décollage à une altitude de 4 500 m)." },
+      "5": { "text": "6. Nécessite un achat en option supplémentaire." },
+      "6": { "text": "7. Cette fonction sera prise en charge à l'avenir par mise à jour du firmware. Veuillez surveiller les notes de mise à jour du firmware correspondantes sur la télécommande et le site officiel." },
+      "7": {
+        "text": "8. La plage de fonctionnement effective de la perception et la capacité d'éviter et de contourner les obstacles varient selon la lumière ambiante, la pluie et le brouillard, ainsi que le matériau, la position et la forme de l'objet cible. La perception inférieure sert à assister le vol en suivi de terrain et maintien d'altitude, tandis que la perception dans les autres directions sert à l'évitement d'obstacles. Hormis les scénarios d'obstacles linéaires, si l'aéronef est endommagé par un échec d'évitement d'obstacles à des vitesses allant jusqu'à 13,8 m/s, la responsabilité peut être déterminée par analyse des journaux, et la garantie gratuite s'applique si la cause n'est pas une erreur humaine ; pour les scénarios d'obstacles linéaires, si l'aéronef est endommagé par un échec d'évitement d'obstacles à des vitesses allant jusqu'à 10 m/s, la responsabilité peut être déterminée par analyse des journaux, et la garantie gratuite s'applique si la cause n'est pas une erreur humaine. Pour garantir la sécurité des opérations, il est recommandé de délimiter les lignes électriques, les haubans et autres dangers similaires en tant qu'obstacles.",
+        "extra": {
+          "0": "Remarque :",
+          "1": "(1) La perception inférieure sert à assister le vol en suivi de terrain et maintien d'altitude. Les utilisateurs doivent prêter attention à l'environnement de vol ; les dommages à l'aéronef causés par des collisions avec des obstacles en dessous ne sont pas couverts par la garantie gratuite ;",
+          "2": "(2) L'aéronef ne peut pas éviter activement les objets en mouvement. Les utilisateurs doivent prêter attention à l'environnement de vol ; les dommages à l'aéronef causés dans de tels scénarios ne sont pas couverts par la garantie gratuite ;",
+          "3": "(3) L'évitement d'obstacles de la cargaison n'est qu'une aide au vol. Les utilisateurs doivent prêter attention à l'environnement de vol ; les dommages à l'aéronef causés par la collision de la cargaison ou du câble de levage avec des obstacles ne sont pas couverts par la garantie gratuite ;"
+        }
+      },
+      "8": { "text": "9. La deuxième télécommande est en option et doit être achetée séparément." },
+      "9": { "text": "10. Mesuré à une altitude équivalente au niveau de la mer, à une température ambiante comprise entre 15 et 40 °C, avec charge rotative d'une seule batterie, pour une charge de 30 % à 95 % ; la charge rapide est prise en charge lorsque la température des cellules de la batterie est comprise entre 15 et 70 °C. Le temps de charge varie selon la puissance d'entrée, l'altitude, le niveau de charge initial et d'autres facteurs." }
+    },
+    "gallery": {
+      "aria": {
+        "position": "Position dans {label}",
+        "item": "Élément {n}",
+        "prev": "Précédent",
+        "next": "Suivant"
+      }
+    },
+    "decision": {
+      "aria": "Capacités de décision autonome",
+      "expand": "Développer",
+      "collapse": "Réduire"
+    }
   }
 }

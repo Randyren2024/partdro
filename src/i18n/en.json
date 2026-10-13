@@ -548,5 +548,204 @@
       "text": "Talk to our team about demos, pricing and deployment for your buildings or wind farms.",
       "visit": "Back to home"
     }
+  },
+  "c500eavision": {
+    "meta": {
+      "title": "C500 Heavy-Lift Flying Robot {'|'} Partdro",
+      "description": "The EAVISION C500 heavy-lift flying robot: 240 kg maximum payload, 30 km 4G+ video transmission, end-to-end autonomous decision-making and cluster lifting for high-altitude logistics."
+    },
+    "nav": {
+      "intro": "Overview",
+      "specs": "Specs",
+      "aria": "C-500 page navigation",
+      "scrollAria": "Page scrollbar"
+    },
+    "hero": {
+      "eyebrow": "Heavy-Lift Beyond Limits, Intelligence Doubled",
+      "title": "C500 Heavy-Lift Flying Robot",
+      "summary": "240 kg ultra-high payload | End-to-end autonomous decision-making | Cluster lifting",
+      "watchVideo": "Watch Video",
+      "videoDialog": "Product Video",
+      "closeVideo": "Close video"
+    },
+    "overview": {
+      "paragraphs": {
+        "0": "The all-new EAVISION C500 has a maximum single-aircraft payload of 240 kg. Its quad-rotor, eight-propeller design delivers a total thrust of 720 kg for outstanding stability and reliability. Dual-battery and quad-battery modes switch flexibly, and ultra-fast charging fills it in just 7 minutes.",
+        "1": "Nine-camera vision and multi-source radar are deeply fused to build an all-domain perception perimeter. An end-to-end neural-network paradigm redefines the aerial logistics system.",
+        "2": "Automatic sway elimination and full safety-boundary coverage. Supports 30 km 4G+ video transmission. Multi-aircraft collaboration pushes beyond the limits of payload."
+      },
+      "technologyAlt": "Embedding embodied intelligence into heavy-lift flight: a five-layer technology foundation — decision brain, perception midbrain, flight-control cerebellum, integrated airframe and operations system — that makes a true heavy-lift flying robot."
+    },
+    "abilities": {
+      "0": { "title": "Maximum single-aircraft payload: 240 kg" },
+      "1": { "title": "Maximum flight speed", "alt": "Maximum flight speed 90 km/h" },
+      "2": { "title": "Structural stability", "detail": "Front-and-rear integrated die-cast crossbeam" },
+      "3": { "title": "End-to-end large-model all-domain perception system" },
+      "4": { "title": "End-to-end neural-network paradigm", "detail": "Redefining the aerial logistics system" },
+      "5": { "title": "Supports dual-battery / quad-battery operation" },
+      "6": { "title": "Multi-aircraft collaboration", "detail": "Maximum payload 720 kg" },
+      "7": { "title": "Applications beyond this, capabilities beyond sight" }
+    },
+    "powerMetrics": {
+      "0": { "unit": "kg", "label": "Maximum single-aircraft payload" },
+      "1": { "unit": "km/h", "label": "Maximum horizontal speed" },
+      "2": { "unit": "m", "label": "Maximum flight altitude" },
+      "3": { "unit": "level", "label": "Wind resistance rating" }
+    },
+    "stories": {
+      "performance": { "title": "Power innovation, airframe stability" },
+      "energy": { "title": "Energy defines the limits of payload" },
+      "perception": { "title": "Boundless perception, insight to the millimeter" },
+      "decision": { "title": "End-to-end autonomous decisions redefine the aerial logistics system" },
+      "cluster": { "title": "Cluster lifting system breaks the heavy-lift limits" },
+      "functions": { "title": "More complete configurations, more functions" }
+    },
+    "galleries": {
+      "power": {
+        "label": "Power innovation, airframe stability",
+        "items": {
+          "0": { "title": "Quad-rotor, eight-propeller, dual assurance", "detail": "73-inch carbon-fiber folding propellers | All-new flat-wire motors | Quad-rotor total thrust 720 kg" },
+          "1": {
+            "title": "Ultimate vibration damping, structural stability",
+            "detailParts": {
+              "0": { "text": "Integrated die-cast crossbeam and propeller safety latches | Airframe rigidity increased by 300%" },
+              "1": { "text": ", vibration transmission reduced by 70%" }
+            }
+          }
+        }
+      },
+      "energy": {
+        "label": "Energy defines the limits of payload",
+        "items": {
+          "0": { "title": "Strong energy, efficient fast charging", "detail": "50 Ah CTB ultra-fast battery: supports dual-battery and quad-battery operation modes; 5.5C fast charging: fully charged in as little as 7 minutes" },
+          "1": { "title": "Long endurance, effortless operation", "detail": "Maximum flight distance 35 km" },
+          "2": {
+            "title": "High-altitude conditions",
+            "detailParts": {
+              "0": { "text": "At 3,000 m, max payload 240 kg; at 4,500 m, max payload 200 kg; at 6,000 m (maximum operating altitude)" },
+              "1": { "text": "max payload 160 kg" }
+            },
+            "detailNote": "(For every 1,000 m increase in altitude, air density drops by about 10%.)"
+          }
+        }
+      },
+      "perception": {
+        "label": "Boundless perception, insight to the millimeter",
+        "items": {
+          "0": { "title": "Nine-camera vision", "detail": "Two 4-camera surround-view systems + 4K FPV = nine-camera 360° real-time surround imagery, streamed directly with no latency" },
+          "1": { "title": "Multi-source radar perception system", "detail": "Front 920,000-point cloud LiDAR with a point-cloud density 3.5× the industry average. Dual millimeter-wave radars above and below for more precise perception, with a detection range of up to 150 m" },
+          "2": { "title": "End-to-end large-model all-domain perception system", "detail": "Nine-camera vision and multi-source radar are deeply fused to build an all-domain perception perimeter" },
+          "3": { "title": "Cargo obstacle avoidance, automatic sway elimination", "detail": "Real-time monitoring of the surroundings, power status and cargo continuously reduces potential risks" }
+        }
+      },
+      "cluster": {
+        "label": "Cluster lifting system breaks the heavy-lift limits",
+        "items": {
+          "0": {
+            "title": "Multi-aircraft collaboration, all-domain coverage",
+            "titleParts": {
+              "0": { "text": "Multi-aircraft collaboration" },
+              "1": { "text": ", all-domain coverage" }
+            }
+          },
+          "1": { "title": "Two-aircraft collaboration, payload up to 400 kg" },
+          "2": { "title": "Four-aircraft collaboration, payload up to 720 kg" }
+        }
+      },
+      "functions": {
+        "label": "More complete configurations, more functions",
+        "items": {
+          "0": {
+            "title": "Video transmission signal",
+            "detailParts": {
+              "0": { "text": "Up to 30 km" },
+              "1": { "text": " 4G+ video transmission | Dual control per aircraft\nRelay base station endurance 8 hours" }
+            }
+          },
+          "1": { "title": "Intelligent voice control", "detail": "Voice wake-up and voice-command control" },
+          "2": { "title": "Cyclic smart-lifting solution", "detail": "People-first, human-machine separation for safer flight and worry-free operations" },
+          "3": { "title": "Optional parachute", "detail": "Softens landing impact to reduce risk and losses" },
+          "4": { "title": "Intelligent airdrop system", "detail": "Electric winch rope extends and retracts freely" }
+        }
+      }
+    },
+    "decisions": {
+      "0": { "title": "End-to-end: sees, decides and flies on its own", "detail": "Expert-trajectory imitation learning and learning agents | Flow Matching, world models and reconstruction pre-training, with trillions of on-device operations per second" },
+      "1": { "title": "Intelligent routes", "detail": "Flies faster and faster, continuously optimizing routes" },
+      "2": { "title": "Trajectory replay", "detail": "One-tap recall of efficient routes reduces workload" }
+    },
+    "applications": {
+      "heading": "Applications beyond this, capabilities beyond sight",
+      "0": { "title": "Photovoltaic transport" },
+      "1": { "title": "Timber transport" },
+      "2": { "title": "Steel transport" },
+      "3": { "title": "Emergency supply transport" }
+    },
+    "packages": {
+      "heading": "EAVISION C-500",
+      "0": { "description": "Standard lifting kit (charger version), ¥133,888. Includes the EAVISION C500 lifting system, 4× CTB smart batteries, remote controller (cargo version) and 2× charging heat sinks." },
+      "1": { "description": "Standard lifting kit (charging-station version), ¥143,888. Includes the EAVISION C500 lifting system, 4× CTB smart batteries, remote controller (cargo version), 2× charging heat sinks and 2× generators." },
+      "2": { "description": "Intelligent airdrop kit (charger version), ¥155,888. Includes the EAVISION C500 intelligent airdrop system, 4× CTB smart batteries, remote controller (cargo version) and 2× charging heat sinks." },
+      "3": { "description": "Intelligent airdrop kit (charging-station version), ¥165,888. Includes the EAVISION C500 intelligent airdrop system, 4× CTB smart batteries, remote controller (cargo version), 2× charging heat sinks and 2× generators." }
+    },
+    "specifications": {
+      "title": "C-500 Heavy-Lift Flying Robot Specifications",
+      "0": { "label": "Maximum payload" },
+      "1": { "label": "Empty weight (excluding batteries)" },
+      "2": { "label": "Power configuration", "value": "Quad-rotor, eight-propeller with dual power safety assurance" },
+      "3": { "label": "Propellers", "value": "73-inch carbon-fiber folding propellers" },
+      "4": { "label": "Quad-rotor total thrust" },
+      "5": { "label": "Maximum flight speed" },
+      "6": { "label": "Wind resistance rating", "value": "Level 6" },
+      "7": { "label": "Overall protection rating" },
+      "8": { "label": "Operating temperature", "value": "-20°C to 50°C" },
+      "9": { "label": "Battery configuration", "value": "50 Ah CTB ultra-fast battery, supports dual-battery and quad-battery operation modes" },
+      "10": { "label": "Charging performance", "value": "5.5C fast charging, fully charged in as little as 7 minutes" },
+      "11": { "label": "Range", "value": "Maximum flight distance 35 km" },
+      "12": { "label": "Perception system", "value": "Nine-camera vision (2× 4-camera surround + 4K FPV), 920,000-point cloud LiDAR, millimeter-wave radars above and below" },
+      "13": { "label": "Detection range", "value": "150 m" },
+      "14": { "label": "Video transmission", "value": "Up to 30 km 4G+ video transmission" },
+      "15": { "label": "Cluster lifting", "value": "Two-aircraft collaboration up to 400 kg; four-aircraft collaboration up to 720 kg" }
+    },
+    "noteIntro": {
+      "0": "* Please check, confirm and strictly comply with local laws and regulations before flying.",
+      "1": "** All videos and images on this page were filmed in strict compliance with the relevant local laws and regulations. Please familiarize yourself with local laws and regulations and ensure the aircraft holds the required certifications before flying.",
+      "2": "*** The actual product appearance is subject to the delivered item.",
+      "3": "**** The UAV payload is measured at sea level. The App intelligently evaluates the safety of the loaded weight based on the current aircraft status, battery status and environmental conditions. Please load according to the weight status shown in the App; otherwise flight safety may be affected."
+    },
+    "notes": {
+      "aria": "Product usage notes and data conditions",
+      "0": { "text": "1. This figure was measured with the C500 in a quad-battery, no-load state, equipped with the lifting system, at an equivalent sea-level altitude, at an ambient temperature of 25°C with no wind, flying forward at 20 m/s until the battery was depleted and a forced landing occurred. The data is for reference only; results may vary to different degrees under different external environments, usage methods and firmware versions. Please pay attention to the App prompts during actual flight." },
+      "1": { "text": "2. The 30 km transmission distance is achieved only under the FCC standard. Mainland China adopts the SRRC standard, with a maximum video-transmission communication distance of 20 km. The above data was measured in an open outdoor environment free of interference and represents the maximum communication distance for one-way, non-return flight under each standard. Please pay attention to the return-to-home prompts in the App during actual flight." },
+      "2": { "text": "3. Derived from comparison with traditional cargo UAVs; test conclusions may differ under different test conditions." },
+      "3": { "text": "4. The maximum flight speed depends on the number of batteries and the payload weight. Please fly safely in strict accordance with the App prompts and warnings." },
+      "4": { "text": "5. The UAV payload capacity decreases as take-off altitude increases. An altitude of 6,000 m is the maximum safe flight altitude of the UAV (taking off at an altitude of 4,500 m)." },
+      "5": { "text": "6. Requires additional optional purchase." },
+      "6": { "text": "7. This function will be supported in the future via firmware upgrade. Please keep an eye on the relevant firmware update notes on the remote controller and the official website." },
+      "7": {
+        "text": "8. The effective working range of perception and the ability to avoid and maneuver around obstacles vary with ambient light, rain and fog, and the material, position and shape of the target object. The downward perception is used to assist terrain-following altitude-hold flight, while perception in other directions is used for obstacle avoidance. Except for linear-obstacle scenarios, if the aircraft is damaged due to obstacle-avoidance failure at speeds within 13.8 m/s, liability can be determined through log analysis, and free warranty applies if the cause is not human error; for linear-obstacle scenarios, if the aircraft is damaged due to obstacle-avoidance failure at speeds within 10 m/s, liability can be determined through log analysis, and free warranty applies if the cause is not human error. To ensure operational safety, it is recommended to mark out power lines, guy wires and similar hazards as obstacles.",
+        "extra": {
+          "0": "Note:",
+          "1": "(1) The downward perception is used to assist terrain-following altitude-hold flight. Users should pay attention to the flight environment; aircraft damage caused by collisions with obstacles below is not covered by the free warranty;",
+          "2": "(2) The aircraft cannot actively avoid moving objects. Users should pay attention to the flight environment; aircraft damage caused in such scenarios is not covered by the free warranty;",
+          "3": "(3) Cargo obstacle avoidance is only an aid to flight. Users should pay attention to the flight environment; aircraft damage caused by the cargo or lifting rope colliding with obstacles is not covered by the free warranty;"
+        }
+      },
+      "8": { "text": "9. The second remote controller is optional and must be purchased separately." },
+      "9": { "text": "10. Measured at an equivalent sea-level altitude at an ambient temperature between 15-40°C, using single-battery rotation charging, for charging from 30% to 95%; fast charging is supported when the battery cell temperature is within 15-70°C. Charging time varies depending on input power, altitude, starting charge level and other factors." }
+    },
+    "gallery": {
+      "aria": {
+        "position": "{label} position",
+        "item": "Item {n}",
+        "prev": "Previous",
+        "next": "Next"
+      }
+    },
+    "decision": {
+      "aria": "Autonomous decision capabilities",
+      "expand": "Expand",
+      "collapse": "Collapse"
+    }
   }
 }

@@ -409,5 +409,204 @@
       "text": "Hable con Partdro sobre la configuración de limpieza adecuada, el montaje de boquillas y el escenario de aplicación para su proyecto.",
       "visit": "Visite partdro.com"
     }
+  },
+  "c500eavision": {
+    "meta": {
+      "title": "Robot volador de gran carga C500 {'|'} Partdro",
+      "description": "El robot volador de gran carga EAVISION C500: 240 kg de carga máxima, transmisión de vídeo 4G+ de 30 km, decisiones autónomas de extremo a extremo y elevación en clúster para logística a gran altitud."
+    },
+    "nav": {
+      "intro": "Resumen",
+      "specs": "Especificaciones",
+      "aria": "Navegación de la página C-500",
+      "scrollAria": "Barra de desplazamiento de la página"
+    },
+    "hero": {
+      "eyebrow": "Gran carga sin límites, inteligencia doble",
+      "title": "Robot volador de gran carga C500",
+      "summary": "240 kg de carga ultragrande | Decisiones autónomas de extremo a extremo | Elevación en clúster",
+      "watchVideo": "Ver vídeo",
+      "videoDialog": "Vídeo del producto",
+      "closeVideo": "Cerrar vídeo"
+    },
+    "overview": {
+      "paragraphs": {
+        "0": "El nuevo EAVISION C500 tiene una carga máxima por aeronave de 240 kg. Su diseño de cuatro rotores y ocho hélices ofrece un empuje total de 720 kg con una estabilidad y fiabilidad sobresalientes. Los modos de doble y cuádruple batería se alternan con flexibilidad, y la carga ultrarrápida lo completa en solo 7 minutos.",
+        "1": "La visión de nueve cámaras y el radar multifuente se fusionan en profundidad para construir un perímetro de percepción de dominio completo. Un paradigma de red neuronal de extremo a extremo redefine el sistema de logística aérea.",
+        "2": "Eliminación automática del balanceo y cobertura total del límite de seguridad. Admite transmisión de vídeo 4G+ de 30 km. La colaboración entre varias aeronaves supera los límites de la carga."
+      },
+      "technologyAlt": "Integrar inteligencia corpórea en el vuelo de gran carga: una base tecnológica de cinco capas — cerebro de decisión, mesencéfalo de percepción, cerebelo de control de vuelo, fuselaje integrado y sistema de operaciones — que da lugar a un verdadero robot volador de gran carga."
+    },
+    "abilities": {
+      "0": { "title": "Carga máxima por aeronave: 240 kg" },
+      "1": { "title": "Velocidad máxima de vuelo", "alt": "Velocidad máxima de vuelo 90 km/h" },
+      "2": { "title": "Estabilidad estructural", "detail": "Viga de fundición integrada delantera y trasera" },
+      "3": { "title": "Sistema de percepción de dominio completo con modelo grande de extremo a extremo" },
+      "4": { "title": "Paradigma de red neuronal de extremo a extremo", "detail": "Redefinir el sistema de logística aérea" },
+      "5": { "title": "Admite operación con doble/cuádruple batería" },
+      "6": { "title": "Colaboración entre varias aeronaves", "detail": "Carga máxima 720 kg" },
+      "7": { "title": "Aplicaciones más allá de esto, capacidades más allá de lo visible" }
+    },
+    "powerMetrics": {
+      "0": { "unit": "kg", "label": "Carga máxima por aeronave" },
+      "1": { "unit": "km/h", "label": "Velocidad horizontal máxima" },
+      "2": { "unit": "m", "label": "Altitud máxima de vuelo" },
+      "3": { "unit": "nivel", "label": "Resistencia al viento" }
+    },
+    "stories": {
+      "performance": { "title": "Innovación en potencia, estabilidad del fuselaje" },
+      "energy": { "title": "La energía define los límites de la carga" },
+      "perception": { "title": "Percepción sin límites, precisión al milímetro" },
+      "decision": { "title": "Las decisiones autónomas de extremo a extremo redefinen el sistema de logística aérea" },
+      "cluster": { "title": "El sistema de elevación en clúster rompe los límites de gran carga" },
+      "functions": { "title": "Configuraciones más completas, más funciones" }
+    },
+    "galleries": {
+      "power": {
+        "label": "Innovación en potencia, estabilidad del fuselaje",
+        "items": {
+          "0": { "title": "Cuatro rotores, ocho hélices, doble garantía", "detail": "Hélices plegables de fibra de carbono de 73 pulgadas | Motores de hilo plano totalmente nuevos | Empuje total de cuatro rotores 720 kg" },
+          "1": {
+            "title": "Amortiguación de vibraciones extrema, estabilidad estructural",
+            "detailParts": {
+              "0": { "text": "Viga de fundición integrada y pestillos de seguridad de las hélices | Rigidez del fuselaje aumentada un 300%" },
+              "1": { "text": ", transmisión de vibraciones reducida un 70%" }
+            }
+          }
+        }
+      },
+      "energy": {
+        "label": "La energía define los límites de la carga",
+        "items": {
+          "0": { "title": "Energía potente, carga rápida eficiente", "detail": "Batería de carga ultrarrápida CTB de 50 Ah: admite modos de doble y cuádruple batería; carga rápida de 5,5C: carga completa en tan solo 7 minutos" },
+          "1": { "title": "Larga autonomía, operación sin esfuerzo", "detail": "Distancia máxima de vuelo 35 km" },
+          "2": {
+            "title": "Condiciones de gran altitud",
+            "detailParts": {
+              "0": { "text": "A 3.000 m, carga máxima 240 kg; a 4.500 m, carga máxima 200 kg; a 6.000 m (altitud máxima de operación)" },
+              "1": { "text": "carga máxima 160 kg" }
+            },
+            "detailNote": "(Por cada aumento de 1.000 m de altitud, la densidad del aire desciende alrededor de un 10 %.)"
+          }
+        }
+      },
+      "perception": {
+        "label": "Percepción sin límites, precisión al milímetro",
+        "items": {
+          "0": { "title": "Visión de nueve cámaras", "detail": "Dos sistemas de visión envolvente de 4 cámaras + 4K FPV = imagen envolvente en tiempo real de 360° con nueve cámaras, transmitida directamente sin latencia" },
+          "1": { "title": "Sistema de percepción por radar multifuente", "detail": "LiDAR frontal de nube de 920.000 puntos con una densidad de nube de puntos 3,5× la media del sector. Doble radar de ondas milimétricas arriba y abajo para una percepción más precisa, con un alcance de detección de hasta 150 m" },
+          "2": { "title": "Sistema de percepción de dominio completo con modelo grande de extremo a extremo", "detail": "La visión de nueve cámaras y el radar multifuente se fusionan en profundidad para construir un perímetro de percepción de dominio completo" },
+          "3": { "title": "Evitación de obstáculos de carga, eliminación automática del balanceo", "detail": "La supervisión en tiempo real del entorno, del estado de potencia y de la carga reduce continuamente los riesgos potenciales" }
+        }
+      },
+      "cluster": {
+        "label": "El sistema de elevación en clúster rompe los límites de gran carga",
+        "items": {
+          "0": {
+            "title": "Colaboración entre varias aeronaves, cobertura de dominio completo",
+            "titleParts": {
+              "0": { "text": "Colaboración entre varias aeronaves" },
+              "1": { "text": ", cobertura de dominio completo" }
+            }
+          },
+          "1": { "title": "Colaboración de dos aeronaves, carga de hasta 400 kg" },
+          "2": { "title": "Colaboración de cuatro aeronaves, carga de hasta 720 kg" }
+        }
+      },
+      "functions": {
+        "label": "Configuraciones más completas, más funciones",
+        "items": {
+          "0": {
+            "title": "Señal de transmisión de vídeo",
+            "detailParts": {
+              "0": { "text": "Hasta 30 km" },
+              "1": { "text": " transmisión de vídeo 4G+ | Doble control por aeronave\nAutonomía de la estación repetidora 8 horas" }
+            }
+          },
+          "1": { "title": "Control por voz inteligente", "detail": "Activación por voz y control mediante comandos de voz" },
+          "2": { "title": "Solución de elevación inteligente cíclica", "detail": "Centrada en las personas, separación hombre-máquina para un vuelo más seguro y operaciones sin preocupaciones" },
+          "3": { "title": "Paracaídas opcional", "detail": "Suaviza el impacto del aterrizaje para reducir riesgos y pérdidas" },
+          "4": { "title": "Sistema de lanzamiento aéreo inteligente", "detail": "Cable de cabrestante eléctrico que se extiende y retrae libremente" }
+        }
+      }
+    },
+    "decisions": {
+      "0": { "title": "De extremo a extremo: ve, decide y vuela por sí solo", "detail": "Aprendizaje por imitación de trayectorias expertas y agentes de aprendizaje | Flow Matching, modelos del mundo y preentrenamiento de reconstrucción, con billones de operaciones por segundo en el dispositivo" },
+      "1": { "title": "Rutas inteligentes", "detail": "Vuela cada vez más rápido, optimizando continuamente las rutas" },
+      "2": { "title": "Repetición de trayectoria", "detail": "Recuperación con un toque de rutas eficientes que reduce la carga de trabajo" }
+    },
+    "applications": {
+      "heading": "Aplicaciones más allá de esto, capacidades más allá de lo visible",
+      "0": { "title": "Transporte fotovoltaico" },
+      "1": { "title": "Transporte de madera" },
+      "2": { "title": "Transporte de acero" },
+      "3": { "title": "Transporte de suministros de emergencia" }
+    },
+    "packages": {
+      "heading": "EAVISION C-500",
+      "0": { "description": "Kit de elevación estándar (versión cargador), 133.888 ¥. Incluye el sistema de elevación EAVISION C500, 4 baterías inteligentes CTB, mando a distancia (versión de carga) y 2 disipadores de carga." },
+      "1": { "description": "Kit de elevación estándar (versión estación de carga), 143.888 ¥. Incluye el sistema de elevación EAVISION C500, 4 baterías inteligentes CTB, mando a distancia (versión de carga), 2 disipadores de carga y 2 generadores." },
+      "2": { "description": "Kit de lanzamiento aéreo inteligente (versión cargador), 155.888 ¥. Incluye el sistema de lanzamiento aéreo inteligente EAVISION C500, 4 baterías inteligentes CTB, mando a distancia (versión de carga) y 2 disipadores de carga." },
+      "3": { "description": "Kit de lanzamiento aéreo inteligente (versión estación de carga), 165.888 ¥. Incluye el sistema de lanzamiento aéreo inteligente EAVISION C500, 4 baterías inteligentes CTB, mando a distancia (versión de carga), 2 disipadores de carga y 2 generadores." }
+    },
+    "specifications": {
+      "title": "Especificaciones del robot volador de gran carga C-500",
+      "0": { "label": "Carga máxima" },
+      "1": { "label": "Peso en vacío (sin baterías)" },
+      "2": { "label": "Configuración de potencia", "value": "Cuatro rotores y ocho hélices con doble garantía de seguridad de potencia" },
+      "3": { "label": "Hélices", "value": "Hélices plegables de fibra de carbono de 73 pulgadas" },
+      "4": { "label": "Empuje total de cuatro rotores" },
+      "5": { "label": "Velocidad máxima de vuelo" },
+      "6": { "label": "Resistencia al viento", "value": "Nivel 6" },
+      "7": { "label": "Grado de protección general" },
+      "8": { "label": "Temperatura de funcionamiento", "value": "-20 °C a 50 °C" },
+      "9": { "label": "Configuración de batería", "value": "Batería de carga ultrarrápida CTB de 50 Ah, admite modos de doble y cuádruple batería" },
+      "10": { "label": "Rendimiento de carga", "value": "Carga rápida de 5,5C, carga completa en tan solo 7 minutos" },
+      "11": { "label": "Autonomía", "value": "Distancia máxima de vuelo 35 km" },
+      "12": { "label": "Sistema de percepción", "value": "Visión de nueve cámaras (2× visión envolvente de 4 cámaras + 4K FPV), LiDAR de nube de 920.000 puntos, radar de ondas milimétricas arriba y abajo" },
+      "13": { "label": "Alcance de detección", "value": "150 m" },
+      "14": { "label": "Transmisión de vídeo", "value": "Transmisión de vídeo 4G+ de hasta 30 km" },
+      "15": { "label": "Elevación en clúster", "value": "Colaboración de dos aeronaves de hasta 400 kg; colaboración de cuatro aeronaves de hasta 720 kg" }
+    },
+    "noteIntro": {
+      "0": "* Consulte, confirme y cumpla estrictamente las leyes y normativas locales antes de volar.",
+      "1": "** Todos los vídeos e imágenes de esta página se grabaron cumpliendo estrictamente las leyes y normativas locales pertinentes. Familiarícese con las leyes y normativas locales y asegúrese de que la aeronave cuenta con las certificaciones requeridas antes de volar.",
+      "2": "*** El aspecto real del producto está sujeto al artículo entregado.",
+      "3": "**** La carga del dron se mide al nivel del mar. La App evalúa de forma inteligente la seguridad del peso cargado según el estado actual de la aeronave, el estado de la batería y las condiciones ambientales. Cargue según el estado de peso mostrado en la App; de lo contrario, la seguridad del vuelo puede verse afectada."
+    },
+    "notes": {
+      "aria": "Notas de uso del producto y condiciones de los datos",
+      "0": { "text": "1. Esta cifra se midió con el C500 en estado de cuádruple batería y sin carga, equipado con el sistema de elevación, a una altitud equivalente al nivel del mar, a una temperatura ambiente de 25 °C sin viento, volando hacia delante a 20 m/s hasta agotar la batería y producirse un aterrizaje forzoso. Los datos son solo de referencia; los resultados pueden variar en distinta medida según el entorno externo, el modo de uso y la versión de firmware. Preste atención a los avisos de la App durante el vuelo real." },
+      "1": { "text": "2. La distancia de transmisión de 30 km solo se alcanza con el estándar FCC. En China continental se aplica el estándar SRRC, con una distancia máxima de comunicación de vídeo de 20 km. Los datos anteriores se midieron en un entorno exterior abierto y sin interferencias y representan la distancia máxima de comunicación para vuelo de ida sin retorno bajo cada estándar. Preste atención a los avisos de retorno de la App durante el vuelo real." },
+      "2": { "text": "3. Obtenido de la comparación con drones de carga tradicionales; las conclusiones pueden variar según las condiciones de prueba." },
+      "3": { "text": "4. La velocidad máxima de vuelo depende del número de baterías y del peso de la carga. Vuele de forma segura siguiendo estrictamente los avisos y advertencias de la App." },
+      "4": { "text": "5. La capacidad de carga del dron disminuye al aumentar la altitud de despegue. Una altitud de 6.000 m es la altitud máxima segura de vuelo del dron (despegando a una altitud de 4.500 m)." },
+      "5": { "text": "6. Requiere compra opcional adicional." },
+      "6": { "text": "7. Esta función se admitirá en el futuro mediante actualización de firmware. Esté atento a las notas de actualización de firmware correspondientes en el mando a distancia y en el sitio web oficial." },
+      "7": {
+        "text": "8. El rango de trabajo efectivo de la percepción y la capacidad de evitar y sortear obstáculos varían según la luz ambiental, la lluvia y la niebla, y el material, la posición y la forma del objeto objetivo. La percepción inferior se utiliza para asistir el vuelo de seguimiento del terreno y mantenimiento de altitud, mientras que la percepción en otras direcciones se utiliza para la evitación de obstáculos. Salvo en escenarios de obstáculos lineales, si la aeronave se daña por fallo de evitación de obstáculos a velocidades de hasta 13,8 m/s, la responsabilidad puede determinarse mediante el análisis de registros, y se aplica la garantía gratuita si la causa no es un error humano; en escenarios de obstáculos lineales, si la aeronave se daña por fallo de evitación de obstáculos a velocidades de hasta 10 m/s, la responsabilidad puede determinarse mediante el análisis de registros, y se aplica la garantía gratuita si la causa no es un error humano. Para garantizar la seguridad operativa, se recomienda delimitar los cables eléctricos, los vientos y peligros similares como obstáculos.",
+        "extra": {
+          "0": "Nota:",
+          "1": "(1) La percepción inferior se utiliza para asistir el vuelo de seguimiento del terreno y mantenimiento de altitud. Los usuarios deben prestar atención al entorno de vuelo; el daño de la aeronave causado por colisiones con obstáculos inferiores no está cubierto por la garantía gratuita;",
+          "2": "(2) La aeronave no puede evitar activamente objetos en movimiento. Los usuarios deben prestar atención al entorno de vuelo; el daño de la aeronave causado en tales escenarios no está cubierto por la garantía gratuita;",
+          "3": "(3) La evitación de obstáculos de carga es solo una ayuda al vuelo. Los usuarios deben prestar atención al entorno de vuelo; el daño de la aeronave causado por la colisión de la carga o el cable de elevación con obstáculos no está cubierto por la garantía gratuita;"
+        }
+      },
+      "8": { "text": "9. El segundo mando a distancia es opcional y debe adquirirse por separado." },
+      "9": { "text": "10. Medido a una altitud equivalente al nivel del mar, a una temperatura ambiente entre 15 y 40 °C, con carga rotativa de una sola batería, para cargar del 30 % al 95 %; la carga rápida es compatible cuando la temperatura de las celdas de la batería está entre 15 y 70 °C. El tiempo de carga varía según la potencia de entrada, la altitud, el nivel de carga inicial y otros factores." }
+    },
+    "gallery": {
+      "aria": {
+        "position": "Posición en {label}",
+        "item": "Elemento {n}",
+        "prev": "Anterior",
+        "next": "Siguiente"
+      }
+    },
+    "decision": {
+      "aria": "Capacidades de decisión autónoma",
+      "expand": "Expandir",
+      "collapse": "Contraer"
+    }
   }
 }
