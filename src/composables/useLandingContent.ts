@@ -12,6 +12,7 @@ import {
   defaultSectionLayout,
   fullSectionLayout,
   normalizeSectionLayout,
+  SECTION_IDS,
   type SectionLayoutItem,
 } from '../components/product/sectionIds'
 
@@ -44,8 +45,18 @@ export const layoutByNs = reactive<Record<string, SectionLayoutItem[]>>({})
 export function getSectionLayout(ns: string): SectionLayoutItem[] {
   const stored = layoutByNs[ns]
   if (stored) return stored
-  // legacy 产品页（d15r）未存布局时仍显示全部区块；新产品默认空白
+  const staticNsContent = (STATIC.en as Record<string, any>)?.[ns]
+  // legacy 产品页（d15r）未存布局时仍显示全部区块
   if (ns === 'd15r') return fullSectionLayout()
+  // 静态编写了内容的产品命名空间（如 fp800）：只显示 en.json 里已编写的区块，
+  // 避免数据未加载时渲染空白或原始 key；DB 的 __layout 加载后按其覆盖
+  if (staticNsContent) {
+    return SECTION_IDS.filter((id) => staticNsContent[id] !== undefined).map((id) => ({
+      id,
+      visible: true,
+    }))
+  }
+  // 其余新产品默认空白（由 /admin/editor 排版后保存 __layout）
   return defaultSectionLayout()
 }
 
@@ -135,10 +146,16 @@ async function loadAndMerge(lang: string) {
   await ensureLayoutFromEn(lang)
   // 图片/视频覆盖：当前语言缺键时从 en 行按键级补齐（当前语言已覆盖的键优先）
   await ensureMediaFromEn(lang)
-  // 产品页命名空间：en 也无 __layout 时，新产品保持空白；d15r legacy 回退全量
+  // 产品页命名空间：en 也无 __layout 时，d15r / 静态编写的产品 ns 回退其静态布局，
+  // 其余新产品保持空白
   const productNs = ['d15r', ...dynamicNamespaces]
   for (const ns of productNs) {
-    if (!layoutByNs[ns]) layoutByNs[ns] = ns === 'd15r' ? fullSectionLayout() : []
+    if (!layoutByNs[ns]) {
+      layoutByNs[ns] =
+        ns === 'd15r' || (STATIC.en as Record<string, any>)?.[ns]
+          ? getSectionLayout(ns)
+          : []
+    }
   }
 }
 

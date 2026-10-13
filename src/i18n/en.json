@@ -747,5 +747,130 @@
       "expand": "Expand",
       "collapse": "Collapse"
     }
+  },
+  "fp800-agricultural-drone": {
+    "hero": {
+      "kicker": "Agricultural drone",
+      "title1": "Professional",
+      "title2": "crop protection",
+      "lead": "The FP800 pairs an 80 L spray tank with a 120 L spreader on one airframe — four rear centrifugal nozzles, up to 10 m working width, dual radar sensing and 85 kg lifting capability for season-long spraying, fertilizing and seeding.",
+      "ctaPrimary": "View specifications",
+      "ctaSecondary": "Contact sales",
+      "badgeTitle": "Factory direct",
+      "badgeText": "Worldwide shipping and support",
+      "stats": { "0": "80 L spray", "1": "120 L spread", "2": "85 kg payload" }
+    },
+    "strip": {
+      "0": { "value": "80 L", "label": "Spray tank" },
+      "1": { "value": "120 L", "label": "Spreading tank" },
+      "2": { "value": "85 kg", "label": "Max payload" },
+      "3": { "value": "10 m", "label": "Working width" },
+      "4": { "value": "IP67", "label": "Protection" }
+    },
+    "why": {
+      "eyebrow": "Why choose it",
+      "title": "Two missions, one airframe.",
+      "lead": "Why growers and spray contractors pick the FP800 for large-field crop protection.",
+      "cards": {
+        "0": { "title": "Spray and spread in one", "desc": "Swap the 80 L spray tank for the 120 L auger-fed spreader to move from spraying to fertilizing and seeding without changing platforms." },
+        "1": { "title": "85 kg maximum payload", "desc": "Carry more per flight, cut refill stops, and lift up to 85 kg on the high-strength rope for farm cargo moves." },
+        "2": { "title": "Four centrifugal nozzles", "desc": "Rear-mounted nozzles deliver up to 40 L/min with adjustable 30-500 µm droplets and spraying accuracy within 5%." },
+        "3": { "title": "Dual radar sensing", "desc": "LiDAR plus mmWave phased-array radar scans 360°, tracks dynamic and static targets and plans avoidance routes in real time." },
+        "4": { "title": "All-weather airframe", "desc": "Aerospace-grade aluminum frame with IP67 protection, foldable arms and neatly routed wiring for fast field maintenance." },
+        "5": { "title": "Continuous operation", "desc": "Dual-battery cycle fast charging with the 12 kW air-cooled charger keeps the FP800 flying through long spray windows." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Engineering",
+      "title": "Built for the field.",
+      "lead": "A platform design that turns around fast: foldable arms, high-flow metering and a power system engineered for heat, dust and long days.",
+      "items": {
+        "0": { "title": "Platform design", "desc": "Aerospace-grade aluminum frame with IP67 protection and durable 63-inch heat-resistant propellers." },
+        "1": { "title": "Dual-channel metering", "desc": "Dual-channel high-flow metering pumps feed four rear centrifugal nozzles across an up-to-10 m spray width." },
+        "2": { "title": "Service-friendly layout", "desc": "Neatly routed wiring harness improves maintenance efficiency and turnaround between missions." }
+      }
+    },
+    "output": {
+      "eyebrow": "Performance",
+      "title": "Output that scales.",
+      "bigNumber": "5%",
+      "unitTitle": "Spraying accuracy deviation",
+      "note": "Factory-rated values. Max feeding rate tested with medium-granule urea; actual output varies with crop, terrain and weather.",
+      "rows": {
+        "0": { "label": "Spray tank", "value": "80 L" },
+        "1": { "label": "Spread tank", "value": "120 L" },
+        "2": { "label": "Working width", "value": "Up to 10 m" },
+        "3": { "label": "Max feeding rate", "value": "400 L/min" },
+        "4": { "label": "Droplet size", "value": "30-500 µm" }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Autonomy",
+      "title": "Smart sensing, intelligent flight.",
+      "lead": "Full-color FPV and a brand-new remote controller give the operator a clear picture, while dual radar keeps the flight path safe.",
+      "items": {
+        "0": { "title": "Dual radar system", "desc": "LiDAR + mmWave phased-array radar with 360° scanning for broad-range obstacle detection." },
+        "1": { "title": "Real-time avoidance", "desc": "Tracks dynamic and static targets simultaneously and plans optimal avoidance routes on the fly." },
+        "2": { "title": "Full-color FPV", "desc": "Clear image details even in low-light conditions, backed by dual 80 W high-brightness lights." },
+        "3": { "title": "Low-altitude awareness", "desc": "Intelligent avoidance of low-altitude obstacles across uneven crop canopies." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "In the field",
+      "title": "Every angle covered.",
+      "lead": "One platform for spraying, spreading and lifting — see how each mission module works.",
+      "items": {
+        "0": { "title": "Platform", "desc": "Foldable arms for rapid transition and transport between fields." },
+        "1": { "title": "Spraying", "desc": "Four rear-mounted centrifugal nozzles with adjustable atomized droplets." },
+        "2": { "title": "Spreading", "desc": "Centrifugal disc delivers a uniform spreading width of up to 10 m." },
+        "3": { "title": "Lifting", "desc": "Smart anti-sway system, automated hook release and real-time weighing." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparison",
+      "title": "FP800 vs. manual work.",
+      "colD15r": "FP800",
+      "colManual": "Manual method",
+      "rows": {
+        "0": { "label": "Efficiency", "d15r": "Up to 10 m swath per pass", "manual": "Backpack sprayer, row by row" },
+        "1": { "label": "Capacity", "d15r": "80 L spray · 120 L spread", "manual": "Around 16 L per refill" },
+        "2": { "label": "Chemical exposure", "d15r": "Operator stays clear of the spray", "manual": "Continuous exposure in the field" },
+        "3": { "label": "Consistency", "d15r": "Radar-controlled height, flow within 5%", "manual": "Varies by operator" },
+        "4": { "label": "Terrain access", "d15r": "Wet, sloped and tall-crop fields", "manual": "Limited by ground conditions" },
+        "5": { "label": "Extra missions", "d15r": "Fertilizing, seeding and 85 kg lifting", "manual": "Separate equipment and labor" }
+      }
+    },
+    "specs": {
+      "eyebrow": "Specifications",
+      "title": "Technical specifications.",
+      "lead": "Factory-rated values for the FP800 agricultural drone.",
+      "items": {
+        "0": { "label": "Spray tank capacity", "value": "80 L" },
+        "1": { "label": "Spread tank capacity", "value": "120 L" },
+        "2": { "label": "Max payload", "value": "85 kg" },
+        "3": { "label": "Max flow rate", "value": "40 L/min" },
+        "4": { "label": "Spreader type", "value": "Auger feeder" },
+        "5": { "label": "Droplet size", "value": "30-500 µm" },
+        "6": { "label": "Max discharge rate", "value": "400 L/min" },
+        "7": { "label": "Spray width", "value": "Up to 10 m" },
+        "8": { "label": "Spreading width", "value": "Up to 10 m" },
+        "9": { "label": "Nozzles", "value": "Four rear-mounted centrifugal" },
+        "10": { "label": "Spraying accuracy", "value": "Within 5%" },
+        "11": { "label": "Radar system", "value": "LiDAR + mmWave phased array" },
+        "12": { "label": "Frame", "value": "Aerospace-grade aluminum, IP67" },
+        "13": { "label": "Propellers", "value": "63 in, durable and heat-resistant" },
+        "14": { "label": "Battery", "value": "High-voltage intelligent" },
+        "15": { "label": "Charger", "value": "12 kW air-cooled" },
+        "16": { "label": "Lifting", "value": "85 kg, high-strength rope" },
+        "17": { "label": "Lights", "value": "Dual 80 W high-brightness" },
+        "18": { "label": "FPV", "value": "Full-color, low-light capable" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Get started",
+      "title": "Ready to see the FP800 work?",
+      "text": "Talk to our team about demos, pricing and deployment for your fields.",
+      "visit": "Back to home"
+    }
   }
 }
