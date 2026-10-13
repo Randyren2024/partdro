@@ -9,6 +9,7 @@
 //   /sitemap.xml                     → 复用 netlify sitemap handler（运行时生成，永远新鲜）
 //   /api/landing-content             → 复用 netlify handler
 //   /api/admin-products              → 复用 netlify handler
+//   /api/inquiry-webhook             → Supabase Database Webhook → 阿里云邮件推送发信
 //   其余 GET/HEAD                    → 静态服务：
 //     路径以 /index.html 结尾        → 301 收敛为无 index.html 的规范路径
 //     路径以 / 结尾（非根）          → 301 收敛为无斜杠规范路径
@@ -20,6 +21,7 @@
 import type { NetlifyEvent, NetlifyResponse } from '../netlify/shared/verifyAdmin'
 import { handler as landingContentHandler } from '../netlify/functions/landing-content'
 import { handler as adminProductsHandler } from '../netlify/functions/admin-products'
+import { handler as inquiryWebhookHandler } from '../netlify/functions/inquiry-webhook'
 import { handler as sitemapHandler } from '../netlify/functions/sitemap'
 
 // OSS bucket/region 由 CI 构建期注入（见 scripts/build-fc.mjs 的 define），本地可用环境变量覆盖
@@ -157,6 +159,13 @@ async function serveStatic(path: string, host: string): Promise<NetlifyResponse>
   return notFound()
 }
 
+/** /api/* → 复用的 netlify handler（键为规范化后的路径） */
+const API_HANDLERS: Record<string, (event: NetlifyEvent) => Promise<NetlifyResponse>> = {
+  '/api/landing-content': landingContentHandler,
+  '/api/admin-products': adminProductsHandler,
+  '/api/inquiry-webhook': inquiryWebhookHandler,
+}
+
 export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<NetlifyResponse> => {
   const fcEvent = toEvent(raw)
   // HTTP 触发器的路径在 rawPath / requestContext.http.path，InvokeFunction 在 path
@@ -182,7 +191,8 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
     const event: NetlifyEvent = { httpMethod: method, headers: {}, body: null, isBase64Encoded: false }
     return sitemapHandler(event)
   }
-  if (path === '/api/landing-content' || path === '/api/admin-products') {
+  const apiHandler = API_HANDLERS[path]
+  if (apiHandler) {
     const event: NetlifyEvent = {
       httpMethod: method,
       // FC 保留 header 原始大小写（Accept/User-Agent），统一小写以兼容大小写敏感查找
@@ -190,7 +200,7 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
       body: fcEvent.body ?? null,
       isBase64Encoded: !!fcEvent.isBase64Encoded,
     }
-    return path === '/api/landing-content' ? landingContentHandler(event) : adminProductsHandler(event)
+    return apiHandler(event)
   }
 
   if (method !== 'GET' && method !== 'HEAD') {

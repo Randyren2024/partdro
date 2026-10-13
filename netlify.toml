@@ -26,6 +26,12 @@
   to = "/.netlify/functions/sitemap"
   status = 200
 
+# C500 历史短链（含 Google Ads 旧 finalUrl）→ 实际产品页（301 利于 SEO）
+[[redirects]]
+  from = "/products/c500"
+  to = "/products/c500-delivery-drone"
+  status = 301
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

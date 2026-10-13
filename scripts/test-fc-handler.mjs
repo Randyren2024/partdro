@@ -12,9 +12,13 @@ const cases = [
   ['/', 'OPTIONS', [], (r) => r.statusCode === 204],
   ['/de/cases', 'POST', [], (r) => r.statusCode === 405],
   ['/api/landing-content', 'OPTIONS', [], (r) => r.statusCode === 204],
+  // inquiries webhook：GET 被 methodGuard 拦，POST 无密钥时 fail-closed
+  ['/api/inquiry-webhook', 'GET', [], (r) => r.statusCode === 405],
+  ['/api/inquiry-webhook', 'POST', [], (r) => r.statusCode === 401 || r.statusCode === 503],
   ['/this-does-not-exist', 'GET', [], (r) => r.statusCode === 404 || r.statusCode === 503],
-  // 主机规范化
-  ['/about', 'GET', [['x-forwarded-proto', 'http']], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/about'],
+  // 主机规范化。FC 网关不透传 x-forwarded-proto，自定义域名设为 HTTPS-only，
+  // http→https 由网关承担；handler 内不再读 proto，x-forwarded-proto 不触发 301。
+  ['/about', 'GET', [['x-forwarded-proto', 'http']], (r) => r.statusCode === 200],
   ['/about', 'GET', [['host', 'droneworld.tech']], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/about'],
   ['/about', 'GET', [['host', 'abc.123.cn-hongkong.fc.devsapp.net']], (r) => r.statusCode !== 301],
 ]
