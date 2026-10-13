@@ -206,13 +206,19 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 }
 
 @media (max-width: 992px) {
+  /* 关键：backdrop-filter 会把 header 变成 fixed 后代的 containing block，
+     导致 .header__nav 的 top/bottom 相对 header（74px 高）定位 → 菜单高度为 0 不可见。
+     移动端直接去掉毛玻璃，菜单用显式高度，双保险。 */
+  .header {
+    backdrop-filter: none;
+  }
   .header__nav {
     display: none;
     position: fixed;
     top: 74px;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: calc(100vh - 74px);
     background: #fff;
     flex-direction: column;
     padding: 20px;
@@ -226,6 +232,8 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
     flex-direction: column;
     width: 100%;
     gap: 0;
+    /* 桌面版是 align-items: center，列方向下会让 .header__dropdown 收缩居中 */
+    align-items: stretch;
   }
   .header__nav-item {
     width: 100%;
@@ -236,6 +244,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
     display: block;
     position: static;
     box-shadow: none;
+    border: none;
     border-radius: 0;
     padding: 0;
     min-width: 0;
