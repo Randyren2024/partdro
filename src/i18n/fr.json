@@ -608,5 +608,130 @@
       "expand": "Développer",
       "collapse": "Réduire"
     }
+  },
+  "fp800-agricultural-drone": {
+    "hero": {
+      "kicker": "Drone agricole",
+      "title1": "Protection professionnelle",
+      "title2": "des cultures",
+      "lead": "Le FP800 associe sur une même cellule un réservoir de pulvérisation de 80 L et un épandeur de 120 L — quatre buses centrifuges arrière, une largeur de travail jusqu'à 10 m, une double détection radar et une capacité de levage de 85 kg pour pulvériser, fertiliser et semer toute la saison.",
+      "ctaPrimary": "Voir les caractéristiques",
+      "ctaSecondary": "Contacter le service commercial",
+      "badgeTitle": "Vente directe usine",
+      "badgeText": "Expédition et assistance dans le monde entier",
+      "stats": { "0": "Pulvérisation 80 L", "1": "Épandage 120 L", "2": "Charge utile 85 kg" }
+    },
+    "strip": {
+      "0": { "value": "80 L", "label": "Réservoir de pulvérisation" },
+      "1": { "value": "120 L", "label": "Réservoir d'épandage" },
+      "2": { "value": "85 kg", "label": "Charge utile max." },
+      "3": { "value": "10 m", "label": "Largeur de travail" },
+      "4": { "value": "IP67", "label": "Protection" }
+    },
+    "why": {
+      "eyebrow": "Pourquoi le choisir",
+      "title": "Deux missions, une seule cellule.",
+      "lead": "Pourquoi les agriculteurs et les prestataires de pulvérisation choisissent le FP800 pour protéger les grandes parcelles.",
+      "cards": {
+        "0": { "title": "Pulvériser et épandre avec un seul appareil", "desc": "Remplacez le réservoir de pulvérisation de 80 L par l'épandeur à vis sans fin de 120 L pour passer de la pulvérisation à la fertilisation et au semis sans changer de plateforme." },
+        "1": { "title": "Charge utile maximale de 85 kg", "desc": "Transportez davantage à chaque vol, réduisez les arrêts de remplissage et hissez jusqu'à 85 kg avec la corde haute résistance pour vos transports agricoles." },
+        "2": { "title": "Quatre buses centrifuges", "desc": "Les buses arrière délivrent jusqu'à 40 L/min avec des gouttelettes réglables de 30-500 µm et une précision de pulvérisation à 5% près." },
+        "3": { "title": "Double détection radar", "desc": "Le LiDAR associé au radar à antenne réseau mmWave balaie sur 360°, suit les cibles dynamiques et statiques et planifie les trajectoires d'évitement en temps réel." },
+        "4": { "title": "Cellule tout temps", "desc": "Châssis en aluminium de qualité aérospatiale avec protection IP67, bras pliables et câblage soigné pour un entretien rapide au champ." },
+        "5": { "title": "Fonctionnement continu", "desc": "La charge rapide en cycle sur deux batteries avec le chargeur 12 kW à refroidissement air maintient le FP800 en vol durant les longues fenêtres de pulvérisation." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Ingénierie",
+      "title": "Conçu pour le terrain.",
+      "lead": "Une plateforme conçue pour enchaîner les missions : bras pliables, dosage à haut débit et système énergétique pensé pour la chaleur, la poussière et les longues journées.",
+      "items": {
+        "0": { "title": "Conception de la plateforme", "desc": "Châssis en aluminium de qualité aérospatiale avec protection IP67 et hélices de 63 pouces durables et résistantes à la chaleur." },
+        "1": { "title": "Dosage à double canal", "desc": "Des pompes de dosage à double canal à haut débit alimentent quatre buses centrifuges arrière sur une largeur de pulvérisation pouvant atteindre 10 m." },
+        "2": { "title": "Architecture facile d'entretien", "desc": "Un câblage soigneusement organisé améliore l'efficacité de la maintenance et la remise en œuvre entre les missions." }
+      }
+    },
+    "output": {
+      "eyebrow": "Performance",
+      "title": "Un rendement qui monte en puissance.",
+      "bigNumber": "5%",
+      "unitTitle": "Écart de précision de pulvérisation",
+      "note": "Valeurs nominatives d'usine. Débit d'alimentation maximal testé avec de l'urée à granulés moyens ; le rendement réel varie selon la culture, le terrain et la météo.",
+      "rows": {
+        "0": { "label": "Réservoir de pulvérisation", "value": "80 L" },
+        "1": { "label": "Réservoir d'épandage", "value": "120 L" },
+        "2": { "label": "Largeur de travail", "value": "Jusqu'à 10 m" },
+        "3": { "label": "Débit d'alimentation max.", "value": "400 L/min" },
+        "4": { "label": "Taille des gouttelettes", "value": "30-500 µm" }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Intelligence embarquée",
+      "title": "Détection intelligente, vol autonome.",
+      "lead": "Le FPV couleur et une radiocommande toute nouvelle offrent à l'opérateur une image claire, tandis que le double radar sécurise la trajectoire de vol.",
+      "items": {
+        "0": { "title": "Système à double radar", "desc": "LiDAR + radar à antenne réseau mmWave avec balayage 360° pour une détection d'obstacles à large couverture." },
+        "1": { "title": "Évitement en temps réel", "desc": "Suit simultanément les cibles dynamiques et statiques et calcule à la volée les trajectoires d'évitement optimales." },
+        "2": { "title": "FPV couleur intégrale", "desc": "Des détails d'image nets même en faible luminosité, grâce aux deux projecteurs 80 W haute luminosité." },
+        "3": { "title": "Perception à basse altitude", "desc": "Évitement intelligent des obstacles bas sur des couverts culturaux irréguliers." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Sur le terrain",
+      "title": "Tous les angles couverts.",
+      "lead": "Une seule plateforme pour pulvériser, épandre et lever — découvrez comment fonctionne chaque module de mission.",
+      "items": {
+        "0": { "title": "Plateforme", "desc": "Bras pliables pour une transition et un transport rapides entre les parcelles." },
+        "1": { "title": "Pulvérisation", "desc": "Quatre buses centrifuges arrière à gouttelettes atomisées réglables." },
+        "2": { "title": "Épandage", "desc": "Le disque centrifuge assure une largeur d'épandage uniforme pouvant atteindre 10 m." },
+        "3": { "title": "Levage", "desc": "Système antibalancement intelligent, libération automatique du crochet et pesée en temps réel." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparaison",
+      "title": "Le FP800 face au travail manuel.",
+      "colD15r": "FP800",
+      "colManual": "Méthode manuelle",
+      "rows": {
+        "0": { "label": "Efficacité", "d15r": "Jusqu'à 10 m de largeur traitée par passage", "manual": "Pulvérisateur à dos, rang par rang" },
+        "1": { "label": "Capacité", "d15r": "80 L pulvérisation · 120 L épandage", "manual": "Environ 16 L par remplissage" },
+        "2": { "label": "Exposition aux produits phytosanitaires", "d15r": "L'opérateur reste à l'écart de la pulvérisation", "manual": "Exposition continue au champ" },
+        "3": { "label": "Régularité", "d15r": "Hauteur régulée par radar, débit à 5% près", "manual": "Varie selon l'opérateur" },
+        "4": { "label": "Accès aux parcelles", "d15r": "Parcelles humides, en pente ou à cultures hautes", "manual": "Limité par les conditions du sol" },
+        "5": { "label": "Missions supplémentaires", "d15r": "Fertilisation, semis et levage de 85 kg", "manual": "Matériel et main-d'œuvre distincts" }
+      }
+    },
+    "specs": {
+      "eyebrow": "Caractéristiques",
+      "title": "Caractéristiques techniques.",
+      "lead": "Valeurs nominatives d'usine du drone agricole FP800.",
+      "items": {
+        "0": { "label": "Capacité du réservoir de pulvérisation", "value": "80 L" },
+        "1": { "label": "Capacité du réservoir d'épandage", "value": "120 L" },
+        "2": { "label": "Charge utile maximale", "value": "85 kg" },
+        "3": { "label": "Débit maximal", "value": "40 L/min" },
+        "4": { "label": "Type d'épandeur", "value": "Vis sans fin" },
+        "5": { "label": "Taille des gouttelettes", "value": "30-500 µm" },
+        "6": { "label": "Débit d'épandage maximal", "value": "400 L/min" },
+        "7": { "label": "Largeur de pulvérisation", "value": "Jusqu'à 10 m" },
+        "8": { "label": "Largeur d'épandage", "value": "Jusqu'à 10 m" },
+        "9": { "label": "Buses", "value": "Quatre buses centrifuges arrière" },
+        "10": { "label": "Précision de pulvérisation", "value": "À 5% près" },
+        "11": { "label": "Système radar", "value": "LiDAR + antenne réseau mmWave" },
+        "12": { "label": "Châssis", "value": "Aluminium de qualité aérospatiale, IP67" },
+        "13": { "label": "Hélices", "value": "63 pouces, durables et résistantes à la chaleur" },
+        "14": { "label": "Batterie", "value": "Intelligente, haute tension" },
+        "15": { "label": "Chargeur", "value": "12 kW à refroidissement air" },
+        "16": { "label": "Levage", "value": "85 kg, corde haute résistance" },
+        "17": { "label": "Éclairage", "value": "Deux projecteurs 80 W haute luminosité" },
+        "18": { "label": "FPV", "value": "Couleur intégrale, efficace en faible luminosité" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Passez à l'action",
+      "title": "Prêt à voir le FP800 à l'œuvre ?",
+      "text": "Parlez à notre équipe des démonstrations, des tarifs et du déploiement pour vos parcelles.",
+      "visit": "Retour à l'accueil"
+    }
   }
 }

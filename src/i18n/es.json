@@ -608,5 +608,130 @@
       "expand": "Expandir",
       "collapse": "Contraer"
     }
+  },
+  "fp800-agricultural-drone": {
+    "hero": {
+      "kicker": "Dron agrícola",
+      "title1": "Protección profesional",
+      "title2": "de cultivos",
+      "lead": "El FP800 combina un tanque de pulverización de 80 L con un esparcidor de 120 L en una sola plataforma: cuatro toberas centrífugas traseras, ancho de trabajo de hasta 10 m, doble percepción por radar y una capacidad de elevación de 85 kg para pulverizar, fertilizar y sembrar durante toda la temporada.",
+      "ctaPrimary": "Ver especificaciones",
+      "ctaSecondary": "Contactar ventas",
+      "badgeTitle": "Venta directa de fábrica",
+      "badgeText": "Envío y soporte a todo el mundo",
+      "stats": { "0": "Pulverización de 80 L", "1": "Esparcido de 120 L", "2": "Carga de 85 kg" }
+    },
+    "strip": {
+      "0": { "value": "80 L", "label": "Tanque de pulverización" },
+      "1": { "value": "120 L", "label": "Tanque de esparcido" },
+      "2": { "value": "85 kg", "label": "Carga máxima" },
+      "3": { "value": "10 m", "label": "Ancho de trabajo" },
+      "4": { "value": "IP67", "label": "Protección" }
+    },
+    "why": {
+      "eyebrow": "Por qué elegirlo",
+      "title": "Dos misiones, una plataforma.",
+      "lead": "Por qué agricultores y contratistas de fumigación eligen el FP800 para la protección de cultivos en grandes extensiones.",
+      "cards": {
+        "0": { "title": "Pulveriza y esparce en un solo equipo", "desc": "Cambia el tanque de pulverización de 80 L por el esparcidor de 120 L con tornillo sin fin para pasar de la pulverización a la fertilización y la siembra sin cambiar de plataforma." },
+        "1": { "title": "Carga máxima de 85 kg", "desc": "Transporta más por vuelo, reduce las paradas de recarga y eleva hasta 85 kg con la cuerda de alta resistencia para mover carga en la finca." },
+        "2": { "title": "Cuatro toberas centrífugas", "desc": "Las toberas traseras entregan hasta 40 L/min con gotas ajustables de 30-500 µm y una precisión de pulverización dentro del 5%." },
+        "3": { "title": "Percepción con doble radar", "desc": "LiDAR más radar de antena en fase mmWave escanea 360°, rastrea objetivos dinámicos y estáticos y planifica rutas de evitación en tiempo real." },
+        "4": { "title": "Plataforma para todo clima", "desc": "Bastidor de aluminio de grado aeroespacial con protección IP67, brazos plegables y cableado ordenado para un mantenimiento rápido en el campo." },
+        "5": { "title": "Operación continua", "desc": "La carga rápida en ciclo de doble batería con el cargador de 12 kW refrigerado por aire mantiene al FP800 volando durante largas jornadas de pulverización." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Ingeniería",
+      "title": "Diseñado para el campo.",
+      "lead": "Un diseño de plataforma de giro rápido: brazos plegables, dosificación de alto caudal y un sistema de energía preparado para el calor, el polvo y las jornadas largas.",
+      "items": {
+        "0": { "title": "Diseño de plataforma", "desc": "Bastidor de aluminio de grado aeroespacial con protección IP67 y duraderas hélices de 63 pulgadas resistentes al calor." },
+        "1": { "title": "Dosificación de doble canal", "desc": "Las bombas dosificadoras de doble canal y alto caudal alimentan cuatro toberas centrífugas traseras en un ancho de pulverización de hasta 10 m." },
+        "2": { "title": "Diseño fácil de mantener", "desc": "El mazo de cableado ordenado mejora la eficiencia del mantenimiento y la rotación entre misiones." }
+      }
+    },
+    "output": {
+      "eyebrow": "Rendimiento",
+      "title": "Producción que escala.",
+      "bigNumber": "5%",
+      "unitTitle": "Desviación de la precisión de pulverización",
+      "note": "Valores nominales de fábrica. El caudal máximo de descarga se probó con urea de grano medio; la producción real varía según el cultivo, el terreno y el clima.",
+      "rows": {
+        "0": { "label": "Tanque de pulverización", "value": "80 L" },
+        "1": { "label": "Tanque de esparcido", "value": "120 L" },
+        "2": { "label": "Ancho de trabajo", "value": "Hasta 10 m" },
+        "3": { "label": "Caudal máximo de descarga", "value": "400 L/min" },
+        "4": { "label": "Tamaño de gota", "value": "30-500 µm" }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Autonomía",
+      "title": "Percepción avanzada, vuelo inteligente.",
+      "lead": "El FPV a todo color y un mando a distancia totalmente nuevo dan al operador una imagen nítida, mientras el doble radar mantiene la ruta de vuelo segura.",
+      "items": {
+        "0": { "title": "Sistema de doble radar", "desc": "LiDAR + radar de antena en fase mmWave con escaneo de 360° para una detección de obstáculos de amplio alcance." },
+        "1": { "title": "Evitación en tiempo real", "desc": "Rastrea objetivos dinámicos y estáticos al mismo tiempo y planifica al vuelo las rutas de evitación óptimas." },
+        "2": { "title": "FPV a todo color", "desc": "Detalles de imagen nítidos incluso con poca luz, respaldados por dobles luces de 80 W de alto brillo." },
+        "3": { "title": "Conciencia de baja altitud", "desc": "Evitación inteligente de obstáculos a baja altura sobre copas de cultivo irregulares." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "En el campo",
+      "title": "Todos los ángulos cubiertos.",
+      "lead": "Una plataforma para pulverizar, esparcir y elevar: descubre cómo funciona cada módulo de misión.",
+      "items": {
+        "0": { "title": "Plataforma", "desc": "Brazos plegables para una transición y un transporte rápidos entre campos." },
+        "1": { "title": "Pulverización", "desc": "Cuatro toberas centrífugas traseras con gotas atomizadas ajustables." },
+        "2": { "title": "Esparcido", "desc": "El disco centrífugo ofrece un ancho de esparcido uniforme de hasta 10 m." },
+        "3": { "title": "Elevación", "desc": "Sistema inteligente antioscilación, liberación automática del gancho y pesaje en tiempo real." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparación",
+      "title": "FP800 frente al trabajo manual.",
+      "colD15r": "FP800",
+      "colManual": "Método manual",
+      "rows": {
+        "0": { "label": "Eficiencia", "d15r": "Hasta 10 m de franja por pasada", "manual": "Fumigadora de mochila, surco por surco" },
+        "1": { "label": "Capacidad", "d15r": "80 L de pulverización · 120 L de esparcido", "manual": "Alrededor de 16 L por recarga" },
+        "2": { "label": "Exposición a químicos", "d15r": "El operador queda alejado de la pulverización", "manual": "Exposición continua en el campo" },
+        "3": { "label": "Consistencia", "d15r": "Altura controlada por radar, caudal dentro del 5%", "manual": "Varía según el operador" },
+        "4": { "label": "Acceso al terreno", "d15r": "Campos húmedos, en pendiente y con cultivos altos", "manual": "Limitado por las condiciones del terreno" },
+        "5": { "label": "Misiones adicionales", "d15r": "Fertilización, siembra y elevación de 85 kg", "manual": "Equipos y mano de obra adicionales" }
+      }
+    },
+    "specs": {
+      "eyebrow": "Especificaciones",
+      "title": "Especificaciones técnicas.",
+      "lead": "Valores nominales de fábrica del dron agrícola FP800.",
+      "items": {
+        "0": { "label": "Capacidad del tanque de pulverización", "value": "80 L" },
+        "1": { "label": "Capacidad del tanque de esparcido", "value": "120 L" },
+        "2": { "label": "Carga máxima", "value": "85 kg" },
+        "3": { "label": "Caudal máximo", "value": "40 L/min" },
+        "4": { "label": "Tipo de esparcidor", "value": "Tornillo sin fin" },
+        "5": { "label": "Tamaño de gota", "value": "30-500 µm" },
+        "6": { "label": "Caudal máximo de descarga", "value": "400 L/min" },
+        "7": { "label": "Ancho de pulverización", "value": "Hasta 10 m" },
+        "8": { "label": "Ancho de esparcido", "value": "Hasta 10 m" },
+        "9": { "label": "Toberas", "value": "Cuatro centrífugas traseras" },
+        "10": { "label": "Precisión de pulverización", "value": "Dentro del 5%" },
+        "11": { "label": "Sistema de radar", "value": "LiDAR + antena en fase mmWave" },
+        "12": { "label": "Bastidor", "value": "Aluminio de grado aeroespacial, IP67" },
+        "13": { "label": "Hélices", "value": "63 pulgadas, duraderas y resistentes al calor" },
+        "14": { "label": "Batería", "value": "Inteligente de alto voltaje" },
+        "15": { "label": "Cargador", "value": "12 kW refrigerado por aire" },
+        "16": { "label": "Elevación", "value": "85 kg, cuerda de alta resistencia" },
+        "17": { "label": "Luces", "value": "Dobles de 80 W de alto brillo" },
+        "18": { "label": "FPV", "value": "A todo color, apto para poca luz" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Comienza ahora",
+      "title": "¿Listo para ver trabajar al FP800?",
+      "text": "Habla con nuestro equipo sobre demos, precios y puesta en marcha en tus campos.",
+      "visit": "Volver al inicio"
+    }
   }
 }

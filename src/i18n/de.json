@@ -747,5 +747,130 @@
       "expand": "Erweitern",
       "collapse": "Zuklappen"
     }
+  },
+  "fp800-agricultural-drone": {
+    "hero": {
+      "kicker": "Agrardrohne",
+      "title1": "Professioneller",
+      "title2": "Pflanzenschutz",
+      "lead": "Der FP800 kombiniert einen 80 L Sprühbehälter mit einem 120 L Streuer in einem einzigen Fluggerät — vier hintere Zentrifugaldüsen, bis zu 10 m Arbeitsbreite, duale Radarsensorik und 85 kg Hebekraft für Spritzen, Düngen und Säen während der gesamten Saison.",
+      "ctaPrimary": "Technische Daten ansehen",
+      "ctaSecondary": "Vertrieb kontaktieren",
+      "badgeTitle": "Direkt ab Werk",
+      "badgeText": "Weltweiter Versand und Support",
+      "stats": { "0": "80 L Sprühen", "1": "120 L Streuen", "2": "85 kg Nutzlast" }
+    },
+    "strip": {
+      "0": { "value": "80 L", "label": "Sprühbehälter" },
+      "1": { "value": "120 L", "label": "Streubehälter" },
+      "2": { "value": "85 kg", "label": "Max. Nutzlast" },
+      "3": { "value": "10 m", "label": "Arbeitsbreite" },
+      "4": { "value": "IP67", "label": "Schutzart" }
+    },
+    "why": {
+      "eyebrow": "Warum er überzeugt",
+      "title": "Zwei Missionen, ein Fluggerät.",
+      "lead": "Warum Landwirte und Spritzdienstleister den FP800 für den Pflanzenschutz auf großen Flächen wählen.",
+      "cards": {
+        "0": { "title": "Spritzen und Streuen in einem", "desc": "Tauschen Sie den 80 L Sprühbehälter gegen den 120 L Streuer mit Schneckenförderer — vom Spritzen zum Düngen und Säen ohne Plattformwechsel." },
+        "1": { "title": "85 kg maximale Nutzlast", "desc": "Mehr Ladung pro Flug, weniger Nachfüllstopps und bis zu 85 kg Hebekraft am hochfesten Seil für Transporte im Betrieb." },
+        "2": { "title": "Vier Zentrifugaldüsen", "desc": "Hinten montierte Düsen liefern bis zu 40 L/min mit einstellbaren Tropfen von 30-500 µm und einer Sprühgenauigkeit innerhalb von 5%." },
+        "3": { "title": "Duale Radarsensorik", "desc": "LiDAR plus mmWave-Phased-Array-Radar scannt 360°, verfolgt dynamische und statische Ziele und plant Ausweichrouten in Echtzeit." },
+        "4": { "title": "Fluggerät für jedes Wetter", "desc": "Luftfahrttauglicher Aluminiumrahmen mit IP67-Schutz, klappbaren Armen und sauber verlegter Verkabelung für schnelle Wartung im Feld." },
+        "5": { "title": "Dauerbetrieb", "desc": "Schnellladung im Doppelakku-Wechselbetrieb mit dem 12 kW luftgekühlten Ladegerät hält den FP800 durch lange Spritzfenster in der Luft." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Ingenieurskunst",
+      "title": "Gebaut für den Feldeinsatz.",
+      "lead": "Ein Plattformdesign für schnelle Wechsel: klappbare Arme, Hochdurchsatz-Dosierung und ein Antriebssystem, ausgelegt für Hitze, Staub und lange Tage.",
+      "items": {
+        "0": { "title": "Plattformdesign", "desc": "Luftfahrttauglicher Aluminiumrahmen mit IP67-Schutz und langlebigen, hitzebeständigen 63-Zoll-Propellern." },
+        "1": { "title": "Zweikanal-Dosierung", "desc": "Zweikanal-Hochdurchsatz-Dosierpumpen versorgen vier hintere Zentrifugaldüsen über eine Sprühbreite von bis zu 10 m." },
+        "2": { "title": "Servicefreundliche Bauweise", "desc": "Sauber verlegte Kabelbäume verbessern die Wartungseffizienz und verkürzen die Umrüstzeit zwischen Missionen." }
+      }
+    },
+    "output": {
+      "eyebrow": "Leistung",
+      "title": "Flächenleistung, die überzeugt.",
+      "bigNumber": "5%",
+      "unitTitle": "Abweichung der Sprühgenauigkeit",
+      "note": "Werksgarantierte Werte. Die maximale Förderrate wurde mit mittlerem Harnstoff-Granulat getestet; die tatsächliche Leistung variiert je nach Kultur, Gelände und Wetter.",
+      "rows": {
+        "0": { "label": "Sprühbehälter", "value": "80 L" },
+        "1": { "label": "Streubehälter", "value": "120 L" },
+        "2": { "label": "Arbeitsbreite", "value": "Bis zu 10 m" },
+        "3": { "label": "Max. Förderrate", "value": "400 L/min" },
+        "4": { "label": "Tropfengröße", "value": "30-500 µm" }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Autonomie",
+      "title": "Smarte Sensorik, intelligenter Flug.",
+      "lead": "Farbiges FPV und eine brandneue Fernbedienung geben dem Piloten ein klares Bild, während das duale Radar den Flugweg sicher hält.",
+      "items": {
+        "0": { "title": "Duales Radarsystem", "desc": "LiDAR + mmWave-Phased-Array-Radar mit 360°-Scan für weiträumige Hinderniserkennung." },
+        "1": { "title": "Ausweichen in Echtzeit", "desc": "Verfolgt dynamische und statische Ziele gleichzeitig und plant optimal Ausweichrouten im Flug." },
+        "2": { "title": "Farbiges FPV", "desc": "Klare Bilddetails selbst bei schwachem Licht, unterstützt durch zwei 80 W Hochhelligkeitsleuchten." },
+        "3": { "title": "Erkennung in niedriger Flughöhe", "desc": "Intelligentes Ausweichen vor Hindernissen in geringer Höhe über ungleichmäßigen Pflanzenbeständen." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Im Feldeinsatz",
+      "title": "Jede Perspektive abgedeckt.",
+      "lead": "Eine Plattform für Spritzen, Streuen und Heben — sehen Sie, wie jedes Missionsmodul funktioniert.",
+      "items": {
+        "0": { "title": "Plattform", "desc": "Klappbare Arme für schnellen Wechsel und Transport zwischen Feldern." },
+        "1": { "title": "Spritzen", "desc": "Vier hinten montierte Zentrifugaldüsen mit einstellbaren Sprühnebeltropfen." },
+        "2": { "title": "Streuen", "desc": "Die Zentrifugalscheibe liefert eine gleichmäßige Streubreite von bis zu 10 m." },
+        "3": { "title": "Heben", "desc": "Intelligentes Anti-Schwing-System, automatische Hakenentriegelung und Echtzeit-Wiegung." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Vergleich",
+      "title": "FP800 vs. manuelle Arbeit.",
+      "colD15r": "FP800",
+      "colManual": "Manuelle Methode",
+      "rows": {
+        "0": { "label": "Effizienz", "d15r": "Bis zu 10 m Bahnbreite pro Durchgang", "manual": "Rückenspritze, Reihe für Reihe" },
+        "1": { "label": "Kapazität", "d15r": "80 L Sprühen · 120 L Streuen", "manual": "Rund 16 L pro Nachfüllung" },
+        "2": { "label": "Kontakt mit Chemikalien", "d15r": "Der Anwender bleibt außerhalb des Sprühnebels", "manual": "Kontinuierliche Exposition auf dem Feld" },
+        "3": { "label": "Gleichmäßigkeit", "d15r": "Radargesteuerte Höhe, Durchfluss innerhalb 5%", "manual": "Je nach Anwender unterschiedlich" },
+        "4": { "label": "Geländezugang", "d15r": "Nasse, geneigte Felder und Hochkulturen", "manual": "Durch Bodenverhältnisse begrenzt" },
+        "5": { "label": "Zusätzliche Missionen", "d15r": "Düngen, Säen und Heben von 85 kg", "manual": "Separate Geräte und Arbeitskräfte" }
+      }
+    },
+    "specs": {
+      "eyebrow": "Technische Daten",
+      "title": "Technische Spezifikationen.",
+      "lead": "Werksgarantierte Werte der FP800 Agrardrohne.",
+      "items": {
+        "0": { "label": "Sprühbehältervolumen", "value": "80 L" },
+        "1": { "label": "Streubehältervolumen", "value": "120 L" },
+        "2": { "label": "Max. Nutzlast", "value": "85 kg" },
+        "3": { "label": "Max. Durchflussrate", "value": "40 L/min" },
+        "4": { "label": "Streuertyp", "value": "Schneckenförderer" },
+        "5": { "label": "Tropfengröße", "value": "30-500 µm" },
+        "6": { "label": "Max. Ausstoßrate", "value": "400 L/min" },
+        "7": { "label": "Sprühbreite", "value": "Bis zu 10 m" },
+        "8": { "label": "Streubreite", "value": "Bis zu 10 m" },
+        "9": { "label": "Düsen", "value": "Vier hinten montierte Zentrifugaldüsen" },
+        "10": { "label": "Sprühgenauigkeit", "value": "Innerhalb von 5%" },
+        "11": { "label": "Radarsystem", "value": "LiDAR + mmWave-Phased-Array" },
+        "12": { "label": "Rahmen", "value": "Luftfahrttaugliches Aluminium, IP67" },
+        "13": { "label": "Propeller", "value": "63 Zoll, langlebig und hitzebeständig" },
+        "14": { "label": "Akku", "value": "Hochspannung, intelligent" },
+        "15": { "label": "Ladegerät", "value": "12 kW luftgekühlt" },
+        "16": { "label": "Heben", "value": "85 kg, hochfestes Seil" },
+        "17": { "label": "Beleuchtung", "value": "Dual 80 W, hochhell" },
+        "18": { "label": "FPV", "value": "Farbig, einsatzfähig bei schwachem Licht" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Jetzt starten",
+      "title": "Bereit, den FP800 in Aktion zu sehen?",
+      "text": "Sprechen Sie mit unserem Team über Demos, Preise und den Einsatz auf Ihren Feldern.",
+      "visit": "Zurück zur Startseite"
+    }
   }
 }

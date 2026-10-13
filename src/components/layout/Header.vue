@@ -55,7 +55,12 @@
           {{ t('nav.contact') }}
           <RightOutlined />
         </router-link>
-        <div class="header__mobile-toggle" @click="mobileOpen = !mobileOpen">
+        <div
+          class="header__mobile-toggle"
+          role="button"
+          aria-label="Menu"
+          @click="mobileOpen = !mobileOpen"
+        >
           <MenuOutlined v-if="!mobileOpen" />
           <CloseOutlined v-else />
         </div>
@@ -191,7 +196,13 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 .header__mobile-toggle {
   display: none;
   font-size: 22px;
+  line-height: 1;
   cursor: pointer;
+  /* 扩大触控命中区（图标 22px 太小，手机上点不准） */
+  padding: 10px;
+  margin-right: -10px;
+  border-radius: 10px;
+  touch-action: manipulation;
 }
 
 @media (max-width: 992px) {
