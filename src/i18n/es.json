@@ -733,5 +733,149 @@
       "text": "Habla con nuestro equipo sobre demos, precios y puesta en marcha en tus campos.",
       "visit": "Volver al inicio"
     }
+  },
+  "d50r": {
+    "hero": {
+      "kicker": "Partdro Serie de Drones de Limpieza Solar D50R",
+      "title1": "Limpieza fotovoltaica inteligente,",
+      "title2": "Hecho para plantas solares.",
+      "lead": "El D50R combina un depósito de 50 L con limpieza automatizada de proceso completo y planificación de rutas: posicionamiento doble RTK, radar de obstáculos frontal y boquillas de alta presión estándar mantienen limpias las grandes plantas fotovoltaicas sin que nadie pise los paneles.",
+      "ctaPrimary": "Descubrir el D50R",
+      "ctaSecondary": "Hablar con Partdro",
+      "stats": {
+        "0": "Depósito de agua a bordo de 50 L",
+        "1": "Posicionamiento doble RTK centimétrico",
+        "2": "5.500 m² limpiados al día"
+      },
+      "badgeTitle": "Hecho para plantas solares.",
+      "badgeText": "Plataforma de limpieza fotovoltaica de 50 litros con planificación de rutas totalmente automatizada."
+    },
+    "strip": {
+      "0": { "value": "50 L", "label": "Capacidad del depósito de agua" },
+      "1": { "value": "8-10 MPa", "label": "Limpieza de alta presión" },
+      "2": { "value": "0-45°", "label": "Ángulo de oscilación del brazo" },
+      "3": { "value": "Doble RTK", "label": "Posicionamiento centimétrico" },
+      "4": { "value": "5.500 m²", "label": "Limpieza diaria (caso real)" }
+    },
+    "why": {
+      "eyebrow": "Por qué elegirlo",
+      "title": "Una plataforma para cada trabajo de limpieza fotovoltaica.",
+      "lead": "Desde plantas de suelo hasta plantas flotantes sobre estanques, el D50R sustituye la limpieza manual en altura por un flujo automatizado con drones.",
+      "cards": {
+        "0": { "title": "Depósito de agua de 50 L", "desc": "Menos recargas y cambio rápido de líquido para trabajar sobre grandes superficies en una sola operación." },
+        "1": { "title": "Automatización de proceso completo", "desc": "Limpieza y planificación de rutas de principio a fin: se planifica la misión una vez y el dron la ejecuta de forma autónoma." },
+        "2": { "title": "Boquillas de alta presión estándar", "desc": "Chorros de alta presión alcanzan las rendijas y las manchas difíciles, con chorro fino de 0° para la suciedad más incrustada." },
+        "3": { "title": "Control de vuelo integrado", "desc": "Un solo operador vuela y limpia desde una única estación, con integración personalizada para varias plataformas de vuelo." },
+        "4": { "title": "Doble RTK más radar de obstáculos", "desc": "Posicionamiento centimétrico y detección frontal de obstáculos mantienen cada pasada estable y segura." },
+        "5": { "title": "Sustituye el trabajo manual en altura", "desc": "Sin andamios, sin cuerdas, sin operarios en los techos: un piloto y un operador de tierra hacen todo el trabajo." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Diseño destacado",
+      "title": "Diseño modular, listo para múltiples escenarios.",
+      "lead": "Una plataforma de limpieza modular que se adapta a cada emplazamiento fotovoltaico: depósito, brazos y boquillas se intercambian según la tarea.",
+      "items": {
+        "0": { "title": "Depósito de agua de 50 L", "desc": "Gran capacidad de carga única cubre extensiones amplias, y el diseño de cambio rápido agiliza las recargas." },
+        "1": { "title": "Brazos de pulverización oscilantes", "desc": "Los brazos oscilan de 0° a 45°, lavando grandes superficies de paneles de manera uniforme en una sola pasada." },
+        "2": { "title": "Compatibilidad multi-boquilla", "desc": "Boquillas de alta presión estándar para rendijas y manchas difíciles, más chorro fino de 0° para los puntos más rebeldes." }
+      }
+    },
+    "output": {
+      "eyebrow": "Resultados de campo",
+      "bigNumber": "5.500 m²",
+      "unitTitle": "Limpiados al día en el caso de Huizhou (planta fotovoltaica acuícola)",
+      "note": "Cifras del proyecto de 100.000 m² / 20 MW: un piloto y un operador de tierra terminaron en 18 días, reduciendo el plazo en más del 60%.",
+      "rows": {
+        "0": { "label": "Superficie por vuelo", "value": "138 m²" },
+        "1": { "label": "Despegues por hora", "value": "5" },
+        "2": { "label": "Ritmo de limpieza manual", "value": "Menos de 900 m² por persona y día" },
+        "3": { "label": "Plazo del proyecto", "value": "18 días (más de 30 manualmente)" },
+        "4": { "label": "Ganancia de generación", "value": "12-15% tras la limpieza" }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Inteligencia — Planificación automatizada de rutas",
+      "title": "Automatización de proceso completo, del plan a la limpieza.",
+      "lead": "El D50R planifica las rutas de limpieza en la estación de tierra y las vuela de forma autónoma, cubriendo cada panel sin puntos ciegos.",
+      "items": {
+        "0": { "title": "Cobertura total con rutas planificadas", "desc": "Las misiones se planifican por emplazamiento y altura, evitando omisiones y puntos ciegos en toda la planta." },
+        "1": { "title": "Vuelo con precisión RTK", "desc": "El doble RTK mantiene la posición y la actitud precisas para trayectorias de limpieza coherentes y repetibles." },
+        "2": { "title": "Alto grado de automatización", "desc": "Las rutas planificadas en la estación se ejecutan automáticamente sin control manual en tiempo real." },
+        "3": { "title": "Operación remota", "desc": "El operador monitoriza y controla el dron desde tierra, lejos de la zona de limpieza." }
+      }
+    },
+    "safety": {
+      "eyebrow": "Seguridad",
+      "title": "Operaciones no tripuladas en altura, protegidas por doble RTK.",
+      "lead": "El D50R mantiene a los operarios en el suelo mientras los sensores integrados protegen cada vuelo sobre la planta.",
+      "cards": {
+        "0": { "title": "Sustituye el trabajo manual en altura", "desc": "La operación remota elimina los riesgos de caída de la limpieza en techos y con acceso suspendido." },
+        "1": { "title": "Doble RTK de alta precisión", "desc": "Los módulos dobles RTK integrados ofrecen posicionamiento centimétrico para un vuelo preciso y fiable." },
+        "2": { "title": "Evitación inteligente de obstáculos", "desc": "El radar frontal detecta obstáculos en tiempo real y mantiene una distancia de operación segura." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Multi-escenario",
+      "title": "Estable en altura, flexible en todos los ángulos.",
+      "lead": "Soportes modulares y varias opciones de boquilla permiten al D50R cubrir partes superiores, inferiores y ángulos difíciles.",
+      "items": {
+        "0": { "title": "Operación estable en altura", "desc": "El doble RTK y el bucle de percepción-decisión-ejecución mantienen el lavado estable a la altura de trabajo." },
+        "1": { "title": "Expansión multi-módulo", "desc": "Depósito, brazos y boquillas se configuran según las distintas tareas de limpieza." },
+        "2": { "title": "Compatible con varias boquillas", "desc": "Boquillas de alta presión estándar para rendijas y manchas en todo tipo de paneles." },
+        "3": { "title": "Cobertura de gran ángulo", "desc": "Brazos que oscilan de 0° a 45° cubren superficies superiores e inferiores en menos pasadas." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparativa entre el D50R y la limpieza manual fotovoltaica",
+      "title": "El D50R limpia más rápido, más seguro y a menor coste.",
+      "colD15r": "Partdro D50R",
+      "colManual": "Limpieza manual",
+      "rows": {
+        "0": { "label": "Seguridad", "d15r": "El dron trabaja en altura y el equipo permanece en el suelo", "manual": "Los operarios limpian techos y plantas en persona" },
+        "1": { "label": "Eficiencia", "d15r": "5.500 m² al día con un equipo de 2 personas", "manual": "Menos de 900 m² por persona y día, con proyectos de más de un mes" },
+        "2": { "label": "Coste", "d15r": "Una inversión en equipo con bajo coste operativo", "manual": "Grandes equipos de trabajo recurrentes en cada lavado" },
+        "3": { "label": "Efecto de limpieza", "d15r": "Aclarado a alta presión de 8-10 MPa elimina las manchas difíciles", "manual": "Las rendijas y la suciedad incrustada cuestan de limpiar a fondo" },
+        "4": { "label": "Plazo", "d15r": "18 días para una planta de 100.000 m²", "manual": "Más de un mes para la misma superficie" },
+        "5": { "label": "Generación", "d15r": "La generación aumenta un 12-15% tras la limpieza", "manual": "Las pérdidas por suciedad persisten entre lavados" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Plantas fotovoltaicas de suelo", "desc": "Limpieza fila a fila para grandes plantas solares a escala de red." },
+      "1": { "title": "Cubiertas comerciales e industriales", "desc": "Limpie la fotovoltaica de cubierta de forma segura, sin operarios en el techo." },
+      "2": { "title": "Plantas fotovoltaicas acuícolas", "desc": "Aclarado con agua a 8-10 MPa adaptado a paneles sobre estanques de acuicultura." },
+      "3": { "title": "Fotovoltaica residencial y distribuida", "desc": "Vuelos compactos ideales para sistemas distribuidos y de cubierta residencial." }
+    },
+    "video": {
+      "eyebrow": "Véalo en acción",
+      "title": "El D50R en acción.",
+      "emptyHint": "Añada una URL de vídeo en el editor para mostrar aquí el D50R."
+    },
+    "specs": {
+      "eyebrow": "Parámetros del producto",
+      "title": "El D50R de un vistazo.",
+      "lead": "Las especificaciones clave del dron de limpieza fotovoltaica D50R.",
+      "items": {
+        "0": { "label": "Modelo", "value": "D50R" },
+        "1": { "label": "Categoría", "value": "Dron inteligente de limpieza fotovoltaica" },
+        "2": { "label": "Capacidad del depósito", "value": "50 L" },
+        "3": { "label": "Presión de limpieza", "value": "8-10 MPa (aclarado con agua a alta presión)" },
+        "4": { "label": "Sistema de pulverización", "value": "Brazos dobles oscilantes, 0-45°" },
+        "5": { "label": "Boquillas", "value": "Alta presión estándar, chorro fino de 0°" },
+        "6": { "label": "Posicionamiento", "value": "Doble RTK de alta precisión" },
+        "7": { "label": "Detección de obstáculos", "value": "Radar frontal" },
+        "8": { "label": "Automatización", "value": "Limpieza de proceso completo con planificación de rutas" },
+        "9": { "label": "Operación", "value": "1 piloto + 1 operador de tierra" },
+        "10": { "label": "Superficie por vuelo", "value": "138 m²" },
+        "11": { "label": "Limpieza diaria", "value": "Hasta 5.500 m²" },
+        "12": { "label": "Plataformas de vuelo", "value": "Integración personalizada para varias plataformas" },
+        "13": { "label": "Aplicaciones", "value": "Plantas de suelo, cubierta, distribuidas y acuícolas" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Partdro Serie de Drones de Limpieza Solar D50R",
+      "title": "¿Listo para mantener sus paneles limpios?",
+      "text": "Hable con Partdro sobre la configuración D50R adecuada para su planta: depósito, boquillas y plan de despliegue.",
+      "visit": "Visitar partdro.com"
+    }
   }
 }

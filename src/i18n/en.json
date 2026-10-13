@@ -872,5 +872,149 @@
       "text": "Talk to our team about demos, pricing and deployment for your fields.",
       "visit": "Back to home"
     }
+  },
+  "d50r": {
+    "hero": {
+      "kicker": "Partdro Solar Cleaning Drone Series D50R",
+      "title1": "Photovoltaic Intelligent Cleaning,",
+      "title2": "Built for solar plants.",
+      "lead": "The D50R pairs a 50 L water tank with full-process automated cleaning and route planning — dual RTK positioning, forward obstacle radar and standard high-pressure nozzles keep large PV arrays clean without sending workers onto the panels.",
+      "ctaPrimary": "Explore D50R",
+      "ctaSecondary": "Talk to Partdro",
+      "stats": {
+        "0": "50 L on-board water tank",
+        "1": "Dual RTK cm-level positioning",
+        "2": "5,500 m² cleaned per day"
+      },
+      "badgeTitle": "Built for solar plants.",
+      "badgeText": "A 50-litre photovoltaic cleaning platform with fully automated route planning."
+    },
+    "strip": {
+      "0": { "value": "50 L", "label": "Water tank capacity" },
+      "1": { "value": "8-10 MPa", "label": "High-pressure cleaning" },
+      "2": { "value": "0-45°", "label": "Spray boom swing angle" },
+      "3": { "value": "Dual RTK", "label": "Centimeter-level positioning" },
+      "4": { "value": "5,500 m²", "label": "Daily cleaning output (case study)" }
+    },
+    "why": {
+      "eyebrow": "Why choose it",
+      "title": "One platform for every PV cleaning job.",
+      "lead": "From ground-mounted plants to fishery-PV arrays, the D50R replaces manual high-altitude cleaning with an automated drone workflow.",
+      "cards": {
+        "0": { "title": "Large 50 L water tank", "desc": "Fewer refills and fast liquid changes keep the drone working over large areas in a single operation." },
+        "1": { "title": "Full-process automation", "desc": "Cleaning and route planning run end-to-end: plan the mission once and the drone executes it autonomously." },
+        "2": { "title": "Standard high-pressure nozzles", "desc": "High-pressure jets reach panel gaps and stubborn stains, with a 0° pinpoint jet for the toughest dirt." },
+        "3": { "title": "Integrated flight control", "desc": "One operator flies and cleans from a single station, with custom integration for multiple flight platforms." },
+        "4": { "title": "Dual RTK plus obstacle radar", "desc": "Centimeter-level positioning and forward obstacle sensing keep every pass stable and safe over the array." },
+        "5": { "title": "Replaces manual work at height", "desc": "No scaffolding, no ropes, no workers on roofs — one pilot and one ground operator run the whole job." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Design highlights",
+      "title": "Modular design, multi-scenario ready.",
+      "lead": "A modular cleaning platform that adapts to different PV sites — tank, booms and nozzles all swap to match the task at hand.",
+      "items": {
+        "0": { "title": "50 L water tank", "desc": "Large single-fill capacity covers wide arrays, and the quick-change design makes refills fast." },
+        "1": { "title": "Dual swing spray booms", "desc": "Booms oscillate from 0° to 45°, washing large panel surfaces evenly in a single pass." },
+        "2": { "title": "Multi-nozzle compatibility", "desc": "Standard high-pressure nozzles for gaps and stubborn stains, plus a 0° pinpoint jet for stubborn spots." }
+      }
+    },
+    "output": {
+      "eyebrow": "Field results",
+      "bigNumber": "5,500 m²",
+      "unitTitle": "Cleaned per day in the Huizhou fishery-PV case",
+      "note": "Figures from the 100,000 m² / 20 MW fishery-PV project: one pilot plus one ground operator finished in 18 days, cutting the schedule by more than 60%.",
+      "rows": {
+        "0": { "label": "Area per sortie", "value": "138 m²" },
+        "1": { "label": "Takeoffs per hour", "value": "5" },
+        "2": { "label": "Manual cleaning rate", "value": "Below 900 m² per person-day" },
+        "3": { "label": "Project schedule", "value": "18 days (30+ days manually)" },
+        "4": { "label": "Power generation gain", "value": "12-15% after cleaning" }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Intelligence — Automated route planning",
+      "title": "Full-process automation, from plan to clean.",
+      "lead": "The D50R plans cleaning routes on the ground station and flies them autonomously, covering every panel without blind spots.",
+      "items": {
+        "0": { "title": "Full-coverage route planning", "desc": "Missions are planned per site and height, avoiding omissions and blind spots across the array." },
+        "1": { "title": "RTK-precision flight", "desc": "Dual RTK keeps position and attitude accurate for consistent, repeatable cleaning paths." },
+        "2": { "title": "High automation", "desc": "Routes planned on the ground station are executed automatically without real-time manual control." },
+        "3": { "title": "Remote operation", "desc": "The operator monitors and controls the drone from the ground, away from the cleaning zone." }
+      }
+    },
+    "safety": {
+      "eyebrow": "Safety",
+      "title": "Unmanned high-altitude operations, protected by dual RTK.",
+      "lead": "The D50R keeps workers on the ground while built-in sensors guard every flight over the array.",
+      "cards": {
+        "0": { "title": "Replaces manual work at height", "desc": "Remote operation eliminates the fall risks of rooftop and suspended-access cleaning work." },
+        "1": { "title": "High-precision dual RTK", "desc": "Built-in dual RTK modules output centimeter-level positioning for accurate, reliable flight." },
+        "2": { "title": "Intelligent obstacle avoidance", "desc": "Forward-looking radar senses obstacles in real time and maintains a safe operating distance." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Multi-scenario",
+      "title": "Stable at height, flexible at every angle.",
+      "lead": "Modular mounts and multiple nozzle options let the D50R cover panel tops, bottoms and hard-to-reach angles.",
+      "items": {
+        "0": { "title": "Stable high-altitude operation", "desc": "Dual RTK and the perception-decision-execution loop keep washing stable at working height." },
+        "1": { "title": "Multi-module expansion", "desc": "Tank, boom and nozzle modules can be configured for different cleaning tasks." },
+        "2": { "title": "Compatible with multiple nozzles", "desc": "Standard high-pressure nozzles handle gaps and stubborn stains across panel types." },
+        "3": { "title": "Wide-angle coverage", "desc": "Spray booms swinging from 0° to 45° cover bottom and top surfaces in fewer passes." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Comparison of D50R and manual PV cleaning",
+      "title": "The D50R cleans faster, safer and at lower cost.",
+      "colD15r": "Partdro D50R",
+      "colManual": "Manual PV cleaning",
+      "rows": {
+        "0": { "label": "Safety", "d15r": "Drone works at height while the crew stays on the ground", "manual": "Workers clean rooftops and arrays in person" },
+        "1": { "label": "Efficiency", "d15r": "5,500 m² per day with a 2-person crew", "manual": "Below 900 m² per person-day with month-long projects" },
+        "2": { "label": "Cost", "d15r": "One equipment investment with low operating cost", "manual": "Large recurring labor teams for every wash" },
+        "3": { "label": "Cleaning effect", "d15r": "8-10 MPa high-pressure rinse removes stubborn stains", "manual": "Panel gaps and stubborn dirt are hard to clean thoroughly" },
+        "4": { "label": "Schedule", "d15r": "18 days for a 100,000 m² plant", "manual": "More than one month for the same area" },
+        "5": { "label": "Power output", "d15r": "Generation increases 12-15% after cleaning", "manual": "Soiling losses persist between manual washes" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Ground-mounted PV plants", "desc": "Row-by-row cleaning for large utility-scale solar farms." },
+      "1": { "title": "Commercial and industrial rooftops", "desc": "Clean rooftop PV safely — no workers on the roof." },
+      "2": { "title": "Fishery-PV plants", "desc": "8-10 MPa water rinse tuned for panels over aquaculture ponds." },
+      "3": { "title": "Residential and distributed PV", "desc": "Compact sorties suit distributed and residential rooftop systems." }
+    },
+    "video": {
+      "eyebrow": "Watch it work",
+      "title": "D50R in action.",
+      "emptyHint": "Add a video URL in the editor to show the D50R here."
+    },
+    "specs": {
+      "eyebrow": "Product Parameter",
+      "title": "D50R at a glance.",
+      "lead": "Key specifications of the D50R photovoltaic cleaning drone.",
+      "items": {
+        "0": { "label": "Model", "value": "D50R" },
+        "1": { "label": "Category", "value": "Photovoltaic intelligent cleaning drone" },
+        "2": { "label": "Water tank capacity", "value": "50 L" },
+        "3": { "label": "Cleaning pressure", "value": "8-10 MPa (high-pressure water rinse)" },
+        "4": { "label": "Spray system", "value": "Dual swing booms, 0-45°" },
+        "5": { "label": "Nozzles", "value": "Standard high-pressure, 0° pinpoint jet" },
+        "6": { "label": "Positioning", "value": "High-precision dual RTK" },
+        "7": { "label": "Obstacle sensing", "value": "Forward-looking radar" },
+        "8": { "label": "Automation", "value": "Full-process cleaning with route planning" },
+        "9": { "label": "Operation", "value": "1 pilot + 1 ground operator" },
+        "10": { "label": "Area per sortie", "value": "138 m²" },
+        "11": { "label": "Daily cleaning output", "value": "Up to 5,500 m²" },
+        "12": { "label": "Flight platforms", "value": "Custom integration for multiple platforms" },
+        "13": { "label": "Applications", "value": "Ground, rooftop, distributed and fishery-PV plants" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Partdro Solar Cleaning Drone Series D50R",
+      "title": "Ready to keep your panels clean?",
+      "text": "Talk with Partdro about the right D50R configuration for your PV plant — tank setup, nozzles and deployment plan.",
+      "visit": "Visit partdro.com"
+    }
   }
 }

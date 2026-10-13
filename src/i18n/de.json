@@ -872,5 +872,149 @@
       "text": "Sprechen Sie mit unserem Team über Demos, Preise und den Einsatz auf Ihren Feldern.",
       "visit": "Zurück zur Startseite"
     }
+  },
+  "d50r": {
+    "hero": {
+      "kicker": "Partdro Solar-Reinigungsdrohnen-Serie D50R",
+      "title1": "Intelligente Photovoltaik-Reinigung,",
+      "title2": "Gebaut für Solarparks.",
+      "lead": "Der D50R kombiniert einen 50-L-Wassertank mit durchgängig automatisierter Reinigung und Routenplanung — duale RTK-Positionierung, vorderes Hindernisradar und Standard-Hochdruckdüsen halten große PV-Anlagen sauber, ohne dass jemand auf die Module steigen muss.",
+      "ctaPrimary": "D50R entdecken",
+      "ctaSecondary": "Partdro kontaktieren",
+      "stats": {
+        "0": "50-L-Wassertank an Bord",
+        "1": "Duale RTK-Positionierung auf Zentimeter genau",
+        "2": "5.500 m² Reinigung pro Tag"
+      },
+      "badgeTitle": "Gebaut für Solarparks.",
+      "badgeText": "Eine 50-Liter-Photovoltaik-Reinigungsplattform mit vollautomatischer Routenplanung."
+    },
+    "strip": {
+      "0": { "value": "50 L", "label": "Wassertankkapazität" },
+      "1": { "value": "8-10 MPa", "label": "Hochdruckreinigung" },
+      "2": { "value": "0-45°", "label": "Schwenkwinkel der Sprüharme" },
+      "3": { "value": "Dual RTK", "label": "Zentimetergenaue Positionierung" },
+      "4": { "value": "5.500 m²", "label": "Reinigungsleistung pro Tag (Fallstudie)" }
+    },
+    "why": {
+      "eyebrow": "Ihre Vorteile",
+      "title": "Eine Plattform für jeden PV-Reinigungseinsatz.",
+      "lead": "Von bodengestützten Anlagen bis zu PV-Anlagen über Fischteichen ersetzt der D50R die manuelle Höhenreinigung durch einen automatisierten Drohnen-Workflow.",
+      "cards": {
+        "0": { "title": "Großer 50-L-Wassertank", "desc": "Weniger Nachfüllungen und schneller Flüssigkeitswechsel für den Einsatz über großen Flächen in einem Durchgang." },
+        "1": { "title": "Durchgängige Automatisierung", "desc": "Reinigung und Routenplanung laufen von Anfang bis Ende: Mission einmal planen, der Drohn führt sie autonom aus." },
+        "2": { "title": "Standard-Hochdruckdüsen", "desc": "Hochdruckstrahlen erreichen Fugen und hartnäckige Verschmutzungen, mit 0°-Punktstrahl für den stärksten Schmutz." },
+        "3": { "title": "Integrierte Flugsteuerung", "desc": "Ein Bediener fliegt und reinigt von einer Station aus, mit kundenspezifischer Integration für mehrere Flugplattformen." },
+        "4": { "title": "Dual RTK plus Hindernisradar", "desc": "Zentimetergenaue Positionierung und vordere Hinderniserkennung halten jede Bahn stabil und sicher." },
+        "5": { "title": "Ersetzt manuelle Höhenarbeit", "desc": "Kein Gerüst, keine Seile, keine Arbeiter auf Dächern — ein Pilot und ein Bodenoperator erledigen den ganzen Job." }
+      }
+    },
+    "designed": {
+      "eyebrow": "Design-Highlights",
+      "title": "Modulares Design, bereit für viele Szenarien.",
+      "lead": "Eine modulare Reinigungsplattform, die sich an unterschiedliche PV-Standorten anpasst — Tank, Sprüharme und Düsen lassen sich je nach Aufgabe austauschen.",
+      "items": {
+        "0": { "title": "50-L-Wassertank", "desc": "Große Tankkapazität für breite Anlagen, und das Schnellwechseldesign macht Nachfüllen leicht." },
+        "1": { "title": "Doppelte Schwenksprüharme", "desc": "Die Arme schwenken von 0° bis 45° und waschen große Modulflächen in einem einzigen Durchgang gleichmäßig." },
+        "2": { "title": "Multi-Düsen-Kompatibilität", "desc": "Standard-Hochdruckdüsen für Fugen und hartnäckige Verschmutzungen, plus 0°-Punktstrahl für widerspenstige Stellen." }
+      }
+    },
+    "output": {
+      "eyebrow": "Ergebnisse aus dem Einsatz",
+      "bigNumber": "5.500 m²",
+      "unitTitle": "Reinigung pro Tag im Fall Huizhou (PV-Anlage über Fischteichen)",
+      "note": "Werte aus dem 100.000-m²- bzw. 20-MW-Projekt: Ein Pilot plus ein Bodenoperator beendeten die Arbeit in 18 Tagen und verkürzten den Zeitplan um mehr als 60%.",
+      "rows": {
+        "0": { "label": "Fläche pro Einsatz", "value": "138 m²" },
+        "1": { "label": "Starts pro Stunde", "value": "5" },
+        "2": { "label": "Manuelle Reinigungsrate", "value": "Unter 900 m² pro Person und Tag" },
+        "3": { "label": "Projektdauer", "value": "18 Tage (manuell über 30 Tage)" },
+        "4": { "label": "Mehrertrag", "value": "12-15% nach der Reinigung" }
+      }
+    },
+    "intelligence": {
+      "eyebrow": "Intelligenz — Automatisierte Routenplanung",
+      "title": "Durchgängige Automatisierung, vom Plan zur Reinigung.",
+      "lead": "Der D50R plant die Reinigungsrouten an der Bodenstation und fliegt sie autonom ab — ohne blinde Flecken auf jedem Modul.",
+      "items": {
+        "0": { "title": "Vollabdeckung durch Routenplanung", "desc": "Missionen werden je nach Standort und Höhe geplant und vermeiden Auslassungen und blinde Flecken auf der gesamten Anlage." },
+        "1": { "title": "Flug mit RTK-Präzision", "desc": "Dual RTK hält Position und Lage präzise für konsistente, wiederholbare Reinigungsbahnen." },
+        "2": { "title": "Hoher Automatisierungsgrad", "desc": "An der Bodenstation geplante Routen werden automatisch ausgeführt, ohne Echtzeit-Steuerung." },
+        "3": { "title": "Fernbedienung", "desc": "Der Bediener überwacht und steuert den Drohnen vom Boden aus, fernab der Reinigungszone." }
+      }
+    },
+    "safety": {
+      "eyebrow": "Sicherheit",
+      "title": "Unbemannte Höhenarbeit, geschützt durch Dual RTK.",
+      "lead": "Der D50R hält die Arbeiter am Boden, während eingebaute Sensoren jeden Flug über der Anlage absichern.",
+      "cards": {
+        "0": { "title": "Ersetzt manuelle Höhenarbeit", "desc": "Fernbedienung eliminiert die Absturzrisiken der Reinigung auf Dächern und mit hängenden Bühnen." },
+        "1": { "title": "Hochpräzises Dual RTK", "desc": "Eingebaute duale RTK-Module liefern zentimetergenaue Positionierung für präzisen, zuverlässigen Flug." },
+        "2": { "title": "Intelligente Hindernisvermeidung", "desc": "Das nach vorn gerichtete Radar erkennt Hindernisse in Echtzeit und hält einen sicheren Betriebsabstand." }
+      }
+    },
+    "multiangle": {
+      "eyebrow": "Multi-Szenario",
+      "title": "Stabil in der Höhe, flexibel in jedem Winkel.",
+      "lead": "Modulare Halterungen und mehrere Düsenoptionen ermöglichen dem D50R die Abdeckung von Modulober- und -unterseiten sowie schwer erreichbaren Winkeln.",
+      "items": {
+        "0": { "title": "Stabiler Betrieb in der Höhe", "desc": "Dual RTK und die Regelkreise Wahrnehmung-Entscheidung-Ausführung halten die Reinigung in der Arbeitshöhe stabil." },
+        "1": { "title": "Multi-Modul-Erweiterung", "desc": "Tank-, Sprüharm- und Düsenmodule lassen sich für unterschiedliche Reinigungsaufgaben konfigurieren." },
+        "2": { "title": "Kompatibel mit mehreren Düsen", "desc": "Standard-Hochdruckdüsen bewältigen Fugen und hartnäckigen Schmutz bei allen Modultypen." },
+        "3": { "title": "Weitwinkel-Abdeckung", "desc": "Sprüharme mit 0° bis 45° Schwenkbereich erreichen Ober- und Unterseiten in weniger Durchgängen." }
+      }
+    },
+    "compare": {
+      "eyebrow": "Vergleich: D50R und manuelle PV-Reinigung",
+      "title": "Der D50R reinigt schneller, sicherer und günstiger.",
+      "colD15r": "Partdro D50R",
+      "colManual": "Manuelle PV-Reinigung",
+      "rows": {
+        "0": { "label": "Sicherheit", "d15r": "Der Drohn arbeitet in der Höhe, das Team bleibt am Boden", "manual": "Arbeiter reinigen Dächer und Anlagen persönlich" },
+        "1": { "label": "Effizienz", "d15r": "5.500 m² pro Tag mit 2 Personen", "manual": "Unter 900 m² pro Person und Tag, Projekte dauern über einen Monat" },
+        "2": { "label": "Kosten", "d15r": "Eine Equipment-Investition mit niedrigen Betriebskosten", "manual": "Große, wiederkehrende Arbeitsteams für jede Wäsche" },
+        "3": { "label": "Reinigungswirkung", "d15r": "8-10-MPa-Hochdruckspülung entfernt hartnäckige Verschmutzungen", "manual": "Fugen und fester Schmutz sind schwer gründlich zu reinigen" },
+        "4": { "label": "Zeitplan", "d15r": "18 Tage für eine 100.000-m²-Anlage", "manual": "Mehr als ein Monat für dieselbe Fläche" },
+        "5": { "label": "Ertrag", "d15r": "Die Erzeugung steigt nach der Reinigung um 12-15%", "manual": "Verschmutzungsverluste bleiben zwischen den Wäschen bestehen" }
+      }
+    },
+    "scenarios": {
+      "0": { "title": "Bodengestützte PV-Anlagen", "desc": "Reihenweise Reinigung für große Solarparks im Utility-Maßstab." },
+      "1": { "title": "Gewerbliche und industrielle Dächer", "desc": "PV auf Dächern sicher reinigen — ohne Arbeiter auf dem Dach." },
+      "2": { "title": "PV-Anlagen über Fischteichen", "desc": "8-10-MPa-Wasserspülung, abgestimmt auf Module über Aquakultur-Teichen." },
+      "3": { "title": "Residenzielle und verteilte PV", "desc": "Kompakte Einsätze passen zu verteilten und residenziellen Dachanlagen." }
+    },
+    "video": {
+      "eyebrow": "Sehen Sie es in Aktion",
+      "title": "D50R im Einsatz.",
+      "emptyHint": "Fügen Sie im Editor eine Video-URL ein, um den D50R hier zu zeigen."
+    },
+    "specs": {
+      "eyebrow": "Produktparameter",
+      "title": "Der D50R auf einen Blick.",
+      "lead": "Die wichtigsten technischen Daten der D50R Photovoltaik-Reinigungsdrohne.",
+      "items": {
+        "0": { "label": "Modell", "value": "D50R" },
+        "1": { "label": "Kategorie", "value": "Intelligente Photovoltaik-Reinigungsdrohne" },
+        "2": { "label": "Wassertankkapazität", "value": "50 L" },
+        "3": { "label": "Reinigungsdruck", "value": "8-10 MPa (Hochdruckwasserspülung)" },
+        "4": { "label": "Sprühsystem", "value": "Doppelte Schwenkarme, 0-45°" },
+        "5": { "label": "Düsen", "value": "Standard-Hochdruck, 0°-Punktstrahl" },
+        "6": { "label": "Positionierung", "value": "Hochpräzises Dual RTK" },
+        "7": { "label": "Hinderniserkennung", "value": "Nach vorn gerichtetes Radar" },
+        "8": { "label": "Automatisierung", "value": "Durchgängige Reinigung mit Routenplanung" },
+        "9": { "label": "Bedienung", "value": "1 Pilot + 1 Bodenoperator" },
+        "10": { "label": "Fläche pro Einsatz", "value": "138 m²" },
+        "11": { "label": "Reinigungsleistung pro Tag", "value": "Bis zu 5.500 m²" },
+        "12": { "label": "Flugplattformen", "value": "Kundenspezifische Integration für mehrere Plattformen" },
+        "13": { "label": "Anwendungen", "value": "Boden-, Dach-, verteilte und Fischteich-Anlagen" }
+      }
+    },
+    "cta": {
+      "eyebrow": "Partdro Solar-Reinigungsdrohnen-Serie D50R",
+      "title": "Bereit, Ihre Module sauber zu halten?",
+      "text": "Sprechen Sie mit Partdro über die richtige D50R-Konfiguration für Ihre Anlage — Tank, Düsen und Einsatzplan.",
+      "visit": "partdro.com besuchen"
+    }
   }
 }

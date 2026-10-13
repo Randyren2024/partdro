@@ -20,10 +20,15 @@ import { computed } from 'vue'
 import { useLandingSection } from '../sectionContext'
 
 const { ns, tt } = useLandingSection()
-const specItems = computed(() =>
-  Array.from({ length: 19 }, (_, i) => ({
-    label: tt(`specs.items.${i}.label`),
-    value: tt(`specs.items.${i}.value`),
-  })),
-)
+// 渲染 i18n 里实际存在的 spec 条目（到缺译即停），不同产品条数可以不同
+const specItems = computed(() => {
+  const items: { label: string; value: string }[] = []
+  for (let i = 0; i < 40; i++) {
+    const key = `specs.items.${i}.label`
+    const label = tt(key)
+    if (label === `${ns.value}.${key}`) break
+    items.push({ label, value: tt(`specs.items.${i}.value`) })
+  }
+  return items
+})
 </script>
