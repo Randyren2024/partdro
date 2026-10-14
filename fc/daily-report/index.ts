@@ -144,11 +144,20 @@ print("REPORT_READY " + str(len(md)) + " chars")
 `
 }
 
-// ---------- 阿里云邮件推送 DM（官方 SDK；直接 require 避开 esbuild __toESM 包装） ----------
-const _dm: any = require('@alicloud/dm20151123')
-const _openapi: any = require('@alicloud/openapi-client')
-const DMClient: any = _dm.default ?? _dm
-const DM_FROM = process.env.DM_FROM || 'report@edm.droneworld.tech'
+// ---------- 阿里云邮件推送 DM（RPC HMAC-SHA1 手写签名，零依赖，与 partdro-api inquiry-webhook 同款） ----------
+// 环境变量（与 partdro-api 共用专用 RAM 用户 partdro-directmail）：
+//   DIRECTMAIL_ACCESS_KEY_ID / DIRECTMAIL_ACCESS_KEY_SECRET / DIRECTMAIL_ACCOUNT
+//   DM_TO 收件人（默认 info@droneworld.tech）
+function dmPercentEncode(value: string): string {
+  return encodeURIComponent(value)
+    .replace(/\+/g, '%20')
+    .replace(/\*/g, '%2A')
+    .replace(/%7E/g, '~')
+    .replace(/!/g, '%21')
+    .replace(/'/g, '%27')
+    .replace(/\(/g, '%28')
+    .replace(/\)/g, '%29')
+}
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -198,31 +207,51 @@ function mdToHtml(md: string): string {
 }
 
 async function sendDmReport(md: string, day: string): Promise<void> {
-  const to = (process.env.DM_TO || '').trim()
-  if (!to) {
-    console.log('[daily-report] DM_TO 未配置，跳过邮件推送')
+  const to = (process.env.DM_TO || 'info@droneworld.tech').trim()
+  const accessKeyId = process.env.DIRECTMAIL_ACCESS_KEY_ID
+  const accessKeySecret = process.env.DIRECTMAIL_ACCESS_KEY_SECRET
+  const account = process.env.DIRECTMAIL_ACCOUNT
+  if (!accessKeyId || !accessKeySecret || !account) {
+    console.log('[daily-report] DIRECTMAIL_* 未配置，跳过邮件推送')
     return
   }
-  const config = new _openapi.Config({
-    accessKeyId: process.env.OSS_AK_ID!,
-    accessKeySecret: process.env.OSS_AK_SECRET!,
-    endpoint: 'dm.aliyuncs.com',
-    regionId: 'cn-hangzhou',
+  const params: Record<string, string> = {
+    AccessKeyId: accessKeyId,
+    Action: 'SingleSendMail',
+    Format: 'JSON',
+    RegionId: process.env.DIRECTMAIL_REGION || 'cn-hangzhou',
+    SignatureMethod: 'HMAC-SHA1',
+    SignatureNonce: crypto.randomUUID(),
+    SignatureVersion: '1.0', // 关键：DM 只接受 1.0（不是通用 POP 的 1.1）
+    Timestamp: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+    Version: '2015-11-23',
+    AccountName: account,
+    AddressType: '1',
+    ReplyToAddress: 'false',
+    ToAddress: to,
+    FromAlias: 'Partdro GSC',
+    Subject: `[Partdro] GSC 搜索日报 ${day}`,
+    ClickTrace: '1',
+    HtmlBody: mdToHtml(md),
+    TextBody: md,
+  }
+  const canonical = Object.keys(params).sort()
+    .map((k) => `${dmPercentEncode(k)}=${dmPercentEncode(params[k])}`).join('&')
+  const stringToSign = `POST&${dmPercentEncode('/')}&${dmPercentEncode(canonical)}`
+  params.Signature = crypto.createHmac('sha1', `${accessKeySecret}&`).update(stringToSign).digest('base64')
+
+  const res = await fetch('https://dm.aliyuncs.com/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(params).toString(),
   })
-  const client = new DMClient(config)
-  const req = new _dm.SingleSendMailRequest({
-    accountName: DM_FROM,
-    addressType: 1,
-    replyToAddress: false,
-    toAddress: to,
-    fromAlias: 'Partdro GSC',
-    subject: `[Partdro] GSC 搜索日报 ${day}`,
-    clickTrace: '1',
-    textBody: md,
-    htmlBody: mdToHtml(md),
-  })
-  const resp = await client.singleSendMail(req)
-  console.log('[daily-report] 日报邮件已发送至:', to, 'EnvId:', resp.body?.envId)
+  const raw = await res.text()
+  let parsed: Record<string, unknown> = {}
+  try { parsed = JSON.parse(raw) } catch { /* 非 JSON 走错误分支 */ }
+  if (!res.ok || parsed.Code) {
+    throw new Error(`DirectMail failed (${res.status}): ${String(parsed.Code || '')} ${String(parsed.Message || raw).slice(0, 300)}`)
+  }
+  console.log('[daily-report] 日报邮件已发送至:', to, 'EnvId:', String(parsed.EnvId ?? ''))
 }
 
 // ---------- OSS 私有写 + 签名读 URL（V1 签名） ----------
@@ -307,12 +336,15 @@ export const handler = async () => {
   console.log('===== END REPORT =====')
   console.log('[daily-report] 报告已存 OSS，7 天有效下载链接:', viewUrl)
 
-  // 邮件推送（失败不影响 OSS 存档与下次调度，仅在日志暴露问题）
+  // 邮件推送（失败不影响 OSS 存档与下次调度；结果写入返回体便于核对）
+  let email: { ok: boolean; error?: string } = { ok: false }
   try {
     await sendDmReport(md, day)
+    email = { ok: true }
   } catch (e) {
+    email = { ok: false, error: (e as Error).message }
     console.error('[daily-report] 邮件推送失败（OSS 存档不受影响）:', (e as Error).message)
   }
 
-  return { statusCode: 200, body: JSON.stringify({ ok: true, ossKey: key }) }
+  return { statusCode: 200, body: JSON.stringify({ ok: true, ossKey: key, email }) }
 }
