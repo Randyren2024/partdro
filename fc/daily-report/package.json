@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@alicloud/dm20151123": "^1.11.0",
+    "@alicloud/openapi-client": "^0.4.15",
     "e2b": "^2.31.0"
   }
 }

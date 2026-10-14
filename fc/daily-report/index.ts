@@ -144,6 +144,87 @@ print("REPORT_READY " + str(len(md)) + " chars")
 `
 }
 
+// ---------- 阿里云邮件推送 DM（官方 SDK；直接 require 避开 esbuild __toESM 包装） ----------
+const _dm: any = require('@alicloud/dm20151123')
+const _openapi: any = require('@alicloud/openapi-client')
+const DMClient: any = _dm.default ?? _dm
+const DM_FROM = process.env.DM_FROM || 'report@edm.droneworld.tech'
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+// 轻量 Markdown→HTML（只覆盖日报用到的：h1/h2、表格、列表、段落）
+function mdToHtml(md: string): string {
+  const lines = md.split('\n')
+  const out: string[] = []
+  let i = 0
+  const isTableSep = (l: string) => /^\s*\|?[\s:|-]+\|?\s*$/.test(l)
+  while (i < lines.length) {
+    const line = lines[i]
+    if (line.startsWith('# ')) {
+      out.push(`<h1 style="font-size:20px;margin:0 0 12px;color:#1a1a1a;">${escapeHtml(line.slice(2))}</h1>`)
+      i++
+    } else if (line.startsWith('## ')) {
+      out.push(`<h2 style="font-size:16px;margin:20px 0 8px;color:#1a1a1a;border-left:4px solid #4285f4;padding-left:8px;">${escapeHtml(line.slice(3))}</h2>`)
+      i++
+    } else if (line.includes('|') && isTableSep(lines[i + 1] || '')) {
+      const header = line.split('|').slice(1, -1).map((c) => c.trim())
+      const rows: string[][] = []
+      i += 2
+      while (i < lines.length && lines[i].includes('|') && lines[i].trim().startsWith('|')) {
+        rows.push(lines[i].split('|').slice(1, -1).map((c) => c.trim()))
+        i++
+      }
+      const th = (c: string) => `<th style="padding:6px 10px;text-align:left;background:#f1f5ff;border-bottom:2px solid #4285f4;">${escapeHtml(c)}</th>`
+      const td = (c: string) => `<td style="padding:6px 10px;border-bottom:1px solid #e5e7eb;">${escapeHtml(c)}</td>`
+      out.push(
+        '<table style="border-collapse:collapse;font-size:13px;margin:8px 0 12px;">',
+        `<tr>${header.map(th).join('')}</tr>`,
+        ...rows.map((r) => `<tr>${r.map(td).join('')}</tr>`),
+        '</table>',
+      )
+    } else if (line.startsWith('- ')) {
+      out.push(`<p style="margin:4px 0;padding-left:16px;">• ${escapeHtml(line.slice(2))}</p>`)
+      i++
+    } else if (line.trim() === '') {
+      i++
+    } else {
+      out.push(`<p style="margin:6px 0;color:#333;">${escapeHtml(line)}</p>`)
+      i++
+    }
+  }
+  return `<div style="font-family:-apple-system,'Segoe UI',Arial,sans-serif;color:#1a1a1a;max-width:760px;">${out.join('\n')}</div>`
+}
+
+async function sendDmReport(md: string, day: string): Promise<void> {
+  const to = (process.env.DM_TO || '').trim()
+  if (!to) {
+    console.log('[daily-report] DM_TO 未配置，跳过邮件推送')
+    return
+  }
+  const config = new _openapi.Config({
+    accessKeyId: process.env.OSS_AK_ID!,
+    accessKeySecret: process.env.OSS_AK_SECRET!,
+    endpoint: 'dm.aliyuncs.com',
+    regionId: 'cn-hangzhou',
+  })
+  const client = new DMClient(config)
+  const req = new _dm.SingleSendMailRequest({
+    accountName: DM_FROM,
+    addressType: 1,
+    replyToAddress: false,
+    toAddress: to,
+    fromAlias: 'Partdro GSC',
+    subject: `[Partdro] GSC 搜索日报 ${day}`,
+    clickTrace: '1',
+    textBody: md,
+    htmlBody: mdToHtml(md),
+  })
+  const resp = await client.singleSendMail(req)
+  console.log('[daily-report] 日报邮件已发送至:', to, 'EnvId:', resp.body?.envId)
+}
+
 // ---------- OSS 私有写 + 签名读 URL（V1 签名） ----------
 function ossPutObject(key: string, body: string): Promise<void> {
   const bucket = process.env.OSS_BUCKET!
@@ -178,7 +259,7 @@ function ossSignedGetUrl(key: string, hours = 168): string {
 }
 
 // 本地测试用导出（deploy/invoke 不受影响）
-export const __test = { buildReportScript }
+export const __test = { buildReportScript, mdToHtml, sendDmReport }
 
 // ---------- FC 入口 ----------
 export const handler = async () => {
@@ -225,6 +306,13 @@ export const handler = async () => {
   console.log(md)
   console.log('===== END REPORT =====')
   console.log('[daily-report] 报告已存 OSS，7 天有效下载链接:', viewUrl)
+
+  // 邮件推送（失败不影响 OSS 存档与下次调度，仅在日志暴露问题）
+  try {
+    await sendDmReport(md, day)
+  } catch (e) {
+    console.error('[daily-report] 邮件推送失败（OSS 存档不受影响）:', (e as Error).message)
+  }
 
   return { statusCode: 200, body: JSON.stringify({ ok: true, ossKey: key }) }
 }

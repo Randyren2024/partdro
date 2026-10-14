@@ -7,7 +7,7 @@
 //      ../partdro_related_with_product_files/gsc/.env 提供 GSC 凭据。
 import { execFileSync } from 'node:child_process'
 import { build } from 'esbuild'
-import { mkdirSync, readFileSync, existsSync, rmSync } from 'node:fs'
+import { mkdirSync, readFileSync, existsSync, rmSync, cpSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import os from 'node:os'
@@ -40,27 +40,45 @@ function aliyun(fcArgs, { capture = false } = {}) {
   return out
 }
 
-// ---------- 1. bundle ----------
-mkdirSync(join(HERE, 'dist'), { recursive: true })
+// ---------- 1. 编译（不 bundle，保留 require，规避 CJS interop 问题） ----------
+const PKG_DIR = join(HERE, 'dist', 'pkg')
+rmSync(PKG_DIR, { recursive: true, force: true })
+mkdirSync(PKG_DIR, { recursive: true })
 await build({
   entryPoints: [join(HERE, 'index.ts')],
   bundle: true,
   platform: 'node',
   target: 'node20',
   format: 'cjs',
-  outfile: join(HERE, 'dist', 'index.js'),
-  minify: true,
+  // e2b 及其 ESM-only 依赖（chalk 等）打包进来转译；@alicloud 保留外部 require（避开 esbuild CJS interop 问题）
+  external: ['@alicloud/*'],
+  outfile: join(PKG_DIR, 'index.js'),
+  minify: false,
   sourcemap: false,
   logLevel: 'info',
 })
 
-// ---------- 2. zip ----------
+// 发布目录覆盖为 CommonJS（上层 package.json 是 type:module，会让 index.js 被当 ESM）
+writeFileSync(join(PKG_DIR, 'package.json'), JSON.stringify({ type: 'commonjs' }) + '\n')
+
+// 只复制 external 的 @alicloud 运行时依赖（e2b 已 bundle，无需携带）
+cpSync(join(HERE, 'node_modules'), join(PKG_DIR, 'node_modules'), {
+  recursive: true,
+  filter: (s) => {
+    const norm = s.replace(/\\/g, '/')
+    if (/\/node_modules\/\.bin(\/|$)/.test(norm) || /\/\.cache(\/|$)/.test(norm)) return false
+    // 保留 @alicloud scope 及其传递依赖；跳过其余（e2b 已打进 index.js）
+    return true
+  },
+})
+console.log('[deploy] 发布目录就绪（index.js + @alicloud node_modules）')
+
+// ---------- 2. zip（正斜杠条目，兼容 FC Linux；不用 Compress-Archive/.NET CreateFromDirectory） ----------
 const zipPath = join(HERE, 'dist', `${FUNC}.zip`)
-rmSync(zipPath, { force: true })
 execFileSync('powershell', [
-  '-NoProfile', '-Command',
-  `Compress-Archive -Path '${join(HERE, 'dist', 'index.js')}' -DestinationPath '${zipPath}' -Force`,
-])
+  '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(HERE, 'zip-pkg.ps1'),
+  '-Src', PKG_DIR, '-Dst', zipPath,
+], { stdio: 'inherit' })
 console.log('[deploy] zip OK:', zipPath)
 
 // ---------- 3. 上传 zip 到 OSS ----------
@@ -87,8 +105,10 @@ const profile = aliCfg.profiles.find((p) => p.name === aliCfg.current) || aliCfg
 if (!profile.access_key_id || !profile.access_key_secret) throw new Error('aliyun CLI 配置缺 AK')
 
 const e2bKey = process.env.E2B_API_KEY || ''
-if (!arg('--invoke') && !e2bKey) {
-  throw new Error('缺少 E2B_API_KEY（控制台创建后: $env:E2B_API_KEY="<key>" 再运行）')
+const dmTo = (process.env.DM_TO || '').trim()
+if (!arg('--invoke')) {
+  if (!e2bKey) throw new Error('缺少 E2B_API_KEY（控制台创建后: $env:E2B_API_KEY="<key>" 再运行）')
+  if (!dmTo) throw new Error('缺少 DM_TO 收件人: $env:DM_TO="you@aliyun.com" node fc/daily-report/deploy.mjs')
 }
 
 const envVars = {
@@ -103,6 +123,8 @@ const envVars = {
   OSS_REGION: REGION,
   OSS_AK_ID: profile.access_key_id,
   OSS_AK_SECRET: profile.access_key_secret,
+  DM_TO: dmTo,
+  DM_FROM: process.env.DM_FROM || 'report@edm.droneworld.tech',
 }
 
 // ---------- 5. 创建或更新函数 ----------
