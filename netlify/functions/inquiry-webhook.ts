@@ -9,11 +9,14 @@
 // 环境变量（配在阿里云 FC 函数的环境变量里，绝不加 VITE_ 前缀）：
 //   DIRECTMAIL_ACCESS_KEY_ID / DIRECTMAIL_ACCESS_KEY_SECRET  （或 ALIYUN_AK / ALIYUN_SK）
 //   DIRECTMAIL_ACCOUNT      已通过验证的发信地址，如 noreply@droneworld.tech
-//   DIRECTMAIL_REGION       默认 cn-hangzhou
-//   DIRECTMAIL_ENDPOINT     可选，默认 https://dm.<region>.aliyuncs.com/
+//   DIRECTMAIL_REGION       默认 cn-hangzhou（只用于签名 RegionId 参数）
+//   DIRECTMAIL_ENDPOINT     可选，默认 https://dm.aliyuncs.com/
+//                           注意：dm.<region>.aliyuncs.com 中的 cn-hangzhou 不存在，不要按 region 拼端点
 //   DIRECTMAIL_REPLY_TO_ADDRESS  默认 true；若 DirectMail 报回信地址错误可设 false
 //   INQUIRY_NOTIFY_TO       默认 info@droneworld.tech
 //   INQUIRY_WEBHOOK_SECRET  Supabase webhook 共享密钥
+//   FEISHU_APP_ID / FEISHU_APP_SECRET   飞书应用凭据（开放平台开发者后台）
+//   FEISHU_OPEN_ID          飞书私聊收件人 open_id（ou_xxx）；任一 FEISHU_* 缺失则跳过飞书
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto'
 import {
   Unauthorized,
@@ -80,7 +83,7 @@ async function sendInquiryEmail(record: Record<string, unknown>): Promise<void> 
   const account = requireEnv('DIRECTMAIL_ACCOUNT')
   const to = process.env.INQUIRY_NOTIFY_TO || DEFAULT_TO
   const region = process.env.DIRECTMAIL_REGION || 'cn-hangzhou'
-  const endpoint = process.env.DIRECTMAIL_ENDPOINT || `https://dm.${region}.aliyuncs.com/`
+  const endpoint = process.env.DIRECTMAIL_ENDPOINT || 'https://dm.aliyuncs.com/'
 
   const fields = usableFields(record)
   const type = String(record.type || 'contact')
@@ -127,11 +130,18 @@ async function sendInquiryEmail(record: Record<string, unknown>): Promise<void> 
   }
   params.Signature = rpcSignature(params, accessKeySecret, 'POST')
 
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(params).toString(),
-  })
+  let res: Response
+  try {
+    res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(params).toString(),
+    })
+  } catch (e) {
+    // undici 的 fetch failed 只有 message，根因在 cause（DNS/连接超时等）
+    const cause = e instanceof Error && e.cause instanceof Error ? e.cause.message : ''
+    throw new UpstreamError(502, `DirectMail unreachable (${endpoint}): ${cause || String(e)}`)
+  }
   const raw = await res.text()
   let parsed: Record<string, unknown> = {}
   try {
@@ -145,6 +155,86 @@ async function sendInquiryEmail(record: Record<string, unknown>): Promise<void> 
       `DirectMail failed (${res.status}): ${String(parsed.Code || '')} ${String(parsed.Message || raw).slice(0, 300)}`,
     )
   }
+}
+
+/** lark_md 里会解析 * _ ~ `，对用户输入做转义 */
+function escapeMd(value: string): string {
+  return value.replace(/([*_~`])/g, '\\$1')
+}
+
+async function feishuPost(url: string, body: unknown, token?: string): Promise<Record<string, any>> {
+  let res: Response
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify(body),
+    })
+  } catch (e) {
+    const cause = e instanceof Error && e.cause instanceof Error ? e.cause.message : ''
+    throw new UpstreamError(502, `Feishu unreachable (${url}): ${cause || String(e)}`)
+  }
+  const data = (await res.json().catch(() => ({}))) as Record<string, any>
+  if (data.code !== 0) {
+    throw new UpstreamError(502, `Feishu API failed (${res.status}): ${data.code} ${String(data.msg || '')}`)
+  }
+  return data
+}
+
+/** 飞书私聊卡片通知；未配置 FEISHU_* 时静默跳过（与邮件并行，互不影响） */
+async function sendFeishuNotification(record: Record<string, unknown>): Promise<void> {
+  const appId = process.env.FEISHU_APP_ID
+  const appSecret = process.env.FEISHU_APP_SECRET
+  const openId = process.env.FEISHU_OPEN_ID
+  if (!appId || !appSecret || !openId) return
+
+  const fields = usableFields(record)
+  const type = String(record.type || 'contact')
+  const name = String(record.name || 'Website visitor')
+  const subject = `[Partdro] New ${type} inquiry from ${name}`
+
+  const md = (pairs: Array<[string, string]>): string =>
+    pairs.map(([k, v]) => `**${escapeMd(k)}**\n${escapeMd(v)}`).join('\n')
+
+  const elements: Array<Record<string, any>> = []
+  if (fields.length > 4) {
+    elements.push({
+      tag: 'div',
+      fields: fields
+        .slice(0, 4)
+        .map(([k, v]) => ({
+          is_short: true,
+          text: { tag: 'lark_md', content: `**${escapeMd(k)}**\n${escapeMd(v)}` },
+        })),
+    })
+    elements.push({ tag: 'div', text: { tag: 'lark_md', content: md(fields.slice(4)) } })
+  } else {
+    elements.push({ tag: 'div', text: { tag: 'lark_md', content: md(fields) } })
+  }
+  elements.push({ tag: 'hr' })
+  elements.push({
+    tag: 'note',
+    elements: [{ tag: 'plain_text', content: 'Sent automatically from the Partdro website contact form.' }],
+  })
+
+  const card = {
+    config: { wide_screen_mode: true },
+    header: { template: 'blue', title: { tag: 'plain_text', content: subject } },
+    elements,
+  }
+
+  const tok = await feishuPost('https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal', {
+    app_id: appId,
+    app_secret: appSecret,
+  })
+  await feishuPost(
+    'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id',
+    { receive_id: openId, msg_type: 'interactive', content: JSON.stringify(card) },
+    String(tok.tenant_access_token),
+  )
 }
 
 function assertWebhookSecret(event: NetlifyEvent): void {
@@ -174,9 +264,16 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
       return json(200, { ok: true, skipped: 'no record' })
     }
 
-    await sendInquiryEmail(record)
+    const [mail, feishu] = await Promise.allSettled([
+      sendInquiryEmail(record),
+      sendFeishuNotification(record),
+    ])
+    if (mail.status === 'rejected') throw mail.reason
+    if (feishu.status === 'rejected') {
+      console.error('[inquiry-webhook] feishu notify failed:', feishu.reason)
+    }
     console.log('[inquiry-webhook] email sent for inquiry', String(record.id ?? '(no id)'))
-    return json(200, { ok: true })
+    return json(200, { ok: true, feishu: feishu.status === 'fulfilled' })
   } catch (e) {
     return errorResponse(e)
   }
