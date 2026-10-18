@@ -10,7 +10,7 @@ const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:droneworld.tech'
 const TARGET_URL =
   process.env.GSC_TARGET_URL || 'https://www.droneworld.tech/products/fp800-agricultural-drone'
 const TEMPLATE = process.env.E2B_TEMPLATE || 'claude-code-gsc'
-const MODEL = process.env.ANTHROPIC_MODEL || 'qwen3.7-max'
+const MODEL = process.env.ANTHROPIC_MODEL || 'deepseek-v4.1-flash'
 
 // ---------- 沙箱内执行的 GSC 数据抓取脚本（仅标准库，凭据在写入时插值） ----------
 function buildGscFetchScript(cred: {

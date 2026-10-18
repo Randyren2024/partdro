@@ -21,7 +21,7 @@ const OSS_KEY = `fc/${FUNC}.zip`
 const TRIGGER_NAME = 'gsc-deep-0930'
 const TEMPLATE = process.env.E2B_TEMPLATE || 'claude-code-gsc'
 const ANTHROPIC_BASE_URL = process.env.ANTHROPIC_BASE_URL || 'https://dashscope.aliyuncs.com/apps/anthropic'
-const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || 'qwen3.7-max'
+const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || 'deepseek-v4.1-flash'
 
 const arg = (n) => process.argv.includes(n)
 
