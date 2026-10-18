@@ -1,0 +1,8 @@
+{
+  "name": "inquiry-analysis",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "e2b": "2.31.0"
+  }
+}

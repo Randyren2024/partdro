@@ -15,6 +15,8 @@
 //   DIRECTMAIL_REPLY_TO_ADDRESS  默认 true；若 DirectMail 报回信地址错误可设 false
 //   INQUIRY_NOTIFY_TO       默认 info@droneworld.tech
 //   INQUIRY_WEBHOOK_SECRET  Supabase webhook 共享密钥
+//   INQUIRY_ANALYSIS_URL    可选；inquiry-analysis 函数的 HTTP URL。配置后通知成功即
+//                           fire-and-forget 异步触发客户背景调研（免费邮箱在下游跳过）
 //   FEISHU_APP_ID / FEISHU_APP_SECRET   飞书应用凭据（开放平台开发者后台）
 //   FEISHU_OPEN_ID          飞书私聊收件人 open_id（ou_xxx）；任一 FEISHU_* 缺失则跳过飞书
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto'
@@ -248,6 +250,26 @@ function assertWebhookSecret(event: NetlifyEvent): void {
   }
 }
 
+/** 通知成功后 fire-and-forget 触发客户背景调研（FC 异步调用，1-5 分钟，绝不同步等待） */
+function triggerLeadAnalysis(record: Record<string, unknown>): Promise<void> {
+  const url = process.env.INQUIRY_ANALYSIS_URL
+  if (!url) return Promise.resolve()
+  const secret = process.env.INQUIRY_WEBHOOK_SECRET || ''
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-webhook-secret': secret,
+      // FC 3.0 HTTP 触发器异步调用：网关 202 立即受理，函数后台跑完整调研
+      'x-fc-invocation-type': 'Async',
+    },
+    body: JSON.stringify({ type: 'INSERT', table: 'inquiries', record }),
+    signal: AbortSignal.timeout(15_000),
+  }).then((res) => {
+    if (!res.ok) console.error('[inquiry-webhook] lead analysis dispatch non-2xx:', res.status)
+  })
+}
+
 export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
   try {
     const guard = methodGuard(event, 'POST')
@@ -273,6 +295,15 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
       console.error('[inquiry-webhook] feishu notify failed:', feishu.reason)
     }
     console.log('[inquiry-webhook] email sent for inquiry', String(record.id ?? '(no id)'))
+    // 客户背景调研：必须等到异步受理（202）。FC 实例在 handler 返回后立即冻结，
+    // fire-and-forget 的 fetch 会被截断导致调研永不触发（已实测）。
+    // Async 调用同区域内网通常 <500ms 受理；3s 上限兜底，避免拖垮上游 pg_net 5s 总超时。
+    await Promise.race([
+      triggerLeadAnalysis(record).catch((e) =>
+        console.error('[inquiry-webhook] lead analysis dispatch failed:', e),
+      ),
+      new Promise((r) => setTimeout(r, 3000)),
+    ])
     return json(200, { ok: true, feishu: feishu.status === 'fulfilled' })
   } catch (e) {
     return errorResponse(e)
