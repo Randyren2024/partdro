@@ -220,6 +220,7 @@ export function usePost(slug: string | (() => string)) {
         .select('*, post_langs(lang, title, summary, content)')
         .eq('slug', s)
         .limit(1)
+        .abortSignal(AbortSignal.timeout(10000))
       if (err) throw err
       data.value = rows?.[0] ? mapPost(rows[0], locale.value) : null
     } catch (e: any) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="news-detail" v-if="post">
+  <div class="news-detail" data-prerender-article v-if="post">
     <div class="page-header">
       <div class="container">
         <h1>{{ post.title }}</h1>
@@ -19,6 +19,14 @@
       </div>
     </div>
   </div>
+  <div v-else class="page-section container" :data-prerender-article-error="!loading ? '' : undefined">
+    <p v-if="loading" role="status">Loading article…</p>
+    <template v-else>
+      <p role="status">{{ error ? 'Unable to load this article. Please try again.' : 'Article not found.' }}</p>
+      <a-button v-if="error" @click="reload">Try again</a-button>
+      <router-link to="/news">Back to News</router-link>
+    </template>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,7 +38,7 @@ import { usePost } from '../composables/useSupabase'
 
 const route = useRoute()
 const slug = () => route.params.slug as string
-const { data: post } = usePost(slug)
+const { data: post, loading, error, reload } = usePost(slug)
 
 // 绝对 URL：图片多存为 /images/... 相对路径，og/JSON-LD 需要完整 URL
 const absUrl = (u?: string | null) =>

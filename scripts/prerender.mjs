@@ -110,7 +110,7 @@ function readInjectedSlugs(prefix) {
 
 async function fetchSitemapSlugs(prefix) {
   try {
-    const res = await fetch(`${SITE}/sitemap.xml`)
+    const res = await fetch(`${SITE}/sitemap.xml`, { signal: AbortSignal.timeout(10000) })
     if (!res.ok) return []
     const xml = await res.text()
     const re = new RegExp(`<loc>[^<]*${prefix}/([^<]+)</loc>`, 'g')
@@ -143,6 +143,7 @@ async function fetchSupabaseNewsSlugs() {
   try {
     const res = await fetch(`${url}/rest/v1/posts?select=slug&published=eq.true`, {
       headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
+      signal: AbortSignal.timeout(10000),
     })
     if (!res.ok) return []
     return (await res.json()).map((r) => r.slug).filter(Boolean)
@@ -216,9 +217,9 @@ async function waitForApiSettled(page, state) {
   // 先等首个数据请求出现（最多 3s）
   while (!state.seen && Date.now() - t0 < 3000) await page.waitForTimeout(100)
   if (!state.seen) return false
-  // 再等所有数据请求结束，并保持 800ms 空闲（最多 23s）
+  // Wait for content requests and 800ms idle, within an 8s total limit.
   let idleSince = 0
-  while (Date.now() - t0 < 23000) {
+  while (Date.now() - t0 < 8000) {
     if (state.inflight.size === 0) {
       if (!idleSince) idleSince = Date.now()
       if (Date.now() - idleSince > 800) return true
@@ -232,19 +233,27 @@ async function waitForApiSettled(page, state) {
 
 // 并发渲染：新闻页默认渲染后总量超过 140 页，串行需 10 分钟级；
 // 4 个并发把构建压到 3 分钟级。可用 PRERENDER_CONCURRENCY 调整。
-const CONCURRENCY = Math.max(1, Number(process.env.PRERENDER_CONCURRENCY || 4))
+const requestedConcurrency = Number(process.env.PRERENDER_CONCURRENCY || 4)
+const CONCURRENCY = Number.isInteger(requestedConcurrency) && requestedConcurrency > 0
+  ? Math.min(requestedConcurrency, 8) : 4
+// Leave ample time for bundling, sitemap generation and Netlify post-processing.
+const RENDER_BUDGET_MS = 6 * 60 * 1000
+const ROUTE_TIMEOUT_MS = 20000
 
 async function renderAll(tasks) {
   const browser = await chromium.launch()
   const rendered = []
+  const deadline = Date.now() + RENDER_BUDGET_MS
 
   async function renderOne({ route, locale }) {
     const url = withPrefix(route, locale)
     const context = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+    // Closing the context interrupts navigation, evaluation and pending network work.
+    const timer = setTimeout(() => { void context.close().catch(() => {}) }, ROUTE_TIMEOUT_MS)
     const page = await context.newPage()
-    // 追踪 Supabase REST / Storage 请求，作为「内容已就绪」的确定信号
+    // Track content REST requests; storage downloads do not determine text readiness.
     const state = { seen: false, inflight: new Set() }
-    const isDataApi = (u) => u.includes('/rest/v1/') || u.includes('/storage/v1/')
+    const isDataApi = (u) => u.includes('/rest/v1/')
     page.on('request', (r) => {
       if (isDataApi(r.url())) {
         state.seen = true
@@ -255,30 +264,33 @@ async function renderAll(tasks) {
     page.on('requestfailed', (r) => state.inflight.delete(r))
     try {
       // 用 domcontentloaded 而非 load：个别资源（缺失图片的重试等）可能永不结束，
-      // 页面就绪与否交给下面的数据等待 + 正文等待 + 图片等待（均带超时）判定。
-      await page.goto(`${BASE}${url}`, { waitUntil: 'domcontentloaded', timeout: 60000 })
-      await page
-        .waitForFunction(
-          () => {
-            const app = document.getElementById('app')
-            return !!app && app.innerText.replace(/\s+/g, '').length > 150
-          },
-          { timeout: 20000 },
-        )
-        .catch(() => console.warn(`[prerender]   ${url} 正文等待超时，仍尝试落盘`))
-      const settled = await waitForApiSettled(page, state)
-      if (!settled) console.warn(`[prerender]   ${url} 数据请求未确认结束，按现状落盘`)
-      await page.waitForTimeout(600)
-      // 等图片加载（带兜底超时，避免坏图挂死）
-      await page
-        .evaluate(async () => {
-          const imgs = Array.from(document.images).filter((i) => !i.complete)
-          await Promise.race([
-            Promise.all(imgs.map((i) => new Promise((r) => ((i.onload = r), (i.onerror = r))))),
-            new Promise((r) => setTimeout(r, 8000)),
-          ])
-        })
-        .catch(() => {})
+      // Readiness is bounded below; media downloads are excluded.
+      // Images, fonts and embedded videos do not contribute article text to the snapshot.
+      await page.route('**/*', (requestRoute) => {
+        const type = requestRoute.request().resourceType()
+        return ['image', 'media', 'font'].includes(type)
+          ? requestRoute.abort() : requestRoute.continue()
+      })
+      await page.goto(`${BASE}${url}`, { waitUntil: 'domcontentloaded', timeout: 10000 })
+      if (route.startsWith('/news/')) {
+        // Wait for this article, rather than navigation/footer text or unrelated requests.
+        // Never publish an empty/error article as an apparently successful static page.
+        await page.waitForFunction(() => {
+          const article = document.querySelector('[data-prerender-article]')
+          if (document.querySelector('[data-prerender-article-error]')) {
+            throw new Error('Article request failed or article was not found')
+          }
+          return !!article && !!article.querySelector('.article-content')?.textContent?.trim()
+        }, null, { timeout: 12000 })
+      } else {
+        await page.waitForFunction(() => {
+          const app = document.getElementById('app')
+          return !!app && app.innerText.replace(/\s+/g, '').length > 150
+        }, null, { timeout: 10000 })
+        const settled = await waitForApiSettled(page, state)
+        if (!settled && state.seen) throw new Error('Content requests did not settle')
+      }
+      await page.waitForTimeout(100)
       const html = injectSeo(
         await page.evaluate(() => '<!doctype html>\n' + document.documentElement.outerHTML),
         route,
@@ -289,6 +301,7 @@ async function renderAll(tasks) {
     } catch (e) {
       console.warn(`[prerender] ✗ ${url}: ${e.message}`)
     } finally {
+      clearTimeout(timer)
       await context.close()
     }
   }
@@ -299,12 +312,15 @@ async function renderAll(tasks) {
     const workers = Array.from(
       { length: Math.min(CONCURRENCY, tasks.length) },
       async () => {
-        while (next < tasks.length) {
+        while (next < tasks.length && Date.now() < deadline) {
           await renderOne(tasks[next++])
         }
       },
     )
     await Promise.all(workers)
+    if (next < tasks.length) {
+      console.warn(`[prerender] Time budget reached; ${tasks.length - next} pages retain client-side rendering`)
+    }
   } finally {
     await browser.close()
   }
