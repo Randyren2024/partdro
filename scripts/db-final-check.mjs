@@ -1,6 +1,14 @@
 // DB final check: brand remnants + content integrity
-const URL = 'https://gcsshuvfzuinevacraao.supabase.co/rest/v1'
-const KEY = 'sb_publishable_TUa2RdDSopaXX8d_7MiGkw_x5FwLfAP'
+const supabaseUrl = process.env.VITE_SUPABASE_URL
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Missing required environment variables: VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY')
+  process.exit(1)
+}
+
+const URL = `${supabaseUrl.replace(/\/+$/, '')}/rest/v1`
+const KEY = supabaseAnonKey
 const headers = { apikey: KEY, Authorization: `Bearer ${KEY}` }
 
 const posts = await (await fetch(`${URL}/posts?select=id,slug,image_url&order=id.asc`, { headers })).json()
