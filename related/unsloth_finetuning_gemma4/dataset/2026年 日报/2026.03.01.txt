@@ -1,0 +1,45 @@
+* nlux实操 元宝 npm install @nlux/react @nlux/openai-react
+*React Landing Page: Hero+Specs+Features+FAQ+CTA+Contact Form
+可以这样翻译（偏工程/产品手册风格）：
+
+Maximum Payload: 400 kg
+Dynamic Payload: 200 kg
+
+如果是放在产品参数表里，也可以写得更完整一点：
+
+Maximum Load Capacity: 400 kg
+Maximum Dynamic Load: 200 kg
+
+如果你想更强调“极限负载”是理论上限，也可以用：
+
+Ultimate Load Capacity: 400 kg
+Rated Dynamic Load: 200 kg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*杭州出差：去具微科技看一看机器狗，验证一下今年的新判断，海外没有销售，满足我的基本要求。
+*完善了落地页www.partdro.com 去跟猎豹的人谈一下谷歌广告的操作，最好是能够接受培训。
+*明天去湘湖玩一下，整理一下思路。
+
+
+
+
+*及时反馈/长期反馈
+*Branding: 从今年开始，我开始有了个人的branding (partdro.com  名片和ppt）还有内容平台blogs（周更新）
+*做一切事情的本质都来源于起心动念，现实与心态的不断碰撞和融合。

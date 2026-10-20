@@ -1,0 +1,56 @@
+2025年我该怎么度过？是自己的信心在减弱吗？一直在消耗自己手里的积蓄。其实很多事情和人性，都能清楚地看到Patter的。
+无论我去哪个城市，见了哪些人，我都能感受到哪些是无效社交，哪些似乎能够给我带来什么样的进步。有时候我觉得AI确实
+比身边的人给到我们的价值会更明显。
+
+当一个人的注意力到处飞舞（monkey mind）的时候，问题就来了。过去犯了很多的错误，认知上的，抑或是行动上的，今天就不能再次犯了。
+
+
+*我需要什么样的东西去支撑自己走好自己的人生之路？是我热爱的拥有好奇心的事？还是养家糊口的本领？
+
+累的时候，你应该关注什么？怎样让自己的心灵得到更好的放松，这样你就可以更好地应对生活中的各种挑战了。
+如果你有执念，你就有了挥之不去的痛苦。从我进入职业生活以来，就一直觉得自己在颠沛流离，无论是身体上还是心灵上，都是这种感觉。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*Claude/Cursor可以免费用了，多搜索看看抖音的教程确实有用的。github上面有很多的大神啊。
+*新的技术挑战：modelscope的落地页需要登录才能进去。后面还得想办法接入API（抖音秋芝的教程看起来不难的hugging face模型试用）。
+
+The application is now running with the updated UI that matches ModelScope's design. You should see:
+Dark navigation bar with:
+ModelScope logo
+Main navigation links (Home, Models, Datasets, Studios, Docs)
+Search box
+Login button
+Studio cards with:
+Title
+Description
+Tags
+Views and likes count
+Last update time
+The UI should now look much more similar to ModelScope's design. Would you like me to:
+Add more features like filtering and sorting?
+Add more sample studios?
+Improve the styling further?
+Add any other functionality?
+Let me know what aspects you'd like to enhance!
+
+
+Add more sample data to better demonstrate the infinite scroll.
+Adjust the card spacing or animations.
+Add filtering functionality to the infinite scroll.
+

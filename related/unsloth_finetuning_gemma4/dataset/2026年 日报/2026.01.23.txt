@@ -1,0 +1,12 @@
+
+
+*mermaid流程图：
+*PyMuPdf
+*用最基础的代码flask_backend nlux rasa三大模块构建你的业务流程。
+*产品上传 /ops   单品上传
+
+
+先将pdf（原生）用pdf to lp转成landing page。智能体的system prompt
+然后根据Supabase直接生成所有信息，如category，填入所有的信息入表。
+
+*测试最基础的流量，用ReAct Agent 从Ads Script开始。

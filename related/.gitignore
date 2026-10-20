@@ -1,0 +1,4 @@
+# 凭据与本地依赖不入库（结构参见各目录的 .env.example）
+**/.env
+**/node_modules/
+**/new_refresh_token.txt

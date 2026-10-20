@@ -1,0 +1,23 @@
+*已经实操过了 ollama 安装Ollama gemma 4 E4B  2~4 tokens/s 新CPU（12/12/14代 i5/i7) 多模态  ollama run gemma4:e4b
+*Unsloth教程   runpod 飞书文档/notebookLLM
+
+
+*规划行程：建德-->南京-->苏州
+*建德的城市风景：新安江 17°水温  阴雨天 今日步行21000步 江和城（八佰伴）明天坐公交去建德站 （-->海宁西）
+
+*俄罗斯客户Alexey：H50T报价
+ * Maggie的产品的出口合规性。找发票给他们报销。国内交货
+*保加利亚Enrico的需求：丰翼无人机/云卓无人机/拓攻无人机（南京）/苏州（智身/坚米）索降器 大疆运载无人机   5G中继/图传
+
+Hi, thanks again for the solutions you shared earlier — they were very helpful.
+
+We'd like to check if you have a platform that can meet the following updated requirements:
+
+Minimum 10 km range
+At least 40 minutes flight time
+Payload capacity of at least 10 kg (5 kg delivery + ~5 kg winch and container system)
+Ability to operate with a winch under load
+Could you advise if you have a suitable model or a customized solution for this setup?
+
+*波兰的Alexandra： Eavision/Potensic 样机安排。
+*今天高铁去海宁西: 租房450人民币 晚上住在长安镇上。

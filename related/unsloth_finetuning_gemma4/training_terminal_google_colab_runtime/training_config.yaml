@@ -1,0 +1,56 @@
+# ============================================================
+# Model
+# ============================================================
+model:
+  name: unsloth/gemma-4-E4B-it-unsloth-bnb-4bit
+  load_in_4bit: true
+  dtype: null
+
+# ============================================================
+# LoRA
+# ============================================================
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: none
+  use_rslora: false
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+# ============================================================
+# Training
+# ============================================================
+training:
+  max_seq_length: 8192
+  num_train_epochs: 3
+  per_device_train_batch_size: 8
+  gradient_accumulation_steps: 4
+  learning_rate: 2e-4
+  warmup_steps: 10
+  weight_decay: 0.01
+  optim: adamw_8bit
+  lr_scheduler_type: cosine
+  gradient_checkpointing: unsloth
+  packing: false
+  train_on_completions_only: true
+  seed: 3407
+  fp16: true
+  bf16: false
+  logging_steps: 10
+  output_dir: outputs
+  report_to: none
+
+# ============================================================
+# Dataset
+# ============================================================
+dataset:
+  format: chatml
+  file: gemma_finetune_dataset.jsonl
+  split: train

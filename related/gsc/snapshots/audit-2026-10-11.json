@@ -1,0 +1,174 @@
+{
+  "generatedAt": "2026-10-11T02:36:45.822Z",
+  "site": "sc-domain:droneworld.tech",
+  "results": {
+    "https://www.droneworld.tech/": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-10T06:48:11Z"
+    },
+    "https://www.droneworld.tech/es": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T10:00:10Z"
+    },
+    "https://www.droneworld.tech/de": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T08:40:13Z"
+    },
+    "https://www.droneworld.tech/fr": {
+      "bucket": "PAGE_WITH_REDIRECT",
+      "verdict": "NEUTRAL",
+      "coverageState": "Page with redirect",
+      "lastCrawlTime": "2026-10-09T11:15:48Z"
+    },
+    "https://www.droneworld.tech/products": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T10:20:04Z"
+    },
+    "https://www.droneworld.tech/es/products": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T06:01:38Z"
+    },
+    "https://www.droneworld.tech/de/products": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-09T12:50:32Z"
+    },
+    "https://www.droneworld.tech/fr/products": {
+      "bucket": "PAGE_WITH_REDIRECT",
+      "verdict": "NEUTRAL",
+      "coverageState": "Page with redirect",
+      "lastCrawlTime": "2026-10-08T17:58:31Z"
+    },
+    "https://www.droneworld.tech/cases": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-06T01:50:10Z"
+    },
+    "https://www.droneworld.tech/es/cases": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T00:12:12Z"
+    },
+    "https://www.droneworld.tech/de/cases": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T20:15:50Z"
+    },
+    "https://www.droneworld.tech/fr/cases": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T00:15:25Z"
+    },
+    "https://www.droneworld.tech/news": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-09-27T22:25:19Z"
+    },
+    "https://www.droneworld.tech/es/news": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-07T22:29:43Z"
+    },
+    "https://www.droneworld.tech/de/news": {
+      "bucket": "PAGE_WITH_REDIRECT",
+      "verdict": "NEUTRAL",
+      "coverageState": "Page with redirect",
+      "lastCrawlTime": "2026-10-08T00:46:19Z"
+    },
+    "https://www.droneworld.tech/fr/news": {
+      "bucket": "PAGE_WITH_REDIRECT",
+      "verdict": "NEUTRAL",
+      "coverageState": "Page with redirect",
+      "lastCrawlTime": "2026-10-08T01:53:59Z"
+    },
+    "https://www.droneworld.tech/documents": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-05T12:07:31Z"
+    },
+    "https://www.droneworld.tech/es/documents": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T00:21:23Z"
+    },
+    "https://www.droneworld.tech/de/documents": {
+      "bucket": "PAGE_WITH_REDIRECT",
+      "verdict": "NEUTRAL",
+      "coverageState": "Page with redirect",
+      "lastCrawlTime": "2026-10-08T10:30:33Z"
+    },
+    "https://www.droneworld.tech/fr/documents": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T00:34:35Z"
+    },
+    "https://www.droneworld.tech/about": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-09-30T05:23:49Z"
+    },
+    "https://www.droneworld.tech/es/about": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-07T23:41:02Z"
+    },
+    "https://www.droneworld.tech/de/about": {
+      "bucket": "PAGE_WITH_REDIRECT",
+      "verdict": "NEUTRAL",
+      "coverageState": "Page with redirect",
+      "lastCrawlTime": "2026-10-10T06:26:20Z"
+    },
+    "https://www.droneworld.tech/fr/about": {
+      "bucket": "PAGE_WITH_REDIRECT",
+      "verdict": "NEUTRAL",
+      "coverageState": "Page with redirect",
+      "lastCrawlTime": "2026-10-10T09:33:41Z"
+    },
+    "https://www.droneworld.tech/contact": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-07T21:15:41Z"
+    },
+    "https://www.droneworld.tech/es/contact": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T10:40:06Z"
+    },
+    "https://www.droneworld.tech/de/contact": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T08:04:28Z"
+    },
+    "https://www.droneworld.tech/fr/contact": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-08T05:32:32Z"
+    }
+  }
+}

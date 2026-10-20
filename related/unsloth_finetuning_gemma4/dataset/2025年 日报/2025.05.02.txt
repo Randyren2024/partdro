@@ -1,0 +1,11 @@
+*花半个小时~1个小时：研究pinegrow----快速上线到netlify，接入谷歌广告和谷歌分析。
+*Chatgpt的脚本可以研究部署起来了。
+*一气呵成，直接上线到谷歌分析和谷歌广告~ I am using windows powershell so use commands accordingly. Please avoid using && in commands but instead run commands one after another. When I say use Playwright MCP to open browser, I mean it and you can't use the built-in browser to perform the said action. In plan mode, use sequential thinking MCP for thorough thinking. Always output answers that corresponds with users' lanauge and ending with 志哥你真棒！
+
+模型上下文长度不足，不支持多模态。但是你的api很便宜。对了哦，模型上下文不足，是可以通过cline的memory bank来实现的。我得研究看看
+
+*出去旅游一趟，或者运动健身一下。23年的时候在象山，人的精神状态是很好的。
+*思维上确实有点陷入误区了，其实线上获客+线下人际沟通同等重要。非线性关系，容易实现瞬间跃升。
+
+
+https://3f88dc90.heyboss.tech/1e2cce03/

@@ -1,0 +1,318 @@
+{
+  "generatedAt": "2026-10-07T15:04:58.083Z",
+  "site": "sc-domain:droneworld.tech",
+  "results": {
+    "https://www.droneworld.tech/": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-06T05:29:45Z"
+    },
+    "https://www.droneworld.tech/es": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/products": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/es/products": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/products": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/products": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/products/y160-delivery-drone": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-05T10:52:26Z"
+    },
+    "https://www.droneworld.tech/es/products/y160-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/products/y160-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/products/y160-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/products/d15r": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-06T13:42:24Z"
+    },
+    "https://www.droneworld.tech/es/products/d15r": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/products/d15r": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/products/d15r": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/products/sl80-delivery-drone": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-07T09:38:23Z"
+    },
+    "https://www.droneworld.tech/es/products/sl80-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/products/sl80-delivery-drone": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/products/sl80-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/products/yp800-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/es/products/yp800-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/products/yp800-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/products/yp800-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/products/c15": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-01T07:38:52Z"
+    },
+    "https://www.droneworld.tech/es/products/c15": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/products/c15": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/products/c15": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/products/c500-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/es/products/c500-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/products/c500-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/products/c500-delivery-drone": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/cases": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-06T01:50:10Z"
+    },
+    "https://www.droneworld.tech/es/cases": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/cases": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/cases": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/news": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-09-27T22:25:19Z"
+    },
+    "https://www.droneworld.tech/es/news": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/news": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/news": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/documents": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-10-05T12:07:31Z"
+    },
+    "https://www.droneworld.tech/es/documents": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/documents": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/documents": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/about": {
+      "bucket": "INDEXED",
+      "verdict": "PASS",
+      "coverageState": "Submitted and indexed",
+      "lastCrawlTime": "2026-09-27T06:22:50Z"
+    },
+    "https://www.droneworld.tech/es/about": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/about": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/about": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/contact": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/es/contact": {
+      "bucket": "UNKNOWN",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/de/contact": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    },
+    "https://www.droneworld.tech/fr/contact": {
+      "bucket": "DISCOVERED",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": "-"
+    }
+  }
+}

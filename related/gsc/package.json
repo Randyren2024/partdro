@@ -1,0 +1,19 @@
+{
+  "name": "partdro-gsc",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "auth": "node src/auth.mjs",
+    "sites": "node src/gsc.mjs sites",
+    "inspect": "node src/gsc.mjs inspect",
+    "analytics": "node src/gsc.mjs analytics",
+    "sitemaps": "node src/gsc.mjs sitemaps",
+    "audit": "node src/audit-urls.mjs",
+    "report": "node src/gsc.mjs report"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "googleapis": "^183.0.0"
+  }
+}

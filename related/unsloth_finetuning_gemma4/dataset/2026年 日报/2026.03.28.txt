@@ -1,0 +1,5 @@
+*Cash flow management: to support the upcoming travels/accomodation. 
+*Autel Max 4T一套发到非洲的博茨瓦纳 PI 银行账号 电池照片 无人机照片
+*将Autel上线到Partdro.com，从文案开始/然后是视频链接（图片链接）supabase
+*图片处理：美图秀秀/Qwen Chat来处理图片
+*小蔡：下周会有新产品（礼品）上市。

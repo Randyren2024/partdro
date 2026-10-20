@@ -1,0 +1,6 @@
+*跳过一些短期解决不了的技术问题：MCP安装：Browser MCP/Cloudflare/Hubspot/Hunter.io
+*linkedin在线找客户可以操作了。
+*省着点用Trae fast requests: 每天不超过100个。3 USD/600 Fast Requests （多账号）
+*Claude 4/Gemini 2.5 Pro
+*域名partdro.com绑定
+*Linkedin资料需要完善

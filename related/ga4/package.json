@@ -1,0 +1,20 @@
+{
+  "name": "partdro-ga4",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "auth": "node src/auth.mjs",
+    "ga4": "node src/ga4.mjs",
+    "check": "node src/ga4.mjs check",
+    "accounts": "node src/ga4.mjs accounts",
+    "properties": "node src/ga4.mjs properties",
+    "streams": "node src/ga4.mjs streams",
+    "report": "node src/ga4.mjs report",
+    "realtime": "node src/ga4.mjs realtime"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "googleapis": "^183.0.0"
+  }
+}

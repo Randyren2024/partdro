@@ -1,0 +1,5 @@
+*很多事情都是一体两面的，你对技术的敏感度比较大，也就意味着你对负面情绪的敏感度比较大。
+*用Cursor来实现自动化在linkedin上找找客户。提示词：linkedin上找客户给他们发开发信，推我的产品：网站链接是https://famous-froyo-a51be2.netlify.app/ 用站内信的方式。你来进入linkedin，我来输入账号和密码。用sequential thinking MCP好好规划一下。
+*可用的还只有Cline，配合Deepseek R1和Gemini 2.5 Flash  (Openrouter里面也有很多免费的好模型）
+
+*买一个公牛的插座：京东购买

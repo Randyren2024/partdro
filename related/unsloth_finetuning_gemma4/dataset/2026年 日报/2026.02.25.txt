@@ -1,0 +1,9 @@
+*React Landing Page: Hero+Specs+Features+FAQ+CTA+Contact Form
+
+*及时反馈（业务跟进）/长期反馈（SEO）
+*Branding: 从今年开始，我开始有了个人的branding (partdro.com  名片和ppt），和内容平台blogs（周更新）
+*decap CMS+React
+*用中文写blogs，然后用AI来翻译+人工润色。
+*做一切事情的本质都来源于起心动念，现实与心态的不断碰撞和融合。
+*马上有新订单进来：Rodolfo和Joe
+*将谷歌广告和独立站项目留在年后处理。自动化技术虽然很有诱惑力，线性做自动化完整可以成形的业务。

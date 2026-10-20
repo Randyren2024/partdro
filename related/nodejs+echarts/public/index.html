@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>农业无人机关键词分析</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #333; }
+    .header { background: #fff; padding: 16px 24px; border-bottom: 1px solid #e8e8e8; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 20px; color: #1890ff; }
+    .stats { display: flex; gap: 24px; }
+    .stat { text-align: center; }
+    .stat-value { font-size: 24px; font-weight: 600; color: #1890ff; }
+    .stat-label { font-size: 12px; color: #666; }
+
+    .main { padding: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card { background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .card-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #333; }
+    .chart { width: 100%; height: 280px; }
+
+    .table-section { margin-top: 16px; background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .table-title { font-size: 14px; font-weight: 600; }
+    .filters { display: flex; gap: 12px; }
+    .filter-select { padding: 6px 12px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 13px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+    th { background: #fafafa; font-weight: 600; color: #333; cursor: pointer; }
+    th:hover { background: #f0f0f0; }
+    td.keyword { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    td.num { text-align: right; font-family: 'Monaco', monospace; }
+
+    .comp-Low { color: #52c41a; }
+    .comp-Medium { color: #faad14; }
+    .comp-High { color: #f5222d; }
+    .comp-Unknown { color: #8c8c8c; }
+
+    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+    .page-btn { padding: 6px 12px; border: 1px solid #d9d9d9; border-radius: 4px; background: #fff; cursor: pointer; font-size: 13px; }
+    .page-btn:hover { border-color: #1890ff; color: #1890ff; }
+    .page-btn.active { background: #1890ff; color: #fff; border-color: #1890ff; }
+
+    .loading { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.6); color: #fff; padding: 20px 40px; border-radius: 8px; z-index: 1000; }
+
+    .highlight { background: #fff7e6; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🚁 农业无人机关键词分析</h1>
+    <div class="stats">
+      <div class="stat"><div class="stat-value" id="totalKeywords">-</div><div class="stat-label">关键词总数</div></div>
+      <div class="stat"><div class="stat-value" id="totalSearches">-</div><div class="stat-label">月搜索总量</div></div>
+      <div class="stat"><div class="stat-value" id="avgBid">-</div><div class="stat-label">平均出价(CNY)</div></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">📊 关键词词云</div>
+        <div class="chart" id="wordcloud"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">🔍 产品搜索量 TOP15</div>
+        <div class="chart" id="searchVolume"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 竞争度分布</div>
+        <div class="chart" id="competition"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📈 搜索量 vs 竞争度</div>
+        <div class="chart" id="scatter"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-title">📉 趋势变化关键词</div>
+      <div class="chart" id="trends" style="height: 200px;"></div>
+    </div>
+
+    <div class="table-section">
+      <div class="table-header">
+        <div class="table-title">📋 关键词详细列表</div>
+        <div class="filters">
+          <select class="filter-select" id="filterComp">
+            <option value="">全部竞争度</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <select class="filter-select" id="filterMinSearch">
+            <option value="">最低搜索量</option>
+            <option value="100">> 100</option>
+            <option value="500">> 500</option>
+            <option value="1000">> 1000</option>
+          </select>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th data-sort="keyword">关键词</th>
+            <th data-sort="avgMonthlySearches">月搜索量</th>
+            <th data-sort="competition">竞争度</th>
+            <th data-sort="competitionIndex">竞争指数</th>
+            <th data-sort="bidAvg">平均出价</th>
+            <th data-sort="threeMonthChange">3个月变化</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+
+  <div class="loading" id="loading">加载中...</div>
+  <script src="js/main.js"></script>
+</body>
+</html>

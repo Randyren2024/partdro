@@ -1,0 +1,57 @@
+*Cash flow management: to support the upcoming travels/accomodation
+*OutReach: https://github.com/eracle/OpenOutreach?tab=readme-ov-file#demo
+
+
+智谱AI：a6782ba434dd48fb91030b03602606a9.oZvbMtfHh1pRdjtd
+
+
+虚拟环境已设置完成！现在可以启动了。
+
+    ✅ 虚拟环境设置完成
+
+    启动命令（每次使用时）：
+
+    方法 1：激活虚拟环境后运行
+
+     1 cd C:\Users\81102\Desktop\mosquito_killer_lamps\openoutreach
+     2 .venv\Scripts\activate
+     3 python manage.py
+
+    方法 2：直接使用虚拟环境的 Python
+
+     1 cd C:\Users\81102\Desktop\mosquito_killer_lamps\openoutreach
+     2 .venv\Scripts\python.exe manage.py
+
+    查看 CRM（可选）：
+
+     1 # 创建管理员
+     2 .venv\Scripts\python.exe manage.py createsuperuser
+     3
+     4 # 启动 Admin 界面
+     5 .venv\Scripts\python.exe manage.py runserver
+     6 # 访问 http://localhost:8000/admin/
+
+    ---
+
+    现在运行启动命令，程序会提示你进行交互式配置（营销活动、LinkedIn 账号、LLM API 密钥等）。
+
+*photoshop替代：美图秀秀
+*CorelDraw替代：Inkscape
+
+*header（添加babala logo)+footer 
+*brand name: babala 
+*domain name: babala-pestcontrol.com
+*about us (company)
+*Categories: 
+*landing page MY-208/MY-  /MY-  /MY     /MY     /MY：文案+图片
+*两大类目：Glue Board Mosquito Killer Lamp/Solar Electric Mosquito Killer Lamp
+*多语种
+
+
+*手机支架/笔记本电脑支架
+*慈溪市观海卫镇古师路666号 逸宿印象酒店 任志 16788684420
+
+
+
+
+

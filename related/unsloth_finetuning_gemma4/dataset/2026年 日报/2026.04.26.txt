@@ -1,0 +1,29 @@
+*三种部署Unsloth的方式：分别为 本地电脑（还是有点问题）CPU部署unsloth_studio_runpod_gemma4_finetuning/ 实现Chat & Data Recipe功能  Runpod部署（训练）Google Colab部署
+*数据集准备：我建议按以下步骤进行：
+步骤 1：数据预处理
+- 将 Markdown 文件转为训练格式（如 JSONL）
+- 提取 PDF 内容（需要 OCR 或文本提取）
+- 清洗和分块
+步骤 2：创建提示词模板（Prompt Template）
+示例格式：
+问：关于[产品类别]的SEO策略是什么？
+答：[对应内容]
+问：消防无人机的目标受众有哪些？
+答：...
+步骤 3：RunPod + Unsloth Studio 配置
+- 选择 GPU：建议 A100 40GB 或 H100（显存够大才能加载 Gemma 4）
+- 镜像：选 Unsloth 提供的镜像或自定义 PyTorch 镜像
+步骤 4：执行微调
+- 使用 Unsloth 的 SFTTrainer / TRLO3
+- 配置 LoRA 参数
+- 训练模型
+步骤 5：保存与测试
+---
+需要确认的问题
+1. 你想用哪个型号？ Gemma 4 有不同版本（2B, 4B, 12B 等），显存需求不同
+2. sales 和 support 目录内容是什么？ 我可以继续查看
+3. 训练数据量预期？ 想把所有文档都转为训练数据，还是只选一部分？
+4. 预算？ RunPod 按小时计费，不同 GPU 价格差异大
+
+
+

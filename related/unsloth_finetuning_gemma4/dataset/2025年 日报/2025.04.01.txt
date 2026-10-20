@@ -1,0 +1,6 @@
+*明天去市里办身份证和寄无人机，可以去拍振风塔。明天要起早。
+*提示词才是王道。
+*we0_open_source_ready_to_deploy可以部署到腾讯云服务器（流量计费版）
+*用We0 (Claude+Deepseek V3-0324)做一个完整的项目，figma的原型图----Code----
+
+*Think tool: While it sounds similar to extended thinking, it's a different concept. Extended thinking is all about what Claude does before it starts generating a response. With extended thinking, Claude deeply considers and iterates on its plan before taking action. The "think" tool is for Claude, once it starts generating a response, to add a step to stop and think about whether it has all the information it needs to move forward. This is particularly helpful when performing long chains of tool calls or in long multi-step conversations with the user.

@@ -1,0 +1,2 @@
+* 上线接入google分析，google ads
+* 测试各个SEO MCP的效果，GSC (google Search Console)接入。

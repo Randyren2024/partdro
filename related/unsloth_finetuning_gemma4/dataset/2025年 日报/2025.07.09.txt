@@ -1,0 +1,6 @@
+*10000 RMB
+*Chatgpt Plus会员：o3/o4 mini大模型： USD 20+USD 9.9
+*需要闭关修炼
+*先搭框架再填充内容。关注你手头上的事情。
+*样样都通的人，适合在目前的状况中做点事情出来。这个系统太严重依赖低效的资本环境，所以需要我用数据化技术做点东西了。business understanding--data mining--data cleaning--exploration--ML--visualization
+*k-means（聚类）/SVM（支持向量机）/随机森林/Apriori（用于关联规则）

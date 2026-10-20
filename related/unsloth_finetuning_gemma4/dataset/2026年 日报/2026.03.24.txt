@@ -1,0 +1,29 @@
+*董腾 Cash flow management: to support the upcoming travels/accomodation
+*Autel Max 4T一套发到非洲的博茨瓦纳 
+*将Autel上线到Partdro.com，从文案开始/然后是视频链接（图片链接）supabase
+
+
+Account Number
+79969931136529
+Account Name
+Hangzhou Pardro Technology Co., Ltd.
+(* If the account name exceeds the available space, please continue in the address field.)
+SWIFT/BIC code
+DHBKHKHH
+( DHBKHKHHXXX * If 11 characters are required )
+Bank Name
+DBS Bank (Hong Kong) Limited
+Bank address
+11th Floor, The Center, 99 Queen's Road Central, Central, Hong Kong
+Country/region
+Hong Kong (China)
+Account type
+Business Account
+Bank Code
+016
+Branch Code
+478
+Payment method
+For the payment of goods, please make a SWIFT(T/T) or CHATS(HK Local) Payment.
+Notes
+Please include [Buyer's Name, Invoice/Contract Number, and Product Name] in the memo or note section when making the payment.

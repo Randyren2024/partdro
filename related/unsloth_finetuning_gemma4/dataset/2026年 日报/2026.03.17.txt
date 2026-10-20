@@ -1,0 +1,10 @@
+*header+footer
+*brand name: babara 
+*domain name: babara-pestcontrol.com
+*pages: home/landing pages/about us/terms & service/privacy policy
+
+*手机支架/笔记本电脑支架/华为手环磁吸充电线
+*github项目nanoGPT：从零理解大语言模型transformer架构
+
+
+

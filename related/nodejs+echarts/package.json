@@ -1,0 +1,20 @@
+{
+  "name": "keyword-analytics",
+  "version": "1.0.0",
+  "description": "Google Keywords Analytics with wink-nlp and ECharts",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "wink-nlp": "^2.4.0",
+    "wink-eng-lite-web-model": "^1.0.5",
+    "papaparse": "^5.4.1",
+    "echarts": "^5.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

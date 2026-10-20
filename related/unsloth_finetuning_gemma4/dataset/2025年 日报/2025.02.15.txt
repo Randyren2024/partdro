@@ -1,0 +1,8 @@
+*Magicquill是一个非常复杂的项目，目前看来，Claude能够基本地部署，虽然在调用  hugging face和modelscope的API上面出现了问题，但是我觉得经过摸索，是能解决这个问题的。不行的话，我就从头再部署一下这个项目看看。按照虚拟环境+安装依赖项+LLaVA/Model checkpoints的思路。
+
+*秋芝2046的hugging face调用，还得实操一下。
+*确保modelmixhub.com 能够尽快上线跑起来。
+
+*接下来需要花费一定的时间在现成的模型上线，也就是modelmixhub.com的主页面了。
+
+

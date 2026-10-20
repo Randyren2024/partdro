@@ -1,0 +1,17 @@
+*Google Ads for Autel Max 4T谷歌广告上线
+*让Openclaw可以完整的操控浏览器（identity.md soul.md user.md)
+*迁移桌面.openclaw: memory/ workspace/ sessions
+
+*# 执行方法一的步骤
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# 验证配置
+npm config get prefix
+# 应该输出 /home/user1102/.npm-global
+
+# 现在安装 openclaw
+npm install -g openclaw@latest
+
