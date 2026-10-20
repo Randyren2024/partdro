@@ -36,6 +36,7 @@ import { computed, provide, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import { buildBreadcrumbLd, buildProductLd, injectJsonLd } from '../seo/structuredData'
 import {
   imgOverridesByLang,
   videoOverridesByLang,
@@ -142,6 +143,23 @@ watch([ns, locale, () => t(`${ns.value}.hero.title1`), () => t(`${ns.value}.hero
   setMeta('meta[name="twitter:title"]', document.title)
   setMeta('meta[name="twitter:description"]', trimmed)
   setMeta('meta[name="twitter:image"]', heroImg)
+
+  // 结构化数据：Product + BreadcrumbList（内联 ld+json 会被预渲染固化进静态 HTML）
+  const segs = route.path.split('/').filter(Boolean)
+  const prefix = ['es', 'de', 'fr'].includes(segs[0]) ? `/${segs[0]}` : ''
+  injectJsonLd('ld-product', buildProductLd({
+    name,
+    description: trimmed,
+    images: [heroImg],
+    url,
+    sku: name.split(' ')[0],
+    category: 'Drone',
+  }))
+  injectJsonLd('ld-breadcrumb', buildBreadcrumbLd([
+    { name: 'Home', url: `${SITE_URL}${prefix || '/'}` },
+    { name: 'Products', url: `${SITE_URL}${prefix}/products` },
+    { name, url },
+  ]))
 }, { immediate: true })
 
 // ====== 视频模块 ======

@@ -30,6 +30,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { trackEvent } from './composables/useTracking'
 import { useLandingContent } from './composables/useLandingContent'
+import { buildOrganizationLd, injectJsonLd } from './seo/structuredData'
 import InlineEditor from './components/admin/InlineEditor.vue'
 import enUS from 'ant-design-vue/es/locale/en_US'
 import esES from 'ant-design-vue/es/locale/es_ES'
@@ -48,6 +49,17 @@ const locales: Record<string, typeof enUS> = {
 const antLocale = computed(() => locales[locale.value] || enUS)
 
 useLandingContent()
+
+// 站点级 Organization 结构化数据（全站统一，随各页预渲染写入静态 HTML）
+const SITE_URL = 'https://www.droneworld.tech'
+injectJsonLd(
+  'ld-organization',
+  buildOrganizationLd({
+    siteUrl: SITE_URL,
+    logo: `${SITE_URL}/partdro_logo.png`,
+    email: 'info@droneworld.tech',
+  }),
+)
 
 const openWhatsApp = () => {
   trackEvent('whatsapp_chat_initiated', {
