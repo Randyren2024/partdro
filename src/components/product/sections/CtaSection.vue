@@ -12,6 +12,12 @@
           <RouterLink class="btn secondary" to="/" :data-edit-key="`${ns}.cta.visit`">{{ tt('cta.visit') }}</RouterLink>
         </div>
       </div>
+
+      <!-- 产品页询盘表单：落地页直接承接高意向采购者。
+           提交成功会 push 'contact_form_submission' → GTM 的 Google Ads 转化标签据此回传转化。 -->
+      <div class="cta-form" id="quote">
+        <InquiryForm />
+      </div>
     </div>
   </section>
 </template>
@@ -19,6 +25,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useLandingSection } from '../sectionContext'
+import InquiryForm from '../../common/InquiryForm.vue'
 
 const { ns, tt, mailtoHref, trackEvent } = useLandingSection()
 </script>

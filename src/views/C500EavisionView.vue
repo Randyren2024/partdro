@@ -8,6 +8,7 @@ import MediaStory from '../components/c500eavision/MediaStory.vue'
 import GallerySection from '../components/c500eavision/GallerySection.vue'
 import DecisionSection from '../components/c500eavision/DecisionSection.vue'
 import VideoModal from '../components/c500eavision/VideoModal.vue'
+import InquiryForm from '../components/common/InquiryForm.vue'
 import { motionReady, reducedMotion, videoOpen } from '../composables/useC500State'
 import { videoOverridesByLang } from '../composables/useLandingContent'
 import {
@@ -277,6 +278,11 @@ onMounted(() => {
           </p>
         </div>
       </div>
+    </section>
+
+    <!-- 询盘表单：与产品页 CTA 一致，提交成功会 push 'contact_form_submission' 供 Ads 转化回传 -->
+    <section id="quote" class="c500-quote">
+      <InquiryForm />
     </section>
 
     <VideoModal :src="introVideo" @close="closeVideo" />

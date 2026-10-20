@@ -91,6 +91,9 @@
 .c500 dd,.c500 dl,.c500 h1,.c500 h2,.c500 h3,.c500 p{margin:0}
 .c500 button{font-family:inherit}
 .section-inner{margin:0 auto;width:min(1200px,calc(100% - 120px))}
+/* 询盘表单：深色页面上的白色卡片，居中并限制宽度 */
+.c500-quote{background:#0d0d0f;padding:70px 0}
+.c500-quote .inquiry-form{width:min(760px,calc(100% - 120px));margin:0 auto}
 .gradient-text{-webkit-text-fill-color:transparent;background:linear-gradient(105deg,#4c60bd,#7183d2 36%,#aeb7de 63%,#fff);background-clip:text;-webkit-background-clip:text;color:#fff}
 .hero{height:calc(100vh - var(--header-height,74px) - 55px - 55px);isolation:isolate;min-height:650px;position:relative}
 .hero__media,.hero__shade{bottom:0;left:0;position:absolute;right:0;top:0;z-index:-1}

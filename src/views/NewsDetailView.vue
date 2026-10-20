@@ -1,5 +1,5 @@
 <template>
-  <div class="news-detail" data-prerender-article v-if="post">
+  <div class="news-detail" data-prerender-article :data-related-products-ready="productsReady" v-if="post">
     <div class="page-header">
       <div class="container">
         <h1>{{ post.title }}</h1>
@@ -13,6 +13,21 @@
           <p>{{ post.summary }}</p>
           <div v-html="post.content" />
         </div>
+        <section v-if="relatedProducts.length" class="related-products" data-related-products>
+          <h2 class="related-products__title">{{ t('news.relatedProducts') }}</h2>
+          <div class="related-products__grid">
+            <router-link
+              v-for="p in relatedProducts"
+              :key="p.slug"
+              :to="lp(`/products/${p.slug}`)"
+              class="related-products__card"
+            >
+              <img v-if="p.image_url" :src="p.image_url" :alt="p.name" class="related-products__img" />
+              <span class="related-products__name">{{ p.name }}</span>
+              <span class="related-products__desc">{{ p.short_desc }}</span>
+            </router-link>
+          </div>
+        </section>
         <a-button type="link" @click="$router.back()">
           <LeftOutlined /> Back to News
         </a-button>
@@ -30,15 +45,49 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
 import { SITE_URL } from '../router'
-import { usePost } from '../composables/useSupabase'
+import { usePost, useProducts } from '../composables/useSupabase'
+import { useLocalePath } from '../composables/useLocalePath'
+import type { Product } from '../types'
 
 const route = useRoute()
 const slug = () => route.params.slug as string
+const { t } = useI18n()
+const lp = useLocalePath()
 const { data: post, loading, error, reload } = usePost(slug)
+
+/**
+ * 文章 category → 相关产品 slug 映射。
+ * 高商业意图查询（crop protection drone / fertilizer application drone /
+ * high-rise drone cleaning 等）当前落在 /news 博客页，而非产品落地页；
+ * 在文章末尾给出「相关产品」区块，把权重与点击引到可转化的产品页。
+ * category 取值来自线上 posts 表：Agriculture / Logistics / Cleaning Drone /
+ * Cleaning / Cargo Drone / Company News / Industry News。
+ */
+const CATEGORY_PRODUCT_SLUGS: Record<string, string[]> = {
+  Agriculture: ['fp800-agricultural-drone'],
+  Logistics: ['y160-delivery-drone', 'c500-delivery-drone'],
+  'Cargo Drone': ['c500-delivery-drone', 'y160-delivery-drone'],
+  'Cleaning Drone': ['d15r', 'c15'],
+  Cleaning: ['d15r', 'c15'],
+}
+
+const { data: products, loading: productsLoading } = useProducts()
+
+// 供预渲染等待：产品请求结束后才落盘，否则静态 HTML 里会缺「相关产品」内链
+const productsReady = computed(() => (productsLoading.value ? undefined : 'true'))
+
+const relatedProducts = computed<Product[]>(() => {
+  const slugs = CATEGORY_PRODUCT_SLUGS[post.value?.category ?? ''] ?? []
+  if (!slugs.length) return []
+  return slugs
+    .map((s) => (products.value ?? []).find((p) => p.slug === s))
+    .filter((p): p is Product => Boolean(p))
+})
 
 // 绝对 URL：图片多存为 /images/... 相对路径，og/JSON-LD 需要完整 URL
 const absUrl = (u?: string | null) =>
@@ -146,5 +195,56 @@ watch(post, (p) => {
 }
 .article-content li {
   margin-bottom: 8px;
+}
+.related-products {
+  margin: 40px 0 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-border, #eee);
+}
+.related-products__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--color-dark);
+}
+.related-products__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.related-products__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--color-border, #eee);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.related-products__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.related-products__img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.related-products__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.related-products__desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>
