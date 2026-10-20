@@ -64,6 +64,8 @@ def analytics(dimensions, limit):
 totals = (analytics(None, None).get("rows") or [{}])[0]
 top_q = analytics(["query"], 10).get("rows") or []
 top_p = analytics(["page"], 10).get("rows") or []
+# 查询 × 落地页：把「排名好却零点击」的查询直接落到具体页面，供改写 title/meta
+qp = analytics(["query", "page"], 300).get("rows") or []
 
 # 3) 重点页面收录状态
 insp = http("https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
@@ -111,7 +113,40 @@ for r in top_p:
 if not top_p:
     L.append("| （无数据） | - | - | - | - |")
 L.append("")
-L.append("## 四、重点页面收录状态")
+L.append("## 四、查询 → 落地页 映射（零点击优先，供改写 title/meta）")
+L.append("")
+L.append("| 查询词 | 展示 | 点击 | 平均排名 | 排名最高落地页 | 该页展示 | 该页排名 |")
+L.append("|---|---|---|---|---|---|---|")
+by_q = {}
+for r in qp:
+    k = r.get("keys") or []
+    if len(k) < 2:
+        continue
+    q, p = k[0], k[1]
+    e = by_q.setdefault(q, {"imp": 0, "clk": 0, "pos": [], "pages": []})
+    e["imp"] += int(r.get("impressions") or 0)
+    e["clk"] += int(r.get("clicks") or 0)
+    if r.get("position"):
+        e["pos"].append(float(r.get("position")))
+    e["pages"].append((int(r.get("impressions") or 0), int(r.get("clicks") or 0), p, float(r.get("position") or 0)))
+qrows = []
+for q, e in by_q.items():
+    if e["clk"] > 0 or e["imp"] < 3:
+        continue
+    avg = sum(e["pos"]) / len(e["pos"]) if e["pos"] else 99.0
+    e["pages"].sort(key=lambda x: -x[0])
+    top = e["pages"][0]
+    qrows.append((avg, e["imp"], q, top[2], top[0], top[3]))
+qrows.sort(key=lambda x: x[0])
+for avg, imp, q, p, pimp, ppos in qrows[:25]:
+    L.append("| " + q.replace("|", "/") + " | " + str(imp) + " | 0 | " + fmt_pos(avg) + " | "
+             + p.replace("|", "/") + " | " + str(pimp) + " | " + fmt_pos(ppos) + " |")
+if not qrows:
+    L.append("| （无排名内零点击查询） | - | - | - | - | - | - |")
+L.append("")
+L.append("> 用法：平均排名 ≤20 且零点击的行即「临门一脚」，直接改对应落地页的 title/meta。")
+L.append("")
+L.append("## 五、重点页面收录状态")
 L.append("")
 L.append("- 页面: " + TARGET_URL)
 L.append("- verdict: " + str(ix.get("verdict", "-")))
@@ -131,7 +166,7 @@ if opp:
     tips.append("查询 \\"" + str(opp[0].get("keys")[0]) + "\\" 排名 4-20 但 CTR<3%，建议优化标题/描述/内链")
 if not tips:
     tips.append("整体表现平稳，无需紧急操作")
-L.append("## 五、建议")
+L.append("## 六、建议")
 L.append("")
 for t in tips:
     L.append("- " + t)
