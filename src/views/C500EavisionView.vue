@@ -23,6 +23,7 @@ import {
   stories,
   technologyImage
 } from '../data/c500eavision'
+import { buildBreadcrumbLd, buildProductLd, injectJsonLd } from '../seo/structuredData'
 import '../components/c500eavision/c500.css'
 
 const { t, te, locale } = useI18n()
@@ -81,6 +82,23 @@ watchEffect(() => {
   setMeta('meta[property="og:url"]', url)
   setMeta('meta[name="twitter:title"]', document.title)
   setMeta('meta[name="twitter:description"]', desc)
+
+  // 结构化数据：Product + BreadcrumbList（内联 ld+json 会被预渲染固化进静态 HTML）
+  const prefix = locale.value === 'en' ? '' : `/${locale.value}`
+  const name = 'C500 Heavy-Lift Flying Robot'
+  injectJsonLd('ld-product', buildProductLd({
+    name,
+    description: desc,
+    images: [heroImage],
+    url,
+    sku: 'C500',
+    category: 'Drone',
+  }))
+  injectJsonLd('ld-breadcrumb', buildBreadcrumbLd([
+    { name: 'Home', url: `${SITE_URL}${prefix || '/'}` },
+    { name: 'Products', url: `${SITE_URL}${prefix}/products` },
+    { name, url },
+  ]))
 })
 
 onMounted(() => {
