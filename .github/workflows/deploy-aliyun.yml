@@ -79,3 +79,14 @@ jobs:
           done
           echo "FC code deploy failed after 5 attempts"
           exit 1
+
+      # 三个日报函数（GSC / Ads / 深度分析）不在上面的静态站点流程里。
+      # 脚本只重新打包 + 上传代码 + 合并飞书凭据，函数已有的 GSC/Ads/E2B/DirectMail
+      # 环境变量原样保留——所以 CI 不需要这些密钥，只要阿里云 AK 与桶名。
+      - name: Deploy report functions (GSC / Ads / Deep)
+        env:
+          OSS_AK_ID: ${{ secrets.ALIYUN_AK }}
+          OSS_AK_SECRET: ${{ secrets.ALIYUN_SK }}
+          ALIYUN_OSS_BUCKET: ${{ secrets.ALIYUN_OSS_BUCKET }}
+          ALIYUN_OSS_REGION: cn-hongkong
+        run: node scripts/deploy-report-fns.mjs
