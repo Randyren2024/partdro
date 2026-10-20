@@ -45,8 +45,14 @@ jobs:
 
       - name: Sync dist to OSS
         run: |
+          # --exclude 保护 OSS 上的运维产物：日报/分析存档与 FC 代码包不在 dist/ 里，
+          # 若被 --delete 清掉会导致邮件里的存档链接失效、函数无法再更新代码。
           aliyun oss sync dist/ "oss://${{ secrets.ALIYUN_OSS_BUCKET }}/" \
-            --delete -e oss-cn-hongkong.aliyuncs.com -f
+            --delete -e oss-cn-hongkong.aliyuncs.com -f \
+            --exclude "ads-reports/*" \
+            --exclude "gsc-reports/*" \
+            --exclude "gsc-deep-analysis/*" \
+            --exclude "fc/*"
 
       - name: Build FC bundle
         env:
