@@ -5,6 +5,7 @@
 // 凭据全部经环境变量注入，不落代码仓库。
 import { Sandbox } from 'e2b'
 import * as crypto from 'node:crypto'
+import { sendFeishuReport } from '../shared/feishu'
 
 const CUSTOMER_ID = process.env.ADS_CUSTOMER_ID || ''
 
@@ -710,5 +711,21 @@ export const handler = async () => {
     console.error('[ads-daily-report] 邮件推送失败（OSS 存档不受影响）:', (e as Error).message)
   }
 
-  return { statusCode: 200, body: JSON.stringify({ ok: true, ossKey: key, email }) }
+  // 飞书推送（与邮件并行、互不影响；未配置 FEISHU_* 时静默跳过）
+  let feishu: { ok: boolean; error?: string } = { ok: false }
+  try {
+    feishu = {
+      ok: await sendFeishuReport({
+        title: `[Partdro] Google Ads 日报 ${day}`,
+        md,
+        template: 'green',
+        footer: 'Google Ads 日报 · 与邮件同源',
+      }),
+    }
+  } catch (e) {
+    feishu = { ok: false, error: (e as Error).message }
+    console.error('[ads-daily-report] 飞书推送失败（邮件与 OSS 不受影响）:', (e as Error).message)
+  }
+
+  return { statusCode: 200, body: JSON.stringify({ ok: true, ossKey: key, email, feishu }) }
 }

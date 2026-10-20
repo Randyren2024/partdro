@@ -117,6 +117,10 @@ const envVars = {
   DIRECTMAIL_ACCESS_KEY_SECRET: apiEnv.DIRECTMAIL_ACCESS_KEY_SECRET,
   DIRECTMAIL_ACCOUNT: apiEnv.DIRECTMAIL_ACCOUNT,
   DIRECTMAIL_REGION: apiEnv.DIRECTMAIL_REGION || 'cn-hangzhou',
+  // 飞书日报推送（与询价通知同应用；缺失时函数内会静默跳过）
+  FEISHU_APP_ID: apiEnv.FEISHU_APP_ID || '',
+  FEISHU_APP_SECRET: apiEnv.FEISHU_APP_SECRET || '',
+  FEISHU_OPEN_ID: apiEnv.FEISHU_OPEN_ID || '',
 }
 
 // ---------- 5. 创建或更新函数 ----------

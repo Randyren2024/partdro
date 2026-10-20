@@ -5,6 +5,7 @@
 // 与 gsc-daily-report 完全独立，互不影响。凭据全部经环境变量注入，不落代码仓库。
 import { Sandbox } from 'e2b'
 import * as crypto from 'node:crypto'
+import { sendFeishuReport } from '../shared/feishu'
 
 const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:droneworld.tech'
 const TARGET_URL =
@@ -373,7 +374,22 @@ export const handler = async () => {
     email = { ok: false, error: (e as Error).message }
     console.error('[deep-analysis] 邮件推送失败（OSS 存档不受影响）:', (e as Error).message)
   }
-  await beat('done, email=' + JSON.stringify(email))
+  // 飞书推送（与邮件并行、互不影响；未配置 FEISHU_* 时静默跳过）
+  let feishu: { ok: boolean; error?: string } = { ok: false }
+  try {
+    feishu = {
+      ok: await sendFeishuReport({
+        title: `[Partdro] GSC 深度分析 ${day}`,
+        md,
+        template: 'orange',
+        footer: 'GSC 深度分析 · 与邮件同源',
+      }),
+    }
+  } catch (e) {
+    feishu = { ok: false, error: (e as Error).message }
+    console.error('[deep-analysis] 飞书推送失败（邮件与 OSS 不受影响）:', (e as Error).message)
+  }
+  await beat('done, email=' + JSON.stringify(email) + ', feishu=' + JSON.stringify(feishu))
 
-  return { statusCode: 200, body: JSON.stringify({ ok: true, ossKey: key, email }) }
+  return { statusCode: 200, body: JSON.stringify({ ok: true, ossKey: key, email, feishu }) }
 }
