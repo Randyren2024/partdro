@@ -35,15 +35,27 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 import { supabase } from '../../supabase/client'
 import { trackEvent } from '../../composables/useTracking'
+import { attributionFields } from '../../composables/useAttribution'
 
 const { t } = useI18n()
+const route = useRoute()
 const loading = ref(false)
 const success = ref(false)
 const errorMsg = ref('')
+
+// 当前页面属于哪个产品（非产品页为 null）。
+// /products/c500-partdro-eavision 是独立路由，params.slug 为空，需单独兜底。
+const productSlug = computed<string | null>(() => {
+  const slug = route.params.slug
+  if (typeof slug === 'string' && slug) return slug
+  if (route.name === 'c500-eavision') return 'c500-partdro-eavision'
+  return null
+})
 
 const form = reactive({
   name: '',
@@ -64,6 +76,7 @@ const handleSubmit = async () => {
       phone: form.phone,
       type: form.type,
       message: form.message,
+      ...attributionFields(route.path, productSlug.value),
     })
     if (error) {
       console.error('[contact form] insert failed:', error.code, error.message)
