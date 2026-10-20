@@ -282,6 +282,13 @@ async function renderAll(tasks) {
           }
           return !!article && !!article.querySelector('.article-content')?.textContent?.trim()
         }, null, { timeout: 12000 })
+        // 文章末尾的「相关产品」内链依赖 products 请求；等数据就绪再落盘，
+        // 避免静态 HTML 缺内链（超时则保留文章本身，不阻断预渲染）。
+        await page.waitForFunction(
+          () => !!document.querySelector('[data-related-products-ready="true"]'),
+          null,
+          { timeout: 8000 },
+        ).catch(() => {})
       } else {
         await page.waitForFunction(() => {
           const app = document.getElementById('app')
