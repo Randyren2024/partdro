@@ -122,7 +122,7 @@ function addSection(id: SectionId) {
   left: 0;
   top: 110px;
   z-index: 80;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, sans-serif;
 }
 .section-panel__fab {
   display: inline-flex;
