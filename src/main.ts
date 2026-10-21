@@ -8,6 +8,10 @@ import router from './router'
 import i18n from './i18n'
 import { captureAttribution } from './composables/useAttribution'
 
+// Inter 可变字体自托管：landing.css / SectionPanel 声明了 Inter，但此前全站从未加载
+// 走 @fontsource 打包进 dist，避免依赖 Google Fonts（国内访问慢、易被墙）
+import '@fontsource-variable/inter'
+
 import './assets/styles/variables.css'
 import './assets/styles/global.css'
 
