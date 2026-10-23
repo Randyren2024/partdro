@@ -13,23 +13,48 @@ const TARGET_URL =
 const TEMPLATE = process.env.E2B_TEMPLATE || 'claude-code-gsc'
 const MODEL = process.env.ANTHROPIC_MODEL || 'deepseek-v4.1-flash'
 
+/**
+ * 服务账号 JWT 断言（RS256，纯 node:crypto）。未配置 GSC_SA_JSON 时返回空串 → 回退 refresh_token。
+ * 好处：不过期、不受 refresh token 数量上限影响、无需用户再次 consent。
+ */
+function buildSaAssertion(scope: string): string {
+  const raw = process.env.GSC_SA_JSON
+  if (!raw) return ''
+  const sa = JSON.parse(raw) as { client_email: string; private_key: string }
+  const now = Math.floor(Date.now() / 1000)
+  const b64 = (o: unknown) => Buffer.from(JSON.stringify(o)).toString('base64url')
+  const head = b64({ alg: 'RS256', typ: 'JWT' })
+  const claims = b64({
+    iss: sa.client_email,
+    scope,
+    aud: 'https://oauth2.googleapis.com/token',
+    iat: now,
+    exp: now + 3600,
+  })
+  const sig = crypto.createSign('RSA-SHA256').update(`${head}.${claims}`).sign(sa.private_key, 'base64url')
+  return `${head}.${claims}.${sig}`
+}
+
 // ---------- 沙箱内执行的 GSC 数据抓取脚本（仅标准库，凭据在写入时插值） ----------
 function buildGscFetchScript(cred: {
   clientId: string
   clientSecret: string
   refreshToken: string
+  home: string
+  assertion?: string
 }): string {
   return `# -*- coding: utf-8 -*-
 # GSC 近 30 天多维度数据抓取（沙箱内执行，香港可直连 Google API）。仅用标准库。
-import json, urllib.request, urllib.parse
+import json, urllib.request, urllib.parse, urllib.error
 from datetime import date, timedelta
 
 CLIENT_ID = ${JSON.stringify(cred.clientId)}
 CLIENT_SECRET = ${JSON.stringify(cred.clientSecret)}
-REFRESH_TOKEN = ${JSON.stringify(cred.refreshToken)}
+REFRESH_TOKEN = ${JSON.stringify(cred.refreshToken || '')}
+ASSERTION = ${JSON.stringify(cred.assertion || '')}
 SITE_URL = ${JSON.stringify(SITE_URL)}
 TARGET_URL = ${JSON.stringify(TARGET_URL)}
-OUT = "/home/user/gsc_data.json"
+OUT = ${JSON.stringify(cred.home + '/gsc_data.json')}
 
 def http(url, payload=None, headers=None):
     data = json.dumps(payload).encode() if payload is not None else None
@@ -37,12 +62,25 @@ def http(url, payload=None, headers=None):
         url, data=data,
         headers=dict({"Content-Type": "application/json"}, **(headers or {})),
         method="POST" if data is not None else "GET")
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read().decode())
+    # 关键：把 HTTP 错误码与响应体打出来。原实现直接让 urlopen 抛裸异常，
+    # 上层只能拿到一行 traceback，无法区分「OAuth 失效」还是「沙箱出不了网」。
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        raise SystemExit("FATAL http " + str(e.code) + " " + url + " body=" + e.read().decode(errors="replace")[:400])
+    except Exception as e:
+        raise SystemExit("FATAL net " + url + " " + repr(e))
 
-tok = http("https://oauth2.googleapis.com/token", {
-    "client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
-    "refresh_token": REFRESH_TOKEN, "grant_type": "refresh_token"})
+# 换 access_token：优先服务账号 JWT 断言（无过期问题），否则回退 refresh_token
+if ASSERTION:
+    tok = http("https://oauth2.googleapis.com/token", {
+        "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        "assertion": ASSERTION})
+else:
+    tok = http("https://oauth2.googleapis.com/token", {
+        "client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
+        "refresh_token": REFRESH_TOKEN, "grant_type": "refresh_token"})
 AT = tok.get("access_token")
 if not AT:
     raise SystemExit("FATAL token exchange failed: " + json.dumps(tok)[:300])
@@ -83,14 +121,14 @@ print("DATA_READY " + str(len(json.dumps(out))))
 }
 
 // ---------- 沙箱内执行的 python 脚本（读日报 + 数据，产深度分析） ----------
-function buildAnalysisPrompt(day: string): string {
+function buildAnalysisPrompt(day: string, home: string): string {
   return [
-    '你是资深 SEO 数据分析师。工作目录 /home/user。',
+    `你是资深 SEO 数据分析师。工作目录 ${home}。`,
     '可用文件：',
-    '- /home/user/gsc_data.json：Google Search Console 近 30 天数据（totals、by_date 日趋势、by_query、by_page、by_country、by_device）',
-    '- /home/user/daily_report.md：今日日报（可能为空，若为空请忽略）',
+    `- ${home}/gsc_data.json：Google Search Console 近 30 天数据（totals、by_date 日趋势、by_query、by_page、by_country、by_device）`,
+    `- ${home}/daily_report.md：今日日报（可能为空，若为空请忽略）`,
     '',
-    `任务：产出一份中文深度分析报告（Markdown），写入 /home/user/deep_analysis.md，日期用 ${day}。`,
+    `任务：产出一份中文深度分析报告（Markdown），写入 ${home}/deep_analysis.md，日期用 ${day}。`,
     '报告必须包含以下章节：',
     '1) `# GSC 深度分析报告（' + day + '）`',
     '2) `## 一、整体趋势`：近 30 天点击/展示/CTR/排名的走势与拐点，指出明显上升或下降的日期并分析可能原因',
@@ -275,11 +313,19 @@ export const __test = { buildGscFetchScript, buildAnalysisPrompt, mdToHtml, send
 export const handler = async () => {
   const required = [
     'E2B_API_KEY', 'E2B_API_URL', 'E2B_DOMAIN', 'ANTHROPIC_AUTH_TOKEN',
-    'GSC_CLIENT_ID', 'GSC_CLIENT_SECRET', 'GSC_REFRESH_TOKEN',
     'OSS_BUCKET', 'OSS_AK_ID', 'OSS_AK_SECRET',
   ]
   for (const k of required) {
     if (!process.env[k]) throw new Error(`missing env: ${k}`)
+  }
+  // 鉴权二选一：服务账号（首选）或 OAuth refresh token（回退）
+  if (!process.env.GSC_SA_JSON && !process.env.GSC_REFRESH_TOKEN) {
+    throw new Error('missing env: 需要 GSC_SA_JSON 或 GSC_REFRESH_TOKEN 其一')
+  }
+  if (!process.env.GSC_SA_JSON) {
+    for (const k of ['GSC_CLIENT_ID', 'GSC_CLIENT_SECRET']) {
+      if (!process.env[k]) throw new Error(`missing env: ${k}`)
+    }
   }
 
   const day = new Date().toISOString().slice(0, 10)
@@ -289,6 +335,7 @@ export const handler = async () => {
 
   let sbx: Sandbox | null = null
   let md = ''
+  let stage = 'init'
   try {
     await beat('handler start')
     // 1) 读今日日报（gsc-daily-report 09:00 产出），作为分析输入之一
@@ -297,12 +344,14 @@ export const handler = async () => {
     await beat(`daily ${dailyKey}: ${dailyMd ? dailyMd.length + ' chars' : '(缺失)'}`)
 
     // 2) 创建 Claude Code 沙箱（注入百炼中转）
+    // 沙箱自身寿命 600s：即使 kill 失败或函数被平台强杀，服务端也会在 10 分钟内回收
     await beat('creating sandbox: ' + TEMPLATE)
+    stage = 'create'
     sbx = await Sandbox.create(TEMPLATE, {
       apiKey: process.env.E2B_API_KEY!,
       apiUrl: process.env.E2B_API_URL!,
       domain: process.env.E2B_DOMAIN!,
-      timeoutMs: 900_000,
+      timeoutMs: 600_000,
       envs: {
         ANTHROPIC_AUTH_TOKEN: process.env.ANTHROPIC_AUTH_TOKEN!,
         ANTHROPIC_BASE_URL: process.env.ANTHROPIC_BASE_URL || 'https://dashscope.aliyuncs.com/apps/anthropic',
@@ -313,34 +362,68 @@ export const handler = async () => {
       },
     })
     await beat('sandbox created: ' + sbx.sandboxId)
+    stage = 'probe'
 
-    // 3) 初始化 claude 配置
-    await sbx.commands.run("echo '{}' > /home/user/.claude.json")
+    // 3) 沙箱环境探测 + 统一命令封装：
+    //    模板换代后不能再假设 home 是 /home/user、cli 在固定路径；
+    //    任何命令失败都必须把 exitCode / stderr 带进错误消息，否则 FC 只回一个空的 CommandExitError（本次排查踩过）。
+    const run = async (cmd: string, timeoutMs = 120_000) => {
+      try {
+        return await sbx!.commands.run(cmd, { timeoutMs })
+      } catch (e) {
+        const err = e as { exitCode?: number; stdout?: string; stderr?: string; message?: string }
+        throw new Error(
+          `sandbox cmd failed [${cmd.slice(0, 80)}] | exit=${err.exitCode} | stderr=${String(err.stderr || '').slice(0, 400)} | stdout=${String(err.stdout || '').slice(0, 200)} | msg=${String(err.message || '').slice(0, 150)}`,
+        )
+      }
+    }
+    const probe = await run(
+      'echo "HOME=$HOME"; command -v claude || echo "claude=missing"; command -v python3 || echo "python3=missing"; python3 -V 2>&1 || true',
+      30_000,
+    )
+    const probeOut = (probe.stdout || '').trim()
+    const probeLine = probeOut.replace(/\n/g, ' | ')
+    await beat('probe: ' + probeLine)
+    const home = ((probeOut.match(/HOME=(\/[^\s]*)/) || [])[1] || '').replace(/\/+$/, '')
+    if (!home) throw new Error('无法解析 HOME（沙箱默认 shell 可能不是 sh/bash）| probe: ' + probeLine)
+    if (/claude=missing/.test(probeOut)) throw new Error('模板内缺少 claude CLI | probe: ' + probeLine)
+    if (/python3=missing/.test(probeOut)) throw new Error('模板内缺少 python3 | probe: ' + probeLine)
+    await beat('home resolved: ' + home)
 
-    // 4) 沙箱内拉取 GSC 近 30 天数据
+    // 4) 初始化 claude 配置
+    stage = 'init-config'
+    await run(`cd ${home} && echo '{}' > .claude.json`)
+
+    // 5) 沙箱内拉取 GSC 近 30 天数据
     const fetchScript = buildGscFetchScript({
       clientId: process.env.GSC_CLIENT_ID!,
       clientSecret: process.env.GSC_CLIENT_SECRET!,
       refreshToken: process.env.GSC_REFRESH_TOKEN!,
+      home,
+      assertion: buildSaAssertion('https://www.googleapis.com/auth/webmasters.readonly'),
     })
-    await sbx.files.write('/home/user/fetch_gsc.py', fetchScript)
-    const fr = await sbx.commands.run('python3 /home/user/fetch_gsc.py', { timeoutMs: 180_000 })
+    await sbx.files.write(`${home}/fetch_gsc.py`, fetchScript)
+    stage = 'fetch'
+    const fr = await run(`cd ${home} && python3 fetch_gsc.py`, 180_000)
     if (fr.exitCode !== 0) {
       throw new Error(`GSC fetch failed (exit ${fr.exitCode}): ${(fr.stderr || fr.stdout || '').slice(-800)}`)
     }
-    const gscJson = await readSandboxFile(sbx, '/home/user/gsc_data.json')
+    const gscJson = await readSandboxFile(sbx, `${home}/gsc_data.json`)
     if (!gscJson || gscJson.length < 50) throw new Error('GSC 数据为空')
     await beat('gsc data: ' + gscJson.length + ' bytes')
 
-    // 5) 写入日报，供 claude 参考
-    await sbx.files.write('/home/user/daily_report.md', dailyMd || '(今日日报缺失)')
+    // 6) 写入日报，供 claude 参考
+    await sbx.files.write(`${home}/daily_report.md`, dailyMd || '(今日日报缺失)')
 
-    // 6) claude 产出深度分析
-    const prompt = buildAnalysisPrompt(day)
-    const claudeCmd = `claude --dangerously-skip-permissions < /dev/null -p ${JSON.stringify(prompt)}`
-    const cr = await sbx.commands.run(claudeCmd, { timeoutMs: 720_000 })
+    // 7) claude 产出深度分析
+    // 720s → 480s：FC 函数超时 900s，抓取 180s + 分析 480s = 660s，留 240s 给收尾
+    // 原 720s 加起来正好 900s，函数被平台强杀时 finally 的 kill 不会执行 → 沙箱泄漏（实测跑 9.6~12.5 小时）
+    const prompt = buildAnalysisPrompt(day, home)
+    stage = 'claude'
+    const claudeCmd = `cd ${home} && claude --dangerously-skip-permissions < /dev/null -p ${JSON.stringify(prompt)}`
+    const cr = await run(claudeCmd, 480_000)
     await beat('claude exit: ' + cr.exitCode + (cr.stderr ? ' | stderr: ' + cr.stderr.slice(-300) : ''))
-    md = await readSandboxFile(sbx, '/home/user/deep_analysis.md')
+    md = await readSandboxFile(sbx, `${home}/deep_analysis.md`)
     if (!md || md.trim().length < 100) {
       md = (cr.stdout || '').trim()
       if (md.length < 100) {
@@ -348,9 +431,21 @@ export const handler = async () => {
       }
     }
     await beat('report: ' + md.length + ' chars')
+
+    // 分析已完成，立刻销毁沙箱 —— 不等 finally。
+    // 原因：函数若在 900s 被 FC 强杀，finally 根本不执行，沙箱会一直计费。
+    await beat('killing sandbox early: ' + sbx.sandboxId)
+    await sbx.kill().catch((e) => beat('early kill failed: ' + String((e as Error).message).slice(0, 120)))
   } catch (e) {
-    await beat('ERROR ' + (e as Error).message + ' | ' + ((e as Error).stack || '').slice(0, 400))
-    throw e
+    // 一律把 stage + 原始错误细节写进 message 再抛出：
+    // 该函数未接 SLS，FC 只回 errorMessage/errorType，空 message 的 CommandExitError 无法定位（本次故障即为此）。
+    const err = e as { name?: string; message?: string; exitCode?: number; stdout?: string; stderr?: string; stack?: string }
+    const detail =
+      `stage=${stage} | type=${err?.name || 'Error'} | exit=${err?.exitCode ?? '-'} | ` +
+      `stderr=${String(err?.stderr || '').slice(0, 500)} | stdout=${String(err?.stdout || '').slice(0, 300)} | ` +
+      `msg=${String(err?.message || '').slice(0, 300)} | at=${String(err?.stack || '').split('\n')[1] || ''}`
+    await beat('ERROR ' + detail)
+    throw new Error(detail)
   } finally {
     if (sbx) await sbx.kill().catch(() => {})
   }

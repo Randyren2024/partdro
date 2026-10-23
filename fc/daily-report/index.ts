@@ -11,20 +11,45 @@ const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:droneworld.tech'
 const TARGET_URL =
   process.env.GSC_TARGET_URL || 'https://www.droneworld.tech/products/fp800-agricultural-drone'
 
+/**
+ * 用服务账号私钥签 JWT 断言（RS256，纯 node:crypto，不引第三方库）。
+ * 未配置 GSC_SA_JSON 时返回空串，函数自动回退到 refresh_token 流程 —— 切换期不中断。
+ * 好处：不过期、不受「refresh token 数量上限」影响、无需用户再次 consent。
+ */
+function buildSaAssertion(scope: string): string {
+  const raw = process.env.GSC_SA_JSON
+  if (!raw) return ''
+  const sa = JSON.parse(raw) as { client_email: string; private_key: string }
+  const now = Math.floor(Date.now() / 1000)
+  const b64 = (o: unknown) => Buffer.from(JSON.stringify(o)).toString('base64url')
+  const head = b64({ alg: 'RS256', typ: 'JWT' })
+  const claims = b64({
+    iss: sa.client_email,
+    scope,
+    aud: 'https://oauth2.googleapis.com/token',
+    iat: now,
+    exp: now + 3600,
+  })
+  const sig = crypto.createSign('RSA-SHA256').update(`${head}.${claims}`).sign(sa.private_key, 'base64url')
+  return `${head}.${claims}.${sig}`
+}
+
 // ---------- 沙箱内执行的 Python 脚本（仅标准库，凭据在写入时插值） ----------
 function buildReportScript(cred: {
   clientId: string
   clientSecret: string
   refreshToken: string
+  assertion?: string
 }): string {
   return `# -*- coding: utf-8 -*-
 # GSC 日报脚本：在云沙箱内执行（香港沙箱可直连 Google API）。仅用标准库。
-import json, urllib.request, urllib.parse, os
+import json, urllib.request, urllib.parse, urllib.error, os
 from datetime import date, timedelta
 
 CLIENT_ID = ${JSON.stringify(cred.clientId)}
 CLIENT_SECRET = ${JSON.stringify(cred.clientSecret)}
-REFRESH_TOKEN = ${JSON.stringify(cred.refreshToken)}
+REFRESH_TOKEN = ${JSON.stringify(cred.refreshToken || '')}
+ASSERTION = ${JSON.stringify(cred.assertion || '')}
 SITE_URL = ${JSON.stringify(SITE_URL)}
 TARGET_URL = ${JSON.stringify(TARGET_URL)}
 OUT = "/home/user/report.md" if os.path.isdir("/home/user") else os.path.join(os.getcwd(), "report.md")
@@ -35,13 +60,24 @@ def http(url, payload=None, headers=None):
         url, data=data,
         headers=dict({"Content-Type": "application/json"}, **(headers or {})),
         method="POST" if data is not None else "GET")
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read().decode())
+    # 把 HTTP 错误码与响应体打出来：否则上层只能拿到裸 traceback，分不清「OAuth 失效」和「沙箱出不了网」
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        raise SystemExit("FATAL http " + str(e.code) + " " + url + " body=" + e.read().decode(errors="replace")[:400])
+    except Exception as e:
+        raise SystemExit("FATAL net " + url + " " + repr(e))
 
-# 1) refresh_token -> access_token
-tok = http("https://oauth2.googleapis.com/token", {
-    "client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
-    "refresh_token": REFRESH_TOKEN, "grant_type": "refresh_token"})
+# 1) 换 access_token：优先服务账号 JWT 断言（无过期问题），否则回退 refresh_token
+if ASSERTION:
+    tok = http("https://oauth2.googleapis.com/token", {
+        "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        "assertion": ASSERTION})
+else:
+    tok = http("https://oauth2.googleapis.com/token", {
+        "client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
+        "refresh_token": REFRESH_TOKEN, "grant_type": "refresh_token"})
 AT = tok.get("access_token")
 if not AT:
     raise SystemExit("FATAL token exchange failed: " + json.dumps(tok)[:300])
@@ -330,14 +366,25 @@ export const __test = { buildReportScript, mdToHtml, sendDmReport }
 export const handler = async () => {
   const required = [
     'E2B_API_KEY', 'E2B_API_URL', 'E2B_DOMAIN',
-    'GSC_CLIENT_ID', 'GSC_CLIENT_SECRET', 'GSC_REFRESH_TOKEN',
     'OSS_BUCKET', 'OSS_AK_ID', 'OSS_AK_SECRET',
   ]
   for (const k of required) {
     if (!process.env[k]) throw new Error(`missing env: ${k}`)
   }
+  // 鉴权二选一：服务账号（首选）或 OAuth refresh token（回退）
+  if (!process.env.GSC_SA_JSON && !process.env.GSC_REFRESH_TOKEN) {
+    throw new Error('missing env: 需要 GSC_SA_JSON 或 GSC_REFRESH_TOKEN 其一')
+  }
+  if (!process.env.GSC_SA_JSON) {
+    for (const k of ['GSC_CLIENT_ID', 'GSC_CLIENT_SECRET']) {
+      if (!process.env[k]) throw new Error(`missing env: ${k}`)
+    }
+  }
 
-  const sbx = await Sandbox.create('code-interpreter-v1', {
+  // 模板改为环境变量驱动：code-interpreter-v1 的底层 FC 函数已于 2026-10-21 被删除（创建沙箱直接 404），
+  // 默认值换成已验证可用、且沙箱内具备 python3 + 能直连 Google 的 claude-code 模板。
+  const TEMPLATE = process.env.E2B_TEMPLATE || 'claude-code-hk-1792472444'
+  const sbx = await Sandbox.create(TEMPLATE, {
     apiKey: process.env.E2B_API_KEY,
     apiUrl: process.env.E2B_API_URL,
     domain: process.env.E2B_DOMAIN,
@@ -350,9 +397,18 @@ export const handler = async () => {
       clientId: process.env.GSC_CLIENT_ID!,
       clientSecret: process.env.GSC_CLIENT_SECRET!,
       refreshToken: process.env.GSC_REFRESH_TOKEN!,
+      assertion: buildSaAssertion('https://www.googleapis.com/auth/webmasters.readonly'),
     })
     await sbx.files.write('/home/user/gsc_report.py', script)
-    const run = await sbx.commands.run('python3 /home/user/gsc_report.py')
+    let run: { exitCode: number; stdout?: string; stderr?: string }
+    try {
+      run = await sbx.commands.run('python3 /home/user/gsc_report.py')
+    } catch (e) {
+      const err = e as { exitCode?: number; stdout?: string; stderr?: string; message?: string }
+      throw new Error(
+        `report script threw | exit=${err.exitCode} | stderr=${String(err.stderr || '').slice(0, 800)} | stdout=${String(err.stdout || '').slice(0, 300)} | msg=${String(err.message || '').slice(0, 200)}`,
+      )
+    }
     if (run.exitCode !== 0) {
       throw new Error(`report script failed (exit ${run.exitCode}): ${(run.stderr || run.stdout || '').slice(-800)}`)
     }

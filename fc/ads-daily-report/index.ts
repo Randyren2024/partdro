@@ -14,12 +14,14 @@ function buildAdsReportScript(cred: {
   adsClientId: string
   adsClientSecret: string
   adsRefreshToken: string
+  adsAssertion?: string
   adsDeveloperToken: string
   adsCustomerId: string
   adsLoginCustomerId: string
   ga4ClientId: string
   ga4ClientSecret: string
   ga4RefreshToken: string
+  ga4Assertion?: string
   ga4PropertyId: string
 }): string {
   return `# -*- coding: utf-8 -*-
@@ -29,13 +31,15 @@ from datetime import date, timedelta
 
 ADS_CID = ${JSON.stringify(cred.adsClientId)}
 ADS_CSEC = ${JSON.stringify(cred.adsClientSecret)}
-ADS_RTOK = ${JSON.stringify(cred.adsRefreshToken)}
+ADS_RTOK = ${JSON.stringify(cred.adsRefreshToken || '')}
+ADS_ASSERTION = ${JSON.stringify(cred.adsAssertion || '')}
 ADS_DEV = ${JSON.stringify(cred.adsDeveloperToken)}
 ADS_CUSTOMER = ${JSON.stringify(cred.adsCustomerId)}
 ADS_LOGIN = ${JSON.stringify(cred.adsLoginCustomerId)}
 GA4_CID = ${JSON.stringify(cred.ga4ClientId)}
 GA4_CSEC = ${JSON.stringify(cred.ga4ClientSecret)}
-GA4_RTOK = ${JSON.stringify(cred.ga4RefreshToken)}
+GA4_RTOK = ${JSON.stringify(cred.ga4RefreshToken || '')}
+GA4_ASSERTION = ${JSON.stringify(cred.ga4Assertion || '')}
 GA4_PROP = ${JSON.stringify(cred.ga4PropertyId)}
 OUT = "/home/user/report.md" if os.path.isdir("/home/user") else os.path.join(os.getcwd(), "report.md")
 
@@ -66,13 +70,17 @@ def http(url, payload=None, headers=None, attempts=4):
             time.sleep(2 + 2 * i)
     raise SystemExit("network failed after " + str(attempts) + " attempts: " + str(last))
 
-def access_token(cid, csec, rtok, label):
+def access_token(cid, csec, rtok, label, assertion=''):
     last = None
     for i in range(4):
         try:
-            r = _http_once("https://oauth2.googleapis.com/token", {
-                "client_id": cid, "client_secret": csec,
-                "refresh_token": rtok, "grant_type": "refresh_token"}, None)
+            # 优先服务账号断言（无过期问题）；无断言时回退 refresh token
+            if assertion:
+                payload = {"grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer", "assertion": assertion}
+            else:
+                payload = {"client_id": cid, "client_secret": csec,
+                           "refresh_token": rtok, "grant_type": "refresh_token"}
+            r = _http_once("https://oauth2.googleapis.com/token", payload, None)
             at = r.get("access_token")
             if at:
                 return at
@@ -106,7 +114,7 @@ def g(obj, *path):
     return cur
 
 # ==================== Google Ads (API v25 REST) ====================
-ads_at = access_token(ADS_CID, ADS_CSEC, ADS_RTOK, "Google Ads")
+ads_at = access_token(ADS_CID, ADS_CSEC, ADS_RTOK, "Google Ads", ADS_ASSERTION)
 ADS_H = {"Authorization": "Bearer " + ads_at, "developer-token": ADS_DEV}
 if ADS_LOGIN:
     ADS_H["login-customer-id"] = ADS_LOGIN
@@ -232,7 +240,7 @@ ga4_camp = []
 ga4_land = []
 ga4_ev = []
 try:
-    ga4_at = access_token(GA4_CID, GA4_CSEC, GA4_RTOK, "GA4")
+    ga4_at = access_token(GA4_CID, GA4_CSEC, GA4_RTOK, "GA4", GA4_ASSERTION)
     GA4_H = {"Authorization": "Bearer " + ga4_at}
     GA4_URL = "https://analyticsdata.googleapis.com/v1beta/properties/" + GA4_PROP + ":runReport"
     CPC_FILTER = {"andGroup": {"expressions": [
@@ -647,19 +655,41 @@ function ossSignedGetUrl(key: string, hours = 168): string {
 // 本地测试用导出（deploy/invoke 不受影响）
 export const __test = { buildAdsReportScript, mdToHtml, sendDmReport }
 
+/** 服务账号 JWT 断言（RS256，纯 node:crypto）。优先读专属于该服务的变量，其次 SA_JSON；都没有则返回空串 → 回退 OAuth。 */
+function buildSaAssertion(scope: string, envName: string): string {
+  const raw = process.env[envName] || process.env.SA_JSON
+  if (!raw) return ''
+  const sa = JSON.parse(raw) as { client_email: string; private_key: string }
+  const now = Math.floor(Date.now() / 1000)
+  const b64 = (o: unknown) => Buffer.from(JSON.stringify(o)).toString('base64url')
+  const head = b64({ alg: 'RS256', typ: 'JWT' })
+  const claims = b64({ iss: sa.client_email, scope, aud: 'https://oauth2.googleapis.com/token', iat: now, exp: now + 3600 })
+  return `${head}.${claims}.` + crypto.createSign('RSA-SHA256').update(`${head}.${claims}`).sign(sa.private_key, 'base64url')
+}
+
 // ---------- FC 入口 ----------
 export const handler = async () => {
   const required = [
     'E2B_API_KEY', 'E2B_API_URL', 'E2B_DOMAIN',
-    'ADS_DEVELOPER_TOKEN', 'ADS_CLIENT_ID', 'ADS_CLIENT_SECRET', 'ADS_REFRESH_TOKEN', 'ADS_CUSTOMER_ID',
-    'GA4_CLIENT_ID', 'GA4_CLIENT_SECRET', 'GA4_REFRESH_TOKEN', 'GA4_PROPERTY_ID',
+    'ADS_DEVELOPER_TOKEN', 'ADS_CUSTOMER_ID',
+    'GA4_PROPERTY_ID',
     'OSS_BUCKET', 'OSS_AK_ID', 'OSS_AK_SECRET',
   ]
   for (const k of required) {
     if (!process.env[k]) throw new Error(`missing env: ${k}`)
   }
+  // 鉴权：Ads 与 GA4 可分别切到服务账号（ADS_SA_JSON / GA4_SA_JSON），未配置的仍走 OAuth
+  const hasSa = Boolean(process.env.ADS_SA_JSON || process.env.GA4_SA_JSON || process.env.SA_JSON)
+  if (!hasSa) {
+    for (const k of ['ADS_CLIENT_ID', 'ADS_CLIENT_SECRET', 'ADS_REFRESH_TOKEN',
+      'GA4_CLIENT_ID', 'GA4_CLIENT_SECRET', 'GA4_REFRESH_TOKEN']) {
+      if (!process.env[k]) throw new Error(`missing env: ${k}（或提供 SA_JSON 改用服务账号）`)
+    }
+  }
 
-  const sbx = await Sandbox.create('code-interpreter-v1', {
+  // 模板改为环境变量驱动：code-interpreter-v1 的底层 FC 函数已于 2026-10-21 删除
+  const TEMPLATE = process.env.E2B_TEMPLATE || 'claude-code-hk-1792472444'
+  const sbx = await Sandbox.create(TEMPLATE, {
     apiKey: process.env.E2B_API_KEY,
     apiUrl: process.env.E2B_API_URL,
     domain: process.env.E2B_DOMAIN,
@@ -669,15 +699,17 @@ export const handler = async () => {
   let md = ''
   try {
     const script = buildAdsReportScript({
-      adsClientId: process.env.ADS_CLIENT_ID!,
-      adsClientSecret: process.env.ADS_CLIENT_SECRET!,
-      adsRefreshToken: process.env.ADS_REFRESH_TOKEN!,
+      adsClientId: process.env.ADS_CLIENT_ID || '',
+      adsClientSecret: process.env.ADS_CLIENT_SECRET || '',
+      adsRefreshToken: process.env.ADS_REFRESH_TOKEN || '',
+      adsAssertion: buildSaAssertion('https://www.googleapis.com/auth/adwords', 'ADS_SA_JSON'),
       adsDeveloperToken: process.env.ADS_DEVELOPER_TOKEN!,
       adsCustomerId: process.env.ADS_CUSTOMER_ID!,
       adsLoginCustomerId: process.env.ADS_LOGIN_CUSTOMER_ID || '',
-      ga4ClientId: process.env.GA4_CLIENT_ID!,
-      ga4ClientSecret: process.env.GA4_CLIENT_SECRET!,
-      ga4RefreshToken: process.env.GA4_REFRESH_TOKEN!,
+      ga4ClientId: process.env.GA4_CLIENT_ID || '',
+      ga4ClientSecret: process.env.GA4_CLIENT_SECRET || '',
+      ga4RefreshToken: process.env.GA4_REFRESH_TOKEN || '',
+      ga4Assertion: buildSaAssertion('https://www.googleapis.com/auth/analytics.readonly', 'GA4_SA_JSON'),
       ga4PropertyId: process.env.GA4_PROPERTY_ID!,
     })
     await sbx.files.write('/home/user/ads_report.py', script)
