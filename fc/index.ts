@@ -65,8 +65,10 @@ interface FcHttpEvent {
   path?: string
   rawPath?: string
   httpMethod?: string
-  requestContext?: { domainName?: string; http?: { path?: string; method?: string } }
+  requestContext?: { domainName?: string; http?: { path?: string; method?: string; queryString?: string } }
   headers?: Record<string, string>
+  queryParameters?: Record<string, string>
+  queryStringParameters?: Record<string, string>
   body?: string | null
   isBase64Encoded?: boolean
 }
@@ -166,6 +168,55 @@ const API_HANDLERS: Record<string, (event: NetlifyEvent) => Promise<NetlifyRespo
   '/api/inquiry-webhook': inquiryWebhookHandler,
 }
 
+/**
+ * 询盘审批页反代：/reply → inquiry-reply 函数。
+ *
+ * 为什么必须反代：FC 默认域名（*.fcapp.run）会给所有响应强制加
+ * `Content-Disposition: attachment`，浏览器/飞书内置浏览器打开就是下载源码；
+ * 只有走自定义域名（www.droneworld.tech）才不会被加这个头。
+ * 自定义域名的证书私钥无法从 API 读回，改动 routes 有打挂 HTTPS 的风险，
+ * 因此在已有的 partdro-api 里加一条只读转发，比改域名配置安全。
+ */
+async function proxyInquiryReply(fcEvent: FcHttpEvent, method: string, rawPath: string): Promise<NetlifyResponse> {
+  const upstream = process.env.INQUIRY_REPLY_UPSTREAM
+  if (!upstream) {
+    return { statusCode: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' }, body: 'INQUIRY_REPLY_UPSTREAM not configured' }
+  }
+  // FC HTTP 触发器把 query 放在 queryParameters；rawPath 可能不带 ?（实测自定义域名即如此）
+  const qp = fcEvent.queryParameters || fcEvent.queryStringParameters
+  const withQuery = [fcEvent.rawPath, fcEvent.path, fcEvent.requestContext?.http?.path].find((v) => v && v.includes('?'))
+  const qs = qp && Object.keys(qp).length
+    ? `?${new URLSearchParams(qp).toString()}`
+    : withQuery
+      ? withQuery.slice(withQuery.indexOf('?'))
+      : fcEvent.requestContext?.http?.queryString
+        ? `?${fcEvent.requestContext.http.queryString}`
+        : ''
+  const headers: Record<string, string> = {}
+  for (const [k, v] of Object.entries(fcEvent.headers || {})) {
+    if (k.toLowerCase() === 'content-type') headers['Content-Type'] = v
+  }
+  const body = method === 'GET' || method === 'HEAD' || fcEvent.body == null
+    ? undefined
+    : fcEvent.isBase64Encoded
+      ? Buffer.from(fcEvent.body, 'base64').toString('utf8')
+      : fcEvent.body
+  let res: Response
+  try {
+    res = await fetch(upstream.replace(/\/+$/, '') + qs, { method, headers, body })
+  } catch (e) {
+    return { statusCode: 502, headers: { 'Content-Type': 'text/plain; charset=utf-8' }, body: `upstream unreachable: ${(e as Error).message}` }
+  }
+  const out: Record<string, string> = {}
+  res.headers.forEach((v, k) => {
+    const key = k.toLowerCase()
+    if (['content-length', 'transfer-encoding', 'connection', 'content-disposition', 'date', 'server'].includes(key)) return
+    out[k] = v
+  })
+  out['content-disposition'] = 'inline'
+  return { statusCode: res.status, headers: out, body: await res.text() }
+}
+
 export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<NetlifyResponse> => {
   const fcEvent = toEvent(raw)
   // HTTP 触发器的路径在 rawPath / requestContext.http.path，InvokeFunction 在 path
@@ -191,6 +242,7 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
     const event: NetlifyEvent = { httpMethod: method, headers: {}, body: null, isBase64Encoded: false }
     return sitemapHandler(event)
   }
+  if (path === '/reply') return proxyInquiryReply(fcEvent, method, rawPath)
   const apiHandler = API_HANDLERS[path]
   if (apiHandler) {
     const event: NetlifyEvent = {

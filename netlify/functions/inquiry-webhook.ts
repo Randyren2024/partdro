@@ -17,6 +17,8 @@
 //   INQUIRY_WEBHOOK_SECRET  Supabase webhook 共享密钥
 //   INQUIRY_ANALYSIS_URL    可选；inquiry-analysis 函数的 HTTP URL。配置后通知成功即
 //                           fire-and-forget 异步触发客户背景调研（免费邮箱在下游跳过）
+//   INQUIRY_REPLY_URL       可选；inquiry-reply 函数的 HTTP URL。配置后卡片带「起草回复」
+//                           按钮（签名链接，打开是草稿审批页，点了发送才真发信）
 //   FEISHU_APP_ID / FEISHU_APP_SECRET   飞书应用凭据（开放平台开发者后台）
 //   FEISHU_OPEN_ID          飞书私聊收件人 open_id（ou_xxx）；任一 FEISHU_* 缺失则跳过飞书
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto'
@@ -186,6 +188,19 @@ async function feishuPost(url: string, body: unknown, token?: string): Promise<R
   return data
 }
 
+/** 极简飞书卡片按钮链接：inquiry-reply 的签名审批页（未配置 INQUIRY_REPLY_URL 时返回空串） */
+function buildReplyLink(record: Record<string, unknown>): string {
+  const base = process.env.INQUIRY_REPLY_URL
+  const secret = process.env.INQUIRY_WEBHOOK_SECRET
+  const id = record.id === undefined || record.id === null ? '' : String(record.id)
+  if (!base || !secret || !id) return ''
+  const token = createHmac('sha256', secret).update(`reply:${id}`).digest('base64url').slice(0, 32)
+  const url = new URL(base)
+  url.searchParams.set('id', id)
+  url.searchParams.set('t', token)
+  return url.toString()
+}
+
 /** 飞书私聊卡片通知；未配置 FEISHU_* 时静默跳过（与邮件并行，互不影响） */
 async function sendFeishuNotification(record: Record<string, unknown>): Promise<void> {
   const appId = process.env.FEISHU_APP_ID
@@ -217,6 +232,18 @@ async function sendFeishuNotification(record: Record<string, unknown>): Promise<
     elements.push({ tag: 'div', text: { tag: 'lark_md', content: md(fields) } })
   }
   elements.push({ tag: 'hr' })
+  const replyLink = buildReplyLink(record)
+  if (replyLink) {
+    elements.push({
+      tag: 'action',
+      actions: [{
+        tag: 'button',
+        text: { tag: 'plain_text', content: '起草回复（需我批准后发送）' },
+        type: 'primary',
+        url: replyLink,
+      }],
+    })
+  }
   elements.push({
     tag: 'note',
     elements: [{ tag: 'plain_text', content: 'Sent automatically from the Partdro website contact form.' }],
