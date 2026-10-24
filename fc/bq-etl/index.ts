@@ -9,6 +9,7 @@
 //   { mode: 'backfill', days: 90 }       回溯 N 天（含昨天）
 //   { mode: 'daily' }                    默认：同步 GSC 最近 7 天 + Ads/GA4 最近 7 天
 //   { mode: 'bootstrap' }                只建数据集/表/视图，不拉数
+//   { mode: 'inquiries' }                只同步 Supabase 询盘归因表（不动其它源）
 import * as crypto from 'node:crypto'
 
 const PROJECT = process.env.BQ_PROJECT || ''
@@ -18,6 +19,9 @@ const SITE_URL = process.env.GSC_SITE_URL || 'sc-domain:droneworld.tech'
 const ADS_CUSTOMER = process.env.ADS_CUSTOMER_ID || ''
 const ADS_LOGIN = process.env.ADS_LOGIN_CUSTOMER_ID || ''
 const ADS_DEV = process.env.ADS_DEVELOPER_TOKEN || ''
+// 询盘归因：Supabase REST（service_role 绕过 RLS），与 inquiry-analysis 同一套凭据
+const SUPABASE_URL = process.env.SUPABASE_URL || ''
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 const GA4_PROP = process.env.GA4_PROPERTY_ID || ''
 const ADS_API = 'https://googleads.googleapis.com/v25/customers'
 
@@ -148,7 +152,7 @@ async function expiryInfo() {
 
 type Field = { name: string; type: string; mode?: string }
 
-const TABLES: Record<string, { fields: Field[]; cluster?: string[] }> = {
+const TABLES: Record<string, { fields: Field[]; cluster?: string[]; unpartitioned?: boolean }> = {
   gsc_query_page: {
     fields: [
       { name: 'date', type: 'DATE' },
@@ -163,6 +167,48 @@ const TABLES: Record<string, { fields: Field[]; cluster?: string[] }> = {
       { name: 'position', type: 'FLOAT' },
     ],
     cluster: ['page'],
+  },
+  // 页面级 GSC：唯一可信的流量口径。query 维度会被 GSC 隐私阈值整行丢弃（clicks 恒 0），
+  // 所以 organic_clicks/impressions 只能来自这张表，绝不能读 gsc_query_page。
+  gsc_page_daily: {
+    fields: [
+      { name: 'date', type: 'DATE' },
+      { name: 'site', type: 'STRING' },
+      { name: 'page', type: 'STRING' },
+      { name: 'clicks', type: 'INTEGER' },
+      { name: 'impressions', type: 'INTEGER' },
+      { name: 'ctr', type: 'FLOAT' },
+      { name: 'position', type: 'FLOAT' },
+    ],
+    cluster: ['page'],
+  },
+  // 询盘归因：与网站 /api/inquiry-webhook 同源，只保留归因字段，刻意丢弃 name/email/message 等 PII。
+  // 不分区（整表替换），沿用既有表结构，避免与外部 bq load --replace 产生分区口径冲突。
+  inquiries_attribution: {
+    unpartitioned: true,
+    fields: [
+      { name: 'id', type: 'INTEGER' },
+      { name: 'created_at', type: 'TIMESTAMP' },
+      { name: 'type', type: 'STRING' },
+      { name: 'product_slug', type: 'STRING' },
+      { name: 'page_path', type: 'STRING' },
+      { name: 'landing_page', type: 'STRING' },
+      { name: 'referrer', type: 'STRING' },
+      { name: 'utm_source', type: 'STRING' },
+      { name: 'utm_medium', type: 'STRING' },
+      { name: 'utm_campaign', type: 'STRING' },
+      { name: 'utm_term', type: 'STRING' },
+      { name: 'utm_content', type: 'STRING' },
+      { name: 'gclid', type: 'STRING' },
+      { name: 'gbraid', type: 'STRING' },
+      { name: 'wbraid', type: 'STRING' },
+      { name: 'dclid', type: 'STRING' },
+      { name: 'fbclid', type: 'STRING' },
+      { name: 'first_referrer', type: 'STRING' },
+      { name: 'first_landing_page', type: 'STRING' },
+      { name: 'first_visit_at', type: 'TIMESTAMP' },
+      { name: 'gclid_captured_at', type: 'TIMESTAMP' },
+    ],
   },
   ads_campaign_daily: {
     fields: [
@@ -259,7 +305,7 @@ async function ensureTables(): Promise<string[]> {
       body: JSON.stringify({
         tableReference: { projectId: PROJECT, datasetId: DATASET, tableId },
         schema: { fields: def.fields },
-        timePartitioning: { type: 'DAY', field: 'date' },
+        ...(def.unpartitioned ? {} : { timePartitioning: { type: 'DAY', field: 'date' } }),
         ...(def.cluster ? { clustering: { fields: def.cluster } } : {}),
       }),
     })
@@ -275,7 +321,7 @@ async function ensureView() {
       SELECT date, SUM(clicks) AS organic_clicks, SUM(impressions) AS organic_impressions,
              SAFE_DIVIDE(SUM(clicks), SUM(impressions)) AS organic_ctr,
              SAFE_DIVIDE(SUM(position * impressions), SUM(impressions)) AS avg_position
-      FROM \`${dsRef()}.gsc_query_page\` GROUP BY date),
+      FROM \`${dsRef()}.gsc_page_daily\` GROUP BY date),
     a AS (
       SELECT date, SUM(cost) AS ads_cost, SUM(clicks) AS ads_clicks,
              SUM(impressions) AS ads_impressions, SUM(conversions) AS ads_conversions
@@ -341,14 +387,26 @@ async function queryRows(sql: string): Promise<any[]> {
 
 async function verify() {
   const q = (t: string) => `SELECT '${t}' AS t, COUNT(*) AS n, CAST(MIN(date) AS STRING) AS mn, CAST(MAX(date) AS STRING) AS mx FROM \`${dsRef()}.${t}\``
-  const rows = await queryRows([q('gsc_query_page'), q('ads_campaign_daily'), q('ads_keyword_daily'), q('ads_search_term_daily'), q('ga4_traffic_daily'), q('ga4_leads_daily')].join(' UNION ALL '))
+  const rows = await queryRows([q('gsc_page_daily'), q('gsc_query_page'), q('ads_campaign_daily'), q('ads_keyword_daily'), q('ads_search_term_daily'), q('ga4_traffic_daily'), q('ga4_leads_daily')].join(' UNION ALL '))
+  const inq = await queryRows(`SELECT COUNT(*) AS n, CAST(MIN(created_at) AS STRING) AS mn, CAST(MAX(created_at) AS STRING) AS mx FROM \`${dsRef()}.inquiries_attribution\``)
   const overview = await queryRows(`SELECT CAST(COUNT(*) AS STRING) AS n FROM \`${dsRef()}.v_daily_overview\``)
-  return { tables: rows, viewRows: overview[0]?.n }
+  const organic = await queryRows(`SELECT CAST(SUM(organic_clicks) AS STRING) AS clk, CAST(SUM(organic_impressions) AS STRING) AS imp FROM \`${dsRef()}.v_daily_overview\``)
+  return { tables: rows, inquiries: inq[0], viewRows: overview[0]?.n, organic: organic[0] }
 }
 
 /** NDJSON 走 multipart 上传，直接 load 到当天分区（WRITE_TRUNCATE → 幂等）。 */
 async function loadPartition(tableId: string, date: string, rows: Record<string, unknown>[]) {
   if (!rows.length) return { table: tableId, date, rows: 0, skipped: true }
+  return loadInto(`${tableId}$${date.replace(/-/g, '')}`, tableId, date, rows)
+}
+
+/** 非分区表的整表替换：一次 load 覆盖全部数据（inquiries_attribution 用）。 */
+async function loadWholeTable(tableId: string, rows: Record<string, unknown>[]) {
+  if (!rows.length) return { table: tableId, rows: 0, skipped: true }
+  return loadInto(tableId, tableId, 'full', rows)
+}
+
+async function loadInto(destination: string, tableId: string, date: string, rows: Record<string, unknown>[]) {
   const ndjson = rows.map((r) => JSON.stringify(r)).join('\n')
   const boundary = `bq_${crypto.randomBytes(8).toString('hex')}`
   const jobId = `etl_${tableId}_${date.replace(/-/g, '')}_${Date.now()}`
@@ -356,7 +414,7 @@ async function loadPartition(tableId: string, date: string, rows: Record<string,
     jobReference: { projectId: PROJECT, jobId, location: LOCATION },
     configuration: {
       load: {
-        destinationTable: { projectId: PROJECT, datasetId: DATASET, tableId: `${tableId}$${date.replace(/-/g, '')}` },
+        destinationTable: { projectId: PROJECT, datasetId: DATASET, tableId: destination },
         sourceFormat: 'NEWLINE_DELIMITED_JSON',
         writeDisposition: 'WRITE_TRUNCATE',
         createDisposition: 'CREATE_IF_NEEDED',
@@ -390,8 +448,8 @@ const addDays = (d: Date, n: number) => new Date(d.getTime() + n * 86400000)
 
 type Row = Record<string, unknown>
 
-async function fetchGsc(start: string, end: string): Promise<Row[]> {
-  const out: Row[] = []
+async function gscSearch(dimensions: string[], start: string, end: string): Promise<any[]> {
+  const out: any[] = []
   const siteEnc = encodeURIComponent(SITE_URL)
   let startRow = 0
   for (let page = 0; page < 40; page++) {
@@ -401,24 +459,104 @@ async function fetchGsc(start: string, end: string): Promise<Row[]> {
       body: JSON.stringify({
         startDate: start,
         endDate: end,
-        dimensions: ['date', 'query', 'page', 'country', 'device'],
-        dataState: 'final',
+        dimensions,
+        // 'final' 会吞掉最近 1–2 天（GSC UI 已经能看到的天），必须用 'all'
+        dataState: 'all',
         rowLimit: 25000,
         startRow,
       }),
     })
     const rows = (r.rows || []) as any[]
-    for (const x of rows) {
-      const k = x.keys || []
-      out.push({
-        date: k[0], site: SITE_URL, query: k[1] || '', page: k[2] || '',
-        country: k[3] || '', device: k[4] || '',
-        clicks: x.clicks || 0, impressions: x.impressions || 0,
-        ctr: x.ctr || 0, position: x.position || 0,
-      })
-    }
+    out.push(...rows)
     if (rows.length < 25000) break
     startRow += rows.length
+  }
+  return out
+}
+
+/** 五维表：只用于 query↔page 映射。clicks 恒为 0（query 维度触发隐私阈值整行丢弃）。 */
+async function fetchGsc(start: string, end: string): Promise<Row[]> {
+  return (await gscSearch(['date', 'query', 'page', 'country', 'device'], start, end)).map((x) => {
+    const k = x.keys || []
+    return {
+      date: k[0], site: SITE_URL, query: k[1] || '', page: k[2] || '',
+      country: k[3] || '', device: k[4] || '',
+      clicks: x.clicks || 0, impressions: x.impressions || 0,
+      ctr: x.ctr || 0, position: x.position || 0,
+    }
+  })
+}
+
+/** 页面级表：唯一可信的流量口径（无 query 维度，不会被匿名化丢行）。 */
+async function fetchGscPage(start: string, end: string): Promise<Row[]> {
+  return (await gscSearch(['date', 'page'], start, end)).map((x) => {
+    const k = x.keys || []
+    return {
+      date: k[0], site: SITE_URL, page: k[1] || '',
+      clicks: x.clicks || 0, impressions: x.impressions || 0,
+      ctr: x.ctr || 0, position: x.position || 0,
+    }
+  })
+}
+
+/** 询盘归因字段白名单：刻意不含 name / email / message，BigQuery 里不留 PII。 */
+const INQUIRY_FIELDS = [
+  'id', 'created_at', 'type', 'product_slug', 'page_path', 'landing_page', 'referrer',
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
+  'gclid', 'gbraid', 'wbraid', 'dclid', 'fbclid',
+  'first_referrer', 'first_landing_page', 'first_visit_at', 'gclid_captured_at',
+]
+
+/** BQ JSON load 的 TIMESTAMP 接受 epoch 秒（数字）；空值转 null 避免 load 报错。 */
+function tsVal(v: unknown): number | null {
+  if (v === null || v === undefined || v === '') return null
+  const ms = Date.parse(String(v))
+  return Number.isFinite(ms) ? ms / 1000 : null
+}
+
+async function fetchInquiries(): Promise<Row[]> {
+  if (!SUPABASE_URL || !SUPABASE_KEY) throw new Error('missing env: SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY')
+  const out: Row[] = []
+  const PAGE = 1000
+  for (let from = 0; from < 50000; from += PAGE) {
+    // 直接用 fetch：api() 会加 Google 的 Bearer token，Supabase 不认
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/inquiries?select=${INQUIRY_FIELDS.join(',')}&order=created_at.asc`, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        Range: `${from}-${from + PAGE - 1}`,
+        'Range-Unit': 'items',
+      },
+    })
+    if (!r.ok) throw new Error(`supabase ${r.status}: ${(await r.text()).slice(0, 200)}`)
+    const rows = (await r.json()) as any[]
+    for (const x of rows) {
+      const s = (v: unknown) => (v === null || v === undefined || v === '' ? null : String(v))
+      out.push({
+        id: x.id === null || x.id === undefined ? null : Number(x.id),
+        created_at: tsVal(x.created_at),
+        type: s(x.type),
+        product_slug: s(x.product_slug),
+        page_path: s(x.page_path),
+        landing_page: s(x.landing_page),
+        referrer: s(x.referrer),
+        utm_source: s(x.utm_source),
+        utm_medium: s(x.utm_medium),
+        utm_campaign: s(x.utm_campaign),
+        utm_term: s(x.utm_term),
+        utm_content: s(x.utm_content),
+        gclid: s(x.gclid),
+        gbraid: s(x.gbraid),
+        wbraid: s(x.wbraid),
+        dclid: s(x.dclid),
+        fbclid: s(x.fbclid),
+        first_referrer: s(x.first_referrer),
+        first_landing_page: s(x.first_landing_page),
+        first_visit_at: tsVal(x.first_visit_at),
+        gclid_captured_at: tsVal(x.gclid_captured_at),
+      })
+    }
+    if (rows.length < PAGE) break
   }
   return out
 }
@@ -753,6 +891,15 @@ export const handler = async (event: any) => {
       report.ms = Date.now() - t0
       return report
     }
+    if (mode === 'inquiries') {
+      // 只同步询盘归因（整表替换），不动其它源
+      const rows = await step('fetch_inquiries', fetchInquiries) as Row[]
+      report.fetched = { inquiries: rows.length }
+      report.loaded = await step('load_inquiries', () => loadWholeTable('inquiries_attribution', rows))
+      report.ok = true
+      report.ms = Date.now() - t0
+      return report
+    }
     if (mode === 'sql') {
       // 只读查询通道：{mode:'sql', sql:'SELECT ...'}，最多回 500 行，供临时分析/导出
       const sql = String(ev?.sql || '')
@@ -785,14 +932,19 @@ export const handler = async (event: any) => {
 
     // GSC 数据延迟约 2 天：窗口各自截断，缺数据的天不会有行（不会写空分区）
     const gscEnd = ymd(addDays(today, -2))
-    const gsc = await step('fetch_gsc', () => fetchGsc(start, gscEnd))
-    const adsC = await step('fetch_ads_campaign', () => fetchAdsCampaign(start, end))
-    const adsK = await step('fetch_ads_keyword', () => fetchAdsKeyword(start, end))
-    const terms = await step('fetch_ads_search_terms', () => fetchAdsSearchTerms(start, end))
-    const ga4 = await step('fetch_ga4', () => fetchGa4(start, end))
-    const leads = await step('fetch_ga4_leads', () => fetchGa4Leads(start, end))
+    // 串行会顶到同步调用的 60s 上限（表现为 503），必须并行
+    const [gsc, gscPage, adsC, adsK, terms, ga4, leads] = await Promise.all([
+      step('fetch_gsc', () => fetchGsc(start, gscEnd)),
+      step('fetch_gsc_page', () => fetchGscPage(start, gscEnd)),
+      step('fetch_ads_campaign', () => fetchAdsCampaign(start, end)),
+      step('fetch_ads_keyword', () => fetchAdsKeyword(start, end)),
+      step('fetch_ads_search_terms', () => fetchAdsSearchTerms(start, end)),
+      step('fetch_ga4', () => fetchGa4(start, end)),
+      step('fetch_ga4_leads', () => fetchGa4Leads(start, end)),
+    ])
     report.fetched = {
-      gsc: (gsc as Row[]).length, ads_campaign: (adsC as Row[]).length,
+      gsc: (gsc as Row[]).length, gsc_page: (gscPage as Row[]).length,
+      ads_campaign: (adsC as Row[]).length,
       ads_keyword: (adsK as Row[]).length, ga4: (ga4 as Row[]).length,
       ga4_leads: (leads as Row[]).length, ads_search_terms: (terms as Row[]).length,
     }
@@ -804,12 +956,22 @@ export const handler = async (event: any) => {
         loaded[table] = (loaded[table] || 0) + list.length
       }
     }
-    await step('load_gsc', () => loadAll('gsc_query_page', gsc as Row[]))
-    await step('load_ads_campaign', () => loadAll('ads_campaign_daily', adsC as Row[]))
-    await step('load_ads_keyword', () => loadAll('ads_keyword_daily', adsK as Row[]))
-    await step('load_ads_search_terms', () => loadAll('ads_search_term_daily', terms as Row[]))
-    await step('load_ga4', () => loadAll('ga4_traffic_daily', ga4 as Row[]))
-    await step('load_ga4_leads', () => loadAll('ga4_leads_daily', leads as Row[]))
+    await Promise.all([
+      step('load_gsc', () => loadAll('gsc_query_page', gsc as Row[])),
+      step('load_gsc_page', () => loadAll('gsc_page_daily', gscPage as Row[])),
+      step('load_ads_campaign', () => loadAll('ads_campaign_daily', adsC as Row[])),
+      step('load_ads_keyword', () => loadAll('ads_keyword_daily', adsK as Row[])),
+      step('load_ads_search_terms', () => loadAll('ads_search_term_daily', terms as Row[])),
+      step('load_ga4', () => loadAll('ga4_traffic_daily', ga4 as Row[])),
+      step('load_ga4_leads', () => loadAll('ga4_leads_daily', leads as Row[])),
+    ])
+    // 询盘归因：整表替换。Supabase 故障不应让整条 Google 管道一起失败，故单独兜住。
+    try {
+      const inquiries = await step('fetch_inquiries', fetchInquiries) as Row[]
+      await step('load_inquiries', () => loadWholeTable('inquiries_attribution', inquiries))
+    } catch (e) {
+      report.inquiriesError = String(e).slice(0, 300)
+    }
     await step('view', ensureView)
 
     report.loaded = loaded
