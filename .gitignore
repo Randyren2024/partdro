@@ -35,3 +35,10 @@ deno.lock
 
 # 本地密钥/调试临时文件（webhook secret、阿里云 AK 等）
 .tmp/
+
+# Google service account keys (defense in depth; prefer .tmp/)
+artful-striker-*.json
+*-service-account*.json
+
+# Local Google Ads OAuth credentials (never commit)
+google_api/
