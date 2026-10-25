@@ -11,7 +11,7 @@
 //
 // 复用仓库已有的 Playwright，零新增依赖。
 // 用法：随 npm run build 自动执行，也可单独运行：
-//   node scripts/prerender.mjs   # 首页 + 主要栏目 + 全部产品页（4 语言）+ 全部新闻文章页（仅英语）
+//   node scripts/prerender.mjs   # 首页 + 主要栏目 + 全部产品页（4 语言）+ 全部新闻（英语 + 已有翻译）
 //   环境变量 PRERENDER_CONCURRENCY 可调整并发数（默认 4）
 import { createServer } from 'node:http'
 import { readFileSync, writeFileSync, existsSync, statSync, mkdirSync } from 'node:fs'
@@ -56,9 +56,18 @@ function withPrefix(route, locale) {
   return `/${locale}${route === '/' ? '' : route}`
 }
 
-/** 该路由需要预渲染的语言集合：新闻页仅英语（本地化翻译不确定，改由运行时按前缀渲染） */
+// 有真实翻译的新闻 slug（由 collectRoutes 从 Supabase 读取）。
+// 未翻译文章只预渲染英语：生产 FC 没有 SPA 回退，本地化 URL 不存在就是 404。
+const translatedNewsSlugs = { es: new Set(), de: new Set(), fr: new Set() }
+
+/** 该路由需要预渲染的语言集合：普通页面 4 语；新闻详情只渲染英语 + 真实存在的翻译 */
 function localesFor(route) {
-  return route.startsWith('/news/') ? [DEFAULT_LOCALE] : LOCALES
+  if (!route.startsWith('/news/')) return LOCALES
+  const slug = route.slice('/news/'.length)
+  return [
+    DEFAULT_LOCALE,
+    ...LOCALES.filter((l) => l !== DEFAULT_LOCALE && translatedNewsSlugs[l]?.has(slug)),
+  ]
 }
 
 function outPathFor(route, locale) {
@@ -70,12 +79,19 @@ function outPathFor(route, locale) {
 function startServer() {
   return new Promise((res) => {
     const server = createServer((req, resp) => {
+      // 渲染超时会主动关闭页面上下文，未完成的请求会随之中断；
+      // 此时 socket 可能已关闭，writeHead 会抛 ERR_HTTP_HEADERS_SENT。
+      // 所有写入都必须先看 headersSent，否则一次中断会打挂整个构建。
+      const safeWriteHead = (status, headers) => {
+        if (resp.headersSent || resp.destroyed) return false
+        resp.writeHead(status, headers)
+        return true
+      }
       try {
         const urlPath = decodeURIComponent((req.url || '/').split('?')[0])
         let filePath = join(DIST, urlPath)
         if (!filePath.startsWith(DIST)) {
-          resp.writeHead(403)
-          resp.end()
+          if (safeWriteHead(403)) resp.end()
           return
         }
         if (!(existsSync(filePath) && statSync(filePath).isFile())) {
@@ -85,14 +101,12 @@ function startServer() {
           // 路由一律回退到本次构建的 index.html，由 SPA 重新渲染。
           filePath = DIST_INDEX
         }
-        resp.writeHead(200, {
+        if (safeWriteHead(200, {
           'Content-Type': MIME[extname(filePath).toLowerCase()] || 'application/octet-stream',
           'Cache-Control': 'no-store',
-        })
-        resp.end(readFileSync(filePath))
+        })) resp.end(readFileSync(filePath))
       } catch (e) {
-        resp.writeHead(500)
-        resp.end(String(e))
+        if (safeWriteHead(500)) resp.end(String(e))
       }
     })
     server.listen(PORT, () => res(server))
@@ -153,6 +167,32 @@ async function fetchSupabaseNewsSlugs() {
   }
 }
 
+/** 读取每种语言真实存在的新闻翻译（post_langs 内连接 posts），只预渲染这些本地化页面。 */
+async function fetchTranslatedNewsSlugs() {
+  const env = loadEnv()
+  const url = env.VITE_SUPABASE_URL || env.SUPABASE_URL
+  const anonKey = env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY
+  if (!url || !anonKey) return
+  await Promise.all(
+    LOCALES.filter((l) => l !== DEFAULT_LOCALE).map(async (lang) => {
+      try {
+        const res = await fetch(
+          `${url}/rest/v1/posts?select=slug,post_langs!inner(lang)&published=eq.true&post_langs.lang=eq.${lang}`,
+          {
+            headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
+            signal: AbortSignal.timeout(10000),
+          },
+        )
+        if (!res.ok) return
+        const rows = await res.json()
+        for (const r of rows) if (r.slug) translatedNewsSlugs[lang].add(r.slug)
+      } catch (e) {
+        console.warn(`[prerender] Supabase 新闻翻译读取失败 (${lang}):`, e.message)
+      }
+    }),
+  )
+}
+
 async function collectRoutes() {
   const routes = [...STATIC_ROUTES]
 
@@ -164,9 +204,10 @@ async function collectRoutes() {
   productSlugs = [...new Set(productSlugs)].filter(Boolean)
   for (const s of productSlugs) routes.push(`/products/${s}`)
 
-  // 新闻详情页同样默认预渲染（仅英语）：slug 首选 Supabase 直读（不受线上部署状态影响），
-  // 失败时回退线上 sitemap。
-  let newsSlugs = await fetchSupabaseNewsSlugs()
+  // 新闻详情页：英语全量 + 其他语言仅真实存在的翻译。slug 首选 Supabase 直读
+  // （不受线上部署状态影响），失败时回退线上 sitemap。
+  const [englishNews] = await Promise.all([fetchSupabaseNewsSlugs(), fetchTranslatedNewsSlugs()])
+  let newsSlugs = englishNews
   if (!newsSlugs.length) newsSlugs = await fetchSitemapSlugs('/news')
   newsSlugs = [...new Set(newsSlugs)].filter(Boolean)
   for (const s of newsSlugs) routes.push(`/news/${s}`)

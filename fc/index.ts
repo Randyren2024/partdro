@@ -16,6 +16,8 @@
 //     路径含扩展名                   → 精确对象直出（assets/robots.txt/图片等）
 //     路径无扩展名                   → 只尝试 <path>/index.html
 //       （不尝试精确对象：避开 OSS 控制台建的 0 字节目录占位对象被当正文返回）
+//     /en/...                        → 301 去掉英语前缀（与无前缀路径重复）
+//     /es|de|fr/news/<无翻译>        → 301 回英语正文（预渲染只生成真实翻译）
 //     全部未命中                     → 干净的 HTML 404（无 JS 跳转）
 //   canonical/sitemap 与无斜杠方案一致，前端零改动。
 import type { NetlifyEvent, NetlifyResponse } from '../netlify/shared/verifyAdmin'
@@ -36,6 +38,50 @@ const REGION = process.env.OSS_REGION || __OSS_REGION__ || 'cn-hongkong'
 const INTERNAL = (process.env.OSS_INTERNAL ?? 'true') !== 'false'
 
 const SITE_FALLBACK_HOST = 'www.droneworld.tech'
+
+/**
+ * 历史落地链接 → 现行规范路径。
+ * 301 必须带原始 query（gclid/utm/gbraid…），否则广告点击的归因会在跳转处丢失。
+ * 生产域名由 FC 静态服务承载，netlify.toml 的 redirects 不生效，所以规则要写在这里。
+ */
+const LEGACY_PATH_REDIRECTS: Record<string, string> = {
+  '/products/c500': '/products/c500-delivery-drone',
+}
+
+/** 归一化路径用于历史链接匹配：去尾斜杠、去 /index.html */
+function legacyTargetOf(path: string): string | null {
+  const normalized = path.replace(/\/+$/, '').replace(/\/index\.html$/, '') || '/'
+  return LEGACY_PATH_REDIRECTS[normalized] || null
+}
+
+/**
+ * /en/... 与无前缀英语路径内容重复，且生产 FC 没有 SPA 回退（会直接 404）。
+ * 统一 301 去掉前缀，query 原样保留。
+ */
+function englishPrefixStripped(path: string): string | null {
+  if (path === '/en' || path === '/en/') return '/'
+  if (path.startsWith('/en/')) return path.slice(3) || '/'
+  return null
+}
+
+/**
+ * 未翻译的本地化新闻：/de/news/<slug> 等静态对象不存在时 301 回英语正文。
+ * 有翻译的文章会被预渲染成静态对象，先命中静态服务，不受此规则影响。
+ */
+function localizedNewsEnglishTarget(path: string): string | null {
+  const m = path.match(/^\/(?:es|de|fr)\/news\/([^/]+)$/)
+  return m ? `/news/${m[1]}` : null
+}
+
+/** 取原始 query string（FC 不同触发器形态分别落在 queryParameters / rawPath / requestContext） */
+function queryStringOf(fcEvent: FcHttpEvent, rawPath: string): string {
+  const qp = fcEvent.queryParameters || fcEvent.queryStringParameters
+  if (qp && Object.keys(qp).length) return `?${new URLSearchParams(qp).toString()}`
+  const qIndex = rawPath.indexOf('?')
+  if (qIndex >= 0) return rawPath.slice(qIndex)
+  const qs = fcEvent.requestContext?.http?.queryString
+  return qs ? `?${qs}` : ''
+}
 
 const CONTENT_TYPES: Record<string, string> = {
   html: 'text/html; charset=utf-8',
@@ -258,16 +304,31 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
   if (method !== 'GET' && method !== 'HEAD') {
     return { statusCode: 405, headers: { 'Content-Type': 'text/plain' }, body: 'Method Not Allowed' }
   }
-  const hostRedirect = canonicalHostRedirect(host, path)
+  const query = queryStringOf(fcEvent, rawPath)
+  // 先去掉 /en 前缀，再匹配历史链接（/en/products/c500 → /products/c500-delivery-drone）
+  let redirectTarget = englishPrefixStripped(path)
+  const legacyTarget = legacyTargetOf(redirectTarget || path)
+  if (legacyTarget) redirectTarget = legacyTarget
+  const targetPath = redirectTarget || path
+  const hostRedirect = canonicalHostRedirect(host, targetPath, query)
   if (hostRedirect) return hostRedirect
-  return serveStatic(path, host)
+  // 历史链接在静态查找之前命中，避免先 404 或先做一次无意义的两跳跳转
+  if (redirectTarget) return redirect(301, `https://${host}${redirectTarget}${query}`)
+  const res = await serveStatic(path, host)
+  // 本地化新闻没有对应翻译（无静态对象）→ 301 到英语正文，而不是 404
+  if (res.statusCode === 404) {
+    const englishTarget = localizedNewsEnglishTarget(path)
+    if (englishTarget) return redirect(301, `https://${host}${englishTarget}${query}`)
+  }
+  return res
 }
 
 /** 主机规范化：仅对自有域名生效，FC 触发器域名（fcapp.run/devsapp.net）不受影响。
  *  裸域 droneworld.tech → www（证书与 SEO 规范均以 www 为主机）。
+ *  query 必须透传，否则跳转会把广告点击的 gclid/utm 归因冲掉。
  *  http→https 由网关层保证（自定义域名 protocol=HTTPS），event 无 scheme 可判。 */
-function canonicalHostRedirect(host: string, path: string): NetlifyResponse | null {
+function canonicalHostRedirect(host: string, path: string, query = ''): NetlifyResponse | null {
   if (host !== SITE_FALLBACK_HOST && host !== 'droneworld.tech' && !host.endsWith('.droneworld.tech')) return null
-  if (host !== SITE_FALLBACK_HOST) return redirect(301, `https://${SITE_FALLBACK_HOST}${path}`)
+  if (host !== SITE_FALLBACK_HOST) return redirect(301, `https://${SITE_FALLBACK_HOST}${path}${query}`)
   return null
 }

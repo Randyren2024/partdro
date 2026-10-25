@@ -37,6 +37,8 @@ export interface Post {
   title: string
   summary: string
   content: string
+  /** 文章实际拥有的翻译语言（含 en）。用于只生成真实存在的本地化 URL，避免 404。 */
+  availableLangs: string[]
 }
 
 export interface Case {

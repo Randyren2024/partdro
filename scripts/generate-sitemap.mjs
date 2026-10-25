@@ -33,7 +33,8 @@ async function fetchSlugs(env, table) {
   const anonKey = env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY
   if (!url || !anonKey) return []
   try {
-    const select = table === 'posts' ? 'slug,published_at' : 'slug'
+    // posts 额外取 post_langs(lang)：sitemap 只登记真实存在的翻译
+    const select = table === 'posts' ? 'slug,published_at,post_langs(lang)' : 'slug'
     const res = await fetch(`${url}/rest/v1/${table}?select=${select}&published=eq.true`, {
       headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
     })
@@ -82,6 +83,8 @@ if (!productSlugs.length && !postSlugs.length) {
 const localizedPaths = [
   '/',
   '/products',
+  // C500 EAVision 是 router 静态路径，不在 products 表，但属于投放/自然搜索落地页
+  '/products/c500-partdro-eavision',
   ...productSlugs.map((s) => `/products/${s}`),
   '/cases',
   '/news',
@@ -90,13 +93,28 @@ const localizedPaths = [
   '/contact',
 ]
 
-// 新闻文章：翻译情况不确定，仅登记英语版本；<lastmod> 取发布时间
-const newsEntries = postRows.map(
-  (p) =>
-    `  <url>\n    <loc>${SITE_URL}/news/${escapeXml(p.slug)}</loc>${
-      p.published_at ? `\n    <lastmod>${escapeXml(p.published_at)}</lastmod>` : ''
-    }\n  </url>`,
-)
+// 新闻文章：英语全量；其他语言只登记 post_langs 里真实存在的翻译。
+// <lastmod> 取发布时间；多语言文章附带 hreflang alternates。
+const newsEntries = postRows.map((p) => {
+  const lastmod = p.published_at ? `\n    <lastmod>${escapeXml(p.published_at)}</lastmod>` : ''
+  const langs = [
+    DEFAULT_LOCALE,
+    ...LOCALES.filter(
+      (l) => l !== DEFAULT_LOCALE && (p.post_langs ?? []).some((x) => x.lang === l),
+    ),
+  ]
+  const url = (l) => `${SITE_URL}${withPrefix(`/news/${escapeXml(p.slug)}`, l)}`
+  if (langs.length === 1) {
+    return `  <url>\n    <loc>${url(DEFAULT_LOCALE)}</loc>${lastmod}\n  </url>`
+  }
+  const altBlock = [
+    ...langs.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${url(l)}" />`),
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${url(DEFAULT_LOCALE)}" />`,
+  ].join('\n')
+  return langs
+    .map((l) => `  <url>\n    <loc>${url(l)}</loc>${lastmod}\n${altBlock}\n  </url>`)
+    .join('\n')
+})
 
 const body =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +

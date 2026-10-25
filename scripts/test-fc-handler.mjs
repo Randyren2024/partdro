@@ -8,6 +8,15 @@ const ev = (rawPath, method = 'GET', headers = {}) => JSON.stringify({ rawPath, 
 const cases = [
   ['/de/cases/', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/de/cases'],
   ['/de/cases/index.html', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/de/cases'],
+  // 历史 Ads 落地链接：301 到现行产品页，且 gclid/utm 原样保留（归因不能丢）
+  ['/products/c500?gclid=abc123&utm_source=google&utm_medium=cpc&utm_campaign=test', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-delivery-drone?gclid=abc123&utm_source=google&utm_medium=cpc&utm_campaign=test'],
+  ['/products/c500/', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-delivery-drone'],
+  ['/products/c500', 'GET', [['host', 'droneworld.tech']], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-delivery-drone'],
+  ['/about?utm_source=x', 'GET', [['host', 'droneworld.tech']], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/about?utm_source=x'],
+  // /en/... 与无前缀英语路径重复：301 去前缀，query 保留；再叠加历史链接规则
+  ['/en', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/'],
+  ['/en/about?utm_source=x', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/about?utm_source=x'],
+  ['/en/products/c500?gclid=abc123', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-delivery-drone?gclid=abc123'],
   ['/', 'GET', [], (r) => r.statusCode === 301 || r.statusCode === 200 || r.statusCode === 503],
   ['/', 'OPTIONS', [], (r) => r.statusCode === 204],
   ['/de/cases', 'POST', [], (r) => r.statusCode === 405],
@@ -18,7 +27,8 @@ const cases = [
   ['/this-does-not-exist', 'GET', [], (r) => r.statusCode === 404 || r.statusCode === 503],
   // 主机规范化。FC 网关不透传 x-forwarded-proto，自定义域名设为 HTTPS-only，
   // http→https 由网关承担；handler 内不再读 proto，x-forwarded-proto 不触发 301。
-  ['/about', 'GET', [['x-forwarded-proto', 'http']], (r) => r.statusCode === 200],
+  // 本地未配置 OSS bucket 时静态读取返回 503；有 bucket 时应为 200。二者都说明路由未被误判。
+  ['/about', 'GET', [['x-forwarded-proto', 'http']], (r) => r.statusCode === 200 || r.statusCode === 503],
   ['/about', 'GET', [['host', 'droneworld.tech']], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/about'],
   ['/about', 'GET', [['host', 'abc.123.cn-hongkong.fc.devsapp.net']], (r) => r.statusCode !== 301],
 ]

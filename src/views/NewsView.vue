@@ -20,7 +20,7 @@
               </div>
               <h3>{{ post.title }}</h3>
               <p>{{ post.summary }}</p>
-              <router-link :to="lp('/news/' + post.slug)" class="news__link">
+              <router-link :to="articlePath(post)" class="news__link">
                 {{ t('news.readMore') }} <RightOutlined />
               </router-link>
             </div>
@@ -36,10 +36,23 @@ import { useI18n } from 'vue-i18n'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { usePosts } from '../composables/useSupabase'
 import { useLocalePath } from '../composables/useLocalePath'
+import { DEFAULT_LOCALE } from '../i18n'
+import type { Post } from '../types'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const lp = useLocalePath()
 const { data: posts } = usePosts()
+
+/**
+ * 文章链接：只有确实存在该语言翻译时才生成 /de|es|fr/news/...。
+ * 96 篇英文文章里只有 5 篇有 es/de/fr 翻译；其余若生成本地化 URL，
+ * 在生产 FC 上会是 404（无 SPA 回退），既丢流量也浪费抓取预算。
+ * 历史已收录的未翻译本地化 URL 由 FC 301 回英语正文。
+ */
+const articlePath = (post: Post) =>
+  locale.value === DEFAULT_LOCALE || post.availableLangs?.includes(locale.value)
+    ? lp(`/news/${post.slug}`)
+    : `/news/${post.slug}`
 </script>
 
 <style scoped>

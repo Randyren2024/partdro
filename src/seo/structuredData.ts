@@ -42,10 +42,21 @@ export function buildOrganizationLd(input: OrganizationLdInput): Record<string, 
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Partdro',
+    // 品牌检索里 "Drone World Tech" / 域名与 Partdro 是同一实体，显式声明可减少实体分裂
+    alternateName: ['Drone World Tech', 'Drone World'],
     url: input.siteUrl,
+    areaServed: 'Worldwide',
   }
   if (input.logo) ld.logo = input.logo
-  if (input.email) ld.email = input.email
+  if (input.email) {
+    ld.email = input.email
+    ld.contactPoint = {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: input.email,
+      availableLanguage: ['English', 'Spanish', 'German', 'French'],
+    }
+  }
   return ld
 }
 

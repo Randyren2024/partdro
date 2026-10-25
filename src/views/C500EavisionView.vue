@@ -74,7 +74,8 @@ const SITE_URL = 'https://www.droneworld.tech'
 watchEffect(() => {
   document.title = t('c500eavision.meta.title')
   const desc = t('c500eavision.meta.description')
-  const url = `${SITE_URL}/products/c500-partdro-eavision`
+  const prefix = locale.value === 'en' ? '' : `/${locale.value}`
+  const url = `${SITE_URL}${prefix}/products/c500-partdro-eavision`
   const setMeta = (selector: string, content: string) =>
     document.querySelector(selector)?.setAttribute('content', content)
   setMeta('meta[name="description"]', desc)
@@ -85,7 +86,6 @@ watchEffect(() => {
   setMeta('meta[name="twitter:description"]', desc)
 
   // 结构化数据：Product + BreadcrumbList（内联 ld+json 会被预渲染固化进静态 HTML）
-  const prefix = locale.value === 'en' ? '' : `/${locale.value}`
   const name = 'C500 Heavy-Lift Flying Robot'
   injectJsonLd('ld-product', buildProductLd({
     name,

@@ -61,6 +61,17 @@ injectJsonLd(
   }),
 )
 
+// 站点级 WebSite 实体：帮助 Google 把品牌词（Partdro / Drone World Tech）
+// 与站点关联，并区分站点与 Organization。
+injectJsonLd('ld-website', {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Partdro',
+  alternateName: ['Drone World Tech', 'droneworld.tech'],
+  url: `${SITE_URL}/`,
+  inLanguage: ['en', 'es', 'de', 'fr'],
+})
+
 const openWhatsApp = () => {
   trackEvent('whatsapp_chat_initiated', {
     channel: 'whatsapp',

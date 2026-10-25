@@ -16,6 +16,7 @@ interface SlugRow {
 
 interface PostRow extends SlugRow {
   published_at?: string | null
+  post_langs?: { lang: string }[]
 }
 
 async function fetchSlugs(table: 'products' | 'posts'): Promise<(SlugRow | PostRow)[]> {
@@ -23,8 +24,8 @@ async function fetchSlugs(table: 'products' | 'posts'): Promise<(SlugRow | PostR
   const anonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
   if (!url || !anonKey) return []
   try {
-    // posts 额外取 published_at，为新闻条目输出 <lastmod>
-    const select = table === 'posts' ? 'slug,published_at' : 'slug'
+    // posts 额外取 published_at（<lastmod>）与 post_langs（只登记真实存在的翻译）
+    const select = table === 'posts' ? 'slug,published_at,post_langs(lang)' : 'slug'
     const res = await fetch(`${url}/rest/v1/${table}?select=${select}&published=eq.true`, {
       headers: {
         apikey: anonKey,
@@ -71,6 +72,8 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
   const localizedPaths = [
     '/',
     '/products',
+    // C500 EAVision 是 router 静态路径，不在 products 表，但属于投放/自然搜索落地页
+    '/products/c500-partdro-eavision',
     ...productSlugs.map((s) => `/products/${s}`),
     '/cases',
     '/news',
@@ -79,14 +82,33 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     '/contact',
   ]
 
-  // 新闻文章：翻译情况不确定，仅登记英语版本，避免声明不存在的语言版本；
-  // <lastmod> 取发布时间，帮助 Google 识别新旧内容、排定重抓优先级
-  const newsEntries = postSlugs.map(
-    (p) =>
-      `  <url>\n    <loc>${SITE_URL}/news/${escapeXml(p.slug)}</loc>${
-        p.published_at ? `\n    <lastmod>${escapeXml(p.published_at)}</lastmod>` : ''
-      }\n  </url>`,
-  )
+  // 新闻文章：英语全量；其他语言只登记 post_langs 里真实存在的翻译，
+  // 并把这些语言作为同一篇文章的 hreflang alternates。未翻译的本地化 URL
+  // 生产上会 301 回英语（见 fc/index.ts），不能写进 sitemap。
+  // <lastmod> 取发布时间，帮助 Google 识别新旧内容、排定重抓优先级。
+  const newsEntries = postSlugs.map((p) => {
+    const lastmod = p.published_at ? `\n    <lastmod>${escapeXml(p.published_at)}</lastmod>` : ''
+    const langs = [
+      DEFAULT_LOCALE,
+      ...LOCALES.filter(
+        (l) => l !== DEFAULT_LOCALE && (p.post_langs ?? []).some((x) => x.lang === l),
+      ),
+    ]
+    const url = (l: string) =>
+      `${SITE_URL}${withPrefix(`/news/${escapeXml(p.slug)}`, l)}`
+    if (langs.length === 1) {
+      return `  <url>\n    <loc>${url(DEFAULT_LOCALE)}</loc>${lastmod}\n  </url>`
+    }
+    const altBlock = [
+      ...langs.map(
+        (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${url(l)}" />`,
+      ),
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${url(DEFAULT_LOCALE)}" />`,
+    ].join('\n')
+    return langs
+      .map((l) => `  <url>\n    <loc>${url(l)}</loc>${lastmod}\n${altBlock}\n  </url>`)
+      .join('\n')
+  })
 
   const body =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +

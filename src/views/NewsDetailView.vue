@@ -52,11 +52,12 @@ import { useRoute } from 'vue-router'
 import { SITE_URL } from '../router'
 import { usePost, useProducts } from '../composables/useSupabase'
 import { useLocalePath } from '../composables/useLocalePath'
+import { DEFAULT_LOCALE } from '../i18n'
 import type { Product } from '../types'
 
 const route = useRoute()
 const slug = () => route.params.slug as string
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const lp = useLocalePath()
 const { data: post, loading, error, reload } = usePost(slug)
 
@@ -124,12 +125,25 @@ watch(post, (p) => {
   const url = `${SITE_URL}${route.path}`
   const image = absUrl(p.image_url)
 
+  // 没有该语言翻译时，正文回退为英语；canonical 必须指向英语原文，
+  // 否则 /de/news/<slug> 会声明一个内容并不存在的本地化版本（重复内容）。
+  const hasTranslation =
+    locale.value === DEFAULT_LOCALE || p.availableLangs?.includes(locale.value)
+  const canonicalUrl = hasTranslation ? url : `${SITE_URL}/news/${p.slug}`
+  let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+  if (!canonical) {
+    canonical = document.createElement('link')
+    canonical.rel = 'canonical'
+    document.head.appendChild(canonical)
+  }
+  canonical.href = canonicalUrl
+
   document.title = title
   setMeta('name', 'description', desc)
   setMeta('property', 'og:title', title)
   setMeta('property', 'og:description', desc)
   setMeta('property', 'og:type', 'article')
-  setMeta('property', 'og:url', url)
+  setMeta('property', 'og:url', canonicalUrl)
   if (image) {
     setMeta('property', 'og:image', image)
     setMeta('name', 'twitter:card', 'summary_large_image')

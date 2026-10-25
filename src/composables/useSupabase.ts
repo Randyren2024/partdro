@@ -35,6 +35,8 @@ function mapProduct(row: any, locale: Lang): Product {
 
 function mapPost(row: any, locale: Lang): Post {
   const lang = pickLang<any>(row.post_langs, locale)
+  const availableLangs = [...new Set<string>((row.post_langs ?? []).map((l: LangRow) => l.lang))]
+  if (!availableLangs.includes('en')) availableLangs.unshift('en')
   return {
     id: row.id,
     slug: row.slug,
@@ -46,6 +48,7 @@ function mapPost(row: any, locale: Lang): Post {
     title: lang?.title ?? row.slug,
     summary: lang?.summary ?? '',
     content: lang?.content ?? '',
+    availableLangs,
   }
 }
 

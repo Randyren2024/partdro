@@ -37,6 +37,7 @@ import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { buildBreadcrumbLd, buildProductLd, injectJsonLd } from '../seo/structuredData'
+import { productSeo } from '../seo/productMeta'
 import {
   imgOverridesByLang,
   videoOverridesByLang,
@@ -127,10 +128,11 @@ watch([ns, locale, () => t(`${ns.value}.hero.title1`), () => t(`${ns.value}.hero
   const title1 = t(titleKey)
   if (title1 === titleKey) return
   const name = productLabel.value
-  document.title = `${name} - ${title1} | Partdro`
   const lead = t(`${ns.value}.hero.lead`)
-  const desc = `${name} - ${lead}`
-  const trimmed = desc.length > 160 ? `${desc.slice(0, 157)}...` : desc
+  // 标题/描述走搜索意图映射（英语手写商业关键词；其他语言沿用本地化文案并规范化）
+  const seo = productSeo(ns.value, locale.value, `${name} - ${title1}`, `${name} - ${lead}`)
+  document.title = seo.title
+  const trimmed = seo.description
   const heroImg = SITE_URL + imgEdit('page001_img001.png', `${ns.value}.hero.mainImg`)
   const url = `${SITE_URL}${route.path}`
   const setMeta = (selector: string, content: string) =>
@@ -148,7 +150,8 @@ watch([ns, locale, () => t(`${ns.value}.hero.title1`), () => t(`${ns.value}.hero
   const segs = route.path.split('/').filter(Boolean)
   const prefix = ['es', 'de', 'fr'].includes(segs[0]) ? `/${segs[0]}` : ''
   injectJsonLd('ld-product', buildProductLd({
-    name,
+    // schema 的 name 用完整产品名（型号 + 用途），比裸型号更利于实体识别
+    name: seo.title.replace(/\s*\|\s*Partdro$/u, ''),
     description: trimmed,
     images: [heroImg],
     url,
