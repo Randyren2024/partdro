@@ -1,7 +1,7 @@
 <template>
   <section class="lp-section" style="padding-top:20px">
     <div class="lp-container split">
-      <div class="media-card"><img :src="imgEdit('page003_img002.png', `${ns}.designed.img`)" :alt="alt('side view with extended cleaning boom')" :data-edit-img="`${ns}.designed.img`" /></div>
+      <div class="media-card"><img :src="imgEdit('page003_img002.png', `${ns}.designed.img`)" :alt="alt('designed')" :data-edit-img="`${ns}.designed.img`" /></div>
       <div>
         <div class="eyebrow" :data-edit-key="`${ns}.designed.eyebrow`">{{ tt('designed.eyebrow') }}</div>
         <h2 style="margin-top:18px" :data-edit-key="`${ns}.designed.title`">{{ tt('designed.title') }}</h2>

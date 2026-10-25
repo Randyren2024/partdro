@@ -1,7 +1,7 @@
 <template>
   <section class="lp-section" id="intelligence">
     <div class="lp-container route-grid grid">
-      <div class="route-image"><img :src="imgEdit('page004_img002.png', `${ns}.intelligence.img`)" :alt="alt('route planning control interface')" :data-edit-img="`${ns}.intelligence.img`" /></div>
+      <div class="route-image"><img :src="imgEdit('page004_img002.png', `${ns}.intelligence.img`)" :alt="alt('intelligence')" :data-edit-img="`${ns}.intelligence.img`" /></div>
       <div class="route-copy">
         <div class="eyebrow" :data-edit-key="`${ns}.intelligence.eyebrow`">{{ tt('intelligence.eyebrow') }}</div>
         <h2 style="margin-top:18px" :data-edit-key="`${ns}.intelligence.title`">{{ tt('intelligence.title') }}</h2>

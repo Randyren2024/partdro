@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="media-card"><img :src="imgEdit('page007_img001.png', `${ns}.multiangle.img`)" :alt="alt('cleaning a building facade at height')" :data-edit-img="`${ns}.multiangle.img`" /></div>
+      <div class="media-card"><img :src="imgEdit('page007_img001.png', `${ns}.multiangle.img`)" :alt="alt('multiangle')" :data-edit-img="`${ns}.multiangle.img`" /></div>
     </div>
   </section>
 </template>

@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="hero-media">
-        <div class="hero-card"><img :src="imgEdit('page001_img001.png', `${ns}.hero.mainImg`)" :alt="alt('multi-functional cleaning drone')" :data-edit-img="`${ns}.hero.mainImg`" /></div>
+        <div class="hero-card"><img :src="imgEdit('page001_img001.png', `${ns}.hero.mainImg`)" :alt="alt('hero')" :data-edit-img="`${ns}.hero.mainImg`" /></div>
         <div class="hero-badge"><strong :data-edit-key="`${ns}.hero.badgeTitle`">{{ tt('hero.badgeTitle') }}</strong><span class="muted" :data-edit-key="`${ns}.hero.badgeText`">{{ tt('hero.badgeText') }}</span></div>
       </div>
     </div>

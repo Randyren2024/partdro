@@ -225,18 +225,27 @@ function stripRuntimePixels(html) {
     .replace(new RegExp(`<img\\b[^>]*(?:${hosts})[^>]*>`, 'gi'), '')
 }
 
+/** 新闻详情页实际拥有的语言（英语 + Supabase 里存在的翻译） */
+function availableNewsLocales(route) {
+  const slug = route.slice('/news/'.length)
+  return [
+    DEFAULT_LOCALE,
+    ...LOCALES.filter((l) => l !== DEFAULT_LOCALE && translatedNewsSlugs[l]?.has(slug)),
+  ]
+}
+
 /** 注入 canonical 与 hreflang alternates（含 x-default），并移除运行时留下的旧标签。
- *  新闻详情页例外：只发 canonical 不发 hreflang——老文章未必有 4 语翻译
- *  （运行时回退显示英语），声明 alternates 会与实际内容不符；列表页 /news 不受影响。 */
+ *  新闻详情页只在存在真实翻译时发 alternates：只有英语的老文章声明 4 语
+ *  会与实际内容不符；有翻译的文章发「英语 + 实际翻译语言」。列表页 /news 不受影响。 */
 function injectSeo(html, route, locale) {
   const cleaned = stripRuntimePixels(html)
   const isNewsDetail = route.startsWith('/news/')
-  const alts = isNewsDetail
-    ? []
-    : LOCALES.map(
-        (l) => `<link rel="alternate" hreflang="${l}" href="${SITE}${withPrefix(route, l)}" />`,
-      )
-  if (!isNewsDetail) {
+  const langs = isNewsDetail ? availableNewsLocales(route) : LOCALES
+  const alts = []
+  if (!isNewsDetail || langs.length > 1) {
+    for (const l of langs) {
+      alts.push(`<link rel="alternate" hreflang="${l}" href="${SITE}${withPrefix(route, l)}" />`)
+    }
     alts.push(
       `<link rel="alternate" hreflang="x-default" href="${SITE}${withPrefix(route, DEFAULT_LOCALE)}" />`,
     )
@@ -258,9 +267,11 @@ async function waitForApiSettled(page, state) {
   // 先等首个数据请求出现（最多 3s）
   while (!state.seen && Date.now() - t0 < 3000) await page.waitForTimeout(100)
   if (!state.seen) return false
-  // Wait for content requests and 800ms idle, within an 8s total limit.
+  // Wait for content requests and 800ms idle, within a 15s total limit.
+  // 8s was flaky for localized product pages whose landing_content overlay
+  // requests occasionally queue behind the main content fetch.
   let idleSince = 0
-  while (Date.now() - t0 < 8000) {
+  while (Date.now() - t0 < 15000) {
     if (state.inflight.size === 0) {
       if (!idleSince) idleSince = Date.now()
       if (Date.now() - idleSince > 800) return true

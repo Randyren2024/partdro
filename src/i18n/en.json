@@ -552,8 +552,8 @@
   },
   "c500eavision": {
     "meta": {
-      "title": "C500 Heavy-Lift Flying Robot {'|'} Partdro",
-      "description": "The EAVISION C500 heavy-lift flying robot: 240 kg maximum payload, 30 km 4G+ video transmission, end-to-end autonomous decision-making and cluster lifting for high-altitude logistics."
+      "title": "C500 Heavy-Lift Cargo Drone (EAVision) {'|'} Partdro",
+      "description": "The EAVISION C500 heavy-lift cargo drone: 240 kg maximum payload, 30 km 4G+ video transmission, end-to-end autonomous decisions and cluster lifting for high-altitude logistics."
     },
     "nav": {
       "intro": "Overview",

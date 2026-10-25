@@ -13,8 +13,8 @@
         </article>
       </div>
       <div class="dual">
-        <div class="media-card"><img :src="imgEdit('page006_img003.png', `${ns}.spray.dualImg1`)" :alt="alt('modular side view')" :data-edit-img="`${ns}.spray.dualImg1`" /></div>
-        <div class="media-card"><img :src="imgEdit('page006_img004.png', `${ns}.spray.dualImg2`)" :alt="alt('dual swinging spray boom configuration')" :data-edit-img="`${ns}.spray.dualImg2`" /></div>
+        <div class="media-card"><img :src="imgEdit('page006_img003.png', `${ns}.spray.dualImg1`)" :alt="alt('spray1')" :data-edit-img="`${ns}.spray.dualImg1`" /></div>
+        <div class="media-card"><img :src="imgEdit('page006_img004.png', `${ns}.spray.dualImg2`)" :alt="alt('spray2')" :data-edit-img="`${ns}.spray.dualImg2`" /></div>
       </div>
     </div>
   </section>

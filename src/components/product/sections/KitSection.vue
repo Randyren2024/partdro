@@ -9,7 +9,7 @@
       <figure class="kit-figure">
         <img
           :src="imgEdit('kit-standard-list.png', `${ns}.kit.img`)"
-          :alt="alt('standard package contents')"
+          :alt="alt('kit')"
           :data-edit-img="`${ns}.kit.img`"
         />
       </figure>

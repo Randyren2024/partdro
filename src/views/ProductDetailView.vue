@@ -94,8 +94,79 @@ const nozzleImages = computed(() => images.value.nozzles)
 const caseImages = computed(() => images.value.cases)
 const scenarioImages = computed(() => images.value.scenarios)
 
-const altBase = computed(() => (ns.value === 'd15r' ? 'D15R' : 'Partdro product'))
-const alt = (desc: string) => `${altBase.value} ${desc}`
+// 图片 alt：各产品共用同一套区块组件，但清理机的文案（cleaning boom / facade）
+// 不能套到 C500 运载机或 FP800 农业机上。这里按产品给每类图片配描述，
+// 未覆盖的产品回退到中性文案；传入的不是已知 key 时（如安全卡片标题）原样使用。
+const PRODUCT_ALT_NAME: Record<string, string> = {
+  d15r: 'D15R cleaning drone',
+  c15: 'C15 cleaning drone',
+  d50r: 'D50R solar panel cleaning drone',
+  'c500-delivery-drone': 'C500 heavy-lift cargo drone',
+  'sl80-delivery-drone': 'SL80 cargo drone',
+  'y160-delivery-drone': 'Y160 cargo drone',
+  'yp800-delivery-drone': 'YP800 cargo drone',
+  'fp800-agricultural-drone': 'FP800 agricultural drone',
+}
+const GENERIC_ALT: Record<string, string> = {
+  hero: 'in operation',
+  designed: 'side view',
+  intelligence: 'route planning control interface',
+  kit: 'standard package contents',
+  multiangle: 'in operation',
+  spray1: 'modular payload',
+  spray2: 'payload configuration',
+}
+const PRODUCT_ALT: Record<string, Record<string, string>> = {
+  d15r: {
+    hero: 'multi-functional, tethered',
+    designed: 'side view with extended cleaning boom',
+    multiangle: 'cleaning a building facade at height',
+    spray1: 'modular side view',
+    spray2: 'dual swinging spray boom configuration',
+  },
+  c15: {
+    hero: 'with 120 m high-pressure hose',
+    designed: 'side view',
+    multiangle: 'cleaning a glass facade at height',
+  },
+  d50r: {
+    hero: 'on a photovoltaic array',
+    designed: 'side view',
+    multiangle: 'cleaning solar panels',
+  },
+  'c500-delivery-drone': {
+    hero: 'with 240 kg payload',
+    designed: 'side view',
+    multiangle: 'in logistics operation',
+  },
+  'sl80-delivery-drone': {
+    hero: 'with 80 kg payload and long endurance',
+    designed: 'side view',
+    multiangle: 'in remote resupply operation',
+  },
+  'y160-delivery-drone': {
+    hero: 'with 165 kg lifting capacity',
+    designed: 'side view',
+    multiangle: 'lifting a payload',
+  },
+  'yp800-delivery-drone': {
+    hero: 'low-altitude transport configuration',
+    designed: 'side view',
+    multiangle: 'in transport operation',
+  },
+  'fp800-agricultural-drone': {
+    hero: 'spraying and seeding',
+    designed: 'side view',
+    multiangle: 'spraying a field',
+    spray1: 'spray tank configuration',
+    spray2: 'spreader configuration',
+  },
+}
+const altBase = computed(() => PRODUCT_ALT_NAME[ns.value] ?? 'Partdro product')
+const alt = (key: string) => {
+  const text = PRODUCT_ALT[ns.value]?.[key] ?? GENERIC_ALT[key] ?? key
+  return `${altBase.value} ${text}`
+}
 const mailtoHref = computed(() => {
   const subject = ns.value === 'd15r' ? 'D15R Cleaning Drone Inquiry' : `${ns.value} drone inquiry`
   return `mailto:info@droneworld.tech?subject=${encodeURIComponent(subject)}`
