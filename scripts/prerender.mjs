@@ -196,12 +196,13 @@ async function fetchTranslatedNewsSlugs() {
 async function collectRoutes() {
   const routes = [...STATIC_ROUTES]
 
-  // C500 Google Ads 落地页：router 静态路径（不在 Supabase products 表，sitemap 抓不到）
-  routes.push('/products/c500-partdro-eavision')
-
   let productSlugs = readInjectedSlugs('/products')
   if (!productSlugs.length) productSlugs = await fetchSitemapSlugs('/products')
-  productSlugs = [...new Set(productSlugs)].filter(Boolean)
+  // /products/c500-partdro-eavision 是独立静态落地页（landing/eavision-c500），
+  // 会出现在首页内链/线上 sitemap 里，但不是 SPA 产品路由，不能在这里预渲染。
+  productSlugs = [...new Set(productSlugs)].filter(
+    (s) => s && s !== 'c500-partdro-eavision',
+  )
   for (const s of productSlugs) routes.push(`/products/${s}`)
 
   // 新闻详情页：英语全量 + 其他语言仅真实存在的翻译。slug 首选 Supabase 直读

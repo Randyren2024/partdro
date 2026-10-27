@@ -49,12 +49,9 @@ const success = ref(false)
 const errorMsg = ref('')
 
 // 当前页面属于哪个产品（非产品页为 null）。
-// /products/c500-partdro-eavision 是独立路由，params.slug 为空，需单独兜底。
 const productSlug = computed<string | null>(() => {
   const slug = route.params.slug
-  if (typeof slug === 'string' && slug) return slug
-  if (route.name === 'c500-eavision') return 'c500-partdro-eavision'
-  return null
+  return typeof slug === 'string' && slug ? slug : null
 })
 
 const form = reactive({

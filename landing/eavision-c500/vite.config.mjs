@@ -4,12 +4,15 @@ import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('.', import.meta.url))
 
-export default defineConfig(({ command }) => ({
+export default defineConfig(() => ({
   root,
-  // Dev keeps the root base so /es/... /de/... /fr/... can be opened locally.
-  // Production uses the absolute landing path so all four locale pages share assets.
-  base: command === 'build' ? '/products/c500-partdro-eavision/' : '/',
+  // The main dev server proxies this path to the standalone landing dev server,
+  // so dev and production share the same absolute base for scripts and media.
+  base: '/products/c500-partdro-eavision/',
   envDir: fileURLToPath(new URL('../..', import.meta.url)),
+  // Keep the main SPA and landing dependency caches separate when both dev
+  // servers run; sharing node_modules/.vite makes them invalidate each other.
+  cacheDir: fileURLToPath(new URL('../../node_modules/.vite-c500', import.meta.url)),
   plugins: [vue()],
   build: {
     outDir: fileURLToPath(

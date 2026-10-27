@@ -11,8 +11,8 @@ Independent Vue 3 + Vite landing page for the EAVision C500, served as static HT
 
 It is **not** part of the main SPA build. `npm run landing:c500:build` produces four
 prerendered documents under `dist-landing/c500/site/`; CI merges that tree into `dist/`
-after the main build. The existing `src/views/C500EavisionView.vue` stays as a local-dev
-fallback only — production is this directory.
+after the main build. The main SPA has no C500 EAVision route — this directory is the only
+implementation, in both development and production.
 
 ## Business rules
 
@@ -34,15 +34,18 @@ fallback only — production is this directory.
 ## Commands (run from the repository root)
 
 ```bash
-npm run landing:c500:dev      # Vite dev server, http://localhost:5174/…
+npm run dev                   # main 5173 + this landing on 5174 (normal local workflow)
+npm run landing:c500:dev      # standalone landing server on 5174 (debug only)
 npm run landing:c500:build    # build + localized SEO + Playwright prerender (4 pages)
 npm run landing:c500:test     # 80 local E2E/SEO/form/attribution checks
 npm run landing:c500:serve    # static server for the built output, http://127.0.0.1:4174
 npm run landing:c500:optimize # re-create WebP/OG assets from the original source images
 ```
 
-Dev URLs follow the same paths as production, e.g.
-`http://localhost:5174/es/products/c500-partdro-eavision`.
+Use the main dev server for normal work; it starts this app automatically and proxies all
+four URLs, e.g. `http://localhost:5173/es/products/c500-partdro-eavision`. The standalone
+server only serves the absolute base path: `http://localhost:5174/products/c500-partdro-eavision/`
+(localized document paths are handled by the 5173 proxy).
 
 The form in dev talks to the real Supabase project when `.env` is present. Use a clearly
 marked test lead and mark/delete it afterwards. The test command mocks Supabase and never

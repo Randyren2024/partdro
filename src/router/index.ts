@@ -17,11 +17,6 @@ const siteChildren = [
     component: () => import('../views/ProductsView.vue'),
   },
   {
-    path: 'products/c500-partdro-eavision',
-    name: 'c500-eavision',
-    component: () => import('../views/C500EavisionView.vue'),
-  },
-  {
     path: 'products/:slug',
     name: 'product-detail',
     component: () => import('../views/ProductDetailView.vue'),

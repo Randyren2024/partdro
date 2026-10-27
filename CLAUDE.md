@@ -6,13 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm install
-npm run dev        # Vite dev server, port 5173 (vite.config.ts)
+npm run dev        # Vite dev server, port 5173; also starts the C500 landing on 5174
 npm run build      # production build; THIS is the type check
 npm run preview
 npm run netlify:dev # local Netlify Functions + SPA proxy (targetPort 5173)
 
 # C500 EAVision static landing (independent of the 175-page main build)
-npm run landing:c500:dev      # port 5174; /es|de|fr/products/c500-partdro-eavision
+npm run landing:c500:dev      # standalone landing dev server on 5174 (debug only)
 npm run landing:c500:build    # Vite + localized SEO + Playwright prerender (4 pages)
 npm run landing:c500:test     # local E2E/SEO/inquiry/attribution checks
 npm run landing:c500:serve    # serve dist-landing/c500/site with FC routing rules
@@ -66,16 +66,16 @@ Vue 3 + TypeScript + Ant Design Vue + Pinia + vue-i18n SPA, with Supabase as the
 
 Router (`src/router/index.ts`):
 
-- A `/:locale?` wrapper contains the site routes; `/products/:slug` uses `ProductDetailView.vue`; `/products/c500-partdro-eavision` uses the dedicated `C500EavisionView.vue` (declared before the dynamic slug). **In production that route is served by the static landing page in `landing/eavision-c500/`; the Vue view is only a local-dev fallback.**
+- A `/:locale?` wrapper contains the site routes; `/products/:slug` uses `ProductDetailView.vue`. **The main SPA has no `/products/c500-partdro-eavision` route**: that URL is the standalone landing in `landing/eavision-c500/`, served by the dev proxy in `vite.config.ts` (5173 → 5174) and as static HTML in production. Catalog links to it must be plain `<a href>`, not `router-link`.
 - Admin routes: `/admin/login`, `/admin/products`; `/admin/editor` redirects to `/products/d15r`.
-- `ProductDetailView.vue` is a **parameterized landing renderer**, not D15R-only: the i18n namespace is `route.params.slug` (default `d15r`), text comes from `<ns>.*`, images from `/images/<ns>/` (D15R has its own `/d15r/images/` sets). The C500 EAVision page is separate (`src/data/c500eavision.ts`, `src/components/c500eavision/*`, `c500.css`).
+- `ProductDetailView.vue` is a **parameterized landing renderer**, not D15R-only: the i18n namespace is `route.params.slug` (default `d15r`), text comes from `<ns>.*`, images from `/images/<ns>/` (D15R has its own `/d15r/images/` sets). The separate `c500-delivery-drone` product page still uses this renderer; the C500 EAVision landing does not.
 - Direct requests for `/products/c500` are 301'd by FC; the Vue router also has a client-side redirect for in-app navigation.
 
 Content model: `products`, `posts`, `cases`, `documents` each have a `<table>_langs` child table with one row per language. `src/composables/useSupabase.ts` fetches `*, *_langs(...)`, merges the current locale row (fallback `en`), and refetches on locale change. `useProduct` is exported but unused; listing/home views use `useProducts`, `usePosts`, etc. Product categories are the literal strings `'agricultural' | 'cargo' | 'cleaning'`.
 
 ## CMS and admin
 
-- `landing_content` stores per-`(namespace, lang)` JSON **diffs** over the static i18n messages. Namespaces include `d15r`, `c15`, `c500eavision`, `d50r`, `about`, `contact`, `footer`, `topBar`. `useLandingContent` deep-merges diffs into vue-i18n and exposes `__images` / `__videos` overrides.
+- `landing_content` stores per-`(namespace, lang)` JSON **diffs** over the static i18n messages. Namespaces include `d15r`, `c15`, `d50r`, `about`, `contact`, `footer`, `topBar`. `useLandingContent` deep-merges diffs into vue-i18n and exposes `__images` / `__videos` overrides.
 - The admin `InlineEditor` hooks elements with `data-edit-key` (text) or `data-edit-img` (image); saves go through `/api/landing-content` (service_role upsert). `saveEditableD15r` is a compatibility wrapper.
 - Admin auth: Supabase Auth + the `admins` table (the real gate); login maps username → `<username>@admin.partdro.com`; client-side 5-fail/60s lock. A Supabase user without an `admins` row is signed out.
 - `/api/admin-products` handles product CRUD; delete goes through the `admin_delete_product` RPC (`scripts/admin-functions.sql` must be run once in Supabase).

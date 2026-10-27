@@ -64,7 +64,7 @@ import type { ProductCategory } from '../types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
 
-// C500 使用独立静态落地页；必须整页跳转，否则 SPA 会渲染成本地开发回退页。
+// C500 使用独立静态落地页；必须整页跳转，否则 SPA 会按 /products/:slug 渲染产品详情。
 const C500_SLUG = 'c500-delivery-drone'
 const C500_LANDING_PATH = '/products/c500-partdro-eavision'
 
