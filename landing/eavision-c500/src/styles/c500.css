@@ -97,21 +97,25 @@ button:focus-visible{outline:2px solid #8092fa;outline-offset:4px}
 .product-nav a{color:#eee;font-size:16px}
 .product-nav__name{font-size:20px!important;font-weight:600}
 .product-nav__inner>div{display:flex;gap:28px}
-.hero{height:calc(100vh - 220px);isolation:isolate;min-height:650px;position:relative}
+.hero{height:100vh;isolation:isolate;min-height:700px;position:relative}
 .hero__media,.hero__shade{bottom:0;left:0;position:absolute;right:0;top:0;z-index:-1}
-.hero__shade{background:linear-gradient(90deg,rgba(0,0,0,.4),transparent 72%)}
+.hero__shade{background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,.45) 0%,rgba(0,0,0,.65) 100%),linear-gradient(180deg,rgba(0,0,0,.3) 0%,transparent 40%,rgba(0,0,0,.5) 100%)}
 .hero__inner{height:100%;margin:0 auto;position:relative;width:min(1200px,calc(100% - 120px))}
-.hero__copy{left:0;position:absolute;top:22%}
-.hero h1{color:#fff;font-size:60px;font-weight:600;line-height:1.25;margin:16px 0}
-.hero .hero__eyebrow{font-size:32px;font-weight:500;width:-moz-fit-content;width:fit-content}
-.hero__summary{font-size:16px;line-height:1.6}
-.outline-button{align-items:center;background:linear-gradient(#050505,#050505) padding-box,linear-gradient(110deg,#5b72d9,#f0f0f5) border-box;border:2px solid transparent;border-radius:28px;color:#fff;cursor:pointer;display:inline-flex;font-size:16px;gap:8px;height:52px;justify-content:center;margin-top:142px;padding:0 22px;transition:transform .25s,box-shadow .25s}
+.hero__copy{left:50%;position:absolute;text-align:center;top:50%;transform:translate(-50%,-50%);width:min(780px,calc(100% - 80px))}
+.hero h1{color:#fff;font-size:clamp(44px,4.2vw,60px);font-weight:600;line-height:1.15;margin:18px auto;max-width:14ch}
+.hero .hero__eyebrow{font-size:clamp(20px,2.2vw,32px);font-weight:500;margin:0 auto}
+.hero__summary{color:#d6d6d7;font-size:17px;line-height:1.6;margin:0 auto;max-width:580px}
+.outline-button{align-items:center;background:linear-gradient(#050505,#050505) padding-box,linear-gradient(110deg,#6b84ff,#ffffff) border-box;border:2.5px solid transparent;border-radius:28px;color:#fff;cursor:pointer;display:inline-flex;font-size:16px;gap:8px;height:52px;justify-content:center;margin-top:142px;padding:0 22px;transition:transform .25s,box-shadow .25s}
 .outline-button:hover{box-shadow:0 0 18px rgba(115,137,234,.2);transform:translateY(-2px)}
+.hero__trust{display:none}
+.hero__actions{justify-content:center}
+.hero__actions .outline-button{display:none}
 .hero__copy>*{opacity:0;transform:translateY(18px);transition:opacity .85s ease,transform 1s cubic-bezier(.22,.68,.15,1)}
 .hero--ready .hero__copy>*{opacity:1;transform:none}
 .hero__copy>:nth-child(2){transition-delay:.12s}
 .hero__copy>:nth-child(3){transition-delay:.24s}
 .hero__copy>:nth-child(4){transition-delay:.36s}
+.hero__copy>:nth-child(5){transition-delay:.48s}
 .overview{padding:70px 0 80px;scroll-margin-top:75px}
 .overview__description{color:#ccc;font-size:16px;line-height:1.75;text-align:center}
 .overview__technology{display:block;height:auto;margin:60px 0 24px;width:100%}
@@ -138,7 +142,7 @@ button:focus-visible{outline:2px solid #8092fa;outline-offset:4px}
 .story-copy-down-leave-active,.story-copy-up-leave-active{transition:opacity .3s ease,transform .3s ease}
 .story-copy-down-enter,.story-copy-up-leave-to{opacity:0;transform:translateY(-24px)}
 .story-copy-down-leave-to,.story-copy-up-enter{opacity:0;transform:translateY(24px)}
-.applications h2,.media-story h2,.packages h2{font-size:46px;font-weight:500;line-height:1.25;margin:0 auto;max-width:100%;width:-moz-fit-content;width:fit-content}
+.applications h2,.media-story h2,.packages h2,.regions h2,.faq h2,.related h2{font-size:46px;font-weight:500;line-height:1.25;margin:0 auto;max-width:100%;width:-moz-fit-content;width:fit-content}
 .power-metrics{grid-gap:30px;display:grid;gap:30px;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:36px!important}
 .staged-copy .power-metrics{margin-top:0!important}
 .power-metrics dt{font-size:20px;line-height:1.4}
@@ -163,9 +167,37 @@ button:focus-visible{outline:2px solid #8092fa;outline-offset:4px}
 .decision-swap-enter{transform:translateX(100%)}
 .decision-swap-leave-to{transform:translateX(-100%)}
 .applications{padding:0 0 130px}
-.applications__grid{grid-gap:20px;display:grid;gap:20px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:60px}
+.c500 .applications__intro,.c500 .regions__intro,.c500 .related__intro{color:#b4b4b5;font-size:14px;line-height:1.7;margin:18px auto 0;max-width:680px;text-align:center}
+.applications__grid{grid-gap:20px;display:grid;gap:20px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:36px}
 .application{aspect-ratio:590/314;border-radius:8px;overflow:hidden;position:relative}
-.application h3{background:linear-gradient(transparent,rgba(0,0,0,.7));bottom:0;color:#fff;font-size:20px;font-weight:400;left:0;padding:75px 40px 30px;position:absolute;right:0;top:auto}
+.application__copy{background:linear-gradient(transparent,rgba(0,0,0,.82));bottom:0;left:0;padding:80px 36px 26px;position:absolute;right:0}
+.application__copy h3{color:#fff;font-size:20px;font-weight:400}
+.c500 .application__copy p{color:#d6d6d7;font-size:13px;line-height:1.55;margin-top:6px;max-width:520px}
+.regions{padding:0 0 110px}
+.regions__grid{grid-gap:18px;display:grid;gap:18px;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:44px}
+.region{background:#1c1c1e;border:1px solid #2c2c2e;border-radius:8px;display:flex;flex-direction:column;padding:26px 22px 22px}
+.region h3{color:#fff;font-size:19px;font-weight:500;line-height:1.4}
+.c500 .region__missions{color:#8092fa;font-size:12px;letter-spacing:.02em;line-height:1.6;margin-top:8px}
+.c500 .region__desc{color:#b4b4b5;flex:1;font-size:13px;line-height:1.7;margin-top:14px}
+.region__cta{align-self:flex-start;border-bottom:1px solid #666;color:#fff;font-size:13px;margin-top:22px;padding-bottom:3px;text-decoration:none;transition:border-color .25s}
+.region__cta:hover{border-color:#fff}
+.faq{padding:100px 0 110px}
+.faq__list{border-top:1px solid #333;margin-top:44px}
+.faq__item{border-bottom:1px solid #333}
+.faq__item summary{color:#fff;cursor:pointer;font-size:18px;line-height:1.5;list-style:none;padding:24px 48px 24px 0;position:relative}
+.faq__item summary::-webkit-details-marker{display:none}
+.faq__item summary:after{color:#8092fa;content:"+";font-size:24px;font-weight:300;position:absolute;right:6px;top:50%;transform:translateY(-50%)}
+.faq__item[open] summary:after{content:"–"}
+.faq__answer{color:#b4b4b5;font-size:15px;line-height:1.8;max-width:920px;padding:0 0 26px}
+.faq__answer a{border-bottom:1px solid #666;color:#fff;display:inline-block;margin-top:10px;text-decoration:none}
+.faq__answer a:hover{border-color:#fff}
+.related{padding:0 0 130px}
+.related__grid{grid-gap:18px;display:grid;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px}
+.related__card{background:#1c1c1e;border:1px solid #2c2c2e;border-radius:8px;color:#fff;display:flex;flex-direction:column;padding:26px 24px 22px;text-decoration:none;transition:border-color .25s,transform .25s}
+.related__card:hover{border-color:#8092fa;transform:translateY(-2px)}
+.related__card h3{font-size:18px;font-weight:500;line-height:1.45}
+.c500 .related__card p{color:#b4b4b5;font-size:13px;line-height:1.7;margin-top:10px}
+.related__card span{color:#8092fa;font-size:13px;margin-top:auto;padding-top:24px}
 .packages{padding-bottom:100px}
 .packages__intro{color:#b4b4b5;font-size:14px;line-height:1.7;margin:18px auto 0;max-width:640px;text-align:center}
 .packages__grid{grid-gap:22px;display:grid;gap:22px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:60px}
@@ -210,7 +242,7 @@ button:focus-visible{outline:2px solid #8092fa;outline-offset:4px}
 .overview__description{font-size:14px}
 .ability__copy{padding-top:25px}
 .ability__copy h3{font-size:18px}
-.applications h2,.media-story h2,.packages h2{font-size:44px}
+.applications h2,.media-story h2,.packages h2,.regions h2,.faq h2,.related h2{font-size:44px}
 .quote h2{font-size:40px}
 .quote__inner{grid-template-columns:minmax(0,1fr);gap:40px}
 .quote__row{grid-template-columns:minmax(0,1fr)}
