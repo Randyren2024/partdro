@@ -28,7 +28,7 @@ defineProps({
         <div v-for="metric in metrics" :key="metric.label">
           <dt>
             <strong>{{ metric.value }}</strong
-            >{{ metric.unit }}
+            >{{ metric.unit ? ` ${metric.unit}` : '' }}
             <sup v-if="metric.note"
               ><a :href="`#c500-note-${metric.note}`">[{{ metric.note }}]</a></sup
             >
