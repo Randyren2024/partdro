@@ -132,7 +132,9 @@ if (!existsSync(DIST)) {
   process.exit(1)
 }
 writeFileSync(join(DIST, 'sitemap.xml'), body, 'utf8')
+// newsEntries 每项是一篇文章，可能含多条 <url>（多语言翻译），按实际 <url> 数统计
+const urlCount = (body.match(/<url>/g) || []).length
 console.log(
-  `[sitemap] ✓ dist/sitemap.xml（${localizedPaths.length * LOCALES.length + newsEntries.length} 条 URL，` +
-    `产品 ${productSlugs.length} / 新闻 ${newsEntries.length}）`,
+  `[sitemap] ✓ dist/sitemap.xml（${urlCount} 条 URL，` +
+    `产品 ${productSlugs.length} / 新闻 ${postRows.length} 篇）`,
 )
