@@ -10,7 +10,12 @@
     "preview": "vite preview",
     "optimize-images": "node scripts/optimize-images.js",
     "generate-favicons": "node scripts/generate-favicons.js",
-    "netlify:dev": "netlify dev"
+    "netlify:dev": "netlify dev",
+    "landing:c500:dev": "vite --config landing/eavision-c500/vite.config.mjs",
+    "landing:c500:build": "vite build --config landing/eavision-c500/vite.config.mjs && node landing/eavision-c500/scripts/postbuild.mjs && node landing/eavision-c500/scripts/prerender.mjs",
+    "landing:c500:serve": "node landing/eavision-c500/scripts/serve.mjs",
+    "landing:c500:optimize": "node landing/eavision-c500/scripts/optimize-images.mjs",
+    "landing:c500:test": "node landing/eavision-c500/scripts/test-local.mjs"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.0",

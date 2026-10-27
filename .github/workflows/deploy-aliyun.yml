@@ -33,6 +33,35 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
 
+      # 独立的 C500 EAVision 静态落地页（四语种）：不参与主站 175 页预渲染，
+      # 构建后覆盖主站同名路由，再由下面的守卫确保没有被空壳覆盖。
+      - name: Build C500 landing (4 locales)
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run landing:c500:build
+
+      - name: Merge C500 landing and guard
+        run: |
+          cp -R dist-landing/c500/site/. dist/
+          for page in \
+            dist/products/c500-partdro-eavision/index.html \
+            dist/es/products/c500-partdro-eavision/index.html \
+            dist/de/products/c500-partdro-eavision/index.html \
+            dist/fr/products/c500-partdro-eavision/index.html; do
+            if [ ! -f "$page" ]; then
+              echo "missing C500 landing page: $page"
+              exit 1
+            fi
+            for needle in 'id="c500-quote"' 'GTM-KJ7GJ3V5' 'hreflang="x-default"'; do
+              if ! grep -q "$needle" "$page"; then
+                echo "$page is missing $needle (was the main build merged over the landing?)"
+                exit 1
+              fi
+            done
+            echo "guard ok: $page"
+          done
+
       - name: Install Aliyun CLI
         run: |
           curl -sL https://github.com/aliyun/aliyun-cli/releases/download/v3.5.1/aliyun-cli-linux-3.5.1-amd64.tgz -o /tmp/aliyun-cli.tgz

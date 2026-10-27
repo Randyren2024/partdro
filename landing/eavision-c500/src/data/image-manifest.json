@@ -1,0 +1,182 @@
+{
+  "hero": {
+    "file": "images/hero-3cc167f8.webp",
+    "width": 1920,
+    "height": 1081,
+    "bytes": 29046
+  },
+  "technology": {
+    "file": "images/technology-a30a97ea.webp",
+    "width": 1600,
+    "height": 400,
+    "bytes": 40084
+  },
+  "abilityPayload": {
+    "file": "images/abilityPayload-67f4b1bb.webp",
+    "width": 1200,
+    "height": 1112,
+    "bytes": 3290
+  },
+  "abilitySpeed": {
+    "file": "images/abilitySpeed-ac560183.webp",
+    "width": 1200,
+    "height": 607,
+    "bytes": 15390
+  },
+  "abilityShort": {
+    "file": "images/abilityShort-69d85627.webp",
+    "width": 1104,
+    "height": 560,
+    "bytes": 1508
+  },
+  "abilityDecision": {
+    "file": "images/abilityDecision-6f9be8a2.webp",
+    "width": 1200,
+    "height": 1110,
+    "bytes": 3384
+  },
+  "abilityBattery": {
+    "file": "images/abilityBattery-94ae6ccf.webp",
+    "width": 1106,
+    "height": 562,
+    "bytes": 30568
+  },
+  "abilityCluster": {
+    "file": "images/abilityCluster-f2280ccd.webp",
+    "width": 1180,
+    "height": 560,
+    "bytes": 24730
+  },
+  "abilityApplications": {
+    "file": "images/abilityApplications-915072b7.webp",
+    "width": 1180,
+    "height": 560,
+    "bytes": 71772
+  },
+  "performance": {
+    "file": "images/performance-119bc92c.webp",
+    "width": 1920,
+    "height": 1081,
+    "bytes": 40838
+  },
+  "storyPlaceholder": {
+    "file": "images/storyPlaceholder-b089eeb5.webp",
+    "width": 1600,
+    "height": 901,
+    "bytes": 2656
+  },
+  "functionsBackground": {
+    "file": "images/functionsBackground-a061d209.webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 139708
+  },
+  "landscape": {
+    "file": "images/landscape-7d67e4cc.webp",
+    "width": 1600,
+    "height": 807,
+    "bytes": 3192
+  },
+  "powerFront": {
+    "file": "images/powerFront-a7623fd9.webp",
+    "width": 1400,
+    "height": 708,
+    "bytes": 38160
+  },
+  "powerStructure": {
+    "file": "images/powerStructure-a9b44675.webp",
+    "width": 1400,
+    "height": 706,
+    "bytes": 76810
+  },
+  "energyAltitude": {
+    "file": "images/energyAltitude-54b42267.webp",
+    "width": 1400,
+    "height": 706,
+    "bytes": 71610
+  },
+  "clusterQuad": {
+    "file": "images/clusterQuad-5d000723.webp",
+    "width": 1400,
+    "height": 706,
+    "bytes": 92676
+  },
+  "functionPlaceholder": {
+    "file": "images/functionPlaceholder-1f3c95ee.webp",
+    "width": 1264,
+    "height": 700,
+    "bytes": 2258
+  },
+  "functionAirlift": {
+    "file": "images/functionAirlift-bb4dcf93.webp",
+    "width": 1264,
+    "height": 700,
+    "bytes": 2260
+  },
+  "decisionPlaceholder": {
+    "file": "images/decisionPlaceholder-b9882028.webp",
+    "width": 1200,
+    "height": 894,
+    "bytes": 2828
+  },
+  "applicationSolar": {
+    "file": "images/applicationSolar-2c028df0.webp",
+    "width": 1180,
+    "height": 628,
+    "bytes": 126478
+  },
+  "applicationTimber": {
+    "file": "images/applicationTimber-821ffea9.webp",
+    "width": 1180,
+    "height": 628,
+    "bytes": 28106
+  },
+  "applicationSteel": {
+    "file": "images/applicationSteel-a1be7177.webp",
+    "width": 1180,
+    "height": 628,
+    "bytes": 133296
+  },
+  "applicationEmergency": {
+    "file": "images/applicationEmergency-40b91b33.webp",
+    "width": 1180,
+    "height": 628,
+    "bytes": 128536
+  },
+  "packageStandardCharger": {
+    "file": "packages/packageStandardCharger-38e1135a.webp",
+    "width": 1200,
+    "height": 1042,
+    "bytes": 33724
+  },
+  "packageStandardStation": {
+    "file": "packages/packageStandardStation-7282282d.webp",
+    "width": 1200,
+    "height": 1042,
+    "bytes": 41062
+  },
+  "packageAirliftCharger": {
+    "file": "packages/packageAirliftCharger-10c5b247.webp",
+    "width": 1200,
+    "height": 1042,
+    "bytes": 30672
+  },
+  "packageAirliftStation": {
+    "file": "packages/packageAirliftStation-fb5d6668.webp",
+    "width": 1200,
+    "height": 1042,
+    "bytes": 39948
+  },
+  "logo": {
+    "file": "images/logo-45620478.webp",
+    "width": 320,
+    "height": 107,
+    "bytes": 8680
+  },
+  "og": {
+    "file": "images/og-c500.jpg",
+    "width": 1200,
+    "height": 630,
+    "bytes": 23094
+  }
+}

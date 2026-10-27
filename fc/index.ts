@@ -143,6 +143,12 @@ function extOf(key: string): string {
 function cacheControlFor(key: string): string {
   if (key.startsWith('assets/')) return 'public, max-age=31536000, immutable'
   if (key.startsWith('images/')) return 'public, max-age=86400'
+  // C500 EAVision 独立落地页：共享 assets/images/packages 位于产品目录下，
+  // 文件名带内容 hash；图片/套餐图按天缓存，HTML 仍走 60 秒。
+  if (key.startsWith('products/c500-partdro-eavision/assets/'))
+    return 'public, max-age=31536000, immutable'
+  if (key.startsWith('products/c500-partdro-eavision/images/')) return 'public, max-age=86400'
+  if (key.startsWith('products/c500-partdro-eavision/packages/')) return 'public, max-age=86400'
   return 'public, max-age=60'
 }
 

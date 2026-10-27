@@ -10,9 +10,16 @@ npm run dev        # Vite dev server, port 5173 (vite.config.ts)
 npm run build      # production build; THIS is the type check
 npm run preview
 npm run netlify:dev # local Netlify Functions + SPA proxy (targetPort 5173)
+
+# C500 EAVision static landing (independent of the 175-page main build)
+npm run landing:c500:dev      # port 5174; /es|de|fr/products/c500-partdro-eavision
+npm run landing:c500:build    # Vite + localized SEO + Playwright prerender (4 pages)
+npm run landing:c500:test     # local E2E/SEO/inquiry/attribution checks
+npm run landing:c500:serve    # serve dist-landing/c500/site with FC routing rules
 ```
 
 - Copy `.env.example` → `.env` for local work. `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` are required by the build and prerender step. Never expose `SUPABASE_SERVICE_ROLE_KEY` to the client.
+- The C500 EAVision landing source of truth is `landing/eavision-c500/` (see its README). It builds to `dist-landing/` and is merged into `dist/` by CI after the main build; do not expect `npm run build` alone to update that page.
 - `npm run build` = `playwright install chromium` + Vite build + `scripts/inject-seo-links.mjs` + `scripts/prerender.mjs` + `scripts/generate-sitemap.mjs`. It needs network for Playwright and Supabase.
 - `vue-tsc` is broken on the current Node version; the build is the type check. There is no lint script/config.
 - Broken npm script: `optimize-images` (`scripts/optimize-images.js` does not exist). `generate-favicons` does exist (`scripts/generate-favicons.js`).
@@ -37,7 +44,7 @@ node fc/<function>/test-local.mjs
 
 ### Deploying
 
-- Production deploys run through `.github/workflows/deploy-aliyun.yml` on push to `main`: build the site, sync `dist/` to OSS, build/upload the FC bundle, update the `partdro-api` function, then deploy the report functions. Prefer this over manual deploys.
+- Production deploys run through `.github/workflows/deploy-aliyun.yml` on push to `main`: build the site, build the four-locale C500 landing and merge it into `dist/` ( guarding `id="c500-quote"`, `GTM-KJ7GJ3V5`, `hreflang="x-default"` per locale), sync `dist/` to OSS, build/upload the FC bundle, update the `partdro-api` function, then deploy the report functions. Prefer this over manual deploys.
 - `node scripts/build-fc.mjs` bundles `fc/index.ts` → `dist-fc/index.js` (handler `index.handler`). For production the bundle needs `ALIYUN_OSS_BUCKET=partdro-site` / `ALIYUN_OSS_REGION=cn-hongkong`; otherwise the static server has no bucket.
 - For a manual FC update: back up the existing `oss://partdro-site/fc-code.zip`, build with the production bucket, zip `index.js` at the zip root, upload to `oss://partdro-site/fc-code.zip`, then update `partdro-api` code. Use only the Aliyun profile/account that can see that function.
 
@@ -59,7 +66,7 @@ Vue 3 + TypeScript + Ant Design Vue + Pinia + vue-i18n SPA, with Supabase as the
 
 Router (`src/router/index.ts`):
 
-- A `/:locale?` wrapper contains the site routes; `/products/:slug` uses `ProductDetailView.vue`; `/products/c500-partdro-eavision` uses the dedicated `C500EavisionView.vue` (declared before the dynamic slug).
+- A `/:locale?` wrapper contains the site routes; `/products/:slug` uses `ProductDetailView.vue`; `/products/c500-partdro-eavision` uses the dedicated `C500EavisionView.vue` (declared before the dynamic slug). **In production that route is served by the static landing page in `landing/eavision-c500/`; the Vue view is only a local-dev fallback.**
 - Admin routes: `/admin/login`, `/admin/products`; `/admin/editor` redirects to `/products/d15r`.
 - `ProductDetailView.vue` is a **parameterized landing renderer**, not D15R-only: the i18n namespace is `route.params.slug` (default `d15r`), text comes from `<ns>.*`, images from `/images/<ns>/` (D15R has its own `/d15r/images/` sets). The C500 EAVision page is separate (`src/data/c500eavision.ts`, `src/components/c500eavision/*`, `c500.css`).
 - Direct requests for `/products/c500` are 301'd by FC; the Vue router also has a client-side redirect for in-app navigation.

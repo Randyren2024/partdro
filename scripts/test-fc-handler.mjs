@@ -25,6 +25,14 @@ const cases = [
   ['/api/inquiry-webhook', 'GET', [], (r) => r.statusCode === 405],
   ['/api/inquiry-webhook', 'POST', [], (r) => r.statusCode === 401 || r.statusCode === 503],
   ['/this-does-not-exist', 'GET', [], (r) => r.statusCode === 404 || r.statusCode === 503],
+  // C500 EAVision 独立落地页：英语 + 三语种目录 index 必须能被静态路由命中（本地无 bucket 时 503）
+  ['/products/c500-partdro-eavision', 'GET', [], (r) => r.statusCode === 200 || r.statusCode === 503],
+  ['/es/products/c500-partdro-eavision', 'GET', [], (r) => r.statusCode === 200 || r.statusCode === 503],
+  ['/de/products/c500-partdro-eavision', 'GET', [], (r) => r.statusCode === 200 || r.statusCode === 503],
+  ['/fr/products/c500-partdro-eavision', 'GET', [], (r) => r.statusCode === 200 || r.statusCode === 503],
+  ['/products/c500-partdro-eavision/', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-partdro-eavision'],
+  ['/products/c500-partdro-eavision/index.html', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-partdro-eavision'],
+  ['/products/c500-partdro-eavision/assets/index-test.js', 'GET', [], (r) => r.statusCode === 200 || r.statusCode === 503],
   // 主机规范化。FC 网关不透传 x-forwarded-proto，自定义域名设为 HTTPS-only，
   // http→https 由网关承担；handler 内不再读 proto，x-forwarded-proto 不触发 301。
   // 本地未配置 OSS bucket 时静态读取返回 503；有 bucket 时应为 200。二者都说明路由未被误判。

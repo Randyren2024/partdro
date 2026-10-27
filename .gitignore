@@ -42,3 +42,6 @@ artful-striker-*.json
 
 # Local Google Ads OAuth credentials (never commit)
 google_api/
+
+# C500 EAVision 独立落地页构建产物（CI 合并进 dist/）
+dist-landing/

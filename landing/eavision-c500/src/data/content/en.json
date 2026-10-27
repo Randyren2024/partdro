@@ -1,0 +1,519 @@
+{
+  "locale": "en",
+  "meta": {
+    "title": "C500 Heavy-Lift Cargo Drone (EAVision) | Partdro",
+    "description": "The EAVision C500 heavy-lift cargo drone: 240 kg payload, 30 km 4G+ video transmission, end-to-end autonomous decisions and cluster lifting — supplied worldwide by Partdro.",
+    "keywords": "EAVision C500, heavy-lift cargo drone, 240 kg payload, autonomous cargo drone, cluster lifting, Partdro",
+    "ogLocale": "en_US",
+    "productName": "EAVision C500 Heavy-Lift Flying Robot"
+  },
+  "nav": {
+    "aria": "C-500 page navigation",
+    "intro": "Overview",
+    "specs": "Specs",
+    "homeAria": "Partdro home",
+    "overview": "Overview",
+    "quote": "Quote",
+    "requestQuote": "Request a quote",
+    "language": "Language",
+    "languageAria": "Select language",
+    "skip": "Skip to content"
+  },
+  "hero": {
+    "title": "C500 Heavy-Lift Flying Robot",
+    "summary": "240 kg payload | End-to-end autonomous decisions | Cluster lifting",
+    "watchVideo": "Watch video",
+    "videoDialog": "Product video",
+    "closeVideo": "Close video",
+    "eyebrow": "Extraordinary payload, exceptional intelligence",
+    "requestQuote": "Request a quote",
+    "trust": "Manufactured by EAVision · Supplied worldwide by Partdro · Certification support",
+    "imageAlt": "EAVision C500 heavy-lift flying robot"
+  },
+  "overview": {
+    "paragraphs": [
+      "The all-new EAVISION C500 has a maximum single-aircraft payload of 240 kg. Its quad-rotor, eight-propeller design delivers a total thrust of 720 kg for outstanding stability and reliability. Dual-battery and quad-battery modes switch flexibly, and ultra-fast charging fills it in just 7 minutes.",
+      "Nine-camera vision and multi-source radar are deeply fused to build an all-domain perception perimeter. An end-to-end neural-network paradigm redefines the aerial logistics system.",
+      "Automatic sway elimination and full safety-boundary coverage. Supports 30 km 4G+ video transmission. Multi-aircraft collaboration pushes beyond the limits of payload."
+    ],
+    "technologyAlt": "Bringing embodied intelligence to heavy lift: from the decision brain, perception midbrain, flight-control cerebellum, integrated airframe and operations system — a five-layer technology foundation for a true heavy-lift flying robot"
+  },
+  "abilities": [
+    {
+      "key": "payload",
+      "title": "Max payload 240 kg",
+      "detail": "",
+      "alt": ""
+    },
+    {
+      "key": "speed",
+      "title": "Max flight speed",
+      "detail": "",
+      "alt": "Max flight speed 90 km/h"
+    },
+    {
+      "key": "structure",
+      "title": "Structurally stable",
+      "detail": "Front-rear integrated die-cast crossbeam",
+      "alt": ""
+    },
+    {
+      "key": "perception",
+      "title": "End-to-end all-domain perception",
+      "detail": "",
+      "alt": ""
+    },
+    {
+      "key": "decision",
+      "title": "End-to-end neural network paradigm",
+      "detail": "Redefining aerial logistics",
+      "alt": ""
+    },
+    {
+      "key": "battery",
+      "title": "Dual / quad battery operation",
+      "detail": "",
+      "alt": ""
+    },
+    {
+      "key": "cluster",
+      "title": "Multi-aircraft collaboration",
+      "detail": "Up to 720 kg payload",
+      "alt": ""
+    },
+    {
+      "key": "applications",
+      "title": "More applications, more possibilities",
+      "detail": "",
+      "alt": ""
+    }
+  ],
+  "powerMetrics": [
+    {
+      "value": "240",
+      "unit": "kg",
+      "label": "Max payload per aircraft"
+    },
+    {
+      "value": "90",
+      "unit": "km/h",
+      "label": "Max horizontal speed",
+      "note": 4
+    },
+    {
+      "value": "6000",
+      "unit": "m",
+      "label": "Max flight altitude",
+      "note": 5
+    },
+    {
+      "value": "6",
+      "unit": "",
+      "label": "Wind resistance (Beaufort)"
+    }
+  ],
+  "stories": {
+    "performance": {
+      "title": "Power Innovation, Steady Airframe"
+    },
+    "energy": {
+      "title": "Energy Defines the Payload Frontier"
+    },
+    "perception": {
+      "title": "Perception Without Limits, Precision to the Millimeter"
+    },
+    "decision": {
+      "title": "End-to-End Autonomous Decisions, Redefining Aerial Logistics"
+    },
+    "cluster": {
+      "title": "Cluster Lifting System, Beyond Heavy-Lift Limits"
+    },
+    "functions": {
+      "title": "More Configurations, More Capabilities"
+    }
+  },
+  "galleries": {
+    "power": {
+      "label": "Power Innovation, Steady Airframe",
+      "items": [
+        {
+          "title": "Four axes, eight propellers, double redundancy",
+          "detail": "73-inch carbon-fiber folding propellers | All-new flat-wire motors | 720 kg total thrust across four axes"
+        },
+        {
+          "title": "Ultimate vibration damping, structurally stable",
+          "detailParts": [
+            {
+              "text": "Integrated die-cast crossbeam and propeller safety locks | 300% higher airframe stiffness",
+              "note": 3
+            },
+            {
+              "text": ", 70% lower vibration transmission",
+              "note": 3
+            }
+          ]
+        }
+      ]
+    },
+    "energy": {
+      "label": "Energy Defines the Payload Frontier",
+      "items": [
+        {
+          "title": "Powerful energy, efficient fast charging",
+          "detail": "50Ah CTB ultra-fast-charge battery: dual- and quad-battery operation; 5.5C fast charging: full charge in as little as 7 minutes",
+          "notes": [
+            10
+          ]
+        },
+        {
+          "title": "Long endurance, effortless operation",
+          "detail": "Max flight distance 35 km",
+          "notes": [
+            1
+          ]
+        },
+        {
+          "title": "High-altitude operation",
+          "detailParts": [
+            {
+              "text": "Max payload 240 kg at 3,000 m; 200 kg at 4,500 m; at 6,000 m (max operating altitude),",
+              "note": 5
+            },
+            {
+              "text": "max payload 160 kg"
+            }
+          ],
+          "detailNote": "(Air density drops by about 10% for every 1,000 m gain in altitude.)"
+        }
+      ]
+    },
+    "perception": {
+      "label": "Perception Without Limits, Precision to the Millimeter",
+      "items": [
+        {
+          "title": "Nine-eye vision",
+          "detail": "2× four-eye surround system + 4K FPV = nine-eye 360° real-time surround imagery, transmitted directly with no latency"
+        },
+        {
+          "title": "Multi-radar perception system",
+          "detail": "Front-mounted 920,000-point-cloud LiDAR with 3.5× the industry average point-cloud density. Dual millimeter-wave radars above and below enable more precise perception with detection range up to 150 m"
+        },
+        {
+          "title": "End-to-end large-model all-domain perception system",
+          "detail": "Deep fusion of nine-eye vision and multi-source radar builds an all-domain perception shield"
+        },
+        {
+          "title": "Cargo obstacle avoidance, automatic swing elimination",
+          "detail": "Real-time observation of the airframe surroundings, power status, and cargo reduces potential risks as they arise"
+        }
+      ]
+    },
+    "cluster": {
+      "label": "Cluster Lifting System, Beyond Heavy-Lift Limits",
+      "items": [
+        {
+          "title": "Multi-aircraft collaboration, all-domain coverage",
+          "titleParts": [
+            {
+              "text": "Multi-aircraft collaboration",
+              "note": 6
+            },
+            {
+              "text": ", all-domain coverage"
+            }
+          ]
+        },
+        {
+          "title": "Two-aircraft collaboration, payload up to 400 kg"
+        },
+        {
+          "title": "Four-aircraft collaboration, payload up to 720 kg"
+        }
+      ]
+    },
+    "functions": {
+      "label": "More Configurations, More Capabilities",
+      "items": [
+        {
+          "title": "Video transmission",
+          "detailParts": [
+            {
+              "text": "Up to 30 km",
+              "note": 2
+            },
+            {
+              "text": " 4G+ video transmission | Dual control per aircraft\nRelay station endurance 8 hours"
+            }
+          ]
+        },
+        {
+          "title": "Smart voice control",
+          "detail": "Voice wake-up and voice-command control"
+        },
+        {
+          "title": "Smart cyclic hauling solution",
+          "detail": "People-first design with human-aircraft separation for safer flights and worry-free operations",
+          "notes": [
+            7
+          ]
+        },
+        {
+          "title": "Parachute option",
+          "detail": "Softens landing impact and reduces risk and loss"
+        },
+        {
+          "title": "Smart air-lift system",
+          "detail": "Electric winch with free spooling",
+          "notes": [
+            6
+          ]
+        }
+      ]
+    }
+  },
+  "decisions": [
+    {
+      "title": "End to end: it sees, decides, and flies on its own",
+      "detail": "Expert-trajectory imitation learning and learning agents | Flow Matching, world models, and reconstruction pre-training, with trillions of on-device operations per second"
+    },
+    {
+      "title": "Smart routes",
+      "detail": "Faster with every flight, continuously optimizing its route"
+    },
+    {
+      "title": "Trajectory replay",
+      "detail": "Recall efficient routes with one tap to reduce workload"
+    }
+  ],
+  "applications": {
+    "heading": "Applications beyond this, capabilities beyond sight",
+    "items": [
+      {
+        "title": "Solar panel transport"
+      },
+      {
+        "title": "Timber transport"
+      },
+      {
+        "title": "Steel transport"
+      },
+      {
+        "title": "Emergency supply transport"
+      }
+    ]
+  },
+  "packages": {
+    "heading": "EAVision C-500",
+    "intro": "Four factory configurations, each built around a different payload and charging setup.",
+    "note": "Pricing tailored to your region",
+    "cta": "Request a quote",
+    "items": [
+      {
+        "key": "standard-charger",
+        "name": "Standard Lifting Package",
+        "variant": "Charger version",
+        "summary": "EAVision C500 lifting system, 4× CTB smart batteries, cargo remote controller, 2× charging heat sinks."
+      },
+      {
+        "key": "standard-station",
+        "name": "Standard Lifting Package",
+        "variant": "Charging station version",
+        "summary": "EAVision C500 lifting system, 4× CTB smart batteries, cargo remote controller, 2× charging heat sinks, 2× generators."
+      },
+      {
+        "key": "airlift-charger",
+        "name": "Smart Air-Lift Package",
+        "variant": "Charger version",
+        "summary": "EAVision C500 smart air-lift system, 4× CTB smart batteries, cargo remote controller, 2× charging heat sinks."
+      },
+      {
+        "key": "airlift-station",
+        "name": "Smart Air-Lift Package",
+        "variant": "Charging station version",
+        "summary": "EAVision C500 smart air-lift system, 4× CTB smart batteries, cargo remote controller, 2× charging heat sinks, 2× generators."
+      }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Global pricing, tailored to you",
+    "title": "Request a quote",
+    "lead": "C500 pricing depends on your configuration, region and deployment scale. Tell us what you need and our team will come back with a tailored offer.",
+    "points": [
+      "Configuration matched to your payload and charging setup",
+      "Regional pricing and delivery lead times",
+      "Support with certification and after-sales planning"
+    ],
+    "form": {
+      "name": "Full name",
+      "email": "Work email",
+      "phone": "Phone / WhatsApp (optional)",
+      "company": "Company",
+      "region": "Country / region",
+      "package": "Package of interest",
+      "packagePlaceholder": "Select a package",
+      "message": "Message",
+      "messagePlaceholder": "Payload, site conditions, timeline…",
+      "submit": "Request a quote",
+      "submitting": "Sending…",
+      "success": "Thank you — your request has reached Partdro. We will reply within one business day.",
+      "error": "Something went wrong. Please try again or email us.",
+      "fallbackLink": "Email info@droneworld.tech",
+      "privacy": "We use these details only to respond to this inquiry.",
+      "noscript": "JavaScript is disabled. Email info@droneworld.tech with your requirements and we will reply directly.",
+      "honeypot": "Website"
+    }
+  },
+  "specifications": {
+    "titlePrefix": "C-500",
+    "title": "Heavy-Lift Flying Robot Specifications",
+    "items": [
+      {
+        "label": "Max payload",
+        "value": "240 kg"
+      },
+      {
+        "label": "Empty weight (excluding batteries)",
+        "value": "120 kg"
+      },
+      {
+        "label": "Power configuration",
+        "value": "Four axes, eight propellers, dual power safety redundancy"
+      },
+      {
+        "label": "Propellers",
+        "value": "73-inch carbon-fiber folding propellers"
+      },
+      {
+        "label": "Total thrust (four axes)",
+        "value": "720 kg"
+      },
+      {
+        "label": "Max flight speed",
+        "value": "90 km/h"
+      },
+      {
+        "label": "Wind resistance",
+        "value": "Beaufort 6"
+      },
+      {
+        "label": "Ingress protection",
+        "value": "IP55"
+      },
+      {
+        "label": "Operating temperature",
+        "value": "-20°C to 50°C"
+      },
+      {
+        "label": "Battery configuration",
+        "value": "50Ah CTB ultra-fast-charge battery, dual- and quad-battery operation"
+      },
+      {
+        "label": "Charging",
+        "value": "5.5C fast charging, full charge in as little as 7 minutes"
+      },
+      {
+        "label": "Range",
+        "value": "Max flight distance 35 km"
+      },
+      {
+        "label": "Perception system",
+        "value": "Nine-eye vision (2× four-eye surround + 4K FPV), 920,000-point-cloud LiDAR, millimeter-wave radar above and below"
+      },
+      {
+        "label": "Detection range",
+        "value": "150 m"
+      },
+      {
+        "label": "Video transmission",
+        "value": "4G+ video transmission up to 30 km"
+      },
+      {
+        "label": "Cluster lifting",
+        "value": "Up to 400 kg with two aircraft, up to 720 kg with four"
+      }
+    ]
+  },
+  "notes": {
+    "aria": "Product usage notes and data conditions",
+    "intro": [
+      "* Please check, confirm, and strictly comply with local laws and regulations before flying.",
+      "** All videos and images on this page were captured in strict compliance with applicable local laws and regulations. Please familiarize yourself with local laws and regulations and ensure the aircraft has the required certifications before flying.",
+      "*** Product appearance is subject to the actual shipped unit.",
+      "**** Payload figures are measured at sea level. The app intelligently evaluates loading safety based on current aircraft status, battery status, and environmental conditions. Please load according to the weight status shown in the app; otherwise flight safety may be affected."
+    ],
+    "items": [
+      {
+        "text": "1. Measured with the C500 in a quad-battery, unloaded configuration fitted with the lifting system, flying forward at 20 m/s at equivalent sea-level altitude, 25°C ambient temperature, and in windless conditions until the battery was depleted and a forced landing occurred. Data is for reference only; results may vary under different external environments, usage methods, and firmware versions. Please pay attention to app prompts during actual flights."
+      },
+      {
+        "text": "2. The 30 km transmission distance is achieved only under the FCC standard. In mainland China, where the SRRC standard applies, the maximum video transmission distance is 20 km. The above data was measured outdoors in open, interference-free conditions and represents the maximum one-way, no-return communication distance under each standard. Please pay attention to return-to-home prompts in the app during actual flights."
+      },
+      {
+        "text": "3. Derived from comparisons with conventional cargo drones; conclusions may vary under different test conditions."
+      },
+      {
+        "text": "4. Maximum flight speed depends on the number of batteries and payload weight. Please fly safely in strict accordance with app prompts and warnings."
+      },
+      {
+        "text": "5. Payload capacity decreases as takeoff altitude increases. 6,000 m is the maximum safe flight altitude for the aircraft (with takeoff at 4,500 m)."
+      },
+      {
+        "text": "6. Requires an additional optional purchase."
+      },
+      {
+        "text": "7. This feature will be supported through a future firmware upgrade. Please watch for the relevant firmware update notes on the remote controller and the official website."
+      },
+      {
+        "text": "8. The effective perception range and the obstacle avoidance and bypass capabilities vary with ambient light, rain and fog, and the material, position, and shape of target objects. Downward perception assists terrain-following altitude hold, while perception in other directions is used for obstacle avoidance. Except in scenarios with linear obstacles, if obstacle avoidance fails at speeds of 13.8 m/s or below and damages the aircraft, liability can be determined through log analysis, and repairs are free of charge if the cause is not human error. In scenarios with linear obstacles, the corresponding speed is 10 m/s or below. For operational safety, power lines, guy wires, and similar hazards are recommended to be marked as obstacles.",
+        "extra": [
+          "Note:",
+          "(1) Downward perception assists terrain-following altitude hold. Users should watch the flight environment; damage caused by colliding with obstacles below is not covered by the free warranty;",
+          "(2) The aircraft cannot actively avoid moving objects. Users should watch the flight environment; damage caused in such scenarios is not covered by the free warranty;",
+          "(3) Cargo obstacle avoidance is an assistive function only. Users should watch the flight environment; damage caused by the cargo or lifting rope colliding with obstacles is not covered by the free warranty;"
+        ]
+      },
+      {
+        "text": "9. The second remote controller is optional and requires an additional purchase."
+      },
+      {
+        "text": "10. Measured at equivalent sea-level altitude, 15–40°C ambient temperature, with single-battery sequential charging, from 30% to 95% charge. Fast charging is supported when the battery cell temperature is between 15°C and 70°C. Charging time varies with input power, altitude, starting charge level, and other factors."
+      }
+    ]
+  },
+  "accessibility": {
+    "notes": "Product usage notes and data conditions",
+    "gallery": {
+      "position": "{label} position",
+      "item": "Item {n}",
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "decision": "Autonomous decision capabilities",
+    "decisionExpand": "Expand",
+    "decisionCollapse": "Collapse",
+    "video": "Product Video",
+    "scroll": "Page scrollbar"
+  },
+  "footer": {
+    "description": "The EAVision C500 heavy-lift cargo drone, supplied worldwide by Partdro with configuration, certification and after-sales support.",
+    "contactHeading": "Talk to Partdro",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone / WhatsApp",
+    "exploreHeading": "Explore",
+    "products": "All products",
+    "about": "About Partdro",
+    "contact": "Contact",
+    "languageHeading": "Language",
+    "legal": "EAVision is the manufacturer of the C500. Partdro is an independent global supplier and not the manufacturer. Product specifications are provided by EAVision and subject to change.",
+    "copyright": "Partdro. All rights reserved."
+  },
+  "whatsapp": {
+    "aria": "Chat with Partdro on WhatsApp",
+    "message": "Hello Partdro, I'm interested in the EAVision C500 heavy-lift cargo drone."
+  },
+  "seo": {
+    "breadcrumbHome": "Home",
+    "breadcrumbProducts": "Products",
+    "breadcrumbCurrent": "C500 EAVision"
+  }
+}

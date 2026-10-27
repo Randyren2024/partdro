@@ -1,0 +1,519 @@
+{
+  "locale": "de",
+  "meta": {
+    "title": "C500 Schwerlast-Transportdrohne (EAVision) | Partdro",
+    "description": "Die EAVision C500 Schwerlast-Transportdrohne: 240 kg maximale Nutzlast, 30 km 4G+-Videoübertragung, autonome Ende-zu-Ende-Entscheidungen und Cluster-Heben — weltweit vertrieben von Partdro.",
+    "keywords": "EAVision C500, Schwerlast-Transportdrohne, 240 kg Nutzlast, autonome Frachtdrohne, Cluster-Heben, Partdro",
+    "ogLocale": "de_DE",
+    "productName": "EAVision C500 Schwerlast-Flugroboter"
+  },
+  "nav": {
+    "aria": "Navigation der C-500-Seite",
+    "intro": "Überblick",
+    "specs": "Technische Daten",
+    "homeAria": "Partdro-Startseite",
+    "quote": "Angebot",
+    "requestQuote": "Angebot anfordern",
+    "language": "Sprache",
+    "languageAria": "Sprache auswählen",
+    "skip": "Zum Inhalt springen",
+    "overview": "Überblick"
+  },
+  "hero": {
+    "title": "C500 Schwerlast-Flugroboter",
+    "summary": "240 kg extrem hohe Nutzlast | Autonome Ende-zu-Ende-Entscheidungen | Cluster-Hebevorrichtungen",
+    "watchVideo": "Video ansehen",
+    "videoDialog": "Produktvideo",
+    "closeVideo": "Video schließen",
+    "eyebrow": "Außergewöhnliche Nutzlast, außergewöhnliche Intelligenz",
+    "requestQuote": "Angebot anfordern",
+    "trust": "Hergestellt von EAVision · Weltweiter Vertrieb durch Partdro · Zertifizierungsunterstützung",
+    "imageAlt": "EAVision C500 Schwerlast-Flugroboter"
+  },
+  "overview": {
+    "paragraphs": [
+      "Der brandneue EAVISION C500 hat eine maximale Nutzlast von 240 kg pro Fluggerät. Das Design mit vier Rotoren und acht Propellern liefert einen Gesamtschub von 720 kg bei hervorragender Stabilität und Zuverlässigkeit. Die Modi mit zwei und vier Akkus lassen sich flexibel wechseln, und das ultraschnelle Laden füllt ihn in nur 7 Minuten.",
+      "Neun-Kamera-Sicht und Multiquellen-Radar werden tief fusioniert, um einen allumfassenden Wahrnehmungsperimeter aufzubauen. Ein Ende-zu-Ende-Neuronales-Netz-Paradigma definiert das Luftlogistiksystem neu.",
+      "Automatische Schwingungsbeseitigung und vollständige Abdeckung der Sicherheitsgrenzen. Unterstützt 30 km 4G+-Videoübertragung. Die Zusammenarbeit mehrerer Fluggeräte sprengt die Grenzen der Nutzlast."
+    ],
+    "technologyAlt": "Verkörperte Intelligenz in den Schwerlastflug einbauen: ein fünftschichtiges Technologiefundament — Entscheidungsgehirn, Wahrnehmungsmittelhirn, Flugsteuerungs-Kleinhirn, integrierter Flugkörper und Betriebssystem — das einen echten Schwerlast-Flugroboter hervorbringt."
+  },
+  "abilities": [
+    {
+      "key": "payload",
+      "title": "Maximale Nutzlast pro Fluggerät: 240 kg",
+      "detail": "",
+      "alt": ""
+    },
+    {
+      "key": "speed",
+      "title": "Maximale Fluggeschwindigkeit",
+      "detail": "",
+      "alt": "Maximale Fluggeschwindigkeit 90 km/h"
+    },
+    {
+      "key": "structure",
+      "title": "Strukturelle Stabilität",
+      "detail": "Integrierter Druckguss-Querträger vorn und hinten",
+      "alt": ""
+    },
+    {
+      "key": "perception",
+      "title": "Ende-zu-Ende-Großmodell-Wahrnehmungssystem für alle Bereiche",
+      "detail": "",
+      "alt": ""
+    },
+    {
+      "key": "decision",
+      "title": "Ende-zu-Ende-Neuronales-Netz-Paradigma",
+      "detail": "Das Luftlogistiksystem neu definieren",
+      "alt": ""
+    },
+    {
+      "key": "battery",
+      "title": "Unterstützt Betrieb mit zwei/vier Akkus",
+      "detail": "",
+      "alt": ""
+    },
+    {
+      "key": "cluster",
+      "title": "Zusammenarbeit mehrerer Fluggeräte",
+      "detail": "Maximale Nutzlast 720 kg",
+      "alt": ""
+    },
+    {
+      "key": "applications",
+      "title": "Anwendungen darüber hinaus, Fähigkeiten über das Sichtbare hinaus",
+      "detail": "",
+      "alt": ""
+    }
+  ],
+  "powerMetrics": [
+    {
+      "value": "240",
+      "unit": "kg",
+      "label": "Maximale Nutzlast pro Fluggerät"
+    },
+    {
+      "value": "90",
+      "unit": "km/h",
+      "label": "Maximale Horizontalgeschwindigkeit",
+      "note": 4
+    },
+    {
+      "value": "6000",
+      "unit": "m",
+      "label": "Maximale Flughöhe",
+      "note": 5
+    },
+    {
+      "value": "6",
+      "unit": "",
+      "label": "Windwiderstand (Beaufort-Skala)"
+    }
+  ],
+  "stories": {
+    "performance": {
+      "title": "Antriebsinnovation, Rumpfstabilität"
+    },
+    "energy": {
+      "title": "Energie bestimmt die Grenzen der Nutzlast"
+    },
+    "perception": {
+      "title": "Grenzenlose Wahrnehmung, Erkenntnis auf den Millimeter"
+    },
+    "decision": {
+      "title": "Autonome Ende-zu-Ende-Entscheidungen definieren das Luftlogistiksystem neu"
+    },
+    "cluster": {
+      "title": "Cluster-Hebesystem sprengt die Schwerlastgrenzen"
+    },
+    "functions": {
+      "title": "Vollständigere Konfigurationen, mehr Funktionen"
+    }
+  },
+  "galleries": {
+    "power": {
+      "label": "Antriebsinnovation, Rumpfstabilität",
+      "items": [
+        {
+          "title": "Vier Rotoren, acht Propeller, doppelte Absicherung",
+          "detail": "73-Zoll-Faltpropeller aus Kohlefaser | Brandneue Flachdrahtmotoren | Gesamtschub der vier Rotoren 720 kg"
+        },
+        {
+          "title": "Extreme Schwingungsdämpfung, strukturelle Stabilität",
+          "detailParts": [
+            {
+              "text": "Integrierter Druckguss-Querträger und Propeller-Sicherheitsverriegelungen | Rumpfsteifigkeit um 300 % erhöht",
+              "note": 3
+            },
+            {
+              "text": ", Schwingungsübertragung um 70 % reduziert",
+              "note": 3
+            }
+          ]
+        }
+      ]
+    },
+    "energy": {
+      "label": "Energie bestimmt die Grenzen der Nutzlast",
+      "items": [
+        {
+          "title": "Starke Energie, effizientes Schnellladen",
+          "detail": "50-Ah-CTB-Ultraschnellakku: unterstützt Betriebsmodi mit zwei und vier Akkus; 5,5C-Schnellladung: vollständig geladen in nur 7 Minuten",
+          "notes": [
+            10
+          ]
+        },
+        {
+          "title": "Lange Ausdauer, müheloser Betrieb",
+          "detail": "Maximale Flugstrecke 35 km",
+          "notes": [
+            1
+          ]
+        },
+        {
+          "title": "Bedingungen in großer Höhe",
+          "detailNote": "(Bei jedem Anstieg um 1.000 m sinkt die Luftdichte um etwa 10 %.)",
+          "detailParts": [
+            {
+              "text": "Bei 3.000 m maximale Nutzlast 240 kg; bei 4.500 m maximale Nutzlast 200 kg; bei 6.000 m (maximale Betriebshöhe)",
+              "note": 5
+            },
+            {
+              "text": "maximale Nutzlast 160 kg"
+            }
+          ]
+        }
+      ]
+    },
+    "perception": {
+      "label": "Grenzenlose Wahrnehmung, Erkenntnis auf den Millimeter",
+      "items": [
+        {
+          "title": "Neun-Kamera-Sicht",
+          "detail": "Zwei 4-Kamera-Rundumsichtsysteme + 4K-FPV = 360°-Echtzeit-Rundumbild mit neun Kameras, direkt und ohne Latenz übertragen"
+        },
+        {
+          "title": "Multiquellen-Radar-Wahrnehmungssystem",
+          "detail": "Frontales LiDAR mit 920.000-Punkt-Wolke und einer Punktwolkendichte, die 3,5× über dem Branchendurchschnitt liegt. Doppeltes Millimeterwellenradar oben und unten für eine präzisere Wahrnehmung mit einer Reichweite von bis zu 150 m"
+        },
+        {
+          "title": "Ende-zu-Ende-Großmodell-Wahrnehmungssystem für alle Bereiche",
+          "detail": "Neun-Kamera-Sicht und Multiquellen-Radar werden tief fusioniert, um einen allumfassenden Wahrnehmungsperimeter aufzubauen"
+        },
+        {
+          "title": "Fracht-Hindernisvermeidung, automatische Schwingungsbeseitigung",
+          "detail": "Die Echtzeitüberwachung der Umgebung, des Leistungszustands und der Fracht reduziert kontinuierlich potenzielle Risiken"
+        }
+      ]
+    },
+    "cluster": {
+      "label": "Cluster-Hebesystem sprengt die Schwerlastgrenzen",
+      "items": [
+        {
+          "title": "Zusammenarbeit mehrerer Fluggeräte, Abdeckung aller Bereiche",
+          "titleParts": [
+            {
+              "text": "Zusammenarbeit mehrerer Fluggeräte",
+              "note": 6
+            },
+            {
+              "text": ", Abdeckung aller Bereiche"
+            }
+          ]
+        },
+        {
+          "title": "Zusammenarbeit von zwei Fluggeräten, Nutzlast bis zu 400 kg"
+        },
+        {
+          "title": "Zusammenarbeit von vier Fluggeräten, Nutzlast bis zu 720 kg"
+        }
+      ]
+    },
+    "functions": {
+      "label": "Vollständigere Konfigurationen, mehr Funktionen",
+      "items": [
+        {
+          "title": "Videoübertragungssignal",
+          "detailParts": [
+            {
+              "text": "Bis zu 30 km",
+              "note": 2
+            },
+            {
+              "text": " 4G+-Videoübertragung | Doppelsteuerung pro Fluggerät\nAusdauer der Relaisstation 8 Stunden"
+            }
+          ]
+        },
+        {
+          "title": "Intelligente Sprachsteuerung",
+          "detail": "Sprachaktivierung und Steuerung per Sprachbefehl"
+        },
+        {
+          "title": "Zyklische Smart-Hebe-Lösung",
+          "detail": "Menschenzentriert, Trennung von Mensch und Maschine für sichereren Flug und sorgenfreien Betrieb",
+          "notes": [
+            7
+          ]
+        },
+        {
+          "title": "Optionaler Fallschirm",
+          "detail": "Dämpft den Aufprall bei der Landung, um Risiken und Verluste zu verringern"
+        },
+        {
+          "title": "Intelligentes Abwurfsystem",
+          "detail": "Elektrisches Windenseil, das sich frei aus- und einfährt",
+          "notes": [
+            6
+          ]
+        }
+      ]
+    }
+  },
+  "decisions": [
+    {
+      "title": "Ende-zu-Ende: sieht, entscheidet und fliegt selbstständig",
+      "detail": "Imitationslernen aus Experten-Trajektorien und lernende Agenten | Flow Matching, Weltmodelle und Rekonstruktions-Vortraining mit Billionen von On-Device-Operationen pro Sekunde"
+    },
+    {
+      "title": "Intelligente Routen",
+      "detail": "Fliegt immer schneller und optimiert kontinuierlich die Routen"
+    },
+    {
+      "title": "Trajektorien-Wiederholung",
+      "detail": "Effiziente Routen mit einem Tippen abrufen, reduziert den Arbeitsaufwand"
+    }
+  ],
+  "applications": {
+    "heading": "Anwendungen darüber hinaus, Fähigkeiten über das Sichtbare hinaus",
+    "items": [
+      {
+        "title": "Photovoltaik-Transport"
+      },
+      {
+        "title": "Holztransport"
+      },
+      {
+        "title": "Stahltransport"
+      },
+      {
+        "title": "Transport von Notfallgütern"
+      }
+    ]
+  },
+  "packages": {
+    "heading": "EAVision C-500",
+    "intro": "Vier Werkskonfigurationen, jede auf eine andere Nutzlast und Ladeausstattung ausgelegt.",
+    "note": "Preis individuell für Ihre Region",
+    "cta": "Angebot anfordern",
+    "items": [
+      {
+        "key": "standard-charger",
+        "name": "Standard-Hebepaket",
+        "variant": "Ladegerät-Version",
+        "summary": "EAVision C500-Hebesystem, 4× intelligente CTB-Akkus, Fracht-Fernbedienung, 2× Ladekühlkörper."
+      },
+      {
+        "key": "standard-station",
+        "name": "Standard-Hebepaket",
+        "variant": "Ladestation-Version",
+        "summary": "EAVision C500-Hebesystem, 4× intelligente CTB-Akkus, Fracht-Fernbedienung, 2× Ladekühlkörper und 2× Generatoren."
+      },
+      {
+        "key": "airlift-charger",
+        "name": "Intelligentes Lufthebe-Paket",
+        "variant": "Ladegerät-Version",
+        "summary": "Intelligentes EAVision C500-Lufthebesystem, 4× intelligente CTB-Akkus, Fracht-Fernbedienung, 2× Ladekühlkörper."
+      },
+      {
+        "key": "airlift-station",
+        "name": "Intelligentes Lufthebe-Paket",
+        "variant": "Ladestation-Version",
+        "summary": "Intelligentes EAVision C500-Lufthebesystem, 4× intelligente CTB-Akkus, Fracht-Fernbedienung, 2× Ladekühlkörper und 2× Generatoren."
+      }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Globale Preisgestaltung, individuell für Sie",
+    "title": "Angebot anfordern",
+    "lead": "Der Preis des C500 hängt von Ihrer Konfiguration, Region und Einsatzgröße ab. Teilen Sie uns Ihren Bedarf mit — unser Team erstellt ein individuelles Angebot.",
+    "points": [
+      "Konfiguration passend zu Ihrer Nutzlast und Ladeausstattung",
+      "Regionale Preisgestaltung und Lieferzeiten",
+      "Unterstützung bei Zertifizierung und After-Sales-Planung"
+    ],
+    "form": {
+      "name": "Vollständiger Name",
+      "email": "Geschäftliche E-Mail",
+      "phone": "Telefon / WhatsApp (optional)",
+      "company": "Unternehmen",
+      "region": "Land / Region",
+      "package": "Gewünschtes Paket",
+      "packagePlaceholder": "Paket auswählen",
+      "message": "Nachricht",
+      "messagePlaceholder": "Nutzlast, Einsatzbedingungen, Zeitplan …",
+      "submit": "Angebot anfordern",
+      "submitting": "Wird gesendet …",
+      "success": "Vielen Dank — Ihre Anfrage ist bei Partdro eingegangen. Wir antworten innerhalb eines Werktags.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns.",
+      "fallbackLink": "Schreiben Sie an info@droneworld.tech",
+      "privacy": "Wir verwenden diese Angaben ausschließlich zur Beantwortung dieser Anfrage.",
+      "noscript": "JavaScript ist deaktiviert. Bitte senden Sie Ihre Anforderungen per E-Mail an info@droneworld.tech; wir antworten direkt.",
+      "honeypot": "Website"
+    }
+  },
+  "specifications": {
+    "titlePrefix": "C-500",
+    "title": "Technische Daten des Schwerlast-Flugroboters",
+    "items": [
+      {
+        "label": "Maximale Nutzlast",
+        "value": "240 kg"
+      },
+      {
+        "label": "Leergewicht (ohne Akkus)",
+        "value": "120 kg"
+      },
+      {
+        "label": "Antriebskonfiguration",
+        "value": "Vier Rotoren, acht Propeller mit doppelter Antriebssicherheit"
+      },
+      {
+        "label": "Propeller",
+        "value": "73-Zoll-Faltpropeller aus Kohlefaser"
+      },
+      {
+        "label": "Gesamtschub der vier Rotoren",
+        "value": "720 kg"
+      },
+      {
+        "label": "Maximale Fluggeschwindigkeit",
+        "value": "90 km/h"
+      },
+      {
+        "label": "Windwiderstandsklasse",
+        "value": "Stufe 6"
+      },
+      {
+        "label": "Gesamte Schutzart",
+        "value": "IP55"
+      },
+      {
+        "label": "Betriebstemperatur",
+        "value": "-20 °C bis 50 °C"
+      },
+      {
+        "label": "Akkukonfiguration",
+        "value": "50-Ah-CTB-Ultraschnellakku, unterstützt Betriebsmodi mit zwei und vier Akkus"
+      },
+      {
+        "label": "Ladeleistung",
+        "value": "5,5C-Schnellladung, vollständig geladen in nur 7 Minuten"
+      },
+      {
+        "label": "Reichweite",
+        "value": "Maximale Flugstrecke 35 km"
+      },
+      {
+        "label": "Wahrnehmungssystem",
+        "value": "Neun-Kamera-Sicht (2× 4-Kamera-Rundumsicht + 4K-FPV), LiDAR mit 920.000-Punkt-Wolke, Millimeterwellenradar oben und unten"
+      },
+      {
+        "label": "Erkennungsreichweite",
+        "value": "150 m"
+      },
+      {
+        "label": "Videoübertragung",
+        "value": "Bis zu 30 km 4G+-Videoübertragung"
+      },
+      {
+        "label": "Cluster-Hebevorrichtung",
+        "value": "Zusammenarbeit von zwei Fluggeräten bis 400 kg; Zusammenarbeit von vier Fluggeräten bis 720 kg"
+      }
+    ]
+  },
+  "notes": {
+    "aria": "Produkthinweise zur Verwendung und Datenbedingungen",
+    "intro": [
+      "* Prüfen, bestätigen und befolgen Sie vor dem Flug strikt die örtlichen Gesetze und Vorschriften.",
+      "** Alle Videos und Bilder auf dieser Seite wurden unter strikter Einhaltung der geltenden örtlichen Gesetze und Vorschriften aufgenommen. Machen Sie sich mit den örtlichen Gesetzen und Vorschriften vertraut und stellen Sie sicher, dass das Fluggerät über die erforderlichen Zertifizierungen verfügt, bevor Sie fliegen.",
+      "*** Das tatsächliche Erscheinungsbild des Produkts entspricht dem gelieferten Artikel.",
+      "**** Die Nutzlast der Drohne wird auf Meereshöhe gemessen. Die App bewertet die Sicherheit des geladenen Gewichts intelligent anhand des aktuellen Fluggerätzustands, des Akkuzustands und der Umgebungsbedingungen. Laden Sie gemäß dem in der App angezeigten Gewichtsstatus; andernfalls kann die Flugsicherheit beeinträchtigt werden."
+    ],
+    "items": [
+      {
+        "text": "1. Dieser Wert wurde mit dem C500 im vierakkubetriebenen, unbeladenen Zustand, ausgestattet mit dem Hebesystem, auf einer Höhe äquivalent zum Meeresspiegel, bei einer Umgebungstemperatur von 25 °C ohne Wind, im Vorwärtsflug mit 20 m/s bis zur Erschöpfung des Akkus und einer erzwungenen Landung gemessen. Die Daten dienen nur als Referenz; die Ergebnisse können in unterschiedlichem Maße je nach externer Umgebung, Nutzungsweise und Firmware-Version abweichen. Beachten Sie während des tatsächlichen Flugs die Hinweise der App."
+      },
+      {
+        "text": "2. Die Übertragungsdistanz von 30 km wird nur nach dem FCC-Standard erreicht. In Festlandchina gilt der SRRC-Standard mit einer maximalen Videoübertragungsdistanz von 20 km. Die oben genannten Daten wurden in einer offenen Außenumgebung ohne Störungen gemessen und stellen die maximale Kommunikationsdistanz für einen Hinflug ohne Rückkehr unter jedem Standard dar. Beachten Sie während des tatsächlichen Flugs die Rückkehrhinweise in der App."
+      },
+      {
+        "text": "3. Abgeleitet aus dem Vergleich mit herkömmlichen Frachtdrohnen; die Testergebnisse können je nach Testbedingungen abweichen."
+      },
+      {
+        "text": "4. Die maximale Fluggeschwindigkeit hängt von der Anzahl der Akkus und dem Gewicht der Nutzlast ab. Fliegen Sie sicher und befolgen Sie strikt die Hinweise und Warnungen der App."
+      },
+      {
+        "text": "5. Die Nutzlastkapazität der Drohne nimmt mit steigender Starthöhe ab. Eine Höhe von 6.000 m ist die maximale sichere Flughöhe der Drohne (Start auf einer Höhe von 4.500 m)."
+      },
+      {
+        "text": "6. Erfordert einen zusätzlichen optionalen Kauf."
+      },
+      {
+        "text": "7. Diese Funktion wird künftig per Firmware-Update unterstützt. Beachten Sie die entsprechenden Firmware-Update-Hinweise auf der Fernbedienung und der offiziellen Website."
+      },
+      {
+        "text": "8. Der effektive Arbeitsbereich der Wahrnehmung sowie die Fähigkeit, Hindernissen auszuweichen und sie zu umfliegen, variieren je nach Umgebungslicht, Regen und Nebel sowie Material, Position und Form des Zielobjekts. Die untere Wahrnehmung dient zur Unterstützung des geländefolgenden Höhenhalteflugs, während die Wahrnehmung in anderen Richtungen zur Hindernisvermeidung dient. Außer bei linearen Hindernisszenarien gilt: Wenn das Fluggerät durch ein Fehlschlagen der Hindernisvermeidung bei Geschwindigkeiten bis 13,8 m/s beschädigt wird, kann die Haftung durch Loganalyse bestimmt werden, und die kostenlose Garantie gilt, wenn die Ursache kein menschliches Versagen ist; bei linearen Hindernisszenarien gilt: Wenn das Fluggerät durch ein Fehlschlagen der Hindernisvermeidung bei Geschwindigkeiten bis 10 m/s beschädigt wird, kann die Haftung durch Loganalyse bestimmt werden, und die kostenlose Garantie gilt, wenn die Ursache kein menschliches Versagen ist. Um die Betriebssicherheit zu gewährleisten, wird empfohlen, Stromleitungen, Abspannseile und ähnliche Gefahren als Hindernisse zu markieren.",
+        "extra": [
+          "Hinweis:",
+          "(1) Die untere Wahrnehmung dient zur Unterstützung des geländefolgenden Höhenhalteflugs. Nutzer sollten die Flugumgebung beachten; Schäden am Fluggerät durch Kollisionen mit Hindernissen unterhalb sind nicht durch die kostenlose Garantie abgedeckt;",
+          "(2) Das Fluggerät kann sich bewegenden Objekten nicht aktiv ausweichen. Nutzer sollten die Flugumgebung beachten; Schäden am Fluggerät, die in solchen Szenarien entstehen, sind nicht durch die kostenlose Garantie abgedeckt;",
+          "(3) Die Fracht-Hindernisvermeidung ist nur eine Flughilfe. Nutzer sollten die Flugumgebung beachten; Schäden am Fluggerät durch Kollision der Fracht oder des Hebedrahts mit Hindernissen sind nicht durch die kostenlose Garantie abgedeckt;"
+        ]
+      },
+      {
+        "text": "9. Die zweite Fernbedienung ist optional und muss separat erworben werden."
+      },
+      {
+        "text": "10. Gemessen auf einer Höhe äquivalent zum Meeresspiegel, bei einer Umgebungstemperatur zwischen 15 und 40 °C, mit rotierendem Einzelakku-Laden, für das Laden von 30 % auf 95 %; Schnellladen wird unterstützt, wenn die Zelltemperatur des Akkus zwischen 15 und 70 °C liegt. Die Ladezeit variiert je nach Eingangsleistung, Höhe, Startladezustand und anderen Faktoren."
+      }
+    ]
+  },
+  "accessibility": {
+    "notes": "Produkthinweise zur Verwendung und Datenbedingungen",
+    "gallery": {
+      "position": "Position in {label}",
+      "item": "Element {n}",
+      "prev": "Zurück",
+      "next": "Weiter"
+    },
+    "decision": "Autonome Entscheidungsfähigkeiten",
+    "decisionExpand": "Erweitern",
+    "decisionCollapse": "Zuklappen",
+    "video": "Produktvideo",
+    "scroll": "Seiten-Bildlaufleiste"
+  },
+  "footer": {
+    "description": "EAVision C500 Schwerlast-Transportdrohne, weltweit vertrieben von Partdro mit Unterstützung bei Konfiguration, Zertifizierung und After-Sales.",
+    "contactHeading": "Sprechen Sie mit Partdro",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon / WhatsApp",
+    "exploreHeading": "Entdecken",
+    "products": "Alle Produkte",
+    "about": "Über Partdro",
+    "contact": "Kontakt",
+    "languageHeading": "Sprache",
+    "legal": "EAVision ist der Hersteller des C500. Partdro ist ein unabhängiger globaler Lieferant und nicht der Hersteller. Die Produktspezifikationen werden von EAVision bereitgestellt und können sich ändern.",
+    "copyright": "Partdro. Alle Rechte vorbehalten."
+  },
+  "whatsapp": {
+    "aria": "Chatten Sie mit Partdro über WhatsApp",
+    "message": "Hallo Partdro, ich interessiere mich für die EAVision C500 Schwerlastdrohne."
+  },
+  "seo": {
+    "breadcrumbHome": "Startseite",
+    "breadcrumbProducts": "Produkte",
+    "breadcrumbCurrent": "C500 EAVision"
+  }
+}
