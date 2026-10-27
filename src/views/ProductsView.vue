@@ -35,9 +35,16 @@
             <div class="product-card__body">
               <h3>{{ product.name }}</h3>
               <p>{{ product.short_desc }}</p>
-              <router-link :to="lp('/products/' + product.slug)" class="product-card__link">
+              <router-link
+                v-if="product.slug !== C500_SLUG"
+                :to="lp('/products/' + product.slug)"
+                class="product-card__link"
+              >
                 {{ t('products.viewDetails') }} <RightOutlined />
               </router-link>
+              <a v-else :href="lp(C500_LANDING_PATH)" class="product-card__link">
+                {{ t('products.viewDetails') }} <RightOutlined />
+              </a>
             </div>
           </div>
         </div>
@@ -56,6 +63,10 @@ import { useLocalePath } from '../composables/useLocalePath'
 import type { ProductCategory } from '../types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
+
+// C500 使用独立静态落地页；必须整页跳转，否则 SPA 会渲染成本地开发回退页。
+const C500_SLUG = 'c500-delivery-drone'
+const C500_LANDING_PATH = '/products/c500-partdro-eavision'
 
 const { t } = useI18n()
 const route = useRoute()
