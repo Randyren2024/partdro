@@ -83,6 +83,10 @@ if (!productSlugs.length && !postSlugs.length) {
 const localizedPaths = [
   '/',
   '/products',
+  // 商业意图 hub（router 静态路由，不在 products 表）
+  '/solutions/facade-cleaning',
+  '/solutions/solar-panel-cleaning',
+  '/solutions/heavy-lift-logistics',
   // C500 EAVision 是独立静态落地页（landing/eavision-c500），不在 products 表，但属于投放/自然搜索落地页
   '/products/c500-partdro-eavision',
   ...productSlugs.map((s) => `/products/${s}`),

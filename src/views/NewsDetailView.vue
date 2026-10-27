@@ -1,5 +1,11 @@
 <template>
-  <div class="news-detail" data-prerender-article :data-related-products-ready="productsReady" v-if="post">
+  <div
+    class="news-detail"
+    data-prerender-article
+    :data-related-products-ready="productsReady"
+    :data-related-articles-ready="articlesReady"
+    v-if="post"
+  >
     <div class="page-header">
       <div class="container">
         <h1>{{ post.title }}</h1>
@@ -13,6 +19,15 @@
           <p>{{ post.summary }}</p>
           <div v-html="post.content" />
         </div>
+        <section v-if="relatedPosts.length" class="related-articles" data-related-articles>
+          <h2 class="related-articles__title">{{ t('news.relatedArticles') }}</h2>
+          <ul class="related-articles__list">
+            <li v-for="p in relatedPosts" :key="p.slug">
+              <router-link :to="newsPath(p)" class="related-articles__link">{{ p.title }}</router-link>
+              <span class="related-articles__date">{{ p.published_at?.slice(0, 10) }}</span>
+            </li>
+          </ul>
+        </section>
         <section v-if="relatedProducts.length" class="related-products" data-related-products>
           <h2 class="related-products__title">{{ t('news.relatedProducts') }}</h2>
           <div class="related-products__grid">
@@ -50,10 +65,10 @@ import { useI18n } from 'vue-i18n'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
 import { SITE_URL } from '../router'
-import { usePost, useProducts } from '../composables/useSupabase'
+import { usePost, useProducts, useRelatedPosts } from '../composables/useSupabase'
 import { useLocalePath } from '../composables/useLocalePath'
 import { DEFAULT_LOCALE } from '../i18n'
-import type { Product } from '../types'
+import type { Post, Product } from '../types'
 
 const route = useRoute()
 const slug = () => route.params.slug as string
@@ -81,6 +96,22 @@ const { data: products, loading: productsLoading } = useProducts()
 
 // 供预渲染等待：产品请求结束后才落盘，否则静态 HTML 里会缺「相关产品」内链
 const productsReady = computed(() => (productsLoading.value ? undefined : 'true'))
+
+/**
+ * 同分类其他文章。96 篇文章正文目前没有任何内链，Google 只能靠分类页发现文章；
+ * 这里给每篇补齐 4 条同主题链接，形成可抓取的文章簇（肥料/植保、清洗、物流）。
+ */
+const { data: relatedPosts, loading: relatedLoading } = useRelatedPosts(
+  () => post.value?.category,
+  () => post.value?.slug,
+)
+const articlesReady = computed(() => (relatedLoading.value ? undefined : 'true'))
+
+// 与 NewsView 一致：没有当前语言翻译的文章链回英语正文，避免落到会被 301 的本地化 URL
+const newsPath = (p: Post) =>
+  locale.value === DEFAULT_LOCALE || p.availableLangs?.includes(locale.value)
+    ? lp(`/news/${p.slug}`)
+    : `/news/${p.slug}`
 
 const relatedProducts = computed<Product[]>(() => {
   const slugs = CATEGORY_PRODUCT_SLUGS[post.value?.category ?? ''] ?? []
@@ -209,6 +240,47 @@ watch(post, (p) => {
 }
 .article-content li {
   margin-bottom: 8px;
+}
+.related-articles {
+  margin: 40px 0 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-border, #eee);
+}
+.related-articles__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--color-dark);
+}
+.related-articles__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.related-articles__list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border, #eee);
+}
+.related-articles__list li:last-child {
+  border-bottom: none;
+}
+.related-articles__link {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-dark);
+  text-decoration: none;
+}
+.related-articles__link:hover {
+  color: var(--color-primary);
+}
+.related-articles__date {
+  flex: none;
+  font-size: 12px;
+  color: var(--color-text-light);
 }
 .related-products {
   margin: 40px 0 28px;

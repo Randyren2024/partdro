@@ -26,6 +26,17 @@
             {{ t(`products.category.${cat}`) }}
           </button>
         </div>
+
+        <nav class="product-solutions" :aria-label="ui.browseSolutions">
+          <span>{{ ui.browseSolutions }}</span>
+          <router-link
+            v-for="item in solutionLinks"
+            :key="item.slug"
+            :to="lp(`/solutions/${item.slug}`)"
+          >
+            {{ item.eyebrow }}
+          </router-link>
+        </nav>
         <div class="product-grid">
           <div class="product-card" v-for="product in filteredProducts" :key="product.slug">
             <div class="product-card__image">
@@ -60,7 +71,9 @@ import { useRoute, useRouter } from 'vue-router'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { useProducts } from '../composables/useSupabase'
 import { useLocalePath } from '../composables/useLocalePath'
-import type { ProductCategory } from '../types'
+import { SOLUTIONS, SOLUTION_SLUGS, SOLUTION_UI } from '../data/solutions'
+import { DEFAULT_LOCALE, isLocale } from '../i18n'
+import type { ProductCategory, Lang } from '../types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
 
@@ -68,11 +81,17 @@ const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
 const C500_SLUG = 'c500-delivery-drone'
 const C500_LANDING_PATH = '/products/c500-partdro-eavision'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const lp = useLocalePath()
 const { data: products } = useProducts()
+
+const lang = computed<Lang>(() => (isLocale(locale.value) ? locale.value : DEFAULT_LOCALE))
+const ui = computed(() => SOLUTION_UI[lang.value])
+const solutionLinks = computed(() =>
+  SOLUTION_SLUGS.map((slug) => ({ slug, eyebrow: SOLUTIONS[slug][lang.value].eyebrow })),
+)
 
 const activeCategory = computed<ProductCategory | null>(() =>
   CATEGORIES.includes(route.query.category as ProductCategory)
@@ -115,6 +134,26 @@ const setCategory = (cat: ProductCategory | null) => {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #fff;
+}
+.product-solutions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin: -14px 0 28px;
+  font-size: 14px;
+}
+.product-solutions > span {
+  color: var(--color-text-light);
+}
+.product-solutions a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(24, 136, 200, 0.4);
+}
+.product-solutions a:hover {
+  border-bottom-style: solid;
 }
 .product-grid {
   display: grid;

@@ -16,6 +16,12 @@ const siteChildren = [
     name: 'products',
     component: () => import('../views/ProductsView.vue'),
   },
+  // 商业意图 hub：facade / solar / heavy-lift（内容见 src/data/solutions.ts）
+  {
+    path: 'solutions/:solution(facade-cleaning|solar-panel-cleaning|heavy-lift-logistics)',
+    name: 'solution',
+    component: () => import('../views/SolutionView.vue'),
+  },
   {
     path: 'products/:slug',
     name: 'product-detail',

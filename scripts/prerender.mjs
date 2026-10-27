@@ -48,7 +48,18 @@ const MIME = {
 }
 
 // 固定栏目路由
-const STATIC_ROUTES = ['/', '/products', '/about', '/news', '/cases', '/documents', '/contact']
+const STATIC_ROUTES = [
+  '/',
+  '/products',
+  '/solutions/facade-cleaning',
+  '/solutions/solar-panel-cleaning',
+  '/solutions/heavy-lift-logistics',
+  '/about',
+  '/news',
+  '/cases',
+  '/documents',
+  '/contact',
+]
 
 /** 裸路径 + 语言 → 带前缀的可抓取 URL 路径（英语不带前缀） */
 function withPrefix(route, locale) {
@@ -335,10 +346,12 @@ async function renderAll(tasks) {
           }
           return !!article && !!article.querySelector('.article-content')?.textContent?.trim()
         }, null, { timeout: 12000 })
-        // 文章末尾的「相关产品」内链依赖 products 请求；等数据就绪再落盘，
-        // 避免静态 HTML 缺内链（超时则保留文章本身，不阻断预渲染）。
+        // 文章末尾的「相关产品 / 相关文章」内链依赖 products、posts 请求；
+        // 等两组数据都就绪再落盘，避免静态 HTML 缺内链（超时则保留文章本身，不阻断预渲染）。
         await page.waitForFunction(
-          () => !!document.querySelector('[data-related-products-ready="true"]'),
+          () =>
+            !!document.querySelector('[data-related-products-ready="true"]') &&
+            !!document.querySelector('[data-related-articles-ready="true"]'),
           null,
           { timeout: 8000 },
         ).catch(() => {})

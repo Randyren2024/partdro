@@ -21,6 +21,17 @@
         </div>
       </div>
 
+      <div class="solutions__applications">
+        <span>{{ ui.browseSolutions }}</span>
+        <router-link
+          v-for="item in solutionLinks"
+          :key="item.slug"
+          :to="lp(`/solutions/${item.slug}`)"
+        >
+          {{ item.eyebrow }}
+        </router-link>
+      </div>
+
       <div class="solutions__cta">
         <a-button type="primary" size="large" @click="$router.push(lp('/products'))">
           {{ t('products.viewAll') }}
@@ -31,14 +42,24 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { RightOutlined } from '@ant-design/icons-vue'
 import { useProducts } from '../../composables/useSupabase'
 import { useLocalePath } from '../../composables/useLocalePath'
+import { SOLUTIONS, SOLUTION_SLUGS, SOLUTION_UI } from '../../data/solutions'
+import { DEFAULT_LOCALE, isLocale } from '../../i18n'
+import type { Lang } from '../../types'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const lp = useLocalePath()
 const { data: products } = useProducts()
+
+const lang = computed<Lang>(() => (isLocale(locale.value) ? locale.value : DEFAULT_LOCALE))
+const ui = computed(() => SOLUTION_UI[lang.value])
+const solutionLinks = computed(() =>
+  SOLUTION_SLUGS.map((slug) => ({ slug, eyebrow: SOLUTIONS[slug][lang.value].eyebrow })),
+)
 
 const categoryLabel = (cat: string) => t(`products.category.${cat}`)
 </script>
@@ -115,6 +136,27 @@ const categoryLabel = (cat: string) => t(`products.category.${cat}`)
 }
 .solutions__card-link:hover {
   gap: 10px;
+}
+.solutions__applications {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 20px;
+  margin-top: 34px;
+  font-size: 14px;
+}
+.solutions__applications > span {
+  color: var(--color-text-light);
+}
+.solutions__applications a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(24, 136, 200, 0.4);
+}
+.solutions__applications a:hover {
+  border-bottom-style: solid;
 }
 .solutions__cta {
   text-align: center;

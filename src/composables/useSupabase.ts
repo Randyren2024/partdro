@@ -204,6 +204,56 @@ export function usePosts(options?: { limit?: number }) {
   return { data, loading, error, reload }
 }
 
+/**
+ * 同分类的其他文章：用于文章页「相关文章」内链。
+ * 只取标题/摘要/封面，不拉正文——文章页没必要为了内链把全站正文再下载一遍。
+ * category/slug 依赖文章本身异步加载，用 watch 等它们就绪后再查。
+ */
+export function useRelatedPosts(
+  category: () => string | undefined,
+  excludeSlug: () => string | undefined,
+  limit = 4,
+) {
+  const { locale, bindLocale } = useLocale()
+  const data = ref<Post[]>([])
+  const loading = ref(false)
+  const error = ref<string | null>(null)
+
+  const reload = async () => {
+    const cat = category()
+    if (!cat) {
+      data.value = []
+      return
+    }
+    loading.value = true
+    error.value = null
+    try {
+      const { data: rows, error: err } = await supabase
+        .from('posts')
+        .select('id,slug,category,image_url,published,published_at,created_at,post_langs(lang,title,summary)')
+        .eq('published', true)
+        .eq('category', cat)
+        .order('published_at', { ascending: false })
+        .limit(limit + 1)
+      if (err) throw err
+      const current = excludeSlug()
+      data.value = (rows ?? [])
+        .filter((r: any) => r.slug !== current)
+        .slice(0, limit)
+        .map((r: any) => mapPost(r, locale.value))
+    } catch (e: any) {
+      error.value = e?.message ?? String(e)
+    } finally {
+      loading.value = false
+    }
+  }
+
+  bindLocale(reload)
+  watch([category, excludeSlug], reload, { immediate: true, flush: 'post' })
+
+  return { data, loading, error, reload }
+}
+
 export function usePost(slug: string | (() => string)) {
   const { locale, bindLocale } = useLocale()
   const data = ref<Post | null>(null)
