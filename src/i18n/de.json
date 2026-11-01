@@ -63,6 +63,11 @@
       "agricultural": "Agrardrohne",
       "cargo": "Lieferdrohne",
       "cleaning": "Reinigungsdrohne"
+    },
+    "u15": {
+      "name": "U15 Multi-Mission Drone",
+      "category": "Multimissionsdrohne",
+      "desc": "15 kg Nutzlast, 75 Minuten Flugzeit und eine Vier-Sensor-Kapsel – ein Airframe für Lieferung, Inspektion und Wasserproben."
     }
   },
   "cases": {

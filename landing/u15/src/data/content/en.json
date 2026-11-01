@@ -1,0 +1,422 @@
+{
+  "locale": "en",
+  "meta": {
+    "title": "U15 Multi-Mission Drone — 15 kg Payload, 75 min Flight | Partdro",
+    "description": "Partdro U15 multi-mission drone: 15 kg payload, 75-minute endurance, 8K four-sensor pod, dual radar obstacle avoidance and 5G cloud control. Inspection, delivery and sampling on one airframe.",
+    "keywords": "U15 drone, multi-mission drone, 15 kg payload drone, inspection drone, delivery drone, water sampling drone, tethered drone, Partdro",
+    "ogLocale": "en_US",
+    "productName": "U15 Multi-Mission Drone"
+  },
+  "nav": {
+    "aria": "U15 page navigation",
+    "overview": "Overview",
+    "autonomy": "Autonomy",
+    "specs": "Specs",
+    "quote": "Quote",
+    "requestQuote": "Request a quote",
+    "homeAria": "Partdro home",
+    "skip": "Skip to content"
+  },
+  "hero": {
+    "eyebrow": "PD-U15 · Multi-mission platform",
+    "title": "U15 Multi-Mission Drone",
+    "titleLines": ["U15", "Multi-Mission Drone"],
+    "summary": "15 kg payload. 75 minutes aloft. One airframe for inspection, delivery and environmental sampling.",
+    "primary": "Request a quote",
+    "secondary": "Watch the demo",
+    "imageAlt": "U15 multi-mission drone in flight above a tea plantation",
+    "stats": [
+      { "value": "15", "unit": "kg", "label": "Max payload" },
+      { "value": "75", "unit": "min", "label": "No-payload endurance" },
+      { "value": "15", "unit": "km", "label": "Direct link range" },
+      { "value": "12", "unit": "", "label": "Compatible payloads" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "Overview",
+    "heading": "One airframe. Every mission.",
+    "paragraphs": [
+      "The U15 is a 15 kg-class quadcopter built to change roles without changing aircraft. Swap the sensor pod, the cargo box or the water sampler, and the same platform flies inspection rounds, drops supplies or collects environmental samples.",
+      "A 1,300 mm wheelbase folds into 455 × 630 × 540 mm for transport. Unfolded, it delivers 75 minutes of endurance with no payload and 31 minutes at the full 15 kg. Tethered power keeps it on station around the clock.",
+      "Dual radar, 360° lidar on the Pro edition and IP55 sealing let it work in rain, dust and darkness, from -20 °C to 50 °C, up to a 5,000 m service ceiling."
+    ],
+    "imageAlt": "U15 airframe with folding arms and cargo module",
+    "metrics": [
+      { "value": "15", "unit": "kg", "label": "Payload at sea level" },
+      { "value": "75", "unit": "min", "label": "Endurance, no payload" },
+      { "value": "5,000", "unit": "m", "label": "Service ceiling" },
+      { "value": "IP55", "unit": "", "label": "Dust and rain sealed" }
+    ]
+  },
+  "pod": {
+    "eyebrow": "Payload · Four-sensor pod",
+    "heading": "Four sensors on one stabilised gimbal",
+    "lead": "An 8K wide-angle camera, an 8K hybrid-zoom camera, a laser rangefinder and an infrared camera share a three-axis stabilised gimbal — so every target is captured in visible and thermal detail at the same moment.",
+    "imageAlt": "U15 four-sensor gimbal pod with wide, zoom, laser and thermal optics",
+    "items": [
+      {
+        "name": "8K wide-angle",
+        "value": "24 mm equivalent",
+        "detail": "One frame covers the whole site, so operators keep context instead of stitching panoramas."
+      },
+      {
+        "name": "8K hybrid zoom",
+        "value": "82–268 mm equivalent",
+        "detail": "Read a nameplate or an insulator from a safe stand-off distance."
+      },
+      {
+        "name": "Laser rangefinder",
+        "value": "5–1,200 m · ±0.5 m",
+        "detail": "Direct distance and coordinate measurement, with no separate sensor to calibrate."
+      },
+      {
+        "name": "Infrared camera",
+        "value": "9 mm / 19 mm lens",
+        "detail": "Thermal detection of people, vehicles and heat sources, day or night."
+      }
+    ]
+  },
+  "endurance": {
+    "eyebrow": "Endurance",
+    "heading": "Payload buys time — and the curve is published",
+    "lead": "Every kilogram you leave behind buys minutes on station. Plan missions from the published curve instead of guessing after takeoff.",
+    "chartTitle": "Payload versus flight time",
+    "chartUnit": "min",
+    "points": [
+      { "load": "0 kg", "minutes": 75, "label": "75 min" },
+      { "load": "5 kg", "minutes": 54, "label": "54 min" },
+      { "load": "10 kg", "minutes": 41, "label": "41 min" },
+      { "load": "15 kg", "minutes": 31, "label": "31 min" }
+    ],
+    "note": "Gradient endurance reduces return-to-home time, expands operational range and raises sortie throughput.",
+    "tethered": {
+      "title": "Tethered power, around the clock",
+      "desc": "A mooring box feeds the aircraft from the ground for continuous surveillance, emergency communications and event coverage — no battery swap, no landing."
+    }
+  },
+  "safety": {
+    "eyebrow": "Safety",
+    "heading": "Built for the second-worst day",
+    "lead": "Radar and lidar see through rain, fog and darkness. The airframe is sealed against dust, sand and water.",
+    "items": [
+      {
+        "title": "Dual radar and lidar",
+        "desc": "360° scanning lidar and millimetre-wave radar pick out thin obstacles — power lines, cables, branches — in rain and at night."
+      },
+      {
+        "title": "Arm dual protection",
+        "desc": "Automatic in-place locking with audible mechanical feedback, so the arms are confirmed before every takeoff."
+      },
+      {
+        "title": "IP55 all-weather",
+        "desc": "Sealed against dust, sand and rain, rated from -20 °C to 50 °C and level-6 winds with gusts to level 7."
+      },
+      {
+        "title": "FPV approach camera",
+        "desc": "A dedicated forward camera for manual approach and landing when the situation calls for eyes instead of automation."
+      }
+    ]
+  },
+  "autonomy": {
+    "eyebrow": "Autonomy",
+    "heading": "It sees, decides and lands itself",
+    "lead": "Onboard compute turns sensor data into a decision: 6 TOPS on the Standard edition, 67 TOPS on the Pro.",
+    "items": [
+      {
+        "title": "AI target recognition",
+        "desc": "People, vehicles, fire and smoke are detected in visible and thermal imagery, then held as a track."
+      },
+      {
+        "title": "Dual-mode delivery",
+        "desc": "Fixed-point drops for a marked pad, or dynamic drops onto a moving vehicle. AI tracking keeps the lock in cluttered environments."
+      },
+      {
+        "title": "Centimetre precision landing",
+        "desc": "A calibration plate absorbs deck motion, so the aircraft docks onto cabinets, trucks and vessels at centimetre level."
+      },
+      {
+        "title": "Monocular visual ranging",
+        "desc": "Target coordinates, latitude, longitude and distance are reported live on the ground station without an extra sensor."
+      },
+      {
+        "title": "Terrain following",
+        "desc": "Real-time terrain perception trims height above canopy, ridge and slope for close-ground transit."
+      }
+    ]
+  },
+  "control": {
+    "eyebrow": "Ground control",
+    "heading": "A command post in a laptop",
+    "lead": "One operator can fly a single aircraft precisely, or schedule a fleet across a site.",
+    "imageAlt": "Operator planning U15 missions from a laptop ground station",
+    "items": [
+      {
+        "title": "Centralised control",
+        "desc": "Remote takeoff and landing, command flight and multi-drone coordination from one console."
+      },
+      {
+        "title": "Precise control",
+        "desc": "Virtual cockpit with keyboard or joystick, live attitude and payload control."
+      },
+      {
+        "title": "Secure deployment",
+        "desc": "Efficient command network with private, offline deployment on domestic servers."
+      },
+      {
+        "title": "Intelligent planning",
+        "desc": "3D route planning, scheduling and data review, with large-model assistance for complex sites."
+      }
+    ]
+  },
+  "payloads": {
+    "eyebrow": "Payload ecosystem",
+    "heading": "Twelve payloads, one quick-release bay",
+    "lead": "The U15 changes role in the field. Every payload below mounts to the same interface.",
+    "note": "Availability varies by region. Confirm the configuration for your deployment with Partdro.",
+    "items": [
+      { "code": "LZA102", "name": "Gimbal camera", "desc": "8K wide, 8K zoom, laser and thermal" },
+      { "code": "LZT101", "name": "Searchlight", "desc": "High-output illumination for night search" },
+      { "code": "LZH101", "name": "Loudspeaker", "desc": "Live broadcast and evacuation messages" },
+      { "code": "LZW101", "name": "Logistics box", "desc": "Sealed cargo box with remote release" },
+      { "code": "LZP101", "name": "Payload dropper", "desc": "Single-point release for sling loads" },
+      { "code": "LZJ101", "name": "Parachute", "desc": "Softens impact when flying over people" },
+      { "code": "HW60", "name": "Methane telemeter", "desc": "Detects and traces methane leaks" },
+      { "code": "YF-CL30", "name": "Flow velocimeter", "desc": "Water-surface velocity measurement" },
+      { "code": "YFK", "name": "Mooring box", "desc": "Tethered power for continuous flight" },
+      { "code": "LCQ10", "name": "Gas detector", "desc": "Multi-gas sniffing for confined sites" },
+      { "code": "LZS101", "name": "Rappelling device", "desc": "Line deployment for rescue access" },
+      { "code": "YFTXS", "name": "Emergency comms", "desc": "Airborne 4G/5G base station" }
+    ]
+  },
+  "applications": {
+    "eyebrow": "Applications",
+    "heading": "Where the U15 goes to work",
+    "intro": "One platform, six recurring missions — each flown with a payload change, not a new aircraft.",
+    "items": [
+      {
+        "title": "Logistics and resupply",
+        "desc": "Move 15 kg of spares, samples or medical stock between sites, cabinets and vehicles. No road, no driver."
+      },
+      {
+        "title": "Asset inspection",
+        "desc": "Fly defined routes over substations, pipelines and rooftops with the four-sensor pod."
+      },
+      {
+        "title": "Emergency response",
+        "desc": "Searchlight, loudspeaker and thermal imaging on one aircraft during the first hour of an incident."
+      },
+      {
+        "title": "Water and environment",
+        "desc": "Collect surface-water samples and measure flow without a boat or a fixed sampling station."
+      },
+      {
+        "title": "Fire and gas",
+        "desc": "Detect heat sources and methane leaks before crews enter the affected area."
+      },
+      {
+        "title": "Night patrol",
+        "desc": "Radar and lidar hold a stable position in darkness, rain and fog."
+      }
+    ]
+  },
+  "video": {
+    "eyebrow": "Field demo",
+    "heading": "Water sampling, start to finish",
+    "lead": "A full autonomous mission on a reservoir: takeoff, transit, sample collection, return and landing.",
+    "play": "Play the demo",
+    "posterAlt": "U15 collecting a water sample from a reservoir",
+    "dialogTitle": "U15 water sampling demo",
+    "close": "Close video",
+    "caption": "Reservoir sampling · autonomous flight · no operator intervention"
+  },
+  "projects": {
+    "eyebrow": "Deployments",
+    "heading": "In service",
+    "intro": "Reference deployments from the platform's field programme.",
+    "items": [
+      {
+        "tag": "Healthcare logistics",
+        "title": "Hospital supply runs",
+        "desc": "Scheduled transport of medical supplies between a regional hospital and its satellite sites."
+      },
+      {
+        "tag": "Environmental monitoring",
+        "title": "Water quality sampling system",
+        "desc": "Routine surface-water sampling for a water and environment group, replacing boat-based collection."
+      },
+      {
+        "tag": "Emergency response",
+        "title": "Rescue and detection",
+        "desc": "Airborne search and detection support for emergency response teams."
+      }
+    ]
+  },
+  "editions": {
+    "eyebrow": "Editions",
+    "heading": "Standard or Pro",
+    "intro": "Same airframe, same payload. The difference is what the aircraft can compute and perceive on its own.",
+    "columns": ["U15 Standard", "U15 Pro"],
+    "rows": [
+      { "label": "Max payload", "values": ["15 kg", "15 kg"] },
+      { "label": "Batteries", "values": ["2 × ES15 smart battery", "2 × ES15 smart battery"] },
+      { "label": "Remote controller", "values": ["Included", "Included"] },
+      { "label": "Packaging and charging", "values": ["Trolley case and charging dock", "Trolley case and charging dock"] },
+      { "label": "Insurance and platform", "values": ["Third-party liability cover, 1-year platform", "Third-party liability cover, 1-year platform"] },
+      { "label": "Onboard compute", "values": ["6 TOPS", "67 TOPS"] },
+      { "label": "AI model", "values": ["Lightweight — person, vehicle, fire", "Medium — higher precision, complex scenes"] },
+      { "label": "Obstacle avoidance", "values": ["Four-direction laser", "360° lidar and millimetre-wave radar"] },
+      { "label": "Visual function", "values": ["Monocular ranging", "Monocular ranging"] },
+      { "label": "Cloud control", "values": ["Not included", "4G/5G direct cloud control"] }
+    ],
+    "kitTitle": "In the standard kit",
+    "kit": "Aircraft × 1 · ES15 battery × 2 · remote controller × 1 · charger × 1 · trolley case × 1 · 1-year control platform · third-party liability insurance × 1 year · lightweight AI model · 6 TOPS compute module."
+  },
+  "specs": {
+    "eyebrow": "Specifications",
+    "titlePrefix": "PD-U15",
+    "title": "Multi-Mission Drone Specifications",
+    "items": [
+      { "label": "Aircraft type", "value": "Quadcopter UAV" },
+      { "label": "Power category", "value": "Electric" },
+      { "label": "Wheelbase", "value": "1,300 mm" },
+      { "label": "Dimensions (unfolded)", "value": "1,050 × 1,030 × 540 mm" },
+      { "label": "Dimensions (folded)", "value": "455 × 630 × 540 mm" },
+      { "label": "Max payload", "value": "15 kg" },
+      { "label": "Endurance, no payload", "value": "75 min" },
+      { "label": "Endurance, full payload", "value": "31 min" },
+      { "label": "Max climb speed", "value": "20 m/s" },
+      { "label": "Max descent speed", "value": "5 m/s" },
+      { "label": "Service ceiling", "value": "5,000 m (high-altitude propellers required)" },
+      { "label": "Wind resistance", "value": "Level 6, gusts to level 7" },
+      { "label": "Navigation", "value": "GPS / BeiDou with RTK" },
+      { "label": "Operating temperature", "value": "-20 °C to 50 °C" },
+      { "label": "Communication range", "value": "15 km, unobstructed and interference free" },
+      { "label": "Ingress protection", "value": "IP55" },
+      { "label": "Standard sensors", "value": "FPV camera, GPS, RTK" },
+      { "label": "Payload interface", "value": "Quick-release bay, 12 compatible payloads" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "heading": "U15 questions, answered",
+    "items": [
+      {
+        "q": "What can the U15 carry?",
+        "a": "Up to 15 kg on the standard airframe. Twelve payloads share the same quick-release bay, including the four-sensor gimbal pod, logistics box, searchlight, loudspeaker, parachute, methane telemeter, water flow velocimeter, gas detector and an airborne emergency communications station."
+      },
+      {
+        "q": "How long can the U15 stay airborne?",
+        "a": "75 minutes with no payload, 54 minutes at 5 kg, 41 minutes at 10 kg and 31 minutes at the full 15 kg. With a mooring box providing tethered power, the aircraft can stay on station continuously."
+      },
+      {
+        "q": "What is the control range?",
+        "a": "The direct link reaches 15 km in unobstructed, interference-free conditions. The Pro edition adds 4G/5G cloud control for operations beyond that range, subject to local approvals."
+      },
+      {
+        "q": "Can it fly in rain and wind?",
+        "a": "Yes. The airframe is IP55 rated against dust, sand and rain, operates from -20 °C to 50 °C, and is rated for level-6 winds with gusts to level 7."
+      },
+      {
+        "q": "What separates the Standard and Pro editions?",
+        "a": "Onboard compute rises from 6 TOPS to 67 TOPS, the AI model moves from lightweight to medium precision, obstacle avoidance moves from four-direction laser to 360° lidar plus millimetre-wave radar, and the Pro adds 4G/5G direct cloud control."
+      },
+      {
+        "q": "Can it deliver to a moving vehicle or a vessel?",
+        "a": "Yes. Visual precision landing uses a calibration plate to absorb deck and vehicle motion and docks at centimetre level. Dynamic drops onto moving targets are supported in the delivery workflow."
+      },
+      {
+        "q": "Is the U15 approved for beyond visual line of sight?",
+        "a": "Approval depends on your jurisdiction. Partdro supports operators with documentation and configuration choices, but the operator remains responsible for local permits and flight rules."
+      },
+      {
+        "q": "What is included in the standard kit?",
+        "a": "One aircraft, two ES15 smart batteries, one remote controller, a charger, a trolley case, a one-year control platform licence, one year of third-party liability insurance and the lightweight AI model with a 6 TOPS compute module."
+      },
+      {
+        "q": "How do I get pricing and lead time?",
+        "a": "Send the configuration, region and expected mission profile through the quote form on this page. Our team replies within one business day with pricing, lead time and shipping options."
+      }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Global pricing, tailored to you",
+    "title": "Request a quote",
+    "lead": "U15 pricing depends on edition, payload set, region and deployment scale. Tell us what the aircraft has to do, and our team will come back with a tailored offer.",
+    "points": [
+      "Edition and payload set matched to your mission",
+      "Regional pricing, lead time and shipping",
+      "Support with permits, training and after-sales planning"
+    ],
+    "form": {
+      "name": "Full name",
+      "email": "Work email",
+      "phone": "Phone / WhatsApp (optional)",
+      "company": "Company",
+      "region": "Country / region",
+      "edition": "Edition of interest",
+      "editionPlaceholder": "Select an edition",
+      "message": "Message",
+      "messagePlaceholder": "Mission profile, payload, site conditions, timeline…",
+      "submit": "Request a quote",
+      "submitting": "Sending…",
+      "success": "Thank you — your request has reached Partdro. We will reply within one business day.",
+      "error": "Something went wrong. Please try again or email us.",
+      "fallbackLink": "Email info@droneworld.tech",
+      "privacy": "We use these details only to respond to this inquiry.",
+      "noscript": "JavaScript is disabled. Email info@droneworld.tech with your requirements and we will reply directly.",
+      "honeypot": "Website"
+    }
+  },
+  "notes": {
+    "aria": "Product usage notes and data conditions",
+    "intro": [
+      "* Check, confirm and strictly comply with local laws and regulations before flying.",
+      "** All videos and images on this page were captured in compliance with applicable local regulations. Confirm the aircraft has the required permits before flying.",
+      "*** Product appearance is subject to the shipped unit. Please load within the weight status shown in the control app; otherwise flight safety may be affected."
+    ],
+    "items": [
+      {
+        "text": "1. Endurance is measured at equivalent sea-level altitude, 25 °C ambient temperature and windless conditions, until the battery was depleted and a forced landing occurred. Results vary with environment, payload, usage and firmware."
+      },
+      {
+        "text": "2. The 15 km communication distance was measured outdoors in open, interference-free conditions and represents the maximum one-way, no-return distance. Watch return-to-home prompts in the app during actual flights."
+      },
+      {
+        "text": "3. The 5,000 m service ceiling requires high-altitude propeller blades. Payload capacity decreases as takeoff altitude increases; quoted payload figures are measured at sea level."
+      },
+      {
+        "text": "4. AI recognition, target tracking and terrain following are assistive functions. Operators remain responsible for flight safety and must monitor the environment at all times."
+      }
+    ]
+  },
+  "accessibility": {
+    "scroll": "Page scrollbar",
+    "video": "Product video",
+    "chart": "Payload and flight time chart",
+    "specs": "Specifications table",
+    "editions": "Edition comparison"
+  },
+  "footer": {
+    "description": "The Partdro U15 multi-mission drone — inspection, delivery and environmental sampling on one IP55 airframe, supplied worldwide with configuration and after-sales support.",
+    "contactHeading": "Talk to Partdro",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone / WhatsApp",
+    "exploreHeading": "Explore",
+    "products": "All products",
+    "solutions": "Heavy-lift solutions",
+    "c500Product": "Cargo drone specifications",
+    "about": "About Partdro",
+    "contact": "Contact",
+    "legal": "Partdro configures and supplies the U15 platform for multi-mission operations. Specifications are subject to change as firmware and payload options evolve.",
+    "copyright": "Partdro. All rights reserved."
+  },
+  "whatsapp": {
+    "aria": "Chat with Partdro on WhatsApp",
+    "message": "Hello Partdro, I'm interested in the U15 multi-mission drone."
+  },
+  "seo": {
+    "breadcrumbHome": "Home",
+    "breadcrumbProducts": "Products",
+    "breadcrumbCurrent": "U15 Multi-Mission Drone"
+  }
+}

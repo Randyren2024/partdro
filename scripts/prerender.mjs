@@ -209,10 +209,10 @@ async function collectRoutes() {
 
   let productSlugs = readInjectedSlugs('/products')
   if (!productSlugs.length) productSlugs = await fetchSitemapSlugs('/products')
-  // /products/c500-partdro-eavision 是独立静态落地页（landing/eavision-c500），
+  // /products/c500-partdro-eavision 与 /products/u15-multi-mission-drone 是独立静态落地页，
   // 会出现在首页内链/线上 sitemap 里，但不是 SPA 产品路由，不能在这里预渲染。
   productSlugs = [...new Set(productSlugs)].filter(
-    (s) => s && s !== 'c500-partdro-eavision',
+    (s) => s && s !== 'c500-partdro-eavision' && s !== 'u15-multi-mission-drone',
   )
   for (const s of productSlugs) routes.push(`/products/${s}`)
 

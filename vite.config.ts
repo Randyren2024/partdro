@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url))
 const C500_LANDING_PORT = 5174
+const U15_LANDING_PORT = 5175
 
 function isPortListening(port: number): Promise<boolean> {
   return new Promise((resolve) => {
@@ -22,28 +23,28 @@ function isPortListening(port: number): Promise<boolean> {
 }
 
 /**
- * C500 is a standalone Vite app (landing/eavision-c500). Start its dev server
- * alongside the main one so localhost:5173 serves the real landing instead of
- * the removed SPA fallback.
+ * Standalone product landings (landing/eavision-c500, landing/u15) are separate
+ * Vite apps. Start their dev servers alongside the main one so localhost:5173
+ * serves the real landing instead of the removed SPA fallback.
  */
-function c500LandingDevServer(): Plugin {
+function landingDevServer(name: string, port: number, config: string): Plugin {
   let child: ChildProcess | undefined
   const stop = () => {
     if (child && !child.killed) child.kill()
   }
   return {
-    name: 'c500-landing-dev-server',
+    name,
     apply: 'serve',
     async configureServer(server) {
-      if (await isPortListening(C500_LANDING_PORT)) return
+      if (await isPortListening(port)) return
       child = spawn(
         process.execPath,
         [
           join(projectRoot, 'node_modules', 'vite', 'bin', 'vite.js'),
           '--config',
-          join(projectRoot, 'landing', 'eavision-c500', 'vite.config.mjs'),
+          join(projectRoot, config),
           '--port',
-          String(C500_LANDING_PORT),
+          String(port),
           '--strictPort',
           '--clearScreen',
           'false'
@@ -60,7 +61,11 @@ function c500LandingDevServer(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [vue(), c500LandingDevServer()],
+  plugins: [
+    vue(),
+    landingDevServer('c500-landing-dev-server', C500_LANDING_PORT, 'landing/eavision-c500/vite.config.mjs'),
+    landingDevServer('u15-landing-dev-server', U15_LANDING_PORT, 'landing/u15/vite.config.mjs')
+  ],
   // Only scan the main SPA entry. The default **/*.html scan also walks the
   // standalone landing's index.html, whose /src/main.js resolves to C:/src.
   optimizeDeps: {
@@ -68,8 +73,8 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    // C500 is a standalone Vite app. In dev, serve it from its own server so
-    // /products/c500-partdro-eavision behaves exactly like the deployed page.
+    // Standalone landings. In dev, serve them from their own servers so the
+    // product URLs behave exactly like the deployed pages.
     proxy: {
       // Localized/English document paths -> the landing dev entry.
       '^/(?:(?:es|de|fr)/)?products/c500-partdro-eavision/?$': {
@@ -80,6 +85,15 @@ export default defineConfig({
       // Landing assets, images and packages all live under the absolute base.
       '^/products/c500-partdro-eavision/': {
         target: `http://localhost:${C500_LANDING_PORT}`,
+        ws: true
+      },
+      '^/products/u15-multi-mission-drone/?$': {
+        target: `http://localhost:${U15_LANDING_PORT}`,
+        rewrite: () => '/products/u15-multi-mission-drone/',
+        ws: true
+      },
+      '^/products/u15-multi-mission-drone/': {
+        target: `http://localhost:${U15_LANDING_PORT}`,
         ws: true
       }
     }

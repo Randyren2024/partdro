@@ -58,6 +58,20 @@
               </a>
             </div>
           </div>
+          <!-- U15 不在 products 表：独立静态落地页，卡片写死并整页跳转 -->
+          <div v-if="!activeCategory" class="product-card">
+            <div class="product-card__image">
+              <img :src="U15_IMAGE" :alt="t('products.u15.name')" />
+              <div class="product-card__category">{{ t('products.u15.category') }}</div>
+            </div>
+            <div class="product-card__body">
+              <h3>{{ t('products.u15.name') }}</h3>
+              <p>{{ t('products.u15.desc') }}</p>
+              <a :href="lp(U15_LANDING_PATH)" class="product-card__link">
+                {{ t('products.viewDetails') }} <RightOutlined />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -80,6 +94,11 @@ const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
 // C500 使用独立静态落地页；必须整页跳转，否则 SPA 会按 /products/:slug 渲染产品详情。
 const C500_SLUG = 'c500-delivery-drone'
 const C500_LANDING_PATH = '/products/c500-partdro-eavision'
+
+// U15 同样是独立静态落地页（landing/u15），也不在 products 表：
+// 卡片静态渲染，链接必须是整页跳转（<a href>），否则 SPA 会按 /products/:slug 渲染。
+const U15_LANDING_PATH = '/products/u15-multi-mission-drone'
+const U15_IMAGE = `${U15_LANDING_PATH}/images/hero.webp`
 
 const { t, locale } = useI18n()
 const route = useRoute()

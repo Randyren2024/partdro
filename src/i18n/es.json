@@ -63,6 +63,11 @@
       "agricultural": "Dron Agrícola",
       "cargo": "Dron de Reparto",
       "cleaning": "Dron de Limpieza"
+    },
+    "u15": {
+      "name": "U15 Multi-Mission Drone",
+      "category": "Dron Multimisión",
+      "desc": "Carga útil de 15 kg, 75 minutos de autonomía y una cápsula de cuatro sensores: un solo airframe para reparto, inspección y muestreo de agua."
     }
   },
   "cases": {

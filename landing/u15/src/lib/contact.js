@@ -1,0 +1,6 @@
+export const CONTACT_EMAIL = 'info@droneworld.tech'
+export const CONTACT_PHONE = '+86 16788684420'
+export const WHATSAPP_E164 = '8616788684420'
+export const PRODUCT_SLUG = 'u15-multi-mission-drone'
+export const LANDING_PATH = '/products/u15-multi-mission-drone'
+export const SITE_URL = 'https://www.droneworld.tech'

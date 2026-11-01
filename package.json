@@ -15,7 +15,11 @@
     "landing:c500:build": "vite build --config landing/eavision-c500/vite.config.mjs && node landing/eavision-c500/scripts/postbuild.mjs && node landing/eavision-c500/scripts/prerender.mjs",
     "landing:c500:serve": "node landing/eavision-c500/scripts/serve.mjs",
     "landing:c500:optimize": "node landing/eavision-c500/scripts/optimize-images.mjs",
-    "landing:c500:test": "node landing/eavision-c500/scripts/test-local.mjs"
+    "landing:c500:test": "node landing/eavision-c500/scripts/test-local.mjs",
+    "landing:u15:dev": "vite --config landing/u15/vite.config.mjs",
+    "landing:u15:build": "vite build --config landing/u15/vite.config.mjs && node landing/u15/scripts/postbuild.mjs && node landing/u15/scripts/prerender.mjs",
+    "landing:u15:serve": "node landing/u15/scripts/serve.mjs",
+    "landing:u15:optimize": "node landing/u15/scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.0",

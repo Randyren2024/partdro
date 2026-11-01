@@ -1,0 +1,134 @@
+{
+  "hero": {
+    "file": "images/hero.webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 157860
+  },
+  "airframe": {
+    "file": "images/airframe.webp",
+    "width": 900,
+    "height": 1130,
+    "bytes": 33208
+  },
+  "pod": {
+    "file": "images/pod.webp",
+    "width": 1200,
+    "height": 1261,
+    "bytes": 26954
+  },
+  "radar": {
+    "file": "images/radar.webp",
+    "width": 1000,
+    "height": 1113,
+    "bytes": 55574
+  },
+  "armLock": {
+    "file": "images/armLock.webp",
+    "width": 1600,
+    "height": 875,
+    "bytes": 62602
+  },
+  "weather": {
+    "file": "images/weather.webp",
+    "width": 1400,
+    "height": 1050,
+    "bytes": 178050
+  },
+  "fpv": {
+    "file": "images/fpv.webp",
+    "width": 1200,
+    "height": 1109,
+    "bytes": 20084
+  },
+  "aiTarget": {
+    "file": "images/aiTarget.webp",
+    "width": 1000,
+    "height": 1284,
+    "bytes": 96582
+  },
+  "delivery": {
+    "file": "images/delivery.webp",
+    "width": 1500,
+    "height": 836,
+    "bytes": 57478
+  },
+  "precision": {
+    "file": "images/precision.webp",
+    "width": 987,
+    "height": 1184,
+    "bytes": 54744
+  },
+  "ranging": {
+    "file": "images/ranging.webp",
+    "width": 1012,
+    "height": 504,
+    "bytes": 129044
+  },
+  "terrain": {
+    "file": "images/terrain.webp",
+    "width": 1500,
+    "height": 878,
+    "bytes": 199680
+  },
+  "gcs": {
+    "file": "images/gcs.webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 84176
+  },
+  "waterSampling": {
+    "file": "images/waterSampling.webp",
+    "width": 1600,
+    "height": 757,
+    "bytes": 168300
+  },
+  "mooringBox": {
+    "file": "images/mooringBox.webp",
+    "width": 800,
+    "height": 1252,
+    "bytes": 51326
+  },
+  "logistics": {
+    "file": "images/logistics.webp",
+    "width": 759,
+    "height": 423,
+    "bytes": 24618
+  },
+  "inspection": {
+    "file": "images/inspection.webp",
+    "width": 1500,
+    "height": 878,
+    "bytes": 200644
+  },
+  "emergency": {
+    "file": "images/emergency.webp",
+    "width": 1400,
+    "height": 805,
+    "bytes": 106540
+  },
+  "fireGas": {
+    "file": "images/fireGas.webp",
+    "width": 970,
+    "height": 647,
+    "bytes": 113176
+  },
+  "nightPatrol": {
+    "file": "images/nightPatrol.webp",
+    "width": 1163,
+    "height": 574,
+    "bytes": 65566
+  },
+  "og": {
+    "file": "images/og-u15.jpg",
+    "width": 1200,
+    "height": 630,
+    "bytes": 145743
+  },
+  "logo": {
+    "file": "images/logo.webp",
+    "width": 320,
+    "height": 107,
+    "bytes": 8074
+  }
+}

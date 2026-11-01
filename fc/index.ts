@@ -149,6 +149,10 @@ function cacheControlFor(key: string): string {
     return 'public, max-age=31536000, immutable'
   if (key.startsWith('products/c500-partdro-eavision/images/')) return 'public, max-age=86400'
   if (key.startsWith('products/c500-partdro-eavision/packages/')) return 'public, max-age=86400'
+  // U15 独立落地页：assets 带内容 hash（长缓存），图片按天缓存，HTML 走 60 秒。
+  if (key.startsWith('products/u15-multi-mission-drone/assets/'))
+    return 'public, max-age=31536000, immutable'
+  if (key.startsWith('products/u15-multi-mission-drone/images/')) return 'public, max-age=86400'
   return 'public, max-age=60'
 }
 

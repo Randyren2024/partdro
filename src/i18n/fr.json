@@ -63,6 +63,11 @@
       "agricultural": "Drone Agricole",
       "cargo": "Drone de Livraison",
       "cleaning": "Drone de Nettoyage"
+    },
+    "u15": {
+      "name": "U15 Multi-Mission Drone",
+      "category": "Drone multi-missions",
+      "desc": "15 kg de charge utile, 75 minutes d'autonomie et une capsule à quatre capteurs : un seul airframe pour la livraison, l'inspection et l'échantillonnage d'eau."
     }
   },
   "cases": {

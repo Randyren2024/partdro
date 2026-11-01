@@ -79,6 +79,10 @@ async function main() {
       ).join(' · ')
       return `        <li>${links}</li>`
     })
+    // U15 是只有英语版的独立静态落地页，不在 products 表，单独给一条内链
+    .concat(
+      '        <li><a href="/products/u15-multi-mission-drone" hreflang="en">U15 Multi-Mission Drone</a></li>',
+    )
     .join('\n')
   const navLinks = ['/products', '/cases', '/news', '/documents', '/about', '/contact']
     .map((p) => LOCALES.map((l) => `<a href="${withPrefix(p, l)}" hreflang="${l}">${p}</a>`).join(' · '))

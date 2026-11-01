@@ -63,6 +63,11 @@
       "agricultural": "Agricultural Drone",
       "cargo": "Delivery Drone",
       "cleaning": "Cleaning Drone"
+    },
+    "u15": {
+      "name": "U15 Multi-Mission Drone",
+      "category": "Multi-Mission Drone",
+      "desc": "15 kg payload, 75-minute endurance and a four-sensor pod — one airframe for delivery, inspection and water sampling."
     }
   },
   "cases": {
