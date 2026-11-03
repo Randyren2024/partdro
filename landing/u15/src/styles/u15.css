@@ -1456,6 +1456,19 @@ h3 {
   outline: none;
 }
 
+/* 原生 <select> 的弹出层选项：浏览器默认白底会把继承来的浅色文字吃掉，
+   这里强制给深色背景 + 亮字，避免"未选中项看不见"。 */
+.quote__form select option {
+  background: #161a1f;
+  color: var(--text);
+  padding: 9px 12px;
+}
+
+/* 占位项（空 value）稍微暗一点，和真正的选项区分开。 */
+.quote__form select option[value=''] {
+  color: var(--muted);
+}
+
 .quote__form textarea {
   resize: vertical;
   min-height: 110px;
