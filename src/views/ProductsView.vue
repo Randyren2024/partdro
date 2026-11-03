@@ -58,8 +58,12 @@
               </a>
             </div>
           </div>
-          <!-- U15 不在 products 表：独立静态落地页，卡片写死并整页跳转 -->
-          <div v-if="!activeCategory" class="product-card">
+          <!-- U15 不在 products 表：独立静态落地页，卡片写死并整页跳转。
+               All 视图恒显示；分类视图仅在 U15 能合理承担该类目任务时显示。 -->
+          <div
+            v-if="!activeCategory || U15_VISIBLE_IN.includes(activeCategory)"
+            class="product-card"
+          >
             <div class="product-card__image">
               <img :src="U15_IMAGE" :alt="t('products.u15.name')" />
               <div class="product-card__category">{{ t('products.u15.category') }}</div>
@@ -97,8 +101,10 @@ const C500_LANDING_PATH = '/products/c500-partdro-eavision'
 
 // U15 同样是独立静态落地页（landing/u15），也不在 products 表：
 // 卡片静态渲染，链接必须是整页跳转（<a href>），否则 SPA 会按 /products/:slug 渲染。
+// 它能承担 delivery（15 kg payload）和 inspection / water sampling，所以在 cargo 类目里也显示。
 const U15_LANDING_PATH = '/products/u15-multi-mission-drone'
 const U15_IMAGE = `${U15_LANDING_PATH}/images/hero.webp`
+const U15_VISIBLE_IN: ProductCategory[] = ['cargo']
 
 const { t, locale } = useI18n()
 const route = useRoute()
