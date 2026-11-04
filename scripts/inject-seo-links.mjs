@@ -15,6 +15,8 @@ const MARK_END = '<!-- seo-fallback:end -->'
 // 与前端保持一致：英语为默认语言不带前缀，其余语言带 /de /es /fr 前缀
 const LOCALES = ['en', 'es', 'de', 'fr']
 const DEFAULT_LOCALE = 'en'
+// 只有英语版的独立静态落地页：不能生成 /es /de /fr 链接（那些路径不存在）
+const EN_ONLY_LANDINGS = new Set(['vf50p-long-endurance-vtol-uav'])
 const withPrefix = (p, loc) => (loc === DEFAULT_LOCALE ? p : `/${loc}${p === '/' ? '' : p}`)
 
 function toLabel(slug) {
@@ -71,6 +73,10 @@ async function main() {
   const items = slugs
     .map((s) => {
       const label = toLabel(s)
+      // 英语版独立落地页只给一条无前缀链接，避免生成 404 的多语言链接
+      if (EN_ONLY_LANDINGS.has(s)) {
+        return `        <li><a href="/products/${s}" hreflang="en">${label}</a></li>`
+      }
       // 每个产品同时给出 4 种语言的可抓取链接，帮助爬虫发现各语言版本
       const links = LOCALES.map((l) =>
         l === DEFAULT_LOCALE
@@ -79,10 +85,9 @@ async function main() {
       ).join(' · ')
       return `        <li>${links}</li>`
     })
-    // U15 / VF50P 是只有英语版的独立静态落地页，不在 products 表，单独给内链
+    // U15 是只有英语版的独立静态落地页，且不在 products 表，单独给内链
     .concat(
       '        <li><a href="/products/u15-multi-mission-drone" hreflang="en">U15 Multi-Mission Drone</a></li>',
-      '        <li><a href="/products/vf50p-long-endurance-vtol-uav" hreflang="en">VF50P Long-Endurance VTOL UAV</a></li>',
     )
     .join('\n')
   const navLinks = ['/products', '/cases', '/news', '/documents', '/about', '/contact']
