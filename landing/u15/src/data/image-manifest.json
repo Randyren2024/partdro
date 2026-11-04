@@ -20,26 +20,26 @@
   "radar": {
     "file": "images/radar.webp",
     "width": 1000,
-    "height": 1113,
-    "bytes": 55574
+    "height": 1333,
+    "bytes": 67800
   },
   "armLock": {
     "file": "images/armLock.webp",
-    "width": 1600,
-    "height": 875,
-    "bytes": 62602
+    "width": 938,
+    "height": 1250,
+    "bytes": 34976
   },
   "weather": {
     "file": "images/weather.webp",
     "width": 1400,
-    "height": 1050,
-    "bytes": 178050
+    "height": 1867,
+    "bytes": 218188
   },
   "fpv": {
     "file": "images/fpv.webp",
-    "width": 1200,
-    "height": 1109,
-    "bytes": 20084
+    "width": 840,
+    "height": 1121,
+    "bytes": 14208
   },
   "aiTarget": {
     "file": "images/aiTarget.webp",
@@ -79,45 +79,45 @@
   },
   "waterSampling": {
     "file": "images/waterSampling.webp",
-    "width": 1600,
-    "height": 757,
-    "bytes": 168300
+    "width": 1347,
+    "height": 842,
+    "bytes": 167020
   },
   "mooringBox": {
     "file": "images/mooringBox.webp",
     "width": 800,
-    "height": 1252,
-    "bytes": 51326
+    "height": 1000,
+    "bytes": 48710
   },
   "logistics": {
     "file": "images/logistics.webp",
-    "width": 759,
+    "width": 677,
     "height": 423,
-    "bytes": 24618
+    "bytes": 21568
   },
   "inspection": {
     "file": "images/inspection.webp",
     "width": 1500,
-    "height": 878,
-    "bytes": 200644
+    "height": 938,
+    "bytes": 211354
   },
   "emergency": {
     "file": "images/emergency.webp",
     "width": 1400,
-    "height": 805,
-    "bytes": 106540
+    "height": 875,
+    "bytes": 110654
   },
   "fireGas": {
     "file": "images/fireGas.webp",
     "width": 970,
-    "height": 647,
-    "bytes": 113176
+    "height": 606,
+    "bytes": 108036
   },
   "nightPatrol": {
     "file": "images/nightPatrol.webp",
-    "width": 1163,
+    "width": 919,
     "height": 574,
-    "bytes": 65566
+    "bytes": 52302
   },
   "og": {
     "file": "images/og-u15.jpg",

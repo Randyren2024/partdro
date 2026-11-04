@@ -701,7 +701,8 @@ h3 {
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--panel);
-  min-height: 380px;
+  align-self: center;
+  aspect-ratio: 4 / 5;
 }
 
 .tether img {
