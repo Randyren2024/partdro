@@ -829,7 +829,7 @@ h3 {
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--panel);
-  min-height: 300px;
+  aspect-ratio: 6 / 5;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -837,10 +837,12 @@ h3 {
 
 .auto-card--1 {
   grid-column: span 3;
+  aspect-ratio: 11 / 6;
 }
 
 .auto-card--2 {
   grid-column: span 3;
+  aspect-ratio: 11 / 6;
 }
 
 .auto-card img {
@@ -884,7 +886,7 @@ h3 {
   .auto-card--1,
   .auto-card--2 {
     grid-column: span 1;
-    min-height: 260px;
+    aspect-ratio: 16 / 10;
   }
 }
 

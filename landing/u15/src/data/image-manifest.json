@@ -44,32 +44,32 @@
   "aiTarget": {
     "file": "images/aiTarget.webp",
     "width": 1000,
-    "height": 1284,
-    "bytes": 96582
+    "height": 545,
+    "bytes": 45708
   },
   "delivery": {
     "file": "images/delivery.webp",
     "width": 1500,
-    "height": 836,
-    "bytes": 57478
+    "height": 818,
+    "bytes": 57094
   },
   "precision": {
     "file": "images/precision.webp",
     "width": 987,
-    "height": 1184,
-    "bytes": 54744
+    "height": 822,
+    "bytes": 46232
   },
   "ranging": {
     "file": "images/ranging.webp",
-    "width": 1012,
+    "width": 605,
     "height": 504,
-    "bytes": 129044
+    "bytes": 83680
   },
   "terrain": {
     "file": "images/terrain.webp",
     "width": 1500,
-    "height": 878,
-    "bytes": 199680
+    "height": 1250,
+    "bytes": 247586
   },
   "gcs": {
     "file": "images/gcs.webp",

@@ -20,11 +20,12 @@ const jobs = [
   { key: 'armLock', src: 'cn-p06-10-2287x1250.jpg', width: 1600, crop: [0.295, 0, 0.410, 1] },
   { key: 'weather', src: 'cn-p13-4-4032x3024.jpg', width: 1400, crop: [0.219, 0, 0.5625, 1] },
   { key: 'fpv', src: 'cn-p04-20-1319x1121.jpg', width: 1200, crop: [0.142, 0, 0.637, 1] },
-  { key: 'aiTarget', src: 'en-p12-2-1047x1344.jpg', width: 1000, crop: [0, 0, 1, 1] },
-  { key: 'delivery', src: 'cn-p06-8-2290x1276.jpg', width: 1500, crop: [0, 0, 1, 1] },
-  { key: 'precision', src: 'en-p10-2-987x1273.jpg', width: 1000, crop: [0, 0, 1, 0.93] },
-  { key: 'ranging', src: 'en-p13-4-1205x573.jpg', width: 1200, crop: [0.16, 0.12, 0.84, 0.88] },
-  { key: 'terrain', src: 'en-p11-2-2292x1915.jpg', width: 1500, crop: [0, 0.12, 1, 0.7] },
+  // auto-card 卡片：span 3 为 11/6，span 2 为 6/5。
+  { key: 'aiTarget', src: 'en-p12-2-1047x1344.jpg', width: 1000, crop: [0, 0.288, 1, 0.425] },
+  { key: 'delivery', src: 'cn-p06-8-2290x1276.jpg', width: 1500, crop: [0, 0.011, 1, 0.979] },
+  { key: 'precision', src: 'en-p10-2-987x1273.jpg', width: 1000, crop: [0, 0.142, 1, 0.646] },
+  { key: 'ranging', src: 'en-p13-4-1205x573.jpg', width: 1200, crop: [0.329, 0.12, 0.502, 0.88] },
+  { key: 'terrain', src: 'en-p11-2-2292x1915.jpg', width: 1500, crop: [0.149, 0.12, 0.702, 0.7] },
   { key: 'gcs', src: 'cn-p13-2-3840x2160.jpg', width: 1600, crop: [0, 0, 1, 1] },
   { key: 'waterSampling', src: 'en-p16-3-1780x842.jpg', width: 1600, crop: [0.122, 0, 0.757, 1] },
   // tether 容器为 4/5 (0.8)。
