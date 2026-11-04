@@ -63,6 +63,7 @@
               <a-select-option value="agricultural">Agricultural Drone</a-select-option>
               <a-select-option value="cargo">Delivery Drone</a-select-option>
               <a-select-option value="cleaning">Cleaning Drone</a-select-option>
+              <a-select-option value="EVTOL">EVTOL</a-select-option>
             </a-select>
           </a-form-item>
           <a-form-item label="Sort order">
@@ -125,7 +126,7 @@ const columns = [
 
 const emptyForm = () => ({
   slug: '',
-  category: 'agricultural' as 'agricultural' | 'cargo' | 'cleaning',
+  category: 'agricultural' as 'agricultural' | 'cargo' | 'cleaning' | 'EVTOL',
   sort_order: 10,
   published: true,
   langs: Object.fromEntries(

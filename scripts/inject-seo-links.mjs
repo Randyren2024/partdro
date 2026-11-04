@@ -79,9 +79,10 @@ async function main() {
       ).join(' · ')
       return `        <li>${links}</li>`
     })
-    // U15 是只有英语版的独立静态落地页，不在 products 表，单独给一条内链
+    // U15 / VF50P 是只有英语版的独立静态落地页，不在 products 表，单独给内链
     .concat(
       '        <li><a href="/products/u15-multi-mission-drone" hreflang="en">U15 Multi-Mission Drone</a></li>',
+      '        <li><a href="/products/vf50p-long-endurance-vtol-uav" hreflang="en">VF50P Long-Endurance VTOL UAV</a></li>',
     )
     .join('\n')
   const navLinks = ['/products', '/cases', '/news', '/documents', '/about', '/contact']

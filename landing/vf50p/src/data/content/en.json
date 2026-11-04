@@ -1,0 +1,312 @@
+{
+  "locale": "en",
+  "meta": {
+    "title": "VF50P Gasoline VTOL UAV — 15 kg Payload, 5 h Endurance | Partdro",
+    "description": "Partdro VF50P gasoline-electric VTOL fixed-wing UAV: 15 kg payload, up to 5 hours aloft, 3.8 m wingspan and a 30 km ground-station link for survey, inspection and emergency missions.",
+    "keywords": "VF50P, gasoline VTOL UAV, fixed-wing VTOL drone, long endurance drone, 15 kg payload UAV, survey drone, power line inspection drone, Partdro",
+    "ogLocale": "en_US",
+    "productName": "VF50P Long-Endurance VTOL UAV"
+  },
+  "nav": {
+    "aria": "VF50P page navigation",
+    "overview": "Overview",
+    "architecture": "Architecture",
+    "endurance": "Endurance",
+    "specs": "Specs",
+    "quote": "Quote",
+    "requestQuote": "Request a quote",
+    "homeAria": "Partdro home",
+    "skip": "Skip to content"
+  },
+  "hero": {
+    "eyebrow": "PD-VF50P · Gasoline VTOL fixed-wing",
+    "title": "VF50P Long-Endurance VTOL UAV",
+    "titleLines": ["VF50P", "Long-Endurance VTOL UAV"],
+    "summary": "Vertical take-off, wing-borne cruise and up to five hours aloft — a 15 kg payload platform for survey, inspection and response work.",
+    "primary": "Request a quote",
+    "secondary": "Watch the flight demo",
+    "imageAlt": "VF50P gasoline-electric VTOL fixed-wing UAV on a test apron",
+    "stats": [
+      { "value": "15", "unit": "kg", "label": "Max payload" },
+      { "value": "5", "unit": "h", "label": "Endurance at 10 kg" },
+      { "value": "30", "unit": "km", "label": "Ground-station range" },
+      { "value": "3.8", "unit": "m", "label": "Wingspan" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "Overview",
+    "heading": "A runway-free aircraft with fixed-wing range",
+    "paragraphs": [
+      "The VF50P is a gasoline-electric VTOL fixed-wing UAV for missions where a multirotor runs out of time and a runway is not available. Four lift rotors handle vertical take-off and landing; the wing takes over in cruise.",
+      "At 55 kg maximum take-off weight, it carries up to 15 kg of mission equipment on a 3.8 m wing. Twelve litres of fuel give three hours at full payload and five hours at 10 kg.",
+      "The aircraft is built around long, linear work: corridor mapping, power-line and pipeline patrol, emergency observation and border or site patrol. A 30 km ground-station link keeps the operator clear of the work area, while a 1 km handheld link covers launch and recovery."
+    ],
+    "imageAlt": "VF50P compound-wing VTOL with exposed gasoline engine",
+    "metrics": [
+      { "value": "55", "unit": "kg", "label": "Maximum take-off weight" },
+      { "value": "15", "unit": "kg", "label": "Maximum payload" },
+      { "value": "3–5", "unit": "h", "label": "Published endurance" },
+      { "value": "12", "unit": "L", "label": "Gasoline fuel capacity" }
+    ]
+  },
+  "architecture": {
+    "eyebrow": "VTOL architecture",
+    "heading": "Lift vertically. Cruise on the wing.",
+    "lead": "The compound-wing layout combines four vertical-lift rotor units with a conventional fixed wing, so the aircraft launches from a small site and then flies like a wing-borne aircraft.",
+    "imageAlt": "VF50P four-rotor VTOL layout with V-tail and wing",
+    "items": [
+      {
+        "name": "Four lift rotors",
+        "value": "Vertical take-off and landing",
+        "detail": "No runway, catapult or launch crew. The aircraft climbs and lands vertically from a compact prepared area."
+      },
+      {
+        "name": "3.8 m compound wing",
+        "value": "Wing-borne cruise",
+        "detail": "In cruise the fixed wing carries the aircraft, which is where the long endurance and 150 km/h top speed come from."
+      },
+      {
+        "name": "Gasoline power",
+        "value": "12 L fuel",
+        "detail": "A gasoline engine provides hours rather than minutes of flight; refuelling between sorties is quicker than recharging battery packs."
+      },
+      {
+        "name": "Under-fuselage payload bay",
+        "value": "Up to 15 kg",
+        "detail": "Mission equipment is carried under the fuselage. Payload and endurance are traded directly: 15 kg gives 3 hours, 10 kg gives 5 hours."
+      }
+    ]
+  },
+  "endurance": {
+    "eyebrow": "Endurance",
+    "heading": "Three hours at full load. Five hours at ten kilos.",
+    "lead": "Published VF50P endurance figures, measured at sea level and 25 °C. Fuel capacity, not battery state, sets the length of the sortie.",
+    "chartTitle": "Payload versus flight time",
+    "points": [
+      { "load": "15 kg", "minutes": 180, "label": "3 h" },
+      { "load": "10 kg", "minutes": 300, "label": "5 h" }
+    ],
+    "note": "Plan for reserve fuel and return-to-base time. Actual endurance varies with altitude, temperature, wind and the installed payload.",
+    "power": {
+      "title": "12 L tank, refuel between sorties",
+      "desc": "Gasoline power removes the battery-recharge cycle from the mission day. The aircraft refuels on site and returns to work."
+    }
+  },
+  "envelope": {
+    "eyebrow": "Flight envelope",
+    "heading": "Built for long lines and remote sites",
+    "lead": "The published envelope covers the conditions crews meet on survey, inspection and response tasks.",
+    "items": [
+      {
+        "title": "Five hours aloft",
+        "desc": "Up to five hours with 10 kg on board — enough for a full pipeline corridor or a wide survey block in one sortie."
+      },
+      {
+        "title": "30 km command link",
+        "desc": "Ground-station control reaches 30 km in open, interference-free conditions; the handheld controller covers 1 km for launch and recovery."
+      },
+      {
+        "title": "12 m/s wind",
+        "desc": "Rated for 12 m/s wind, so exposed coastal, ridge and open-plain sites remain workable within the published limit."
+      },
+      {
+        "title": "3,000 m service ceiling",
+        "desc": "A 3,000 m ceiling supports highland survey and inspection; payload and fuel planning is required at altitude."
+      }
+    ]
+  },
+  "applications": {
+    "eyebrow": "Applications",
+    "heading": "Where the VF50P goes to work",
+    "intro": "Six recurring missions where fixed-wing endurance beats a multirotor's hover time.",
+    "items": [
+      {
+        "title": "Survey and mapping",
+        "desc": "Corridor and block mapping, orthophoto and terrain data collection over areas too large for a multirotor sortie."
+      },
+      {
+        "title": "Power grid inspection",
+        "desc": "Tower, line and substation inspection along a corridor without taking the circuit out of service."
+      },
+      {
+        "title": "Oil and gas pipelines",
+        "desc": "Route patrol, valve-station inspection and leak-response support along long pipeline networks."
+      },
+      {
+        "title": "Emergency response",
+        "desc": "Airborne situation awareness and small-payload delivery during the first hours of a fire, flood or rescue task."
+      },
+      {
+        "title": "Police and border patrol",
+        "desc": "Persistent aerial observation for patrol, evidence collection and search work over wide areas."
+      },
+      {
+        "title": "Meteorology and environment",
+        "desc": "Upper-air sampling and environmental monitoring over remote or hazardous terrain."
+      }
+    ]
+  },
+  "video": {
+    "eyebrow": "Flight demonstration",
+    "heading": "VF50P in flight",
+    "lead": "Vertical take-off, transition to wing-borne flight and cruise, filmed at a flight-test facility.",
+    "play": "Play the demo",
+    "posterAlt": "VF50P VTOL UAV in wing-borne cruise during a flight test",
+    "dialogTitle": "VF50P flight demonstration",
+    "close": "Close video",
+    "caption": "Flight-test footage · VTOL take-off and fixed-wing cruise"
+  },
+  "specs": {
+    "eyebrow": "Specifications",
+    "titlePrefix": "PD-VF50P",
+    "title": "Long-Endurance VTOL UAV Specifications",
+    "items": [
+      { "label": "Aircraft type", "value": "Gasoline-electric VTOL fixed-wing UAV" },
+      { "label": "Layout", "value": "Compound wing with four lift rotors" },
+      { "label": "Maximum take-off weight", "value": "55 kg" },
+      { "label": "Maximum payload", "value": "15 kg" },
+      { "label": "Wingspan", "value": "3.8 m" },
+      { "label": "Length", "value": "2.5 m" },
+      { "label": "Fuel capacity", "value": "12 L gasoline" },
+      { "label": "Endurance at 15 kg", "value": "3 h" },
+      { "label": "Endurance at 10 kg", "value": "5 h" },
+      { "label": "Maximum level speed", "value": "150 km/h" },
+      { "label": "Cruise speed", "value": "100 km/h" },
+      { "label": "Service ceiling", "value": "3,000 m" },
+      { "label": "Wind resistance", "value": "12 m/s" },
+      { "label": "Operating temperature", "value": "-10 °C to 45 °C" },
+      { "label": "Ground-station range", "value": "30 km, unobstructed and interference free" },
+      { "label": "Handheld controller range", "value": "1 km" },
+      { "label": "Payload interface", "value": "Under-fuselage payload bay" },
+      { "label": "Take-off and landing", "value": "Vertical, no runway required" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "heading": "VF50P questions, answered",
+    "items": [
+      {
+        "q": "What payload can the VF50P carry?",
+        "a": "Up to 15 kg under the fuselage. Endurance is published as 3 hours at the full 15 kg and 5 hours at 10 kg. The specific survey, inspection or cargo fit is confirmed with engineering during configuration."
+      },
+      {
+        "q": "Does it need a runway?",
+        "a": "No. The VF50P uses four lift rotors for vertical take-off and landing, then transitions to wing-borne cruise. It can operate from a compact prepared site rather than a runway."
+      },
+      {
+        "q": "How is the aircraft powered?",
+        "a": "A gasoline engine with a 12 L tank drives the fixed-wing cruise. The aircraft refuels on site between sorties; no battery pack swap or recharge cycle is required for the cruise phase."
+      },
+      {
+        "q": "What is the control range?",
+        "a": "The ground station reaches 30 km in unobstructed, interference-free conditions. A handheld controller covers 1 km for take-off, landing and local manual control."
+      },
+      {
+        "q": "What wind and temperature can it handle?",
+        "a": "The published envelope is 12 m/s wind, -10 °C to 45 °C and a 3,000 m service ceiling. Plan payload and fuel for high-altitude or high-temperature sites."
+      },
+      {
+        "q": "How long does a mission take?",
+        "a": "With 10 kg on board the published endurance is 5 hours; at 15 kg it is 3 hours. Reserve fuel for transit, weather and return-to-base must be planned separately."
+      },
+      {
+        "q": "Can it be shipped and supported internationally?",
+        "a": "Partdro supplies the aircraft, ground station and handheld controller with configuration and after-sales planning. Shipping, spares and training are quoted for the destination country."
+      },
+      {
+        "q": "What about approvals and local flight rules?",
+        "a": "Approval depends on the jurisdiction. Partdro supports operators with documentation and configuration choices, but the operator remains responsible for permits and flight rules."
+      },
+      {
+        "q": "How do I get pricing and lead time?",
+        "a": "Send the mission profile, payload idea and destination through the quote form. Our team replies with pricing, lead time and shipping options."
+      }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Global pricing, tailored to you",
+    "title": "Request a quote",
+    "lead": "VF50P pricing depends on payload fit, ground-station configuration, destination and support scope. Tell us what the aircraft has to do and our team will return a tailored offer.",
+    "points": [
+      "Aircraft, ground station and controller matched to your mission",
+      "Regional pricing, lead time and shipping",
+      "Support with payload integration, training and after-sales planning"
+    ],
+    "options": [
+      { "key": "airframe", "label": "Airframe and integration" },
+      { "key": "survey", "label": "Survey and mapping payload" },
+      { "key": "inspection", "label": "Inspection payload" },
+      { "key": "program", "label": "Fleet or programme enquiry" }
+    ],
+    "form": {
+      "name": "Full name",
+      "email": "Work email",
+      "phone": "Phone / WhatsApp (optional)",
+      "company": "Company",
+      "region": "Country / region",
+      "interest": "Configuration of interest",
+      "interestPlaceholder": "Select a configuration",
+      "message": "Message",
+      "messagePlaceholder": "Mission profile, payload, site conditions, timeline…",
+      "submit": "Request a quote",
+      "submitting": "Sending…",
+      "success": "Thank you — your request has reached Partdro. We will reply within one business day.",
+      "error": "Something went wrong. Please try again or email us.",
+      "fallbackLink": "Email info@droneworld.tech",
+      "privacy": "We use these details only to respond to this inquiry.",
+      "noscript": "JavaScript is disabled. Email info@droneworld.tech with your requirements and we will reply directly.",
+      "honeypot": "Website"
+    }
+  },
+  "notes": {
+    "aria": "Product usage notes and data conditions",
+    "intro": [
+      "* Check, confirm and strictly comply with local laws and regulations before flying.",
+      "** Flight imagery on this page was captured at a test facility. Product appearance is subject to the shipped configuration.",
+      "*** Endurance, speed and range figures are published manufacturer values; confirm the final configuration with Partdro before planning a mission."
+    ],
+    "items": [
+      {
+        "text": "1. Endurance figures are published for sea-level altitude and 25 °C ambient temperature: 3 hours at 15 kg payload and 5 hours at 10 kg payload. Fuel load, altitude, temperature, wind and payload change the result."
+      },
+      {
+        "text": "2. The 30 km ground-station range and 1 km handheld-controller range were measured in open, interference-free conditions. Observe return-to-base prompts and local radio regulations in operation."
+      },
+      {
+        "text": "3. The 3,000 m service ceiling and 12 m/s wind limit are published maxima. Reduce payload or fuel and plan alternative tasking when operating near those limits."
+      },
+      {
+        "text": "4. Payload integration, sensor selection and cargo fittings are confirmed per order. The airframe shown may carry different mission equipment from the delivered aircraft."
+      }
+    ]
+  },
+  "accessibility": {
+    "scroll": "Page scrollbar",
+    "video": "Product video",
+    "chart": "Payload and flight time chart",
+    "specs": "Specifications table"
+  },
+  "footer": {
+    "description": "The Partdro VF50P gasoline-electric VTOL fixed-wing UAV — 15 kg payload, up to five hours aloft and a 30 km ground-station link, supplied with configuration and after-sales support.",
+    "contactHeading": "Talk to Partdro",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone / WhatsApp",
+    "exploreHeading": "Explore",
+    "products": "All products",
+    "solutions": "Heavy-lift solutions",
+    "c500Product": "Cargo drone specifications",
+    "about": "About Partdro",
+    "contact": "Contact",
+    "legal": "Partdro configures and supplies the VF50P platform for long-endurance VTOL operations. Specifications are subject to change as configurations evolve.",
+    "copyright": "Partdro. All rights reserved."
+  },
+  "whatsapp": {
+    "aria": "Chat with Partdro on WhatsApp",
+    "message": "Hello Partdro, I'm interested in the VF50P long-endurance VTOL UAV."
+  },
+  "seo": {
+    "breadcrumbHome": "Home",
+    "breadcrumbProducts": "Products",
+    "breadcrumbCurrent": "VF50P Long-Endurance VTOL UAV"
+  }
+}

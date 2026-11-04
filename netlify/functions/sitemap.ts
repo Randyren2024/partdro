@@ -130,6 +130,8 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     localizedPaths.map(localizedEntries).join('\n') +
     '\n' +
     englishOnlyEntry('/products/u15-multi-mission-drone') +
+    '\n' +
+    englishOnlyEntry('/products/vf50p-long-endurance-vtol-uav') +
     (newsEntries.length ? '\n' + newsEntries.join('\n') : '') +
     `\n</urlset>\n`
 

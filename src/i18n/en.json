@@ -62,7 +62,8 @@
     "category": {
       "agricultural": "Agricultural Drone",
       "cargo": "Delivery Drone",
-      "cleaning": "Cleaning Drone"
+      "cleaning": "Cleaning Drone",
+      "EVTOL": "EVTOL"
     },
     "u15": {
       "name": "U15 Multi-Mission Drone",

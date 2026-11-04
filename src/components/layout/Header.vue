@@ -77,7 +77,7 @@ import LangSwitcher from "../common/LangSwitcher.vue";
 import { useLocalePath } from "../../composables/useLocalePath";
 import type { ProductCategory } from "../../types";
 
-const CATEGORIES: ProductCategory[] = ["agricultural", "cargo", "cleaning"];
+const CATEGORIES: ProductCategory[] = ["agricultural", "cargo", "cleaning", "EVTOL"];
 
 const { t } = useI18n();
 const lp = useLocalePath();

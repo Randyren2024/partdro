@@ -1,6 +1,6 @@
 export type Lang = 'en' | 'es' | 'de' | 'fr'
 
-export type ProductCategory = 'agricultural' | 'cargo' | 'cleaning'
+export type ProductCategory = 'agricultural' | 'cargo' | 'cleaning' | 'EVTOL'
 
 export interface Product {
   id: number

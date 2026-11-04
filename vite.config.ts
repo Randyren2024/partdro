@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url'
 const projectRoot = fileURLToPath(new URL('.', import.meta.url))
 const C500_LANDING_PORT = 5174
 const U15_LANDING_PORT = 5175
+const VF50P_LANDING_PORT = 5176
 
 function isPortListening(port: number): Promise<boolean> {
   return new Promise((resolve) => {
@@ -64,7 +65,8 @@ export default defineConfig({
   plugins: [
     vue(),
     landingDevServer('c500-landing-dev-server', C500_LANDING_PORT, 'landing/eavision-c500/vite.config.mjs'),
-    landingDevServer('u15-landing-dev-server', U15_LANDING_PORT, 'landing/u15/vite.config.mjs')
+    landingDevServer('u15-landing-dev-server', U15_LANDING_PORT, 'landing/u15/vite.config.mjs'),
+    landingDevServer('vf50p-landing-dev-server', VF50P_LANDING_PORT, 'landing/vf50p/vite.config.mjs')
   ],
   // Only scan the main SPA entry. The default **/*.html scan also walks the
   // standalone landing's index.html, whose /src/main.js resolves to C:/src.
@@ -94,6 +96,15 @@ export default defineConfig({
       },
       '^/products/u15-multi-mission-drone/': {
         target: `http://localhost:${U15_LANDING_PORT}`,
+        ws: true
+      },
+      '^/products/vf50p-long-endurance-vtol-uav/?$': {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
+        rewrite: () => '/products/vf50p-long-endurance-vtol-uav/',
+        ws: true
+      },
+      '^/products/vf50p-long-endurance-vtol-uav/': {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
         ws: true
       }
     }

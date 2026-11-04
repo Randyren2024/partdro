@@ -62,7 +62,8 @@
     "category": {
       "agricultural": "Drone Agricole",
       "cargo": "Drone de Livraison",
-      "cleaning": "Drone de Nettoyage"
+      "cleaning": "Drone de Nettoyage",
+      "EVTOL": "EVTOL"
     },
     "u15": {
       "name": "U15 Multi-Mission Drone",

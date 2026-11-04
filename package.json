@@ -19,7 +19,10 @@
     "landing:u15:dev": "vite --config landing/u15/vite.config.mjs",
     "landing:u15:build": "vite build --config landing/u15/vite.config.mjs && node landing/u15/scripts/postbuild.mjs && node landing/u15/scripts/prerender.mjs",
     "landing:u15:serve": "node landing/u15/scripts/serve.mjs",
-    "landing:u15:optimize": "node landing/u15/scripts/optimize-images.mjs"
+    "landing:u15:optimize": "node landing/u15/scripts/optimize-images.mjs",
+    "landing:vf50p:dev": "vite --config landing/vf50p/vite.config.mjs",
+    "landing:vf50p:build": "vite build --config landing/vf50p/vite.config.mjs && node landing/vf50p/scripts/postbuild.mjs && node landing/vf50p/scripts/prerender.mjs",
+    "landing:vf50p:serve": "node landing/vf50p/scripts/serve.mjs"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.0",

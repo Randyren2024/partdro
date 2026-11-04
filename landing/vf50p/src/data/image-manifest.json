@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "file": "images/vf50p/hero-vf50p.webp",
+    "width": 1920,
+    "height": 1080,
+    "bytes": 382452
+  },
+  "airframe": {
+    "file": "images/vf50p/airframe-gasoline-vtol.webp",
+    "width": 1400,
+    "height": 1050,
+    "bytes": 284356
+  },
+  "tail": {
+    "file": "images/vf50p/airframe-vtol-tail.webp",
+    "width": 1400,
+    "height": 1050,
+    "bytes": 124692
+  },
+  "engine": {
+    "file": "images/vf50p/engine-detail.webp",
+    "width": 1400,
+    "height": 1050,
+    "bytes": 273828
+  },
+  "poster": {
+    "file": "images/vf50p/demo-flight-poster.webp",
+    "width": 1280,
+    "height": 720,
+    "bytes": 20828
+  },
+  "og": {
+    "file": "images/vf50p/vf50p-og.jpg",
+    "width": 1200,
+    "height": 630,
+    "bytes": 177768
+  },
+  "logo": {
+    "file": "images/logo.webp",
+    "width": 320,
+    "height": 107,
+    "bytes": 8074
+  }
+}

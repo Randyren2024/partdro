@@ -46,16 +46,15 @@
             <div class="product-card__body">
               <h3>{{ product.name }}</h3>
               <p>{{ product.short_desc }}</p>
-              <router-link
-                v-if="product.slug !== C500_SLUG"
-                :to="lp('/products/' + product.slug)"
-                class="product-card__link"
-              >
-                {{ t('products.viewDetails') }} <RightOutlined />
-              </router-link>
-              <a v-else :href="lp(C500_LANDING_PATH)" class="product-card__link">
+              <a v-if="product.slug === VF50P_SLUG" :href="VF50P_LANDING_PATH" class="product-card__link">
                 {{ t('products.viewDetails') }} <RightOutlined />
               </a>
+              <a v-else-if="product.slug === C500_SLUG" :href="lp(C500_LANDING_PATH)" class="product-card__link">
+                {{ t('products.viewDetails') }} <RightOutlined />
+              </a>
+              <router-link v-else :to="lp('/products/' + product.slug)" class="product-card__link">
+                {{ t('products.viewDetails') }} <RightOutlined />
+              </router-link>
             </div>
           </div>
           <!-- U15 不在 products 表：独立静态落地页，卡片写死并整页跳转。
@@ -93,7 +92,7 @@ import { SOLUTIONS, SOLUTION_SLUGS, SOLUTION_UI } from '../data/solutions'
 import { DEFAULT_LOCALE, isLocale } from '../i18n'
 import type { ProductCategory, Lang } from '../types'
 
-const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning']
+const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning', 'EVTOL']
 
 // C500 使用独立静态落地页；必须整页跳转，否则 SPA 会按 /products/:slug 渲染产品详情。
 const C500_SLUG = 'c500-delivery-drone'
@@ -105,6 +104,12 @@ const C500_LANDING_PATH = '/products/c500-partdro-eavision'
 const U15_LANDING_PATH = '/products/u15-multi-mission-drone'
 const U15_IMAGE = `${U15_LANDING_PATH}/images/hero.webp`
 const U15_VISIBLE_IN: ProductCategory[] = ['cargo']
+
+// VF50P 详情是 landing/vf50p 的独立静态页（仅英文版），不在 SPA 详情路由中：
+// 卡片数据来自 Supabase products 表，但 CTA 必须整页跳转（<a href>），
+// 且保持无语言前缀，否则 /es/products/... 会 404。
+const VF50P_SLUG = 'vf50p-long-endurance-vtol-uav'
+const VF50P_LANDING_PATH = '/products/vf50p-long-endurance-vtol-uav'
 
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -155,7 +160,8 @@ const setCategory = (cat: ProductCategory | null) => {
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
-.product-filter__tab--active {
+.product-filter__tab--active,
+.product-filter__tab--active:hover {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #fff;

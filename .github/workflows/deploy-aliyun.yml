@@ -87,6 +87,29 @@ jobs:
           done
           echo "guard ok: $page"
 
+      # 独立的 VF50P 长航时 VTOL 固定翼无人机静态落地页（仅英语）。
+      - name: Build VF50P landing (en)
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run landing:vf50p:build
+
+      - name: Merge VF50P landing and guard
+        run: |
+          cp -R dist-landing/vf50p/site/. dist/
+          page=dist/products/vf50p-long-endurance-vtol-uav/index.html
+          if [ ! -f "$page" ]; then
+            echo "missing VF50P landing page: $page"
+            exit 1
+          fi
+          for needle in 'id="vf50p-quote"' 'GTM-KJ7GJ3V5' 'vf50p/images/hero-vf50p.webp'; do
+            if ! grep -q "$needle" "$page"; then
+              echo "$page is missing $needle (was the main build merged over the landing?)"
+              exit 1
+            fi
+          done
+          echo "guard ok: $page"
+
       - name: Install Aliyun CLI
         run: |
           curl -sL https://github.com/aliyun/aliyun-cli/releases/download/v3.5.1/aliyun-cli-linux-3.5.1-amd64.tgz -o /tmp/aliyun-cli.tgz

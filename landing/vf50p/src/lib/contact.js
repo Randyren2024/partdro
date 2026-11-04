@@ -1,0 +1,6 @@
+export const CONTACT_EMAIL = 'info@droneworld.tech'
+export const CONTACT_PHONE = '+86 16788684420'
+export const WHATSAPP_E164 = '8616788684420'
+export const PRODUCT_SLUG = 'vf50p-long-endurance-vtol-uav'
+export const LANDING_PATH = '/products/vf50p-long-endurance-vtol-uav'
+export const SITE_URL = 'https://www.droneworld.tech'

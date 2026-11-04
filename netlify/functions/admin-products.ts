@@ -38,7 +38,7 @@ interface DeleteBody {
 
 type AdminProductsBody = ListBody | CreateBody | UpdateBody | DeleteBody
 
-const CATEGORIES = new Set(['agricultural', 'cargo', 'cleaning'])
+const CATEGORIES = new Set(['agricultural', 'cargo', 'cleaning', 'EVTOL'])
 const LANGS = new Set(['en', 'es', 'de', 'fr'])
 
 export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
