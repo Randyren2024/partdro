@@ -102,7 +102,7 @@ jobs:
             echo "missing VF50P landing page: $page"
             exit 1
           fi
-          for needle in 'id="vf50p-quote"' 'GTM-KJ7GJ3V5' 'vf50p/images/hero-vf50p.webp'; do
+          for needle in 'id="vf50p-quote"' 'GTM-KJ7GJ3V5' 'images/vf50p/hero-vf50p.webp'; do
             if ! grep -q "$needle" "$page"; then
               echo "$page is missing $needle (was the main build merged over the landing?)"
               exit 1
