@@ -461,11 +461,13 @@ h3 {
 }
 
 .section--overview .split__figure {
-  aspect-ratio: 4 / 4.6;
+  /* airframe 图片 900×1130：宽高比要精确匹配，否则 object-fit: cover 会把机身底部裁掉。 */
+  aspect-ratio: 900 / 1130;
 }
 
 .section--control .split__figure {
-  aspect-ratio: 16 / 10.5;
+  /* GCS 截图 1600×900。 */
+  aspect-ratio: 16 / 9;
 }
 
 .metric-grid {
@@ -512,8 +514,10 @@ h3 {
   }
 
   .section--overview .split__figure {
-    aspect-ratio: 16 / 12;
-    max-height: 460px;
+    /* 移动端也按原图比例显示整架无人机，不再裁机身。 */
+    aspect-ratio: 900 / 1130;
+    max-width: 520px;
+    margin: 0 auto;
   }
 
   .metric-grid {
@@ -548,7 +552,8 @@ h3 {
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--panel);
-  aspect-ratio: 4 / 5;
+  /* pod 图 1200×1261：精确匹配宽高比，避免左右裁掉 HUD 边缘。 */
+  aspect-ratio: 1200 / 1261;
 }
 
 .stack__figure img {
@@ -602,7 +607,10 @@ h3 {
   }
 
   .stack__figure {
-    aspect-ratio: 16 / 11;
+    /* pod 图 1200×1261，移动端同样按原比例。 */
+    aspect-ratio: 1200 / 1261;
+    max-width: 520px;
+    margin: 0 auto;
   }
 }
 
