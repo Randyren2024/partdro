@@ -15,21 +15,42 @@
     "quote": "Quote",
     "requestQuote": "Request a quote",
     "homeAria": "Partdro home",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "language": "Language",
+    "languageAria": "Select language"
   },
   "hero": {
     "eyebrow": "PD-U15 · Multi-mission platform",
     "title": "U15 Multi-Mission Drone",
-    "titleLines": ["U15", "Multi-Mission Drone"],
+    "titleLines": [
+      "U15",
+      "Multi-Mission Drone"
+    ],
     "summary": "15 kg payload. 75 minutes aloft. One airframe for inspection, delivery and environmental sampling.",
     "primary": "Request a quote",
     "secondary": "Watch the demo",
     "imageAlt": "U15 multi-mission drone in flight above a tea plantation",
     "stats": [
-      { "value": "15", "unit": "kg", "label": "Max payload" },
-      { "value": "75", "unit": "min", "label": "No-payload endurance" },
-      { "value": "15", "unit": "km", "label": "Direct link range" },
-      { "value": "12", "unit": "", "label": "Compatible payloads" }
+      {
+        "value": "15",
+        "unit": "kg",
+        "label": "Max payload"
+      },
+      {
+        "value": "75",
+        "unit": "min",
+        "label": "No-payload endurance"
+      },
+      {
+        "value": "15",
+        "unit": "km",
+        "label": "Direct link range"
+      },
+      {
+        "value": "12",
+        "unit": "",
+        "label": "Compatible payloads"
+      }
     ]
   },
   "overview": {
@@ -42,10 +63,26 @@
     ],
     "imageAlt": "U15 airframe with folding arms and cargo module",
     "metrics": [
-      { "value": "15", "unit": "kg", "label": "Payload at sea level" },
-      { "value": "75", "unit": "min", "label": "Endurance, no payload" },
-      { "value": "5,000", "unit": "m", "label": "Service ceiling" },
-      { "value": "IP55", "unit": "", "label": "Dust and rain sealed" }
+      {
+        "value": "15",
+        "unit": "kg",
+        "label": "Payload at sea level"
+      },
+      {
+        "value": "75",
+        "unit": "min",
+        "label": "Endurance, no payload"
+      },
+      {
+        "value": "5,000",
+        "unit": "m",
+        "label": "Service ceiling"
+      },
+      {
+        "value": "IP55",
+        "unit": "",
+        "label": "Dust and rain sealed"
+      }
     ]
   },
   "pod": {
@@ -83,10 +120,26 @@
     "chartTitle": "Payload versus flight time",
     "chartUnit": "min",
     "points": [
-      { "load": "0 kg", "minutes": 75, "label": "75 min" },
-      { "load": "5 kg", "minutes": 54, "label": "54 min" },
-      { "load": "10 kg", "minutes": 41, "label": "41 min" },
-      { "load": "15 kg", "minutes": 31, "label": "31 min" }
+      {
+        "load": "0 kg",
+        "minutes": 75,
+        "label": "75 min"
+      },
+      {
+        "load": "5 kg",
+        "minutes": 54,
+        "label": "54 min"
+      },
+      {
+        "load": "10 kg",
+        "minutes": 41,
+        "label": "41 min"
+      },
+      {
+        "load": "15 kg",
+        "minutes": 31,
+        "label": "31 min"
+      }
     ],
     "note": "Gradient endurance reduces return-to-home time, expands operational range and raises sortie throughput.",
     "tethered": {
@@ -174,18 +227,66 @@
     "lead": "The U15 changes role in the field. Every payload below mounts to the same interface.",
     "note": "Availability varies by region. Confirm the configuration for your deployment with Partdro.",
     "items": [
-      { "code": "LZA102", "name": "Gimbal camera", "desc": "8K wide, 8K zoom, laser and thermal" },
-      { "code": "LZT101", "name": "Searchlight", "desc": "High-output illumination for night search" },
-      { "code": "LZH101", "name": "Loudspeaker", "desc": "Live broadcast and evacuation messages" },
-      { "code": "LZW101", "name": "Logistics box", "desc": "Sealed cargo box with remote release" },
-      { "code": "LZP101", "name": "Payload dropper", "desc": "Single-point release for sling loads" },
-      { "code": "LZJ101", "name": "Parachute", "desc": "Softens impact when flying over people" },
-      { "code": "HW60", "name": "Methane telemeter", "desc": "Detects and traces methane leaks" },
-      { "code": "YF-CL30", "name": "Flow velocimeter", "desc": "Water-surface velocity measurement" },
-      { "code": "YFK", "name": "Mooring box", "desc": "Tethered power for continuous flight" },
-      { "code": "LCQ10", "name": "Gas detector", "desc": "Multi-gas sniffing for confined sites" },
-      { "code": "LZS101", "name": "Rappelling device", "desc": "Line deployment for rescue access" },
-      { "code": "YFTXS", "name": "Emergency comms", "desc": "Airborne 4G/5G base station" }
+      {
+        "code": "LZA102",
+        "name": "Gimbal camera",
+        "desc": "8K wide, 8K zoom, laser and thermal"
+      },
+      {
+        "code": "LZT101",
+        "name": "Searchlight",
+        "desc": "High-output illumination for night search"
+      },
+      {
+        "code": "LZH101",
+        "name": "Loudspeaker",
+        "desc": "Live broadcast and evacuation messages"
+      },
+      {
+        "code": "LZW101",
+        "name": "Logistics box",
+        "desc": "Sealed cargo box with remote release"
+      },
+      {
+        "code": "LZP101",
+        "name": "Payload dropper",
+        "desc": "Single-point release for sling loads"
+      },
+      {
+        "code": "LZJ101",
+        "name": "Parachute",
+        "desc": "Softens impact when flying over people"
+      },
+      {
+        "code": "HW60",
+        "name": "Methane telemeter",
+        "desc": "Detects and traces methane leaks"
+      },
+      {
+        "code": "YF-CL30",
+        "name": "Flow velocimeter",
+        "desc": "Water-surface velocity measurement"
+      },
+      {
+        "code": "YFK",
+        "name": "Mooring box",
+        "desc": "Tethered power for continuous flight"
+      },
+      {
+        "code": "LCQ10",
+        "name": "Gas detector",
+        "desc": "Multi-gas sniffing for confined sites"
+      },
+      {
+        "code": "LZS101",
+        "name": "Rappelling device",
+        "desc": "Line deployment for rescue access"
+      },
+      {
+        "code": "YFTXS",
+        "name": "Emergency comms",
+        "desc": "Airborne 4G/5G base station"
+      }
     ]
   },
   "applications": {
@@ -255,18 +356,81 @@
     "eyebrow": "Editions",
     "heading": "Standard or Pro",
     "intro": "Same airframe, same payload. The difference is what the aircraft can compute and perceive on its own.",
-    "columns": ["U15 Standard", "U15 Pro"],
+    "columns": [
+      "U15 Standard",
+      "U15 Pro"
+    ],
     "rows": [
-      { "label": "Max payload", "values": ["15 kg", "15 kg"] },
-      { "label": "Batteries", "values": ["2 × ES15 smart battery", "2 × ES15 smart battery"] },
-      { "label": "Remote controller", "values": ["Included", "Included"] },
-      { "label": "Packaging and charging", "values": ["Trolley case and charging dock", "Trolley case and charging dock"] },
-      { "label": "Insurance and platform", "values": ["Third-party liability cover, 1-year platform", "Third-party liability cover, 1-year platform"] },
-      { "label": "Onboard compute", "values": ["6 TOPS", "67 TOPS"] },
-      { "label": "AI model", "values": ["Lightweight — person, vehicle, fire", "Medium — higher precision, complex scenes"] },
-      { "label": "Obstacle avoidance", "values": ["Four-direction laser", "360° lidar and millimetre-wave radar"] },
-      { "label": "Visual function", "values": ["Monocular ranging", "Monocular ranging"] },
-      { "label": "Cloud control", "values": ["Not included", "4G/5G direct cloud control"] }
+      {
+        "label": "Max payload",
+        "values": [
+          "15 kg",
+          "15 kg"
+        ]
+      },
+      {
+        "label": "Batteries",
+        "values": [
+          "2 × ES15 smart battery",
+          "2 × ES15 smart battery"
+        ]
+      },
+      {
+        "label": "Remote controller",
+        "values": [
+          "Included",
+          "Included"
+        ]
+      },
+      {
+        "label": "Packaging and charging",
+        "values": [
+          "Trolley case and charging dock",
+          "Trolley case and charging dock"
+        ]
+      },
+      {
+        "label": "Insurance and platform",
+        "values": [
+          "Third-party liability cover, 1-year platform",
+          "Third-party liability cover, 1-year platform"
+        ]
+      },
+      {
+        "label": "Onboard compute",
+        "values": [
+          "6 TOPS",
+          "67 TOPS"
+        ]
+      },
+      {
+        "label": "AI model",
+        "values": [
+          "Lightweight — person, vehicle, fire",
+          "Medium — higher precision, complex scenes"
+        ]
+      },
+      {
+        "label": "Obstacle avoidance",
+        "values": [
+          "Four-direction laser",
+          "360° lidar and millimetre-wave radar"
+        ]
+      },
+      {
+        "label": "Visual function",
+        "values": [
+          "Monocular ranging",
+          "Monocular ranging"
+        ]
+      },
+      {
+        "label": "Cloud control",
+        "values": [
+          "Not included",
+          "4G/5G direct cloud control"
+        ]
+      }
     ],
     "kitTitle": "In the standard kit",
     "kit": "Aircraft × 1 · ES15 battery × 2 · remote controller × 1 · charger × 1 · trolley case × 1 · 1-year control platform · third-party liability insurance × 1 year · lightweight AI model · 6 TOPS compute module."
@@ -276,24 +440,78 @@
     "titlePrefix": "PD-U15",
     "title": "Multi-Mission Drone Specifications",
     "items": [
-      { "label": "Aircraft type", "value": "Quadcopter UAV" },
-      { "label": "Power category", "value": "Electric" },
-      { "label": "Wheelbase", "value": "1,300 mm" },
-      { "label": "Dimensions (unfolded)", "value": "1,050 × 1,030 × 540 mm" },
-      { "label": "Dimensions (folded)", "value": "455 × 630 × 540 mm" },
-      { "label": "Max payload", "value": "15 kg" },
-      { "label": "Endurance, no payload", "value": "75 min" },
-      { "label": "Endurance, full payload", "value": "31 min" },
-      { "label": "Max climb speed", "value": "20 m/s" },
-      { "label": "Max descent speed", "value": "5 m/s" },
-      { "label": "Service ceiling", "value": "5,000 m (high-altitude propellers required)" },
-      { "label": "Wind resistance", "value": "Level 6, gusts to level 7" },
-      { "label": "Navigation", "value": "GPS / BeiDou with RTK" },
-      { "label": "Operating temperature", "value": "-20 °C to 50 °C" },
-      { "label": "Communication range", "value": "15 km, unobstructed and interference free" },
-      { "label": "Ingress protection", "value": "IP55" },
-      { "label": "Standard sensors", "value": "FPV camera, GPS, RTK" },
-      { "label": "Payload interface", "value": "Quick-release bay, 12 compatible payloads" }
+      {
+        "label": "Aircraft type",
+        "value": "Quadcopter UAV"
+      },
+      {
+        "label": "Power category",
+        "value": "Electric"
+      },
+      {
+        "label": "Wheelbase",
+        "value": "1,300 mm"
+      },
+      {
+        "label": "Dimensions (unfolded)",
+        "value": "1,050 × 1,030 × 540 mm"
+      },
+      {
+        "label": "Dimensions (folded)",
+        "value": "455 × 630 × 540 mm"
+      },
+      {
+        "label": "Max payload",
+        "value": "15 kg"
+      },
+      {
+        "label": "Endurance, no payload",
+        "value": "75 min"
+      },
+      {
+        "label": "Endurance, full payload",
+        "value": "31 min"
+      },
+      {
+        "label": "Max climb speed",
+        "value": "20 m/s"
+      },
+      {
+        "label": "Max descent speed",
+        "value": "5 m/s"
+      },
+      {
+        "label": "Service ceiling",
+        "value": "5,000 m (high-altitude propellers required)"
+      },
+      {
+        "label": "Wind resistance",
+        "value": "Level 6, gusts to level 7"
+      },
+      {
+        "label": "Navigation",
+        "value": "GPS / BeiDou with RTK"
+      },
+      {
+        "label": "Operating temperature",
+        "value": "-20 °C to 50 °C"
+      },
+      {
+        "label": "Communication range",
+        "value": "15 km, unobstructed and interference free"
+      },
+      {
+        "label": "Ingress protection",
+        "value": "IP55"
+      },
+      {
+        "label": "Standard sensors",
+        "value": "FPV camera, GPS, RTK"
+      },
+      {
+        "label": "Payload interface",
+        "value": "Quick-release bay, 12 compatible payloads"
+      }
     ]
   },
   "faq": {
