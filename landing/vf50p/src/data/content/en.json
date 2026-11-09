@@ -23,35 +23,16 @@
   "hero": {
     "eyebrow": "PD-VF50P · Gasoline VTOL fixed-wing",
     "title": "VF50P Long-Endurance VTOL UAV",
-    "titleLines": [
-      "VF50P",
-      "Long-Endurance VTOL UAV"
-    ],
+    "titleLines": ["VF50P", "Long-Endurance VTOL UAV"],
     "summary": "Vertical take-off, wing-borne cruise and up to five hours aloft — a 15 kg payload platform for survey, inspection and response work.",
     "primary": "Request a quote",
     "secondary": "Watch the flight demo",
     "imageAlt": "VF50P gasoline-electric VTOL fixed-wing UAV on a test apron",
     "stats": [
-      {
-        "value": "15",
-        "unit": "kg",
-        "label": "Max payload"
-      },
-      {
-        "value": "5",
-        "unit": "h",
-        "label": "Endurance at 10 kg"
-      },
-      {
-        "value": "30",
-        "unit": "km",
-        "label": "Ground-station range"
-      },
-      {
-        "value": "3.8",
-        "unit": "m",
-        "label": "Wingspan"
-      }
+      { "value": "15", "unit": "kg", "label": "Max payload" },
+      { "value": "5", "unit": "h", "label": "Endurance at 10 kg" },
+      { "value": "30", "unit": "km", "label": "Ground-station range" },
+      { "value": "3.8", "unit": "m", "label": "Wingspan" }
     ]
   },
   "overview": {
@@ -64,26 +45,10 @@
     ],
     "imageAlt": "VF50P compound-wing VTOL with exposed gasoline engine",
     "metrics": [
-      {
-        "value": "55",
-        "unit": "kg",
-        "label": "Maximum take-off weight"
-      },
-      {
-        "value": "15",
-        "unit": "kg",
-        "label": "Maximum payload"
-      },
-      {
-        "value": "3–5",
-        "unit": "h",
-        "label": "Published endurance"
-      },
-      {
-        "value": "12",
-        "unit": "L",
-        "label": "Gasoline fuel capacity"
-      }
+      { "value": "55", "unit": "kg", "label": "Maximum take-off weight" },
+      { "value": "15", "unit": "kg", "label": "Maximum payload" },
+      { "value": "3–5", "unit": "h", "label": "Published endurance" },
+      { "value": "12", "unit": "L", "label": "Gasoline fuel capacity" }
     ]
   },
   "architecture": {
@@ -120,16 +85,8 @@
     "lead": "Published VF50P endurance figures, measured at sea level and 25 °C. Fuel capacity, not battery state, sets the length of the sortie.",
     "chartTitle": "Payload versus flight time",
     "points": [
-      {
-        "load": "15 kg",
-        "minutes": 180,
-        "label": "3 h"
-      },
-      {
-        "load": "10 kg",
-        "minutes": 300,
-        "label": "5 h"
-      }
+      { "load": "15 kg", "minutes": 180, "label": "3 h" },
+      { "load": "10 kg", "minutes": 300, "label": "5 h" }
     ],
     "note": "Plan for reserve fuel and return-to-base time. Actual endurance varies with altitude, temperature, wind and the installed payload.",
     "power": {
@@ -206,78 +163,24 @@
     "titlePrefix": "PD-VF50P",
     "title": "Long-Endurance VTOL UAV Specifications",
     "items": [
-      {
-        "label": "Aircraft type",
-        "value": "Gasoline-electric VTOL fixed-wing UAV"
-      },
-      {
-        "label": "Layout",
-        "value": "Compound wing with four lift rotors"
-      },
-      {
-        "label": "Maximum take-off weight",
-        "value": "55 kg"
-      },
-      {
-        "label": "Maximum payload",
-        "value": "15 kg"
-      },
-      {
-        "label": "Wingspan",
-        "value": "3.8 m"
-      },
-      {
-        "label": "Length",
-        "value": "2.5 m"
-      },
-      {
-        "label": "Fuel capacity",
-        "value": "12 L gasoline"
-      },
-      {
-        "label": "Endurance at 15 kg",
-        "value": "3 h"
-      },
-      {
-        "label": "Endurance at 10 kg",
-        "value": "5 h"
-      },
-      {
-        "label": "Maximum level speed",
-        "value": "150 km/h"
-      },
-      {
-        "label": "Cruise speed",
-        "value": "100 km/h"
-      },
-      {
-        "label": "Service ceiling",
-        "value": "3,000 m"
-      },
-      {
-        "label": "Wind resistance",
-        "value": "12 m/s"
-      },
-      {
-        "label": "Operating temperature",
-        "value": "-10 °C to 45 °C"
-      },
-      {
-        "label": "Ground-station range",
-        "value": "30 km, unobstructed and interference free"
-      },
-      {
-        "label": "Handheld controller range",
-        "value": "1 km"
-      },
-      {
-        "label": "Payload interface",
-        "value": "Under-fuselage payload bay"
-      },
-      {
-        "label": "Take-off and landing",
-        "value": "Vertical, no runway required"
-      }
+      { "label": "Aircraft type", "value": "Gasoline-electric VTOL fixed-wing UAV" },
+      { "label": "Layout", "value": "Compound wing with four lift rotors" },
+      { "label": "Maximum take-off weight", "value": "55 kg" },
+      { "label": "Maximum payload", "value": "15 kg" },
+      { "label": "Wingspan", "value": "3.8 m" },
+      { "label": "Length", "value": "2.5 m" },
+      { "label": "Fuel capacity", "value": "12 L gasoline" },
+      { "label": "Endurance at 15 kg", "value": "3 h" },
+      { "label": "Endurance at 10 kg", "value": "5 h" },
+      { "label": "Maximum level speed", "value": "150 km/h" },
+      { "label": "Cruise speed", "value": "100 km/h" },
+      { "label": "Service ceiling", "value": "3,000 m" },
+      { "label": "Wind resistance", "value": "12 m/s" },
+      { "label": "Operating temperature", "value": "-10 °C to 45 °C" },
+      { "label": "Ground-station range", "value": "30 km, unobstructed and interference free" },
+      { "label": "Handheld controller range", "value": "1 km" },
+      { "label": "Payload interface", "value": "Under-fuselage payload bay" },
+      { "label": "Take-off and landing", "value": "Vertical, no runway required" }
     ]
   },
   "faq": {
@@ -332,22 +235,10 @@
       "Support with payload integration, training and after-sales planning"
     ],
     "options": [
-      {
-        "key": "airframe",
-        "label": "Airframe and integration"
-      },
-      {
-        "key": "survey",
-        "label": "Survey and mapping payload"
-      },
-      {
-        "key": "inspection",
-        "label": "Inspection payload"
-      },
-      {
-        "key": "program",
-        "label": "Fleet or programme enquiry"
-      }
+      { "key": "airframe", "label": "Airframe and integration" },
+      { "key": "survey", "label": "Survey and mapping payload" },
+      { "key": "inspection", "label": "Inspection payload" },
+      { "key": "program", "label": "Fleet or programme enquiry" }
     ],
     "form": {
       "name": "Full name",
