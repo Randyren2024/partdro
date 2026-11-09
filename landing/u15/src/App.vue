@@ -13,6 +13,7 @@ import { trackEvent } from './lib/tracking'
 
 const locale = localeFromPath()
 const content = contentFor(locale)
+const search = window.location.search
 
 reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 motionReady.value = !reducedMotion.value
@@ -216,7 +217,7 @@ onBeforeUnmount(() => {
 <template>
   <a class="skip-link" href="#u15-detail">{{ content.nav.skip }}</a>
 
-  <SiteHeader :content="content.nav" :locale="locale" />
+  <SiteHeader :content="content.nav" :locale="locale" :search="search" />
 
   <main
     id="u15-detail"
