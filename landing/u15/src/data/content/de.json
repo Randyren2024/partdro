@@ -1,0 +1,304 @@
+{
+  "locale": "de",
+  "meta": {
+    "title": "U15-Multifunktionsdrohne — 15 kg Nutzlast, 75 Min. Flugzeit | Partdro",
+    "description": "Die Partdro U15-Multifunktionsdrohne bietet 15 kg Nutzlast, bis zu 75 Minuten Flugzeit, eine Vier-Sensor-Kameraeinheit in 8K, duale Radarsysteme und 5G-Cloud-Steuerung. Eine Plattform für Inspektion, Lieferung und Umweltprobenahme.",
+    "keywords": "U15 Drohne, Multifunktionsdrohne, Drohne mit 15 kg Nutzlast, Inspektionsdrohne, Lieferdrohne, Wasserprobenahme-Drohne, kabelgebundene Drohne, Partdro",
+    "ogLocale": "de_DE",
+    "productName": "U15-Multifunktionsdrohne"
+  },
+  "nav": {
+    "aria": "Seitennavigation der U15",
+    "overview": "Überblick",
+    "autonomy": "Autonomie",
+    "specs": "Technische Daten",
+    "quote": "Angebot",
+    "requestQuote": "Angebot anfordern",
+    "homeAria": "Partdro-Startseite",
+    "skip": "Zum Inhalt springen",
+    "language": "Sprache",
+    "languageAria": "Sprache auswählen"
+  },
+  "hero": {
+    "eyebrow": "PD-U15 · Multifunktionsplattform",
+    "title": "U15-Multifunktionsdrohne",
+    "titleLines": ["U15", "Multifunktionsdrohne"],
+    "summary": "15 kg Nutzlast. Bis zu 75 Minuten Flugzeit. Eine Flugplattform für Inspektion, Lieferung und Umweltprobenahme.",
+    "primary": "Angebot anfordern",
+    "secondary": "Demo ansehen",
+    "imageAlt": "U15-Multifunktionsdrohne im Flug über einer Teeplantage",
+    "stats": [
+      { "value": "15", "unit": "kg", "label": "Max. Nutzlast" },
+      { "value": "75", "unit": "Min.", "label": "Flugzeit ohne Nutzlast" },
+      { "value": "15", "unit": "km", "label": "Direkte Funkreichweite" },
+      { "value": "12", "unit": "", "label": "Kompatible Nutzlasten" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "Überblick",
+    "heading": "Eine Plattform. Jede Mission.",
+    "paragraphs": [
+      "Die U15 ist ein Quadrocopter der 15-kg-Klasse, dessen Einsatzprofil sich wechseln lässt, ohne das Fluggerät auszutauschen. Wechseln Sie zwischen Sensorsystem, Transportbox und Wasserprobenehmer: Dieselbe Plattform übernimmt Inspektionsflüge, liefert Versorgungsgüter oder sammelt Umweltproben.",
+      "Der Radstand von 1.300 mm lässt sich für den Transport auf 455 × 630 × 540 mm zusammenklappen. Im ausgeklappten Zustand erreicht die Drohne 75 Minuten Flugzeit ohne Nutzlast und 31 Minuten bei voller Nutzlast von 15 kg. Eine Bodenstation mit kabelgebundener Stromversorgung ermöglicht einen kontinuierlichen Einsatz.",
+      "Doppelradar, 360°-Lidar in der Pro-Version und Schutzart IP55 ermöglichen den Betrieb bei Regen, Staub und Dunkelheit, bei Temperaturen von -20 °C bis 50 °C und bis zu einer Einsatzhöhe von 5.000 m."
+    ],
+    "imageAlt": "U15-Fluggerät mit klappbaren Armen und Transportmodul",
+    "metrics": [
+      { "value": "15", "unit": "kg", "label": "Nutzlast auf Meereshöhe" },
+      { "value": "75", "unit": "Min.", "label": "Flugzeit ohne Nutzlast" },
+      { "value": "5.000", "unit": "m", "label": "Maximale Einsatzhöhe" },
+      { "value": "IP55", "unit": "", "label": "Schutz gegen Staub und Regen" }
+    ]
+  },
+  "pod": {
+    "eyebrow": "Nutzlast · Vier-Sensor-Kameraeinheit",
+    "heading": "Vier Sensoren an einem stabilisierten Gimbal",
+    "lead": "Eine 8K-Weitwinkelkamera, eine 8K-Hybrid-Zoomkamera, ein Laser-Entfernungsmesser und eine Infrarotkamera sind auf einem dreiachsig stabilisierten Gimbal montiert. So wird jedes Ziel gleichzeitig im sichtbaren und im Wärmebild erfasst.",
+    "imageAlt": "U15-Vier-Sensor-Gimbal mit Weitwinkel-, Zoom-, Laser- und Wärmebildoptik",
+    "items": [
+      { "name": "8K-Weitwinkelkamera", "value": "24 mm Kleinbildäquivalent", "detail": "Ein einziges Bild erfasst den gesamten Einsatzort. Das gibt dem Bediener den nötigen Überblick, ohne Panoramen zusammensetzen zu müssen." },
+      { "name": "8K-Hybrid-Zoomkamera", "value": "82–268 mm Kleinbildäquivalent", "detail": "Typenschilder oder Isolatoren lassen sich aus sicherer Entfernung detailliert erkennen." },
+      { "name": "Laser-Entfernungsmesser", "value": "5–1.200 m · ±0,5 m", "detail": "Direkte Messung von Entfernung und Koordinaten, ohne einen zusätzlichen Sensor kalibrieren zu müssen." },
+      { "name": "Infrarotkamera", "value": "9-mm- / 19-mm-Objektiv", "detail": "Wärmebild-Erkennung von Personen, Fahrzeugen und Wärmequellen bei Tag und Nacht." }
+    ]
+  },
+  "endurance": {
+    "eyebrow": "Flugzeit",
+    "heading": "Mehr Nutzlast verändert die Flugzeit – die Kennlinie ist veröffentlicht",
+    "lead": "Jedes Kilogramm weniger an Bord bringt zusätzliche Einsatzminuten. Planen Sie Missionen anhand der veröffentlichten Werte statt nach Schätzungen nach dem Start.",
+    "chartTitle": "Nutzlast im Verhältnis zur Flugzeit",
+    "chartUnit": "Min.",
+    "points": [
+      { "load": "0 kg", "minutes": 75, "label": "75 Min." },
+      { "load": "5 kg", "minutes": 54, "label": "54 Min." },
+      { "load": "10 kg", "minutes": 41, "label": "41 Min." },
+      { "load": "15 kg", "minutes": 31, "label": "31 Min." }
+    ],
+    "note": "Eine stufenweise angepasste Flugzeit erleichtert die Planung der Rückkehr, vergrößert den nutzbaren Einsatzradius und erhöht die Zahl möglicher Flüge.",
+    "tethered": {
+      "title": "Dauerbetrieb mit kabelgebundener Stromversorgung",
+      "desc": "Eine Bodenstation versorgt das Fluggerät kontinuierlich mit Strom – für Überwachung, Notfallkommunikation und Veranstaltungssicherung ohne Batteriewechsel oder Landung."
+    }
+  },
+  "safety": {
+    "eyebrow": "Sicherheit",
+    "heading": "Für anspruchsvolle Einsatzbedingungen gebaut",
+    "lead": "Radar und Lidar erkennen Hindernisse auch bei Regen, Nebel und Dunkelheit. Das Gehäuse schützt vor Staub, Sand und Wasser.",
+    "items": [
+      { "title": "Doppelradar und Lidar", "desc": "360°-Lidar und Millimeterwellenradar erkennen dünne Hindernisse wie Stromleitungen, Kabel und Äste – auch bei Regen und Nacht." },
+      { "title": "Doppelte Armsicherung", "desc": "Automatische Verriegelung mit hörbarer mechanischer Rückmeldung bestätigt die sichere Arretierung der Arme vor jedem Start." },
+      { "title": "IP55 für jedes Wetter", "desc": "Geschützt gegen Staub, Sand und Regen; ausgelegt für -20 °C bis 50 °C sowie Windstärke 6 mit Böen bis Stärke 7." },
+      { "title": "Frontkamera für den FPV-Anflug", "desc": "Eine separate Frontkamera unterstützt den manuellen Anflug und die Landung, wenn direkte Sichtkontrolle wichtiger ist als Automatisierung." }
+    ]
+  },
+  "autonomy": {
+    "eyebrow": "Autonomie",
+    "heading": "Erkennen, entscheiden und selbstständig landen",
+    "lead": "Die bordeigene Rechenleistung wandelt Sensordaten in Entscheidungen um: 6 TOPS bei der Standard-Version und 67 TOPS bei der Pro-Version.",
+    "items": [
+      { "title": "KI-Zielerkennung", "desc": "Personen, Fahrzeuge, Feuer und Rauch werden in sichtbaren und thermischen Bildern erkannt und anschließend als Ziel verfolgt." },
+      { "title": "Lieferung in zwei Modi", "desc": "Abwurf an einem markierten festen Punkt oder dynamische Abgabe an ein fahrendes Fahrzeug. KI-Tracking hält das Ziel auch in unübersichtlicher Umgebung im Blick." },
+      { "title": "Zentimetergenaue Präzisionslandung", "desc": "Eine Kalibrierplatte gleicht Bewegungen von Decks und Fahrzeugen aus, sodass die Drohne zentimetergenau auf Schränken, Lastwagen und Schiffen andocken kann." },
+      { "title": "Visuelle Entfernungsmessung mit einer Kamera", "desc": "Zielkoordinaten, Breiten- und Längengrad sowie Entfernung werden in Echtzeit an der Bodenstation angezeigt – ohne zusätzlichen Sensor." },
+      { "title": "Geländefolgeflug", "desc": "Die Geländeerfassung in Echtzeit passt die Flughöhe über Baumkronen, Bergrücken und Hängen für den bodennahen Flug an." }
+    ]
+  },
+  "control": {
+    "eyebrow": "Bodensteuerung",
+    "heading": "Eine Kommandozentrale auf dem Laptop",
+    "lead": "Ein Bediener kann ein einzelnes Fluggerät präzise steuern oder den Einsatz einer ganzen Flotte an einem Standort planen.",
+    "imageAlt": "Bediener plant U15-Missionen an einer laptopbasierten Bodenstation",
+    "items": [
+      { "title": "Zentrale Steuerung", "desc": "Ferngesteuerter Start und Landung, Missionssteuerung und Koordination mehrerer Drohnen über eine Konsole." },
+      { "title": "Präzise Bedienung", "desc": "Virtuelles Cockpit mit Tastatur- oder Joystick-Steuerung sowie Live-Anzeige von Fluglage und Nutzlast." },
+      { "title": "Sichere Bereitstellung", "desc": "Effizientes Steuerungsnetzwerk mit privater Offline-Bereitstellung auf eigenen Servern." },
+      { "title": "Intelligente Missionsplanung", "desc": "3D-Routenplanung, Zeitplanung und Datenauswertung mit KI-Unterstützung für komplexe Einsatzorte." }
+    ]
+  },
+  "payloads": {
+    "eyebrow": "Nutzlast-Ökosystem",
+    "heading": "Zwölf Nutzlasten. Eine Schnellwechsel-Schnittstelle.",
+    "lead": "Die U15 wechselt ihre Aufgabe direkt am Einsatzort. Alle unten aufgeführten Nutzlasten verwenden dieselbe Schnittstelle.",
+    "note": "Die Verfügbarkeit kann je nach Region variieren. Bestätigen Sie die passende Konfiguration für Ihren Einsatz mit Partdro.",
+    "items": [
+      { "code": "LZA102", "name": "Gimbal-Kamera", "desc": "8K-Weitwinkel, 8K-Zoom, Laser und Wärmebild" },
+      { "code": "LZT101", "name": "Suchscheinwerfer", "desc": "Leistungsstarke Beleuchtung für die nächtliche Suche" },
+      { "code": "LZH101", "name": "Lautsprecher", "desc": "Live-Durchsagen und Evakuierungsanweisungen" },
+      { "code": "LZW101", "name": "Transportbox", "desc": "Versiegelte Transportbox mit Fernentriegelung" },
+      { "code": "LZP101", "name": "Lasten-Auslöser", "desc": "Einfacher Auslösemechanismus für Lasten an einer Schlinge" },
+      { "code": "LZJ101", "name": "Fallschirm", "desc": "Reduziert die Aufprallenergie bei Flügen über Menschen" },
+      { "code": "HW60", "name": "Methan-Messgerät", "desc": "Erkennt und verfolgt Methanlecks" },
+      { "code": "YF-CL30", "name": "Strömungsmesser", "desc": "Messung der Fließgeschwindigkeit an Wasseroberflächen" },
+      { "code": "YFK", "name": "Bodenstation mit Halteseil", "desc": "Kabelgebundene Stromversorgung für Dauerbetrieb" },
+      { "code": "LCQ10", "name": "Gasdetektor", "desc": "Mehrgas-Messung an schwer zugänglichen Einsatzorten" },
+      { "code": "LZS101", "name": "Abseilvorrichtung", "desc": "Seilablass für den Zugang bei Rettungseinsätzen" },
+      { "code": "YFTXS", "name": "Notfallkommunikation", "desc": "Luftgestützte 4G-/5G-Basisstation" }
+    ]
+  },
+  "applications": {
+    "eyebrow": "Anwendungen",
+    "heading": "Wo die U15 zum Einsatz kommt",
+    "intro": "Eine Plattform für sechs wiederkehrende Aufgaben – jeweils mit einem Nutzlastwechsel statt einem neuen Fluggerät.",
+    "items": [
+      { "title": "Logistik und Nachschub", "desc": "Transport von bis zu 15 kg Ersatzteilen, Proben oder medizinischen Gütern zwischen Standorten, Schaltschränken und Fahrzeugen – ohne Straße und Fahrer." },
+      { "title": "Anlageninspektion", "desc": "Vordefinierte Routen über Umspannwerke, Pipelines und Dächer mit der Vier-Sensor-Kameraeinheit abfliegen." },
+      { "title": "Notfallhilfe", "desc": "Suchscheinwerfer, Lautsprecher und Wärmebild auf einem Fluggerät für die erste Stunde nach einem Vorfall." },
+      { "title": "Wasser und Umwelt", "desc": "Oberflächenwasserproben entnehmen und Strömungen messen – ohne Boot oder feste Probenahmestation." },
+      { "title": "Feuer und Gas", "desc": "Wärmequellen und Methanlecks erkennen, bevor Einsatzkräfte den Gefahrenbereich betreten." },
+      { "title": "Nachtüberwachung", "desc": "Radar und Lidar halten die Drohne auch bei Dunkelheit, Regen und Nebel stabil auf Position." }
+    ]
+  },
+  "video": {
+    "eyebrow": "Praxiseinsatz",
+    "heading": "Wasserprobenahme vom Start bis zur Landung",
+    "lead": "Eine vollständig autonome Mission an einem Reservoir: Start, Flug zum Einsatzort, Probenahme, Rückflug und Landung.",
+    "play": "Demo abspielen",
+    "posterAlt": "U15 entnimmt eine Wasserprobe aus einem Reservoir",
+    "dialogTitle": "U15-Demo zur Wasserprobenahme",
+    "close": "Video schließen",
+    "caption": "Probenahme am Reservoir · autonomer Flug · kein Eingreifen des Bedieners"
+  },
+  "projects": {
+    "eyebrow": "Einsätze",
+    "heading": "Bereits im Einsatz",
+    "intro": "Referenzanwendungen aus dem praktischen Einsatzprogramm der Plattform.",
+    "items": [
+      { "tag": "Medizinische Logistik", "title": "Versorgungsflüge für Krankenhäuser", "desc": "Geplanter Transport medizinischer Güter zwischen einem Regionalkrankenhaus und seinen Außenstellen." },
+      { "tag": "Umweltüberwachung", "title": "System zur Wasserqualitäts-Probenahme", "desc": "Regelmäßige Probenahme von Oberflächenwasser für eine Wasser- und Umweltorganisation – als Ersatz für die Entnahme per Boot." },
+      { "tag": "Notfallhilfe", "title": "Rettung und Detektion", "desc": "Luftgestützte Such- und Detektionsunterstützung für Notfallteams." }
+    ]
+  },
+  "editions": {
+    "eyebrow": "Versionen",
+    "heading": "Standard oder Pro",
+    "intro": "Gleiche Flugplattform, gleiche Nutzlast. Der Unterschied liegt in der bordeigenen Rechenleistung und Sensorik.",
+    "columns": ["U15 Standard", "U15 Pro"],
+    "rows": [
+      { "label": "Max. Nutzlast", "values": ["15 kg", "15 kg"] },
+      { "label": "Akkus", "values": ["2 × ES15-Smart-Akku", "2 × ES15-Smart-Akku"] },
+      { "label": "Fernsteuerung", "values": ["Inklusive", "Inklusive"] },
+      { "label": "Transport und Laden", "values": ["Transportkoffer und Ladestation", "Transportkoffer und Ladestation"] },
+      { "label": "Versicherung und Plattform", "values": ["Haftpflichtversicherung, Plattform für 1 Jahr", "Haftpflichtversicherung, Plattform für 1 Jahr"] },
+      { "label": "Bordrechenleistung", "values": ["6 TOPS", "67 TOPS"] },
+      { "label": "KI-Modell", "values": ["Leicht – Personen, Fahrzeuge und Feuer", "Mittel – höhere Präzision in komplexen Szenen"] },
+      { "label": "Hindernisvermeidung", "values": ["Laser in vier Richtungen", "360°-Lidar und Millimeterwellenradar"] },
+      { "label": "Visuelle Funktion", "values": ["Monokulare Entfernungsmessung", "Monokulare Entfernungsmessung"] },
+      { "label": "Cloud-Steuerung", "values": ["Nicht enthalten", "Direkte 4G-/5G-Cloud-Steuerung"] }
+    ],
+    "kitTitle": "Lieferumfang der Standardversion",
+    "kit": "Fluggerät × 1 · ES15-Akku × 2 · Fernsteuerung × 1 · Ladegerät × 1 · Transportkoffer × 1 · Steuerungsplattform für 1 Jahr · Haftpflichtversicherung für 1 Jahr · leichtes KI-Modell · 6-TOPS-Rechenmodul."
+  },
+  "specs": {
+    "eyebrow": "Technische Daten",
+    "titlePrefix": "PD-U15",
+    "title": "Technische Daten der Multifunktionsdrohne",
+    "items": [
+      { "label": "Fluggerätetyp", "value": "Quadrocopter-UAV" },
+      { "label": "Antriebsart", "value": "Elektrisch" },
+      { "label": "Radstand", "value": "1.300 mm" },
+      { "label": "Abmessungen (ausgeklappt)", "value": "1.050 × 1.030 × 540 mm" },
+      { "label": "Abmessungen (zusammengeklappt)", "value": "455 × 630 × 540 mm" },
+      { "label": "Max. Nutzlast", "value": "15 kg" },
+      { "label": "Flugzeit ohne Nutzlast", "value": "75 Min." },
+      { "label": "Flugzeit bei voller Nutzlast", "value": "31 Min." },
+      { "label": "Max. Steiggeschwindigkeit", "value": "20 m/s" },
+      { "label": "Max. Sinkgeschwindigkeit", "value": "5 m/s" },
+      { "label": "Maximale Einsatzhöhe", "value": "5.000 m (Höhenluftschrauben erforderlich)" },
+      { "label": "Windbeständigkeit", "value": "Windstärke 6, Böen bis Stärke 7" },
+      { "label": "Navigation", "value": "GPS / BeiDou mit RTK" },
+      { "label": "Betriebstemperatur", "value": "-20 °C bis 50 °C" },
+      { "label": "Kommunikationsreichweite", "value": "15 km, freie Sicht und störungsfreie Umgebung" },
+      { "label": "Schutzart", "value": "IP55" },
+      { "label": "Standardsensoren", "value": "FPV-Kamera, GPS, RTK" },
+      { "label": "Nutzlastschnittstelle", "value": "Schnellwechselaufnahme, 12 kompatible Nutzlasten" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "heading": "Fragen zur U15 – beantwortet",
+    "items": [
+      { "q": "Welche Nutzlast kann die U15 tragen?", "a": "Die Standardplattform trägt bis zu 15 kg. Zwölf Nutzlasten verwenden dieselbe Schnellwechselaufnahme, darunter die Vier-Sensor-Gimbal-Kamera, Transportbox, Suchscheinwerfer, Lautsprecher, Fallschirm, Methan-Messgerät, Wasserströmungsmesser, Gasdetektor und eine luftgestützte Notfall-Kommunikationsstation." },
+      { "q": "Wie lange kann die U15 in der Luft bleiben?", "a": "75 Minuten ohne Nutzlast, 54 Minuten bei 5 kg, 41 Minuten bei 10 kg und 31 Minuten bei voller Nutzlast von 15 kg. Mit einer Bodenstation zur kabelgebundenen Stromversorgung kann das Fluggerät dauerhaft in der Luft bleiben." },
+      { "q": "Wie groß ist die Steuerungsreichweite?", "a": "Die direkte Funkverbindung erreicht unter freien und störungsfreien Bedingungen 15 km. Die Pro-Version ergänzt eine 4G-/5G-Cloud-Steuerung für Einsätze über diese Reichweite hinaus, vorbehaltlich lokaler Genehmigungen." },
+      { "q": "Kann die Drohne bei Regen und Wind fliegen?", "a": "Ja. Das Fluggerät ist nach IP55 gegen Staub, Sand und Regen geschützt, für -20 °C bis 50 °C ausgelegt und für Windstärke 6 mit Böen bis Stärke 7 zugelassen." },
+      { "q": "Worin unterscheiden sich Standard- und Pro-Version?", "a": "Die Bordrechenleistung steigt von 6 TOPS auf 67 TOPS, das KI-Modell von einer leichten auf eine höhere Präzisionsstufe. Die Hindernisvermeidung wechselt von Lasern in vier Richtungen zu 360°-Lidar plus Millimeterwellenradar. Die Pro-Version ergänzt außerdem die direkte 4G-/5G-Cloud-Steuerung." },
+      { "q": "Kann die Drohne auf einem fahrenden Fahrzeug oder Schiff landen?", "a": "Ja. Bei der visuellen Präzisionslandung gleicht eine Kalibrierplatte die Bewegungen von Deck oder Fahrzeug aus und ermöglicht ein Andocken im Zentimeterbereich. Dynamische Abwürfe auf bewegte Ziele werden im Lieferprozess unterstützt." },
+      { "q": "Ist die U15 für Flüge außerhalb der Sichtweite zugelassen?", "a": "Die Genehmigung hängt von den Vorschriften Ihres Landes ab. Partdro unterstützt Betreiber mit Unterlagen und Konfigurationsoptionen; für lokale Genehmigungen und Flugregeln bleibt jedoch der Betreiber verantwortlich." },
+      { "q": "Was gehört zum Standard-Lieferumfang?", "a": "Ein Fluggerät, zwei ES15-Smart-Akkus, eine Fernsteuerung, ein Ladegerät, ein Transportkoffer, eine einjährige Lizenz für die Steuerungsplattform, eine einjährige Haftpflichtversicherung sowie das leichte KI-Modell mit einem 6-TOPS-Rechenmodul." },
+      { "q": "Wie erhalte ich Preis und Lieferzeit?", "a": "Senden Sie die gewünschte Konfiguration, Ihre Region und das geplante Einsatzprofil über das Anfrageformular auf dieser Seite. Unser Team antwortet innerhalb eines Werktags mit Preis, Lieferzeit und Versandoptionen." }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Weltweite Preise – passend zu Ihrem Bedarf",
+    "title": "Angebot anfordern",
+    "lead": "Der Preis der U15 hängt von der Version, dem Nutzlastpaket, der Region und dem Umfang des Einsatzes ab. Beschreiben Sie uns Ihre Aufgabe – unser Team erstellt ein passendes Angebot.",
+    "points": [
+      "Version und Nutzlast passend zu Ihrer Mission",
+      "Regionale Preise, Lieferzeiten und Versand",
+      "Unterstützung bei Genehmigungen, Schulung und Kundendienstplanung"
+    ],
+    "form": {
+      "name": "Vollständiger Name",
+      "email": "Geschäftliche E-Mail-Adresse",
+      "phone": "Telefon / WhatsApp (optional)",
+      "company": "Unternehmen",
+      "region": "Land / Region",
+      "edition": "Gewünschte Version",
+      "editionPlaceholder": "Version auswählen",
+      "message": "Nachricht",
+      "messagePlaceholder": "Einsatzprofil, Nutzlast, Standortbedingungen, Zeitplan …",
+      "submit": "Angebot anfordern",
+      "submitting": "Wird gesendet …",
+      "success": "Vielen Dank! Ihre Anfrage ist bei Partdro eingegangen. Wir antworten innerhalb eines Werktags.",
+      "error": "Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns eine E-Mail.",
+      "fallbackLink": "E-Mail an info@droneworld.tech",
+      "privacy": "Wir verwenden diese Angaben ausschließlich zur Beantwortung Ihrer Anfrage.",
+      "noscript": "JavaScript ist deaktiviert. Senden Sie Ihre Anforderungen bitte per E-Mail an info@droneworld.tech.",
+      "honeypot": "Website"
+    }
+  },
+  "notes": {
+    "aria": "Hinweise zur Produktnutzung und zu Messbedingungen",
+    "intro": [
+      "* Prüfen und beachten Sie vor jedem Flug die geltenden lokalen Gesetze und Vorschriften.",
+      "** Alle Videos und Bilder auf dieser Seite wurden unter Einhaltung der geltenden lokalen Vorschriften aufgenommen. Stellen Sie vor dem Flug sicher, dass alle erforderlichen Genehmigungen vorliegen.",
+      "*** Das gelieferte Produkt kann optisch von den Abbildungen abweichen. Halten Sie die in der Steuerungs-App angezeigten Gewichtsgrenzen ein, um die Flugsicherheit nicht zu beeinträchtigen."
+    ],
+    "items": [
+      { "text": "1. Die Flugzeit wurde unter meereshöhenähnlichen Bedingungen bei 25 °C und Windstille bis zur vollständigen Entladung des Akkus und einer erzwungenen Landung gemessen. Die Ergebnisse hängen von Umgebung, Nutzlast, Verwendung und Firmware ab." },
+      { "text": "2. Die Kommunikationsreichweite von 15 km wurde im Freien und in störungsfreier Umgebung gemessen. Sie bezeichnet die maximale einfache Entfernung ohne Rückflug. Beachten Sie während des tatsächlichen Flugs die Rückkehrhinweise in der App." },
+      { "text": "3. Für eine Einsatzhöhe von 5.000 m sind spezielle Luftschrauben für große Höhen erforderlich. Die Nutzlast sinkt mit zunehmender Starthöhe; die angegebenen Nutzlastwerte gelten für Starts auf Meereshöhe." },
+      { "text": "4. KI-Erkennung, Zielverfolgung und Geländefolgeflug sind Assistenzfunktionen. Die Bediener bleiben für die Flugsicherheit verantwortlich und müssen die Umgebung jederzeit überwachen." }
+    ]
+  },
+  "accessibility": {
+    "scroll": "Seiten-Bildlaufleiste",
+    "video": "Produktvideo",
+    "chart": "Diagramm Nutzlast und Flugzeit",
+    "specs": "Tabelle der technischen Daten",
+    "editions": "Versionsvergleich"
+  },
+  "footer": {
+    "description": "Die Partdro U15-Multifunktionsdrohne vereint Inspektion, Lieferung und Umweltprobenahme auf einer IP55-geschützten Plattform. Weltweite Lieferung mit Konfiguration und Kundendienst.",
+    "contactHeading": "Sprechen Sie mit Partdro",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon / WhatsApp",
+    "exploreHeading": "Entdecken",
+    "products": "Alle Produkte",
+    "solutions": "Lösungen für Schwerlastlogistik",
+    "c500Product": "Technische Daten der Transportdrohne",
+    "about": "Über Partdro",
+    "contact": "Kontakt",
+    "legal": "Partdro konfiguriert und liefert die U15-Plattform für Multifunktionsmissionen. Technische Daten können sich mit Firmware- und Nutzlastoptionen ändern.",
+    "copyright": "Partdro. Alle Rechte vorbehalten."
+  },
+  "whatsapp": {
+    "aria": "Partdro über WhatsApp kontaktieren",
+    "message": "Hallo Partdro, ich interessiere mich für die U15-Multifunktionsdrohne."
+  },
+  "seo": {
+    "breadcrumbHome": "Startseite",
+    "breadcrumbProducts": "Produkte",
+    "breadcrumbCurrent": "U15-Multifunktionsdrohne"
+  }
+}
