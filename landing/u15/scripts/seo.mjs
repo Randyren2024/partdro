@@ -4,13 +4,26 @@ import { fileURLToPath } from 'node:url'
 export const SITE_URL = 'https://www.droneworld.tech'
 export const BASE_PATH = '/products/u15-multi-mission-drone'
 export const ASSET_BASE = `${BASE_PATH}/`
-export const LOCALES = ['en']
+export const LOCALES = ['en', 'es', 'de', 'fr']
 
 const here = fileURLToPath(new URL('.', import.meta.url))
 const CONTENT_DIR = `${here}../src/data/content/`
 
+function mergeContent(base, override) {
+  if (Array.isArray(override)) return override
+  if (!override || typeof override !== 'object') return override
+  const merged = { ...(base || {}) }
+  for (const [key, value] of Object.entries(override)) {
+    merged[key] = mergeContent(base?.[key], value)
+  }
+  return merged
+}
+
 export function loadContent(locale) {
-  return JSON.parse(readFileSync(`${CONTENT_DIR}${locale}.json`, 'utf8'))
+  const base = JSON.parse(readFileSync(`${CONTENT_DIR}en.json`, 'utf8'))
+  if (locale === 'en') return base
+  const override = JSON.parse(readFileSync(`${CONTENT_DIR}${locale}.json`, 'utf8'))
+  return mergeContent(base, override)
 }
 
 export function loadManifest() {
@@ -132,7 +145,7 @@ function organizationJsonLd() {
       contactType: 'sales',
       email: 'info@droneworld.tech',
       telephone: '+86 16788684420',
-      availableLanguage: ['English'],
+      availableLanguage: ['English', 'Spanish', 'German', 'French'],
     },
   }
 }
@@ -161,6 +174,10 @@ export function buildHead(locale, content, manifest) {
     `    <meta name="keywords" content="${escapeHtml(content.meta.keywords)}" />`,
     `    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`,
     `    <link rel="canonical" href="${canonical}" />`,
+    ...LOCALES.map((language) =>
+      `    <link rel="alternate" hreflang="${language}" href="${absoluteUrl(canonicalPath(language))}" />`
+    ),
+    `    <link rel="alternate" hreflang="x-default" href="${absoluteUrl(canonicalPath('en'))}" />`,
     `    <meta name="theme-color" content="#060708" />`,
     `    <link rel="icon" href="/favicon.ico" sizes="any" />`,
     `    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />`,
