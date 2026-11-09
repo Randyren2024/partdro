@@ -1,0 +1,233 @@
+{
+  "locale": "fr",
+  "meta": {
+    "title": "Drone VTOL VF50P longue endurance — Charge utile 15 kg, vol 5 h | Partdro",
+    "description": "Le drone VTOL à voilure fixe hybride essence-électrique Partdro VF50P offre une charge utile de 15 kg, jusqu’à 5 heures de vol, une envergure de 3,8 m et une liaison avec station au sol de 30 km pour la topographie, l’inspection et les interventions d’urgence.",
+    "keywords": "VF50P, drone VTOL à essence, UAV VTOL à voilure fixe, drone longue endurance, UAV charge utile 15 kg, drone de topographie, inspection de lignes électriques, Partdro",
+    "ogLocale": "fr_FR",
+    "productName": "Drone VTOL VF50P longue endurance"
+  },
+  "nav": {
+    "aria": "Navigation de la page VF50P",
+    "overview": "Aperçu",
+    "architecture": "Architecture",
+    "endurance": "Autonomie",
+    "specs": "Caractéristiques",
+    "quote": "Devis",
+    "requestQuote": "Demander un devis",
+    "homeAria": "Accueil Partdro",
+    "skip": "Aller au contenu",
+    "language": "Langue",
+    "languageAria": "Choisir la langue"
+  },
+  "hero": {
+    "eyebrow": "PD-VF50P · Aile fixe VTOL à essence",
+    "title": "Drone VTOL VF50P longue endurance",
+    "titleLines": ["VF50P", "Drone VTOL longue endurance"],
+    "summary": "Décollage vertical, croisière portée par les ailes et jusqu’à cinq heures de vol : une plateforme de 15 kg de charge utile pour la topographie, l’inspection et les interventions.",
+    "primary": "Demander un devis",
+    "secondary": "Voir la démonstration en vol",
+    "imageAlt": "Drone VTOL à voilure fixe hybride essence-électrique VF50P sur une aire d’essai",
+    "stats": [
+      { "value": "15", "unit": "kg", "label": "Charge utile max." },
+      { "value": "5", "unit": "h", "label": "Autonomie avec 10 kg" },
+      { "value": "30", "unit": "km", "label": "Portée de la station au sol" },
+      { "value": "3,8", "unit": "m", "label": "Envergure" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "Aperçu",
+    "heading": "Sans piste, avec l’autonomie d’un aéronef à voilure fixe",
+    "paragraphs": [
+      "Le VF50P est un drone VTOL à voilure fixe hybride essence-électrique, conçu pour les missions où un multirotor manque d’autonomie et où aucune piste n’est disponible. Quatre rotors de sustentation assurent le décollage et l’atterrissage verticaux ; l’aile prend ensuite le relais en croisière.",
+      "Avec une masse maximale au décollage de 55 kg, il transporte jusqu’à 15 kg d’équipements de mission sur une aile de 3,8 m d’envergure. Les 12 litres de carburant permettent trois heures de vol à pleine charge et cinq heures avec 10 kg.",
+      "L’appareil est conçu pour les missions linéaires de longue durée : cartographie de corridors, patrouille de lignes électriques et de pipelines, observation d’urgence et surveillance de frontières ou de sites. La liaison de 30 km avec la station au sol maintient l’opérateur à distance de la zone de travail, tandis que la commande portative couvre 1 km pour le décollage et la récupération."
+    ],
+    "imageAlt": "Drone VTOL VF50P à aile composite avec moteur à essence apparent",
+    "metrics": [
+      { "value": "55", "unit": "kg", "label": "Masse maximale au décollage" },
+      { "value": "15", "unit": "kg", "label": "Charge utile maximale" },
+      { "value": "3–5", "unit": "h", "label": "Autonomie annoncée" },
+      { "value": "12", "unit": "L", "label": "Capacité en carburant" }
+    ]
+  },
+  "architecture": {
+    "eyebrow": "Architecture VTOL",
+    "heading": "Décollage vertical. Croisière sur les ailes.",
+    "lead": "La configuration à aile composite associe quatre unités de rotors de sustentation verticale à une aile fixe classique. L’appareil peut ainsi décoller depuis une petite zone, puis voler comme un aéronef à voilure fixe.",
+    "imageAlt": "Configuration VTOL VF50P à quatre rotors avec empennage en V et aile",
+    "items": [
+      { "name": "Quatre rotors de sustentation", "value": "Décollage et atterrissage verticaux", "detail": "Aucune piste, catapulte ou équipe de lancement n’est nécessaire. L’appareil monte et atterrit verticalement depuis une zone préparée et compacte." },
+      { "name": "Aile composite de 3,8 m", "value": "Croisière portée par les ailes", "detail": "En croisière, l’aile fixe porte l’appareil, ce qui permet une grande autonomie et une vitesse maximale de 150 km/h." },
+      { "name": "Motorisation à essence", "value": "12 L de carburant", "detail": "Un moteur à essence permet de voler pendant des heures plutôt que des minutes ; le ravitaillement entre deux sorties est plus rapide que la recharge des batteries." },
+      { "name": "Compartiment de charge sous le fuselage", "value": "Jusqu’à 15 kg", "detail": "Les équipements de mission sont installés sous le fuselage. La charge utile et l’autonomie sont directement liées : 15 kg permettent 3 heures de vol, 10 kg en permettent 5." }
+    ]
+  },
+  "endurance": {
+    "eyebrow": "Autonomie",
+    "heading": "Trois heures à pleine charge. Cinq heures avec dix kilos.",
+    "lead": "Les valeurs d’autonomie publiées pour le VF50P sont mesurées au niveau de la mer et à 25 °C. C’est la capacité en carburant, et non l’état de la batterie, qui détermine la durée de la mission.",
+    "chartTitle": "Charge utile en fonction du temps de vol",
+    "points": [
+      { "load": "15 kg", "minutes": 180, "label": "3 h" },
+      { "load": "10 kg", "minutes": 300, "label": "5 h" }
+    ],
+    "note": "Prévoyez une réserve de carburant et le temps de retour à la base. L’autonomie réelle varie selon l’altitude, la température, le vent et la charge utile installée.",
+    "power": {
+      "title": "Réservoir de 12 L, ravitaillement entre les missions",
+      "desc": "La motorisation à essence supprime les cycles de recharge des batteries au cours de la journée. L’appareil peut être ravitaillé sur site et reprendre sa mission."
+    }
+  },
+  "envelope": {
+    "eyebrow": "Domaine de vol",
+    "heading": "Conçu pour les longs corridors et les sites isolés",
+    "lead": "Le domaine de vol publié couvre les conditions rencontrées par les équipes de topographie, d’inspection et d’intervention.",
+    "items": [
+      { "title": "Cinq heures de vol", "desc": "Jusqu’à cinq heures avec 10 kg à bord — suffisamment pour parcourir un corridor de pipeline ou une vaste zone de relevé en une seule sortie." },
+      { "title": "Liaison de commande de 30 km", "desc": "La station au sol assure le contrôle jusqu’à 30 km en espace dégagé et sans interférences ; la commande portative couvre 1 km pour le décollage et l’atterrissage." },
+      { "title": "Vent jusqu’à 12 m/s", "desc": "Prévu pour un vent allant jusqu’à 12 m/s, afin de travailler dans les limites publiées sur des sites côtiers exposés, des crêtes et des plaines ouvertes." },
+      { "title": "Plafond opérationnel de 3 000 m", "desc": "Un plafond de 3 000 m permet les missions de topographie et d’inspection en altitude ; la charge utile et le carburant doivent être planifiés en conséquence." }
+    ]
+  },
+  "applications": {
+    "eyebrow": "Applications",
+    "heading": "Les missions du VF50P",
+    "intro": "Six missions récurrentes où l’endurance d’un aéronef à voilure fixe dépasse le temps de vol stationnaire d’un multirotor.",
+    "items": [
+      { "title": "Topographie et cartographie", "desc": "Cartographie de corridors et de zones, orthophotos et collecte de données terrain sur des surfaces trop vastes pour une sortie en multirotor." },
+      { "title": "Inspection du réseau électrique", "desc": "Inspection des pylônes, lignes et postes le long d’un corridor sans interrompre le circuit électrique." },
+      { "title": "Pipelines pétroliers et gaziers", "desc": "Patrouille d’itinéraires, inspection de stations de vannes et assistance lors d’interventions sur fuite le long de réseaux étendus." },
+      { "title": "Intervention d’urgence", "desc": "Connaissance aérienne de la situation et livraison de petites charges durant les premières heures d’un incendie, d’une inondation ou d’une opération de sauvetage." },
+      { "title": "Patrouille policière et frontalière", "desc": "Observation aérienne persistante pour les patrouilles, la collecte de preuves et les recherches sur de vastes zones." },
+      { "title": "Météorologie et environnement", "desc": "Échantillonnage atmosphérique et surveillance environnementale au-dessus de terrains isolés ou dangereux." }
+    ]
+  },
+  "video": {
+    "eyebrow": "Démonstration en vol",
+    "heading": "Le VF50P en vol",
+    "lead": "Décollage vertical, transition vers le vol porté par les ailes et croisière, filmés sur un site d’essais en vol.",
+    "play": "Lire la démonstration",
+    "posterAlt": "Drone VTOL VF50P en croisière à voilure fixe pendant un essai en vol",
+    "dialogTitle": "Démonstration en vol du VF50P",
+    "close": "Fermer la vidéo",
+    "caption": "Images d’essais en vol · décollage VTOL et croisière à voilure fixe"
+  },
+  "specs": {
+    "eyebrow": "Caractéristiques",
+    "titlePrefix": "PD-VF50P",
+    "title": "Caractéristiques du drone VTOL longue endurance",
+    "items": [
+      { "label": "Type d’aéronef", "value": "Drone VTOL à voilure fixe hybride essence-électrique" },
+      { "label": "Configuration", "value": "Aile composite avec quatre rotors de sustentation" },
+      { "label": "Masse maximale au décollage", "value": "55 kg" },
+      { "label": "Charge utile maximale", "value": "15 kg" },
+      { "label": "Envergure", "value": "3,8 m" },
+      { "label": "Longueur", "value": "2,5 m" },
+      { "label": "Capacité en carburant", "value": "12 L d’essence" },
+      { "label": "Autonomie avec 15 kg", "value": "3 h" },
+      { "label": "Autonomie avec 10 kg", "value": "5 h" },
+      { "label": "Vitesse horizontale maximale", "value": "150 km/h" },
+      { "label": "Vitesse de croisière", "value": "100 km/h" },
+      { "label": "Plafond opérationnel", "value": "3 000 m" },
+      { "label": "Résistance au vent", "value": "12 m/s" },
+      { "label": "Température de fonctionnement", "value": "-10 °C à 45 °C" },
+      { "label": "Portée de la station au sol", "value": "30 km, sans obstacle ni interférence" },
+      { "label": "Portée de la commande portative", "value": "1 km" },
+      { "label": "Interface de charge utile", "value": "Compartiment de charge sous le fuselage" },
+      { "label": "Décollage et atterrissage", "value": "Verticaux, sans piste requise" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "heading": "Questions fréquentes sur le VF50P",
+    "items": [
+      { "q": "Quelle charge utile le VF50P peut-il transporter ?", "a": "Jusqu’à 15 kg sous le fuselage. L’autonomie annoncée est de 3 heures à pleine charge de 15 kg et de 5 heures avec 10 kg. La configuration de topographie, d’inspection ou de transport est confirmée avec l’équipe technique." },
+      { "q": "A-t-il besoin d’une piste ?", "a": "Non. Le VF50P utilise quatre rotors de sustentation pour le décollage et l’atterrissage verticaux, puis passe en croisière portée par les ailes. Il peut opérer depuis une zone préparée et compacte plutôt que depuis une piste." },
+      { "q": "Comment l’aéronef est-il propulsé ?", "a": "Un moteur à essence avec un réservoir de 12 L entraîne la croisière à voilure fixe. L’appareil est ravitaillé sur site entre les sorties ; aucun échange ou cycle de recharge de batterie n’est requis pour la phase de croisière." },
+      { "q": "Quelle est la portée de commande ?", "a": "La station au sol atteint 30 km en espace dégagé et sans interférences. Une commande portative couvre 1 km pour le décollage, l’atterrissage et le pilotage manuel local." },
+      { "q": "Quelles conditions de vent et de température peut-il supporter ?", "a": "Le domaine publié prévoit un vent de 12 m/s, une température de -10 °C à 45 °C et un plafond opérationnel de 3 000 m. La charge utile et le carburant doivent être adaptés aux sites en altitude ou aux températures élevées." },
+      { "q": "Combien de temps dure une mission ?", "a": "Avec 10 kg à bord, l’autonomie annoncée est de 5 heures ; avec 15 kg, elle est de 3 heures. Il faut prévoir une réserve de carburant pour le transit, les conditions météo et le retour à la base." },
+      { "q": "Peut-il être expédié et pris en charge à l’international ?", "a": "Partdro fournit l’aéronef, la station au sol et la commande portative, avec un accompagnement pour la configuration et le service après-vente. L’expédition, les pièces de rechange et la formation sont chiffrées selon le pays de destination." },
+      { "q": "Qu’en est-il des autorisations et des règles de vol locales ?", "a": "Les autorisations dépendent de la juridiction. Partdro accompagne les opérateurs avec des documents et des options de configuration, mais l’opérateur reste responsable des permis et des règles de vol locales." },
+      { "q": "Comment obtenir le prix et le délai de livraison ?", "a": "Envoyez le profil de mission, la charge utile envisagée et la destination via le formulaire de devis. Notre équipe vous répondra avec le prix, le délai et les options d’expédition." }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Tarifs internationaux adaptés à votre projet",
+    "title": "Demander un devis",
+    "lead": "Le prix du VF50P dépend de l’intégration de la charge utile, de la configuration de la station au sol, de la destination et du niveau d’assistance souhaité. Décrivez-nous la mission et notre équipe préparera une proposition adaptée.",
+    "points": [
+      "Aéronef, station au sol et commande adaptés à votre mission",
+      "Tarifs régionaux, délais et expédition",
+      "Assistance pour l’intégration des charges utiles, la formation et le service après-vente"
+    ],
+    "options": [
+      { "key": "airframe", "label": "Aéronef et intégration" },
+      { "key": "survey", "label": "Charge utile de topographie et cartographie" },
+      { "key": "inspection", "label": "Charge utile d’inspection" },
+      { "key": "program", "label": "Demande concernant une flotte ou un programme" }
+    ],
+    "form": {
+      "name": "Nom complet",
+      "email": "E-mail professionnel",
+      "phone": "Téléphone / WhatsApp (facultatif)",
+      "company": "Entreprise",
+      "region": "Pays / région",
+      "interest": "Configuration souhaitée",
+      "interestPlaceholder": "Sélectionner une configuration",
+      "message": "Message",
+      "messagePlaceholder": "Profil de mission, charge utile, conditions du site, calendrier…",
+      "submit": "Demander un devis",
+      "submitting": "Envoi en cours…",
+      "success": "Merci ! Votre demande est bien arrivée chez Partdro. Nous vous répondrons sous un jour ouvré.",
+      "error": "Une erreur s’est produite. Veuillez réessayer ou nous écrire directement.",
+      "fallbackLink": "Envoyer un e-mail à info@droneworld.tech",
+      "privacy": "Ces informations sont utilisées uniquement pour répondre à votre demande.",
+      "noscript": "JavaScript est désactivé. Envoyez vos besoins à info@droneworld.tech et nous vous répondrons directement.",
+      "honeypot": "Site web"
+    }
+  },
+  "notes": {
+    "aria": "Notes sur l’utilisation du produit et les conditions de mesure",
+    "intro": [
+      "* Vérifiez et respectez strictement les lois et réglementations locales avant tout vol.",
+      "** Les images de vol de cette page ont été réalisées sur un site d’essais. L’apparence du produit livré peut varier selon la configuration.",
+      "*** Les valeurs d’autonomie, de vitesse et de portée proviennent des données publiées par le fabricant. Confirmez la configuration finale avec Partdro avant de planifier une mission."
+    ],
+    "items": [
+      { "text": "1. Les valeurs d’autonomie sont publiées pour une altitude équivalente au niveau de la mer et une température ambiante de 25 °C : 3 heures avec 15 kg de charge utile et 5 heures avec 10 kg. La quantité de carburant, l’altitude, la température, le vent et la charge utile influencent le résultat." },
+      { "text": "2. La portée de 30 km de la station au sol et celle de 1 km de la commande portative ont été mesurées en espace dégagé et sans interférences. En opération, respectez les alertes de retour à la base et la réglementation radio locale." },
+      { "text": "3. Le plafond opérationnel de 3 000 m et la limite de vent de 12 m/s sont des maxima publiés. Réduisez la charge utile ou le carburant et prévoyez des missions alternatives lorsque vous approchez de ces limites." },
+      { "text": "4. L’intégration de la charge utile, le choix des capteurs et les équipements cargo sont confirmés pour chaque commande. L’aéronef illustré peut embarquer des équipements différents de ceux de l’appareil livré." }
+    ]
+  },
+  "accessibility": {
+    "scroll": "Barre de défilement de la page",
+    "video": "Vidéo du produit",
+    "chart": "Graphique de charge utile et de temps de vol",
+    "specs": "Tableau des caractéristiques"
+  },
+  "footer": {
+    "description": "Le drone VTOL à voilure fixe hybride essence-électrique Partdro VF50P offre une charge utile de 15 kg, jusqu’à cinq heures de vol et une liaison avec station au sol de 30 km, avec configuration et assistance après-vente.",
+    "contactHeading": "Contacter Partdro",
+    "emailLabel": "E-mail",
+    "phoneLabel": "Téléphone / WhatsApp",
+    "exploreHeading": "Explorer",
+    "products": "Tous les produits",
+    "solutions": "Solutions de logistique lourde",
+    "c500Product": "Caractéristiques du drone cargo",
+    "about": "À propos de Partdro",
+    "contact": "Contact",
+    "legal": "Partdro configure et fournit la plateforme VF50P pour les opérations VTOL longue endurance. Les caractéristiques peuvent évoluer selon les configurations disponibles.",
+    "copyright": "Partdro. Tous droits réservés."
+  },
+  "whatsapp": {
+    "aria": "Discuter avec Partdro sur WhatsApp",
+    "message": "Bonjour Partdro, je suis intéressé par le drone VTOL VF50P longue endurance."
+  },
+  "seo": {
+    "breadcrumbHome": "Accueil",
+    "breadcrumbProducts": "Produits",
+    "breadcrumbCurrent": "Drone VTOL VF50P longue endurance"
+  }
+}
