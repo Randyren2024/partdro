@@ -15,7 +15,9 @@
     "quote": "Quote",
     "requestQuote": "Request a quote",
     "homeAria": "Partdro home",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "language": "Language",
+    "languageAria": "Select language"
   },
   "hero": {
     "eyebrow": "PD-U15 · Multi-mission platform",

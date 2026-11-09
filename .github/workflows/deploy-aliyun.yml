@@ -64,51 +64,63 @@ jobs:
             echo "guard ok: $page"
           done
 
-      # 独立的 U15 多任务无人机静态落地页（仅英语）：构建后覆盖主站同名路由。
-      - name: Build U15 landing (en)
+      # 独立的 U15 多任务无人机静态落地页（英语、西语、德语、法语）。
+      - name: Build U15 landing (4 locales)
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run landing:u15:build
 
-      - name: Merge U15 landing and guard
+      - name: Merge U15 landing and guard (4 locales)
         run: |
           cp -R dist-landing/u15/site/. dist/
-          page=dist/products/u15-multi-mission-drone/index.html
-          if [ ! -f "$page" ]; then
-            echo "missing U15 landing page: $page"
-            exit 1
-          fi
-          for needle in 'id="u15-quote"' 'GTM-KJ7GJ3V5' 'u15-multi-mission-drone/images/hero.webp'; do
-            if ! grep -q "$needle" "$page"; then
-              echo "$page is missing $needle (was the main build merged over the landing?)"
+          for locale in en es de fr; do
+            if [ "$locale" = "en" ]; then
+              page=dist/products/u15-multi-mission-drone/index.html
+            else
+              page=dist/$locale/products/u15-multi-mission-drone/index.html
+            fi
+            if [ ! -f "$page" ]; then
+              echo "missing U15 landing page: $page"
               exit 1
             fi
+            for needle in 'id="u15-quote"' 'GTM-KJ7GJ3V5' 'u15-multi-mission-drone/images/hero.webp' 'hreflang="x-default"'; do
+              if ! grep -q "$needle" "$page"; then
+                echo "$page is missing $needle (was the main build merged over the landing?)"
+                exit 1
+              fi
+            done
+            echo "guard ok: $page"
           done
-          echo "guard ok: $page"
 
-      # 独立的 VF50P 长航时 VTOL 固定翼无人机静态落地页（仅英语）。
-      - name: Build VF50P landing (en)
+      # 独立的 VF50P 长航时 VTOL 固定翼无人机静态落地页（英语、西语、德语、法语）。
+      - name: Build VF50P landing (4 locales)
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run landing:vf50p:build
 
-      - name: Merge VF50P landing and guard
+      - name: Merge VF50P landing and guard (4 locales)
         run: |
           cp -R dist-landing/vf50p/site/. dist/
-          page=dist/products/vf50p-long-endurance-vtol-uav/index.html
-          if [ ! -f "$page" ]; then
-            echo "missing VF50P landing page: $page"
-            exit 1
-          fi
-          for needle in 'id="vf50p-quote"' 'GTM-KJ7GJ3V5' 'images/vf50p/hero-vf50p.webp'; do
-            if ! grep -q "$needle" "$page"; then
-              echo "$page is missing $needle (was the main build merged over the landing?)"
+          for locale in en es de fr; do
+            if [ "$locale" = "en" ]; then
+              page=dist/products/vf50p-long-endurance-vtol-uav/index.html
+            else
+              page=dist/$locale/products/vf50p-long-endurance-vtol-uav/index.html
+            fi
+            if [ ! -f "$page" ]; then
+              echo "missing VF50P landing page: $page"
               exit 1
             fi
+            for needle in 'id="vf50p-quote"' 'GTM-KJ7GJ3V5' 'images/vf50p/hero-vf50p.webp' 'hreflang="x-default"'; do
+              if ! grep -q "$needle" "$page"; then
+                echo "$page is missing $needle (was the main build merged over the landing?)"
+                exit 1
+              fi
+            done
+            echo "guard ok: $page"
           done
-          echo "guard ok: $page"
 
       - name: Install Aliyun CLI
         run: |

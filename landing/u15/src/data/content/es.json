@@ -1,0 +1,304 @@
+{
+  "locale": "es",
+  "meta": {
+    "title": "Dron U15 Multimisión — 15 kg de carga útil, 75 min de vuelo | Partdro",
+    "description": "El dron multimisión U15 de Partdro ofrece 15 kg de carga útil, hasta 75 minutos de autonomía, un módulo de cuatro sensores 8K, radar dual y control en la nube 5G. Una sola plataforma para inspección, entregas y muestreo ambiental.",
+    "keywords": "dron U15, dron multimisión, dron de 15 kg de carga útil, dron de inspección, dron de entrega, dron para muestreo de agua, dron cautivo, Partdro",
+    "ogLocale": "es_ES",
+    "productName": "Dron U15 Multimisión"
+  },
+  "nav": {
+    "aria": "Navegación de la página U15",
+    "overview": "Resumen",
+    "autonomy": "Autonomía",
+    "specs": "Especificaciones",
+    "quote": "Presupuesto",
+    "requestQuote": "Solicitar presupuesto",
+    "homeAria": "Inicio de Partdro",
+    "skip": "Saltar al contenido",
+    "language": "Idioma",
+    "languageAria": "Seleccionar idioma"
+  },
+  "hero": {
+    "eyebrow": "PD-U15 · Plataforma multimisión",
+    "title": "Dron U15 Multimisión",
+    "titleLines": ["U15", "Dron Multimisión"],
+    "summary": "15 kg de carga útil. 75 minutos de vuelo. Una sola aeronave para inspección, entregas y muestreo ambiental.",
+    "primary": "Solicitar presupuesto",
+    "secondary": "Ver demostración",
+    "imageAlt": "Dron U15 multimisión volando sobre una plantación de té",
+    "stats": [
+      { "value": "15", "unit": "kg", "label": "Carga útil máxima" },
+      { "value": "75", "unit": "min", "label": "Autonomía sin carga" },
+      { "value": "15", "unit": "km", "label": "Alcance del enlace directo" },
+      { "value": "12", "unit": "", "label": "Cargas útiles compatibles" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "Resumen",
+    "heading": "Una aeronave. Todas las misiones.",
+    "paragraphs": [
+      "El U15 es un cuadricóptero de la clase de 15 kg de carga útil diseñado para cambiar de función sin cambiar de aeronave. Sustituya el módulo de sensores, la caja de carga o el sistema de muestreo de agua y la misma plataforma podrá realizar inspecciones, entregar suministros o recoger muestras ambientales.",
+      "La distancia entre ejes de 1.300 mm se pliega hasta 455 × 630 × 540 mm para facilitar el transporte. Desplegado, ofrece 75 minutos de autonomía sin carga y 31 minutos con la carga máxima de 15 kg. La alimentación cautiva desde tierra permite permanecer en posición de forma continua.",
+      "El radar dual, el lidar de 360° en la versión Pro y la protección IP55 permiten operar con lluvia, polvo y oscuridad, entre -20 °C y 50 °C y hasta un techo operativo de 5.000 m."
+    ],
+    "imageAlt": "Aeronave U15 con brazos plegables y módulo de carga",
+    "metrics": [
+      { "value": "15", "unit": "kg", "label": "Carga útil al nivel del mar" },
+      { "value": "75", "unit": "min", "label": "Autonomía sin carga" },
+      { "value": "5.000", "unit": "m", "label": "Techo operativo" },
+      { "value": "IP55", "unit": "", "label": "Protección contra polvo y lluvia" }
+    ]
+  },
+  "pod": {
+    "eyebrow": "Carga útil · Módulo de cuatro sensores",
+    "heading": "Cuatro sensores en un solo gimbal estabilizado",
+    "lead": "Una cámara gran angular 8K, una cámara híbrida con zoom 8K, un telémetro láser y una cámara infrarroja comparten un gimbal estabilizado de tres ejes. Así, cada objetivo se registra al mismo tiempo con detalle visible y térmico.",
+    "imageAlt": "Módulo gimbal U15 de cuatro sensores con ópticas gran angular, zoom, láser y térmica",
+    "items": [
+      { "name": "Gran angular 8K", "value": "Equivalente a 24 mm", "detail": "Una sola imagen cubre toda la zona y conserva el contexto para el operador, sin necesidad de unir panorámicas." },
+      { "name": "Zoom híbrido 8K", "value": "Equivalente a 82–268 mm", "detail": "Permite leer una placa de identificación o inspeccionar un aislador desde una distancia segura." },
+      { "name": "Telémetro láser", "value": "5–1.200 m · ±0,5 m", "detail": "Medición directa de distancia y coordenadas sin necesidad de calibrar un sensor independiente." },
+      { "name": "Cámara infrarroja", "value": "Objetivo de 9 mm / 19 mm", "detail": "Detección térmica de personas, vehículos y fuentes de calor, de día o de noche." }
+    ]
+  },
+  "endurance": {
+    "eyebrow": "Autonomía",
+    "heading": "La carga útil determina el tiempo de vuelo, y la curva está publicada",
+    "lead": "Cada kilogramo que se deja en tierra añade minutos de operación. Planifique las misiones con la curva publicada, sin depender de estimaciones después del despegue.",
+    "chartTitle": "Carga útil frente al tiempo de vuelo",
+    "chartUnit": "min",
+    "points": [
+      { "load": "0 kg", "minutes": 75, "label": "75 min" },
+      { "load": "5 kg", "minutes": 54, "label": "54 min" },
+      { "load": "10 kg", "minutes": 41, "label": "41 min" },
+      { "load": "15 kg", "minutes": 31, "label": "31 min" }
+    ],
+    "note": "La autonomía progresiva facilita el cálculo del regreso, amplía el radio operativo y aumenta el número de salidas posibles.",
+    "tethered": {
+      "title": "Alimentación cautiva para operar sin interrupciones",
+      "desc": "Una estación terrestre suministra energía continua a la aeronave para vigilancia, comunicaciones de emergencia y cobertura de eventos, sin cambiar baterías ni aterrizar."
+    }
+  },
+  "safety": {
+    "eyebrow": "Seguridad",
+    "heading": "Preparado para las condiciones más exigentes",
+    "lead": "El radar y el lidar detectan obstáculos con lluvia, niebla y oscuridad. La estructura está sellada contra el polvo, la arena y el agua.",
+    "items": [
+      { "title": "Radar dual y lidar", "desc": "El lidar de escaneo de 360° y el radar de ondas milimétricas detectan obstáculos finos —líneas eléctricas, cables y ramas— incluso con lluvia y de noche." },
+      { "title": "Doble protección de los brazos", "desc": "Bloqueo automático con confirmación mecánica audible para verificar que los brazos estén asegurados antes de cada despegue." },
+      { "title": "IP55 para todo tipo de clima", "desc": "Protección contra polvo, arena y lluvia; funcionamiento entre -20 °C y 50 °C y resistencia a vientos de nivel 6 con ráfagas de nivel 7." },
+      { "title": "Cámara frontal FPV", "desc": "Una cámara frontal específica facilita la aproximación y el aterrizaje manuales cuando la situación requiere observación directa en lugar de automatización." }
+    ]
+  },
+  "autonomy": {
+    "eyebrow": "Autonomía",
+    "heading": "Ve, decide y aterriza por sí mismo",
+    "lead": "La capacidad de cálculo a bordo convierte los datos de los sensores en decisiones: 6 TOPS en la versión Standard y 67 TOPS en la Pro.",
+    "items": [
+      { "title": "Reconocimiento de objetivos con IA", "desc": "Detecta personas, vehículos, fuego y humo en imágenes visibles y térmicas y mantiene el seguimiento del objetivo." },
+      { "title": "Entrega en dos modos", "desc": "Descarga en un punto fijo señalizado o entrega dinámica a un vehículo en movimiento. El seguimiento por IA mantiene el objetivo identificado en entornos complejos." },
+      { "title": "Aterrizaje de precisión centimétrica", "desc": "Una placa de calibración compensa el movimiento de cubiertas y vehículos para que la aeronave pueda acoplarse con precisión centimétrica a armarios, camiones y embarcaciones." },
+      { "title": "Medición visual monocular", "desc": "Las coordenadas del objetivo, latitud, longitud y distancia se muestran en tiempo real en la estación terrestre, sin sensores adicionales." },
+      { "title": "Seguimiento del terreno", "desc": "La percepción del terreno en tiempo real ajusta la altura sobre copas de árboles, crestas y pendientes durante los vuelos a baja altura." }
+    ]
+  },
+  "control": {
+    "eyebrow": "Control terrestre",
+    "heading": "Un centro de mando en un portátil",
+    "lead": "Un operador puede pilotar una aeronave con precisión o programar una flota completa para trabajar en una misma zona.",
+    "imageAlt": "Operador planificando misiones del U15 desde una estación terrestre en un portátil",
+    "items": [
+      { "title": "Control centralizado", "desc": "Despegue y aterrizaje remotos, control de misión y coordinación de varias aeronaves desde una sola consola." },
+      { "title": "Control preciso", "desc": "Cabina virtual con teclado o joystick y control en directo de la actitud de vuelo y la carga útil." },
+      { "title": "Implementación segura", "desc": "Red de mando eficiente con despliegue privado y sin conexión en servidores propios." },
+      { "title": "Planificación inteligente", "desc": "Planificación de rutas 3D, programación y revisión de datos con asistencia de modelos avanzados para entornos complejos." }
+    ]
+  },
+  "payloads": {
+    "eyebrow": "Ecosistema de cargas útiles",
+    "heading": "Doce cargas útiles. Una interfaz de liberación rápida.",
+    "lead": "El U15 cambia de función directamente en el lugar de trabajo. Todas las cargas útiles siguientes utilizan la misma interfaz.",
+    "note": "La disponibilidad varía según la región. Confirme con Partdro la configuración adecuada para su operación.",
+    "items": [
+      { "code": "LZA102", "name": "Cámara gimbal", "desc": "Gran angular 8K, zoom 8K, láser y térmica" },
+      { "code": "LZT101", "name": "Foco de búsqueda", "desc": "Iluminación de alta potencia para búsquedas nocturnas" },
+      { "code": "LZH101", "name": "Altavoz", "desc": "Mensajes en directo y avisos de evacuación" },
+      { "code": "LZW101", "name": "Caja logística", "desc": "Caja de carga sellada con apertura remota" },
+      { "code": "LZP101", "name": "Liberador de carga", "desc": "Liberación de un solo punto para cargas suspendidas" },
+      { "code": "LZJ101", "name": "Paracaídas", "desc": "Reduce el impacto al volar sobre zonas con personas" },
+      { "code": "HW60", "name": "Medidor de metano", "desc": "Detecta y rastrea fugas de metano" },
+      { "code": "YF-CL30", "name": "Velocímetro de flujo", "desc": "Medición de la velocidad del agua en superficie" },
+      { "code": "YFK", "name": "Estación de amarre", "desc": "Alimentación cautiva para vuelo continuo" },
+      { "code": "LCQ10", "name": "Detector de gases", "desc": "Detección de varios gases en espacios confinados" },
+      { "code": "LZS101", "name": "Dispositivo de descenso", "desc": "Despliegue de cuerda para acceso en rescates" },
+      { "code": "YFTXS", "name": "Comunicaciones de emergencia", "desc": "Estación base aérea 4G/5G" }
+    ]
+  },
+  "applications": {
+    "eyebrow": "Aplicaciones",
+    "heading": "Dónde trabaja el U15",
+    "intro": "Una plataforma para seis misiones recurrentes: solo hay que cambiar la carga útil, no la aeronave.",
+    "items": [
+      { "title": "Logística y abastecimiento", "desc": "Transporta hasta 15 kg de repuestos, muestras o suministros médicos entre instalaciones, armarios y vehículos, sin carretera ni conductor." },
+      { "title": "Inspección de activos", "desc": "Realiza rutas definidas sobre subestaciones, tuberías y tejados con el módulo de cuatro sensores." },
+      { "title": "Respuesta a emergencias", "desc": "Foco de búsqueda, altavoz e imagen térmica en una sola aeronave durante la primera hora de una incidencia." },
+      { "title": "Agua y medio ambiente", "desc": "Recoge muestras de agua superficial y mide el flujo sin embarcación ni estación fija de muestreo." },
+      { "title": "Incendios y gases", "desc": "Detecta fuentes de calor y fugas de metano antes de que los equipos entren en la zona afectada." },
+      { "title": "Vigilancia nocturna", "desc": "El radar y el lidar mantienen la posición en condiciones de oscuridad, lluvia y niebla." }
+    ]
+  },
+  "video": {
+    "eyebrow": "Demostración en campo",
+    "heading": "Muestreo de agua de principio a fin",
+    "lead": "Una misión totalmente autónoma en un embalse: despegue, desplazamiento, recogida de muestras, regreso y aterrizaje.",
+    "play": "Reproducir demostración",
+    "posterAlt": "El U15 recogiendo una muestra de agua en un embalse",
+    "dialogTitle": "Demostración de muestreo de agua del U15",
+    "close": "Cerrar vídeo",
+    "caption": "Muestreo en embalse · vuelo autónomo · sin intervención del operador"
+  },
+  "projects": {
+    "eyebrow": "Despliegues",
+    "heading": "En servicio",
+    "intro": "Proyectos de referencia del programa de aplicaciones de la plataforma.",
+    "items": [
+      { "tag": "Logística sanitaria", "title": "Suministros hospitalarios", "desc": "Transporte programado de material médico entre un hospital regional y sus centros satélite." },
+      { "tag": "Vigilancia ambiental", "title": "Sistema de muestreo de calidad del agua", "desc": "Muestreo periódico de aguas superficiales para una organización de agua y medio ambiente, sustituyendo la recogida desde embarcaciones." },
+      { "tag": "Respuesta a emergencias", "title": "Rescate y detección", "desc": "Apoyo aéreo de búsqueda y detección para equipos de respuesta a emergencias." }
+    ]
+  },
+  "editions": {
+    "eyebrow": "Versiones",
+    "heading": "Standard o Pro",
+    "intro": "Misma aeronave y misma carga útil. La diferencia está en la capacidad de cálculo y percepción autónomas.",
+    "columns": ["U15 Standard", "U15 Pro"],
+    "rows": [
+      { "label": "Carga útil máxima", "values": ["15 kg", "15 kg"] },
+      { "label": "Baterías", "values": ["2 × batería inteligente ES15", "2 × batería inteligente ES15"] },
+      { "label": "Control remoto", "values": ["Incluido", "Incluido"] },
+      { "label": "Embalaje y carga", "values": ["Maleta con ruedas y base de carga", "Maleta con ruedas y base de carga"] },
+      { "label": "Seguro y plataforma", "values": ["Seguro de responsabilidad civil y plataforma de 1 año", "Seguro de responsabilidad civil y plataforma de 1 año"] },
+      { "label": "Cálculo a bordo", "values": ["6 TOPS", "67 TOPS"] },
+      { "label": "Modelo de IA", "values": ["Ligero: personas, vehículos e incendios", "Medio: mayor precisión en escenas complejas"] },
+      { "label": "Evitación de obstáculos", "values": ["Láser en cuatro direcciones", "Lidar de 360° y radar de ondas milimétricas"] },
+      { "label": "Función visual", "values": ["Medición monocular de distancia", "Medición monocular de distancia"] },
+      { "label": "Control en la nube", "values": ["No incluido", "Control directo en la nube 4G/5G"] }
+    ],
+    "kitTitle": "Contenido del paquete estándar",
+    "kit": "Aeronave × 1 · batería ES15 × 2 · control remoto × 1 · cargador × 1 · maleta con ruedas × 1 · plataforma de control durante 1 año · seguro de responsabilidad civil durante 1 año · modelo de IA ligero · módulo de cálculo de 6 TOPS."
+  },
+  "specs": {
+    "eyebrow": "Especificaciones",
+    "titlePrefix": "PD-U15",
+    "title": "Especificaciones del dron multimisión",
+    "items": [
+      { "label": "Tipo de aeronave", "value": "UAV cuadricóptero" },
+      { "label": "Tipo de propulsión", "value": "Eléctrica" },
+      { "label": "Distancia entre ejes", "value": "1.300 mm" },
+      { "label": "Dimensiones desplegado", "value": "1.050 × 1.030 × 540 mm" },
+      { "label": "Dimensiones plegado", "value": "455 × 630 × 540 mm" },
+      { "label": "Carga útil máxima", "value": "15 kg" },
+      { "label": "Autonomía sin carga", "value": "75 min" },
+      { "label": "Autonomía con carga máxima", "value": "31 min" },
+      { "label": "Velocidad máxima de ascenso", "value": "20 m/s" },
+      { "label": "Velocidad máxima de descenso", "value": "5 m/s" },
+      { "label": "Techo operativo", "value": "5.000 m (requiere hélices para gran altitud)" },
+      { "label": "Resistencia al viento", "value": "Nivel 6, ráfagas hasta nivel 7" },
+      { "label": "Navegación", "value": "GPS / BeiDou con RTK" },
+      { "label": "Temperatura de funcionamiento", "value": "-20 °C a 50 °C" },
+      { "label": "Alcance de comunicación", "value": "15 km, sin obstáculos ni interferencias" },
+      { "label": "Protección de entrada", "value": "IP55" },
+      { "label": "Sensores estándar", "value": "Cámara FPV, GPS, RTK" },
+      { "label": "Interfaz de carga útil", "value": "Bahía de liberación rápida, 12 cargas útiles compatibles" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Preguntas frecuentes",
+    "heading": "Respuestas a las preguntas sobre el U15",
+    "items": [
+      { "q": "¿Qué carga útil puede transportar el U15?", "a": "Hasta 15 kg en la aeronave estándar. Doce cargas útiles comparten la misma bahía de liberación rápida, incluido el módulo gimbal de cuatro sensores, la caja logística, el foco de búsqueda, el altavoz, el paracaídas, el medidor de metano, el velocímetro de flujo de agua, el detector de gases y una estación aérea de comunicaciones de emergencia." },
+      { "q": "¿Cuánto tiempo puede permanecer el U15 en el aire?", "a": "75 minutos sin carga, 54 minutos con 5 kg, 41 minutos con 10 kg y 31 minutos con la carga máxima de 15 kg. Con una estación de amarre que suministre energía por cable, la aeronave puede permanecer en posición de forma continua." },
+      { "q": "¿Cuál es el alcance de control?", "a": "El enlace directo alcanza 15 km en condiciones abiertas y sin interferencias. La versión Pro añade control en la nube 4G/5G para operaciones más allá de ese alcance, sujeto a las autorizaciones locales." },
+      { "q": "¿Puede volar con lluvia y viento?", "a": "Sí. La aeronave cuenta con protección IP55 contra polvo, arena y lluvia, funciona entre -20 °C y 50 °C y admite vientos de nivel 6 con ráfagas de nivel 7." },
+      { "q": "¿Qué diferencia hay entre las versiones Standard y Pro?", "a": "La capacidad de cálculo a bordo aumenta de 6 TOPS a 67 TOPS; el modelo de IA pasa de ligero a precisión media; la evitación de obstáculos cambia de láser en cuatro direcciones a lidar de 360° más radar de ondas milimétricas; y la versión Pro incorpora control directo en la nube 4G/5G." },
+      { "q": "¿Puede entregar carga a un vehículo o embarcación en movimiento?", "a": "Sí. El aterrizaje visual de precisión utiliza una placa de calibración para compensar el movimiento de cubiertas y vehículos y acoplarse con precisión centimétrica. El flujo de entrega también admite descargas dinámicas sobre objetivos móviles." },
+      { "q": "¿El U15 está autorizado para volar más allá del alcance visual?", "a": "La autorización depende de la jurisdicción. Partdro ayuda a los operadores con documentación y opciones de configuración, pero el operador sigue siendo responsable de los permisos locales y las normas de vuelo." },
+      { "q": "¿Qué incluye el paquete estándar?", "a": "Una aeronave, dos baterías inteligentes ES15, un control remoto, un cargador, una maleta con ruedas, una licencia de un año para la plataforma de control, un año de seguro de responsabilidad civil y el modelo de IA ligero con módulo de cálculo de 6 TOPS." },
+      { "q": "¿Cómo puedo obtener el precio y el plazo de entrega?", "a": "Envíe la configuración, la región y el perfil de misión previsto mediante el formulario de esta página. Nuestro equipo responderá en un día laborable con el precio, el plazo de entrega y las opciones de envío." }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Precios globales adaptados a sus necesidades",
+    "title": "Solicitar presupuesto",
+    "lead": "El precio del U15 depende de la versión, el conjunto de cargas útiles, la región y la escala de despliegue. Cuéntenos qué necesita hacer la aeronave y nuestro equipo preparará una propuesta a medida.",
+    "points": [
+      "Versión y cargas útiles adaptadas a su misión",
+      "Precios regionales, plazo de entrega y envío",
+      "Asistencia con permisos, formación y planificación posventa"
+    ],
+    "form": {
+      "name": "Nombre completo",
+      "email": "Correo electrónico profesional",
+      "phone": "Teléfono / WhatsApp (opcional)",
+      "company": "Empresa",
+      "region": "País / región",
+      "edition": "Versión de interés",
+      "editionPlaceholder": "Seleccione una versión",
+      "message": "Mensaje",
+      "messagePlaceholder": "Perfil de misión, carga útil, condiciones del lugar, calendario…",
+      "submit": "Solicitar presupuesto",
+      "submitting": "Enviando…",
+      "success": "Gracias. Partdro ha recibido su solicitud. Le responderemos en un día laborable.",
+      "error": "Se ha producido un error. Inténtelo de nuevo o escríbanos por correo electrónico.",
+      "fallbackLink": "Enviar un correo a info@droneworld.tech",
+      "privacy": "Utilizamos estos datos únicamente para responder a su consulta.",
+      "noscript": "JavaScript está desactivado. Envíe sus requisitos a info@droneworld.tech y le responderemos directamente.",
+      "honeypot": "Sitio web"
+    }
+  },
+  "notes": {
+    "aria": "Notas sobre el uso del producto y las condiciones de medición",
+    "intro": [
+      "* Antes de volar, compruebe y cumpla estrictamente las leyes y normativas locales.",
+      "** Todos los vídeos e imágenes de esta página se grabaron de conformidad con la normativa local aplicable. Confirme que la aeronave dispone de los permisos necesarios antes de volar.",
+      "*** El aspecto del producto puede variar respecto a la unidad entregada. Respete los límites de peso indicados en la aplicación de control para no comprometer la seguridad del vuelo."
+    ],
+    "items": [
+      { "text": "1. La autonomía se mide a una altitud equivalente al nivel del mar, con 25 °C y sin viento, hasta que la batería se agota y se produce un aterrizaje forzoso. Los resultados varían según el entorno, la carga útil, el uso y el firmware." },
+      { "text": "2. La distancia de comunicación de 15 km se midió al aire libre y sin interferencias. Representa la distancia máxima de ida, sin contar el regreso. Durante los vuelos reales, preste atención a las indicaciones de regreso al punto de origen de la aplicación." },
+      { "text": "3. El techo operativo de 5.000 m requiere hélices para gran altitud. La capacidad de carga útil disminuye a medida que aumenta la altitud de despegue; los valores publicados se miden al nivel del mar." },
+      { "text": "4. El reconocimiento por IA, el seguimiento de objetivos y el seguimiento del terreno son funciones de asistencia. Los operadores siguen siendo responsables de la seguridad del vuelo y deben vigilar el entorno en todo momento." }
+    ]
+  },
+  "accessibility": {
+    "scroll": "Barra de desplazamiento de la página",
+    "video": "Vídeo del producto",
+    "chart": "Gráfico de carga útil y tiempo de vuelo",
+    "specs": "Tabla de especificaciones",
+    "editions": "Comparación de versiones"
+  },
+  "footer": {
+    "description": "El dron multimisión U15 de Partdro reúne inspección, entregas y muestreo ambiental en una plataforma IP55, con suministro global, configuración y asistencia posventa.",
+    "contactHeading": "Hable con Partdro",
+    "emailLabel": "Correo electrónico",
+    "phoneLabel": "Teléfono / WhatsApp",
+    "exploreHeading": "Explorar",
+    "products": "Todos los productos",
+    "solutions": "Soluciones de logística de carga pesada",
+    "c500Product": "Especificaciones del dron de carga",
+    "about": "Acerca de Partdro",
+    "contact": "Contacto",
+    "legal": "Partdro configura y suministra la plataforma U15 para operaciones multimisión. Las especificaciones pueden cambiar a medida que evolucionen el firmware y las opciones de carga útil.",
+    "copyright": "Partdro. Todos los derechos reservados."
+  },
+  "whatsapp": {
+    "aria": "Chatear con Partdro por WhatsApp",
+    "message": "Hola Partdro, me interesa el dron U15 multimisión."
+  },
+  "seo": {
+    "breadcrumbHome": "Inicio",
+    "breadcrumbProducts": "Productos",
+    "breadcrumbCurrent": "Dron U15 Multimisión"
+  }
+}
