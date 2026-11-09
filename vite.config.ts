@@ -24,7 +24,7 @@ function isPortListening(port: number): Promise<boolean> {
 }
 
 /**
- * Standalone product landings (landing/eavision-c500, landing/u15) are separate
+ * Standalone product landings (landing/eavision-c500, landing/u15, landing/vf50p) are separate
  * Vite apps. Start their dev servers alongside the main one so localhost:5173
  * serves the real landing instead of the removed SPA fallback.
  */
@@ -89,7 +89,97 @@ export default defineConfig({
         target: `http://localhost:${C500_LANDING_PORT}`,
         ws: true
       },
-      '^/products/u15-multi-mission-drone/?$': {
+      '^/(?:(?:es|de|fr)/)?products/u15-multi-mission-drone/?: {
+        target: `http://localhost:${U15_LANDING_PORT}`,
+        rewrite: () => '/products/u15-multi-mission-drone/',
+        ws: true
+      },
+      '^/products/u15-multi-mission-drone/': {
+        target: `http://localhost:${U15_LANDING_PORT}`,
+        ws: true
+      },
+      '^/(?:(?:es|de|fr)/)?products/vf50p-long-endurance-vtol-uav/?: {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
+        rewrite: () => '/products/vf50p-long-endurance-vtol-uav/',
+        ws: true
+      },
+      '^/products/vf50p-long-endurance-vtol-uav/': {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
+        ws: true
+      }
+    }
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          antd: ['ant-design-vue', '@ant-design/icons-vue']
+        }
+      }
+    }
+  }
+})
+: {
+        target: `http://localhost:${U15_LANDING_PORT}`,
+        rewrite: () => '/products/u15-multi-mission-drone/',
+        ws: true
+      },
+      '^/products/u15-multi-mission-drone/': {
+        target: `http://localhost:${U15_LANDING_PORT}`,
+        ws: true
+      },
+      '^/products/vf50p-long-endurance-vtol-uav/?$': {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
+        rewrite: () => '/products/vf50p-long-endurance-vtol-uav/',
+        ws: true
+      },
+      '^/products/vf50p-long-endurance-vtol-uav/': {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
+        ws: true
+      }
+    }
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          antd: ['ant-design-vue', '@ant-design/icons-vue']
+        }
+      }
+    }
+  }
+})
+: {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
+        rewrite: () => '/products/vf50p-long-endurance-vtol-uav/',
+        ws: true
+      },
+      '^/products/vf50p-long-endurance-vtol-uav/': {
+        target: `http://localhost:${VF50P_LANDING_PORT}`,
+        ws: true
+      }
+    }
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          antd: ['ant-design-vue', '@ant-design/icons-vue']
+        }
+      }
+    }
+  }
+})
+: {
         target: `http://localhost:${U15_LANDING_PORT}`,
         rewrite: () => '/products/u15-multi-mission-drone/',
         ws: true
