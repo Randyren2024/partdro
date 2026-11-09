@@ -1,0 +1,233 @@
+{
+  "locale": "es",
+  "meta": {
+    "title": "Dron VTOL VF50P de larga autonomía — 15 kg de carga, 5 h de vuelo | Partdro",
+    "description": "El UAV VTOL de ala fija híbrido gasolina-eléctrico Partdro VF50P ofrece 15 kg de carga útil, hasta 5 horas de vuelo, 3,8 m de envergadura y un enlace con estación terrestre de 30 km para topografía, inspección y respuesta a emergencias.",
+    "keywords": "VF50P, dron VTOL de gasolina, UAV VTOL de ala fija, dron de larga autonomía, UAV de 15 kg de carga útil, dron topográfico, inspección de líneas eléctricas, Partdro",
+    "ogLocale": "es_ES",
+    "productName": "UAV VTOL VF50P de larga autonomía"
+  },
+  "nav": {
+    "aria": "Navegación de la página VF50P",
+    "overview": "Resumen",
+    "architecture": "Arquitectura",
+    "endurance": "Autonomía",
+    "specs": "Especificaciones",
+    "quote": "Presupuesto",
+    "requestQuote": "Solicitar presupuesto",
+    "homeAria": "Inicio de Partdro",
+    "skip": "Saltar al contenido",
+    "language": "Idioma",
+    "languageAria": "Seleccionar idioma"
+  },
+  "hero": {
+    "eyebrow": "PD-VF50P · Ala fija VTOL con motor de gasolina",
+    "title": "UAV VTOL VF50P de larga autonomía",
+    "titleLines": ["VF50P", "UAV VTOL de larga autonomía"],
+    "summary": "Despegue vertical, crucero con sustentación alar y hasta cinco horas de vuelo: una plataforma de 15 kg de carga útil para topografía, inspección y operaciones de respuesta.",
+    "primary": "Solicitar presupuesto",
+    "secondary": "Ver demostración de vuelo",
+    "imageAlt": "UAV VTOL de ala fija híbrido gasolina-eléctrico VF50P en una plataforma de pruebas",
+    "stats": [
+      { "value": "15", "unit": "kg", "label": "Carga útil máxima" },
+      { "value": "5", "unit": "h", "label": "Autonomía con 10 kg" },
+      { "value": "30", "unit": "km", "label": "Alcance de estación terrestre" },
+      { "value": "3,8", "unit": "m", "label": "Envergadura" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "Resumen",
+    "heading": "Sin pista de aterrizaje, con el alcance de un ala fija",
+    "paragraphs": [
+      "El VF50P es un UAV VTOL de ala fija con propulsión híbrida gasolina-eléctrica, diseñado para misiones en las que un multirrotor se queda sin tiempo de vuelo y no hay una pista disponible. Cuatro rotores de elevación realizan el despegue y el aterrizaje verticales; después, el ala se encarga del vuelo de crucero.",
+      "Con un peso máximo al despegue de 55 kg, transporta hasta 15 kg de equipos de misión en un ala de 3,8 m. Los 12 litros de combustible permiten volar tres horas con la carga máxima y cinco horas con 10 kg.",
+      "La aeronave está diseñada para trabajos lineales y de larga distancia: cartografía de corredores, patrullaje de líneas eléctricas y tuberías, observación de emergencias y vigilancia de fronteras o instalaciones. El enlace con la estación terrestre de 30 km mantiene al operador alejado de la zona de trabajo, mientras que el control manual de 1 km cubre el despegue y la recuperación."
+    ],
+    "imageAlt": "UAV VTOL VF50P de ala compuesta con el motor de gasolina visible",
+    "metrics": [
+      { "value": "55", "unit": "kg", "label": "Peso máximo al despegue" },
+      { "value": "15", "unit": "kg", "label": "Carga útil máxima" },
+      { "value": "3–5", "unit": "h", "label": "Autonomía publicada" },
+      { "value": "12", "unit": "L", "label": "Capacidad de combustible" }
+    ]
+  },
+  "architecture": {
+    "eyebrow": "Arquitectura VTOL",
+    "heading": "Despegue vertical. Crucero con las alas.",
+    "lead": "La configuración de ala compuesta combina cuatro unidades de rotores de elevación vertical con un ala fija convencional. Así, la aeronave despega desde una zona reducida y después vuela como un avión de ala fija.",
+    "imageAlt": "Configuración VTOL VF50P de cuatro rotores con cola en V y ala",
+    "items": [
+      { "name": "Cuatro rotores de elevación", "value": "Despegue y aterrizaje verticales", "detail": "No necesita pista, catapulta ni equipo de lanzamiento. La aeronave asciende y aterriza verticalmente desde una zona compacta preparada." },
+      { "name": "Ala compuesta de 3,8 m", "value": "Crucero con sustentación alar", "detail": "Durante el crucero, el ala fija soporta la aeronave, lo que permite una gran autonomía y una velocidad máxima de 150 km/h." },
+      { "name": "Propulsión de gasolina", "value": "12 L de combustible", "detail": "Un motor de gasolina proporciona horas de vuelo en lugar de minutos; repostar entre salidas es más rápido que recargar baterías." },
+      { "name": "Compartimento de carga bajo el fuselaje", "value": "Hasta 15 kg", "detail": "Los equipos de misión se instalan bajo el fuselaje. La carga útil y la autonomía están directamente relacionadas: 15 kg permiten 3 horas y 10 kg permiten 5 horas." }
+    ]
+  },
+  "endurance": {
+    "eyebrow": "Autonomía",
+    "heading": "Tres horas a plena carga. Cinco horas con diez kilos.",
+    "lead": "Los valores de autonomía publicados para el VF50P se midieron al nivel del mar y a 25 °C. La capacidad de combustible, no el estado de la batería, determina la duración de la misión.",
+    "chartTitle": "Carga útil frente al tiempo de vuelo",
+    "points": [
+      { "load": "15 kg", "minutes": 180, "label": "3 h" },
+      { "load": "10 kg", "minutes": 300, "label": "5 h" }
+    ],
+    "note": "Planifique una reserva de combustible y el tiempo de regreso a la base. La autonomía real varía según la altitud, la temperatura, el viento y la carga útil instalada.",
+    "power": {
+      "title": "Depósito de 12 L, repostaje entre misiones",
+      "desc": "La propulsión de gasolina elimina los ciclos de recarga de baterías durante la jornada de trabajo. La aeronave puede repostar en el lugar y volver a operar."
+    }
+  },
+  "envelope": {
+    "eyebrow": "Envolvente de vuelo",
+    "heading": "Diseñado para corredores extensos y lugares remotos",
+    "lead": "La envolvente publicada contempla las condiciones habituales en tareas de topografía, inspección y respuesta operativa.",
+    "items": [
+      { "title": "Cinco horas de vuelo", "desc": "Hasta cinco horas con 10 kg a bordo: suficiente para recorrer un corredor de tuberías o una amplia zona de cartografía en una sola salida." },
+      { "title": "Enlace de mando de 30 km", "desc": "El control desde la estación terrestre alcanza 30 km en condiciones abiertas y sin interferencias; el control manual cubre 1 km para el despegue y el aterrizaje." },
+      { "title": "Viento de hasta 12 m/s", "desc": "Admite viento de hasta 12 m/s, lo que permite trabajar dentro del límite publicado en zonas costeras expuestas, crestas y llanuras abiertas." },
+      { "title": "Techo operativo de 3.000 m", "desc": "El techo de 3.000 m permite realizar trabajos de topografía e inspección en zonas elevadas; es necesario planificar la carga útil y el combustible para operar en altitud." }
+    ]
+  },
+  "applications": {
+    "eyebrow": "Aplicaciones",
+    "heading": "Dónde trabaja el VF50P",
+    "intro": "Seis misiones habituales en las que la autonomía de un ala fija supera el tiempo de vuelo estacionario de un multirrotor.",
+    "items": [
+      { "title": "Topografía y cartografía", "desc": "Cartografía de corredores y parcelas, ortofotos y recopilación de datos del terreno en superficies demasiado extensas para una salida de multirrotor." },
+      { "title": "Inspección de redes eléctricas", "desc": "Inspección de torres, líneas y subestaciones a lo largo de un corredor sin interrumpir el servicio eléctrico." },
+      { "title": "Oleoductos y gasoductos", "desc": "Patrullaje de rutas, inspección de estaciones de válvulas y apoyo a la respuesta ante fugas en redes extensas de tuberías." },
+      { "title": "Respuesta a emergencias", "desc": "Información aérea de la situación y entrega de cargas pequeñas durante las primeras horas de un incendio, inundación o rescate." },
+      { "title": "Vigilancia policial y fronteriza", "desc": "Observación aérea persistente para patrullaje, recopilación de pruebas y tareas de búsqueda en grandes superficies." },
+      { "title": "Meteorología y medio ambiente", "desc": "Muestreo de la atmósfera y vigilancia ambiental en terrenos remotos o peligrosos." }
+    ]
+  },
+  "video": {
+    "eyebrow": "Demostración de vuelo",
+    "heading": "El VF50P en vuelo",
+    "lead": "Despegue vertical, transición al vuelo con sustentación alar y crucero, grabados en unas instalaciones de pruebas de vuelo.",
+    "play": "Reproducir demostración",
+    "posterAlt": "UAV VTOL VF50P en vuelo de crucero con ala fija durante una prueba",
+    "dialogTitle": "Demostración de vuelo del VF50P",
+    "close": "Cerrar vídeo",
+    "caption": "Imágenes de pruebas de vuelo · despegue VTOL y crucero de ala fija"
+  },
+  "specs": {
+    "eyebrow": "Especificaciones",
+    "titlePrefix": "PD-VF50P",
+    "title": "Especificaciones del UAV VTOL de larga autonomía",
+    "items": [
+      { "label": "Tipo de aeronave", "value": "UAV VTOL de ala fija híbrido gasolina-eléctrico" },
+      { "label": "Configuración", "value": "Ala compuesta con cuatro rotores de elevación" },
+      { "label": "Peso máximo al despegue", "value": "55 kg" },
+      { "label": "Carga útil máxima", "value": "15 kg" },
+      { "label": "Envergadura", "value": "3,8 m" },
+      { "label": "Longitud", "value": "2,5 m" },
+      { "label": "Capacidad de combustible", "value": "12 L de gasolina" },
+      { "label": "Autonomía con 15 kg", "value": "3 h" },
+      { "label": "Autonomía con 10 kg", "value": "5 h" },
+      { "label": "Velocidad horizontal máxima", "value": "150 km/h" },
+      { "label": "Velocidad de crucero", "value": "100 km/h" },
+      { "label": "Techo operativo", "value": "3.000 m" },
+      { "label": "Resistencia al viento", "value": "12 m/s" },
+      { "label": "Temperatura de funcionamiento", "value": "-10 °C a 45 °C" },
+      { "label": "Alcance de la estación terrestre", "value": "30 km, sin obstáculos ni interferencias" },
+      { "label": "Alcance del control manual", "value": "1 km" },
+      { "label": "Interfaz de carga útil", "value": "Compartimento de carga bajo el fuselaje" },
+      { "label": "Despegue y aterrizaje", "value": "Verticales, sin necesidad de pista" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Preguntas frecuentes",
+    "heading": "Respuestas a las preguntas sobre el VF50P",
+    "items": [
+      { "q": "¿Qué carga útil puede transportar el VF50P?", "a": "Hasta 15 kg bajo el fuselaje. La autonomía publicada es de 3 horas con la carga máxima de 15 kg y de 5 horas con 10 kg. La configuración concreta de topografía, inspección o transporte se confirma con el equipo técnico." },
+      { "q": "¿Necesita una pista de aterrizaje?", "a": "No. El VF50P utiliza cuatro rotores de elevación para despegar y aterrizar verticalmente y después pasa al vuelo de crucero con sustentación alar. Puede operar desde una zona compacta preparada en lugar de una pista." },
+      { "q": "¿Qué sistema de propulsión utiliza la aeronave?", "a": "Un motor de gasolina con un depósito de 12 L impulsa el vuelo de crucero con ala fija. La aeronave reposta en el lugar entre misiones; no necesita cambiar ni recargar baterías para la fase de crucero." },
+      { "q": "¿Cuál es el alcance de control?", "a": "La estación terrestre alcanza 30 km en condiciones abiertas y sin interferencias. El control manual cubre 1 km para el despegue, el aterrizaje y el manejo manual local." },
+      { "q": "¿Qué condiciones de viento y temperatura admite?", "a": "La envolvente publicada contempla viento de 12 m/s, temperaturas de -10 °C a 45 °C y un techo operativo de 3.000 m. En zonas elevadas o con altas temperaturas se debe planificar la carga útil y el combustible." },
+      { "q": "¿Cuánto dura una misión?", "a": "Con 10 kg a bordo, la autonomía publicada es de 5 horas; con 15 kg es de 3 horas. Debe reservarse combustible adicional para el trayecto, las condiciones meteorológicas y el regreso a la base." },
+      { "q": "¿Se puede enviar y ofrecer asistencia a nivel internacional?", "a": "Partdro suministra la aeronave, la estación terrestre y el control manual, además de planificación de configuración y posventa. El envío, los repuestos y la formación se cotizan según el país de destino." },
+      { "q": "¿Qué ocurre con las autorizaciones y las normas de vuelo locales?", "a": "La autorización depende de la jurisdicción. Partdro ayuda a los operadores con documentación y opciones de configuración, pero el operador sigue siendo responsable de los permisos y las normas de vuelo locales." },
+      { "q": "¿Cómo puedo obtener el precio y el plazo de entrega?", "a": "Envíe el perfil de misión, la carga útil prevista y el destino mediante el formulario de presupuesto. Nuestro equipo responderá con el precio, el plazo de entrega y las opciones de envío." }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Precios globales adaptados a sus necesidades",
+    "title": "Solicitar presupuesto",
+    "lead": "El precio del VF50P depende de la integración de la carga útil, la configuración de la estación terrestre, el destino y el alcance de la asistencia. Cuéntenos qué necesita hacer la aeronave y nuestro equipo preparará una propuesta a medida.",
+    "points": [
+      "Aeronave, estación terrestre y control adaptados a su misión",
+      "Precios regionales, plazos de entrega y envío",
+      "Asistencia con integración de cargas útiles, formación y planificación posventa"
+    ],
+    "options": [
+      { "key": "airframe", "label": "Aeronave e integración" },
+      { "key": "survey", "label": "Carga útil para topografía y cartografía" },
+      { "key": "inspection", "label": "Carga útil de inspección" },
+      { "key": "program", "label": "Consulta sobre flota o programa" }
+    ],
+    "form": {
+      "name": "Nombre completo",
+      "email": "Correo electrónico profesional",
+      "phone": "Teléfono / WhatsApp (opcional)",
+      "company": "Empresa",
+      "region": "País / región",
+      "interest": "Configuración de interés",
+      "interestPlaceholder": "Seleccione una configuración",
+      "message": "Mensaje",
+      "messagePlaceholder": "Perfil de misión, carga útil, condiciones del lugar, calendario…",
+      "submit": "Solicitar presupuesto",
+      "submitting": "Enviando…",
+      "success": "Gracias. Partdro ha recibido su solicitud. Le responderemos en un día laborable.",
+      "error": "Se ha producido un error. Inténtelo de nuevo o escríbanos por correo electrónico.",
+      "fallbackLink": "Enviar un correo a info@droneworld.tech",
+      "privacy": "Utilizamos estos datos únicamente para responder a su consulta.",
+      "noscript": "JavaScript está desactivado. Envíe sus requisitos a info@droneworld.tech y le responderemos directamente.",
+      "honeypot": "Sitio web"
+    }
+  },
+  "notes": {
+    "aria": "Notas sobre el uso del producto y las condiciones de medición",
+    "intro": [
+      "* Antes de volar, compruebe y cumpla estrictamente las leyes y normativas locales.",
+      "** Las imágenes de vuelo de esta página se grabaron en unas instalaciones de pruebas. El aspecto del producto puede variar según la configuración suministrada.",
+      "*** Las cifras de autonomía, velocidad y alcance corresponden a los valores publicados por el fabricante. Confirme la configuración final con Partdro antes de planificar una misión."
+    ],
+    "items": [
+      { "text": "1. Los valores de autonomía se publican para una altitud equivalente al nivel del mar y una temperatura ambiente de 25 °C: 3 horas con 15 kg de carga útil y 5 horas con 10 kg. La cantidad de combustible, la altitud, la temperatura, el viento y la carga útil modifican el resultado." },
+      { "text": "2. El alcance de 30 km de la estación terrestre y el alcance de 1 km del control manual se midieron en condiciones abiertas y sin interferencias. Durante la operación, respete las indicaciones de regreso a la base y la normativa local sobre radiofrecuencia." },
+      { "text": "3. El techo operativo de 3.000 m y el límite de viento de 12 m/s son valores máximos publicados. Reduzca la carga útil o el combustible y planifique tareas alternativas cuando opere cerca de esos límites." },
+      { "text": "4. La integración de la carga útil, la selección de sensores y los accesorios de transporte se confirman para cada pedido. La aeronave mostrada puede llevar equipos distintos de los incluidos en la unidad suministrada." }
+    ]
+  },
+  "accessibility": {
+    "scroll": "Barra de desplazamiento de la página",
+    "video": "Vídeo del producto",
+    "chart": "Gráfico de carga útil y tiempo de vuelo",
+    "specs": "Tabla de especificaciones"
+  },
+  "footer": {
+    "description": "El UAV VTOL de ala fija híbrido gasolina-eléctrico Partdro VF50P ofrece 15 kg de carga útil, hasta cinco horas de vuelo y un enlace con estación terrestre de 30 km, con configuración y asistencia posventa.",
+    "contactHeading": "Hable con Partdro",
+    "emailLabel": "Correo electrónico",
+    "phoneLabel": "Teléfono / WhatsApp",
+    "exploreHeading": "Explorar",
+    "products": "Todos los productos",
+    "solutions": "Soluciones de logística de carga pesada",
+    "c500Product": "Especificaciones del dron de carga",
+    "about": "Acerca de Partdro",
+    "contact": "Contacto",
+    "legal": "Partdro configura y suministra la plataforma VF50P para operaciones VTOL de larga autonomía. Las especificaciones pueden cambiar según las configuraciones disponibles.",
+    "copyright": "Partdro. Todos los derechos reservados."
+  },
+  "whatsapp": {
+    "aria": "Chatear con Partdro por WhatsApp",
+    "message": "Hola Partdro, me interesa el UAV VTOL VF50P de larga autonomía."
+  },
+  "seo": {
+    "breadcrumbHome": "Inicio",
+    "breadcrumbProducts": "Productos",
+    "breadcrumbCurrent": "UAV VTOL VF50P de larga autonomía"
+  }
+}
