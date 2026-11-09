@@ -89,7 +89,7 @@ export default defineConfig({
         target: `http://localhost:${C500_LANDING_PORT}`,
         ws: true
       },
-      '^/(?:(?:es|de|fr)/)?products/u15-multi-mission-drone/?: {
+      '^/(?:(?:es|de|fr)/)?products/u15-multi-mission-drone/?$': {
         target: `http://localhost:${U15_LANDING_PORT}`,
         rewrite: () => '/products/u15-multi-mission-drone/',
         ws: true
@@ -98,7 +98,7 @@ export default defineConfig({
         target: `http://localhost:${U15_LANDING_PORT}`,
         ws: true
       },
-      '^/(?:(?:es|de|fr)/)?products/vf50p-long-endurance-vtol-uav/?: {
+      '^/(?:(?:es|de|fr)/)?products/vf50p-long-endurance-vtol-uav/?$': {
         target: `http://localhost:${VF50P_LANDING_PORT}`,
         rewrite: () => '/products/vf50p-long-endurance-vtol-uav/',
         ws: true
