@@ -1,0 +1,233 @@
+{
+  "locale": "de",
+  "meta": {
+    "title": "VF50P Benzin-VTOL-Drohne — 15 kg Nutzlast, 5 Std. Flugzeit | Partdro",
+    "description": "Die benzin-elektrische VTOL-Festflügeldrohne Partdro VF50P bietet 15 kg Nutzlast, bis zu 5 Stunden Flugzeit, 3,8 m Spannweite und eine 30-km-Bodenstationsverbindung für Vermessung, Inspektion und Notfalleinsätze.",
+    "keywords": "VF50P, Benzin-VTOL-Drohne, VTOL-Festflügeldrohne, Langstreckendrohne, UAV mit 15 kg Nutzlast, Vermessungsdrohne, Stromleitungsinspektion, Partdro",
+    "ogLocale": "de_DE",
+    "productName": "VF50P VTOL-Drohne mit langer Flugzeit"
+  },
+  "nav": {
+    "aria": "Seitennavigation der VF50P",
+    "overview": "Überblick",
+    "architecture": "Flugzeugaufbau",
+    "endurance": "Flugzeit",
+    "specs": "Technische Daten",
+    "quote": "Angebot",
+    "requestQuote": "Angebot anfordern",
+    "homeAria": "Partdro-Startseite",
+    "skip": "Zum Inhalt springen",
+    "language": "Sprache",
+    "languageAria": "Sprache auswählen"
+  },
+  "hero": {
+    "eyebrow": "PD-VF50P · Benzinbetriebener VTOL-Festflügler",
+    "title": "VF50P VTOL-Drohne mit langer Flugzeit",
+    "titleLines": ["VF50P", "VTOL-Drohne mit langer Flugzeit"],
+    "summary": "Senkrechtstart, Reiseflug mit Tragflächen und bis zu fünf Stunden Flugzeit – eine Plattform mit 15 kg Nutzlast für Vermessung, Inspektion und Einsatzunterstützung.",
+    "primary": "Angebot anfordern",
+    "secondary": "Flugdemo ansehen",
+    "imageAlt": "Benzin-elektrische VF50P-VTOL-Festflügeldrohne auf einem Testflugplatz",
+    "stats": [
+      { "value": "15", "unit": "kg", "label": "Max. Nutzlast" },
+      { "value": "5", "unit": "Std.", "label": "Flugzeit bei 10 kg" },
+      { "value": "30", "unit": "km", "label": "Bodenstationsreichweite" },
+      { "value": "3,8", "unit": "m", "label": "Spannweite" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "Überblick",
+    "heading": "Ohne Startbahn. Mit der Reichweite eines Festflüglers.",
+    "paragraphs": [
+      "Die VF50P ist eine benzin-elektrische VTOL-Festflügeldrohne für Missionen, bei denen ein Multicopter nicht lange genug in der Luft bleibt und keine Startbahn verfügbar ist. Vier Hubrotoren übernehmen Start und Landung; im Reiseflug trägt die Tragfläche das Fluggerät.",
+      "Bei einem maximalen Startgewicht von 55 kg transportiert die VF50P bis zu 15 kg Missionsausrüstung an einer Tragfläche mit 3,8 m Spannweite. Zwölf Liter Kraftstoff ermöglichen drei Stunden Flugzeit bei voller Nutzlast und fünf Stunden bei 10 kg.",
+      "Das Fluggerät ist für lange, lineare Einsätze ausgelegt: Korridorvermessung, Kontrolle von Stromleitungen und Pipelines, Notfallbeobachtung sowie Grenz- und Standortüberwachung. Eine 30-km-Bodenstationsverbindung hält den Bediener vom Einsatzgebiet fern; eine 1-km-Handsteuerung deckt Start und Landung ab."
+    ],
+    "imageAlt": "VF50P-VTOL mit Verbundtragfläche und freiliegendem Benzinmotor",
+    "metrics": [
+      { "value": "55", "unit": "kg", "label": "Maximales Startgewicht" },
+      { "value": "15", "unit": "kg", "label": "Maximale Nutzlast" },
+      { "value": "3–5", "unit": "Std.", "label": "Angegebene Flugzeit" },
+      { "value": "12", "unit": "L", "label": "Benzintankvolumen" }
+    ]
+  },
+  "architecture": {
+    "eyebrow": "VTOL-Aufbau",
+    "heading": "Senkrecht starten. Mit Tragflächen weiterfliegen.",
+    "lead": "Der Verbundflügel-Aufbau kombiniert vier Rotoren für den Vertikalflug mit einer klassischen Festfläche. So startet die Drohne von einem kleinen Einsatzort und fliegt anschließend im Reiseflug wie ein herkömmlicher Festflügler.",
+    "imageAlt": "VF50P-VTOL-Aufbau mit vier Hubrotoren, V-Leitwerk und Tragfläche",
+    "items": [
+      { "name": "Vier Hubrotoren", "value": "Senkrechtstart und -landung", "detail": "Keine Startbahn, kein Katapult und keine Startmannschaft erforderlich. Das Fluggerät steigt und landet senkrecht auf einer kompakten, vorbereiteten Fläche." },
+      { "name": "3,8-m-Verbundtragfläche", "value": "Reiseflug mit Tragflächen", "detail": "Im Reiseflug trägt die Festfläche das Fluggerät. Dadurch werden die lange Flugzeit und die Höchstgeschwindigkeit von 150 km/h erreicht." },
+      { "name": "Benzinantrieb", "value": "12 l Kraftstoff", "detail": "Ein Benzinmotor ermöglicht Flugzeiten in Stunden statt Minuten. Das Auftanken zwischen Einsätzen ist schneller als das Laden von Akkus." },
+      { "name": "Nutzlastfach unter dem Rumpf", "value": "Bis zu 15 kg", "detail": "Die Missionsausrüstung wird unter dem Rumpf befestigt. Nutzlast und Flugzeit stehen in direktem Zusammenhang: 15 kg ermöglichen 3 Stunden, 10 kg ermöglichen 5 Stunden." }
+    ]
+  },
+  "endurance": {
+    "eyebrow": "Flugzeit",
+    "heading": "Drei Stunden bei voller Last. Fünf Stunden mit zehn Kilogramm.",
+    "lead": "Die veröffentlichten Flugzeitwerte der VF50P wurden auf Meereshöhe bei 25 °C gemessen. Die Kraftstoffkapazität – nicht der Akkustand – bestimmt die Länge eines Einsatzes.",
+    "chartTitle": "Nutzlast im Verhältnis zur Flugzeit",
+    "points": [
+      { "load": "15 kg", "minutes": 180, "label": "3 Std." },
+      { "load": "10 kg", "minutes": 300, "label": "5 Std." }
+    ],
+    "note": "Planen Sie Kraftstoffreserven und die Rückkehr zum Startpunkt ein. Die tatsächliche Flugzeit hängt von Höhe, Temperatur, Wind und installierter Nutzlast ab.",
+    "power": {
+      "title": "12-l-Tank, Auftanken zwischen den Einsätzen",
+      "desc": "Der Benzinantrieb macht Ladezyklen während des Einsatztages überflüssig. Das Fluggerät kann vor Ort betankt werden und anschließend weiterarbeiten."
+    }
+  },
+  "envelope": {
+    "eyebrow": "Flugbereich",
+    "heading": "Für lange Korridore und abgelegene Einsatzorte",
+    "lead": "Der angegebene Flugbereich deckt typische Bedingungen bei Vermessungs-, Inspektions- und Rettungseinsätzen ab.",
+    "items": [
+      { "title": "Fünf Stunden Flugzeit", "desc": "Bis zu fünf Stunden mit 10 kg Nutzlast – genug für einen langen Pipeline-Korridor oder ein großes Vermessungsgebiet in einem Flug." },
+      { "title": "30-km-Steuerungsverbindung", "desc": "Die Bodenstation erreicht unter freier Sicht und ohne Funkstörungen 30 km. Die Handsteuerung deckt 1 km für Start und Landung ab." },
+      { "title": "Wind bis 12 m/s", "desc": "Ausgelegt für Windgeschwindigkeiten bis 12 m/s, sodass exponierte Küsten-, Höhen- und Ebenenstandorte innerhalb der angegebenen Grenzen bearbeitet werden können." },
+      { "title": "Einsatzhöhe bis 3.000 m", "desc": "Die Einsatzhöhe von 3.000 m unterstützt Vermessungs- und Inspektionsaufgaben im Hochland. Nutzlast und Kraftstoff müssen für Höhenflüge angepasst werden." }
+    ]
+  },
+  "applications": {
+    "eyebrow": "Anwendungen",
+    "heading": "Typische Einsatzgebiete der VF50P",
+    "intro": "Sechs wiederkehrende Missionen, bei denen die Ausdauer eines Festflüglers die Schwebezeit eines Multicopters übertrifft.",
+    "items": [
+      { "title": "Vermessung und Kartierung", "desc": "Korridor- und Flächenvermessung, Orthofotos und Geländedaten für Gebiete, die für einen Multicopter-Flug zu groß sind." },
+      { "title": "Inspektion des Stromnetzes", "desc": "Kontrolle von Masten, Leitungen und Umspannwerken entlang eines Korridors, ohne den Stromkreis außer Betrieb zu nehmen." },
+      { "title": "Öl- und Gaspipelines", "desc": "Routenüberwachung, Inspektion von Ventilstationen und Unterstützung bei Leckageeinsätzen entlang langer Pipeline-Netze." },
+      { "title": "Notfalleinsätze", "desc": "Luftgestützte Lageerfassung und Lieferung kleiner Nutzlasten in den ersten Stunden eines Brandes, Hochwassers oder Rettungseinsatzes." },
+      { "title": "Polizei- und Grenzüberwachung", "desc": "Anhaltende Luftbeobachtung für Patrouillen, Beweissicherung und Suche über weitläufige Gebiete." },
+      { "title": "Meteorologie und Umwelt", "desc": "Atmosphärische Probenahme und Umweltüberwachung über abgelegenem oder gefährlichem Gelände." }
+    ]
+  },
+  "video": {
+    "eyebrow": "Flugdemonstration",
+    "heading": "VF50P im Flug",
+    "lead": "Senkrechtstart, Übergang in den Tragflächenflug und Reiseflug – aufgenommen auf einem Flugtestgelände.",
+    "play": "Demo abspielen",
+    "posterAlt": "VF50P-VTOL-Drohne im Tragflächenflug während eines Flugtests",
+    "dialogTitle": "Flugdemonstration der VF50P",
+    "close": "Video schließen",
+    "caption": "Flugtestaufnahmen · VTOL-Start und Festflügel-Reiseflug"
+  },
+  "specs": {
+    "eyebrow": "Technische Daten",
+    "titlePrefix": "PD-VF50P",
+    "title": "Technische Daten der VTOL-Drohne mit langer Flugzeit",
+    "items": [
+      { "label": "Fluggerätetyp", "value": "Benzin-elektrische VTOL-Festflügeldrohne" },
+      { "label": "Aufbau", "value": "Verbundtragfläche mit vier Hubrotoren" },
+      { "label": "Maximales Startgewicht", "value": "55 kg" },
+      { "label": "Maximale Nutzlast", "value": "15 kg" },
+      { "label": "Spannweite", "value": "3,8 m" },
+      { "label": "Länge", "value": "2,5 m" },
+      { "label": "Kraftstoffkapazität", "value": "12 l Benzin" },
+      { "label": "Flugzeit bei 15 kg", "value": "3 Std." },
+      { "label": "Flugzeit bei 10 kg", "value": "5 Std." },
+      { "label": "Maximale Horizontalgeschwindigkeit", "value": "150 km/h" },
+      { "label": "Reisegeschwindigkeit", "value": "100 km/h" },
+      { "label": "Einsatzhöhe", "value": "3.000 m" },
+      { "label": "Windbeständigkeit", "value": "12 m/s" },
+      { "label": "Betriebstemperatur", "value": "-10 °C bis 45 °C" },
+      { "label": "Bodenstationsreichweite", "value": "30 km, freie Sicht und störungsfreie Umgebung" },
+      { "label": "Reichweite der Handsteuerung", "value": "1 km" },
+      { "label": "Nutzlastschnittstelle", "value": "Nutzlastfach unter dem Rumpf" },
+      { "label": "Start und Landung", "value": "Senkrecht, keine Startbahn erforderlich" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "heading": "Häufige Fragen zur VF50P",
+    "items": [
+      { "q": "Welche Nutzlast kann die VF50P transportieren?", "a": "Bis zu 15 kg unter dem Rumpf. Die angegebene Flugzeit beträgt 3 Stunden bei voller Nutzlast von 15 kg und 5 Stunden bei 10 kg. Die konkrete Vermessungs-, Inspektions- oder Transportausrüstung wird bei der Konfiguration gemeinsam mit der Technik bestätigt." },
+      { "q": "Benötigt die Drohne eine Startbahn?", "a": "Nein. Vier Hubrotoren ermöglichen den Senkrechtstart und die senkrechte Landung; anschließend wechselt die VF50P in den Tragflächen-Reiseflug. Sie kann von einer kompakten vorbereiteten Fläche statt von einer Startbahn aus betrieben werden." },
+      { "q": "Wie wird das Fluggerät angetrieben?", "a": "Ein Benzinmotor mit einem 12-l-Tank treibt den Festflügel-Reiseflug an. Zwischen den Einsätzen wird vor Ort aufgetankt; für die Reiseflugphase ist kein Akkuwechsel und kein Ladevorgang erforderlich." },
+      { "q": "Wie groß ist die Steuerungsreichweite?", "a": "Die Bodenstation erreicht unter freier Sicht und ohne Funkstörungen 30 km. Eine Handsteuerung deckt 1 km für Start, Landung und lokale manuelle Steuerung ab." },
+      { "q": "Welche Wind- und Temperaturbedingungen sind möglich?", "a": "Der angegebene Betriebsbereich umfasst 12 m/s Wind, -10 °C bis 45 °C und eine Einsatzhöhe von 3.000 m. Bei Einsätzen in großer Höhe oder bei hohen Temperaturen müssen Nutzlast und Kraftstoff entsprechend geplant werden." },
+      { "q": "Wie lange dauert ein Einsatz?", "a": "Mit 10 kg Nutzlast beträgt die angegebene Flugzeit 5 Stunden; bei 15 kg sind es 3 Stunden. Kraftstoffreserven für Anflug, Wetter und Rückkehr müssen zusätzlich eingeplant werden." },
+      { "q": "Kann die Drohne international geliefert und unterstützt werden?", "a": "Partdro liefert das Fluggerät, die Bodenstation und die Handsteuerung einschließlich Konfigurations- und Kundendienstplanung. Versand, Ersatzteile und Schulung werden für das jeweilige Zielland angeboten." },
+      { "q": "Wie sieht es mit Genehmigungen und lokalen Flugregeln aus?", "a": "Die Genehmigung hängt von den Vorschriften des jeweiligen Landes ab. Partdro unterstützt Betreiber mit Unterlagen und Konfigurationsoptionen; für lokale Genehmigungen und Flugregeln bleibt der Betreiber verantwortlich." },
+      { "q": "Wie erhalte ich Preis und Lieferzeit?", "a": "Senden Sie Ihr Einsatzprofil, die gewünschte Nutzlast und das Zielland über das Anfrageformular. Unser Team antwortet mit Preis, Lieferzeit und Versandoptionen." }
+    ]
+  },
+  "quote": {
+    "eyebrow": "Weltweite Preise – individuell konfiguriert",
+    "title": "Angebot anfordern",
+    "lead": "Der Preis der VF50P hängt von der Nutzlastintegration, der Bodenstationskonfiguration, dem Zielland und dem gewünschten Support ab. Beschreiben Sie uns Ihren Einsatz – unser Team erstellt ein passendes Angebot.",
+    "points": [
+      "Fluggerät, Bodenstation und Steuerung passend zu Ihrer Mission",
+      "Regionale Preise, Lieferzeiten und Versand",
+      "Unterstützung bei Nutzlastintegration, Schulung und Kundendienstplanung"
+    ],
+    "options": [
+      { "key": "airframe", "label": "Fluggerät und Integration" },
+      { "key": "survey", "label": "Nutzlast für Vermessung und Kartierung" },
+      { "key": "inspection", "label": "Inspektionsnutzlast" },
+      { "key": "program", "label": "Flotten- oder Projektanfrage" }
+    ],
+    "form": {
+      "name": "Vollständiger Name",
+      "email": "Geschäftliche E-Mail-Adresse",
+      "phone": "Telefon / WhatsApp (optional)",
+      "company": "Unternehmen",
+      "region": "Land / Region",
+      "interest": "Gewünschte Konfiguration",
+      "interestPlaceholder": "Konfiguration auswählen",
+      "message": "Nachricht",
+      "messagePlaceholder": "Einsatzprofil, Nutzlast, Standortbedingungen, Zeitplan …",
+      "submit": "Angebot anfordern",
+      "submitting": "Wird gesendet …",
+      "success": "Vielen Dank! Ihre Anfrage ist bei Partdro eingegangen. Wir antworten innerhalb eines Werktags.",
+      "error": "Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns eine E-Mail.",
+      "fallbackLink": "E-Mail an info@droneworld.tech",
+      "privacy": "Wir verwenden diese Angaben ausschließlich zur Beantwortung Ihrer Anfrage.",
+      "noscript": "JavaScript ist deaktiviert. Senden Sie Ihre Anforderungen bitte per E-Mail an info@droneworld.tech.",
+      "honeypot": "Website"
+    }
+  },
+  "notes": {
+    "aria": "Hinweise zur Produktnutzung und zu Messbedingungen",
+    "intro": [
+      "* Prüfen und beachten Sie vor jedem Flug die geltenden lokalen Gesetze und Vorschriften.",
+      "** Die Flugaufnahmen auf dieser Seite wurden auf einem Testgelände erstellt. Das gelieferte Produkt kann je nach Konfiguration optisch abweichen.",
+      "*** Flugzeit-, Geschwindigkeits- und Reichweitenangaben stammen aus den veröffentlichten Herstellerdaten. Bestätigen Sie die endgültige Konfiguration mit Partdro, bevor Sie einen Einsatz planen."
+    ],
+    "items": [
+      { "text": "1. Die Flugzeitwerte wurden bei meereshöhenähnlicher Höhe und 25 °C gemessen: 3 Stunden bei 15 kg Nutzlast und 5 Stunden bei 10 kg Nutzlast. Kraftstoffmenge, Höhe, Temperatur, Wind und Nutzlast beeinflussen das Ergebnis." },
+      { "text": "2. Die Reichweite der Bodenstation von 30 km und die Reichweite der Handsteuerung von 1 km wurden unter freier Sicht und ohne Funkstörungen gemessen. Beachten Sie im Betrieb die Rückkehrhinweise und die lokalen Funkvorschriften." },
+      { "text": "3. Die Einsatzhöhe von 3.000 m und die Windgrenze von 12 m/s sind veröffentlichte Höchstwerte. Reduzieren Sie Nutzlast oder Kraftstoffmenge und planen Sie alternative Einsätze, wenn Sie nahe an diesen Grenzen arbeiten." },
+      { "text": "4. Nutzlastintegration, Sensorauswahl und Transportvorrichtungen werden für jede Bestellung bestätigt. Das abgebildete Fluggerät kann eine andere Missionsausrüstung tragen als die gelieferte Konfiguration." }
+    ]
+  },
+  "accessibility": {
+    "scroll": "Seiten-Bildlaufleiste",
+    "video": "Produktvideo",
+    "chart": "Diagramm Nutzlast und Flugzeit",
+    "specs": "Tabelle der technischen Daten"
+  },
+  "footer": {
+    "description": "Die benzin-elektrische VTOL-Festflügeldrohne Partdro VF50P bietet 15 kg Nutzlast, bis zu fünf Stunden Flugzeit und eine 30-km-Bodenstationsverbindung. Lieferung mit Konfiguration und Kundendienst.",
+    "contactHeading": "Sprechen Sie mit Partdro",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon / WhatsApp",
+    "exploreHeading": "Entdecken",
+    "products": "Alle Produkte",
+    "solutions": "Lösungen für Schwerlastlogistik",
+    "c500Product": "Technische Daten der Transportdrohne",
+    "about": "Über Partdro",
+    "contact": "Kontakt",
+    "legal": "Partdro konfiguriert und liefert die VF50P-Plattform für VTOL-Langstreckeneinsätze. Technische Daten können sich mit den verfügbaren Konfigurationen ändern.",
+    "copyright": "Partdro. Alle Rechte vorbehalten."
+  },
+  "whatsapp": {
+    "aria": "Partdro über WhatsApp kontaktieren",
+    "message": "Hallo Partdro, ich interessiere mich für die VF50P VTOL-Drohne mit langer Flugzeit."
+  },
+  "seo": {
+    "breadcrumbHome": "Startseite",
+    "breadcrumbProducts": "Produkte",
+    "breadcrumbCurrent": "VF50P VTOL-Drohne mit langer Flugzeit"
+  }
+}
