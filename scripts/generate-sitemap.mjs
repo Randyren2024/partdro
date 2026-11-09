@@ -67,15 +67,7 @@ function localizedEntries(path) {
   ).join('\n')
 }
 
-// 只有英语版的独立落地页（landing/u15）：不生成 es/de/fr 的 URL（生产会 404）
-function englishOnlyEntry(path) {
-  return (
-    `  <url>\n    <loc>${SITE_URL}${escapeXml(path)}</loc>\n` +
-    `    <xhtml:link rel="alternate" hreflang="en" href="${SITE_URL}${escapeXml(path)}" />\n` +
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${escapeXml(path)}" />\n` +
-    `  </url>`
-  )
-}
+// 独立落地页 U15 与 VF50P 同样提供四种语言，统一生成本地化 URL。
 
 const env = loadEnv()
 const [productRows, postRows] = await Promise.all([
@@ -99,6 +91,8 @@ const localizedPaths = [
   '/solutions/heavy-lift-logistics',
   // C500 EAVision 是独立静态落地页（landing/eavision-c500），不在 products 表，但属于投放/自然搜索落地页
   '/products/c500-partdro-eavision',
+  '/products/u15-multi-mission-drone',
+  '/products/vf50p-long-endurance-vtol-uav',
   ...productSlugs.map((s) => `/products/${s}`),
   '/cases',
   '/news',
@@ -135,9 +129,6 @@ const body =
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
   localizedPaths.map(localizedEntries).join('\n') +
   '\n' +
-  englishOnlyEntry('/products/u15-multi-mission-drone') +
-  '\n' +
-  englishOnlyEntry('/products/vf50p-long-endurance-vtol-uav') +
   (newsEntries.length ? '\n' + newsEntries.join('\n') : '') +
   `\n</urlset>\n`
 
