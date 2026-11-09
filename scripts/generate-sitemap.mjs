@@ -74,7 +74,15 @@ const [productRows, postRows] = await Promise.all([
   fetchSlugs(env, 'products'),
   fetchSlugs(env, 'posts'),
 ])
-const productSlugs = productRows.map((r) => r.slug)
+// 独立静态落地页在下方单独列入多语言路由，避免再从 products 表重复输出。
+const standaloneProductSlugs = new Set([
+  'c500-partdro-eavision',
+  'u15-multi-mission-drone',
+  'vf50p-long-endurance-vtol-uav',
+])
+const productSlugs = productRows
+  .map((r) => r.slug)
+  .filter((slug) => !standaloneProductSlugs.has(slug))
 const postSlugs = postRows.filter((r) => r.published_at !== undefined || true).map((r) => r)
 
 if (!productSlugs.length && !postSlugs.length) {
