@@ -1,11 +1,21 @@
 <script setup>
+import { computed } from 'vue'
 import { logo, logoSize } from '../data/media'
-import { localePath } from '../lib/i18n'
+import { LOCALES, LOCALE_LABELS, localePath } from '../lib/i18n'
 
 const props = defineProps({
   content: { type: Object, required: true },
-  locale: { type: String, required: true }
+  locale: { type: String, required: true },
+  search: { type: String, default: '' }
 })
+
+const languages = computed(() =>
+  LOCALES.map((code) => ({
+    code,
+    label: LOCALE_LABELS[code],
+    href: `${localePath(code, '/products/vf50p-long-endurance-vtol-uav')}${props.search}`
+  }))
+)
 </script>
 
 <template>
@@ -25,6 +35,25 @@ const props = defineProps({
           <a href="#vf50p-specs">{{ content.specs }}</a>
           <a href="#vf50p-quote">{{ content.quote }}</a>
         </nav>
+
+        <details class="site-header__lang">
+          <summary :aria-label="content.languageAria">
+            <span>{{ content.language }}</span>
+            <strong>{{ LOCALE_LABELS[locale] }}</strong>
+          </summary>
+          <div class="site-header__lang-menu">
+            <a
+              v-for="item in languages"
+              :key="item.code"
+              :href="item.href"
+              :lang="item.code"
+              :aria-current="item.code === locale ? 'page' : undefined"
+            >
+              {{ item.label }}
+            </a>
+          </div>
+        </details>
+
         <a class="site-header__cta" href="#vf50p-quote">{{ content.requestQuote }}</a>
       </div>
     </div>
