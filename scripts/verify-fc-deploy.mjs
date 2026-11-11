@@ -139,6 +139,45 @@ if (sitemapXml) {
 for (const p of productSample) await checkPage(p.replace(SITE, ''))
 for (const p of newsSample) await checkPage(p.replace(SITE, ''))
 
+// --- 独立产品落地页：四语种 URL、hreflang 与 sitemap 必须保持一致 ---
+const standaloneSlugs = [
+  'c500-partdro-eavision',
+  'u15-multi-mission-drone',
+  'vf50p-long-endurance-vtol-uav',
+]
+const localePrefixes = { en: '', es: '/es', de: '/de', fr: '/fr' }
+const requiredLandingPaths = standaloneSlugs.flatMap((slug) =>
+  Object.entries(localePrefixes).map(([locale, prefix]) =>
+    (prefix || '') + '/products/' + slug,
+  ),
+)
+if (sitemapXml) {
+  const missingLandingUrls = requiredLandingPaths
+    .map((path) => SITE + path)
+    .filter((url) => !sitemapLocs.includes(url))
+  record(
+    '独立产品页 sitemap 覆盖',
+    missingLandingUrls.length ? 'FAIL' : 'PASS',
+    missingLandingUrls.length
+      ? '缺少: ' + missingLandingUrls.join(', ')
+      : 'C500 / U15 / VF50P 四语种 URL 均存在',
+  )
+  const duplicateLocs = sitemapLocs.filter((url, index) => sitemapLocs.indexOf(url) !== index)
+  record(
+    'sitemap URL 唯一性',
+    duplicateLocs.length ? 'FAIL' : 'PASS',
+    duplicateLocs.length ? '重复: ' + [...new Set(duplicateLocs)].join(', ') : '无重复 URL',
+  )
+}
+for (const slug of standaloneSlugs) {
+  for (const [locale, prefix] of Object.entries(localePrefixes)) {
+    await checkPage(prefix + '/products/' + slug, {
+      expectLang: locale,
+      expectHreflangs: 5,
+    })
+  }
+}
+
 // --- robots.txt / 静态资源 ---
 await checkFile('/robots.txt', { minBytes: 50, label: 'robots' })
 if (sitemapXml) {

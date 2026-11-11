@@ -83,7 +83,8 @@ const standaloneProductSlugs = new Set([
 const productSlugs = productRows
   .map((r) => r.slug)
   .filter((slug) => !standaloneProductSlugs.has(slug))
-const postSlugs = postRows.filter((r) => r.published_at !== undefined || true).map((r) => r)
+// fetchSlugs 已按 published=true 过滤；保留所有已发布文章，lastmod 可以为空。
+const postSlugs = postRows
 
 if (!productSlugs.length && !postSlugs.length) {
   console.warn('[sitemap] Supabase 无数据，降级为纯静态栏目路由')

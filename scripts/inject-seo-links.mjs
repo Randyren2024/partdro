@@ -1,58 +1,65 @@
-// 构建后向 dist/index.html 注入可抓取的产品内链
-// 背景：本站为纯客户端渲染 SPA，原始 HTML 仅有空的 <div id="app"></div>，
-//       爬虫首轮看不到任何内容与链接，导致产品页长期停留在
-//       "Discovered - currently not indexed"。这里把产品链接以 <noscript>
-//       形式写进静态 HTML，为无 JS 的首轮抓取提供内链；JS 用户无感知。
-//
-// 用法：随 npm run build 自动执行，也可单独运行 `node scripts/inject-seo-links.mjs`
+// 构建后向静态 HTML 注入可抓取的产品内链
+// 产品列表由 Supabase 异步加载；独立落地页不在 products 表，因此必须显式注入。
+// 这些链接写入 noscript，不改变访客页面布局，并为抓取器提供真实 href。
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 const DIST_INDEX = resolve(process.cwd(), 'dist', 'index.html')
 const MARK_START = '<!-- seo-fallback:start -->'
 const MARK_END = '<!-- seo-fallback:end -->'
-
-// 与前端保持一致：英语为默认语言不带前缀，其余语言带 /de /es /fr 前缀
 const LOCALES = ['en', 'es', 'de', 'fr']
 const DEFAULT_LOCALE = 'en'
-// 只有英语版的独立静态落地页：不能生成 /es /de /fr 链接（那些路径不存在）
-const EN_ONLY_LANDINGS = new Set(['vf50p-long-endurance-vtol-uav'])
-const withPrefix = (p, loc) => (loc === DEFAULT_LOCALE ? p : `/${loc}${p === '/' ? '' : p}`)
+const withPrefix = (path, locale) =>
+  locale === DEFAULT_LOCALE ? path : '/' + locale + (path === '/' ? '' : path)
+
+// 独立落地页不在 Supabase products 表，但均由 CI 构建四种语言。
+const STANDALONE_LANDINGS = [
+  { slug: 'c500-partdro-eavision', label: 'C500 EAVision Heavy-Lift Cargo Drone' },
+  { slug: 'u15-multi-mission-drone', label: 'U15 Multi-Mission Drone' },
+  { slug: 'vf50p-long-endurance-vtol-uav', label: 'VF50P Long-Endurance VTOL UAV' },
+]
 
 function toLabel(slug) {
   return slug
     .split('-')
-    .map((w) => (/^[a-z]+\d+[a-z]*$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
+    .map((word) => (/^[a-z]+\d+[a-z]*$/.test(word) ? word.toUpperCase() : word.charAt(0).toUpperCase() + word.slice(1)))
     .join(' ')
 }
 
-// 1) 优先用 Supabase（与 sitemap 函数同源），失败则回退线上 sitemap
 async function fetchProductSlugs() {
   const url = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL
   const key = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
   if (url && key) {
     try {
-      const res = await fetch(`${url}/rest/v1/products?select=slug&published=eq.true`, {
-        headers: { apikey: key, Authorization: `Bearer ${key}` },
+      const response = await fetch(url + '/rest/v1/products?select=slug&published=eq.true', {
+        headers: { apikey: key, Authorization: 'Bearer ' + key },
       })
-      if (res.ok) {
-        const rows = await res.json()
-        const slugs = rows.map((r) => r.slug).filter(Boolean)
+      if (response.ok) {
+        const rows = await response.json()
+        const slugs = rows.map((row) => row.slug).filter(Boolean)
         if (slugs.length) return slugs
       }
-    } catch (e) {
-      console.warn('[seo-links] Supabase 读取失败，回退 sitemap:', e.message)
+    } catch (error) {
+      console.warn('[seo-links] Supabase 读取失败，回退 sitemap:', error.message)
     }
   }
   try {
-    const res = await fetch('https://www.droneworld.tech/sitemap.xml')
-    if (!res.ok) return []
-    const xml = await res.text()
-    return [...xml.matchAll(/<loc>[^<]*\/products\/([^<]+)<\/loc>/g)].map((m) => m[1])
-  } catch (e) {
-    console.warn('[seo-links] sitemap 读取失败:', e.message)
+    const response = await fetch('https://www.droneworld.tech/sitemap.xml')
+    if (!response.ok) return []
+    const xml = await response.text()
+    return [...xml.matchAll(/<loc>[^<]*\/products\/([^<]+)<\/loc>/g)].map((match) => match[1])
+  } catch (error) {
+    console.warn('[seo-links] sitemap 读取失败:', error.message)
     return []
   }
+}
+
+function localizedProductLinks(slug, label) {
+  return LOCALES.map((locale) => {
+    const href = withPrefix('/products/' + slug, locale)
+    const suffix = locale === DEFAULT_LOCALE ? '' : ' [' + locale.toUpperCase() + ']'
+    return '<a href="' + href + '" hreflang="' + locale + '">' + label + suffix + '</a>'
+  }).join(' · ')
 }
 
 async function main() {
@@ -60,58 +67,62 @@ async function main() {
     console.warn('[seo-links] 未找到 dist/index.html，跳过（需先 vite build）')
     return
   }
-  const slugs = [...new Set(await fetchProductSlugs())]
-  if (!slugs.length) {
-    console.warn('[seo-links] 未取到任何产品 slug，跳过注入')
-    return
-  }
+
+  // Supabase 产品 + 独立落地页合并去重，独立落地页不能依赖数据库记录存在。
+  const dynamicSlugs = await fetchProductSlugs()
+  const slugs = [...new Set([...dynamicSlugs, ...STANDALONE_LANDINGS.map((item) => item.slug)])]
+  const standaloneBySlug = new Map(STANDALONE_LANDINGS.map((item) => [item.slug, item.label]))
 
   let html = readFileSync(DIST_INDEX, 'utf8')
   // 幂等：重复构建时先移除旧块
-  html = html.replace(new RegExp(`${MARK_START}[\\s\\S]*?${MARK_END}`, 'g'), '')
+  html = html.replace(new RegExp(MARK_START + '[\\s\\S]*?' + MARK_END, 'g'), '')
 
   const items = slugs
-    .map((s) => {
-      const label = toLabel(s)
-      // 英语版独立落地页只给一条无前缀链接，避免生成 404 的多语言链接
-      if (EN_ONLY_LANDINGS.has(s)) {
-        return `        <li><a href="/products/${s}" hreflang="en">${label}</a></li>`
-      }
-      // 每个产品同时给出 4 种语言的可抓取链接，帮助爬虫发现各语言版本
-      const links = LOCALES.map((l) =>
-        l === DEFAULT_LOCALE
-          ? `<a href="${withPrefix(`/products/${s}`, l)}" hreflang="${l}">${label}</a>`
-          : `<a href="${withPrefix(`/products/${s}`, l)}" hreflang="${l}">${label} [${l.toUpperCase()}]</a>`,
-      ).join(' · ')
-      return `        <li>${links}</li>`
+    .map((slug) => {
+      const label = standaloneBySlug.get(slug) || toLabel(slug)
+      return '        <li>' + localizedProductLinks(slug, label) + '</li>'
     })
-    // U15 是只有英语版的独立静态落地页，且不在 products 表，单独给内链
-    .concat(
-      '        <li><a href="/products/u15-multi-mission-drone" hreflang="en">U15 Multi-Mission Drone</a></li>',
-    )
     .join('\n')
+
   const navLinks = ['/products', '/cases', '/news', '/documents', '/about', '/contact']
-    .map((p) => LOCALES.map((l) => `<a href="${withPrefix(p, l)}" hreflang="${l}">${p}</a>`).join(' · '))
+    .map((path) =>
+      LOCALES.map((locale) =>
+        '<a href="' + withPrefix(path, locale) + '" hreflang="' + locale + '">' + path + '</a>',
+      ).join(' · '),
+    )
     .join('\n          ')
+
   const block =
-    `\n    ${MARK_START}\n` +
-    `    <noscript>\n` +
-    `      <nav aria-label="Products">\n` +
-    `        <ul>\n${items}\n        </ul>\n` +
-    `        <p>${navLinks}</p>\n` +
-    `      </nav>\n` +
-    `    </noscript>\n` +
-    `    ${MARK_END}\n`
+    '\n    ' + MARK_START + '\n' +
+    '    <noscript>\n' +
+    '      <nav aria-label="Product and language links">\n' +
+    '        <ul>\n' + items + '\n        </ul>\n' +
+    '        <p>' + navLinks + '</p>\n' +
+    '      </nav>\n' +
+    '    </noscript>\n' +
+    '    ' + MARK_END + '\n'
+
+  // Fail the build-time injection if any standalone locale link is missing.
+  const missingStandaloneLinks = STANDALONE_LANDINGS.flatMap((item) =>
+    LOCALES.map((locale) => {
+      const href = withPrefix('/products/' + item.slug, locale)
+      const expected = 'href="' + href + '" hreflang="' + locale + '"'
+      return block.includes(expected) ? null : expected
+    }),
+  ).filter(Boolean)
+  if (missingStandaloneLinks.length) {
+    throw new Error('Standalone landing crawl links missing: ' + missingStandaloneLinks.join(', '))
+  }
 
   if (!html.includes('</body>')) {
     console.warn('[seo-links] dist/index.html 中未找到 </body>，跳过注入')
     return
   }
-  html = html.replace('</body>', `${block}  </body>`)
+  html = html.replace('</body>', block + '  </body>')
   writeFileSync(DIST_INDEX, html)
-  console.log(`[seo-links] 已注入 ${slugs.length} 条产品内链 → dist/index.html`)
+  console.log('[seo-links] 已注入 ' + slugs.length + ' 个产品 URL（每个产品含 4 个语言版本）')
 }
 
-main().catch((e) => {
-  console.warn('[seo-links] 注入失败（不影响构建）:', e.message)
+main().catch((error) => {
+  console.warn('[seo-links] 注入失败（不影响构建）:', error.message)
 })
