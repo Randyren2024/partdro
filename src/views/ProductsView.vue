@@ -46,7 +46,7 @@
             <div class="product-card__body">
               <h3>{{ product.name }}</h3>
               <p>{{ product.short_desc }}</p>
-              <a v-if="product.slug === VF50P_SLUG" :href="VF50P_LANDING_PATH" class="product-card__link">
+              <a v-if="product.slug === VF50P_SLUG" :href="lp(VF50P_LANDING_PATH)" class="product-card__link">
                 {{ t('products.viewDetails') }} <RightOutlined />
               </a>
               <a v-else-if="product.slug === C500_SLUG" :href="lp(C500_LANDING_PATH)" class="product-card__link">
@@ -105,9 +105,8 @@ const U15_LANDING_PATH = '/products/u15-multi-mission-drone'
 const U15_IMAGE = `${U15_LANDING_PATH}/images/hero.webp`
 const U15_VISIBLE_IN: ProductCategory[] = ['cargo']
 
-// VF50P 详情是 landing/vf50p 的独立静态页（仅英文版），不在 SPA 详情路由中：
-// 卡片数据来自 Supabase products 表，但 CTA 必须整页跳转（<a href>），
-// 且保持无语言前缀，否则 /es/products/... 会 404。
+// VF50P 详情是 landing/vf50p 的独立静态页（四语种），不在 SPA 详情路由中：
+// 卡片数据来自 Supabase products 表；CTA 必须整页跳转，并跟随当前语言前缀。
 const VF50P_SLUG = 'vf50p-long-endurance-vtol-uav'
 const VF50P_LANDING_PATH = '/products/vf50p-long-endurance-vtol-uav'
 
