@@ -200,7 +200,7 @@ const handleImageError = (e: Event, fallback: string) => {
 }
 
 const openWhatsApp = () => {
-  trackEvent('generate_lead', { method: 'request_demo_about' })
+  trackEvent('whatsapp_chat_initiated', { channel: 'whatsapp', method: 'request_demo_about' })
   const message = 'Hello! I would like to learn more about Partdro drone solutions.'
   window.open(`https://wa.me/8616788684420?text=${encodeURIComponent(message)}`, '_blank')
 }
