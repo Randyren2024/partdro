@@ -102,6 +102,18 @@ async function main() {
     '    </noscript>\n' +
     '    ' + MARK_END + '\n'
 
+  // Fail the build-time injection if any standalone locale link is missing.
+  const missingStandaloneLinks = STANDALONE_LANDINGS.flatMap((item) =>
+    LOCALES.map((locale) => {
+      const href = withPrefix('/products/' + item.slug, locale)
+      const expected = 'href="' + href + '" hreflang="' + locale + '"'
+      return block.includes(expected) ? null : expected
+    }),
+  ).filter(Boolean)
+  if (missingStandaloneLinks.length) {
+    throw new Error('Standalone landing crawl links missing: ' + missingStandaloneLinks.join(', '))
+  }
+
   if (!html.includes('</body>')) {
     console.warn('[seo-links] dist/index.html 中未找到 </body>，跳过注入')
     return
