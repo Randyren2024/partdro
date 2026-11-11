@@ -65,7 +65,13 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
 
   // Supabase 查询失败时降级为纯静态路由，保证 sitemap 始终可用
   const [productRows, postRows] = await Promise.all([fetchSlugs('products'), fetchSlugs('posts')])
-  const productSlugs = productRows.map((r) => r.slug)
+  // 独立落地页在下面显式登记，先从数据库产品列表排除，避免 sitemap 重复 URL。
+  const standaloneProductSlugs = new Set([
+    'c500-partdro-eavision',
+    'u15-multi-mission-drone',
+    'vf50p-long-endurance-vtol-uav',
+  ])
+  const productSlugs = productRows.map((r) => r.slug).filter((slug) => !standaloneProductSlugs.has(slug))
   const postSlugs = postRows.filter((r): r is PostRow => 'published_at' in r)
 
   // 栏目与产品页：4 种语言均有本地化内容
