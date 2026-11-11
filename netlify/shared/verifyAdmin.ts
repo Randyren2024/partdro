@@ -48,12 +48,23 @@ export function supabaseUrl(): string {
   return requireEnv('SUPABASE_URL', 'VITE_SUPABASE_URL')
 }
 
+/** Prefer new publishable key; fall back to legacy anon key during migration */
 export function anonKey(): string {
-  return requireEnv('SUPABASE_ANON_KEY', 'VITE_SUPABASE_ANON_KEY')
+  return requireEnv(
+    'SUPABASE_PUBLISHABLE_KEY',
+    'VITE_SUPABASE_PUBLISHABLE_KEY',
+    'SUPABASE_ANON_KEY',
+    'VITE_SUPABASE_ANON_KEY',
+  )
 }
 
+/** Prefer new secret key; fall back to legacy service_role key during migration */
 export function serviceRoleClient(): SupabaseClient {
-  return createClient(supabaseUrl(), requireEnv('SUPABASE_SERVICE_ROLE_KEY'), clientOptions)
+  return createClient(
+    supabaseUrl(),
+    requireEnv('SUPABASE_SECRET_KEY', 'SUPABASE_SERVICE_ROLE_KEY'),
+    clientOptions,
+  )
 }
 
 export function parseBody<T>(event: NetlifyEvent): T {
@@ -115,8 +126,8 @@ export interface AdminContext {
 }
 
 /**
- * 1. 用 anon client 校验 Bearer JWT（来自浏览器 supabase.auth session）
- * 2. 用 service_role 查 admins 表确认在册
+ * 1. 用 publishable/anon client 校验 Bearer JWT（来自浏览器 supabase.auth session）
+ * 2. 用 secret/service_role 查 admins 表确认在册
  * 失败抛 401/403。
  */
 export async function verifyAdmin(event: NetlifyEvent): Promise<AdminContext> {

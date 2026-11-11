@@ -10,26 +10,31 @@ function withPrefix(path: string, locale: string): string {
   return locale === DEFAULT_LOCALE ? path : `/${locale}${path === '/' ? '' : path}`
 }
 
-interface SlugRow {
+interfaceSlugRow {
   slug: string
 }
 
-interface PostRow extends SlugRow {
+interface PostRow extendsSlugRow {
   published_at?: string | null
   post_langs?: { lang: string }[]
 }
 
 async function fetchSlugs(table: 'products' | 'posts'): Promise<(SlugRow | PostRow)[]> {
   const url = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL
-  const anonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
-  if (!url || !anonKey) return []
+  // Prefer new publishable key; fall back to legacy anon key during migration
+  const publicKey =
+    process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    process.env.VITE_SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_ANON_KEY
+  if (!url || !publicKey) return []
   try {
     // posts 额外取 published_at（<lastmod>）与 post_langs（只登记真实存在的翻译）
     const select = table === 'posts' ? 'slug,published_at,post_langs(lang)' : 'slug'
     const res = await fetch(`${url}/rest/v1/${table}?select=${select}&published=eq.true`, {
       headers: {
-        apikey: anonKey,
-        Authorization: `Bearer ${anonKey}`,
+        apikey: publicKey,
+        Authorization: `Bearer ${publicKey}`,
       },
     })
     if (!res.ok) return []
