@@ -10,7 +10,7 @@
             <p class="cta-card__text" :data-edit-key="'footer.cta.text'">{{ t('footer.cta.text') }}</p>
           </div>
           <div class="cta-card__actions">
-            <a class="cta-btn cta-btn--primary" :href="'mailto:' + mail" @click="trackEvent('generate_lead', { location: 'footer_cta' })">{{ mail }}</a>
+            <a class="cta-btn cta-btn--primary" :href="'mailto:' + mail" @click="trackEvent('email_click', { location: 'footer_cta' })">{{ mail }}</a>
             <router-link class="cta-btn cta-btn--ghost" :to="lp('/products')" :data-edit-key="'footer.cta.visit'">{{ t('footer.cta.visit') }}</router-link>
           </div>
         </div>
@@ -63,7 +63,7 @@
             <h4>{{ t('contact.title') }}</h4>
             <ul class="footer__contact-list">
               <li><PhoneOutlined /> +86 16788684420</li>
-              <li><a href="mailto:info@droneworld.tech" @click="trackEvent('generate_lead', { location: 'footer' })"><MailOutlined /> info@droneworld.tech</a></li>
+              <li><a href="mailto:info@droneworld.tech" @click="trackEvent('email_click', { location: 'footer' })"><MailOutlined /> info@droneworld.tech</a></li>
               <li><EnvironmentOutlined /> Shenzhen, China</li>
             </ul>
           </div>
