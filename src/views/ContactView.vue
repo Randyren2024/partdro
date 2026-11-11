@@ -26,7 +26,7 @@
                 <MailOutlined />
                 <div>
                   <p><strong :data-edit-key="'contact.info.emailLabel'">{{ t('contact.info.emailLabel') }}</strong></p>
-                  <p><a href="mailto:info@droneworld.tech" :data-edit-key="'contact.info.emailValue'" @click="trackEvent('generate_lead', { location: 'contact_info' })">{{ t('contact.info.emailValue') }}</a></p>
+                  <p><a href="mailto:info@droneworld.tech" :data-edit-key="'contact.info.emailValue'" @click="trackEvent('email_click', { location: 'contact_info' })">{{ t('contact.info.emailValue') }}</a></p>
                 </div>
               </div>
               <div class="contact-info__item">
