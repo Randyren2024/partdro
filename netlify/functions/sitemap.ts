@@ -10,11 +10,11 @@ function withPrefix(path: string, locale: string): string {
   return locale === DEFAULT_LOCALE ? path : `/${locale}${path === '/' ? '' : path}`
 }
 
-interfaceSlugRow {
+interface SlugRow {
   slug: string
 }
 
-interface PostRow extendsSlugRow {
+interface PostRow extends SlugRow {
   published_at?: string | null
   post_langs?: { lang: string }[]
 }
