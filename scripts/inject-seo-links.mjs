@@ -11,7 +11,7 @@ const MARK_END = '<!-- seo-fallback:end -->'
 
 const LOCALES = ['en', 'es', 'de', 'fr']
 const DEFAULT_LOCALE = 'en'
-const withPrefix = (p, loc) => (loc === DEFAULT_LOCALE ? p : `/${loc}${p === '/' ? '' : p}`)
+const withPrefix = (p, loc) => (loc === DEFAULT_LOCALE ? p : \`/\${loc}\${p === '/' ? '' : p}\`)
 
 // 独立落地页不在 Supabase products 表，但都由 CI 构建四种语言。
 // 保持这里与 deploy-aliyun.yml 的 landing build/merge 保持一致。
@@ -24,7 +24,7 @@ const STANDALONE_LANDINGS = [
 function toLabel(slug) {
   return slug
     .split('-')
-    .map((w) => (/^[a-z]+\\d+[a-z]*$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
+    .map((w) => (/^[a-z]+\d+[a-z]*$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
     .join(' ')
 }
 
@@ -34,8 +34,8 @@ async function fetchProductSlugs() {
   const key = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
   if (url && key) {
     try {
-      const res = await fetch(`${url}/rest/v1/products?select=slug&published=eq.true`, {
-        headers: { apikey: key, Authorization: `Bearer ${key}` },
+      const res = await fetch(\`\${url}/rest/v1/products?select=slug&published=eq.true\`, {
+        headers: { apikey: key, Authorization: \`Bearer \${key}\` },
       })
       if (res.ok) {
         const rows = await res.json()
@@ -50,7 +50,7 @@ async function fetchProductSlugs() {
     const res = await fetch('https://www.droneworld.tech/sitemap.xml')
     if (!res.ok) return []
     const xml = await res.text()
-    return [...xml.matchAll(/<loc>[^<]*\\/products\\/([^<]+)<\\/loc>/g)].map((m) => m[1])
+    return [...xml.matchAll(/<loc>[^<]*\/products\/([^<]+)<\/loc>/g)].map((m) => m[1])
   } catch (e) {
     console.warn('[seo-links] sitemap 读取失败:', e.message)
     return []
@@ -59,8 +59,8 @@ async function fetchProductSlugs() {
 
 function localizedProductLinks(slug, label) {
   return LOCALES.map((locale) => {
-    const href = withPrefix(`/products/${slug}`, locale)
-    return `<a href="${href}" hreflang="${locale}">${label}${locale === DEFAULT_LOCALE ? '' : ` [${locale.toUpperCase()}]`}</a>`
+    const href = withPrefix(\`/products/\${slug}\`, locale)
+    return \`<a href="\${href}" hreflang="\${locale}">\${label}\${locale === DEFAULT_LOCALE ? '' : \` [\${locale.toUpperCase()}]\`}</a>\`
   }).join(' · ')
 }
 
@@ -79,34 +79,38 @@ async function main() {
 
   const standaloneBySlug = new Map(STANDALONE_LANDINGS.map((p) => [p.slug, p.label]))
   let html = readFileSync(DIST_INDEX, 'utf8')
-  html = html.replace(new RegExp(`${MARK_START}[\\\\s\\\\S]*?${MARK_END}`, 'g'), '')
+  // 幂等：重复构建时先移除旧块
+  html = html.replace(new RegExp(\`\${MARK_START}[\\\\s\\\\S]*?\${MARK_END}\`, 'g'), '')
 
   const items = slugs
     .map((slug) => {
       const label = standaloneBySlug.get(slug) || toLabel(slug)
-      return `        <li>${localizedProductLinks(slug, label)}</li>`
+      return \`        <li>\${localizedProductLinks(slug, label)}</li>\`
     })
     .join('\\n')
 
   const navLinks = ['/products', '/cases', '/news', '/documents', '/about', '/contact']
-    .map((path) => LOCALES.map((locale) => `<a href="${withPrefix(path, locale)}" hreflang="${locale}">${path}</a>`).join(' · '))
+    .map((path) => LOCALES.map((locale) => \`<a href="\${withPrefix(path, locale)}" hreflang="\${locale}">\${path}</a>\`).join(' · '))
     .join('\\n          ')
 
+  // 放在 noscript 中：不改变访客看到的页面布局，同时为不执行 JS 的抓取提供真实 href。
   const block =
-    `\\n    ${MARK_START}\\n` +
-    `    <nav class="seo-crawl-links" aria-label="Product and language links">\\n` +
-    `      <ul>\\n${items}\\n      </ul>\\n` +
-    `      <p>${navLinks}</p>\\n` +
-    `    </nav>\\n` +
-    `    ${MARK_END}\\n`
+    \`\\n    \${MARK_START}\\n\` +
+    \`    <noscript>\\n\` +
+    \`      <nav aria-label="Product and language links">\\n\` +
+    \`        <ul>\\n\${items}\\n        </ul>\\n\` +
+    \`        <p>\${navLinks}</p>\\n\` +
+    \`      </nav>\\n\` +
+    \`    </noscript>\\n\` +
+    \`    \${MARK_END}\\n\`
 
   if (!html.includes('</body>')) {
     console.warn('[seo-links] dist/index.html 中未找到 </body>，跳过注入')
     return
   }
-  html = html.replace('</body>', `${block}  </body>`)
+  html = html.replace('</body>', \`\${block}  </body>\`)
   writeFileSync(DIST_INDEX, html)
-  console.log(`[seo-links] 已注入 ${slugs.length} 条产品内链（每页最多含 4 个语言版本）→ dist/index.html`)
+  console.log(\`[seo-links] 已注入 \${slugs.length} 条产品内链（每个落地页含 4 个语言版本）→ dist/index.html\`)
 }
 
 main().catch((e) => {
