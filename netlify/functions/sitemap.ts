@@ -58,16 +58,6 @@ function localizedEntries(path: string): string {
   ).join('\n')
 }
 
-// 只有英语版的独立落地页（landing/u15）：不生成 es/de/fr 的 URL（生产会 404）
-function englishOnlyEntry(path: string): string {
-  return (
-    `  <url>\n    <loc>${SITE_URL}${escapeXml(path)}</loc>\n` +
-    `    <xhtml:link rel="alternate" hreflang="en" href="${SITE_URL}${escapeXml(path)}" />\n` +
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_URL}${escapeXml(path)}" />\n` +
-    `  </url>`
-  )
-}
-
 export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 204, body: '' }
@@ -86,8 +76,10 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     '/solutions/facade-cleaning',
     '/solutions/solar-panel-cleaning',
     '/solutions/heavy-lift-logistics',
-    // C500 EAVision 是独立静态落地页（landing/eavision-c500），不在 products 表，但属于投放/自然搜索落地页
+    // C500 EAVision、U15 与 VF50P 是独立静态落地页，不在 products 表；CI 为三者构建四种语言。
     '/products/c500-partdro-eavision',
+    '/products/u15-multi-mission-drone',
+    '/products/vf50p-long-endurance-vtol-uav',
     ...productSlugs.map((s) => `/products/${s}`),
     '/cases',
     '/news',
@@ -128,10 +120,6 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
     localizedPaths.map(localizedEntries).join('\n') +
-    '\n' +
-    englishOnlyEntry('/products/u15-multi-mission-drone') +
-    '\n' +
-    englishOnlyEntry('/products/vf50p-long-endurance-vtol-uav') +
     (newsEntries.length ? '\n' + newsEntries.join('\n') : '') +
     `\n</urlset>\n`
 
