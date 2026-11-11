@@ -33,6 +33,15 @@ const cases = [
   ['/products/c500-partdro-eavision/', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-partdro-eavision'],
   ['/products/c500-partdro-eavision/index.html', 'GET', [], (r) => r.statusCode === 301 && r.headers.Location === 'https://www.droneworld.tech/products/c500-partdro-eavision'],
   ['/products/c500-partdro-eavision/assets/index-test.js', 'GET', [], (r) => r.statusCode === 200 || r.statusCode === 503],
+  // U15 与 VF50P 四语种独立静态落地页：所有 locale 都必须由 FC 静态路由命中。
+  ...['u15-multi-mission-drone', 'vf50p-long-endurance-vtol-uav'].flatMap((slug) =>
+    ['', '/es', '/de', '/fr'].map((prefix) => [
+      prefix + '/products/' + slug,
+      'GET',
+      [],
+      (r) => r.statusCode === 200 || r.statusCode === 503,
+    ]),
+  ),
   // 主机规范化。FC 网关不透传 x-forwarded-proto，自定义域名设为 HTTPS-only，
   // http→https 由网关承担；handler 内不再读 proto，x-forwarded-proto 不触发 301。
   // 本地未配置 OSS bucket 时静态读取返回 503；有 bucket 时应为 200。二者都说明路由未被误判。
