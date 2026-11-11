@@ -8,7 +8,7 @@
           <p :data-edit-key="`${ns}.cta.text`">{{ tt('cta.text') }}</p>
         </div>
         <div class="btns" style="margin-top:0;min-width:220px">
-          <a class="btn primary" :href="mailtoHref" @click="trackEvent('generate_lead', { location: 'cta_box' })">info@droneworld.tech</a>
+          <a class="btn primary" :href="mailtoHref" @click="trackEvent('email_click', { location: 'cta_box' })">info@droneworld.tech</a>
           <RouterLink class="btn secondary" to="/" :data-edit-key="`${ns}.cta.visit`">{{ tt('cta.visit') }}</RouterLink>
         </div>
       </div>
