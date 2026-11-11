@@ -7,7 +7,7 @@
         <p class="lead" :data-edit-key="`${ns}.hero.lead`">{{ tt('hero.lead') }}</p>
         <div class="btns">
           <a class="btn primary" href="#specs" :data-edit-key="`${ns}.hero.ctaPrimary`">{{ tt('hero.ctaPrimary') }}</a>
-          <a class="btn secondary" :href="mailtoHref" :data-edit-key="`${ns}.hero.ctaSecondary`" @click="trackEvent('generate_lead', { location: 'hero' })">{{ tt('hero.ctaSecondary') }}</a>
+          <a class="btn secondary" :href="mailtoHref" :data-edit-key="`${ns}.hero.ctaSecondary`" @click="trackEvent('email_click', { location: 'hero' })">{{ tt('hero.ctaSecondary') }}</a>
         </div>
         <div class="hero-stat-row">
           <div v-for="(s, i) in heroStats" :key="i" class="mini-stat" :data-edit-key="`${ns}.hero.stats.${i}`">{{ s }}</div>
