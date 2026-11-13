@@ -53,7 +53,6 @@ import SectionPanel from '~/components/product/SectionPanel.vue'
 import type { SectionLayoutItem } from '~/components/product/sectionIds'
 import '~/components/product/landing.css'
 
-const auth = useAuthStore()
 const route = useRoute()
 const { t, locale } = useI18n()
 
@@ -73,7 +72,13 @@ function toggleTheme() {
 }
 
 // 编辑模式下禁用 lightbox（点击用于编辑而非放大）
-const editMode = computed(() => auth.isLoggedIn)
+const editMode = ref(false)
+onMounted(async () => {
+  // Admin state is browser-session state; do not instantiate Pinia auth during SSG.
+  const auth = useAuthStore()
+  await auth.init()
+  editMode.value = auth.isLoggedIn
+})
 
 // ====== 按路由 slug 参数化：i18n namespace + 图片目录 ======
 const ns = computed(() => (route.params.slug as string) || 'd15r')
@@ -307,41 +312,5 @@ provide(landingSectionKey, {
 })
 
 
-// @ts-ignore - Nuxt macro
-definePrerenderRoutes(async () => {
-  const PRESET_SLUGS = [
-    'd15r', 'c500-delivery-drone', 'y160-delivery-drone',
-    's200-agricultural-drone', 's300-agricultural-drone', 'x160-delivery-drone',
-    'x160-lite-delivery-drone', 'd15r-pro', 'd15r-max',
-  ]
-  const LOCALES = ['', '/de', '/es', '/fr'] as const
-  const config = useRuntimeConfig()
-  let slugs: string[] = []
 
-  if (config.public.supabaseUrl && config.public.supabaseAnonKey) {
-    try {
-      const res = await fetch(
-        `${config.public.supabaseUrl}/rest/v1/products?select=slug&order=created_at.desc`,
-        { headers: { apikey: config.public.supabaseAnonKey, Authorization: `Bearer ${config.public.supabaseAnonKey}` } },
-      )
-      if (res.ok) {
-        const rows: { slug: string | null }[] = await res.json()
-        slugs = rows.map((r) => r.slug || '').filter(Boolean)
-      }
-    } catch (e) {
-      console.warn('[prerender] products slug fetch failed, using fallback:', (e as Error).message)
-    }
-  }
-
-  if (!slugs.length) slugs = PRESET_SLUGS
-
-  const routes: string[] = []
-  for (const l of LOCALES) {
-    for (const slug of slugs) {
-      routes.push(`${l}/products/${slug}`)
-    }
-  }
-  console.log(`[prerender] products: ${slugs.length} slugs × ${LOCALES.length} locales = ${routes.length} routes`)
-  return routes
-})
 </script>
