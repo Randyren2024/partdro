@@ -21,8 +21,8 @@
   --pd-radius-lg: 24px;
   --pd-container: 1200px;
   --pd-header-height: 76px;
-  --pd-font: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  --pd-font-display: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --pd-font: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --pd-font-display: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* Backwards-compatible aliases used by existing page components. */
   --color-primary: var(--pd-primary);
