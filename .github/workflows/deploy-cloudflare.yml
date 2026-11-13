@@ -26,8 +26,6 @@ jobs:
       - name: Preflight — required secrets present
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          SB_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          SB_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: |
           # Only the Cloudflare token is a hard requirement. The Supabase URL and
           # anon key are public values with build-time defaults in nuxt.config.ts,
@@ -35,9 +33,6 @@ jobs:
           if [ -z "$CF_TOKEN" ]; then
             echo "::error::Missing GitHub secret: CLOUDFLARE_API_TOKEN"
             exit 1
-          fi
-          if [ -z "$SB_URL" ] || [ -z "$SB_KEY" ]; then
-            echo "::warning::Supabase secrets not set — using the public defaults baked into nuxt.config.ts"
           fi
           echo "preflight ok"
 
@@ -58,16 +53,7 @@ jobs:
 
       - name: Build Nuxt static site (Cloudflare Pages preset)
         env:
-          # The current public Supabase URL / anon key are passed from repository
-          # secrets so both SSR prerender and Vite's client bundle use the
-          # same project. The service_role key remains runtime-only.
           NITRO_PRESET: cloudflare_pages
-          # Build-time client config: these are public Supabase credentials.
-          # Use the current project secrets rather than stale hard-coded defaults.
-          NUXT_PUBLIC_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          NUXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run generate
 
       - name: Compress oversized media (Cloudflare Pages 25 MiB per-file limit)
