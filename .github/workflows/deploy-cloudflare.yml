@@ -64,6 +64,12 @@ jobs:
           # Runtime secrets (service_role, DirectMail, Feishu, DashScope) live
           # in the Cloudflare Pages dashboard, not in the build.
           NITRO_PRESET: cloudflare_pages
+          # Build-time client config: these are public Supabase credentials.
+          # Use the current project secrets rather than stale hard-coded defaults.
+          NUXT_PUBLIC_SUPABASE_URL: ${{ secrets.NUXT_SUPABASE_URL }}
+          NUXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.NUXT_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
         run: npm run generate
 
       - name: Compress oversized media (Cloudflare Pages 25 MiB per-file limit)
