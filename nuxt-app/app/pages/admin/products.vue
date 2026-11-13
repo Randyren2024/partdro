@@ -100,8 +100,8 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
-import { callFunction } from '../../lib/netlifyApi'
-import { useAuthStore } from '../../stores/auth'
+import { callFunction } from '~/lib/netlifyApi'
+import { useAuthStore } from '~/stores/auth'
 
 const LANGS = ['en', 'es', 'de', 'fr'] as const
 type Lang = (typeof LANGS)[number]

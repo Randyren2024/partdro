@@ -90,13 +90,13 @@
 import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useProducts } from '../composables/useSupabase'
-import { useLocalePath } from '../composables/useLocalePath'
-import { SITE_URL } from '../router'
-import { buildBreadcrumbLd, injectJsonLd } from '../seo/structuredData'
-import { SOLUTIONS, SOLUTION_UI, type SolutionSlug } from '../data/solutions'
-import { DEFAULT_LOCALE, isLocale } from '../i18n'
-import type { Lang, Product } from '../types'
+import { useProducts } from '~/composables/useSupabase'
+import { useLocalePath } from '~/composables/useLocalePath'
+import { SITE_URL } from '~/utils/site'
+import { buildBreadcrumbLd, injectJsonLd } from '~/seo/structuredData'
+import { SOLUTIONS, SOLUTION_UI, type SolutionSlug } from '~/data/solutions'
+import { DEFAULT_LOCALE, isLocale } from '~/i18n'
+import type { Lang, Product } from '~/types'
 
 const route = useRoute()
 const { locale } = useI18n()

@@ -64,11 +64,11 @@ import { computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
-import { SITE_URL } from '../router'
-import { usePost, useProducts, useRelatedPosts } from '../composables/useSupabase'
-import { useLocalePath } from '../composables/useLocalePath'
-import { DEFAULT_LOCALE } from '../i18n'
-import type { Post, Product } from '../types'
+import { SITE_URL } from '~/utils/site'
+import { usePost, useProducts, useRelatedPosts } from '~/composables/useSupabase'
+import { useLocalePath } from '~/composables/useLocalePath'
+import { DEFAULT_LOCALE } from '~/i18n'
+import type { Post, Product } from '~/types'
 
 const route = useRoute()
 const slug = () => route.params.slug as string
