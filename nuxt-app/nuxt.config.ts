@@ -177,6 +177,9 @@ export default defineNuxtConfig({
     // Step out of that prefix to resolve the locale JSON under app/i18n/i18n/.
     langDir: '../app/i18n/i18n/',
     defaultLocale: 'en',
+    // If a locale bundle is missing a key at runtime, render the English value
+    // instead of exposing raw keys such as "nav.contact" in the public header.
+    fallbackLocale: 'en',
     strategy: 'prefix_except_default',
     lazy: false,
     detectBrowserLanguage: {

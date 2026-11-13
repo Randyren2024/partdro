@@ -132,6 +132,21 @@ jobs:
               exit 1
             fi
           done
+          # Verify the actual prerendered header labels, not just that locale routes exist.
+          for check in "de:Kontakt" "es:Contáctenos" "fr:Contactez-Nous"; do
+            locale="${check%%:*}"
+            label="${check#*:}"
+            html="dist/${locale}/contact/index.html"
+            if ! grep -Fq "${label}" "${html}"; then
+              echo "FAIL: expected localized contact label '${label}' in ${html}"
+              exit 1
+            fi
+            if grep -Fq "nav.contact" "${html}"; then
+              echo "FAIL: raw i18n key nav.contact leaked into ${html}"
+              exit 1
+            fi
+            echo "verified ${locale} navigation label: ${label}"
+          done
           # The three bespoke Vue/Vite landing pages must exist in all four locales.
           for locale in en es de fr; do
             prefix=""
