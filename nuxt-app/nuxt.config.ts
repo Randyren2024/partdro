@@ -20,9 +20,9 @@ const ALL_LOCALES = ['', '/de', '/es', '/fr']
  * Pages 的运行时环境变量）。
  * 环境变量存在时仍然优先，方便切换项目。
  */
-const PUBLIC_SUPABASE_URL = 'https://gcsshuvfzuinevacraao.supabase.co'
+const PUBLIC_SUPABASE_URL = process.env.NUXT_PUBLIC_SUPABASE_URL || process.env.NUXT_SUPABASE_URL || 'https://gcsshuvfzuinevacraao.supabase.co'
 const PUBLIC_SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdjc3NodXZmenVpbmV2YWNyYWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODk4MDYsImV4cCI6MjA4MTE2NTgwNn0.z0PWfvom52SFIacK0OiR4r_ofl0n9CSMlE3xe85wne4'
+  process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdjc3NodXZmenVpbmV2YWNyYWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODk4MDYsImV4cCI6MjA4MTE2NTgwNn0.z0PWfvom52SFIacK0OiR4r_ofl0n9CSMlE3xe85wne4'
 
 async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
   if (!url || !key) {
