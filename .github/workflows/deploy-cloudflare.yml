@@ -29,19 +29,17 @@ jobs:
           SB_URL: ${{ secrets.NUXT_SUPABASE_URL }}
           SB_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
         run: |
-          # Missing Supabase vars do NOT fail the build — fetchSlugs() swallows
-          # errors and returns [], so prerender silently emits ~86 pages instead
-          # of ~462. Fail loudly here instead of letting a thin site deploy.
-          missing=""
-          if [ -z "$CF_TOKEN" ]; then missing="$missing CLOUDFLARE_API_TOKEN"; fi
-          if [ -z "$SB_URL" ]; then missing="$missing NUXT_SUPABASE_URL"; fi
-          if [ -z "$SB_KEY" ]; then missing="$missing NUXT_PUBLIC_SUPABASE_ANON_KEY"; fi
-          if [ -n "$missing" ]; then
-            echo "::error::Missing GitHub secrets:$missing"
-            echo "Add them at Settings -> Secrets and variables -> Actions."
+          # Only the Cloudflare token is a hard requirement. The Supabase URL and
+          # anon key are public values with build-time defaults in nuxt.config.ts,
+          # so a stale/missing copy here is a warning, not a failure.
+          if [ -z "$CF_TOKEN" ]; then
+            echo "::error::Missing GitHub secret: CLOUDFLARE_API_TOKEN"
             exit 1
           fi
-          echo "all required secrets present"
+          if [ -z "$SB_URL" ] || [ -z "$SB_KEY" ]; then
+            echo "::warning::Supabase secrets not set — using the public defaults baked into nuxt.config.ts"
+          fi
+          echo "preflight ok"
 
       - uses: actions/setup-node@v4
         with:

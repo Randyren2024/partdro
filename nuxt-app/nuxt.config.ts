@@ -10,6 +10,20 @@ const PRESET_PRODUCTS = [
 const PRESET_NEWS = ['drone-cleaning-industry-trends-2026', 'c500-first-flight-tests']
 const ALL_LOCALES = ['', '/de', '/es', '/fr']
 
+/**
+ * 构建期兜底值（Supabase 项目 URL + anon key）。
+ *
+ * 这两个值本来就是公开的：NUXT_PUBLIC_* 会被序列化进客户端 bundle，任何访客
+ * 都能在浏览器里看到。把它们做成「构建缺了就出 86 页薄站」的必填 secret，
+ * 只会增加一个失败模式而不增加任何安全性。
+ * 真正需要保密的是 service_role key（只在 Nitro 服务端用，走 Cloudflare
+ * Pages 的运行时环境变量）。
+ * 环境变量存在时仍然优先，方便切换项目。
+ */
+const PUBLIC_SUPABASE_URL = 'https://gcsshuvfzuinevacraao.supabase.co'
+const PUBLIC_SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdjc3NodXZmenVpbmV2YWNyYWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODk4MDYsImV4cCI6MjA4MTE2NTgwNn0.z0PWfvom52SFIacK0OiR4r_ofl0n9CSMlE3xe85wne4'
+
 async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
   if (!url || !key) {
     console.warn(`[prerender] ${table}: SUPABASE_URL / anon key missing — falling back to presets`)
@@ -82,7 +96,8 @@ export default defineNuxtConfig({
     public: {
       // 客户端可见
       siteUrl: 'https://www.droneworld.tech',
-      supabaseAnonKey: '',
+      // anon key 本来就是公开值（会进浏览器 bundle），默认值避免漏配导致客户端无数据
+      supabaseAnonKey: PUBLIC_SUPABASE_ANON_KEY,
       gtmId: 'GTM-KJ7GJ3V5',
       // Ads 转化（客户端用）
       adsConversionId: '',
@@ -173,8 +188,8 @@ export default defineNuxtConfig({
   // 动态 prerender：在 build:before hook 里 push 动态路由到 nitro.options.prerender.routes
   hooks: {
     async 'nitro:build:before'(nitro) {
-      const url = process.env.NUXT_SUPABASE_URL
-      const key = process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY
+      const url = process.env.NUXT_SUPABASE_URL || PUBLIC_SUPABASE_URL
+      const key = process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || PUBLIC_SUPABASE_ANON_KEY
       let productSlugs = PRESET_PRODUCTS
       let newsSlugs = PRESET_NEWS
 
