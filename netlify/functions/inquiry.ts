@@ -48,9 +48,9 @@ const LIMITS = {
 
 function readString(value: unknown, field: string, max: number): string {
   if (value === undefined || value === null) return ''
-  if (typeof value !== 'string') throw new BadRequest(\`Invalid \${field} format.\`)
+  if (typeof value !== 'string') throw new BadRequest(`Invalid ${field} format.`)
   const normalized = value.trim()
-  if (normalized.length > max) throw new BadRequest(\`\${field} is too long.\`)
+  if (normalized.length > max) throw new BadRequest(`${field} is too long.`)
   return normalized
 }
 
@@ -58,7 +58,7 @@ function readTimestamp(value: unknown, field: string): string | null {
   const input = readString(value, field, LIMITS.timestamp)
   if (!input) return null
   const timestamp = Date.parse(input)
-  if (!Number.isFinite(timestamp)) throw new BadRequest(\`Invalid \${field} format.\`)
+  if (!Number.isFinite(timestamp)) throw new BadRequest(`Invalid ${field} format.`)
   return new Date(timestamp).toISOString()
 }
 
@@ -102,10 +102,10 @@ export const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => 
     if (!['contact', 'booking', 'franchise'].includes(type)) throw new BadRequest('Invalid inquiry type.')
 
     const supabase = serviceRoleClient()
-    if (event.clientIp && !(await consumeRateLimit(supabase, \`ip:\${event.clientIp}\`, 12, 600))) {
+    if (event.clientIp && !(await consumeRateLimit(supabase, `ip:${event.clientIp}`, 12, 600))) {
       return json(429, { ok: false, error: 'Too many submissions. Please wait a few minutes and try again.' })
     }
-    if (!(await consumeRateLimit(supabase, \`email:\${email}\`, 4, 3600))) {
+    if (!(await consumeRateLimit(supabase, `email:${email}`, 4, 3600))) {
       return json(429, { ok: false, error: 'Too many submissions for this email address. Please try again later.' })
     }
 
