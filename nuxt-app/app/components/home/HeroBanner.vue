@@ -86,8 +86,8 @@ function imgEdit(defaultSrc: string, key: string): string {
   flex: 1;
   max-width: 630px;
 }
-.hero__eyebrow { display:flex; align-items:center; gap:10px; color:#ffb08f; font-size:11px; font-weight:800; letter-spacing:.18em; margin-bottom:20px; }
-.hero__eyebrow span { width:36px; height:2px; background:#e85d2a; }
+.hero__eyebrow { display:flex; align-items:center; gap:10px; color:#ffb066; font-size:11px; font-weight:800; letter-spacing:.18em; margin-bottom:20px; }
+.hero__eyebrow span { width:36px; height:2px; background:#ff6a1a; }
 .hero__text h1 {
   font-size: clamp(3rem, 5vw, 5.2rem);
   font-weight: 760;
