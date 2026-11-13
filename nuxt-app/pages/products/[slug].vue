@@ -42,6 +42,7 @@ import {
   imgOverridesByLang,
   videoOverridesByLang,
   registerProductNamespace,
+  useLandingContent,
   getSectionLayout,
   setSectionLayout,
 } from '~/composables/useLandingContent'
@@ -55,6 +56,8 @@ import '~/components/product/landing.css'
 
 const route = useRoute()
 const { t, locale } = useI18n()
+// Initialize the module-level i18n bridge before registering dynamic product namespaces.
+useLandingContent()
 
 // ====== 主题（深色 / 浅色） ======
 type Theme = 'dark' | 'light'
