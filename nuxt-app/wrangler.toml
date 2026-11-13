@@ -1,0 +1,8 @@
+# Cloudflare Pages deployment.
+# Build: NITRO_PRESET=cloudflare_pages npm run build  (output: dist/)
+# Dashboard: root dir = nuxt-app, build command as above, output dir = dist.
+
+name = "partdro-nuxt"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-07-15"
+compatibility_flags = ["nodejs_compat"]
