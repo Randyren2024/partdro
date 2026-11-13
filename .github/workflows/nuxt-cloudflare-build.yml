@@ -1,4 +1,4 @@
-name: Nuxt Cloudflare Pages Build and PR Preview
+name: Nuxt Cloudflare Pages Build Validation
 
 on:
   pull_request:
@@ -19,8 +19,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  CF_PROJECT_NAME: partdro-nuxt
-  CF_ACCOUNT_ID: f7baff0f09564f34ec470d7f7d0ce474
 
 jobs:
   build:
@@ -75,56 +73,5 @@ jobs:
           done
           echo "Cloudflare Pages build artifacts verified."
 
-      - name: Compress oversized media for Cloudflare Pages
-        if: github.event_name == 'pull_request'
-        run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          fi
-          found=0
-          while IFS= read -r f; do
-            found=1
-            echo "compressing $f ($(du -m "$f" | cut -f1) MiB)"
-            ffmpeg -nostdin -loglevel error -i "$f" -c:v libx264 -preset veryfast -crf 24 \
-              -c:a aac -b:a 128k -fs 23M -y "$f.tmp.mp4"
-            mv "$f.tmp.mp4" "$f"
-          done < <(find dist -type f \( -name '*.mp4' -o -name '*.mov' \) -size +24M)
-          if [ "$found" = 0 ]; then echo "no oversized media found"; fi
-          oversized=$(find dist -type f -size +24M | head -20)
-          if [ -n "$oversized" ]; then
-            echo "::error::Files still exceed Cloudflare Pages 25 MiB limit:"
-            echo "$oversized"
-            exit 1
-          fi
-
-      - name: Check Cloudflare preview credentials
-        if: github.event_name == 'pull_request'
-        env:
-          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: |
-          if [ -z "$CF_TOKEN" ]; then
-            echo "::error::Missing GitHub Actions secret CLOUDFLARE_API_TOKEN. Add a Cloudflare API token with Cloudflare Pages Edit permission."
-            exit 1
-          fi
-
-      - name: Deploy PR preview to Cloudflare Pages
-        if: github.event_name == 'pull_request'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT_ID }}
-        run: |
-          set -o pipefail
-          PREVIEW_BRANCH="pr-${{ github.event.pull_request.number }}"
-          npx wrangler pages deploy dist \
-            --project-name "${{ env.CF_PROJECT_NAME }}" \
-            --branch "$PREVIEW_BRANCH" \
-            --commit-dirty=true 2>&1 | tee deploy.log
-          PREVIEW_URL="https://${PREVIEW_BRANCH}.${{ env.CF_PROJECT_NAME }}.pages.dev"
-          {
-            echo "## Cloudflare Pages PR Preview"
-            echo ""
-            echo "**Preview branch:** `$PREVIEW_BRANCH`"
-            echo ""
-            echo "**Preview URL:** $PREVIEW_URL"
-          } >> "$GITHUB_STEP_SUMMARY"
-          echo "Preview URL: $PREVIEW_URL"
+      # PRs run build and route validation only. No temporary Cloudflare deployment:
+      # production deployment happens after merge to main in deploy-cloudflare.yml.
