@@ -251,7 +251,8 @@
       "text": "Parlez à Partdro de la configuration et du scénario d'application adaptés à votre travail.",
       "mail": "info{'@'}droneworld.tech",
       "visit": "Découvrir les produits"
-    }
+    },
+    "description": "Solutions par drone pour l’agriculture, le transport de marchandises, le nettoyage et les applications industrielles."
   },
   "topBar": {
     "phone": "Téléphone",
