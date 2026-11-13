@@ -53,10 +53,10 @@ jobs:
           # "Missing: @esbuild/linux-x64@0.28.2 from lock file".
           npm install --include=optional --no-audit --no-fund
 
-      - name: Build Nuxt static site (Cloudflare Pages preset)
+      - name: Build Nuxt app with Cloudflare Pages server runtime
         env:
           NITRO_PRESET: cloudflare_pages
-        run: npm run generate
+        run: npm run build
 
       # These three product pages are intentionally bespoke Vue 3 + Vite
       # experiences. Build them from their original sources and merge their
@@ -151,7 +151,41 @@ jobs:
               exit 1
             fi
           done
+          # Static generate omits Nitro server routes; require the Pages Worker.
+          if [ ! -e "dist/_worker.js" ]; then
+            echo "FAIL: dist/_worker.js missing — server API routes would return 404"
+            exit 1
+          fi
+          echo "Cloudflare Pages Worker present"
           echo "build artifact check passed"
+
+      - name: Smoke-test server API with local Cloudflare Pages runtime
+        run: |
+          set -euo pipefail
+          npx wrangler pages dev dist --ip 127.0.0.1 --port 8788 > /tmp/partdro-pages-dev.log 2>&1 &
+          WRANGLER_PID=$!
+          trap 'kill "$WRANGLER_PID" 2>/dev/null || true' EXIT
+          STATUS=""
+          for attempt in $(seq 1 30); do
+            STATUS=$(curl --silent --output /tmp/partdro-inquiry-response.json --write-out '%{http_code}' \
+              --request POST http://127.0.0.1:8788/api/inquiry \
+              --header 'Content-Type: application/json' \
+              --data '{}' || true)
+            if [ "$STATUS" = "400" ]; then
+              echo "PASS: /api/inquiry is served by the Pages Worker and validates the request"
+              exit 0
+            fi
+            if [ -n "$STATUS" ] && [ "$STATUS" != "000" ] && [ "$STATUS" != "404" ]; then
+              echo "FAIL: /api/inquiry returned unexpected HTTP $STATUS"
+              cat /tmp/partdro-inquiry-response.json || true
+              cat /tmp/partdro-pages-dev.log || true
+              exit 1
+            fi
+            sleep 2
+          done
+          echo "FAIL: /api/inquiry did not become available (last HTTP status: ${STATUS:-none})"
+          cat /tmp/partdro-pages-dev.log || true
+          exit 1
 
       - name: Deploy to Cloudflare Pages
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
