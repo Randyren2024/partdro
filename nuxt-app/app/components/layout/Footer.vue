@@ -198,13 +198,15 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
 
 /* ===== 原有页脚 ===== */
 .footer {
-  background-color: var(--color-dark);
+  /* Footer is intentionally dark in both color modes. Do not use --color-dark here:
+     that legacy alias resolves to --pd-ink, which becomes near-white in dark mode. */
+  background-color: #080b0d;
   /* 页脚条同样织入细斜线纹理，与 D15R 页面落地纹理衔接一致 */
   background-image:
     linear-gradient(30deg, transparent 49%, rgba(255, 255, 255, 0.025) 50%, transparent 51%),
     linear-gradient(-30deg, transparent 49%, rgba(255, 255, 255, 0.016) 50%, transparent 51%);
   background-size: 180px 104px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #d5dde1;
   padding: 60px 0 0;
 }
 .footer__grid {
@@ -232,7 +234,8 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
   font-size: 14px;
   line-height: 1.8;
   margin-bottom: 20px;
-  opacity: 0.7;
+  color: #aeb8bd;
+  opacity: 1;
 }
 .footer__social {
   display: flex;
@@ -268,24 +271,27 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
 }
 .footer__col a {
   font-size: 14px;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+  color: #c2cbd0;
+  opacity: 1;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 .footer__col a:hover {
   opacity: 1;
-  color: var(--color-primary-light);
+  color: var(--pd-primary);
 }
 .footer__contact-list li {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 14px;
+  color: #c2cbd0;
 }
 .footer__bottom {
   padding: 20px 0;
   text-align: center;
   font-size: 13px;
-  opacity: 0.5;
+  color: #89949a;
+  opacity: 1;
 }
 
 @media (max-width: 992px) {
