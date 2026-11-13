@@ -1,8 +1,10 @@
 <template>
   <a-select
     :value="locale"
+    aria-label="Select language"
+    class="language-select"
     size="small"
-    style="width: 80px"
+    style="width: 76px"
     @change="changeLang"
   >
     <a-select-option value="en">EN</a-select-option>
