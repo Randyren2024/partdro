@@ -245,14 +245,14 @@ onUnmounted(() => {
   padding: 0 17px;
   border-radius: 999px;
   color: var(--pd-on-primary);
-  background: var(--pd-primary-deep);
+  background: var(--pd-primary);
   font-size: 13px;
   font-weight: 700;
   transition: transform .18s ease, background .18s ease;
 }
 .header__contact:hover {
   color: var(--pd-on-primary);
-  background: var(--pd-primary);
+  background: var(--pd-primary-hover);
   transform: translateY(-1px);
 }
 .header__mobile-toggle {
