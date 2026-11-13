@@ -8,6 +8,7 @@ interface InquiryBody {
   email?: unknown
   phone?: unknown
   company?: unknown
+  country?: unknown
   message?: unknown
   type?: unknown
   product_slug?: unknown
@@ -36,6 +37,7 @@ const LIMITS = {
   email: 254,
   phone: 40,
   company: 160,
+  country: 120,
   message: 5000,
   product_slug: 160,
   website: 200,
@@ -100,6 +102,7 @@ export default defineEventHandler(async (event) => {
   const email = readString(body.email, 'email', LIMITS.email).toLowerCase()
   const phone = readString(body.phone, 'phone', LIMITS.phone)
   const company = readString(body.company, 'company', LIMITS.company)
+  const country = readString(body.country, 'country', LIMITS.country)
   const message = readString(body.message, 'message', LIMITS.message)
   const type = readString(body.type, 'type', 32) || 'contact'
   const productSlug = readString(body.product_slug, 'product_slug', LIMITS.product_slug)
@@ -131,6 +134,7 @@ export default defineEventHandler(async (event) => {
     message,
     phone: phone || null,
     company: company || null,
+    country: country || null,
     type,
     product_slug: productSlug || null,
     gclid: readString(body.gclid, 'gclid', LIMITS.click_id) || null,
