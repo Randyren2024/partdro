@@ -236,7 +236,8 @@
     "error": "Inténtelo de nuevo dentro de un momento.",
     "emptyTitle": "Aún no hay documentos disponibles",
     "empty": "Los documentos técnicos aparecerán aquí cuando se publiquen.",
-    "unavailable": "Archivo no disponible"
+    "unavailable": "Archivo no disponible",
+    "retry": "Reintentar"
   },
   "footer": {
     "company": "Empresa",
