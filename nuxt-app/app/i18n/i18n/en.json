@@ -230,7 +230,13 @@
   "documents": {
     "title": "Technical Documents",
     "subtitle": "Download manuals, guides, and specifications",
-    "download": "Download"
+    "download": "Download",
+    "loading": "Loading documents…",
+    "errorTitle": "Documents could not be loaded",
+    "error": "Please try again in a moment.",
+    "emptyTitle": "No documents available yet",
+    "empty": "Technical documents will appear here when they are published.",
+    "unavailable": "File unavailable"
   },
   "footer": {
     "company": "Company",
