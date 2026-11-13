@@ -173,9 +173,9 @@ export default defineNuxtConfig({
       { code: 'es', iso: 'es-ES', file: 'es.json', name: 'Español' },
       { code: 'fr', iso: 'fr-FR', file: 'fr.json', name: 'Français' },
     ],
-    // @nuxtjs/i18n resolves langDir from the Nuxt project root and appends
-    // the locale subdirectory, so this points to app/i18n/i18n/*.json.
-    langDir: './app/i18n/',
+    // @nuxtjs/i18n v10 prefixes langDir with the project i18n directory.
+    // Step out of that prefix to resolve the locale JSON under app/i18n/i18n/.
+    langDir: '../app/i18n/i18n/',
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     lazy: false,
