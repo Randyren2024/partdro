@@ -58,8 +58,8 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/i18n', '@nuxtjs/color-mode', '@pinia/nuxt'],
 
   colorMode: {
-    preference: 'light',
-    fallback: 'light',
+    preference: 'dark',
+    fallback: 'dark',
     classSuffix: '',
   },
 
@@ -119,7 +119,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#ffffff' },
+        { name: 'theme-color', content: '#101315' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/droneworld_logo.svg' },
