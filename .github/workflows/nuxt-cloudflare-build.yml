@@ -6,11 +6,13 @@ on:
       - "nuxt-app/**"
       - ".github/workflows/nuxt-cloudflare-build.yml"
       - ".github/workflows/validate-nuxt.yml"
+      - ".github/workflows/deploy-cloudflare.yml"
   push:
     branches: [main]
     paths:
       - "nuxt-app/**"
       - ".github/workflows/nuxt-cloudflare-build.yml"
+      - ".github/workflows/deploy-cloudflare.yml"
 
 concurrency:
   group: nuxt-cloudflare-build-${{ github.event.pull_request.number || github.ref }}
