@@ -35,11 +35,11 @@ const statsData = [
 
 <style scoped>
 .stats {
-  background: #10363c;
+  background: #171a1c;
   position:relative;
   overflow:hidden;
 }
-.stats::before { content:""; position:absolute; width:620px; height:620px; border:1px solid rgba(119,220,215,.14); border-radius:50%; left:-360px; top:-440px; }
+.stats::before { content:""; position:absolute; width:620px; height:620px; border:1px solid rgba(232,93,42,.18); border-radius:50%; left:-360px; top:-440px; }
 .stats__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -54,7 +54,7 @@ const statsData = [
 .stats__item:last-child { border-right:0; }
 .stats__icon {
   font-size: 40px;
-  color: #76d8d5;
+  color: var(--pd-accent);
   margin-bottom: 12px;
 }
 .stats__number {
