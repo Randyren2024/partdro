@@ -204,6 +204,7 @@ watch([ns, locale, () => t(`${ns.value}.hero.title1`), () => t(`${ns.value}.hero
   const titleKey = `${ns.value}.hero.title1`
   const title1 = t(titleKey)
   if (title1 === titleKey) return
+  if (!import.meta.client) return
   const name = productLabel.value
   const lead = t(`${ns.value}.hero.lead`)
   // 标题/描述走搜索意图映射（英语手写商业关键词；其他语言沿用本地化文案并规范化）
