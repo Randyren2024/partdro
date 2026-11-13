@@ -3,6 +3,13 @@ import { theme as antdThemeTools, ConfigProvider } from 'ant-design-vue'
 
 const colorMode = useColorMode()
 
+useHead({
+  meta: [{
+    name: 'theme-color',
+    content: computed(() => colorMode.value === 'dark' ? '#101315' : '#f5f4f0'),
+  }],
+})
+
 const antdTheme = computed(() => {
   const dark = colorMode.value === 'dark'
   const primary = dark ? '#ff8153' : '#e85d2a'
