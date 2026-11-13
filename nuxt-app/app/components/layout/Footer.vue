@@ -54,7 +54,7 @@
           <div class="footer__col">
             <h4>{{ t('contact.title') }}</h4>
             <ul class="footer__contact-list">
-              <li><PhoneOutlined /> +86 16788684420</li>
+              <li><a href="tel:+8616788684420" @click="trackEvent('phone_click', { location: 'footer' })"><PhoneOutlined /> +86 16788684420</a></li>
               <li><a href="mailto:info@droneworld.tech" @click="trackEvent('email_click', { location: 'footer' })"><MailOutlined /> info@droneworld.tech</a></li>
               <li><EnvironmentOutlined /> Shenzhen, China</li>
             </ul>
@@ -95,7 +95,7 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
 .footer-cta {
   position: relative;
   overflow: hidden;
-  padding: 96px 0 88px;
+  padding: clamp(58px, 7vw, 88px) 0;
   background-color: #070a0c;
   /* 细斜线纹理（对齐 D15R 落地页 .d15r-landing 网格） */
   background-image:
@@ -109,16 +109,16 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 80% 0%, rgba(57, 191, 212, 0.14), transparent 34%),
-    radial-gradient(circle at 8% 60%, rgba(57, 191, 212, 0.06), transparent 30%);
+    radial-gradient(circle at 80% 0%, rgba(232, 93, 42, 0.14), transparent 34%),
+    radial-gradient(circle at 8% 60%, rgba(232, 93, 42, 0.06), transparent 30%);
 }
 .footer-cta .container {
   position: relative;
   z-index: 1;
 }
 .cta-card {
-  border: 1px solid rgba(57, 191, 212, 0.3);
-  background: radial-gradient(circle at 80% 20%, rgba(57, 191, 212, 0.13), transparent 30%), rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(232, 93, 42, 0.3);
+  background: radial-gradient(circle at 80% 20%, rgba(232, 93, 42, 0.13), transparent 30%), rgba(255, 255, 255, 0.025);
   border-radius: 32px;
   padding: 56px 58px;
   display: flex;
@@ -131,7 +131,7 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #39bfd4;
+  color: var(--pd-primary);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.18em;
@@ -141,7 +141,7 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
   content: "";
   width: 26px;
   height: 2px;
-  background: #39bfd4;
+  background: var(--pd-primary);
   display: block;
 }
 .cta-card__title {
@@ -178,12 +178,12 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
   cursor: pointer;
 }
 .cta-btn--primary {
-  background: #39bfd4;
-  color: #001115;
-  border: 1px solid #39bfd4;
+  background: var(--pd-primary);
+  color: var(--pd-on-primary);
+  border: 1px solid var(--pd-primary);
 }
 .cta-btn--primary:hover {
-  background: #74e6f4;
+  background: var(--pd-primary-hover);
   transform: translateY(-2px);
 }
 .cta-btn--ghost {
