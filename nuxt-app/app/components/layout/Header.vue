@@ -96,7 +96,7 @@ import { useLocalePath } from '../../composables/useLocalePath'
 import type { ProductCategory } from '../../types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning', 'EVTOL']
-const { t } = useI18n()
+const { t } = useI18n({ useScope: 'global' })
 const route = useRoute()
 const lp = useLocalePath()
 const scrolled = ref(false)
