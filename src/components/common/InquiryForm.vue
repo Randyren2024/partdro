@@ -42,7 +42,6 @@
 import { computed, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { supabase } from '../../supabase/client'
 import { trackEvent } from '../../composables/useTracking'
 import { attributionFields } from '../../composables/useAttribution'
 
@@ -73,9 +72,26 @@ const handleSubmit = async () => {
   success.value = false
   errorMsg.value = ''
   try {
-    // Honeypot submissions receive a neutral success state but never create a lead or conversion.
-    if (form.website) {
-      success.value = true
+    const response = await fetch('/api/inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        type: form.type,
+        message: form.message,
+        website: form.website,
+        ...attributionFields(route.path, productSlug.value),
+      }),
+    })
+    const result = await response.json().catch(() => ({}))
+    if (!response.ok || !result.ok) {
+      errorMsg.value = result.error || t('contact.error')
+      return
+    }
+    if (!result.spam) trackEvent('contact_form_submission', { form_type: form.type })
+    success.value = true
       return
     }
     const { error } = await supabase.from('inquiries').insert({
