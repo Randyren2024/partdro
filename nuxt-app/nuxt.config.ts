@@ -188,8 +188,10 @@ export default defineNuxtConfig({
   // 动态 prerender：在 build:before hook 里 push 动态路由到 nitro.options.prerender.routes
   hooks: {
     async 'nitro:build:before'(nitro) {
-      const url = process.env.NUXT_SUPABASE_URL || PUBLIC_SUPABASE_URL
-      const key = process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || PUBLIC_SUPABASE_ANON_KEY
+      // 直接用公开常量，不读环境变量：secret 里存过一个失效的旧 anon key，
+      // 一旦覆盖就静默退化成 86 页薄站。公开值不值得为它引入这个失败模式。
+      const url = PUBLIC_SUPABASE_URL
+      const key = PUBLIC_SUPABASE_ANON_KEY
       let productSlugs = PRESET_PRODUCTS
       let newsSlugs = PRESET_NEWS
 

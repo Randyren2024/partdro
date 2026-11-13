@@ -57,11 +57,11 @@ jobs:
 
       - name: Build Nuxt static site (Cloudflare Pages preset)
         env:
-          # Build-time only needs Supabase to pull dynamic product/news slugs.
-          # Runtime secrets (service_role, DirectMail, Feishu, DashScope) are
-          # configured in Cloudflare Pages dashboard environment variables.
-          NUXT_SUPABASE_URL: ${{ secrets.NUXT_SUPABASE_URL }}
-          NUXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
+          # Supabase URL / anon key are NOT passed here on purpose: they are
+          # public values baked into nuxt.config.ts. Passing a stale secret
+          # previously overrode them and silently produced an 86-page site.
+          # Runtime secrets (service_role, DirectMail, Feishu, DashScope) live
+          # in the Cloudflare Pages dashboard, not in the build.
           NITRO_PRESET: cloudflare_pages
         run: npm run generate
 
