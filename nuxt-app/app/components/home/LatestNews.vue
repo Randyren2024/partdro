@@ -7,7 +7,14 @@
       <div class="news__grid">
         <div class="news__card" v-for="post in posts" :key="post.slug">
           <div class="news__card-image">
-            <img :src="post.image_url" :alt="post.title" />
+            <img
+              :src="post.image_url"
+              :alt="post.title"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="420"
+            />
           </div>
           <div class="news__card-body">
             <div class="news__card-meta">
@@ -74,6 +81,7 @@ const { data: posts } = usePosts({ limit: 3 })
   background: var(--pd-bg-soft);
 }
 .news__card-image img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
