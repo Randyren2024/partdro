@@ -109,16 +109,16 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 80% 0%, rgba(232, 93, 42, 0.14), transparent 34%),
-    radial-gradient(circle at 8% 60%, rgba(232, 93, 42, 0.06), transparent 30%);
+    radial-gradient(circle at 80% 0%, rgba(255, 106, 26, 0.14), transparent 34%),
+    radial-gradient(circle at 8% 60%, rgba(255, 106, 26, 0.06), transparent 30%);
 }
 .footer-cta .container {
   position: relative;
   z-index: 1;
 }
 .cta-card {
-  border: 1px solid rgba(232, 93, 42, 0.3);
-  background: radial-gradient(circle at 80% 20%, rgba(232, 93, 42, 0.13), transparent 30%), rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 106, 26, 0.3);
+  background: radial-gradient(circle at 80% 20%, rgba(255, 106, 26, 0.13), transparent 30%), rgba(255, 255, 255, 0.025);
   border-radius: 32px;
   padding: 56px 58px;
   display: flex;
