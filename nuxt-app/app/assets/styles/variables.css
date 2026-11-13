@@ -22,7 +22,7 @@
   --pd-container: 1200px;
   --pd-header-height: 68px;
   --pd-font: "Barlow", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --pd-font-display: "Barlow Condensed", "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pd-font-display: var(--pd-font);
   --pd-font-weight-regular: 400;
   --pd-font-weight-medium: 500;
   --pd-font-weight-semibold: 600;

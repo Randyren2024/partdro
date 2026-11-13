@@ -60,7 +60,7 @@ button:focus-visible{outline:2px solid #8092fa;outline-offset:4px}
 .notes p{margin:0}
 .notes__inner>p,.notes__item{margin-bottom:8px}
 .notes__item{scroll-margin-top:80px}
-.specifications{background:#000;color:#fff;font-family:HarmonyOS Sans SC,PingFang SC,Microsoft YaHei,sans-serif}
+.specifications{background:#000;color:#fff;font-family:'Barlow','PingFang SC','Microsoft YaHei',sans-serif}
 .specifications__content{padding:100px 0 144px}
 .specifications__inner{margin:0 auto;width:min(1200px,calc(100% - 48px))}
 .specifications .specifications__title{color:#fff;font-size:48px;font-weight:400;line-height:1.4;margin:0 0 104px;text-align:center}
