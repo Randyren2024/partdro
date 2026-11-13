@@ -29,6 +29,7 @@ const LIMITS = {
   company: 160,
   message: 5000,
   product_slug: 160,
+  website: 200,
   gclid: 512,
   utm: 500,
   page_path: 1000,
@@ -36,8 +37,16 @@ const LIMITS = {
   referrer: 2000,
 } as const
 
-function clean(value: unknown, max: number): string {
-  return typeof value === 'string' ? value.trim().slice(0, max) : ''
+function readString(value: unknown, field: string, max: number): string {
+  if (value === undefined || value === null) return ''
+  if (typeof value !== 'string') {
+    throw createError({ statusCode: 400, statusMessage: `Invalid ${field} format.` })
+  }
+  const normalized = value.trim()
+  if (normalized.length > max) {
+    throw createError({ statusCode: 400, statusMessage: `${field} is too long.` })
+  }
+  return normalized
 }
 
 export default defineEventHandler(async (event) => {
@@ -49,17 +58,17 @@ export default defineEventHandler(async (event) => {
   }
 
   // Honeypot: silently accept automated submissions without storing or counting them.
-  if (clean(body.website, 200)) {
+  if (readString(body.website, 'website', LIMITS.website)) {
     return { ok: true, spam: true }
   }
 
-  const name = clean(body.name, LIMITS.name)
-  const email = clean(body.email, LIMITS.email).toLowerCase()
-  const phone = clean(body.phone, LIMITS.phone)
-  const company = clean(body.company, LIMITS.company)
-  const message = clean(body.message, LIMITS.message)
-  const type = clean(body.type, 32) || 'contact'
-  const productSlug = clean(body.product_slug, LIMITS.product_slug)
+  const name = readString(body.name, 'name', LIMITS.name)
+  const email = readString(body.email, 'email', LIMITS.email).toLowerCase()
+  const phone = readString(body.phone, 'phone', LIMITS.phone)
+  const company = readString(body.company, 'company', LIMITS.company)
+  const message = readString(body.message, 'message', LIMITS.message)
+  const type = readString(body.type, 'type', 32) || 'contact'
+  const productSlug = readString(body.product_slug, 'product_slug', LIMITS.product_slug)
 
   if (!name || !email || !message) {
     throw createError({ statusCode: 400, statusMessage: 'Name, email and message are required.' })
@@ -73,11 +82,6 @@ export default defineEventHandler(async (event) => {
   if (!['contact', 'booking', 'franchise'].includes(type)) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid inquiry type.' })
   }
-  if (body.name !== undefined && typeof body.name !== 'string'
-    || body.email !== undefined && typeof body.email !== 'string'
-    || body.message !== undefined && typeof body.message !== 'string') {
-    throw createError({ statusCode: 400, statusMessage: 'Invalid field format.' })
-  }
 
   const supabase = getSupabaseServer(event)
   const { data, error } = await supabase.from('inquiries').insert({
@@ -88,15 +92,15 @@ export default defineEventHandler(async (event) => {
     company: company || null,
     type,
     product_slug: productSlug || null,
-    gclid: clean(body.gclid, LIMITS.gclid) || null,
-    utm_source: clean(body.utm_source, LIMITS.utm) || null,
-    utm_medium: clean(body.utm_medium, LIMITS.utm) || null,
-    utm_campaign: clean(body.utm_campaign, LIMITS.utm) || null,
-    utm_term: clean(body.utm_term, LIMITS.utm) || null,
-    utm_content: clean(body.utm_content, LIMITS.utm) || null,
-    page_path: clean(body.page_path, LIMITS.page_path) || null,
-    landing_page: clean(body.landing_page, LIMITS.landing_page) || null,
-    referrer: clean(body.referrer, LIMITS.referrer) || null,
+    gclid: readString(body.gclid, 'gclid', LIMITS.gclid) || null,
+    utm_source: readString(body.utm_source, 'utm_source', LIMITS.utm) || null,
+    utm_medium: readString(body.utm_medium, 'utm_medium', LIMITS.utm) || null,
+    utm_campaign: readString(body.utm_campaign, 'utm_campaign', LIMITS.utm) || null,
+    utm_term: readString(body.utm_term, 'utm_term', LIMITS.utm) || null,
+    utm_content: readString(body.utm_content, 'utm_content', LIMITS.utm) || null,
+    page_path: readString(body.page_path, 'page_path', LIMITS.page_path) || null,
+    landing_page: readString(body.landing_page, 'landing_page', LIMITS.landing_page) || null,
+    referrer: readString(body.referrer, 'referrer', LIMITS.referrer) || null,
   }).select('id').single()
 
   if (error) {
