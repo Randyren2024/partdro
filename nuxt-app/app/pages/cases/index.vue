@@ -11,7 +11,7 @@
         <div class="cases__grid">
           <div class="cases__card" v-for="c in cases" :key="c.slug">
             <div class="cases__card-image">
-              <img :src="c.image_url" :alt="c.title" />
+              <img :src="c.image_url" :alt="c.title" loading="lazy" decoding="async" />
             </div>
             <div class="cases__card-body">
               <h3>{{ c.title }}</h3>
