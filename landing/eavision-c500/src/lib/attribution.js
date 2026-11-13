@@ -1,20 +1,28 @@
-// Mirrors src/composables/useAttribution.ts on the main site so paid clicks
-// arrive in the same `inquiries` attribution columns with the same semantics.
+// Keep attribution fields aligned with the main site's inquiry schema.
 const STORAGE_KEY = 'pd_attribution_v1'
 const TTL_MS = 90 * 24 * 60 * 60 * 1000
 const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+const CLICK_ID_KEYS = ['gclid', 'gbraid', 'wbraid', 'dclid', 'fbclid']
 
 function emptyAttribution() {
   return {
     ts: 0,
+    first_visit_at: null,
     landing_page: null,
+    first_landing_page: null,
     referrer: null,
+    first_referrer: null,
     utm_source: null,
     utm_medium: null,
     utm_campaign: null,
     utm_term: null,
     utm_content: null,
     gclid: null,
+    gbraid: null,
+    wbraid: null,
+    dclid: null,
+    fbclid: null,
+    gclid_captured_at: null,
   }
 }
 
@@ -44,6 +52,7 @@ export function captureAttribution() {
   const params = new URLSearchParams(window.location.search)
   const incoming = {}
   let hasCampaignParams = false
+  let hasGoogleClickId = false
 
   for (const key of UTM_KEYS) {
     const value = params.get(key)
@@ -52,16 +61,27 @@ export function captureAttribution() {
       hasCampaignParams = true
     }
   }
-  const gclid = params.get('gclid') || params.get('gbraid') || params.get('wbraid')
-  if (gclid) {
-    incoming.gclid = gclid
-    hasCampaignParams = true
+
+  for (const key of CLICK_ID_KEYS) {
+    const value = params.get(key)
+    if (value) {
+      incoming[key] = value
+      hasCampaignParams = true
+      if (key === 'gclid' || key === 'gbraid' || key === 'wbraid') hasGoogleClickId = true
+    }
   }
 
   const stored = readStored()
-  if (!stored.landing_page) {
-    stored.landing_page = window.location.pathname + window.location.search
-    stored.referrer = document.referrer || null
+  const isFirstTouch = !stored.first_visit_at && !stored.landing_page
+  if (isFirstTouch) {
+    const firstLandingPage = window.location.pathname + window.location.search
+    const firstReferrer = document.referrer || null
+    const firstVisitAt = new Date().toISOString()
+    stored.first_visit_at = firstVisitAt
+    stored.landing_page = firstLandingPage
+    stored.first_landing_page = firstLandingPage
+    stored.referrer = firstReferrer
+    stored.first_referrer = firstReferrer
     stored.ts = Date.now()
   }
 
@@ -69,7 +89,7 @@ export function captureAttribution() {
     Object.assign(stored, incoming)
     stored.ts = Date.now()
   }
-
+  if (hasGoogleClickId) stored.gclid_captured_at = new Date().toISOString()
   writeStored(stored)
 }
 
@@ -78,13 +98,21 @@ export function attributionFields(pagePath, productSlug) {
   return {
     page_path: pagePath,
     landing_page: stored.landing_page,
+    first_landing_page: stored.first_landing_page,
     referrer: stored.referrer,
+    first_referrer: stored.first_referrer,
+    first_visit_at: stored.first_visit_at,
     utm_source: stored.utm_source,
     utm_medium: stored.utm_medium,
     utm_campaign: stored.utm_campaign,
     utm_term: stored.utm_term,
     utm_content: stored.utm_content,
     gclid: stored.gclid,
+    gbraid: stored.gbraid,
+    wbraid: stored.wbraid,
+    dclid: stored.dclid,
+    fbclid: stored.fbclid,
+    gclid_captured_at: stored.gclid_captured_at,
     product_slug: productSlug,
   }
 }
