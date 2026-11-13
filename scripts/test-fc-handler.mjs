@@ -21,6 +21,8 @@ const cases = [
   ['/', 'OPTIONS', [], (r) => r.statusCode === 204],
   ['/de/cases', 'POST', [], (r) => r.statusCode === 405],
   ['/api/landing-content', 'OPTIONS', [], (r) => r.statusCode === 204],
+  ['/api/inquiry', 'GET', [], (r) => r.statusCode === 405],
+  ['/api/inquiry', 'POST', [], (r) => r.statusCode === 400],
   // inquiries webhook：GET 被 methodGuard 拦，POST 无密钥时 fail-closed
   ['/api/inquiry-webhook', 'GET', [], (r) => r.statusCode === 405],
   ['/api/inquiry-webhook', 'POST', [], (r) => r.statusCode === 401 || r.statusCode === 503],
