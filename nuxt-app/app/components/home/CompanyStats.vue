@@ -35,11 +35,11 @@ const statsData = [
 
 <style scoped>
 .stats {
-  background: #171a1c;
+  background: #0a0c0e;
   position:relative;
   overflow:hidden;
 }
-.stats::before { content:""; position:absolute; width:620px; height:620px; border:1px solid rgba(232,93,42,.18); border-radius:50%; left:-360px; top:-440px; }
+.stats::before { content:""; position:absolute; width:620px; height:620px; border:1px solid rgba(255,106,26,.18); border-radius:50%; left:-360px; top:-440px; }
 .stats__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
