@@ -7,6 +7,15 @@
  * other functions use at runtime.
  */
 
+/** Shared locale constants used by route helpers and page components. */
+export const DEFAULT_LOCALE = 'en' as const
+export const SUPPORTED_LOCALES = ['en', 'de', 'es', 'fr'] as const
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
+
+export function isLocale(value: unknown): value is SupportedLocale {
+  return typeof value === 'string' && (SUPPORTED_LOCALES as readonly string[]).includes(value)
+}
+
 let _instance: any = null
 
 export function setI18nInstance(i: any) {
