@@ -68,10 +68,7 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run landing:vf50p:build
 
-      - name: Build Aliyun FC bundle
-        env:
-          ALIYUN_OSS_BUCKET: ci-validation-bucket
-          ALIYUN_OSS_REGION: cn-hongkong
+      - name: Build Aliyun FC bundle without a production bucket
         run: node scripts/build-fc.mjs
 
       - name: Test FC routes and inquiry method guards
