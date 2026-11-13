@@ -4,23 +4,23 @@
       <h3 :data-edit-key="'contact.formTitle'">{{ t('contact.formTitle') }}</h3>
       <a-form :model="form" layout="vertical" @finish="handleSubmit">
         <a-form-item name="name" :rules="[{ required: true }]">
-          <a-input v-model:value="form.name" :placeholder="t('contact.name')" />
+          <a-input v-model:value="form.name" :placeholder="t('contact.name')" :aria-label="t('contact.name')" autocomplete="name" />
         </a-form-item>
         <a-form-item name="email" :rules="[{ required: true, type: 'email' }]">
-          <a-input v-model:value="form.email" :placeholder="t('contact.email')" />
+          <a-input v-model:value="form.email" :placeholder="t('contact.email')" :aria-label="t('contact.email')" autocomplete="email" />
         </a-form-item>
         <a-form-item name="phone">
-          <a-input v-model:value="form.phone" :placeholder="t('contact.phone')" />
+          <a-input v-model:value="form.phone" :placeholder="t('contact.phone')" :aria-label="t('contact.phone')" autocomplete="tel" />
         </a-form-item>
         <a-form-item name="type">
-          <a-select v-model:value="form.type" :placeholder="t('contact.type')">
+          <a-select v-model:value="form.type" :placeholder="t('contact.type')" :aria-label="t('contact.type')">
             <a-select-option value="contact">{{ t('contact.typeContact') }}</a-select-option>
             <a-select-option value="booking">{{ t('contact.typeBooking') }}</a-select-option>
             <a-select-option value="franchise">{{ t('contact.typeFranchise') }}</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item name="message" :rules="[{ required: true }]">
-          <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :rows="3" />
+          <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :aria-label="t('contact.message')" :rows="3" />
         </a-form-item>
         <a-form-item>
           <a-button type="primary" html-type="submit" block :loading="loading">

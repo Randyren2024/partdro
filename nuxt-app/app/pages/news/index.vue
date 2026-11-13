@@ -11,7 +11,7 @@
         <div class="news__grid">
           <div class="news__card" v-for="post in posts" :key="post.slug">
             <div class="news__card-image">
-              <img :src="post.image_url" :alt="post.title" />
+              <img :src="post.image_url" :alt="post.title" loading="lazy" decoding="async" />
             </div>
             <div class="news__card-body">
               <div class="news__meta">

@@ -21,7 +21,7 @@
                 <PhoneOutlined />
                 <div>
                   <p><strong :data-edit-key="'contact.info.phoneLabel'">{{ t('contact.info.phoneLabel') }}</strong></p>
-                  <p :data-edit-key="'contact.info.phoneValue'">{{ t('contact.info.phoneValue') }}</p>
+                  <p><a href="tel:+8616788684420" :data-edit-key="'contact.info.phoneValue'" @click="trackEvent('phone_click', { location: 'contact_info' })">{{ t('contact.info.phoneValue') }}</a></p>
                 </div>
               </div>
               <div class="contact-info__item">
