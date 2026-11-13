@@ -251,7 +251,8 @@
       "text": "Talk with Partdro about the right configuration and application scenario for your work.",
       "mail": "info{'@'}droneworld.tech",
       "visit": "Explore Products"
-    }
+    },
+    "description": "Drone solutions for agriculture, cargo transport, cleaning and industrial applications."
   },
   "topBar": {
     "phone": "Phone",
