@@ -97,7 +97,7 @@ const handleSubmit = async () => {
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
- .inquiry-form__card :deep(.ant-input),
+.inquiry-form__card :deep(.ant-input),
 .inquiry-form__card :deep(.ant-input-affix-wrapper),
 .inquiry-form__card :deep(.ant-select-selector) {
   min-height: 46px;
