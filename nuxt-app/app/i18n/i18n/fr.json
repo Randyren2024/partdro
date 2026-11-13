@@ -230,7 +230,13 @@
   "documents": {
     "title": "Documents Techniques",
     "subtitle": "Téléchargez manuels, guides et spécifications",
-    "download": "Télécharger"
+    "download": "Télécharger",
+    "loading": "Chargement des documents…",
+    "errorTitle": "Impossible de charger les documents",
+    "error": "Veuillez réessayer dans un instant.",
+    "emptyTitle": "Aucun document disponible pour le moment",
+    "empty": "Les documents techniques apparaîtront ici dès leur publication.",
+    "unavailable": "Fichier indisponible"
   },
   "footer": {
     "company": "Entreprise",
