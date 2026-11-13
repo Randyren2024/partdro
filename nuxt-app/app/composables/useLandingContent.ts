@@ -272,11 +272,20 @@ export function registerProductNamespace(ns: string) {
  */
 export function useLandingContent() {
   const i18n = useI18n()
+
+  // Do not query Supabase while Nuxt is rendering/prerendering pages on the
+  // server. The layout is instantiated once per generated route, and loading
+  // every editable namespace for every locale here can leave thousands of
+  // outbound connections open and prevent `nuxt generate` from exiting.
+  // Static pages use their bundled i18n messages; published overrides are
+  // fetched immediately after hydration in the browser.
+  if (import.meta.server) return
+
   const { locale } = i18n
   // Lazily seed the global module-level i18n reference — all other module
   // functions (applyNamespaceOverrides, registerProductNamespace, etc.) use it.
   setI18nInstance(i18n)
-  watch(locale, (l) => { loadAndMerge(l) }, { immediate: true, flush: 'pre' })
+  watch(locale, (l) => { void loadAndMerge(l) }, { immediate: true, flush: 'pre' })
 }
 
 /** 计算相对静态默认值的差异（只存被改动过的叶子），跳过 __images/__videos 键。 */
