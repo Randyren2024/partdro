@@ -180,14 +180,16 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
-      { code: 'de', iso: 'de-DE', file: 'de.json', name: 'Deutsch' },
-      { code: 'es', iso: 'es-ES', file: 'es.json', name: 'Español' },
-      { code: 'fr', iso: 'fr-FR', file: 'fr.json', name: 'Français' },
+      { code: 'en', language: 'en-US', file: 'en.json', name: 'English' },
+      { code: 'de', language: 'de-DE', file: 'de.json', name: 'Deutsch' },
+      { code: 'es', language: 'es-ES', file: 'es.json', name: 'Español' },
+      { code: 'fr', language: 'fr-FR', file: 'fr.json', name: 'Français' },
     ],
-    // @nuxtjs/i18n v10 prefixes langDir with the project i18n directory.
-    // Step out of that prefix to resolve the locale JSON under app/i18n/i18n/.
-    langDir: '../app/i18n/i18n/',
+    // Keep the locale files inside the Nuxt 4 app source tree while making
+    // the resolution base explicit. @nuxtjs/i18n resolves langDir from
+    // <rootDir>/<restructureDir>, not from srcDir.
+    restructureDir: 'app/i18n',
+    langDir: 'i18n',
     defaultLocale: 'en',
     // If a locale bundle is missing a key at runtime, render the English value
     // instead of exposing raw keys such as "nav.contact" in the public header.
