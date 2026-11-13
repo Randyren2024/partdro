@@ -11,14 +11,25 @@ const PRESET_NEWS = ['drone-cleaning-industry-trends-2026', 'c500-first-flight-t
 const ALL_LOCALES = ['', '/de', '/es', '/fr']
 
 async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
+  if (!url || !key) {
+    console.warn(`[prerender] ${table}: SUPABASE_URL / anon key missing — falling back to presets`)
+    return []
+  }
   try {
     const res = await fetch(`${url}/rest/v1/${table}?select=slug&order=created_at.desc`, {
       headers: { apikey: key, Authorization: `Bearer ${key}` },
     })
-    if (!res.ok) return []
+    if (!res.ok) {
+      // Never swallow this: a 401 here silently turns a 96-article site into a 2-article one.
+      console.warn(`[prerender] ${table}: HTTP ${res.status} — ${(await res.text()).slice(0, 200)}`)
+      return []
+    }
     const rows: { slug: string | null }[] = await res.json()
-    return rows.map((r) => r.slug || '').filter(Boolean)
-  } catch {
+    const slugs = rows.map((r) => r.slug || '').filter(Boolean)
+    console.log(`[prerender] ${table}: fetched ${slugs.length} slugs`)
+    return slugs
+  } catch (e) {
+    console.warn(`[prerender] ${table}: fetch failed — ${(e as Error).message}`)
     return []
   }
 }
