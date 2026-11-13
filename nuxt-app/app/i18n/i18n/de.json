@@ -230,7 +230,14 @@
   "documents": {
     "title": "Technische Dokumente",
     "subtitle": "Laden Sie Handbücher, Anleitungen und Spezifikationen herunter",
-    "download": "Herunterladen"
+    "download": "Herunterladen",
+    "loading": "Dokumente werden geladen …",
+    "errorTitle": "Dokumente konnten nicht geladen werden",
+    "error": "Bitte versuchen Sie es in Kürze erneut.",
+    "emptyTitle": "Noch keine Dokumente verfügbar",
+    "empty": "Technische Dokumente werden hier angezeigt, sobald sie veröffentlicht wurden.",
+    "unavailable": "Datei nicht verfügbar",
+    "retry": "Erneut versuchen"
   },
   "footer": {
     "company": "Unternehmen",
@@ -244,7 +251,8 @@
       "text": "Sprechen Sie mit Partdro über die richtige Konfiguration und das Anwendungsszenario für Ihre Arbeit.",
       "mail": "info{'@'}droneworld.tech",
       "visit": "Produkte entdecken"
-    }
+    },
+    "description": "Drohnenlösungen für Landwirtschaft, Frachttransport, Reinigung und industrielle Anwendungen."
   },
   "topBar": {
     "phone": "Telefon",

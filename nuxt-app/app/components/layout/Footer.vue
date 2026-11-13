@@ -24,15 +24,7 @@
             <div class="footer__logo">
               <img src="/partdro_logo_white.png" alt="Partdro" />
             </div>
-            <p class="footer__desc">
-              Professional D15R high-altitude cleaning drone solutions. RTK precision, 20MPa power.
-            </p>
-            <div class="footer__social">
-              <a href="#" aria-label="Facebook"><FacebookOutlined /></a>
-              <a href="#" aria-label="Instagram"><InstagramOutlined /></a>
-              <a href="#" aria-label="YouTube"><YoutubeOutlined /></a>
-              <a href="#" aria-label="LinkedIn"><LinkedinOutlined /></a>
-            </div>
+            <p class="footer__desc">{{ t('footer.description') }}</p>
           </div>
 
           <div class="footer__col">
@@ -82,10 +74,6 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import {
-  FacebookOutlined,
-  InstagramOutlined,
-  YoutubeOutlined,
-  LinkedinOutlined,
   PhoneOutlined,
   MailOutlined,
   EnvironmentOutlined,
