@@ -44,7 +44,6 @@
               target="_blank"
               rel="noopener noreferrer"
               :aria-label="`${t('documents.download')}: ${item.title}`"
-              @click="trackDownload(item.title)"
             >
               <DownloadOutlined />
               <span>{{ t('documents.download') }}</span>
@@ -61,7 +60,6 @@
 import { useI18n } from 'vue-i18n'
 import { DownloadOutlined, FilePdfOutlined } from '@ant-design/icons-vue'
 import { useDocuments } from '~/composables/useSupabase'
-import { trackEvent } from '~/composables/useTracking'
 
 const { t } = useI18n()
 const { data: documents, loading, error, reload } = useDocuments()
@@ -71,10 +69,6 @@ function formatFileSize(value: number | string) {
   if (!Number.isFinite(bytes) || bytes <= 0) return ''
   if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
-}
-
-function trackDownload(title: string) {
-  trackEvent('document_download_click', { document_title: title })
 }
 </script>
 
