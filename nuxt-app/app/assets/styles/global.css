@@ -157,7 +157,7 @@
 .page-section h1,
 .page-section h2,
 .page-section h3 {
-  font-family: var(--pd-font-display);
+  font-family: var(--pd-font);
   letter-spacing: var(--pd-tracking-display);
 }
 
