@@ -1,11 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
-// Nuxt auto-imports useRuntimeConfig, but this module-level code runs before setup.
-// Use Vite's import.meta.env for client build, and fall back to runtimeConfig via lazy getters.
-const url = (import.meta as any).env?.VITE_SUPABASE_URL || ''
-const key =
-  (import.meta as any).env?.VITE_SUPABASE_PUBLISHABLE_KEY ||
-  (import.meta as any).env?.VITE_SUPABASE_ANON_KEY ||
-  ''
+// The URL and publishable key are intentionally public and match the active
+// droneworld.tech Supabase project. Never put the service_role key in this module.
+const url = 'https://uphfcvquglafkszqqxiq.supabase.co'
+const key = 'sb_publishable_gZ5lDMIYJBTn7TfhN_ASzg_1DytunFt'
 
 export const supabase = createClient(url, key)

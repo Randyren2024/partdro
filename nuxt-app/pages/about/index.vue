@@ -174,9 +174,9 @@ import {
   AppstoreOutlined,
   SafetyCertificateOutlined,
 } from '@ant-design/icons-vue'
-import { trackEvent } from '../composables/useTracking'
-import { imgOverridesByLang } from '../composables/useLandingContent'
-import { useLocalePath } from '../composables/useLocalePath'
+import { trackEvent } from '~/composables/useTracking'
+import { imgOverridesByLang } from '~/composables/useLandingContent'
+import { useLocalePath } from '~/composables/useLocalePath'
 
 const { t, locale } = useI18n()
 const router = useRouter()

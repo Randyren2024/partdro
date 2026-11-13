@@ -20,9 +20,8 @@ const ALL_LOCALES = ['', '/de', '/es', '/fr']
  * Pages 的运行时环境变量）。
  * 环境变量存在时仍然优先，方便切换项目。
  */
-const PUBLIC_SUPABASE_URL = 'https://gcsshuvfzuinevacraao.supabase.co'
-const PUBLIC_SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdjc3NodXZmenVpbmV2YWNyYWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODk4MDYsImV4cCI6MjA4MTE2NTgwNn0.z0PWfvom52SFIacK0OiR4r_ofl0n9CSMlE3xe85wne4'
+const PUBLIC_SUPABASE_URL = 'https://uphfcvquglafkszqqxiq.supabase.co'
+const PUBLIC_SUPABASE_ANON_KEY = 'sb_publishable_gZ5lDMIYJBTn7TfhN_ASzg_1DytunFt'
 
 async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
   if (!url || !key) {
@@ -68,8 +67,8 @@ export default defineNuxtConfig({
   css: [
     'ant-design-vue/dist/reset.css',
     '@fontsource-variable/inter',
-    './app/assets/styles/variables.css',
-    './app/assets/styles/global.css',
+    '~/app/assets/styles/variables.css',
+    '~/app/assets/styles/global.css',
   ],
 
   /**
@@ -101,6 +100,7 @@ export default defineNuxtConfig({
       // 客户端可见
       siteUrl: 'https://www.droneworld.tech',
       // anon key 本来就是公开值（会进浏览器 bundle），默认值避免漏配导致客户端无数据
+      supabaseUrl: PUBLIC_SUPABASE_URL,
       supabaseAnonKey: PUBLIC_SUPABASE_ANON_KEY,
       gtmId: 'GTM-KJ7GJ3V5',
       // Ads 转化（客户端用）

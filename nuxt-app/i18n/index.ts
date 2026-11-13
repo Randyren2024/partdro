@@ -7,6 +7,15 @@
  * other functions use at runtime.
  */
 
+/** Shared locale constants used by route helpers and page components. */
+export const DEFAULT_LOCALE = 'en' as const
+export const SUPPORTED_LOCALES = ['en', 'de', 'es', 'fr'] as const
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
+
+export function isLocale(value: unknown): value is SupportedLocale {
+  return typeof value === 'string' && (SUPPORTED_LOCALES as readonly string[]).includes(value)
+}
+
 let _instance: any = null
 
 export function setI18nInstance(i: any) {
@@ -24,10 +33,14 @@ export function getI18n(): any {
 
 // Also provide a default export for code that does `import i18nInstance from '../i18n'`
 export default {
+  // In Composition API mode useI18n() returns the Composer itself; in legacy
+  // mode callers may pass the i18n instance with a .global Composer.
   get global() {
-    return getI18n()?.global
+    const instance = getI18n()
+    return instance?.global ?? instance
   },
   get locale() {
-    return getI18n()?.locale
+    const instance = getI18n()
+    return instance?.global?.locale ?? instance?.locale
   },
 }

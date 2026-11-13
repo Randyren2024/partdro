@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { FilePdfOutlined, DownloadOutlined } from '@ant-design/icons-vue'
-import { useDocuments } from '../composables/useSupabase'
+import { useDocuments } from '~/composables/useSupabase'
 
 const { t } = useI18n()
 const { data: documents } = useDocuments()

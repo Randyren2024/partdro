@@ -54,8 +54,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { PhoneOutlined, MailOutlined, EnvironmentOutlined, ClockCircleOutlined } from '@ant-design/icons-vue'
-import InquiryForm from '../components/common/InquiryForm.vue'
-import { trackEvent } from '../composables/useTracking'
+import InquiryForm from '~/components/common/InquiryForm.vue'
+import { trackEvent } from '~/composables/useTracking'
 
 const { t } = useI18n()
 </script>

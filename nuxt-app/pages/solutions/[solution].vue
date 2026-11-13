@@ -87,17 +87,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useProducts } from '../composables/useSupabase'
-import { useLocalePath } from '../composables/useLocalePath'
-import { SITE_URL } from '../router'
-import { buildBreadcrumbLd, injectJsonLd } from '../seo/structuredData'
-import { SOLUTIONS, SOLUTION_UI, type SolutionSlug } from '../data/solutions'
-import { DEFAULT_LOCALE, isLocale } from '../i18n'
-import type { Lang, Product } from '../types'
+import { useProducts } from '~/composables/useSupabase'
+import { useLocalePath } from '~/composables/useLocalePath'
+import { buildBreadcrumbLd } from '~/utils/structuredData'
+import { SOLUTIONS, SOLUTION_UI, type SolutionSlug } from '~/data/solutions'
+import { DEFAULT_LOCALE, isLocale } from '~/i18n'
+import type { Lang, Product } from '~/types'
 
+const runtimeConfig = useRuntimeConfig()
+const SITE_URL = runtimeConfig.public.siteUrl || 'https://www.droneworld.tech'
 const route = useRoute()
 const { locale } = useI18n()
 const lp = useLocalePath()
@@ -118,80 +119,67 @@ const solutionProducts = computed<Product[]>(() => {
 
 const SITE = SITE_URL
 
-function setMeta(attr: string, key: string, value: string) {
-  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
-  if (!el) {
-    el = document.createElement('meta')
-    el.setAttribute(attr, key)
-    document.head.appendChild(el)
-  }
-  el.setAttribute('content', value)
-}
-
 function absolute(path: string) {
   return path.startsWith('http') ? path : `${SITE}${path.startsWith('/') ? '' : '/'}${path}`
 }
 
-// 标题 / 描述 / OG / 结构化数据随语言与产品数据更新；预渲染会把这些写进静态 HTML。
-watch(
-  [copy, solutionProducts, lang],
-  ([c, list, l]) => {
-    if (!c) return
-    const prefix = l === DEFAULT_LOCALE ? '' : `/${l}`
-    const url = `${SITE}${prefix}/solutions/${slug.value}`
-    document.title = c.metaTitle
-    setMeta('name', 'description', c.metaDescription)
-    setMeta('property', 'og:title', c.metaTitle)
-    setMeta('property', 'og:description', c.metaDescription)
-    setMeta('property', 'og:url', url)
-    setMeta('property', 'og:image', absolute(c.heroImage))
-    setMeta('name', 'twitter:title', c.metaTitle)
-    setMeta('name', 'twitter:description', c.metaDescription)
-    setMeta('name', 'twitter:image', absolute(c.heroImage))
+// useHead 在 SSR / 静态预渲染阶段生成 SEO，不直接操作 document。
+const seoHead = computed(() => {
+  const c = copy.value
+  if (!c) return {}
+  const l = lang.value
+  const prefix = l === DEFAULT_LOCALE ? '' : `/${l}`
+  const url = `${SITE}${prefix}/solutions/${slug.value}`
+  const list = solutionProducts.value
+  const breadcrumb = buildBreadcrumbLd([
+    { name: SOLUTION_UI[l].home, url: `${SITE}${prefix || '/'}` },
+    { name: SOLUTION_UI[l].productsCrumb, url: `${SITE}${prefix}/products` },
+    { name: c.eyebrow, url },
+  ])
+  const faq = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: c.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+  const productsLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: c.metaTitle,
+    itemListElement: list.map((p, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: p.name,
+      url: `${SITE}${prefix}/products/${p.slug}`,
+    })),
+  }
+  return {
+    title: c.metaTitle,
+    meta: [
+      { name: 'description', content: c.metaDescription },
+      { property: 'og:title', content: c.metaTitle },
+      { property: 'og:description', content: c.metaDescription },
+      { property: 'og:url', content: url },
+      { property: 'og:image', content: absolute(c.heroImage) },
+      { name: 'twitter:title', content: c.metaTitle },
+      { name: 'twitter:description', content: c.metaDescription },
+      { name: 'twitter:image', content: absolute(c.heroImage) },
+    ],
+    link: [{ rel: 'canonical', href: url }],
+    script: [
+      { key: 'ld-breadcrumb', type: 'application/ld+json', innerHTML: JSON.stringify(breadcrumb) },
+      { key: 'ld-faq', type: 'application/ld+json', innerHTML: JSON.stringify(faq) },
+      ...(list.length
+        ? [{ key: 'ld-solution-products', type: 'application/ld+json', innerHTML: JSON.stringify(productsLd) }]
+        : []),
+    ],
+  }
+})
+useHead(seoHead)
 
-    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-    if (!canonical) {
-      canonical = document.createElement('link')
-      canonical.rel = 'canonical'
-      document.head.appendChild(canonical)
-    }
-    canonical.href = url
-
-    injectJsonLd(
-      'ld-breadcrumb',
-      buildBreadcrumbLd([
-        { name: SOLUTION_UI[l].home, url: `${SITE}${prefix || '/'}` },
-        { name: SOLUTION_UI[l].productsCrumb, url: `${SITE}${prefix}/products` },
-        { name: c.eyebrow, url },
-      ]),
-    )
-
-    injectJsonLd('ld-faq', {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: c.faq.map((f) => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
-    })
-
-    if (list.length) {
-      injectJsonLd('ld-solution-products', {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: c.metaTitle,
-        itemListElement: list.map((p, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: p.name,
-          url: `${SITE}${prefix}/products/${p.slug}`,
-        })),
-      })
-    }
-  },
-  { immediate: true },
-)
 </script>
 
 <style scoped>

@@ -64,12 +64,13 @@ import { computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
-import { SITE_URL } from '../router'
-import { usePost, useProducts, useRelatedPosts } from '../composables/useSupabase'
-import { useLocalePath } from '../composables/useLocalePath'
-import { DEFAULT_LOCALE } from '../i18n'
-import type { Post, Product } from '../types'
+import { usePost, useProducts, useRelatedPosts } from '~/composables/useSupabase'
+import { useLocalePath } from '~/composables/useLocalePath'
+import { DEFAULT_LOCALE } from '~/i18n'
+import type { Post, Product } from '~/types'
 
+const runtimeConfig = useRuntimeConfig()
+const SITE_URL = runtimeConfig.public.siteUrl || 'https://www.droneworld.tech'
 const route = useRoute()
 const slug = () => route.params.slug as string
 const { t, locale } = useI18n()
@@ -151,6 +152,7 @@ function injectJsonLd(doc: Record<string, unknown>) {
 // 数据到达后更新页面 title / description / og 标签 / 结构化数据
 watch(post, (p) => {
   if (!p) return
+  if (!import.meta.client) return
   const title = `${p.title} | Partdro`
   const desc = p.summary || ''
   const url = `${SITE_URL}${route.path}`
@@ -219,40 +221,5 @@ watch(post, (p) => {
 })
 
 
-// @ts-ignore - Nuxt macro
-definePrerenderRoutes(async () => {
-  const PRESET_NEWS = [
-    'drone-cleaning-industry-trends-2026', 'c500-first-flight-tests',
-  ]
-  const LOCALES = ['', '/de', '/es', '/fr'] as const
-  const config = useRuntimeConfig()
-  let slugs: string[] = []
 
-  if (config.public.supabaseUrl && config.public.supabaseAnonKey) {
-    try {
-      const res = await fetch(
-        `${config.public.supabaseUrl}/rest/v1/posts?select=slug&published=eq.true&order=published_at.desc`,
-        { headers: { apikey: config.public.supabaseAnonKey, Authorization: `Bearer ${config.public.supabaseAnonKey}` } },
-      )
-      if (res.ok) {
-        const rows: { slug: string | null }[] = await res.json()
-        slugs = rows.map((r) => r.slug || '').filter(Boolean)
-      }
-    } catch (e) {
-      console.warn('[prerender] news slug fetch failed, using fallback:', (e as Error).message)
-    }
-  }
-
-  if (!slugs.length) slugs = PRESET_NEWS
-
-  // 新闻翻译可能不全——先全量生成，Cloudflare Pages 上不 404 就不会报错
-  const routes: string[] = []
-  for (const l of LOCALES) {
-    for (const slug of slugs) {
-      routes.push(`${l}/news/${slug}`)
-    }
-  }
-  console.log(`[prerender] news: ${slugs.length} slugs × ${LOCALES.length} locales = ${routes.length} routes`)
-  return routes
-})
 </script>
