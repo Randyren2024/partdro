@@ -31,7 +31,7 @@ const antdTheme = computed(() => {
       colorSplit: dark ? 'rgba(235,247,244,.10)' : 'rgba(20,40,45,.08)',
       colorLink: primary,
       colorLinkHover: dark ? '#83ded8' : '#056b76',
-      fontFamily: 'Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif',
+      fontFamily: '"Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif',
       fontSize: 14,
       fontSizeSM: 12,
       fontSizeLG: 16,
