@@ -26,8 +26,8 @@ jobs:
       - name: Preflight — required secrets present
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          SB_URL: ${{ secrets.NUXT_SUPABASE_URL }}
-          SB_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SB_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SB_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: |
           # Only the Cloudflare token is a hard requirement. The Supabase URL and
           # anon key are public values with build-time defaults in nuxt.config.ts,
@@ -64,10 +64,10 @@ jobs:
           NITRO_PRESET: cloudflare_pages
           # Build-time client config: these are public Supabase credentials.
           # Use the current project secrets rather than stale hard-coded defaults.
-          NUXT_PUBLIC_SUPABASE_URL: ${{ secrets.NUXT_SUPABASE_URL }}
-          NUXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
-          VITE_SUPABASE_URL: ${{ secrets.NUXT_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NUXT_PUBLIC_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          NUXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run generate
 
       - name: Compress oversized media (Cloudflare Pages 25 MiB per-file limit)
