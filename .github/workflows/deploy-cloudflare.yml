@@ -166,6 +166,25 @@ jobs:
               exit 1
             fi
           done
+          # Static HTML and assets are served directly by Pages; only /api/*
+          # invokes the Nitro Worker. This avoids Nitro's per-file exclusion
+          # list and Cloudflare's 100-character rule limit.
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs'
+          const routes = JSON.parse(readFileSync('dist/_routes.json', 'utf8'))
+          const rules = [...(routes.include || []), ...(routes.exclude || [])]
+          if (routes.version !== 1) throw new Error('Unsupported _routes.json version')
+          if (JSON.stringify(routes.include) !== JSON.stringify(['/api/*'])) {
+            throw new Error(`Expected include ["/api/*"], got ${JSON.stringify(routes.include)}`)
+          }
+          if ((routes.exclude || []).length !== 0) {
+            throw new Error(`Expected no excludes, got ${JSON.stringify(routes.exclude)}`)
+          }
+          const tooLong = rules.filter(rule => rule.length > 100)
+          if (tooLong.length) throw new Error(`Cloudflare route rules exceed 100 chars: ${tooLong.join(', ')}`)
+          if (rules.length > 100) throw new Error(`Cloudflare route rule count exceeds 100: ${rules.length}`)
+          console.log('Cloudflare Pages routes verified: only /api/* invokes the Worker')
+          NODE
           # Static generate omits Nitro server routes; require the Pages Worker.
           if [ ! -e "dist/_worker.js" ]; then
             echo "FAIL: dist/_worker.js missing — server API routes would return 404"
@@ -193,6 +212,11 @@ jobs:
             if [ -n "$STATUS" ] && [ "$STATUS" != "000" ] && [ "$STATUS" != "404" ]; then
               echo "FAIL: /api/inquiry returned unexpected HTTP $STATUS"
               cat /tmp/partdro-inquiry-response.json || true
+              cat /tmp/partdro-pages-dev.log || true
+              exit 1
+            fi
+            if ! kill -0 "$WRANGLER_PID" 2>/dev/null; then
+              echo "FAIL: Wrangler Pages runtime exited before becoming ready"
               cat /tmp/partdro-pages-dev.log || true
               exit 1
             fi
