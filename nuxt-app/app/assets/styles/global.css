@@ -1,0 +1,52 @@
+.page-section {
+  padding: 80px 0;
+}
+
+.page-section--gray {
+  background: var(--color-bg-gray);
+}
+
+.page-header {
+  background: var(--color-dark);
+  color: #fff;
+  padding: 120px 0 60px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.page-header p {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* Grid patterns */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+/* Dark section */
+.section--dark {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.section--dark .section-title {
+  color: #fff;
+}
+
+.section--dark .section-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}

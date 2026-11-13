@@ -45,3 +45,11 @@ google_api/
 
 # C500 EAVision 独立落地页构建产物（CI 合并进 dist/）
 dist-landing/
+
+# Nuxt 4 build artifacts
+nuxt-app/.nuxt/
+nuxt-app/dist/
+nuxt-app/.output/
+nuxt-app/node_modules/
+nuxt-app/.wrangler/
+nuxt-app/.DS_Store

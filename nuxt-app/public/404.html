@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Page not found</title>
+<script>
+  // OSS 静态网站托管没有 SPA history 回退：预渲染页面都落在 <route>/index.html，
+  // 这里把 /products/d15r 这类无扩展名、无尾斜杠的路径补斜杠后重定向，
+  // 让 OSS 命中目录下的 index.html。补斜杠后仍 404 则直接展示本页，不会死循环。
+  (function () {
+    var p = location.pathname;
+    var last = p.split('/').pop();
+    if (!/\/$/.test(p) && last && last.indexOf('.') === -1) {
+      location.replace(p + '/' + location.search + location.hash);
+    }
+  })();
+</script>
+<style>
+  body { font-family: system-ui, -apple-system, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; background: #0b1220; color: #e7ecf3; }
+  main { text-align: center; }
+  a { color: #39c1d4; }
+</style>
+</head>
+<body>
+  <main>
+    <h1>404</h1>
+    <p>Page not found.</p>
+    <p><a href="/">← Back to home</a></p>
+  </main>
+</body>
+</html>
