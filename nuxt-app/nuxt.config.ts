@@ -131,6 +131,18 @@ export default defineNuxtConfig({
 
   nitro: {
     compressPublicAssets: true,
+    // All application pages are prerendered as static HTML. Only API endpoints
+    // need the Pages Worker; routing every request through it makes Nitro emit
+    // one exclusion per generated file, which can exceed Cloudflare's 100-char
+    // per-rule limit for long product slugs.
+    cloudflare: {
+      pages: {
+        routes: {
+          include: ['/api/*'],
+          exclude: [],
+        },
+      },
+    },
     // Cloudflare Pages 部署时设 NITRO_PRESET=cloudflare_pages
     routeRules: {
       // 旧路径 redirect（保留历史 Google Ads finalUrl 和内部收藏链接）
