@@ -24,6 +24,7 @@ import type { NetlifyEvent, NetlifyResponse } from '../netlify/shared/verifyAdmi
 import { handler as landingContentHandler } from '../netlify/functions/landing-content'
 import { handler as adminProductsHandler } from '../netlify/functions/admin-products'
 import { handler as inquiryWebhookHandler } from '../netlify/functions/inquiry-webhook'
+import { handler as inquiryHandler } from '../netlify/functions/inquiry'
 import { handler as sitemapHandler } from '../netlify/functions/sitemap'
 
 // OSS bucket/region 由 CI 构建期注入（见 scripts/build-fc.mjs 的 define），本地可用环境变量覆盖
@@ -111,7 +112,7 @@ interface FcHttpEvent {
   path?: string
   rawPath?: string
   httpMethod?: string
-  requestContext?: { domainName?: string; http?: { path?: string; method?: string; queryString?: string } }
+  requestContext?: { domainName?: string; http?: { path?: string; method?: string; queryString?: string; sourceIp?: string } }
   headers?: Record<string, string>
   queryParameters?: Record<string, string>
   queryStringParameters?: Record<string, string>
@@ -222,6 +223,7 @@ const API_HANDLERS: Record<string, (event: NetlifyEvent) => Promise<NetlifyRespo
   '/api/landing-content': landingContentHandler,
   '/api/admin-products': adminProductsHandler,
   '/api/inquiry-webhook': inquiryWebhookHandler,
+  '/api/inquiry': inquiryHandler,
 }
 
 /**
@@ -307,6 +309,13 @@ export const handler = async (raw: FcHttpEvent | string | Uint8Array): Promise<N
       headers: Object.fromEntries(Object.entries(fcEvent.headers || {}).map(([k, v]) => [k.toLowerCase(), v])),
       body: fcEvent.body ?? null,
       isBase64Encoded: !!fcEvent.isBase64Encoded,
+      clientIp: fcEvent.requestContext?.http?.sourceIp
+        || fcEvent.headers?.['x-real-ip']
+        || fcEvent.headers?.['cf-connecting-ip']
+        || fcEvent.headers?.['X-Real-IP']
+        || fcEvent.headers?.['CF-Connecting-IP']
+        || fcEvent.headers?.['x-forwarded-for']?.split(',')[0]?.trim()
+        || fcEvent.headers?.['X-Forwarded-For']?.split(',')[0]?.trim(),
     }
     return apiHandler(event)
   }
