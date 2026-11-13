@@ -18,7 +18,7 @@
           <FilePdfOutlined />
           <h2>{{ t('documents.errorTitle') }}</h2>
           <p>{{ t('documents.error') }}</p>
-          <a-button type="primary" @click="reload">{{ t('common.retry') }}</a-button>
+          <a-button type="primary" @click="reload">{{ t('documents.retry') }}</a-button>
         </div>
 
         <div v-else-if="!documents.length" class="documents-state">
