@@ -105,7 +105,7 @@ function imgEdit(defaultSrc: string, key: string): string {
   gap: 16px;
 }
 .hero__buttons :deep(.ant-btn) { height:48px; padding:0 23px; border-radius:999px; font-weight:700; box-shadow:none; }
-.hero__buttons :deep(.ant-btn-primary) { background:#e85d2a !important; border-color:#6dd2d0 !important; color:#ffffff !important; }
+.hero__buttons :deep(.ant-btn-primary) { background:#e85d2a !important; border-color:#e85d2a !important; color:#ffffff !important; }
 .hero__proof { display:flex; gap:18px; flex-wrap:wrap; margin-top:35px; color:rgba(255,255,255,.72); font-size:10px; font-weight:750; letter-spacing:.13em; }
 .hero__proof span { display:flex; align-items:center; gap:7px; }
 .hero__proof span::before { content:""; width:5px; height:5px; border-radius:50%; background:var(--pd-primary); }
