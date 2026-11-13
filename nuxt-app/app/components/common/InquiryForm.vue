@@ -134,4 +134,13 @@ const handleSubmit = async () => {
   height: 1px;
   overflow: hidden;
 }
+@media (max-width: 640px) {
+  .inquiry-form__card { padding: 4px; }
+  .inquiry-form__card :deep(.ant-form-item) { margin-bottom: 16px; }
+  .inquiry-form__card :deep(.ant-input),
+  .inquiry-form__card :deep(.ant-input-affix-wrapper),
+  .inquiry-form__card :deep(.ant-select-selector),
+  .inquiry-form__card :deep(textarea.ant-input) { font-size: 16px !important; }
+  .inquiry-form__card :deep(.ant-btn) { min-height: 50px; }
+}
 </style>
