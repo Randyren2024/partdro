@@ -180,14 +180,15 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
-      { code: 'de', iso: 'de-DE', file: 'de.json', name: 'Deutsch' },
-      { code: 'es', iso: 'es-ES', file: 'es.json', name: 'Español' },
-      { code: 'fr', iso: 'fr-FR', file: 'fr.json', name: 'Français' },
+      { code: 'en', language: 'en-US', name: 'English' },
+      { code: 'de', language: 'de-DE', name: 'Deutsch' },
+      { code: 'es', language: 'es-ES', name: 'Español' },
+      { code: 'fr', language: 'fr-FR', name: 'Français' },
     ],
-    // @nuxtjs/i18n v10 prefixes langDir with the project i18n directory.
-    // Step out of that prefix to resolve the locale JSON under app/i18n/i18n/.
-    langDir: '../app/i18n/i18n/',
+    // Load all four message bundles from one explicit config module. This
+    // avoids relying on generated langDir paths in the Nuxt 4 app directory.
+    restructureDir: 'app/i18n',
+    vueI18n: './i18n.config.ts',
     defaultLocale: 'en',
     // If a locale bundle is missing a key at runtime, render the English value
     // instead of exposing raw keys such as "nav.contact" in the public header.
