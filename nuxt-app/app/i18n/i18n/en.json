@@ -121,6 +121,14 @@
       "addressValue": "Shenzhen, Guangdong, China",
       "hoursLabel": "Business Hours",
       "hoursValue": "Mon - Fri: 9:00 AM - 6:00 PM"
+    },
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "nameMin": "Please enter at least 2 characters.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "messageRequired": "Please enter a message.",
+      "messageMin": "Please provide at least 5 characters."
     }
   },
   "about": {
