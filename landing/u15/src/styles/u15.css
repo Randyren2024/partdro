@@ -1202,14 +1202,18 @@ h3 {
 }
 
 .editions {
+  max-width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
+  background: var(--panel);
 }
 
 .editions table {
   width: 100%;
+  min-width: 620px;
   border-collapse: collapse;
+  color: var(--text);
   font-size: 13.5px;
 }
 
@@ -1224,7 +1228,8 @@ h3 {
 .editions thead th {
   padding-top: 22px;
   padding-bottom: 22px;
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.045);
 }
 
 .editions__name {
@@ -1288,13 +1293,23 @@ h3 {
   line-height: 1.66;
 }
 
+.editions {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
+}
+
 @media (max-width: 760px) {
   .editions {
-    overflow-x: auto;
+    border-radius: 10px;
   }
 
-  .editions table {
-    min-width: 620px;
+  .editions th,
+  .editions td {
+    padding: 14px 16px;
   }
 }
 
@@ -1303,6 +1318,7 @@ h3 {
 .spec-table {
   width: 100%;
   border-collapse: collapse;
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -1326,7 +1342,8 @@ h3 {
 
 .spec-table tr:hover th,
 .spec-table tr:hover td {
-  color: #fff;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .accent {

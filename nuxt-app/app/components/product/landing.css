@@ -203,13 +203,58 @@
 .d15r-landing .safety-card p {color:var(--muted);font-size:.92rem}
 
 /* Comparison table */
-.d15r-landing .table-wrap {overflow:auto;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
-.d15r-landing table {width:100%;border-collapse:collapse;min-width:760px}
-.d15r-landing th, .d15r-landing td {padding:18px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:.9rem}
-.d15r-landing th {color:var(--table-th);background:var(--surface-3);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
-.d15r-landing td:first-child {color:var(--table-td);font-weight:800;width:22%}
-.d15r-landing tr:last-child td {border-bottom:0}
-.d15r-landing .positive {color:var(--positive)}
+.d15r-landing .table-wrap {
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--panel);
+  scrollbar-width:thin;
+  scrollbar-color:var(--muted) transparent;
+}
+.d15r-landing table {
+  width:100%;
+  min-width:720px;
+  border-collapse:separate;
+  border-spacing:0;
+  color:var(--text);
+  background:transparent;
+  font-size:.9rem;
+  line-height:1.55;
+}
+.d15r-landing th,
+.d15r-landing td {
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+  overflow-wrap:anywhere;
+}
+.d15r-landing thead th {
+  position:sticky;
+  top:0;
+  z-index:1;
+  color:var(--table-th);
+  background:var(--card);
+  font-size:.76rem;
+  font-weight:750;
+  text-transform:uppercase;
+  letter-spacing:.075em;
+}
+.d15r-landing tbody td { color:var(--lead); }
+.d15r-landing tbody td:first-child {
+  width:22%;
+  color:var(--table-td);
+  font-weight:750;
+}
+.d15r-landing tbody tr:nth-child(even) { background:var(--surface-2); }
+.d15r-landing tbody tr:hover { background:var(--surface); }
+.d15r-landing tbody tr:last-child td { border-bottom:0; }
+.d15r-landing .positive { color:var(--positive); }
+.d15r-landing .table-wrap:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
 
 /* Cases */
 .d15r-landing .case-grid {grid-template-columns:repeat(3,1fr)}
