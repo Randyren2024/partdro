@@ -7,7 +7,7 @@
       <div class="solutions__grid">
         <div class="solutions__card" v-for="product in products" :key="product.slug">
           <div class="solutions__card-image">
-            <img :src="product.image_url" :alt="product.name" />
+            <img :src="product.image_url" :alt="product.name" loading="lazy" decoding="async" width="640" height="420" />
             <div class="solutions__card-category">{{ categoryLabel(product.category) }}</div>
           </div>
           <div class="solutions__card-body">
