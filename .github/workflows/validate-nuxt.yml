@@ -1,12 +1,6 @@
 name: Validate Nuxt UI and static generation
 
 on:
-  push:
-    branches:
-      - feat/auto-parts-design-system-alignment
-    paths:
-      - 'nuxt-app/**'
-      - '.github/workflows/validate-nuxt.yml'
   pull_request:
     branches: [main]
     paths:
