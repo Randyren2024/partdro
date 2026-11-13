@@ -152,6 +152,7 @@ function injectJsonLd(doc: Record<string, unknown>) {
 // 数据到达后更新页面 title / description / og 标签 / 结构化数据
 watch(post, (p) => {
   if (!p) return
+  if (!import.meta.client) return
   const title = `${p.title} | Partdro`
   const desc = p.summary || ''
   const url = `${SITE_URL}${route.path}`
