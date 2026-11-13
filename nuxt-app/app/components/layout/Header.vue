@@ -143,7 +143,7 @@ onUnmounted(() => {
 }
 .header--scrolled {
   background: color-mix(in srgb, var(--pd-surface) 94%, transparent);
-  box-shadow: 0 10px 32px rgba(8, 35, 40, .08);
+  box-shadow: 0 10px 32px rgba(23, 26, 28, .08);
 }
 .dark .header--scrolled {
   box-shadow: 0 10px 32px rgba(0, 0, 0, .24);
@@ -295,7 +295,7 @@ onUnmounted(() => {
   font-size: 14px;
   font-weight: 500;
 }
-@media (max-width: 1120px) {
+@media (max-width: 1240px) {
   .header__nav { display: none; }
   .header__mobile-toggle { display: inline-flex; }
   .header__contact { display: none; }
@@ -309,8 +309,8 @@ onUnmounted(() => {
 
 /* Shared header proportions and interaction language from auto_parts. */
 .header__inner { gap: clamp(12px, 1.6vw, 24px); }
-.header__logo img { height: 32px; max-width: 176px; }
-.header__nav-items { gap: clamp(12px, 1.5vw, 24px); }
+.header__logo img { height: 30px; max-width: 164px; }
+.header__nav-items { gap: clamp(9px, 1.05vw, 16px); }
 .header__nav-item {
   min-height: 36px;
   padding: 4px 0;
