@@ -84,7 +84,7 @@ function imgEdit(defaultSrc: string, key: string): string {
   inset: 0;
   background: linear-gradient(90deg, rgba(12, 14, 15, .94) 0%, rgba(20, 23, 24, .82) 46%, rgba(20, 23, 24, .28) 100%);
 }
-.hero__bg::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 77% 45%, rgba(232, 93, 42, .22), transparent 28%); mix-blend-mode:screen; }
+.hero__bg::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 77% 45%, color-mix(in srgb, var(--pd-primary) 22%, transparent), transparent 28%); mix-blend-mode:screen; }
 .hero::after { content:""; position:absolute; right:5%; top:17%; width:34vw; height:34vw; border:1px solid rgba(255, 154, 112, .18); border-radius:50%; pointer-events:none; }
 .hero__content {
   position: relative;
@@ -101,8 +101,8 @@ function imgEdit(defaultSrc: string, key: string): string {
   flex: 1;
   max-width: 630px;
 }
-.hero__eyebrow { display:flex; align-items:center; gap:10px; color:#ffb066; font-size:11px; font-weight:800; letter-spacing:.18em; margin-bottom:20px; }
-.hero__eyebrow span { width:36px; height:2px; background:#ff6a1a; }
+.hero__eyebrow { display:flex; align-items:center; gap:10px; color:var(--color-primary-light); font-size:11px; font-weight:800; letter-spacing:.18em; margin-bottom:20px; }
+.hero__eyebrow span { width:36px; height:2px; background:var(--pd-primary); }
 .hero__text h1 {
   max-width: 680px;
   font-size: clamp(3.2rem, 6vw, 6rem);
@@ -123,8 +123,8 @@ function imgEdit(defaultSrc: string, key: string): string {
   gap: 16px;
 }
 .hero__buttons :deep(.ant-btn) { height:48px; padding:0 23px; border-radius:999px; font-weight:700; box-shadow:none; }
-.hero__buttons :deep(.ant-btn-primary) { background:#e85d2a !important; border-color:#e85d2a !important; color:#ffffff !important; }
-.hero__proof { display:flex; gap:18px; flex-wrap:wrap; margin-top:35px; color:rgba(255,255,255,.72); font-size:10px; font-weight:750; letter-spacing:.13em; }
+.hero__buttons :deep(.ant-btn-primary) { background:var(--pd-primary) !important; border-color:var(--pd-primary) !important; color:var(--pd-on-primary) !important; }
+.hero__proof { display:flex; gap:18px; flex-wrap:wrap; margin-top:35px; color:rgba(255,255,255,.78); font-size:10px; font-weight:750; letter-spacing:.13em; }
 .hero__proof span { display:flex; align-items:center; gap:7px; }
 .hero__proof span::before { content:""; width:5px; height:5px; border-radius:50%; background:var(--pd-primary); }
 .hero__buttons .ant-btn:not(.ant-btn-primary) {
