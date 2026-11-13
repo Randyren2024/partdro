@@ -1,0 +1,136 @@
+name: Deploy Nuxt 4 to Cloudflare Pages
+
+on:
+  push:
+    branches: [trae_nuxt_cf]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-cloudflare
+  cancel-in-progress: false
+
+env:
+  CF_PROJECT_NAME: partdro-nuxt
+  CF_ACCOUNT_ID: f7baff0f09564f34ec470d7f7d0ce474 # Partdro2023@gmail.com's Account
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: nuxt-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Preflight — required secrets present
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          SB_URL: ${{ secrets.NUXT_SUPABASE_URL }}
+          SB_KEY: ${{ secrets.NUXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: |
+          # Only the Cloudflare token is a hard requirement. The Supabase URL and
+          # anon key are public values with build-time defaults in nuxt.config.ts,
+          # so a stale/missing copy here is a warning, not a failure.
+          if [ -z "$CF_TOKEN" ]; then
+            echo "::error::Missing GitHub secret: CLOUDFLARE_API_TOKEN"
+            exit 1
+          fi
+          if [ -z "$SB_URL" ] || [ -z "$SB_KEY" ]; then
+            echo "::warning::Supabase secrets not set — using the public defaults baked into nuxt.config.ts"
+          fi
+          echo "preflight ok"
+
+      - uses: actions/setup-node@v4
+        with:
+          # wrangler 4.161 requires Node >= 22.12; Node 20 makes it refuse to run.
+          node-version: 22
+          cache: npm
+          cache-dependency-path: nuxt-app/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          # Use `npm install`, not `npm ci`. The lockfile was generated on Windows
+          # and hoists esbuild to 0.25.12 while nested copies sit at 0.28.2; on
+          # Linux `npm ci` recomputes a different hoisting and aborts with
+          # "Missing: @esbuild/linux-x64@0.28.2 from lock file".
+          npm install --include=optional --no-audit --no-fund
+
+      - name: Build Nuxt static site (Cloudflare Pages preset)
+        env:
+          # Supabase URL / anon key are NOT passed here on purpose: they are
+          # public values baked into nuxt.config.ts. Passing a stale secret
+          # previously overrode them and silently produced an 86-page site.
+          # Runtime secrets (service_role, DirectMail, Feishu, DashScope) live
+          # in the Cloudflare Pages dashboard, not in the build.
+          NITRO_PRESET: cloudflare_pages
+        run: npm run generate
+
+      - name: Compress oversized media (Cloudflare Pages 25 MiB per-file limit)
+        run: |
+          # Source videos in public/ exceed 25 MiB; Cloudflare Pages rejects the
+          # whole upload if any single file is larger. Compress in CI only, so
+          # git never has to carry the extra blobs.
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          fi
+          found=0
+          while IFS= read -r f; do
+            found=1
+            echo "compressing $f ($(du -m "$f" | cut -f1) MiB)"
+            # -nostdin is required: without it ffmpeg eats the loop's stdin
+            # (the find output) and only the first file ever gets processed.
+            ffmpeg -nostdin -loglevel error -i "$f" -c:v libx264 -preset veryfast -crf 24 \
+              -c:a aac -b:a 128k -fs 23M -y "$f.tmp.mp4"
+            mv "$f.tmp.mp4" "$f"
+            echo "  -> $(du -m "$f" | cut -f1) MiB"
+          done < <(find dist -type f \( -name '*.mp4' -o -name '*.mov' \) -size +24M)
+          if [ "$found" = 0 ]; then echo "no oversized media found"; fi
+          # Hard gate: nothing over 24 MiB may remain (Cloudflare limit is 25 MiB).
+          oversized=$(find dist -type f -size +24M | head -20)
+          if [ -n "$oversized" ]; then
+            echo "FAIL: files still exceed 24 MiB:"; echo "$oversized"; exit 1
+          fi
+
+      - name: Verify build output
+        run: |
+          # Nitro prerender should produce ~900+ routes (9 products + 96 news × 4 locales).
+          HTML_COUNT=$(find dist -name '*.html' | wc -l)
+          echo "HTML files: $HTML_COUNT (expected ~460+ for 4 locales)"
+          if [ "$HTML_COUNT" -lt 100 ]; then
+            echo "FAIL: too few HTML files — prerender may have failed"
+            exit 1
+          fi
+          for artifact in _routes.json _headers _redirects; do
+            if [ ! -f "dist/$artifact" ]; then
+              echo "FAIL: dist/$artifact missing (cloudflare_pages preset should generate it)"
+              exit 1
+            fi
+          done
+          echo "build artifact check passed"
+
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT_ID }}
+        run: |
+          # pipefail is essential: `| tee` otherwise makes the step exit with tee's
+          # status (0) and hides a wrangler failure — a run can look green while
+          # nothing was deployed.
+          set -o pipefail
+          npx wrangler pages deploy dist \
+            --project-name "${{ env.CF_PROJECT_NAME }}" \
+            --branch "${GITHUB_REF_NAME}" \
+            --commit-dirty=true 2>&1 | tee deploy.log
+
+      - name: Report preview URL
+        if: always()
+        run: |
+          # Pull the *.pages.dev URL out of wrangler's own output.
+          URL=$(grep -oE 'https://[a-z0-9-]+\.'${{ env.CF_PROJECT_NAME }}'\.pages\.dev' deploy.log | tail -n1 || true)
+          echo "Preview URL: ${URL:-<not found in deploy.log>}"
+          if [ -n "$URL" ]; then
+            echo "### Deployed to Cloudflare Pages" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "$URL" >> "$GITHUB_STEP_SUMMARY"
+          fi

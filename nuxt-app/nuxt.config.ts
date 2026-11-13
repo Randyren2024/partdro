@@ -10,15 +10,40 @@ const PRESET_PRODUCTS = [
 const PRESET_NEWS = ['drone-cleaning-industry-trends-2026', 'c500-first-flight-tests']
 const ALL_LOCALES = ['', '/de', '/es', '/fr']
 
+/**
+ * 构建期兜底值（Supabase 项目 URL + anon key）。
+ *
+ * 这两个值本来就是公开的：NUXT_PUBLIC_* 会被序列化进客户端 bundle，任何访客
+ * 都能在浏览器里看到。把它们做成「构建缺了就出 86 页薄站」的必填 secret，
+ * 只会增加一个失败模式而不增加任何安全性。
+ * 真正需要保密的是 service_role key（只在 Nitro 服务端用，走 Cloudflare
+ * Pages 的运行时环境变量）。
+ * 环境变量存在时仍然优先，方便切换项目。
+ */
+const PUBLIC_SUPABASE_URL = 'https://gcsshuvfzuinevacraao.supabase.co'
+const PUBLIC_SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdjc3NodXZmenVpbmV2YWNyYWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODk4MDYsImV4cCI6MjA4MTE2NTgwNn0.z0PWfvom52SFIacK0OiR4r_ofl0n9CSMlE3xe85wne4'
+
 async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
+  if (!url || !key) {
+    console.warn(`[prerender] ${table}: SUPABASE_URL / anon key missing — falling back to presets`)
+    return []
+  }
   try {
     const res = await fetch(`${url}/rest/v1/${table}?select=slug&order=created_at.desc`, {
       headers: { apikey: key, Authorization: `Bearer ${key}` },
     })
-    if (!res.ok) return []
+    if (!res.ok) {
+      // Never swallow this: a 401 here silently turns a 96-article site into a 2-article one.
+      console.warn(`[prerender] ${table}: HTTP ${res.status} — ${(await res.text()).slice(0, 200)}`)
+      return []
+    }
     const rows: { slug: string | null }[] = await res.json()
-    return rows.map((r) => r.slug || '').filter(Boolean)
-  } catch {
+    const slugs = rows.map((r) => r.slug || '').filter(Boolean)
+    console.log(`[prerender] ${table}: fetched ${slugs.length} slugs`)
+    return slugs
+  } catch (e) {
+    console.warn(`[prerender] ${table}: fetch failed — ${(e as Error).message}`)
     return []
   }
 }
@@ -75,7 +100,8 @@ export default defineNuxtConfig({
     public: {
       // 客户端可见
       siteUrl: 'https://www.droneworld.tech',
-      supabaseAnonKey: '',
+      // anon key 本来就是公开值（会进浏览器 bundle），默认值避免漏配导致客户端无数据
+      supabaseAnonKey: PUBLIC_SUPABASE_ANON_KEY,
       gtmId: 'GTM-KJ7GJ3V5',
       // Ads 转化（客户端用）
       adsConversionId: '',
@@ -148,10 +174,14 @@ export default defineNuxtConfig({
       { code: 'es', iso: 'es-ES', file: 'es.json', name: 'Español' },
       { code: 'fr', iso: 'fr-FR', file: 'fr.json', name: 'Français' },
     ],
+    // @nuxtjs/i18n v9 has a path bug where it prepends an extra 'i18n/' layer
+    // internally, e.g. with langDir: './' it resolves to ./i18n/en.json.
+    // With langDir: './i18n/' it becomes ./i18n/i18n/en.json — which is where
+    // the translation files actually live (nested i18n dir from the original migration).
     langDir: './i18n/',
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
-    lazy: true,
+    lazy: false,
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
@@ -162,8 +192,10 @@ export default defineNuxtConfig({
   // 动态 prerender：在 build:before hook 里 push 动态路由到 nitro.options.prerender.routes
   hooks: {
     async 'nitro:build:before'(nitro) {
-      const url = process.env.NUXT_SUPABASE_URL
-      const key = process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY
+      // 直接用公开常量，不读环境变量：secret 里存过一个失效的旧 anon key，
+      // 一旦覆盖就静默退化成 86 页薄站。公开值不值得为它引入这个失败模式。
+      const url = PUBLIC_SUPABASE_URL
+      const key = PUBLIC_SUPABASE_ANON_KEY
       let productSlugs = PRESET_PRODUCTS
       let newsSlugs = PRESET_NEWS
 

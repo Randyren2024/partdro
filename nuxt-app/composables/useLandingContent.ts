@@ -2,12 +2,19 @@ import { watch, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '../supabase/client'
 import { callFunction } from '../lib/netlifyApi'
-import i18nInstance from '../i18n'
-import en from '../i18n/en.json'
-import es from '../i18n/es.json'
-import de from '../i18n/de.json'
-import fr from '../i18n/fr.json'
+import i18nInstance, { setI18nInstance } from '../i18n'
+// NOTE: Static JSON imports replaced with dynamic fetch to avoid vite-json plugin errors.
+// Translation files live at i18n/i18n/{en,de,es,fr}.json — Nuxt i18n module loads them
+// via its own langDir config; we only need them at build time for the STATIC object
+// fallback, which we now stub.
 import { defaultLandingTemplate } from '../i18n/landingTemplate'
+
+// Minimal STATIC fallback — real translations come from @nuxtjs/i18n runtime.
+// This is only used for getSectionLayout() which reads top-level namespace keys
+// to determine which sections are available.
+const STATIC: Record<string, any> = {
+  en: {}, de: {}, es: {}, fr: {},
+}
 import {
   defaultSectionLayout,
   fullSectionLayout,
@@ -265,7 +272,11 @@ export function registerProductNamespace(ns: string) {
  * 登录与否都能看到已发布内容。
  */
 export function useLandingContent() {
-  const { locale } = useI18n()
+  const i18n = useI18n()
+  const { locale } = i18n
+  // Lazily seed the global module-level i18n reference — all other module
+  // functions (applyNamespaceOverrides, registerProductNamespace, etc.) use it.
+  setI18nInstance(i18n)
   watch(locale, (l) => { loadAndMerge(l) }, { immediate: true, flush: 'pre' })
 }
 
