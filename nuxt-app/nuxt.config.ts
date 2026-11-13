@@ -48,9 +48,8 @@ async function fetchSlugs(url: string, key: string, table: string): Promise<stri
 }
 
 export default defineNuxtConfig({
-  // Keep the existing Nuxt 3-style root layout while running Nuxt 4.
-  // This makes /pages, /components, /layouts, /composables and /i18n discoverable.
-  srcDir: '.',
+  // Nuxt 4 application source lives in nuxt-app/app/.
+  srcDir: 'app/',
 
   compatibilityDate: '2025-07-15',
 
@@ -67,8 +66,8 @@ export default defineNuxtConfig({
   css: [
     'ant-design-vue/dist/reset.css',
     '@fontsource-variable/inter',
-    '~/app/assets/styles/variables.css',
-    '~/app/assets/styles/global.css',
+    '~/assets/styles/variables.css',
+    '~/assets/styles/global.css',
   ],
 
   /**
