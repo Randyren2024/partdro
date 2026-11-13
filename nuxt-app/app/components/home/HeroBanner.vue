@@ -64,6 +64,20 @@ function imgEdit(defaultSrc: string, key: string): string {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1.025);
+}
+.hero__bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(90deg, transparent, #000 70%);
 }
 .hero__overlay {
   position: absolute;
@@ -74,13 +88,14 @@ function imgEdit(defaultSrc: string, key: string): string {
 .hero::after { content:""; position:absolute; right:5%; top:17%; width:34vw; height:34vw; border:1px solid rgba(255, 154, 112, .18); border-radius:50%; pointer-events:none; }
 .hero__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 44px;
   width: 100%;
-  padding: 96px 20px 88px;
+  min-height: min(820px, calc(100svh - var(--pd-header-height)));
+  padding: 104px 20px 92px;
 }
 .hero__text {
   flex: 1;
@@ -89,12 +104,13 @@ function imgEdit(defaultSrc: string, key: string): string {
 .hero__eyebrow { display:flex; align-items:center; gap:10px; color:#ffb066; font-size:11px; font-weight:800; letter-spacing:.18em; margin-bottom:20px; }
 .hero__eyebrow span { width:36px; height:2px; background:#ff6a1a; }
 .hero__text h1 {
-  font-size: clamp(3rem, 5vw, 5.2rem);
+  max-width: 680px;
+  font-size: clamp(3.2rem, 6vw, 6rem);
   font-weight: 760;
   color: #fff;
-  line-height: 1.2;
-  margin-bottom: 22px;
-  letter-spacing: -.055em;
+  line-height: 1.02;
+  margin-bottom: 24px;
+  letter-spacing: -.06em;
 }
 .hero__text p {
   font-size: 19px;
@@ -121,10 +137,33 @@ function imgEdit(defaultSrc: string, key: string): string {
   color: #fff;
 }
 .hero__product-wrapper {
+  position: relative;
+  isolation: isolate;
   flex-shrink: 0;
-  width: min(39vw, 540px);
+  width: min(42vw, 560px);
   display: flex;
   justify-content: center;
+}
+.hero__product-wrapper::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,106,26,.22), rgba(63,208,255,.08) 42%, transparent 72%);
+  filter: blur(12px);
+}
+.hero__product-wrapper::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 86%;
+  aspect-ratio: 1;
+  top: 7%;
+  left: 7%;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px rgba(255,255,255,.018), 0 0 0 48px rgba(255,255,255,.012);
 }
 .hero__product-img {
   max-width: 100%;
@@ -136,13 +175,16 @@ function imgEdit(defaultSrc: string, key: string): string {
 
 @media (max-width: 992px) {
   .hero__content {
+    min-height: 0;
     flex-direction: column;
     text-align: center;
-    padding: 60px 20px;
+    padding: 72px 20px 64px;
   }
   .hero::after { width:65vw; height:65vw; right:-20%; }
   .hero__text h1 {
-    font-size: 36px;
+    max-width: 620px;
+    margin-inline: auto;
+    font-size: clamp(2.5rem, 8vw, 3.8rem);
   }
   .hero__buttons {
     justify-content: center;
