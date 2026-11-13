@@ -92,26 +92,9 @@ const handleSubmit = async () => {
     }
     if (!result.spam) trackEvent('contact_form_submission', { form_type: form.type })
     success.value = true
-      return
-    }
-    const { error } = await supabase.from('inquiries').insert({
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      type: form.type,
-      message: form.message,
-      ...attributionFields(route.path, productSlug.value),
-    })
-    if (error) {
-      console.error('[contact form] insert failed:', error.code, error.message)
-      errorMsg.value = t('contact.error')
-      return
-    }
-    trackEvent('contact_form_submission', { form_type: form.type })
-    success.value = true
     Object.assign(form, { name: '', email: '', phone: '', type: 'contact', message: '', website: '' })
   } catch (e) {
-    console.error('[contact form] unexpected error:', e)
+    console.error('[contact form] server submission failed:', e)
     errorMsg.value = t('contact.error')
   } finally {
     loading.value = false
