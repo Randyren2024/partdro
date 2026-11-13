@@ -12,6 +12,8 @@ export interface NetlifyEvent {
   headers: Record<string, string>
   body: string | null
   isBase64Encoded?: boolean
+  /** Trusted client address supplied by the hosting gateway, never copied from the request body. */
+  clientIp?: string
 }
 
 export interface NetlifyResponse {
