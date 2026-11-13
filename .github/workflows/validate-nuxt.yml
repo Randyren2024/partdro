@@ -1,0 +1,63 @@
+name: Validate Nuxt UI and static generation
+
+on:
+  push:
+    branches:
+      - feat/auto-parts-design-system-alignment
+    paths:
+      - 'nuxt-app/**'
+      - '.github/workflows/validate-nuxt.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'nuxt-app/**'
+      - '.github/workflows/validate-nuxt.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: validate-nuxt-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: nuxt-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: nuxt-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm install --include=optional --no-audit --no-fund
+
+      - name: Generate static site
+        env:
+          NITRO_PRESET: cloudflare_pages
+        run: npm run generate
+
+      - name: Verify generated routes and localized catalogue
+        run: |
+          set -euo pipefail
+          test -f dist/index.html
+          HTML_COUNT=$(find dist -type f -name '*.html' | wc -l)
+          echo "Generated HTML files: ${HTML_COUNT}"
+          if [ "${HTML_COUNT}" -lt 100 ]; then
+            echo "::error::Only ${HTML_COUNT} HTML files generated; expected at least 100."
+            exit 1
+          fi
+
+          for route in products products/d15r de/products es/products fr/products; do
+            if [ ! -f "dist/${route}/index.html" ]; then
+              echo "::error::Missing generated route: ${route}"
+              exit 1
+            fi
+          done
+
+          echo "Nuxt static generation and route assertions passed."
