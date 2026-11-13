@@ -68,8 +68,8 @@ export default defineNuxtConfig({
   css: [
     'ant-design-vue/dist/reset.css',
     '@fontsource-variable/inter',
-    './app/assets/styles/variables.css',
-    './app/assets/styles/global.css',
+    '~/app/assets/styles/variables.css',
+    '~/app/assets/styles/global.css',
   ],
 
   /**
