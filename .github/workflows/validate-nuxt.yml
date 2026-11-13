@@ -65,12 +65,12 @@ jobs:
             ['fr/contact', 'Contactez-Nous'],
           ]
           for (const [route, expectedTitle] of checks) {
-            const html = readFileSync(`dist/${route}/index.html`, 'utf8')
+            const html = readFileSync(\`dist/\${route}/index.html\`, 'utf8')
             // data-edit-key attributes intentionally contain translation keys for
             // the CMS editor. Check rendered text only, not HTML attributes or scripts.
             const visibleText = html
-              .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, ' ')
-              .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi, ' ')
+              .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+              .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
               .replace(/<[^>]+>/g, ' ')
               .replace(/&(?:amp|lt|gt|quot|#39);/g, ' ')
             for (const key of ['contact.title', 'contact.info.phoneValue']) {
