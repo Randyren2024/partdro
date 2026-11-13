@@ -59,7 +59,9 @@ jobs:
           while IFS= read -r f; do
             found=1
             echo "compressing $f ($(du -m "$f" | cut -f1) MiB)"
-            ffmpeg -loglevel error -i "$f" -c:v libx264 -preset veryfast -crf 24 \
+            # -nostdin is required: without it ffmpeg eats the loop's stdin
+            # (the find output) and only the first file ever gets processed.
+            ffmpeg -nostdin -loglevel error -i "$f" -c:v libx264 -preset veryfast -crf 24 \
               -c:a aac -b:a 128k -fs 23M -y "$f.tmp.mp4"
             mv "$f.tmp.mp4" "$f"
             echo "  -> $(du -m "$f" | cut -f1) MiB"
