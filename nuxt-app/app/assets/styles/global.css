@@ -144,3 +144,54 @@
     width: min(var(--max-width), calc(100% - 32px));
   }
 }
+
+
+/* Auto-parts visual alignment: editorial typography, warm neutral surfaces, signal-orange accents. */
+.container {
+  width: min(var(--pd-container), calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.section-title,
+.page-header h1,
+.page-section h1,
+.page-section h2,
+.page-section h3 {
+  font-family: var(--pd-font-display);
+  letter-spacing: var(--pd-tracking-display);
+}
+
+.page-header {
+  color: #f8f7f4;
+  background:
+    radial-gradient(ellipse at 82% 12%, rgba(232, 93, 42, .18), transparent 34%),
+    linear-gradient(125deg, #111315 0%, #202426 58%, #111315 100%);
+}
+
+.page-header::after {
+  opacity: .2;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.page-header p { color: rgba(248, 247, 244, .72); }
+
+.page-section--gray { background: var(--pd-bg-soft); }
+
+.product-grid,
+.feature-grid { gap: clamp(18px, 2.2vw, 28px); }
+
+.ant-card {
+  border: 1px solid var(--pd-line);
+  box-shadow: var(--pd-shadow-sm);
+}
+
+.ant-btn-primary {
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .container { width: min(var(--pd-container), calc(100% - 32px)); }
+}

@@ -1,35 +1,44 @@
 :root {
   color-scheme: light;
-  /* Partdro design system — industrial teal, graphite and warm signal orange. */
-  --pd-bg: #f5f7f6;
-  --pd-bg-soft: #eaf0ef;
+  /* Shared visual language aligned with auto_parts: graphite, warm white, signal orange. */
+  --pd-bg: #f5f4f0;
+  --pd-bg-soft: #eceae5;
   --pd-surface: #ffffff;
   --pd-surface-elevated: #ffffff;
-  --pd-ink: #14282d;
-  --pd-ink-soft: #5f7479;
-  --pd-ink-muted: #829397;
-  --pd-line: rgba(20, 40, 45, .11);
-  --pd-line-strong: rgba(20, 40, 45, .2);
-  --pd-primary: #087f8c;
-  --pd-primary-hover: #056b76;
-  --pd-primary-deep: #064a54;
-  --pd-accent: #ed9255;
+  --pd-ink: #171a1c;
+  --pd-ink-soft: #73797a;
+  --pd-ink-muted: #929797;
+  --pd-line: rgba(23, 26, 28, .10);
+  --pd-line-strong: rgba(23, 26, 28, .18);
+  --pd-primary: #e85d2a;
+  --pd-primary-hover: #c9481b;
+  --pd-primary-deep: #aa3915;
+  --pd-accent: #ff9a70;
   --pd-on-primary: #ffffff;
-  --pd-shadow: 0 22px 60px rgba(10, 38, 44, .10);
-  --pd-shadow-sm: 0 8px 26px rgba(10, 38, 44, .07);
+  --pd-shadow: 0 18px 50px rgba(23, 26, 28, .10);
+  --pd-shadow-sm: 0 8px 24px rgba(23, 26, 28, .08);
   --pd-radius: 16px;
-  --pd-radius-lg: 24px;
+  --pd-radius-lg: 22px;
   --pd-container: 1200px;
-  --pd-header-height: 76px;
-  --pd-font: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  --pd-font-display: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --pd-header-height: 56px;
+  --pd-font: "Barlow", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --pd-font-display: "Barlow Condensed", "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pd-font-weight-regular: 400;
+  --pd-font-weight-medium: 500;
+  --pd-font-weight-semibold: 600;
+  --pd-font-weight-bold: 700;
+  --pd-font-weight-extrabold: 800;
+  --pd-leading-tight: 1.02;
+  --pd-leading-heading: 1.08;
+  --pd-leading-body: 1.65;
+  --pd-tracking-display: -.035em;
 
   /* Backwards-compatible aliases used by existing page components. */
   --color-primary: var(--pd-primary);
   --color-primary-dark: var(--pd-primary-hover);
-  --color-primary-light: #14a6ad;
+  --color-primary-light: #ff8153;
   --color-dark: var(--pd-ink);
-  --color-dark-secondary: #1a2529;
+  --color-dark-secondary: #111315;
   --color-text: var(--pd-ink);
   --color-text-light: var(--pd-ink-soft);
   --color-bg: var(--pd-bg);
@@ -43,28 +52,28 @@
 
 .dark {
   color-scheme: dark;
-  --pd-bg: #101719;
-  --pd-bg-soft: #151f22;
-  --pd-surface: #1a2529;
-  --pd-surface-elevated: #202d31;
-  --pd-ink: #eef4f2;
-  --pd-ink-soft: #afbfbe;
-  --pd-ink-muted: #829796;
-  --pd-line: rgba(235, 247, 244, .12);
-  --pd-line-strong: rgba(235, 247, 244, .22);
-  --pd-primary: #64c9c5;
-  --pd-primary-hover: #83ded8;
-  --pd-primary-deep: #153f42;
-  --pd-accent: #ffad72;
-  --pd-on-primary: #082c31;
-  --pd-shadow: 0 24px 70px rgba(0, 0, 0, .42);
-  --pd-shadow-sm: 0 8px 28px rgba(0, 0, 0, .28);
+  --pd-bg: #101315;
+  --pd-bg-soft: #171b1d;
+  --pd-surface: #1b2022;
+  --pd-surface-elevated: #202628;
+  --pd-ink: #f3f2ef;
+  --pd-ink-soft: #aeb4b4;
+  --pd-ink-muted: #7f898a;
+  --pd-line: rgba(255, 255, 255, .12);
+  --pd-line-strong: rgba(255, 255, 255, .22);
+  --pd-primary: #ff8153;
+  --pd-primary-hover: #ff9a70;
+  --pd-primary-deep: #26150f;
+  --pd-accent: #ff9a70;
+  --pd-on-primary: #171a1c;
+  --pd-shadow: 0 22px 70px rgba(0, 0, 0, .45);
+  --pd-shadow-sm: 0 8px 24px rgba(0, 0, 0, .35);
 
   --color-primary: var(--pd-primary);
   --color-primary-dark: var(--pd-primary-hover);
-  --color-primary-light: #83ded8;
+  --color-primary-light: #ff9a70;
   --color-dark: var(--pd-ink);
-  --color-dark-secondary: #0b1113;
+  --color-dark-secondary: #050708;
   --color-text: var(--pd-ink);
   --color-text-light: var(--pd-ink-soft);
   --color-bg: var(--pd-bg);
@@ -75,9 +84,7 @@
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
@@ -86,77 +93,36 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-family);
-  color: var(--color-text);
-  background: var(--color-bg);
-  line-height: 1.65;
+  font-family: var(--pd-font);
+  color: var(--pd-ink);
+  background: var(--pd-bg);
+  font-size: 16px;
+  font-weight: var(--pd-font-weight-regular);
+  line-height: var(--pd-leading-body);
   font-optical-sizing: auto;
+  font-kerning: normal;
+  font-feature-settings: "kern";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color .22s ease, color .22s ease;
+  transition: background-color .25s ease, color .25s ease;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
+img, svg, video { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
 
-img,
-svg,
-video {
-  display: block;
-  max-width: 100%;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-.container {
-  width: min(var(--max-width), calc(100% - 48px));
-  margin-inline: auto;
-  padding-inline: 0;
-}
-
-.section {
-  padding: clamp(64px, 8vw, 108px) 0;
-}
-
-.section-title {
-  color: var(--color-dark);
+h1, h2, h3, h4 {
   font-family: var(--pd-font-display);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 800;
-  letter-spacing: -.045em;
-  line-height: 1.08;
+  line-height: var(--pd-leading-heading);
+  letter-spacing: var(--pd-tracking-display);
+  font-weight: var(--pd-font-weight-extrabold);
 }
 
-.section-subtitle {
-  max-width: 66ch;
-  margin: 16px auto 44px;
-  color: var(--color-text-light);
-  font-size: 17px;
-  line-height: 1.7;
-}
-
-::selection {
-  background: var(--pd-primary);
-  color: var(--pd-on-primary);
-}
-
-:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--pd-primary) 42%, transparent);
-  outline-offset: 3px;
-}
+::selection { background: var(--pd-primary); color: var(--pd-on-primary); }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     scroll-behavior: auto !important;
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;

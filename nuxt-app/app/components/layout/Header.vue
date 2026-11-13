@@ -306,4 +306,38 @@ onUnmounted(() => {
   .header__actions { gap: 7px; }
   .header__mobile-panel { padding-inline: 18px; }
 }
+
+/* Shared header proportions and interaction language from auto_parts. */
+.header__inner { gap: clamp(12px, 1.6vw, 24px); }
+.header__logo img { height: 32px; max-width: 176px; }
+.header__nav-items { gap: clamp(12px, 1.5vw, 24px); }
+.header__nav-item {
+  min-height: 36px;
+  padding: 4px 0;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  background: transparent !important;
+}
+.header__nav-item:hover,
+.header__nav-item.router-link-active {
+  color: var(--pd-ink);
+}
+.header__contact {
+  min-height: 38px;
+  padding-inline: 18px;
+  font-size: 13px;
+  letter-spacing: .01em;
+}
+.header__dropdown-menu {
+  top: calc(100% + 14px);
+  min-width: 248px;
+  border-radius: 14px;
+  padding: 12px;
+}
+.header__dropdown-item { padding: 9px 12px; }
+@media (max-width: 480px) {
+  .header__logo img { height: 30px; max-width: 142px; }
+}
 </style>
