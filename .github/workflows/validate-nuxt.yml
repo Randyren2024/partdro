@@ -56,4 +56,34 @@ jobs:
             fi
           done
 
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs'
+          const checks = [
+            ['contact', 'Contact Us'],
+            ['de/contact', 'Kontaktieren Sie Uns'],
+            ['es/contact', 'Contáctenos'],
+            ['fr/contact', 'Contactez-Nous'],
+          ]
+          for (const [route, expectedTitle] of checks) {
+            const html = readFileSync('dist/' + route + '/index.html', 'utf8')
+            // data-edit-key attributes intentionally contain translation keys for
+            // the CMS editor. Check rendered text only, not HTML attributes or scripts.
+            const visibleText = html
+              .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+              .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/&(?:amp|lt|gt|quot|#39);/g, ' ')
+            for (const key of ['contact.title', 'contact.info.phoneValue']) {
+              if (visibleText.includes(key)) {
+                console.error(`::error::Raw i18n key "${key}" found in visible text on /${route}`)
+                process.exit(1)
+              }
+            }
+            if (!visibleText.includes(expectedTitle)) {
+              console.error(`::error::Expected contact title "${expectedTitle}" missing from /${route}`)
+              process.exit(1)
+            }
+            console.log(`Contact locale passed: /${route}`)
+          }
+          NODE
           echo "Nuxt static generation and route assertions passed."

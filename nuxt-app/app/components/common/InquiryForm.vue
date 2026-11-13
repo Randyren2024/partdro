@@ -45,7 +45,7 @@ import { useRoute } from 'vue-router'
 import { trackEvent } from '../../composables/useTracking'
 import { attributionFields } from '../../composables/useAttribution'
 
-const { t } = useI18n()
+const { t } = useI18n({ useScope: 'global' })
 const route = useRoute()
 const loading = ref(false)
 const success = ref(false)
