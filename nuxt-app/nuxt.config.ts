@@ -173,11 +173,9 @@ export default defineNuxtConfig({
       { code: 'es', iso: 'es-ES', file: 'es.json', name: 'Español' },
       { code: 'fr', iso: 'fr-FR', file: 'fr.json', name: 'Français' },
     ],
-    // @nuxtjs/i18n v9 has a path bug where it prepends an extra 'i18n/' layer
-    // internally, e.g. with langDir: './' it resolves to ./i18n/en.json.
-    // With langDir: './i18n/' it becomes ./i18n/i18n/en.json — which is where
-    // the translation files actually live (nested i18n dir from the original migration).
-    langDir: './i18n/',
+    // @nuxtjs/i18n resolves langDir from the Nuxt project root and appends
+    // the locale subdirectory, so this points to app/i18n/i18n/*.json.
+    langDir: './app/i18n/',
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     lazy: false,
