@@ -14,6 +14,7 @@
             <a-input-search
               v-model:value="searchQuery"
               :placeholder="t('products.searchPlaceholder')"
+              :aria-label="t('products.searchPlaceholder')"
               enter-button
               allow-clear
               size="large"
@@ -59,7 +60,7 @@
         <div v-else-if="filteredProducts.length || showU15" class="product-grid">
           <div class="product-card" v-for="product in filteredProducts" :key="product.slug">
             <div class="product-card__image">
-              <img :src="product.image_url" :alt="product.name" loading="lazy" />
+              <img :src="product.image_url" :alt="product.name" loading="lazy" decoding="async" width="640" height="420" />
               <div class="product-card__category">{{ t(`products.category.${product.category}`) }}</div>
             </div>
             <div class="product-card__body">
@@ -79,7 +80,7 @@
 
           <div v-if="showU15" class="product-card">
             <div class="product-card__image">
-              <img :src="U15_IMAGE" :alt="t('products.u15.name')" loading="lazy" />
+              <img :src="U15_IMAGE" :alt="t('products.u15.name')" loading="lazy" decoding="async" width="640" height="420" />
               <div class="product-card__category">{{ t('products.u15.category') }}</div>
             </div>
             <div class="product-card__body">
@@ -333,6 +334,10 @@ function clearFilters() {
   line-height: 1.2;
 }
 .product-card__body p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   margin-bottom: 18px;
   color: var(--pd-ink-soft);
   font-size: 14px;
@@ -350,6 +355,11 @@ function clearFilters() {
 }
 .product-card__link:hover {
   gap: 12px;
+}
+.product-card__link:focus-visible,
+.product-filter__tab:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--pd-primary) 48%, transparent);
+  outline-offset: 3px;
 }
 .catalog-loading {
   display: grid;
@@ -392,6 +402,8 @@ function clearFilters() {
   margin: 4px;
 }
 @media (max-width: 640px) {
+  .product-card__body { min-height: 0; padding: 20px; }
+  .product-card__image { height: 230px; }
   .catalog-toolbar {
     align-items: stretch;
     flex-direction: column;

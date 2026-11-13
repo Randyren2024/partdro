@@ -37,7 +37,7 @@ const antdTheme = computed(() => {
       colorBorderSecondary: dark ? 'rgba(255,255,255,.10)' : 'rgba(23,26,28,.09)',
       colorSplit: dark ? 'rgba(255,255,255,.10)' : 'rgba(23,26,28,.08)',
       colorLink: primary,
-      colorLinkHover: dark ? '#83ded8' : '#056b76',
+      colorLinkHover: dark ? '#ff9a70' : '#c9481b',
       fontFamily: '"Barlow", system-ui, -apple-system, "Segoe UI", Arial, sans-serif',
       fontSize: 14,
       fontSizeSM: 12,
