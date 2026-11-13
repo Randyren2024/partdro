@@ -58,11 +58,9 @@ jobs:
 
       - name: Build Nuxt static site (Cloudflare Pages preset)
         env:
-          # Supabase URL / anon key are NOT passed here on purpose: they are
-          # public values baked into nuxt.config.ts. Passing a stale secret
-          # previously overrode them and silently produced an 86-page site.
-          # Runtime secrets (service_role, DirectMail, Feishu, DashScope) live
-          # in the Cloudflare Pages dashboard, not in the build.
+          # The current public Supabase URL / anon key are passed from repository
+          # secrets so both SSR prerender and Vite's client bundle use the
+          # same project. The service_role key remains runtime-only.
           NITRO_PRESET: cloudflare_pages
           # Build-time client config: these are public Supabase credentials.
           # Use the current project secrets rather than stale hard-coded defaults.
