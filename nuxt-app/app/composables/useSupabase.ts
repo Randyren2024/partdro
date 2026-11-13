@@ -111,6 +111,11 @@ export function useProducts(category?: ProductCategory) {
   const error = ref<string | null>(null)
 
   const reload = async () => {
+    // Supabase reads are intentionally client-side. These composables are not
+    // awaited by Nuxt's static renderer, so firing them during every prerendered
+    // route creates thousands of orphaned HTTP requests without adding data to
+    // the generated HTML. The browser performs the same reads after hydration.
+    if (import.meta.server) return
     loading.value = true
     error.value = null
     try {
@@ -145,6 +150,11 @@ export function useProduct(slug: string | (() => string)) {
   const resolveSlug = () => (typeof slug === 'function' ? slug() : slug)
 
   const reload = async () => {
+    // Supabase reads are intentionally client-side. These composables are not
+    // awaited by Nuxt's static renderer, so firing them during every prerendered
+    // route creates thousands of orphaned HTTP requests without adding data to
+    // the generated HTML. The browser performs the same reads after hydration.
+    if (import.meta.server) return
     const s = resolveSlug()
     if (!s) return
     loading.value = true
@@ -179,6 +189,11 @@ export function usePosts(options?: { limit?: number }) {
   const error = ref<string | null>(null)
 
   const reload = async () => {
+    // Supabase reads are intentionally client-side. These composables are not
+    // awaited by Nuxt's static renderer, so firing them during every prerendered
+    // route creates thousands of orphaned HTTP requests without adding data to
+    // the generated HTML. The browser performs the same reads after hydration.
+    if (import.meta.server) return
     loading.value = true
     error.value = null
     try {
@@ -220,6 +235,11 @@ export function useRelatedPosts(
   const error = ref<string | null>(null)
 
   const reload = async () => {
+    // Supabase reads are intentionally client-side. These composables are not
+    // awaited by Nuxt's static renderer, so firing them during every prerendered
+    // route creates thousands of orphaned HTTP requests without adding data to
+    // the generated HTML. The browser performs the same reads after hydration.
+    if (import.meta.server) return
     const cat = category()
     if (!cat) {
       data.value = []
@@ -263,6 +283,11 @@ export function usePost(slug: string | (() => string)) {
   const resolveSlug = () => (typeof slug === 'function' ? slug() : slug)
 
   const reload = async () => {
+    // Supabase reads are intentionally client-side. These composables are not
+    // awaited by Nuxt's static renderer, so firing them during every prerendered
+    // route creates thousands of orphaned HTTP requests without adding data to
+    // the generated HTML. The browser performs the same reads after hydration.
+    if (import.meta.server) return
     const s = resolveSlug()
     if (!s) return
     loading.value = true
@@ -298,6 +323,11 @@ export function useCases() {
   const error = ref<string | null>(null)
 
   const reload = async () => {
+    // Supabase reads are intentionally client-side. These composables are not
+    // awaited by Nuxt's static renderer, so firing them during every prerendered
+    // route creates thousands of orphaned HTTP requests without adding data to
+    // the generated HTML. The browser performs the same reads after hydration.
+    if (import.meta.server) return
     loading.value = true
     error.value = null
     try {
@@ -330,6 +360,11 @@ export function useDocuments() {
   const error = ref<string | null>(null)
 
   const reload = async () => {
+    // Supabase reads are intentionally client-side. These composables are not
+    // awaited by Nuxt's static renderer, so firing them during every prerendered
+    // route creates thousands of orphaned HTTP requests without adding data to
+    // the generated HTML. The browser performs the same reads after hydration.
+    if (import.meta.server) return
     loading.value = true
     error.value = null
     try {

@@ -48,9 +48,8 @@ async function fetchSlugs(url: string, key: string, table: string): Promise<stri
 }
 
 export default defineNuxtConfig({
-  // Keep the existing Nuxt 3-style root layout while running Nuxt 4.
-  // This makes /pages, /components, /layouts, /composables and /i18n discoverable.
-  srcDir: '.',
+  // Nuxt 4 application source lives in nuxt-app/app/.
+  srcDir: 'app/',
 
   compatibilityDate: '2025-07-15',
 
@@ -67,8 +66,8 @@ export default defineNuxtConfig({
   css: [
     'ant-design-vue/dist/reset.css',
     '@fontsource-variable/inter',
-    '~/app/assets/styles/variables.css',
-    '~/app/assets/styles/global.css',
+    '~/assets/styles/variables.css',
+    '~/assets/styles/global.css',
   ],
 
   /**
@@ -174,11 +173,9 @@ export default defineNuxtConfig({
       { code: 'es', iso: 'es-ES', file: 'es.json', name: 'Español' },
       { code: 'fr', iso: 'fr-FR', file: 'fr.json', name: 'Français' },
     ],
-    // @nuxtjs/i18n v9 has a path bug where it prepends an extra 'i18n/' layer
-    // internally, e.g. with langDir: './' it resolves to ./i18n/en.json.
-    // With langDir: './i18n/' it becomes ./i18n/i18n/en.json — which is where
-    // the translation files actually live (nested i18n dir from the original migration).
-    langDir: './i18n/',
+    // @nuxtjs/i18n v10 prefixes langDir with the project i18n directory.
+    // Step out of that prefix to resolve the locale JSON under app/i18n/i18n/.
+    langDir: '../app/i18n/i18n/',
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     lazy: false,

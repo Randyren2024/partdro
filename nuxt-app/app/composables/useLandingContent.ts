@@ -259,10 +259,15 @@ export function registerProductNamespace(ns: string) {
     if (!enMsgs[ns]) {
       i18nInstance.global.setLocaleMessage('en', { ...enMsgs, [ns]: defaultLandingTemplate() })
     }
+
+    // During SSG, seed the default namespace so the product page can render,
+    // but never start background Supabase requests from the prerender server.
+    if (import.meta.server) return
+
     const current = typeof i18nInstance.global.locale === 'string'
       ? i18nInstance.global.locale
       : (i18nInstance.global.locale as any).value
-    loadAndMerge(current)
+    void loadAndMerge(current)
   }
 }
 
@@ -272,11 +277,17 @@ export function registerProductNamespace(ns: string) {
  */
 export function useLandingContent() {
   const i18n = useI18n()
-  const { locale } = i18n
-  // Lazily seed the global module-level i18n reference — all other module
-  // functions (applyNamespaceOverrides, registerProductNamespace, etc.) use it.
+
+  // Seed the module-level i18n bridge in both SSR and the browser. Product
+  // detail pages register their dynamic namespace immediately during setup.
   setI18nInstance(i18n)
-  watch(locale, (l) => { loadAndMerge(l) }, { immediate: true, flush: 'pre' })
+
+  // Do not query Supabase while Nuxt is rendering/prerendering pages on the
+  // server. Published overrides are fetched immediately after hydration.
+  if (import.meta.server) return
+
+  const { locale } = i18n
+  watch(locale, (l) => { void loadAndMerge(l) }, { immediate: true, flush: 'pre' })
 }
 
 /** 计算相对静态默认值的差异（只存被改动过的叶子），跳过 __images/__videos 键。 */
