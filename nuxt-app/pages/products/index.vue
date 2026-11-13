@@ -86,11 +86,11 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { RightOutlined } from '@ant-design/icons-vue'
-import { useProducts } from '../composables/useSupabase'
-import { useLocalePath } from '../composables/useLocalePath'
-import { SOLUTIONS, SOLUTION_SLUGS, SOLUTION_UI } from '../data/solutions'
-import { DEFAULT_LOCALE, isLocale } from '../i18n'
-import type { ProductCategory, Lang } from '../types'
+import { useProducts } from '~/composables/useSupabase'
+import { useLocalePath } from '~/composables/useLocalePath'
+import { SOLUTIONS, SOLUTION_SLUGS, SOLUTION_UI } from '~/data/solutions'
+import { DEFAULT_LOCALE, isLocale } from '~/i18n'
+import type { ProductCategory, Lang } from '~/types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning', 'EVTOL']
 
