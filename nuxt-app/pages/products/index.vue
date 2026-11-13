@@ -55,7 +55,8 @@
           </router-link>
         </nav>
 
-        <div v-if="filteredProducts.length || showU15" class="product-grid">
+        <div v-if="productsLoading && !products.length" class="catalog-loading"><a-spin size="large" /></div>
+        <div v-else-if="filteredProducts.length || showU15" class="product-grid">
           <div class="product-card" v-for="product in filteredProducts" :key="product.slug">
             <div class="product-card__image">
               <img :src="product.image_url" :alt="product.name" loading="lazy" />
@@ -127,7 +128,7 @@ const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const lp = useLocalePath()
-const { data: products } = useProducts()
+const { data: products, loading: productsLoading } = useProducts()
 const searchQuery = ref(typeof route.query.q === 'string' ? route.query.q : '')
 
 const lang = computed<Lang>(() => (isLocale(locale.value) ? locale.value : DEFAULT_LOCALE))
@@ -187,7 +188,8 @@ function applySearch() {
 }
 
 function setCategory(category: ProductCategory | null) {
-  router.replace({ query: { ...route.query, category: category ?? undefined } })
+  const query = searchQuery.value.trim()
+  router.replace({ query: { ...route.query, q: query || undefined, category: category ?? undefined } })
 }
 
 function clearFilters() {
@@ -348,6 +350,11 @@ function clearFilters() {
 }
 .product-card__link:hover {
   gap: 12px;
+}
+.catalog-loading {
+  display: grid;
+  min-height: 260px;
+  place-items: center;
 }
 .catalog-empty {
   display: flex;
