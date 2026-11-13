@@ -30,7 +30,12 @@ jobs:
           cache-dependency-path: nuxt-app/package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          # Use `npm install`, not `npm ci`. The lockfile was generated on Windows
+          # and hoists esbuild to 0.25.12 while nested copies sit at 0.28.2; on
+          # Linux `npm ci` recomputes a different hoisting and aborts with
+          # "Missing: @esbuild/linux-x64@0.28.2 from lock file".
+          npm install --include=optional --no-audit --no-fund
 
       - name: Build Nuxt static site (Cloudflare Pages preset)
         env:
