@@ -34,10 +34,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { RightOutlined } from '@ant-design/icons-vue'
-import { usePosts } from '../composables/useSupabase'
-import { useLocalePath } from '../composables/useLocalePath'
-import { DEFAULT_LOCALE } from '../i18n'
-import type { Post } from '../types'
+import { usePosts } from '~/composables/useSupabase'
+import { useLocalePath } from '~/composables/useLocalePath'
+import { DEFAULT_LOCALE } from '~/i18n'
+import type { Post } from '~/types'
 
 const { t, locale } = useI18n()
 const lp = useLocalePath()
