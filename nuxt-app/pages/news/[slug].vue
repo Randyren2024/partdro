@@ -64,12 +64,13 @@ import { computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
-import { SITE_URL } from '../router'
-import { usePost, useProducts, useRelatedPosts } from '../composables/useSupabase'
-import { useLocalePath } from '../composables/useLocalePath'
-import { DEFAULT_LOCALE } from '../i18n'
-import type { Post, Product } from '../types'
+import { usePost, useProducts, useRelatedPosts } from '~/composables/useSupabase'
+import { useLocalePath } from '~/composables/useLocalePath'
+import { DEFAULT_LOCALE } from '~/i18n'
+import type { Post, Product } from '~/types'
 
+const runtimeConfig = useRuntimeConfig()
+const SITE_URL = runtimeConfig.public.siteUrl || 'https://www.droneworld.tech'
 const route = useRoute()
 const slug = () => route.params.slug as string
 const { t, locale } = useI18n()
