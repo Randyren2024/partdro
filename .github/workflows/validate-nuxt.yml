@@ -66,13 +66,20 @@ jobs:
           ]
           for (const [route, expectedTitle] of checks) {
             const html = readFileSync(`dist/${route}/index.html`, 'utf8')
+            // data-edit-key attributes intentionally contain translation keys for
+            // the CMS editor. Check rendered text only, not HTML attributes or scripts.
+            const visibleText = html
+              .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, ' ')
+              .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi, ' ')
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/&(?:amp|lt|gt|quot|#39);/g, ' ')
             for (const key of ['contact.title', 'contact.info.phoneValue']) {
-              if (html.includes(key)) {
-                console.error(`::error::Raw i18n key "${key}" found in /${route}`)
+              if (visibleText.includes(key)) {
+                console.error(`::error::Raw i18n key "${key}" found in visible text on /${route}`)
                 process.exit(1)
               }
             }
-            if (!html.includes(expectedTitle)) {
+            if (!visibleText.includes(expectedTitle)) {
               console.error(`::error::Expected contact title "${expectedTitle}" missing from /${route}`)
               process.exit(1)
             }
