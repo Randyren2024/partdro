@@ -305,6 +305,7 @@
   .d15r-landing .hero-media {max-width:780px;margin:0 auto;width:100%}
   .d15r-landing .stats {grid-template-columns:repeat(2,1fr)}
   .d15r-landing .stat:nth-child(3), .d15r-landing .stat:nth-child(5) {border-right:0}
+  .d15r-landing .stat:nth-child(5) {grid-column:1 / -1;text-align:center;border-bottom:0}
   .d15r-landing .stat:nth-child(-n+3) {border-bottom:1px solid var(--line)}
   .d15r-landing .lp-feature-grid, .d15r-landing .case-grid, .d15r-landing .safety-grid {grid-template-columns:1fr 1fr}
   .d15r-landing .scenario-grid {grid-template-columns:1fr 1fr}
@@ -322,6 +323,10 @@
   .d15r-landing .stat {padding:20px 12px}
   .d15r-landing .stat strong {font-size:1.35rem}
   .d15r-landing .dual {grid-template-columns:1fr}
+  .d15r-landing .hero {min-height:auto;padding:48px 0 34px}
+  .d15r-landing .hero h1 {font-size:clamp(2.55rem,11vw,3.5rem);line-height:1.02}
+  .d15r-landing .hero-copy .lead {margin-top:16px}
+  .d15r-landing .hero-kicker {margin-bottom:16px}
   .d15r-landing .hero-badge {position:static;margin-top:14px}
   .d15r-landing .hero-card {transform:none}
   .d15r-landing .cta-box {flex-direction:column;align-items:flex-start;padding:30px}
@@ -382,4 +387,47 @@
   color:#8a95a1;
   font-size:15px;
   font-weight:500;
+}
+
+
+/* Mobile product-page polish */
+@media (max-width: 640px) {
+  .d15r-landing .theme-toggle {
+    left: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    min-height: 42px;
+    padding: 8px 12px;
+    font-size: .8rem;
+  }
+  .d15r-landing .hero .btns {
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .d15r-landing .hero .btn {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+  .d15r-landing .cta-box {
+    gap: 22px;
+    padding: 24px;
+    border-radius: 24px;
+  }
+  .d15r-landing .cta-box .btns {
+    min-width: 0 !important;
+    margin-top: 0;
+  }
+  .d15r-landing .cta-form {
+    margin-top: 24px;
+    margin-bottom: calc(88px + env(safe-area-inset-bottom));
+  }
+  .d15r-landing .cta-form .inquiry-form__card {
+    padding: 18px 14px;
+  }
+}
+@media (max-width: 380px) {
+  .d15r-landing .lp-container {width:calc(100% - 24px)}
+  .d15r-landing .hero h1 {font-size:2.45rem}
+  .d15r-landing .stat {padding:16px 9px}
+  .d15r-landing .stat strong {font-size:1.2rem}
+  .d15r-landing .cta-box {padding:20px}
 }
