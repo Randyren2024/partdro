@@ -61,17 +61,12 @@ useLandingContent()
 
 // ====== 主题（深色 / 浅色） ======
 type Theme = 'dark' | 'light'
-const THEME_KEY = 'lp-theme'
-const theme = ref<Theme>('light')
-onMounted(() => {
-  const saved = localStorage.getItem(THEME_KEY)
-  if (saved === 'dark' || saved === 'light') theme.value = saved
-})
-watch(theme, (value) => {
-  if (import.meta.client) localStorage.setItem(THEME_KEY, value)
-})
+const colorMode = useColorMode()
+// Product detail pages use the same site-wide color preference as the shared header.
+// The theme-* class remains for the legacy landing-page stylesheet.
+const theme = computed<Theme>(() => colorMode.value === 'dark' ? 'dark' : 'light')
 function toggleTheme() {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark'
+  colorMode.preference = theme.value === 'dark' ? 'light' : 'dark'
 }
 
 // 编辑模式下禁用 lightbox（点击用于编辑而非放大）
