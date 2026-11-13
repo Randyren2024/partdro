@@ -221,40 +221,5 @@ watch(post, (p) => {
 })
 
 
-// @ts-ignore - Nuxt macro
-definePrerenderRoutes(async () => {
-  const PRESET_NEWS = [
-    'drone-cleaning-industry-trends-2026', 'c500-first-flight-tests',
-  ]
-  const LOCALES = ['', '/de', '/es', '/fr'] as const
-  const config = useRuntimeConfig()
-  let slugs: string[] = []
 
-  if (config.public.supabaseUrl && config.public.supabaseAnonKey) {
-    try {
-      const res = await fetch(
-        `${config.public.supabaseUrl}/rest/v1/posts?select=slug&published=eq.true&order=published_at.desc`,
-        { headers: { apikey: config.public.supabaseAnonKey, Authorization: `Bearer ${config.public.supabaseAnonKey}` } },
-      )
-      if (res.ok) {
-        const rows: { slug: string | null }[] = await res.json()
-        slugs = rows.map((r) => r.slug || '').filter(Boolean)
-      }
-    } catch (e) {
-      console.warn('[prerender] news slug fetch failed, using fallback:', (e as Error).message)
-    }
-  }
-
-  if (!slugs.length) slugs = PRESET_NEWS
-
-  // 新闻翻译可能不全——先全量生成，Cloudflare Pages 上不 404 就不会报错
-  const routes: string[] = []
-  for (const l of LOCALES) {
-    for (const slug of slugs) {
-      routes.push(`${l}/news/${slug}`)
-    }
-  }
-  console.log(`[prerender] news: ${slugs.length} slugs × ${LOCALES.length} locales = ${routes.length} routes`)
-  return routes
-})
 </script>
