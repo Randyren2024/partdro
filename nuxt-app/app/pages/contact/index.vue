@@ -59,7 +59,7 @@ import { PhoneOutlined, MailOutlined, EnvironmentOutlined, ClockCircleOutlined }
 import InquiryForm from '~/components/common/InquiryForm.vue'
 import { trackEvent } from '~/composables/useTracking'
 
-const { t } = useI18n()
+const { t } = useI18n({ useScope: 'global' })
 </script>
 
 <style scoped>
