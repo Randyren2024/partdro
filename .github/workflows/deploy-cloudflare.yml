@@ -166,6 +166,28 @@ jobs:
               exit 1
             fi
           done
+          # Nitro currently appends every prerendered path to _routes.json exclude.
+          # Cloudflare Pages limits route rules to 100 chars and 100 entries.
+          # Rewrite the final manifest after all static assets/pages are merged:
+          # only API requests invoke the Worker; Pages serves all other files.
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs'
+          const file = 'dist/_routes.json'
+          const routes = JSON.parse(readFileSync(file, 'utf8'))
+          if (routes.version !== 1) throw new Error('Unsupported _routes.json version')
+          routes.include = ['/api/*']
+          routes.exclude = []
+          const rules = [...routes.include, ...routes.exclude]
+          const tooLong = rules.filter(rule => rule.length > 100)
+          if (tooLong.length) throw new Error(`Cloudflare route rules exceed 100 chars: ${tooLong.join(', ')}`)
+          if (rules.length > 100) throw new Error(`Cloudflare route rule count exceeds 100: ${rules.length}`)
+          writeFileSync(file, JSON.stringify(routes, null, 2) + '\n')
+          const verified = JSON.parse(readFileSync(file, 'utf8'))
+          if (JSON.stringify(verified.include) !== JSON.stringify(['/api/*']) || verified.exclude.length !== 0) {
+            throw new Error('Failed to normalize Cloudflare Pages routes manifest')
+          }
+          console.log('Normalized Cloudflare Pages routes: only /api/* invokes the Worker')
+          NODE
           # Static generate omits Nitro server routes; require the Pages Worker.
           if [ ! -e "dist/_worker.js" ]; then
             echo "FAIL: dist/_worker.js missing — server API routes would return 404"
@@ -193,6 +215,11 @@ jobs:
             if [ -n "$STATUS" ] && [ "$STATUS" != "000" ] && [ "$STATUS" != "404" ]; then
               echo "FAIL: /api/inquiry returned unexpected HTTP $STATUS"
               cat /tmp/partdro-inquiry-response.json || true
+              cat /tmp/partdro-pages-dev.log || true
+              exit 1
+            fi
+            if ! kill -0 "$WRANGLER_PID" 2>/dev/null; then
+              echo "FAIL: Wrangler Pages runtime exited before becoming ready"
               cat /tmp/partdro-pages-dev.log || true
               exit 1
             fi
