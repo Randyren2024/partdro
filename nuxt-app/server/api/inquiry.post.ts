@@ -113,8 +113,11 @@ export default defineEventHandler(async (event) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     throw createError({ statusCode: 400, statusMessage: 'Please enter a valid email address.' })
   }
-  if (name.length < 2 || message.length < 5) {
-    throw createError({ statusCode: 400, statusMessage: 'Please provide a little more detail.' })
+  if (name.length < 2) {
+    throw createError({ statusCode: 400, statusMessage: 'Please enter a name with at least 2 characters.' })
+  }
+  if (message.length < 5) {
+    throw createError({ statusCode: 400, statusMessage: 'Please provide a message with at least 5 characters.' })
   }
   if (!['contact', 'booking', 'franchise'].includes(type)) {
     throw createError({ statusCode: 400, statusMessage: 'Invalid inquiry type.' })
