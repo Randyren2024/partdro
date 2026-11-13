@@ -1,22 +1,22 @@
 :root {
   color-scheme: light;
-  /* Shared visual language aligned with auto_parts: graphite, warm white, signal orange. */
-  --pd-bg: #060708;
-  --pd-bg-soft: #0a0c0e;
-  --pd-surface: #101418;
-  --pd-surface-elevated: #14181d;
-  --pd-ink: #f4f5f6;
-  --pd-ink-soft: #9ba3a9;
-  --pd-ink-muted: #6f777d;
-  --pd-line: rgba(255, 255, 255, .09);
-  --pd-line-strong: rgba(255, 255, 255, .18);
-  --pd-primary: #ff6a1a;
-  --pd-primary-hover: #ff8b45;
-  --pd-primary-deep: #c84b0b;
+  /* Shared visual language: premium industrial dark mode with a complete light-mode fallback. */
+  --pd-bg: #f5f4f0;
+  --pd-bg-soft: #eceae5;
+  --pd-surface: #ffffff;
+  --pd-surface-elevated: #ffffff;
+  --pd-ink: #171a1c;
+  --pd-ink-soft: #73797a;
+  --pd-ink-muted: #929797;
+  --pd-line: rgba(23, 26, 28, .10);
+  --pd-line-strong: rgba(23, 26, 28, .18);
+  --pd-primary: #e85d2a;
+  --pd-primary-hover: #c9481b;
+  --pd-primary-deep: #aa3915;
   --pd-accent: #3fd0ff;
-  --pd-on-primary: #140900;
-  --pd-shadow: 0 22px 70px rgba(0, 0, 0, .45);
-  --pd-shadow-sm: 0 8px 28px rgba(0, 0, 0, .28);
+  --pd-on-primary: #ffffff;
+  --pd-shadow: 0 18px 50px rgba(23, 26, 28, .10);
+  --pd-shadow-sm: 0 8px 24px rgba(23, 26, 28, .08);
   --pd-radius: 18px;
   --pd-radius-lg: 22px;
   --pd-container: 1200px;
