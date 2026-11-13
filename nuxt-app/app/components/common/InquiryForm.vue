@@ -3,7 +3,7 @@
     <a-card :bordered="false" class="inquiry-form__card">
       <h3 :data-edit-key="'contact.formTitle'">{{ t('contact.formTitle') }}</h3>
       <a-form :model="form" layout="vertical" @finish="handleSubmit" :validate-trigger="['blur', 'change']">
-        <a-form-item name="name" :rules="[{ required: true, whitespace: true }]">
+        <a-form-item name="name" :rules="[{ required: true, whitespace: true }, { min: 2, message: 'Please enter at least 2 characters.' }]">
           <a-input v-model:value="form.name" :placeholder="t('contact.name')" :aria-label="t('contact.name')" autocomplete="name" />
         </a-form-item>
         <a-form-item name="email" :rules="[{ required: true, type: 'email' }]">
@@ -19,7 +19,7 @@
             <a-select-option value="franchise">{{ t('contact.typeFranchise') }}</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item name="message" :rules="[{ required: true, whitespace: true }]">
+        <a-form-item name="message" :rules="[{ required: true, whitespace: true }, { min: 5, message: 'Please provide at least 5 characters.' }]">
           <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :aria-label="t('contact.message')" :rows="4" />
         </a-form-item>
         <div class="inquiry-form__honeypot" aria-hidden="true">
