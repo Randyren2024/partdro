@@ -69,7 +69,12 @@
       "name": "U15 Multi-Mission Drone",
       "category": "Multi-Mission Drone",
       "desc": "15 kg payload, 75-minute endurance and a four-sensor pod — one airframe for delivery, inspection and water sampling."
-    }
+    },
+    "searchPlaceholder": "Search by model, capability or application",
+    "results": "products",
+    "noResults": "No matching drones found",
+    "noResultsHint": "Try another model, category or capability, or contact us for help.",
+    "clearFilters": "Clear filters"
   },
   "cases": {
     "title": "Application Cases",
@@ -172,20 +177,44 @@
       "title": "Our Values",
       "subtitle": "What drives us forward",
       "items": {
-        "0": { "title": "Technical Excellence", "desc": "Maintaining the highest standards in product selection and technical validation, ensuring every solution meets rigorous quality benchmarks." },
-        "1": { "title": "Customer Partnership", "desc": "Viewing clients as long-term partners, providing comprehensive support from product selection to after-sales service." },
-        "2": { "title": "Market Intelligence", "desc": "Deep understanding of both Chinese manufacturing capabilities and global market needs for optimal product-market fit." },
-        "3": { "title": "Localized Service", "desc": "Building deep, localized service systems to truly serve global customers with complete solutions, not just products." }
+        "0": {
+          "title": "Technical Excellence",
+          "desc": "Maintaining the highest standards in product selection and technical validation, ensuring every solution meets rigorous quality benchmarks."
+        },
+        "1": {
+          "title": "Customer Partnership",
+          "desc": "Viewing clients as long-term partners, providing comprehensive support from product selection to after-sales service."
+        },
+        "2": {
+          "title": "Market Intelligence",
+          "desc": "Deep understanding of both Chinese manufacturing capabilities and global market needs for optimal product-market fit."
+        },
+        "3": {
+          "title": "Localized Service",
+          "desc": "Building deep, localized service systems to truly serve global customers with complete solutions, not just products."
+        }
       }
     },
     "stats": {
       "title": "Why Choose Us",
       "subtitle": "Our proven track record",
       "items": {
-        "0": { "title": "10+ Years Experience", "desc": "Deep expertise in UAV technology, continuously innovating since 2014." },
-        "1": { "title": "Multiple Product Lines", "desc": "Comprehensive solutions covering consumer, enterprise, agriculture drones and accessories." },
-        "2": { "title": "Global Reach", "desc": "Serving customers across Oceania and globally with localized support." },
-        "3": { "title": "Trusted Partners", "desc": "Strong partnerships with leading drone manufacturers and distribution networks." }
+        "0": {
+          "title": "10+ Years Experience",
+          "desc": "Deep expertise in UAV technology, continuously innovating since 2014."
+        },
+        "1": {
+          "title": "Multiple Product Lines",
+          "desc": "Comprehensive solutions covering consumer, enterprise, agriculture drones and accessories."
+        },
+        "2": {
+          "title": "Global Reach",
+          "desc": "Serving customers across Oceania and globally with localized support."
+        },
+        "3": {
+          "title": "Trusted Partners",
+          "desc": "Strong partnerships with leading drone manufacturers and distribution networks."
+        }
       }
     },
     "cta": {
@@ -239,23 +268,56 @@
       "badgeText": "A modular aerial cleaning platform built for repeatable high-altitude work."
     },
     "strip": {
-      "0": { "value": "15 L/min", "label": "Spray flow rate" },
-      "1": { "value": "100 m", "label": "Hose length" },
-      "2": { "value": "45 min", "label": "Curtain wall flight time" },
-      "3": { "value": "55 min", "label": "PV panel flight time" },
-      "4": { "value": "12 m/s", "label": "Max wind speed" }
+      "0": {
+        "value": "15 L/min",
+        "label": "Spray flow rate"
+      },
+      "1": {
+        "value": "100 m",
+        "label": "Hose length"
+      },
+      "2": {
+        "value": "45 min",
+        "label": "Curtain wall flight time"
+      },
+      "3": {
+        "value": "55 min",
+        "label": "PV panel flight time"
+      },
+      "4": {
+        "value": "12 m/s",
+        "label": "Max wind speed"
+      }
     },
     "why": {
       "eyebrow": "High efficiency",
       "title": "1,000 m²/h high pressure fast cleaning.",
       "lead": "Artificial cleaning (spiderman, cradles) is still the main cleaning method, facing operational risk, inefficient cleaning, poor operational flexibility and high cost. The D15R cleaning drone features a modular design with two types of cleaning attachments and four nozzles of different angles, providing a convenient, efficient, multi-scenario aerial high-pressure cleaning solution.",
       "cards": {
-        "0": { "title": "Tethered water supply", "desc": "Long uninterrupted operation without any limitation of water tank capacity." },
-        "1": { "title": "1,000 m²/h max. Quick Wash", "desc": "Fast washing under hovering, D15R can be equipped with dual swinging spray booms optionally for 1,000 m²/h coverage." },
-        "2": { "title": "20 MPa Instantaneous Peak Pressure", "desc": "Fast and effective removal of stubborn stains with high-pressure washing." },
-        "3": { "title": "Rapid installation and deployment", "desc": "Folding design for easy transportation and storage; quick release mode for 1-minute deployment." },
-        "4": { "title": "4 different nozzles as standard", "desc": "0°, 15°, 25° and 40° spray angles — one nozzle pipe, multiple water types, switching of water types from 0-40° at will." },
-        "5": { "title": "Adaptable to 2 different loads", "desc": "D15R can be adapted to two types of cleaning attachments: adjustable-angle nozzles and oscillating nozzles." }
+        "0": {
+          "title": "Tethered water supply",
+          "desc": "Long uninterrupted operation without any limitation of water tank capacity."
+        },
+        "1": {
+          "title": "1,000 m²/h max. Quick Wash",
+          "desc": "Fast washing under hovering, D15R can be equipped with dual swinging spray booms optionally for 1,000 m²/h coverage."
+        },
+        "2": {
+          "title": "20 MPa Instantaneous Peak Pressure",
+          "desc": "Fast and effective removal of stubborn stains with high-pressure washing."
+        },
+        "3": {
+          "title": "Rapid installation and deployment",
+          "desc": "Folding design for easy transportation and storage; quick release mode for 1-minute deployment."
+        },
+        "4": {
+          "title": "4 different nozzles as standard",
+          "desc": "0°, 15°, 25° and 40° spray angles — one nozzle pipe, multiple water types, switching of water types from 0-40° at will."
+        },
+        "5": {
+          "title": "Adaptable to 2 different loads",
+          "desc": "D15R can be adapted to two types of cleaning attachments: adjustable-angle nozzles and oscillating nozzles."
+        }
       }
     },
     "designed": {
@@ -263,9 +325,18 @@
       "title": "Adaptable to multiple configurations.",
       "lead": "The D15R cleaning drone features a modular design, compatible with two types of cleaning attachments: adjustable-angle nozzles and oscillating nozzles. Equipped with four nozzles of different angles, it provides a convenient, efficient, and multi-scenario aerial high-pressure cleaning solution.",
       "items": {
-        "0": { "title": "Water nozzle (Fixed)", "desc": "1500 mm nozzle keeps the fuselage away from the wall, safe and reliable. The nozzle can swing left and right horizontally." },
-        "1": { "title": "Oscillating nozzle", "desc": "The swing range of the nozzle is ±15°, and the speed of the swing can be adjusted on the remote control according to the stain level." },
-        "2": { "title": "Dual swinging spray boom", "desc": "Optional kit combines foam and water nozzles for one-key remote switching without landing. Completes full foam softening and water rinsing in one flight." }
+        "0": {
+          "title": "Water nozzle (Fixed)",
+          "desc": "1500 mm nozzle keeps the fuselage away from the wall, safe and reliable. The nozzle can swing left and right horizontally."
+        },
+        "1": {
+          "title": "Oscillating nozzle",
+          "desc": "The swing range of the nozzle is ±15°, and the speed of the swing can be adjusted on the remote control according to the stain level."
+        },
+        "2": {
+          "title": "Dual swinging spray boom",
+          "desc": "Optional kit combines foam and water nozzles for one-key remote switching without landing. Completes full foam softening and water rinsing in one flight."
+        }
       }
     },
     "output": {
@@ -273,11 +344,26 @@
       "unitTitle": "1,000 m²/h maximum light-cleaning capacity",
       "note": "The product brochure specifies 500 m²/h for deep cleaning. Actual output depends on the work surface, contamination level, cleaning liquid and operating conditions.",
       "rows": {
-        "0": { "label": "Peak water pressure", "value": "20 MPa (instantaneous)" },
-        "1": { "label": "Rated water pressure", "value": "10 MPa" },
-        "2": { "label": "Spray flow", "value": "15 L/min" },
-        "3": { "label": "Nozzle-to-surface distance", "value": "2-3 m" },
-        "4": { "label": "Maximum take-off weight", "value": "≤ 24.9 kg" }
+        "0": {
+          "label": "Peak water pressure",
+          "value": "20 MPa (instantaneous)"
+        },
+        "1": {
+          "label": "Rated water pressure",
+          "value": "10 MPa"
+        },
+        "2": {
+          "label": "Spray flow",
+          "value": "15 L/min"
+        },
+        "3": {
+          "label": "Nozzle-to-surface distance",
+          "value": "2-3 m"
+        },
+        "4": {
+          "label": "Maximum take-off weight",
+          "value": "≤ 24.9 kg"
+        }
       }
     },
     "spray": {
@@ -285,10 +371,22 @@
       "title": "4 types of spray nozzles, tool-free installation.",
       "lead": "The modular nozzle design meets the needs of customers for diversified cleaning tasks. One nozzle pipe, multiple water types — switching of water types from 0-40° at will.",
       "nozzles": {
-        "0": { "angle": "0° high jet pressure", "desc": "For flushing crevices, stubborn stains, etc." },
-        "1": { "angle": "15° fan-shaped water jet", "desc": "For quick rinsing of stains." },
-        "2": { "angle": "25° fan-shaped water discharge", "desc": "Rapid rinsing of sand and soil, higher efficiency." },
-        "3": { "angle": "40° broad fan", "desc": "For rinsing large areas after spraying detergent." }
+        "0": {
+          "angle": "0° high jet pressure",
+          "desc": "For flushing crevices, stubborn stains, etc."
+        },
+        "1": {
+          "angle": "15° fan-shaped water jet",
+          "desc": "For quick rinsing of stains."
+        },
+        "2": {
+          "angle": "25° fan-shaped water discharge",
+          "desc": "Rapid rinsing of sand and soil, higher efficiency."
+        },
+        "3": {
+          "angle": "40° broad fan",
+          "desc": "For rinsing large areas after spraying detergent."
+        }
       }
     },
     "intelligence": {
@@ -296,10 +394,22 @@
       "title": "D15R 5.0 — Autonomous operation with route planning.",
       "lead": "The new upgraded version D15R 5.0 adds intelligent route planning to achieve autonomous operation. It can set routes for different cleaning scenarios, greatly improving the work efficiency and flexibility of the cleaning drone.",
       "items": {
-        "0": { "title": "Comprehensive coverage without blind spots", "desc": "The entire facade can be accurately covered according to the set route and height, avoiding omissions and blind spots that may occur during manual inspection or ordinary flight." },
-        "1": { "title": "High precision with RTK", "desc": "Combined with advanced positioning technologies such as RTK positioning, the UAV can maintain a stable flight attitude and position accuracy, thereby obtaining high-precision images and measurement data." },
-        "2": { "title": "High degree of automation", "desc": "The route can be planned in advance through the ground control station, and the drone can fly automatically according to the preset path without real-time manual control." },
-        "3": { "title": "Remote operation", "desc": "The operator can control and monitor the drone from a safe location away from dangerous facades, with timely measures in case of emergency." }
+        "0": {
+          "title": "Comprehensive coverage without blind spots",
+          "desc": "The entire facade can be accurately covered according to the set route and height, avoiding omissions and blind spots that may occur during manual inspection or ordinary flight."
+        },
+        "1": {
+          "title": "High precision with RTK",
+          "desc": "Combined with advanced positioning technologies such as RTK positioning, the UAV can maintain a stable flight attitude and position accuracy, thereby obtaining high-precision images and measurement data."
+        },
+        "2": {
+          "title": "High degree of automation",
+          "desc": "The route can be planned in advance through the ground control station, and the drone can fly automatically according to the preset path without real-time manual control."
+        },
+        "3": {
+          "title": "Remote operation",
+          "desc": "The operator can control and monitor the drone from a safe location away from dangerous facades, with timely measures in case of emergency."
+        }
       }
     },
     "safety": {
@@ -307,9 +417,18 @@
       "title": "Dual RTK + wall-following radar for secure flight.",
       "lead": "Enabling manual-free high-altitude operations. Replacing manual overhead work with remote-controlled drone operation, built-in dual RTK modules for centimeter-level positioning, and an intelligent perception system with wall-following radar.",
       "cards": {
-        "0": { "title": "Replacing manual overhead work", "desc": "Remote control of personnel can complete all kinds of complex cleaning tasks at high altitude, eliminating the potential risks of working at height." },
-        "1": { "title": "Built-in high-precision dual RTK", "desc": "Equipped with high-precision dual RTK modules, it can output centimeter-level positioning data, ensuring accurate and reliable positioning and safe operation." },
-        "2": { "title": "Intelligent Perception System", "desc": "Front-mounted wall-following radar senses real-time distance information ahead, maintains a safe distance, and ensures more secure flight." }
+        "0": {
+          "title": "Replacing manual overhead work",
+          "desc": "Remote control of personnel can complete all kinds of complex cleaning tasks at high altitude, eliminating the potential risks of working at height."
+        },
+        "1": {
+          "title": "Built-in high-precision dual RTK",
+          "desc": "Equipped with high-precision dual RTK modules, it can output centimeter-level positioning data, ensuring accurate and reliable positioning and safe operation."
+        },
+        "2": {
+          "title": "Intelligent Perception System",
+          "desc": "Front-mounted wall-following radar senses real-time distance information ahead, maintains a safe distance, and ensures more secure flight."
+        }
       }
     },
     "multiangle": {
@@ -317,10 +436,22 @@
       "title": "Various nozzles, covering difficult angles.",
       "lead": "Modular design for different loads, stable operation at high altitude, flexible operation, and multi-angle coverage of bottom and top surfaces.",
       "items": {
-        "0": { "title": "Modular design", "desc": "Optimal mounts and nozzles can be customized according to different tasks to meet the configuration needs of various altitude cleaning requirements." },
-        "1": { "title": "Stable operation at high altitude", "desc": "Comes with dual RTK and a 'Perception-Decision-Execution' closed-loop system, adapting to various height-based cleaning requirements." },
-        "2": { "title": "Flexible operation", "desc": "Flexible traveling, not afraid of narrow building distance and other complex building spaces." },
-        "3": { "title": "Multi-angle coverage of bottom and top surfaces", "desc": "Supporting different configurations, it can easily cover the bottom and top surfaces and other complex surfaces." }
+        "0": {
+          "title": "Modular design",
+          "desc": "Optimal mounts and nozzles can be customized according to different tasks to meet the configuration needs of various altitude cleaning requirements."
+        },
+        "1": {
+          "title": "Stable operation at high altitude",
+          "desc": "Comes with dual RTK and a 'Perception-Decision-Execution' closed-loop system, adapting to various height-based cleaning requirements."
+        },
+        "2": {
+          "title": "Flexible operation",
+          "desc": "Flexible traveling, not afraid of narrow building distance and other complex building spaces."
+        },
+        "3": {
+          "title": "Multi-angle coverage of bottom and top surfaces",
+          "desc": "Supporting different configurations, it can easily cover the bottom and top surfaces and other complex surfaces."
+        }
       }
     },
     "compare": {
@@ -329,12 +460,36 @@
       "colD15r": "D15R Aerial cleaning System",
       "colManual": "Traditional manual operation",
       "rows": {
-        "0": { "label": "Security", "d15r": "Drone operation replaces manual work at height, greatly reducing the risk", "manual": "Manual operation has potential safety hazards" },
-        "1": { "label": "Cleaning efficiency", "d15r": "1,000 m²/h, high-pressure fast cleaning, support uninterrupted operation", "manual": "Slow cleaning speed, long operation time" },
-        "2": { "label": "Cost", "d15r": "One-time equipment investment & low long-term operating costs", "manual": "High labor cost, each time requires a lot of manpower and time investment" },
-        "3": { "label": "Cleaning effect", "d15r": "20 MPa high-pressure cleaning, with professional cleaning agents, thoroughly remove stubborn stains and mold spots", "manual": "Difficult to clean thoroughly, affecting the aesthetics of the building and the life of the material" },
-        "4": { "label": "Installation time", "d15r": "Quick installation for 1 min", "manual": "Time-consuming and labor-intensive: to set up scaffolding or cradles" },
-        "5": { "label": "Operational flexibility", "d15r": "2 types of mounting, 4 nozzles, multi-angle and multi-scene coverage", "manual": "Poor flexibility, difficult to cover all work surfaces" }
+        "0": {
+          "label": "Security",
+          "d15r": "Drone operation replaces manual work at height, greatly reducing the risk",
+          "manual": "Manual operation has potential safety hazards"
+        },
+        "1": {
+          "label": "Cleaning efficiency",
+          "d15r": "1,000 m²/h, high-pressure fast cleaning, support uninterrupted operation",
+          "manual": "Slow cleaning speed, long operation time"
+        },
+        "2": {
+          "label": "Cost",
+          "d15r": "One-time equipment investment & low long-term operating costs",
+          "manual": "High labor cost, each time requires a lot of manpower and time investment"
+        },
+        "3": {
+          "label": "Cleaning effect",
+          "d15r": "20 MPa high-pressure cleaning, with professional cleaning agents, thoroughly remove stubborn stains and mold spots",
+          "manual": "Difficult to clean thoroughly, affecting the aesthetics of the building and the life of the material"
+        },
+        "4": {
+          "label": "Installation time",
+          "d15r": "Quick installation for 1 min",
+          "manual": "Time-consuming and labor-intensive: to set up scaffolding or cradles"
+        },
+        "5": {
+          "label": "Operational flexibility",
+          "d15r": "2 types of mounting, 4 nozzles, multi-angle and multi-scene coverage",
+          "manual": "Poor flexibility, difficult to cover all work surfaces"
+        }
       }
     },
     "applications": {
@@ -347,19 +502,49 @@
         "application": "Application"
       },
       "cases": {
-        "0": { "badge": "case", "title": "Maintenance of a building facade in Dongguan" },
-        "1": { "badge": "case", "title": "Exterior wall cleaning of a building in Songgang" },
-        "2": { "badge": "case", "title": "Exterior wall maintenance of a building in Shenzhen" },
-        "3": { "badge": "case", "title": "Building maintenance for a building in Shenzhen" },
-        "4": { "badge": "operation", "title": "Aerial facade cleaning workflow" },
-        "5": { "badge": "application", "title": "Photovoltaic panel cleaning" }
+        "0": {
+          "badge": "case",
+          "title": "Maintenance of a building facade in Dongguan"
+        },
+        "1": {
+          "badge": "case",
+          "title": "Exterior wall cleaning of a building in Songgang"
+        },
+        "2": {
+          "badge": "case",
+          "title": "Exterior wall maintenance of a building in Shenzhen"
+        },
+        "3": {
+          "badge": "case",
+          "title": "Building maintenance for a building in Shenzhen"
+        },
+        "4": {
+          "badge": "operation",
+          "title": "Aerial facade cleaning workflow"
+        },
+        "5": {
+          "badge": "application",
+          "title": "Photovoltaic panel cleaning"
+        }
       }
     },
     "scenarios": {
-      "0": { "title": "Building cleaning", "desc": "Exterior facade and curtain wall maintenance" },
-      "1": { "title": "Photovoltaic cleaning", "desc": "Large-area solar panel washing" },
-      "2": { "title": "Wind turbine cleaning", "desc": "High-altitude surface maintenance" },
-      "3": { "title": "Highway sign cleaning", "desc": "Hard-to-reach roadside infrastructure" }
+      "0": {
+        "title": "Building cleaning",
+        "desc": "Exterior facade and curtain wall maintenance"
+      },
+      "1": {
+        "title": "Photovoltaic cleaning",
+        "desc": "Large-area solar panel washing"
+      },
+      "2": {
+        "title": "Wind turbine cleaning",
+        "desc": "High-altitude surface maintenance"
+      },
+      "3": {
+        "title": "Highway sign cleaning",
+        "desc": "Hard-to-reach roadside infrastructure"
+      }
     },
     "kit": {
       "eyebrow": "Standard package",
@@ -384,25 +569,82 @@
       "title": "D15R at a glance.",
       "lead": "Specification values transcribed from the D15R product brochure V6.0.",
       "items": {
-        "0": { "label": "Model", "value": "D15R" },
-        "1": { "label": "Overall dimensions (arms + propellers deployed)", "value": "1945 × 1945 × 730 mm" },
-        "2": { "label": "Overall dimensions (arms deployed only)", "value": "1150 × 1150 × 730 mm" },
-        "3": { "label": "Spray flow rate", "value": "15 L/min" },
-        "4": { "label": "Hose length", "value": "100 m" },
-        "5": { "label": "Flight time", "value": "45 min curtain wall / 55 min PV / 30 min wind turbine" },
-        "6": { "label": "Nozzle-to-surface distance", "value": "2-3 m (adjustable)" },
-        "7": { "label": "Battery", "value": "14S 22000 mAh" },
-        "8": { "label": "Spray pipe", "value": "1500 mm" },
-        "9": { "label": "Maximum horizontal flight speed", "value": "15 m/s" },
-        "10": { "label": "Working temperature", "value": "-10°C to 40°C" },
-        "11": { "label": "Operating humidity", "value": "0-90%" },
-        "12": { "label": "Maximum wind speed", "value": "12 m/s" },
-        "13": { "label": "Rated water pressure", "value": "10 MPa" },
-        "14": { "label": "Max water pressure (instantaneous)", "value": "20 MPa" },
-        "15": { "label": "Light cleaning", "value": "1000 m²/h" },
-        "16": { "label": "Deep cleaning", "value": "500 m²/h" },
-        "17": { "label": "Charging time", "value": "40 minutes" },
-        "18": { "label": "Maximum take-off weight", "value": "≤ 24.9 kg" }
+        "0": {
+          "label": "Model",
+          "value": "D15R"
+        },
+        "1": {
+          "label": "Overall dimensions (arms + propellers deployed)",
+          "value": "1945 × 1945 × 730 mm"
+        },
+        "2": {
+          "label": "Overall dimensions (arms deployed only)",
+          "value": "1150 × 1150 × 730 mm"
+        },
+        "3": {
+          "label": "Spray flow rate",
+          "value": "15 L/min"
+        },
+        "4": {
+          "label": "Hose length",
+          "value": "100 m"
+        },
+        "5": {
+          "label": "Flight time",
+          "value": "45 min curtain wall / 55 min PV / 30 min wind turbine"
+        },
+        "6": {
+          "label": "Nozzle-to-surface distance",
+          "value": "2-3 m (adjustable)"
+        },
+        "7": {
+          "label": "Battery",
+          "value": "14S 22000 mAh"
+        },
+        "8": {
+          "label": "Spray pipe",
+          "value": "1500 mm"
+        },
+        "9": {
+          "label": "Maximum horizontal flight speed",
+          "value": "15 m/s"
+        },
+        "10": {
+          "label": "Working temperature",
+          "value": "-10°C to 40°C"
+        },
+        "11": {
+          "label": "Operating humidity",
+          "value": "0-90%"
+        },
+        "12": {
+          "label": "Maximum wind speed",
+          "value": "12 m/s"
+        },
+        "13": {
+          "label": "Rated water pressure",
+          "value": "10 MPa"
+        },
+        "14": {
+          "label": "Max water pressure (instantaneous)",
+          "value": "20 MPa"
+        },
+        "15": {
+          "label": "Light cleaning",
+          "value": "1000 m²/h"
+        },
+        "16": {
+          "label": "Deep cleaning",
+          "value": "500 m²/h"
+        },
+        "17": {
+          "label": "Charging time",
+          "value": "40 minutes"
+        },
+        "18": {
+          "label": "Maximum take-off weight",
+          "value": "≤ 24.9 kg"
+        }
       }
     },
     "video": {
@@ -435,23 +677,56 @@
       }
     },
     "strip": {
-      "0": { "value": "21 kg", "label": "Drone weight (incl. battery)" },
-      "1": { "value": "16 MPa", "label": "Rated pressure" },
-      "2": { "value": "20 L/min", "label": "Rated flow rate" },
-      "3": { "value": "120 m", "label": "High-pressure hose" },
-      "4": { "value": "100 m", "label": "Max operating height" }
+      "0": {
+        "value": "21 kg",
+        "label": "Drone weight (incl. battery)"
+      },
+      "1": {
+        "value": "16 MPa",
+        "label": "Rated pressure"
+      },
+      "2": {
+        "value": "20 L/min",
+        "label": "Rated flow rate"
+      },
+      "3": {
+        "value": "120 m",
+        "label": "High-pressure hose"
+      },
+      "4": {
+        "value": "100 m",
+        "label": "Max operating height"
+      }
     },
     "why": {
       "eyebrow": "Why choose it",
       "title": "Built for demanding cleaning jobs.",
       "lead": "Six reasons contractors pick the C15 over scaffolding and rope-access teams.",
       "cards": {
-        "0": { "title": "Tethered water supply", "desc": "External water hookup enables continuous operation without frequent refills." },
-        "1": { "title": "High-pressure cleaning", "desc": "16 MPa maximum pressure easily removes stubborn dirt at 20 L/min." },
-        "2": { "title": "Extra-long operating radius", "desc": "120 m hose and up to 100 m working height cover large-area facades." },
-        "3": { "title": "Lightweight single-person operation", "desc": "21 kg airframe is easy for one operator to transport and fly." },
-        "4": { "title": "Corrosion-resistant washing system", "desc": "Compatible with multiple cleaning agents and stays like new." },
-        "5": { "title": "IP67-rated protection", "desc": "Resistant to wind, rain and dust for reliable outdoor work." }
+        "0": {
+          "title": "Tethered water supply",
+          "desc": "External water hookup enables continuous operation without frequent refills."
+        },
+        "1": {
+          "title": "High-pressure cleaning",
+          "desc": "16 MPa maximum pressure easily removes stubborn dirt at 20 L/min."
+        },
+        "2": {
+          "title": "Extra-long operating radius",
+          "desc": "120 m hose and up to 100 m working height cover large-area facades."
+        },
+        "3": {
+          "title": "Lightweight single-person operation",
+          "desc": "21 kg airframe is easy for one operator to transport and fly."
+        },
+        "4": {
+          "title": "Corrosion-resistant washing system",
+          "desc": "Compatible with multiple cleaning agents and stays like new."
+        },
+        "5": {
+          "title": "IP67-rated protection",
+          "desc": "Resistant to wind, rain and dust for reliable outdoor work."
+        }
       }
     },
     "designed": {
@@ -459,9 +734,18 @@
       "title": "Lightweight and flexible, easy to operate.",
       "lead": "A compact airframe designed around the realities of facade work: fast to assemble, simple to maintain, easy to position in tight spaces.",
       "items": {
-        "0": { "title": "Lightweight design", "desc": "21 kg including battery for comfortable single-person operation." },
-        "1": { "title": "Modular structure", "desc": "Quick assembly and easy maintenance between jobs." },
-        "2": { "title": "Compact body", "desc": "Smooth operation in narrow or complex spaces." }
+        "0": {
+          "title": "Lightweight design",
+          "desc": "21 kg including battery for comfortable single-person operation."
+        },
+        "1": {
+          "title": "Modular structure",
+          "desc": "Quick assembly and easy maintenance between jobs."
+        },
+        "2": {
+          "title": "Compact body",
+          "desc": "Smooth operation in narrow or complex spaces."
+        }
       }
     },
     "output": {
@@ -471,11 +755,26 @@
       "unitTitle": "Max operating height",
       "note": "Measured figures for the C15 high-pressure washing system.",
       "rows": {
-        "0": { "label": "Rated pressure", "value": "16 MPa" },
-        "1": { "label": "Rated flow rate", "value": "20 L/min" },
-        "2": { "label": "Spray boom length", "value": "1.6 m" },
-        "3": { "label": "High-pressure hose", "value": "120 m" },
-        "4": { "label": "Max flight speed", "value": "10 m/s" }
+        "0": {
+          "label": "Rated pressure",
+          "value": "16 MPa"
+        },
+        "1": {
+          "label": "Rated flow rate",
+          "value": "20 L/min"
+        },
+        "2": {
+          "label": "Spray boom length",
+          "value": "1.6 m"
+        },
+        "3": {
+          "label": "High-pressure hose",
+          "value": "120 m"
+        },
+        "4": {
+          "label": "Max flight speed",
+          "value": "10 m/s"
+        }
       }
     },
     "safety": {
@@ -483,9 +782,18 @@
       "title": "Full awareness for safer operations.",
       "lead": "Layered sensing keeps the drone at a safe distance while giving the operator a clear view of every stain.",
       "cards": {
-        "0": { "title": "Millimeter-wave radar", "desc": "Accurately detects building distance for a stable standoff." },
-        "1": { "title": "Real-time FPV feed", "desc": "Makes even hard-to-reach stains clearly visible to the operator." },
-        "2": { "title": "RTK high-precision positioning", "desc": "Centimeter-level accuracy for complete flight control." }
+        "0": {
+          "title": "Millimeter-wave radar",
+          "desc": "Accurately detects building distance for a stable standoff."
+        },
+        "1": {
+          "title": "Real-time FPV feed",
+          "desc": "Makes even hard-to-reach stains clearly visible to the operator."
+        },
+        "2": {
+          "title": "RTK high-precision positioning",
+          "desc": "Centimeter-level accuracy for complete flight control."
+        }
       }
     },
     "multiangle": {
@@ -493,10 +801,22 @@
       "title": "Every angle covered.",
       "lead": "From the spray boom to the sensor pod, every part of the C15 is built for facade work.",
       "items": {
-        "0": { "title": "Front", "desc": "High-pressure nozzle tracks the stain line across the facade." },
-        "1": { "title": "Side", "desc": "1.6 m spray boom sweeps a wide, even washing path." },
-        "2": { "title": "Top", "desc": "Tethered hose feeds continuous water from the ground supply." },
-        "3": { "title": "Detail", "desc": "IP67-rated modules resist wind, rain and dust." }
+        "0": {
+          "title": "Front",
+          "desc": "High-pressure nozzle tracks the stain line across the facade."
+        },
+        "1": {
+          "title": "Side",
+          "desc": "1.6 m spray boom sweeps a wide, even washing path."
+        },
+        "2": {
+          "title": "Top",
+          "desc": "Tethered hose feeds continuous water from the ground supply."
+        },
+        "3": {
+          "title": "Detail",
+          "desc": "IP67-rated modules resist wind, rain and dust."
+        }
       }
     },
     "compare": {
@@ -505,19 +825,55 @@
       "colD15r": "Partdro C15",
       "colManual": "Manual method",
       "rows": {
-        "0": { "label": "Efficiency", "d15r": "Large facades in minutes", "manual": "Slow, section by section" },
-        "1": { "label": "Cost per m²", "d15r": "No scaffolding required", "manual": "Scaffolding and gondola rental" },
-        "2": { "label": "Safety risk", "d15r": "Operator stays on the ground", "manual": "Workers at height" },
-        "3": { "label": "Quality consistency", "d15r": "Stable 16 MPa jet", "manual": "Varies by crew" },
-        "4": { "label": "Access to heights", "d15r": "Up to 100 m working height", "manual": "Restricted by equipment" },
-        "5": { "label": "Setup time", "d15r": "Minutes", "manual": "Hours of rigging" }
+        "0": {
+          "label": "Efficiency",
+          "d15r": "Large facades in minutes",
+          "manual": "Slow, section by section"
+        },
+        "1": {
+          "label": "Cost per m²",
+          "d15r": "No scaffolding required",
+          "manual": "Scaffolding and gondola rental"
+        },
+        "2": {
+          "label": "Safety risk",
+          "d15r": "Operator stays on the ground",
+          "manual": "Workers at height"
+        },
+        "3": {
+          "label": "Quality consistency",
+          "d15r": "Stable 16 MPa jet",
+          "manual": "Varies by crew"
+        },
+        "4": {
+          "label": "Access to heights",
+          "d15r": "Up to 100 m working height",
+          "manual": "Restricted by equipment"
+        },
+        "5": {
+          "label": "Setup time",
+          "d15r": "Minutes",
+          "manual": "Hours of rigging"
+        }
       }
     },
     "scenarios": {
-      "0": { "title": "High-Rise Building Cleaning", "desc": "Wash facades and curtain walls without gondolas or rope access." },
-      "1": { "title": "Wind Turbine Maintenance", "desc": "Clean blades and nacelles across the entire wind farm." },
-      "2": { "title": "Glass Curtain Wall Cleaning", "desc": "Tethered water supply keeps the jet stable at full height." },
-      "3": { "title": "FPV Precision Targeting", "desc": "Real-time camera feed makes hard-to-reach stains clearly visible." }
+      "0": {
+        "title": "High-Rise Building Cleaning",
+        "desc": "Wash facades and curtain walls without gondolas or rope access."
+      },
+      "1": {
+        "title": "Wind Turbine Maintenance",
+        "desc": "Clean blades and nacelles across the entire wind farm."
+      },
+      "2": {
+        "title": "Glass Curtain Wall Cleaning",
+        "desc": "Tethered water supply keeps the jet stable at full height."
+      },
+      "3": {
+        "title": "FPV Precision Targeting",
+        "desc": "Real-time camera feed makes hard-to-reach stains clearly visible."
+      }
     },
     "video": {
       "eyebrow": "Watch it work",
@@ -529,25 +885,82 @@
       "title": "Technical specifications.",
       "lead": "Key figures for the C15 aerial cleaning platform.",
       "items": {
-        "0": { "label": "Drone weight (incl. battery)", "value": "21 kg" },
-        "1": { "label": "Spray boom length", "value": "1.6 m" },
-        "2": { "label": "Max flight speed", "value": "10 m/s" },
-        "3": { "label": "High-pressure hose length", "value": "120 m" },
-        "4": { "label": "Max operating height", "value": "100 m" },
-        "5": { "label": "Battery capacity", "value": "20 Ah" },
-        "6": { "label": "Rated pressure", "value": "16 MPa" },
-        "7": { "label": "Rated flow rate", "value": "20 L/min" },
-        "8": { "label": "Protection rating", "value": "IP67" },
-        "9": { "label": "Positioning", "value": "RTK high-precision" },
-        "10": { "label": "Obstacle sensing", "value": "Millimeter-wave radar" },
-        "11": { "label": "Situational awareness", "value": "Real-time FPV camera" },
-        "12": { "label": "Airframe", "value": "High-strength aluminum" },
-        "13": { "label": "Assembly", "value": "Modular, quick-release" },
-        "14": { "label": "Water supply", "value": "Tethered external hookup" },
-        "15": { "label": "Cleaning agents", "value": "Multi-agent compatible" },
-        "16": { "label": "Operation", "value": "Single-person" },
-        "17": { "label": "Washing system", "value": "Corrosion-resistant" },
-        "18": { "label": "Applications", "value": "Facades & wind turbines" }
+        "0": {
+          "label": "Drone weight (incl. battery)",
+          "value": "21 kg"
+        },
+        "1": {
+          "label": "Spray boom length",
+          "value": "1.6 m"
+        },
+        "2": {
+          "label": "Max flight speed",
+          "value": "10 m/s"
+        },
+        "3": {
+          "label": "High-pressure hose length",
+          "value": "120 m"
+        },
+        "4": {
+          "label": "Max operating height",
+          "value": "100 m"
+        },
+        "5": {
+          "label": "Battery capacity",
+          "value": "20 Ah"
+        },
+        "6": {
+          "label": "Rated pressure",
+          "value": "16 MPa"
+        },
+        "7": {
+          "label": "Rated flow rate",
+          "value": "20 L/min"
+        },
+        "8": {
+          "label": "Protection rating",
+          "value": "IP67"
+        },
+        "9": {
+          "label": "Positioning",
+          "value": "RTK high-precision"
+        },
+        "10": {
+          "label": "Obstacle sensing",
+          "value": "Millimeter-wave radar"
+        },
+        "11": {
+          "label": "Situational awareness",
+          "value": "Real-time FPV camera"
+        },
+        "12": {
+          "label": "Airframe",
+          "value": "High-strength aluminum"
+        },
+        "13": {
+          "label": "Assembly",
+          "value": "Modular, quick-release"
+        },
+        "14": {
+          "label": "Water supply",
+          "value": "Tethered external hookup"
+        },
+        "15": {
+          "label": "Cleaning agents",
+          "value": "Multi-agent compatible"
+        },
+        "16": {
+          "label": "Operation",
+          "value": "Single-person"
+        },
+        "17": {
+          "label": "Washing system",
+          "value": "Corrosion-resistant"
+        },
+        "18": {
+          "label": "Applications",
+          "value": "Facades & wind turbines"
+        }
       }
     },
     "cta": {
@@ -567,26 +980,63 @@
       "ctaSecondary": "Contact sales",
       "badgeTitle": "Factory direct",
       "badgeText": "Worldwide shipping and support",
-      "stats": { "0": "80 L spray", "1": "120 L spread", "2": "85 kg payload" }
+      "stats": {
+        "0": "80 L spray",
+        "1": "120 L spread",
+        "2": "85 kg payload"
+      }
     },
     "strip": {
-      "0": { "value": "80 L", "label": "Spray tank" },
-      "1": { "value": "120 L", "label": "Spreading tank" },
-      "2": { "value": "85 kg", "label": "Max payload" },
-      "3": { "value": "10 m", "label": "Working width" },
-      "4": { "value": "IP67", "label": "Protection" }
+      "0": {
+        "value": "80 L",
+        "label": "Spray tank"
+      },
+      "1": {
+        "value": "120 L",
+        "label": "Spreading tank"
+      },
+      "2": {
+        "value": "85 kg",
+        "label": "Max payload"
+      },
+      "3": {
+        "value": "10 m",
+        "label": "Working width"
+      },
+      "4": {
+        "value": "IP67",
+        "label": "Protection"
+      }
     },
     "why": {
       "eyebrow": "Why choose it",
       "title": "Two missions, one airframe.",
       "lead": "Why growers and spray contractors pick the FP800 for large-field crop protection.",
       "cards": {
-        "0": { "title": "Spray and spread in one", "desc": "Swap the 80 L spray tank for the 120 L auger-fed spreader to move from spraying to fertilizing and seeding without changing platforms." },
-        "1": { "title": "85 kg maximum payload", "desc": "Carry more per flight, cut refill stops, and lift up to 85 kg on the high-strength rope for farm cargo moves." },
-        "2": { "title": "Four centrifugal nozzles", "desc": "Rear-mounted nozzles deliver up to 40 L/min with adjustable 30-500 µm droplets and spraying accuracy within 5%." },
-        "3": { "title": "Dual radar sensing", "desc": "LiDAR plus mmWave phased-array radar scans 360°, tracks dynamic and static targets and plans avoidance routes in real time." },
-        "4": { "title": "All-weather airframe", "desc": "Aerospace-grade aluminum frame with IP67 protection, foldable arms and neatly routed wiring for fast field maintenance." },
-        "5": { "title": "Continuous operation", "desc": "Dual-battery cycle fast charging with the 12 kW air-cooled charger keeps the FP800 flying through long spray windows." }
+        "0": {
+          "title": "Spray and spread in one",
+          "desc": "Swap the 80 L spray tank for the 120 L auger-fed spreader to move from spraying to fertilizing and seeding without changing platforms."
+        },
+        "1": {
+          "title": "85 kg maximum payload",
+          "desc": "Carry more per flight, cut refill stops, and lift up to 85 kg on the high-strength rope for farm cargo moves."
+        },
+        "2": {
+          "title": "Four centrifugal nozzles",
+          "desc": "Rear-mounted nozzles deliver up to 40 L/min with adjustable 30-500 µm droplets and spraying accuracy within 5%."
+        },
+        "3": {
+          "title": "Dual radar sensing",
+          "desc": "LiDAR plus mmWave phased-array radar scans 360°, tracks dynamic and static targets and plans avoidance routes in real time."
+        },
+        "4": {
+          "title": "All-weather airframe",
+          "desc": "Aerospace-grade aluminum frame with IP67 protection, foldable arms and neatly routed wiring for fast field maintenance."
+        },
+        "5": {
+          "title": "Continuous operation",
+          "desc": "Dual-battery cycle fast charging with the 12 kW air-cooled charger keeps the FP800 flying through long spray windows."
+        }
       }
     },
     "designed": {
@@ -594,9 +1044,18 @@
       "title": "Built for the field.",
       "lead": "A platform design that turns around fast: foldable arms, high-flow metering and a power system engineered for heat, dust and long days.",
       "items": {
-        "0": { "title": "Platform design", "desc": "Aerospace-grade aluminum frame with IP67 protection and durable 63-inch heat-resistant propellers." },
-        "1": { "title": "Dual-channel metering", "desc": "Dual-channel high-flow metering pumps feed four rear centrifugal nozzles across an up-to-10 m spray width." },
-        "2": { "title": "Service-friendly layout", "desc": "Neatly routed wiring harness improves maintenance efficiency and turnaround between missions." }
+        "0": {
+          "title": "Platform design",
+          "desc": "Aerospace-grade aluminum frame with IP67 protection and durable 63-inch heat-resistant propellers."
+        },
+        "1": {
+          "title": "Dual-channel metering",
+          "desc": "Dual-channel high-flow metering pumps feed four rear centrifugal nozzles across an up-to-10 m spray width."
+        },
+        "2": {
+          "title": "Service-friendly layout",
+          "desc": "Neatly routed wiring harness improves maintenance efficiency and turnaround between missions."
+        }
       }
     },
     "output": {
@@ -606,11 +1065,26 @@
       "unitTitle": "Spraying accuracy deviation",
       "note": "Factory-rated values. Max feeding rate tested with medium-granule urea; actual output varies with crop, terrain and weather.",
       "rows": {
-        "0": { "label": "Spray tank", "value": "80 L" },
-        "1": { "label": "Spread tank", "value": "120 L" },
-        "2": { "label": "Working width", "value": "Up to 10 m" },
-        "3": { "label": "Max feeding rate", "value": "400 L/min" },
-        "4": { "label": "Droplet size", "value": "30-500 µm" }
+        "0": {
+          "label": "Spray tank",
+          "value": "80 L"
+        },
+        "1": {
+          "label": "Spread tank",
+          "value": "120 L"
+        },
+        "2": {
+          "label": "Working width",
+          "value": "Up to 10 m"
+        },
+        "3": {
+          "label": "Max feeding rate",
+          "value": "400 L/min"
+        },
+        "4": {
+          "label": "Droplet size",
+          "value": "30-500 µm"
+        }
       }
     },
     "intelligence": {
@@ -618,10 +1092,22 @@
       "title": "Smart sensing, intelligent flight.",
       "lead": "Full-color FPV and a brand-new remote controller give the operator a clear picture, while dual radar keeps the flight path safe.",
       "items": {
-        "0": { "title": "Dual radar system", "desc": "LiDAR + mmWave phased-array radar with 360° scanning for broad-range obstacle detection." },
-        "1": { "title": "Real-time avoidance", "desc": "Tracks dynamic and static targets simultaneously and plans optimal avoidance routes on the fly." },
-        "2": { "title": "Full-color FPV", "desc": "Clear image details even in low-light conditions, backed by dual 80 W high-brightness lights." },
-        "3": { "title": "Low-altitude awareness", "desc": "Intelligent avoidance of low-altitude obstacles across uneven crop canopies." }
+        "0": {
+          "title": "Dual radar system",
+          "desc": "LiDAR + mmWave phased-array radar with 360° scanning for broad-range obstacle detection."
+        },
+        "1": {
+          "title": "Real-time avoidance",
+          "desc": "Tracks dynamic and static targets simultaneously and plans optimal avoidance routes on the fly."
+        },
+        "2": {
+          "title": "Full-color FPV",
+          "desc": "Clear image details even in low-light conditions, backed by dual 80 W high-brightness lights."
+        },
+        "3": {
+          "title": "Low-altitude awareness",
+          "desc": "Intelligent avoidance of low-altitude obstacles across uneven crop canopies."
+        }
       }
     },
     "multiangle": {
@@ -629,10 +1115,22 @@
       "title": "Every angle covered.",
       "lead": "One platform for spraying, spreading and lifting — see how each mission module works.",
       "items": {
-        "0": { "title": "Platform", "desc": "Foldable arms for rapid transition and transport between fields." },
-        "1": { "title": "Spraying", "desc": "Four rear-mounted centrifugal nozzles with adjustable atomized droplets." },
-        "2": { "title": "Spreading", "desc": "Centrifugal disc delivers a uniform spreading width of up to 10 m." },
-        "3": { "title": "Lifting", "desc": "Smart anti-sway system, automated hook release and real-time weighing." }
+        "0": {
+          "title": "Platform",
+          "desc": "Foldable arms for rapid transition and transport between fields."
+        },
+        "1": {
+          "title": "Spraying",
+          "desc": "Four rear-mounted centrifugal nozzles with adjustable atomized droplets."
+        },
+        "2": {
+          "title": "Spreading",
+          "desc": "Centrifugal disc delivers a uniform spreading width of up to 10 m."
+        },
+        "3": {
+          "title": "Lifting",
+          "desc": "Smart anti-sway system, automated hook release and real-time weighing."
+        }
       }
     },
     "compare": {
@@ -641,12 +1139,36 @@
       "colD15r": "FP800",
       "colManual": "Manual method",
       "rows": {
-        "0": { "label": "Efficiency", "d15r": "Up to 10 m swath per pass", "manual": "Backpack sprayer, row by row" },
-        "1": { "label": "Capacity", "d15r": "80 L spray · 120 L spread", "manual": "Around 16 L per refill" },
-        "2": { "label": "Chemical exposure", "d15r": "Operator stays clear of the spray", "manual": "Continuous exposure in the field" },
-        "3": { "label": "Consistency", "d15r": "Radar-controlled height, flow within 5%", "manual": "Varies by operator" },
-        "4": { "label": "Terrain access", "d15r": "Wet, sloped and tall-crop fields", "manual": "Limited by ground conditions" },
-        "5": { "label": "Extra missions", "d15r": "Fertilizing, seeding and 85 kg lifting", "manual": "Separate equipment and labor" }
+        "0": {
+          "label": "Efficiency",
+          "d15r": "Up to 10 m swath per pass",
+          "manual": "Backpack sprayer, row by row"
+        },
+        "1": {
+          "label": "Capacity",
+          "d15r": "80 L spray · 120 L spread",
+          "manual": "Around 16 L per refill"
+        },
+        "2": {
+          "label": "Chemical exposure",
+          "d15r": "Operator stays clear of the spray",
+          "manual": "Continuous exposure in the field"
+        },
+        "3": {
+          "label": "Consistency",
+          "d15r": "Radar-controlled height, flow within 5%",
+          "manual": "Varies by operator"
+        },
+        "4": {
+          "label": "Terrain access",
+          "d15r": "Wet, sloped and tall-crop fields",
+          "manual": "Limited by ground conditions"
+        },
+        "5": {
+          "label": "Extra missions",
+          "d15r": "Fertilizing, seeding and 85 kg lifting",
+          "manual": "Separate equipment and labor"
+        }
       }
     },
     "specs": {
@@ -654,25 +1176,82 @@
       "title": "Technical specifications.",
       "lead": "Factory-rated values for the FP800 agricultural drone.",
       "items": {
-        "0": { "label": "Spray tank capacity", "value": "80 L" },
-        "1": { "label": "Spread tank capacity", "value": "120 L" },
-        "2": { "label": "Max payload", "value": "85 kg" },
-        "3": { "label": "Max flow rate", "value": "40 L/min" },
-        "4": { "label": "Spreader type", "value": "Auger feeder" },
-        "5": { "label": "Droplet size", "value": "30-500 µm" },
-        "6": { "label": "Max discharge rate", "value": "400 L/min" },
-        "7": { "label": "Spray width", "value": "Up to 10 m" },
-        "8": { "label": "Spreading width", "value": "Up to 10 m" },
-        "9": { "label": "Nozzles", "value": "Four rear-mounted centrifugal" },
-        "10": { "label": "Spraying accuracy", "value": "Within 5%" },
-        "11": { "label": "Radar system", "value": "LiDAR + mmWave phased array" },
-        "12": { "label": "Frame", "value": "Aerospace-grade aluminum, IP67" },
-        "13": { "label": "Propellers", "value": "63 in, durable and heat-resistant" },
-        "14": { "label": "Battery", "value": "High-voltage intelligent" },
-        "15": { "label": "Charger", "value": "12 kW air-cooled" },
-        "16": { "label": "Lifting", "value": "85 kg, high-strength rope" },
-        "17": { "label": "Lights", "value": "Dual 80 W high-brightness" },
-        "18": { "label": "FPV", "value": "Full-color, low-light capable" }
+        "0": {
+          "label": "Spray tank capacity",
+          "value": "80 L"
+        },
+        "1": {
+          "label": "Spread tank capacity",
+          "value": "120 L"
+        },
+        "2": {
+          "label": "Max payload",
+          "value": "85 kg"
+        },
+        "3": {
+          "label": "Max flow rate",
+          "value": "40 L/min"
+        },
+        "4": {
+          "label": "Spreader type",
+          "value": "Auger feeder"
+        },
+        "5": {
+          "label": "Droplet size",
+          "value": "30-500 µm"
+        },
+        "6": {
+          "label": "Max discharge rate",
+          "value": "400 L/min"
+        },
+        "7": {
+          "label": "Spray width",
+          "value": "Up to 10 m"
+        },
+        "8": {
+          "label": "Spreading width",
+          "value": "Up to 10 m"
+        },
+        "9": {
+          "label": "Nozzles",
+          "value": "Four rear-mounted centrifugal"
+        },
+        "10": {
+          "label": "Spraying accuracy",
+          "value": "Within 5%"
+        },
+        "11": {
+          "label": "Radar system",
+          "value": "LiDAR + mmWave phased array"
+        },
+        "12": {
+          "label": "Frame",
+          "value": "Aerospace-grade aluminum, IP67"
+        },
+        "13": {
+          "label": "Propellers",
+          "value": "63 in, durable and heat-resistant"
+        },
+        "14": {
+          "label": "Battery",
+          "value": "High-voltage intelligent"
+        },
+        "15": {
+          "label": "Charger",
+          "value": "12 kW air-cooled"
+        },
+        "16": {
+          "label": "Lifting",
+          "value": "85 kg, high-strength rope"
+        },
+        "17": {
+          "label": "Lights",
+          "value": "Dual 80 W high-brightness"
+        },
+        "18": {
+          "label": "FPV",
+          "value": "Full-color, low-light capable"
+        }
       }
     },
     "cta": {
@@ -699,23 +1278,56 @@
       "badgeText": "A 50-litre photovoltaic cleaning platform with fully automated route planning."
     },
     "strip": {
-      "0": { "value": "50 L", "label": "Water tank capacity" },
-      "1": { "value": "8-10 MPa", "label": "High-pressure cleaning" },
-      "2": { "value": "0-45°", "label": "Spray boom swing angle" },
-      "3": { "value": "Dual RTK", "label": "Centimeter-level positioning" },
-      "4": { "value": "5,500 m²", "label": "Daily cleaning output (case study)" }
+      "0": {
+        "value": "50 L",
+        "label": "Water tank capacity"
+      },
+      "1": {
+        "value": "8-10 MPa",
+        "label": "High-pressure cleaning"
+      },
+      "2": {
+        "value": "0-45°",
+        "label": "Spray boom swing angle"
+      },
+      "3": {
+        "value": "Dual RTK",
+        "label": "Centimeter-level positioning"
+      },
+      "4": {
+        "value": "5,500 m²",
+        "label": "Daily cleaning output (case study)"
+      }
     },
     "why": {
       "eyebrow": "Why choose it",
       "title": "One platform for every PV cleaning job.",
       "lead": "From ground-mounted plants to fishery-PV arrays, the D50R replaces manual high-altitude cleaning with an automated drone workflow.",
       "cards": {
-        "0": { "title": "Large 50 L water tank", "desc": "Fewer refills and fast liquid changes keep the drone working over large areas in a single operation." },
-        "1": { "title": "Full-process automation", "desc": "Cleaning and route planning run end-to-end: plan the mission once and the drone executes it autonomously." },
-        "2": { "title": "Standard high-pressure nozzles", "desc": "High-pressure jets reach panel gaps and stubborn stains, with a 0° pinpoint jet for the toughest dirt." },
-        "3": { "title": "Integrated flight control", "desc": "One operator flies and cleans from a single station, with custom integration for multiple flight platforms." },
-        "4": { "title": "Dual RTK plus obstacle radar", "desc": "Centimeter-level positioning and forward obstacle sensing keep every pass stable and safe over the array." },
-        "5": { "title": "Replaces manual work at height", "desc": "No scaffolding, no ropes, no workers on roofs — one pilot and one ground operator run the whole job." }
+        "0": {
+          "title": "Large 50 L water tank",
+          "desc": "Fewer refills and fast liquid changes keep the drone working over large areas in a single operation."
+        },
+        "1": {
+          "title": "Full-process automation",
+          "desc": "Cleaning and route planning run end-to-end: plan the mission once and the drone executes it autonomously."
+        },
+        "2": {
+          "title": "Standard high-pressure nozzles",
+          "desc": "High-pressure jets reach panel gaps and stubborn stains, with a 0° pinpoint jet for the toughest dirt."
+        },
+        "3": {
+          "title": "Integrated flight control",
+          "desc": "One operator flies and cleans from a single station, with custom integration for multiple flight platforms."
+        },
+        "4": {
+          "title": "Dual RTK plus obstacle radar",
+          "desc": "Centimeter-level positioning and forward obstacle sensing keep every pass stable and safe over the array."
+        },
+        "5": {
+          "title": "Replaces manual work at height",
+          "desc": "No scaffolding, no ropes, no workers on roofs — one pilot and one ground operator run the whole job."
+        }
       }
     },
     "designed": {
@@ -723,9 +1335,18 @@
       "title": "Modular design, multi-scenario ready.",
       "lead": "A modular cleaning platform that adapts to different PV sites — tank, booms and nozzles all swap to match the task at hand.",
       "items": {
-        "0": { "title": "50 L water tank", "desc": "Large single-fill capacity covers wide arrays, and the quick-change design makes refills fast." },
-        "1": { "title": "Dual swing spray booms", "desc": "Booms oscillate from 0° to 45°, washing large panel surfaces evenly in a single pass." },
-        "2": { "title": "Multi-nozzle compatibility", "desc": "Standard high-pressure nozzles for gaps and stubborn stains, plus a 0° pinpoint jet for stubborn spots." }
+        "0": {
+          "title": "50 L water tank",
+          "desc": "Large single-fill capacity covers wide arrays, and the quick-change design makes refills fast."
+        },
+        "1": {
+          "title": "Dual swing spray booms",
+          "desc": "Booms oscillate from 0° to 45°, washing large panel surfaces evenly in a single pass."
+        },
+        "2": {
+          "title": "Multi-nozzle compatibility",
+          "desc": "Standard high-pressure nozzles for gaps and stubborn stains, plus a 0° pinpoint jet for stubborn spots."
+        }
       }
     },
     "output": {
@@ -734,11 +1355,26 @@
       "unitTitle": "Cleaned per day in the Huizhou fishery-PV case",
       "note": "Figures from the 100,000 m² / 20 MW fishery-PV project: one pilot plus one ground operator finished in 18 days, cutting the schedule by more than 60%.",
       "rows": {
-        "0": { "label": "Area per sortie", "value": "138 m²" },
-        "1": { "label": "Takeoffs per hour", "value": "5" },
-        "2": { "label": "Manual cleaning rate", "value": "Below 900 m² per person-day" },
-        "3": { "label": "Project schedule", "value": "18 days (30+ days manually)" },
-        "4": { "label": "Power generation gain", "value": "12-15% after cleaning" }
+        "0": {
+          "label": "Area per sortie",
+          "value": "138 m²"
+        },
+        "1": {
+          "label": "Takeoffs per hour",
+          "value": "5"
+        },
+        "2": {
+          "label": "Manual cleaning rate",
+          "value": "Below 900 m² per person-day"
+        },
+        "3": {
+          "label": "Project schedule",
+          "value": "18 days (30+ days manually)"
+        },
+        "4": {
+          "label": "Power generation gain",
+          "value": "12-15% after cleaning"
+        }
       }
     },
     "intelligence": {
@@ -746,10 +1382,22 @@
       "title": "Full-process automation, from plan to clean.",
       "lead": "The D50R plans cleaning routes on the ground station and flies them autonomously, covering every panel without blind spots.",
       "items": {
-        "0": { "title": "Full-coverage route planning", "desc": "Missions are planned per site and height, avoiding omissions and blind spots across the array." },
-        "1": { "title": "RTK-precision flight", "desc": "Dual RTK keeps position and attitude accurate for consistent, repeatable cleaning paths." },
-        "2": { "title": "High automation", "desc": "Routes planned on the ground station are executed automatically without real-time manual control." },
-        "3": { "title": "Remote operation", "desc": "The operator monitors and controls the drone from the ground, away from the cleaning zone." }
+        "0": {
+          "title": "Full-coverage route planning",
+          "desc": "Missions are planned per site and height, avoiding omissions and blind spots across the array."
+        },
+        "1": {
+          "title": "RTK-precision flight",
+          "desc": "Dual RTK keeps position and attitude accurate for consistent, repeatable cleaning paths."
+        },
+        "2": {
+          "title": "High automation",
+          "desc": "Routes planned on the ground station are executed automatically without real-time manual control."
+        },
+        "3": {
+          "title": "Remote operation",
+          "desc": "The operator monitors and controls the drone from the ground, away from the cleaning zone."
+        }
       }
     },
     "safety": {
@@ -757,9 +1405,18 @@
       "title": "Unmanned high-altitude operations, protected by dual RTK.",
       "lead": "The D50R keeps workers on the ground while built-in sensors guard every flight over the array.",
       "cards": {
-        "0": { "title": "Replaces manual work at height", "desc": "Remote operation eliminates the fall risks of rooftop and suspended-access cleaning work." },
-        "1": { "title": "High-precision dual RTK", "desc": "Built-in dual RTK modules output centimeter-level positioning for accurate, reliable flight." },
-        "2": { "title": "Intelligent obstacle avoidance", "desc": "Forward-looking radar senses obstacles in real time and maintains a safe operating distance." }
+        "0": {
+          "title": "Replaces manual work at height",
+          "desc": "Remote operation eliminates the fall risks of rooftop and suspended-access cleaning work."
+        },
+        "1": {
+          "title": "High-precision dual RTK",
+          "desc": "Built-in dual RTK modules output centimeter-level positioning for accurate, reliable flight."
+        },
+        "2": {
+          "title": "Intelligent obstacle avoidance",
+          "desc": "Forward-looking radar senses obstacles in real time and maintains a safe operating distance."
+        }
       }
     },
     "multiangle": {
@@ -767,10 +1424,22 @@
       "title": "Stable at height, flexible at every angle.",
       "lead": "Modular mounts and multiple nozzle options let the D50R cover panel tops, bottoms and hard-to-reach angles.",
       "items": {
-        "0": { "title": "Stable high-altitude operation", "desc": "Dual RTK and the perception-decision-execution loop keep washing stable at working height." },
-        "1": { "title": "Multi-module expansion", "desc": "Tank, boom and nozzle modules can be configured for different cleaning tasks." },
-        "2": { "title": "Compatible with multiple nozzles", "desc": "Standard high-pressure nozzles handle gaps and stubborn stains across panel types." },
-        "3": { "title": "Wide-angle coverage", "desc": "Spray booms swinging from 0° to 45° cover bottom and top surfaces in fewer passes." }
+        "0": {
+          "title": "Stable high-altitude operation",
+          "desc": "Dual RTK and the perception-decision-execution loop keep washing stable at working height."
+        },
+        "1": {
+          "title": "Multi-module expansion",
+          "desc": "Tank, boom and nozzle modules can be configured for different cleaning tasks."
+        },
+        "2": {
+          "title": "Compatible with multiple nozzles",
+          "desc": "Standard high-pressure nozzles handle gaps and stubborn stains across panel types."
+        },
+        "3": {
+          "title": "Wide-angle coverage",
+          "desc": "Spray booms swinging from 0° to 45° cover bottom and top surfaces in fewer passes."
+        }
       }
     },
     "compare": {
@@ -779,19 +1448,55 @@
       "colD15r": "Partdro D50R",
       "colManual": "Manual PV cleaning",
       "rows": {
-        "0": { "label": "Safety", "d15r": "Drone works at height while the crew stays on the ground", "manual": "Workers clean rooftops and arrays in person" },
-        "1": { "label": "Efficiency", "d15r": "5,500 m² per day with a 2-person crew", "manual": "Below 900 m² per person-day with month-long projects" },
-        "2": { "label": "Cost", "d15r": "One equipment investment with low operating cost", "manual": "Large recurring labor teams for every wash" },
-        "3": { "label": "Cleaning effect", "d15r": "8-10 MPa high-pressure rinse removes stubborn stains", "manual": "Panel gaps and stubborn dirt are hard to clean thoroughly" },
-        "4": { "label": "Schedule", "d15r": "18 days for a 100,000 m² plant", "manual": "More than one month for the same area" },
-        "5": { "label": "Power output", "d15r": "Generation increases 12-15% after cleaning", "manual": "Soiling losses persist between manual washes" }
+        "0": {
+          "label": "Safety",
+          "d15r": "Drone works at height while the crew stays on the ground",
+          "manual": "Workers clean rooftops and arrays in person"
+        },
+        "1": {
+          "label": "Efficiency",
+          "d15r": "5,500 m² per day with a 2-person crew",
+          "manual": "Below 900 m² per person-day with month-long projects"
+        },
+        "2": {
+          "label": "Cost",
+          "d15r": "One equipment investment with low operating cost",
+          "manual": "Large recurring labor teams for every wash"
+        },
+        "3": {
+          "label": "Cleaning effect",
+          "d15r": "8-10 MPa high-pressure rinse removes stubborn stains",
+          "manual": "Panel gaps and stubborn dirt are hard to clean thoroughly"
+        },
+        "4": {
+          "label": "Schedule",
+          "d15r": "18 days for a 100,000 m² plant",
+          "manual": "More than one month for the same area"
+        },
+        "5": {
+          "label": "Power output",
+          "d15r": "Generation increases 12-15% after cleaning",
+          "manual": "Soiling losses persist between manual washes"
+        }
       }
     },
     "scenarios": {
-      "0": { "title": "Ground-mounted PV plants", "desc": "Row-by-row cleaning for large utility-scale solar farms." },
-      "1": { "title": "Commercial and industrial rooftops", "desc": "Clean rooftop PV safely — no workers on the roof." },
-      "2": { "title": "Fishery-PV plants", "desc": "8-10 MPa water rinse tuned for panels over aquaculture ponds." },
-      "3": { "title": "Residential and distributed PV", "desc": "Compact sorties suit distributed and residential rooftop systems." }
+      "0": {
+        "title": "Ground-mounted PV plants",
+        "desc": "Row-by-row cleaning for large utility-scale solar farms."
+      },
+      "1": {
+        "title": "Commercial and industrial rooftops",
+        "desc": "Clean rooftop PV safely — no workers on the roof."
+      },
+      "2": {
+        "title": "Fishery-PV plants",
+        "desc": "8-10 MPa water rinse tuned for panels over aquaculture ponds."
+      },
+      "3": {
+        "title": "Residential and distributed PV",
+        "desc": "Compact sorties suit distributed and residential rooftop systems."
+      }
     },
     "video": {
       "eyebrow": "Watch it work",
@@ -803,20 +1508,62 @@
       "title": "D50R at a glance.",
       "lead": "Key specifications of the D50R photovoltaic cleaning drone.",
       "items": {
-        "0": { "label": "Model", "value": "D50R" },
-        "1": { "label": "Category", "value": "Photovoltaic intelligent cleaning drone" },
-        "2": { "label": "Water tank capacity", "value": "50 L" },
-        "3": { "label": "Cleaning pressure", "value": "8-10 MPa (high-pressure water rinse)" },
-        "4": { "label": "Spray system", "value": "Dual swing booms, 0-45°" },
-        "5": { "label": "Nozzles", "value": "Standard high-pressure, 0° pinpoint jet" },
-        "6": { "label": "Positioning", "value": "High-precision dual RTK" },
-        "7": { "label": "Obstacle sensing", "value": "Forward-looking radar" },
-        "8": { "label": "Automation", "value": "Full-process cleaning with route planning" },
-        "9": { "label": "Operation", "value": "1 pilot + 1 ground operator" },
-        "10": { "label": "Area per sortie", "value": "138 m²" },
-        "11": { "label": "Daily cleaning output", "value": "Up to 5,500 m²" },
-        "12": { "label": "Flight platforms", "value": "Custom integration for multiple platforms" },
-        "13": { "label": "Applications", "value": "Ground, rooftop, distributed and fishery-PV plants" }
+        "0": {
+          "label": "Model",
+          "value": "D50R"
+        },
+        "1": {
+          "label": "Category",
+          "value": "Photovoltaic intelligent cleaning drone"
+        },
+        "2": {
+          "label": "Water tank capacity",
+          "value": "50 L"
+        },
+        "3": {
+          "label": "Cleaning pressure",
+          "value": "8-10 MPa (high-pressure water rinse)"
+        },
+        "4": {
+          "label": "Spray system",
+          "value": "Dual swing booms, 0-45°"
+        },
+        "5": {
+          "label": "Nozzles",
+          "value": "Standard high-pressure, 0° pinpoint jet"
+        },
+        "6": {
+          "label": "Positioning",
+          "value": "High-precision dual RTK"
+        },
+        "7": {
+          "label": "Obstacle sensing",
+          "value": "Forward-looking radar"
+        },
+        "8": {
+          "label": "Automation",
+          "value": "Full-process cleaning with route planning"
+        },
+        "9": {
+          "label": "Operation",
+          "value": "1 pilot + 1 ground operator"
+        },
+        "10": {
+          "label": "Area per sortie",
+          "value": "138 m²"
+        },
+        "11": {
+          "label": "Daily cleaning output",
+          "value": "Up to 5,500 m²"
+        },
+        "12": {
+          "label": "Flight platforms",
+          "value": "Custom integration for multiple platforms"
+        },
+        "13": {
+          "label": "Applications",
+          "value": "Ground, rooftop, distributed and fishery-PV plants"
+        }
       }
     },
     "cta": {
