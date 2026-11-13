@@ -432,7 +432,7 @@ useHead(seoHead)
 .solution-product img { background:var(--pd-bg-soft); }
 .solution-app { border-left:3px solid var(--pd-primary); border-radius:var(--pd-radius); }
 .solution-faq__item { border-radius:var(--pd-radius); }
-.solution-cta { background:radial-gradient(circle at 85% 0%,rgba(232,93,42,.18),transparent 34%),linear-gradient(125deg,#111315,#202426); }
+.solution-cta { background:radial-gradient(circle at 85% 0%,rgba(255,106,26,.18),transparent 34%),linear-gradient(125deg,#111315,#202426); }
 .solution-cta h2 { color:#fff; }
 .solution-cta p { color:rgba(248,247,244,.76); }
 @media(max-width:640px) {
