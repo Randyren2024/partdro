@@ -12,6 +12,14 @@ interface InquiryBody {
   product_slug?: unknown
   website?: unknown
   gclid?: unknown
+  gbraid?: unknown
+  wbraid?: unknown
+  dclid?: unknown
+  fbclid?: unknown
+  gclid_captured_at?: unknown
+  first_visit_at?: unknown
+  first_referrer?: unknown
+  first_landing_page?: unknown
   utm_source?: unknown
   utm_medium?: unknown
   utm_campaign?: unknown
@@ -30,11 +38,12 @@ const LIMITS = {
   message: 5000,
   product_slug: 160,
   website: 200,
-  gclid: 512,
+  click_id: 512,
   utm: 500,
   page_path: 1000,
   landing_page: 2000,
   referrer: 2000,
+  timestamp: 40,
 } as const
 
 function readString(value: unknown, field: string, max: number): string {
@@ -47,6 +56,16 @@ function readString(value: unknown, field: string, max: number): string {
     throw createError({ statusCode: 400, statusMessage: `${field} is too long.` })
   }
   return normalized
+}
+
+function readTimestamp(value: unknown, field: string): string | null {
+  const input = readString(value, field, LIMITS.timestamp)
+  if (!input) return null
+  const timestamp = Date.parse(input)
+  if (!Number.isFinite(timestamp)) {
+    throw createError({ statusCode: 400, statusMessage: `Invalid ${field} format.` })
+  }
+  return new Date(timestamp).toISOString()
 }
 
 export default defineEventHandler(async (event) => {
@@ -92,7 +111,15 @@ export default defineEventHandler(async (event) => {
     company: company || null,
     type,
     product_slug: productSlug || null,
-    gclid: readString(body.gclid, 'gclid', LIMITS.gclid) || null,
+    gclid: readString(body.gclid, 'gclid', LIMITS.click_id) || null,
+    gbraid: readString(body.gbraid, 'gbraid', LIMITS.click_id) || null,
+    wbraid: readString(body.wbraid, 'wbraid', LIMITS.click_id) || null,
+    dclid: readString(body.dclid, 'dclid', LIMITS.click_id) || null,
+    fbclid: readString(body.fbclid, 'fbclid', LIMITS.click_id) || null,
+    gclid_captured_at: readTimestamp(body.gclid_captured_at, 'gclid_captured_at'),
+    first_visit_at: readTimestamp(body.first_visit_at, 'first_visit_at'),
+    first_referrer: readString(body.first_referrer, 'first_referrer', LIMITS.referrer) || null,
+    first_landing_page: readString(body.first_landing_page, 'first_landing_page', LIMITS.landing_page) || null,
     utm_source: readString(body.utm_source, 'utm_source', LIMITS.utm) || null,
     utm_medium: readString(body.utm_medium, 'utm_medium', LIMITS.utm) || null,
     utm_campaign: readString(body.utm_campaign, 'utm_campaign', LIMITS.utm) || null,
