@@ -16,7 +16,7 @@
     "@ant-design/icons-vue": "^7.0.1",
     "@fontsource-variable/inter": "^5.1.0",
     "@nuxtjs/color-mode": "^3.5.0",
-    "@nuxtjs/i18n": "^9.0.0",
+    "@nuxtjs/i18n": "^10.6.0",
     "@pinia/nuxt": "^0.9.0",
     "@stripe/stripe-js": "^4.9.0",
     "@supabase/supabase-js": "^2.45.0",

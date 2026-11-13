@@ -1,4 +1,4 @@
-import { supabase } from '../supabase/client'
+import { supabase } from '../../supabase/client'
 
 /**
  * API 基地址：本地 / Netlify 部署留空（同源 /api/*）；
