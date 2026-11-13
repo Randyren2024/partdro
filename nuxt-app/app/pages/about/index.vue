@@ -252,7 +252,7 @@ const statItems = computed(() =>
 
 <style scoped>
 .about {
-  font-family: 'Barlow', 'Barlow', 'Barlow', sans-serif;
+  font-family: var(--pd-font);
   overflow: clip;
   contain: layout style;
 }
@@ -323,7 +323,7 @@ const statItems = computed(() =>
 }
 
 .section-title {
-  font-family: 'Poppins', 'Barlow', sans-serif;
+  font-family: var(--pd-font);
   font-size: clamp(30px, 3.2vw, 40px);
   font-weight: 800;
   background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
@@ -588,7 +588,7 @@ const statItems = computed(() =>
 .value-4 { background: linear-gradient(135deg, rgba(24, 136, 200, 0.08), rgba(26, 157, 228, 0.12)); }
 
 .value-title {
-  font-family: 'Poppins', 'Barlow', sans-serif;
+  font-family: var(--pd-font);
   font-size: 20px;
   font-weight: 700;
   color: #1d1d1f;
@@ -641,7 +641,7 @@ const statItems = computed(() =>
 }
 
 .stat-title {
-  font-family: 'Poppins', 'Barlow', sans-serif;
+  font-family: var(--pd-font);
   font-size: 20px;
   font-weight: 700;
   color: #1d1d1f;
