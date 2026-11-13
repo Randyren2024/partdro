@@ -69,7 +69,12 @@
       "name": "U15 Multi-Mission Drone",
       "category": "Drone multi-missions",
       "desc": "15 kg de charge utile, 75 minutes d'autonomie et une capsule à quatre capteurs : un seul airframe pour la livraison, l'inspection et l'échantillonnage d'eau."
-    }
+    },
+    "searchPlaceholder": "Rechercher par modèle, capacité ou application",
+    "results": "produits",
+    "noResults": "Aucun drone correspondant trouvé",
+    "noResultsHint": "Essayez un autre modèle, une autre catégorie ou capacité, ou contactez-nous.",
+    "clearFilters": "Effacer les filtres"
   },
   "cases": {
     "title": "Études de Cas",
@@ -172,20 +177,44 @@
       "title": "Nos Valeurs",
       "subtitle": "Ce qui nous fait avancer",
       "items": {
-        "0": { "title": "Excellence Technique", "desc": "Maintenir les normes les plus élevées dans la sélection des produits et la validation technique, en garantissant que chaque solution respecte des critères de qualité rigoureux." },
-        "1": { "title": "Partenariat Client", "desc": "Considérer les clients comme des partenaires à long terme, en offrant un support complet de la sélection du produit au service après-vente." },
-        "2": { "title": "Intelligence du Marché", "desc": "Compréhension approfondie des capacités de fabrication chinoises et des besoins du marché mondial pour un adéquation produit-marché optimale." },
-        "3": { "title": "Service Localisé", "desc": "Construire des systèmes de service approfondis et localisés pour servir véritablement les clients mondiaux avec des solutions complètes, pas seulement des produits." }
+        "0": {
+          "title": "Excellence Technique",
+          "desc": "Maintenir les normes les plus élevées dans la sélection des produits et la validation technique, en garantissant que chaque solution respecte des critères de qualité rigoureux."
+        },
+        "1": {
+          "title": "Partenariat Client",
+          "desc": "Considérer les clients comme des partenaires à long terme, en offrant un support complet de la sélection du produit au service après-vente."
+        },
+        "2": {
+          "title": "Intelligence du Marché",
+          "desc": "Compréhension approfondie des capacités de fabrication chinoises et des besoins du marché mondial pour un adéquation produit-marché optimale."
+        },
+        "3": {
+          "title": "Service Localisé",
+          "desc": "Construire des systèmes de service approfondis et localisés pour servir véritablement les clients mondiaux avec des solutions complètes, pas seulement des produits."
+        }
       }
     },
     "stats": {
       "title": "Pourquoi Nous Choisir",
       "subtitle": "Notre bilan éprouvé",
       "items": {
-        "0": { "title": "10+ Ans d'Expérience", "desc": "Expertise approfondie en technologie UAV, innovation continue depuis 2014." },
-        "1": { "title": "Plusieurs Gammes de Produits", "desc": "Solutions complètes couvrant les drones grand public, professionnels, agricoles et accessoires." },
-        "2": { "title": "Portée Mondiale", "desc": "Au service des clients en Océanie et dans le monde entier avec un support localisé." },
-        "3": { "title": "Partenaires de Confiance", "desc": "Partenariats solides avec les principaux fabricants de drones et réseaux de distribution." }
+        "0": {
+          "title": "10+ Ans d'Expérience",
+          "desc": "Expertise approfondie en technologie UAV, innovation continue depuis 2014."
+        },
+        "1": {
+          "title": "Plusieurs Gammes de Produits",
+          "desc": "Solutions complètes couvrant les drones grand public, professionnels, agricoles et accessoires."
+        },
+        "2": {
+          "title": "Portée Mondiale",
+          "desc": "Au service des clients en Océanie et dans le monde entier avec un support localisé."
+        },
+        "3": {
+          "title": "Partenaires de Confiance",
+          "desc": "Partenariats solides avec les principaux fabricants de drones et réseaux de distribution."
+        }
       }
     },
     "cta": {
@@ -239,23 +268,56 @@
       "badgeText": "Une plateforme de nettoyage aérien modulaire conçue pour des travaux en hauteur répétables."
     },
     "strip": {
-      "0": { "value": "15 L/min", "label": "Débit de pulvérisation" },
-      "1": { "value": "100 m", "label": "Longueur du tuyau" },
-      "2": { "value": "45 min", "label": "Temps de vol pour mur-rideau" },
-      "3": { "value": "55 min", "label": "Temps de vol pour panneaux PV" },
-      "4": { "value": "12 m/s", "label": "Vitesse de vent maximale" }
+      "0": {
+        "value": "15 L/min",
+        "label": "Débit de pulvérisation"
+      },
+      "1": {
+        "value": "100 m",
+        "label": "Longueur du tuyau"
+      },
+      "2": {
+        "value": "45 min",
+        "label": "Temps de vol pour mur-rideau"
+      },
+      "3": {
+        "value": "55 min",
+        "label": "Temps de vol pour panneaux PV"
+      },
+      "4": {
+        "value": "12 m/s",
+        "label": "Vitesse de vent maximale"
+      }
     },
     "why": {
       "eyebrow": "Haute efficacité",
       "title": "Nettoyage rapide haute pression à 1 000 m²/h.",
       "lead": "Le nettoyage manuel (travailleurs en hauteur, nacelles) est toujours la principale méthode de nettoyage, confronté à des risques opérationnels, un nettoyage inefficace, une faible flexibilité opérationnelle et des coûts élevés. Le drone de nettoyage D15R présente un design modulaire avec deux types d'accessoires de nettoyage et quatre buses de différents angles, offrant une solution de nettoyage aérien haute pression pratique, efficace et multi-scénarios.",
       "cards": {
-        "0": { "title": "Alimentation en eau amarrée", "desc": "Fonctionnement prolongé et ininterrompu sans limitation de capacité du réservoir d'eau." },
-        "1": { "title": "Max. lavage rapide 1 000 m²/h", "desc": "Lavage rapide en vol stationnaire ; le D15R peut être équipé en option de rampes de pulvérisation doubles oscillantes pour une couverture de 1 000 m²/h." },
-        "2": { "title": "Pression crête instantanée de 20 MPa", "desc": "Élimination rapide et efficace des taches tenaces par lavage haute pression." },
-        "3": { "title": "Installation et déploiement rapides", "desc": "Design pliable pour un transport et un stockage faciles ; mode à libération rapide pour un déploiement en 1 minute." },
-        "4": { "title": "4 buses différentes en standard", "desc": "Angles de pulvérisation de 0°, 15°, 25° et 40° — un tube de buse, plusieurs types d'eau, commutation des types d'eau de 0-40° à volonté." },
-        "5": { "title": "Adaptable à 2 charges différentes", "desc": "Le D15R peut être adapté à deux types d'accessoires de nettoyage : buses à angle réglable et buses oscillantes." }
+        "0": {
+          "title": "Alimentation en eau amarrée",
+          "desc": "Fonctionnement prolongé et ininterrompu sans limitation de capacité du réservoir d'eau."
+        },
+        "1": {
+          "title": "Max. lavage rapide 1 000 m²/h",
+          "desc": "Lavage rapide en vol stationnaire ; le D15R peut être équipé en option de rampes de pulvérisation doubles oscillantes pour une couverture de 1 000 m²/h."
+        },
+        "2": {
+          "title": "Pression crête instantanée de 20 MPa",
+          "desc": "Élimination rapide et efficace des taches tenaces par lavage haute pression."
+        },
+        "3": {
+          "title": "Installation et déploiement rapides",
+          "desc": "Design pliable pour un transport et un stockage faciles ; mode à libération rapide pour un déploiement en 1 minute."
+        },
+        "4": {
+          "title": "4 buses différentes en standard",
+          "desc": "Angles de pulvérisation de 0°, 15°, 25° et 40° — un tube de buse, plusieurs types d'eau, commutation des types d'eau de 0-40° à volonté."
+        },
+        "5": {
+          "title": "Adaptable à 2 charges différentes",
+          "desc": "Le D15R peut être adapté à deux types d'accessoires de nettoyage : buses à angle réglable et buses oscillantes."
+        }
       }
     },
     "designed": {
@@ -263,9 +325,18 @@
       "title": "Adaptable à plusieurs configurations.",
       "lead": "Le drone de nettoyage D15R présente un design modulaire, compatible avec deux types d'accessoires de nettoyage : buses à angle réglable et buses oscillantes. Équipé de quatre buses de différents angles, il offre une solution de nettoyage aérien haute pression pratique, efficace et multi-scénarios.",
       "items": {
-        "0": { "title": "Buse à eau (fixe)", "desc": "La buse de 1500 mm maintient le fuselage éloigné du mur, sûre et fiable. La buse peut osciller horizontalement à gauche et à droite." },
-        "1": { "title": "Buse oscillante", "desc": "La plage d'oscillation de la buse est de ±15°, et la vitesse d'oscillation peut être ajustée sur la télécommande selon le niveau de salissure." },
-        "2": { "title": "Rampe de pulvérisation double oscillante", "desc": "Kit en option combinant buses à mousse et à eau pour une commutation à distance par un bouton sans atterrissage. Achève le ramollissement complet à la mousse et le rinçage à l'eau en un seul vol." }
+        "0": {
+          "title": "Buse à eau (fixe)",
+          "desc": "La buse de 1500 mm maintient le fuselage éloigné du mur, sûre et fiable. La buse peut osciller horizontalement à gauche et à droite."
+        },
+        "1": {
+          "title": "Buse oscillante",
+          "desc": "La plage d'oscillation de la buse est de ±15°, et la vitesse d'oscillation peut être ajustée sur la télécommande selon le niveau de salissure."
+        },
+        "2": {
+          "title": "Rampe de pulvérisation double oscillante",
+          "desc": "Kit en option combinant buses à mousse et à eau pour une commutation à distance par un bouton sans atterrissage. Achève le ramollissement complet à la mousse et le rinçage à l'eau en un seul vol."
+        }
       }
     },
     "output": {
@@ -273,11 +344,26 @@
       "unitTitle": "Capacité maximale en nettoyage léger de 1 000 m²/h",
       "note": "La brochure du produit spécifie 500 m²/h pour le nettoyage en profondeur. Le rendement réel dépend de la surface de travail, du niveau de contamination, du liquide de nettoyage et des conditions d'exploitation.",
       "rows": {
-        "0": { "label": "Pression d'eau crête", "value": "20 MPa (instantanée)" },
-        "1": { "label": "Pression d'eau nominale", "value": "10 MPa" },
-        "2": { "label": "Débit de pulvérisation", "value": "15 L/min" },
-        "3": { "label": "Distance buse-surface", "value": "2-3 m" },
-        "4": { "label": "Poids maximal au décollage", "value": "≤ 24.9 kg" }
+        "0": {
+          "label": "Pression d'eau crête",
+          "value": "20 MPa (instantanée)"
+        },
+        "1": {
+          "label": "Pression d'eau nominale",
+          "value": "10 MPa"
+        },
+        "2": {
+          "label": "Débit de pulvérisation",
+          "value": "15 L/min"
+        },
+        "3": {
+          "label": "Distance buse-surface",
+          "value": "2-3 m"
+        },
+        "4": {
+          "label": "Poids maximal au décollage",
+          "value": "≤ 24.9 kg"
+        }
       }
     },
     "spray": {
@@ -285,10 +371,22 @@
       "title": "4 types de buses de pulvérisation, installation sans outil.",
       "lead": "Le design modulaire des buses répond aux besoins des clients pour des tâches de nettoyage diversifiées. Un tube de buse, plusieurs types d'eau — commutation des types d'eau de 0-40° à volonté.",
       "nozzles": {
-        "0": { "angle": "Jet haute pression 0°", "desc": "Pour rincer les interstices, taches tenaces, etc." },
-        "1": { "angle": "Jet d'eau en éventail 15°", "desc": "Pour le rinçage rapide des taches." },
-        "2": { "angle": "Évacuation d'eau en éventail 25°", "desc": "Rinçage rapide du sable et de la terre, efficacité plus élevée." },
-        "3": { "angle": "Éventail large 40°", "desc": "Pour le rinçage de grandes surfaces après pulvérisation de détergent." }
+        "0": {
+          "angle": "Jet haute pression 0°",
+          "desc": "Pour rincer les interstices, taches tenaces, etc."
+        },
+        "1": {
+          "angle": "Jet d'eau en éventail 15°",
+          "desc": "Pour le rinçage rapide des taches."
+        },
+        "2": {
+          "angle": "Évacuation d'eau en éventail 25°",
+          "desc": "Rinçage rapide du sable et de la terre, efficacité plus élevée."
+        },
+        "3": {
+          "angle": "Éventail large 40°",
+          "desc": "Pour le rinçage de grandes surfaces après pulvérisation de détergent."
+        }
       }
     },
     "intelligence": {
@@ -296,10 +394,22 @@
       "title": "D15R 5.0 — Exploitation autonome avec planification d'itinéraires.",
       "lead": "La nouvelle version améliorée D15R 5.0 ajoute la planification intelligente des itinéraires pour réaliser une exploitation autonome. Elle peut définir des itinéraires pour différents scénarios de nettoyage, améliorant considérablement l'efficacité de travail et la flexibilité du drone de nettoyage.",
       "items": {
-        "0": { "title": "Couverture complète sans angles morts", "desc": "L'ensemble de la façade peut être couvert avec précision selon l'itinéraire et la hauteur définis, évitant les omissions et les angles morts qui peuvent survenir lors de l'inspection manuelle ou du vol ordinaire." },
-        "1": { "title": "Haute précision avec RTK", "desc": "Combiné à des technologies de positionnement avancées telles que le positionnement RTK, l'UAV peut maintenir une attitude de vol stable et une précision de position, obtenant ainsi des images et des données de mesure haute précision." },
-        "2": { "title": "Degré élevé d'automatisation", "desc": "L'itinéraire peut être planifié à l'avance via la station de contrôle au sol, et le drone peut voler automatiquement selon le chemin prédéfini sans pilotage manuel en temps réel." },
-        "3": { "title": "Exploitation à distance", "desc": "L'opérateur peut contrôler et surveiller le drone depuis un endroit sûr éloigné des façades dangereuses, avec des mesures opportunes en cas d'urgence." }
+        "0": {
+          "title": "Couverture complète sans angles morts",
+          "desc": "L'ensemble de la façade peut être couvert avec précision selon l'itinéraire et la hauteur définis, évitant les omissions et les angles morts qui peuvent survenir lors de l'inspection manuelle ou du vol ordinaire."
+        },
+        "1": {
+          "title": "Haute précision avec RTK",
+          "desc": "Combiné à des technologies de positionnement avancées telles que le positionnement RTK, l'UAV peut maintenir une attitude de vol stable et une précision de position, obtenant ainsi des images et des données de mesure haute précision."
+        },
+        "2": {
+          "title": "Degré élevé d'automatisation",
+          "desc": "L'itinéraire peut être planifié à l'avance via la station de contrôle au sol, et le drone peut voler automatiquement selon le chemin prédéfini sans pilotage manuel en temps réel."
+        },
+        "3": {
+          "title": "Exploitation à distance",
+          "desc": "L'opérateur peut contrôler et surveiller le drone depuis un endroit sûr éloigné des façades dangereuses, avec des mesures opportunes en cas d'urgence."
+        }
       }
     },
     "safety": {
@@ -307,9 +417,18 @@
       "title": "Double RTK + radar de suivi de façade pour un vol sécurisé.",
       "lead": "Permet des opérations en hauteur sans personnel. Remplace le travail manuel en hauteur par l'exploitation de drone télécommandé, modules RTK doubles intégrés pour un positionnement au centimètre près, et un système de perception intelligente avec radar de suivi de façade.",
       "cards": {
-        "0": { "title": "Remplacement du travail manuel en hauteur", "desc": "La télécommande par le personnel peut accomplir toutes sortes de tâches de nettoyage complexes en hauteur, éliminant les risques potentiels du travail en hauteur." },
-        "1": { "title": "Double RTK haute précision intégré", "desc": "Équipé de modules RTK doubles haute précision, il peut émettre des données de positionnement au centimètre près, garantissant un positionnement précis et fiable et une exploitation sûre." },
-        "2": { "title": "Système de Perception Intelligente", "desc": "Le radar de suivi de façade monté à l'avant détecte les informations de distance en temps réel vers l'avant, maintient une distance sûre et garantit un vol plus sécurisé." }
+        "0": {
+          "title": "Remplacement du travail manuel en hauteur",
+          "desc": "La télécommande par le personnel peut accomplir toutes sortes de tâches de nettoyage complexes en hauteur, éliminant les risques potentiels du travail en hauteur."
+        },
+        "1": {
+          "title": "Double RTK haute précision intégré",
+          "desc": "Équipé de modules RTK doubles haute précision, il peut émettre des données de positionnement au centimètre près, garantissant un positionnement précis et fiable et une exploitation sûre."
+        },
+        "2": {
+          "title": "Système de Perception Intelligente",
+          "desc": "Le radar de suivi de façade monté à l'avant détecte les informations de distance en temps réel vers l'avant, maintient une distance sûre et garantit un vol plus sécurisé."
+        }
       }
     },
     "multiangle": {
@@ -317,10 +436,22 @@
       "title": "Diverses buses, couvrant des angles difficiles.",
       "lead": "Design modulaire pour différentes charges, exploitation stable en hauteur, manipulation flexible et couverture multi-angles des surfaces inférieures et supérieures.",
       "items": {
-        "0": { "title": "Design modulaire", "desc": "Les supports et buses optimaux peuvent être personnalisés selon différentes tâches pour répondre aux besoins de configuration de diverses exigences de nettoyage en hauteur." },
-        "1": { "title": "Exploitation stable en hauteur", "desc": "Équipé de double RTK et d'un système en boucle fermée 'Perception-Décision-Exécution', s'adaptant à diverses exigences de nettoyage basées sur la hauteur." },
-        "2": { "title": "Manipulation flexible", "desc": "Déplacement flexible, pas peur des distances étroites entre bâtiments et autres espaces complexes." },
-        "3": { "title": "Couverture multi-angles des surfaces inférieures et supérieures", "desc": "Prenant en charge différentes configurations, il peut facilement couvrir les surfaces inférieures et supérieures et autres surfaces complexes." }
+        "0": {
+          "title": "Design modulaire",
+          "desc": "Les supports et buses optimaux peuvent être personnalisés selon différentes tâches pour répondre aux besoins de configuration de diverses exigences de nettoyage en hauteur."
+        },
+        "1": {
+          "title": "Exploitation stable en hauteur",
+          "desc": "Équipé de double RTK et d'un système en boucle fermée 'Perception-Décision-Exécution', s'adaptant à diverses exigences de nettoyage basées sur la hauteur."
+        },
+        "2": {
+          "title": "Manipulation flexible",
+          "desc": "Déplacement flexible, pas peur des distances étroites entre bâtiments et autres espaces complexes."
+        },
+        "3": {
+          "title": "Couverture multi-angles des surfaces inférieures et supérieures",
+          "desc": "Prenant en charge différentes configurations, il peut facilement couvrir les surfaces inférieures et supérieures et autres surfaces complexes."
+        }
       }
     },
     "compare": {
@@ -329,12 +460,36 @@
       "colD15r": "Système de nettoyage aérien D15R",
       "colManual": "Exploitation manuelle traditionnelle",
       "rows": {
-        "0": { "label": "Sécurité", "d15r": "L'exploitation du drone remplace le travail manuel en hauteur, réduisant considérablement le risque", "manual": "L'exploitation manuelle présente des risques de sécurité potentiels" },
-        "1": { "label": "Efficacité de nettoyage", "d15r": "1 000 m²/h, nettoyage rapide haute pression, prend en charge un fonctionnement ininterrompu", "manual": "Vitesse de nettoyage plus lente, temps d'exploitation plus long" },
-        "2": { "label": "Coût", "d15r": "Investissement unique dans l'équipement et faibles coûts d'exploitation à long terme", "manual": "Coût de main-d'œuvre élevé, chaque intervention nécessite beaucoup de personnel et de temps" },
-        "3": { "label": "Résultat de nettoyage", "d15r": "Nettoyage haute pression à 20 MPa, avec des agents de nettoyage professionnels, élimine en profondeur les taches tenaces et les moisissures", "manual": "Difficile à nettoyer en profondeur, affecte l'esthétique du bâtiment et la durée de vie du matériau" },
-        "4": { "label": "Temps d'installation", "d15r": "Installation rapide en 1 min", "manual": "Consomme du temps et de la main-d'œuvre : monter des échafaudages ou des nacelles" },
-        "5": { "label": "Flexibilité opérationnelle", "d15r": "2 types de montage, 4 buses, couverture multi-angles et multi-scénarios", "manual": "Faible flexibilité, difficile de couvrir toutes les surfaces de travail" }
+        "0": {
+          "label": "Sécurité",
+          "d15r": "L'exploitation du drone remplace le travail manuel en hauteur, réduisant considérablement le risque",
+          "manual": "L'exploitation manuelle présente des risques de sécurité potentiels"
+        },
+        "1": {
+          "label": "Efficacité de nettoyage",
+          "d15r": "1 000 m²/h, nettoyage rapide haute pression, prend en charge un fonctionnement ininterrompu",
+          "manual": "Vitesse de nettoyage plus lente, temps d'exploitation plus long"
+        },
+        "2": {
+          "label": "Coût",
+          "d15r": "Investissement unique dans l'équipement et faibles coûts d'exploitation à long terme",
+          "manual": "Coût de main-d'œuvre élevé, chaque intervention nécessite beaucoup de personnel et de temps"
+        },
+        "3": {
+          "label": "Résultat de nettoyage",
+          "d15r": "Nettoyage haute pression à 20 MPa, avec des agents de nettoyage professionnels, élimine en profondeur les taches tenaces et les moisissures",
+          "manual": "Difficile à nettoyer en profondeur, affecte l'esthétique du bâtiment et la durée de vie du matériau"
+        },
+        "4": {
+          "label": "Temps d'installation",
+          "d15r": "Installation rapide en 1 min",
+          "manual": "Consomme du temps et de la main-d'œuvre : monter des échafaudages ou des nacelles"
+        },
+        "5": {
+          "label": "Flexibilité opérationnelle",
+          "d15r": "2 types de montage, 4 buses, couverture multi-angles et multi-scénarios",
+          "manual": "Faible flexibilité, difficile de couvrir toutes les surfaces de travail"
+        }
       }
     },
     "applications": {
@@ -347,19 +502,49 @@
         "application": "Application"
       },
       "cases": {
-        "0": { "badge": "case", "title": "Maintenance d'une façade de bâtiment à Dongguan" },
-        "1": { "badge": "case", "title": "Nettoyage de mur extérieur d'un bâtiment à Songgang" },
-        "2": { "badge": "case", "title": "Maintenance de mur extérieur d'un bâtiment à Shenzhen" },
-        "3": { "badge": "case", "title": "Maintenance de bâtiment à Shenzhen" },
-        "4": { "badge": "operation", "title": "Flux de travail de nettoyage aérien de façade" },
-        "5": { "badge": "application", "title": "Nettoyage de panneaux photovoltaïques" }
+        "0": {
+          "badge": "case",
+          "title": "Maintenance d'une façade de bâtiment à Dongguan"
+        },
+        "1": {
+          "badge": "case",
+          "title": "Nettoyage de mur extérieur d'un bâtiment à Songgang"
+        },
+        "2": {
+          "badge": "case",
+          "title": "Maintenance de mur extérieur d'un bâtiment à Shenzhen"
+        },
+        "3": {
+          "badge": "case",
+          "title": "Maintenance de bâtiment à Shenzhen"
+        },
+        "4": {
+          "badge": "operation",
+          "title": "Flux de travail de nettoyage aérien de façade"
+        },
+        "5": {
+          "badge": "application",
+          "title": "Nettoyage de panneaux photovoltaïques"
+        }
       }
     },
     "scenarios": {
-      "0": { "title": "Nettoyage de bâtiments", "desc": "Maintenance de façades extérieures et de murs-rideaux" },
-      "1": { "title": "Nettoyage photovoltaïque", "desc": "Lavage de panneaux solaires sur de grandes surfaces" },
-      "2": { "title": "Nettoyage d'éoliennes", "desc": "Maintenance de surfaces en hauteur" },
-      "3": { "title": "Nettoyage de panneaux autoroutiers", "desc": "Infrastructures routières difficiles d'accès" }
+      "0": {
+        "title": "Nettoyage de bâtiments",
+        "desc": "Maintenance de façades extérieures et de murs-rideaux"
+      },
+      "1": {
+        "title": "Nettoyage photovoltaïque",
+        "desc": "Lavage de panneaux solaires sur de grandes surfaces"
+      },
+      "2": {
+        "title": "Nettoyage d'éoliennes",
+        "desc": "Maintenance de surfaces en hauteur"
+      },
+      "3": {
+        "title": "Nettoyage de panneaux autoroutiers",
+        "desc": "Infrastructures routières difficiles d'accès"
+      }
     },
     "kit": {
       "eyebrow": "Pack standard",
@@ -384,25 +569,82 @@
       "title": "Le D15R en un coup d'œil.",
       "lead": "Les valeurs de spécification ci-dessous sont retranscrites de la brochure produit D15R V6.0.",
       "items": {
-        "0": { "label": "Modèle", "value": "D15R" },
-        "1": { "label": "Dimensions générales (bras + hélices déployés)", "value": "1945 × 1945 × 730 mm" },
-        "2": { "label": "Dimensions générales (bras déployés seuls)", "value": "1150 × 1150 × 730 mm" },
-        "3": { "label": "Débit de pulvérisation", "value": "15 L/min" },
-        "4": { "label": "Longueur du tuyau", "value": "100 m" },
-        "5": { "label": "Temps de vol", "value": "45 min mur-rideau / 55 min PV / 30 min éolienne" },
-        "6": { "label": "Distance buse-surface", "value": "2-3 m (réglable)" },
-        "7": { "label": "Batterie", "value": "14S 22000 mAh" },
-        "8": { "label": "Tube de pulvérisation", "value": "1500 mm" },
-        "9": { "label": "Vitesse de vol horizontale maximale", "value": "15 m/s" },
-        "10": { "label": "Température de fonctionnement", "value": "-10°C à 40°C" },
-        "11": { "label": "Humidité de fonctionnement", "value": "0-90%" },
-        "12": { "label": "Vitesse de vent maximale", "value": "12 m/s" },
-        "13": { "label": "Pression d'eau nominale", "value": "10 MPa" },
-        "14": { "label": "Pression d'eau maximale (instantanée)", "value": "20 MPa" },
-        "15": { "label": "Nettoyage léger", "value": "1000 m²/h" },
-        "16": { "label": "Nettoyage en profondeur", "value": "500 m²/h" },
-        "17": { "label": "Temps de charge", "value": "40 minutes" },
-        "18": { "label": "Poids maximal au décollage", "value": "≤ 24.9 kg" }
+        "0": {
+          "label": "Modèle",
+          "value": "D15R"
+        },
+        "1": {
+          "label": "Dimensions générales (bras + hélices déployés)",
+          "value": "1945 × 1945 × 730 mm"
+        },
+        "2": {
+          "label": "Dimensions générales (bras déployés seuls)",
+          "value": "1150 × 1150 × 730 mm"
+        },
+        "3": {
+          "label": "Débit de pulvérisation",
+          "value": "15 L/min"
+        },
+        "4": {
+          "label": "Longueur du tuyau",
+          "value": "100 m"
+        },
+        "5": {
+          "label": "Temps de vol",
+          "value": "45 min mur-rideau / 55 min PV / 30 min éolienne"
+        },
+        "6": {
+          "label": "Distance buse-surface",
+          "value": "2-3 m (réglable)"
+        },
+        "7": {
+          "label": "Batterie",
+          "value": "14S 22000 mAh"
+        },
+        "8": {
+          "label": "Tube de pulvérisation",
+          "value": "1500 mm"
+        },
+        "9": {
+          "label": "Vitesse de vol horizontale maximale",
+          "value": "15 m/s"
+        },
+        "10": {
+          "label": "Température de fonctionnement",
+          "value": "-10°C à 40°C"
+        },
+        "11": {
+          "label": "Humidité de fonctionnement",
+          "value": "0-90%"
+        },
+        "12": {
+          "label": "Vitesse de vent maximale",
+          "value": "12 m/s"
+        },
+        "13": {
+          "label": "Pression d'eau nominale",
+          "value": "10 MPa"
+        },
+        "14": {
+          "label": "Pression d'eau maximale (instantanée)",
+          "value": "20 MPa"
+        },
+        "15": {
+          "label": "Nettoyage léger",
+          "value": "1000 m²/h"
+        },
+        "16": {
+          "label": "Nettoyage en profondeur",
+          "value": "500 m²/h"
+        },
+        "17": {
+          "label": "Temps de charge",
+          "value": "40 minutes"
+        },
+        "18": {
+          "label": "Poids maximal au décollage",
+          "value": "≤ 24.9 kg"
+        }
       }
     },
     "video": {
@@ -428,26 +670,63 @@
       "ctaSecondary": "Contacter le service commercial",
       "badgeTitle": "Vente directe usine",
       "badgeText": "Expédition et assistance dans le monde entier",
-      "stats": { "0": "Pulvérisation 80 L", "1": "Épandage 120 L", "2": "Charge utile 85 kg" }
+      "stats": {
+        "0": "Pulvérisation 80 L",
+        "1": "Épandage 120 L",
+        "2": "Charge utile 85 kg"
+      }
     },
     "strip": {
-      "0": { "value": "80 L", "label": "Réservoir de pulvérisation" },
-      "1": { "value": "120 L", "label": "Réservoir d'épandage" },
-      "2": { "value": "85 kg", "label": "Charge utile max." },
-      "3": { "value": "10 m", "label": "Largeur de travail" },
-      "4": { "value": "IP67", "label": "Protection" }
+      "0": {
+        "value": "80 L",
+        "label": "Réservoir de pulvérisation"
+      },
+      "1": {
+        "value": "120 L",
+        "label": "Réservoir d'épandage"
+      },
+      "2": {
+        "value": "85 kg",
+        "label": "Charge utile max."
+      },
+      "3": {
+        "value": "10 m",
+        "label": "Largeur de travail"
+      },
+      "4": {
+        "value": "IP67",
+        "label": "Protection"
+      }
     },
     "why": {
       "eyebrow": "Pourquoi le choisir",
       "title": "Deux missions, une seule cellule.",
       "lead": "Pourquoi les agriculteurs et les prestataires de pulvérisation choisissent le FP800 pour protéger les grandes parcelles.",
       "cards": {
-        "0": { "title": "Pulvériser et épandre avec un seul appareil", "desc": "Remplacez le réservoir de pulvérisation de 80 L par l'épandeur à vis sans fin de 120 L pour passer de la pulvérisation à la fertilisation et au semis sans changer de plateforme." },
-        "1": { "title": "Charge utile maximale de 85 kg", "desc": "Transportez davantage à chaque vol, réduisez les arrêts de remplissage et hissez jusqu'à 85 kg avec la corde haute résistance pour vos transports agricoles." },
-        "2": { "title": "Quatre buses centrifuges", "desc": "Les buses arrière délivrent jusqu'à 40 L/min avec des gouttelettes réglables de 30-500 µm et une précision de pulvérisation à 5% près." },
-        "3": { "title": "Double détection radar", "desc": "Le LiDAR associé au radar à antenne réseau mmWave balaie sur 360°, suit les cibles dynamiques et statiques et planifie les trajectoires d'évitement en temps réel." },
-        "4": { "title": "Cellule tout temps", "desc": "Châssis en aluminium de qualité aérospatiale avec protection IP67, bras pliables et câblage soigné pour un entretien rapide au champ." },
-        "5": { "title": "Fonctionnement continu", "desc": "La charge rapide en cycle sur deux batteries avec le chargeur 12 kW à refroidissement air maintient le FP800 en vol durant les longues fenêtres de pulvérisation." }
+        "0": {
+          "title": "Pulvériser et épandre avec un seul appareil",
+          "desc": "Remplacez le réservoir de pulvérisation de 80 L par l'épandeur à vis sans fin de 120 L pour passer de la pulvérisation à la fertilisation et au semis sans changer de plateforme."
+        },
+        "1": {
+          "title": "Charge utile maximale de 85 kg",
+          "desc": "Transportez davantage à chaque vol, réduisez les arrêts de remplissage et hissez jusqu'à 85 kg avec la corde haute résistance pour vos transports agricoles."
+        },
+        "2": {
+          "title": "Quatre buses centrifuges",
+          "desc": "Les buses arrière délivrent jusqu'à 40 L/min avec des gouttelettes réglables de 30-500 µm et une précision de pulvérisation à 5% près."
+        },
+        "3": {
+          "title": "Double détection radar",
+          "desc": "Le LiDAR associé au radar à antenne réseau mmWave balaie sur 360°, suit les cibles dynamiques et statiques et planifie les trajectoires d'évitement en temps réel."
+        },
+        "4": {
+          "title": "Cellule tout temps",
+          "desc": "Châssis en aluminium de qualité aérospatiale avec protection IP67, bras pliables et câblage soigné pour un entretien rapide au champ."
+        },
+        "5": {
+          "title": "Fonctionnement continu",
+          "desc": "La charge rapide en cycle sur deux batteries avec le chargeur 12 kW à refroidissement air maintient le FP800 en vol durant les longues fenêtres de pulvérisation."
+        }
       }
     },
     "designed": {
@@ -455,9 +734,18 @@
       "title": "Conçu pour le terrain.",
       "lead": "Une plateforme conçue pour enchaîner les missions : bras pliables, dosage à haut débit et système énergétique pensé pour la chaleur, la poussière et les longues journées.",
       "items": {
-        "0": { "title": "Conception de la plateforme", "desc": "Châssis en aluminium de qualité aérospatiale avec protection IP67 et hélices de 63 pouces durables et résistantes à la chaleur." },
-        "1": { "title": "Dosage à double canal", "desc": "Des pompes de dosage à double canal à haut débit alimentent quatre buses centrifuges arrière sur une largeur de pulvérisation pouvant atteindre 10 m." },
-        "2": { "title": "Architecture facile d'entretien", "desc": "Un câblage soigneusement organisé améliore l'efficacité de la maintenance et la remise en œuvre entre les missions." }
+        "0": {
+          "title": "Conception de la plateforme",
+          "desc": "Châssis en aluminium de qualité aérospatiale avec protection IP67 et hélices de 63 pouces durables et résistantes à la chaleur."
+        },
+        "1": {
+          "title": "Dosage à double canal",
+          "desc": "Des pompes de dosage à double canal à haut débit alimentent quatre buses centrifuges arrière sur une largeur de pulvérisation pouvant atteindre 10 m."
+        },
+        "2": {
+          "title": "Architecture facile d'entretien",
+          "desc": "Un câblage soigneusement organisé améliore l'efficacité de la maintenance et la remise en œuvre entre les missions."
+        }
       }
     },
     "output": {
@@ -467,11 +755,26 @@
       "unitTitle": "Écart de précision de pulvérisation",
       "note": "Valeurs nominatives d'usine. Débit d'alimentation maximal testé avec de l'urée à granulés moyens ; le rendement réel varie selon la culture, le terrain et la météo.",
       "rows": {
-        "0": { "label": "Réservoir de pulvérisation", "value": "80 L" },
-        "1": { "label": "Réservoir d'épandage", "value": "120 L" },
-        "2": { "label": "Largeur de travail", "value": "Jusqu'à 10 m" },
-        "3": { "label": "Débit d'alimentation max.", "value": "400 L/min" },
-        "4": { "label": "Taille des gouttelettes", "value": "30-500 µm" }
+        "0": {
+          "label": "Réservoir de pulvérisation",
+          "value": "80 L"
+        },
+        "1": {
+          "label": "Réservoir d'épandage",
+          "value": "120 L"
+        },
+        "2": {
+          "label": "Largeur de travail",
+          "value": "Jusqu'à 10 m"
+        },
+        "3": {
+          "label": "Débit d'alimentation max.",
+          "value": "400 L/min"
+        },
+        "4": {
+          "label": "Taille des gouttelettes",
+          "value": "30-500 µm"
+        }
       }
     },
     "intelligence": {
@@ -479,10 +782,22 @@
       "title": "Détection intelligente, vol autonome.",
       "lead": "Le FPV couleur et une radiocommande toute nouvelle offrent à l'opérateur une image claire, tandis que le double radar sécurise la trajectoire de vol.",
       "items": {
-        "0": { "title": "Système à double radar", "desc": "LiDAR + radar à antenne réseau mmWave avec balayage 360° pour une détection d'obstacles à large couverture." },
-        "1": { "title": "Évitement en temps réel", "desc": "Suit simultanément les cibles dynamiques et statiques et calcule à la volée les trajectoires d'évitement optimales." },
-        "2": { "title": "FPV couleur intégrale", "desc": "Des détails d'image nets même en faible luminosité, grâce aux deux projecteurs 80 W haute luminosité." },
-        "3": { "title": "Perception à basse altitude", "desc": "Évitement intelligent des obstacles bas sur des couverts culturaux irréguliers." }
+        "0": {
+          "title": "Système à double radar",
+          "desc": "LiDAR + radar à antenne réseau mmWave avec balayage 360° pour une détection d'obstacles à large couverture."
+        },
+        "1": {
+          "title": "Évitement en temps réel",
+          "desc": "Suit simultanément les cibles dynamiques et statiques et calcule à la volée les trajectoires d'évitement optimales."
+        },
+        "2": {
+          "title": "FPV couleur intégrale",
+          "desc": "Des détails d'image nets même en faible luminosité, grâce aux deux projecteurs 80 W haute luminosité."
+        },
+        "3": {
+          "title": "Perception à basse altitude",
+          "desc": "Évitement intelligent des obstacles bas sur des couverts culturaux irréguliers."
+        }
       }
     },
     "multiangle": {
@@ -490,10 +805,22 @@
       "title": "Tous les angles couverts.",
       "lead": "Une seule plateforme pour pulvériser, épandre et lever — découvrez comment fonctionne chaque module de mission.",
       "items": {
-        "0": { "title": "Plateforme", "desc": "Bras pliables pour une transition et un transport rapides entre les parcelles." },
-        "1": { "title": "Pulvérisation", "desc": "Quatre buses centrifuges arrière à gouttelettes atomisées réglables." },
-        "2": { "title": "Épandage", "desc": "Le disque centrifuge assure une largeur d'épandage uniforme pouvant atteindre 10 m." },
-        "3": { "title": "Levage", "desc": "Système antibalancement intelligent, libération automatique du crochet et pesée en temps réel." }
+        "0": {
+          "title": "Plateforme",
+          "desc": "Bras pliables pour une transition et un transport rapides entre les parcelles."
+        },
+        "1": {
+          "title": "Pulvérisation",
+          "desc": "Quatre buses centrifuges arrière à gouttelettes atomisées réglables."
+        },
+        "2": {
+          "title": "Épandage",
+          "desc": "Le disque centrifuge assure une largeur d'épandage uniforme pouvant atteindre 10 m."
+        },
+        "3": {
+          "title": "Levage",
+          "desc": "Système antibalancement intelligent, libération automatique du crochet et pesée en temps réel."
+        }
       }
     },
     "compare": {
@@ -502,12 +829,36 @@
       "colD15r": "FP800",
       "colManual": "Méthode manuelle",
       "rows": {
-        "0": { "label": "Efficacité", "d15r": "Jusqu'à 10 m de largeur traitée par passage", "manual": "Pulvérisateur à dos, rang par rang" },
-        "1": { "label": "Capacité", "d15r": "80 L pulvérisation · 120 L épandage", "manual": "Environ 16 L par remplissage" },
-        "2": { "label": "Exposition aux produits phytosanitaires", "d15r": "L'opérateur reste à l'écart de la pulvérisation", "manual": "Exposition continue au champ" },
-        "3": { "label": "Régularité", "d15r": "Hauteur régulée par radar, débit à 5% près", "manual": "Varie selon l'opérateur" },
-        "4": { "label": "Accès aux parcelles", "d15r": "Parcelles humides, en pente ou à cultures hautes", "manual": "Limité par les conditions du sol" },
-        "5": { "label": "Missions supplémentaires", "d15r": "Fertilisation, semis et levage de 85 kg", "manual": "Matériel et main-d'œuvre distincts" }
+        "0": {
+          "label": "Efficacité",
+          "d15r": "Jusqu'à 10 m de largeur traitée par passage",
+          "manual": "Pulvérisateur à dos, rang par rang"
+        },
+        "1": {
+          "label": "Capacité",
+          "d15r": "80 L pulvérisation · 120 L épandage",
+          "manual": "Environ 16 L par remplissage"
+        },
+        "2": {
+          "label": "Exposition aux produits phytosanitaires",
+          "d15r": "L'opérateur reste à l'écart de la pulvérisation",
+          "manual": "Exposition continue au champ"
+        },
+        "3": {
+          "label": "Régularité",
+          "d15r": "Hauteur régulée par radar, débit à 5% près",
+          "manual": "Varie selon l'opérateur"
+        },
+        "4": {
+          "label": "Accès aux parcelles",
+          "d15r": "Parcelles humides, en pente ou à cultures hautes",
+          "manual": "Limité par les conditions du sol"
+        },
+        "5": {
+          "label": "Missions supplémentaires",
+          "d15r": "Fertilisation, semis et levage de 85 kg",
+          "manual": "Matériel et main-d'œuvre distincts"
+        }
       }
     },
     "specs": {
@@ -515,25 +866,82 @@
       "title": "Caractéristiques techniques.",
       "lead": "Valeurs nominatives d'usine du drone agricole FP800.",
       "items": {
-        "0": { "label": "Capacité du réservoir de pulvérisation", "value": "80 L" },
-        "1": { "label": "Capacité du réservoir d'épandage", "value": "120 L" },
-        "2": { "label": "Charge utile maximale", "value": "85 kg" },
-        "3": { "label": "Débit maximal", "value": "40 L/min" },
-        "4": { "label": "Type d'épandeur", "value": "Vis sans fin" },
-        "5": { "label": "Taille des gouttelettes", "value": "30-500 µm" },
-        "6": { "label": "Débit d'épandage maximal", "value": "400 L/min" },
-        "7": { "label": "Largeur de pulvérisation", "value": "Jusqu'à 10 m" },
-        "8": { "label": "Largeur d'épandage", "value": "Jusqu'à 10 m" },
-        "9": { "label": "Buses", "value": "Quatre buses centrifuges arrière" },
-        "10": { "label": "Précision de pulvérisation", "value": "À 5% près" },
-        "11": { "label": "Système radar", "value": "LiDAR + antenne réseau mmWave" },
-        "12": { "label": "Châssis", "value": "Aluminium de qualité aérospatiale, IP67" },
-        "13": { "label": "Hélices", "value": "63 pouces, durables et résistantes à la chaleur" },
-        "14": { "label": "Batterie", "value": "Intelligente, haute tension" },
-        "15": { "label": "Chargeur", "value": "12 kW à refroidissement air" },
-        "16": { "label": "Levage", "value": "85 kg, corde haute résistance" },
-        "17": { "label": "Éclairage", "value": "Deux projecteurs 80 W haute luminosité" },
-        "18": { "label": "FPV", "value": "Couleur intégrale, efficace en faible luminosité" }
+        "0": {
+          "label": "Capacité du réservoir de pulvérisation",
+          "value": "80 L"
+        },
+        "1": {
+          "label": "Capacité du réservoir d'épandage",
+          "value": "120 L"
+        },
+        "2": {
+          "label": "Charge utile maximale",
+          "value": "85 kg"
+        },
+        "3": {
+          "label": "Débit maximal",
+          "value": "40 L/min"
+        },
+        "4": {
+          "label": "Type d'épandeur",
+          "value": "Vis sans fin"
+        },
+        "5": {
+          "label": "Taille des gouttelettes",
+          "value": "30-500 µm"
+        },
+        "6": {
+          "label": "Débit d'épandage maximal",
+          "value": "400 L/min"
+        },
+        "7": {
+          "label": "Largeur de pulvérisation",
+          "value": "Jusqu'à 10 m"
+        },
+        "8": {
+          "label": "Largeur d'épandage",
+          "value": "Jusqu'à 10 m"
+        },
+        "9": {
+          "label": "Buses",
+          "value": "Quatre buses centrifuges arrière"
+        },
+        "10": {
+          "label": "Précision de pulvérisation",
+          "value": "À 5% près"
+        },
+        "11": {
+          "label": "Système radar",
+          "value": "LiDAR + antenne réseau mmWave"
+        },
+        "12": {
+          "label": "Châssis",
+          "value": "Aluminium de qualité aérospatiale, IP67"
+        },
+        "13": {
+          "label": "Hélices",
+          "value": "63 pouces, durables et résistantes à la chaleur"
+        },
+        "14": {
+          "label": "Batterie",
+          "value": "Intelligente, haute tension"
+        },
+        "15": {
+          "label": "Chargeur",
+          "value": "12 kW à refroidissement air"
+        },
+        "16": {
+          "label": "Levage",
+          "value": "85 kg, corde haute résistance"
+        },
+        "17": {
+          "label": "Éclairage",
+          "value": "Deux projecteurs 80 W haute luminosité"
+        },
+        "18": {
+          "label": "FPV",
+          "value": "Couleur intégrale, efficace en faible luminosité"
+        }
       }
     },
     "cta": {
@@ -560,23 +968,56 @@
       "badgeText": "Une plateforme de nettoyage photovoltaïque de 50 litres avec planification des trajectoires entièrement automatisée."
     },
     "strip": {
-      "0": { "value": "50 L", "label": "Capacité du réservoir d'eau" },
-      "1": { "value": "8-10 MPa", "label": "Nettoyage haute pression" },
-      "2": { "value": "0-45°", "label": "Angle d'oscillation des bras" },
-      "3": { "value": "Double RTK", "label": "Positionnement centimétrique" },
-      "4": { "value": "5 500 m²", "label": "Nettoyage par jour (étude de cas)" }
+      "0": {
+        "value": "50 L",
+        "label": "Capacité du réservoir d'eau"
+      },
+      "1": {
+        "value": "8-10 MPa",
+        "label": "Nettoyage haute pression"
+      },
+      "2": {
+        "value": "0-45°",
+        "label": "Angle d'oscillation des bras"
+      },
+      "3": {
+        "value": "Double RTK",
+        "label": "Positionnement centimétrique"
+      },
+      "4": {
+        "value": "5 500 m²",
+        "label": "Nettoyage par jour (étude de cas)"
+      }
     },
     "why": {
       "eyebrow": "Pourquoi le choisir",
       "title": "Une seule plateforme pour tous les travaux de nettoyage PV.",
       "lead": "Des centrales au sol aux installations sur bassins, le D50R remplace le nettoyage manuel en hauteur par un flux de travail automatisé par drone.",
       "cards": {
-        "0": { "title": "Grand réservoir d'eau de 50 L", "desc": "Moins de remplissages et changement de liquide rapide pour couvrir de grandes surfaces en une seule opération." },
-        "1": { "title": "Automatisation de bout en bout", "desc": "Nettoyage et planification des trajectoires de A à Z : la mission est planifiée une fois, le drone l'exécute en autonomie." },
-        "2": { "title": "Buses haute pression standard", "desc": "Des jets haute pression atteignent les interstices et les salissures tenaces, avec un jet ponctuel de 0° pour la saleté la plus incrustée." },
-        "3": { "title": "Contrôle de vol intégré", "desc": "Un seul opérateur pilote et nettoie depuis une station unique, avec intégration personnalisée pour plusieurs plateformes de vol." },
-        "4": { "title": "Double RTK et radar d'obstacles", "desc": "Positionnement centimétrique et détection frontale d'obstacles gardent chaque passage stable et sûr." },
-        "5": { "title": "Remplace le travail manuel en hauteur", "desc": "Pas d'échafaudage, pas de cordes, pas d'ouvriers sur les toits — un pilote et un opérateur au sol font tout le travail." }
+        "0": {
+          "title": "Grand réservoir d'eau de 50 L",
+          "desc": "Moins de remplissages et changement de liquide rapide pour couvrir de grandes surfaces en une seule opération."
+        },
+        "1": {
+          "title": "Automatisation de bout en bout",
+          "desc": "Nettoyage et planification des trajectoires de A à Z : la mission est planifiée une fois, le drone l'exécute en autonomie."
+        },
+        "2": {
+          "title": "Buses haute pression standard",
+          "desc": "Des jets haute pression atteignent les interstices et les salissures tenaces, avec un jet ponctuel de 0° pour la saleté la plus incrustée."
+        },
+        "3": {
+          "title": "Contrôle de vol intégré",
+          "desc": "Un seul opérateur pilote et nettoie depuis une station unique, avec intégration personnalisée pour plusieurs plateformes de vol."
+        },
+        "4": {
+          "title": "Double RTK et radar d'obstacles",
+          "desc": "Positionnement centimétrique et détection frontale d'obstacles gardent chaque passage stable et sûr."
+        },
+        "5": {
+          "title": "Remplace le travail manuel en hauteur",
+          "desc": "Pas d'échafaudage, pas de cordes, pas d'ouvriers sur les toits — un pilote et un opérateur au sol font tout le travail."
+        }
       }
     },
     "designed": {
@@ -584,9 +1025,18 @@
       "title": "Design modulaire, prêt pour tous les scénarios.",
       "lead": "Une plateforme de nettoyage modulaire qui s'adapte à chaque site photovoltaïque — réservoir, bras et buses s'échangent selon la tâche.",
       "items": {
-        "0": { "title": "Réservoir d'eau de 50 L", "desc": "Une grande capacité par remplissage couvre de vastes installations, et la conception à changement rapide facilite les recharges." },
-        "1": { "title": "Double bras de pulvérisation oscillants", "desc": "Les bras oscillent de 0° à 45°, lavant de grandes surfaces de panneaux de manière uniforme en un seul passage." },
-        "2": { "title": "Compatibilité multi-buses", "desc": "Buses haute pression standard pour les interstices et les taches tenaces, plus un jet ponctuel de 0° pour les zones les plus encrassées." }
+        "0": {
+          "title": "Réservoir d'eau de 50 L",
+          "desc": "Une grande capacité par remplissage couvre de vastes installations, et la conception à changement rapide facilite les recharges."
+        },
+        "1": {
+          "title": "Double bras de pulvérisation oscillants",
+          "desc": "Les bras oscillent de 0° à 45°, lavant de grandes surfaces de panneaux de manière uniforme en un seul passage."
+        },
+        "2": {
+          "title": "Compatibilité multi-buses",
+          "desc": "Buses haute pression standard pour les interstices et les taches tenaces, plus un jet ponctuel de 0° pour les zones les plus encrassées."
+        }
       }
     },
     "output": {
@@ -595,11 +1045,26 @@
       "unitTitle": "Nettoyés par jour dans le cas de Huizhou (centrale photovoltaïque aquacole)",
       "note": "Chiffres du projet de 100 000 m² / 20 MW : un pilote et un opérateur au sol ont terminé en 18 jours, réduisant le délai de plus de 60%.",
       "rows": {
-        "0": { "label": "Surface par vol", "value": "138 m²" },
-        "1": { "label": "Décollages par heure", "value": "5" },
-        "2": { "label": "Rythme de nettoyage manuel", "value": "Moins de 900 m² par personne et par jour" },
-        "3": { "label": "Délai du projet", "value": "18 jours (plus de 30 jours manuellement)" },
-        "4": { "label": "Gain de production", "value": "12-15% après nettoyage" }
+        "0": {
+          "label": "Surface par vol",
+          "value": "138 m²"
+        },
+        "1": {
+          "label": "Décollages par heure",
+          "value": "5"
+        },
+        "2": {
+          "label": "Rythme de nettoyage manuel",
+          "value": "Moins de 900 m² par personne et par jour"
+        },
+        "3": {
+          "label": "Délai du projet",
+          "value": "18 jours (plus de 30 jours manuellement)"
+        },
+        "4": {
+          "label": "Gain de production",
+          "value": "12-15% après nettoyage"
+        }
       }
     },
     "intelligence": {
@@ -607,10 +1072,22 @@
       "title": "Automatisation complète, du plan au nettoyage.",
       "lead": "Le D50R planifie les trajectoires de nettoyage sur la station au sol et les vole en autonomie, couvrant chaque panneau sans angle mort.",
       "items": {
-        "0": { "title": "Couverture totale planifiée", "desc": "Les missions sont planifiées par site et par hauteur, évitant omissions et angles morts sur toute l'installation." },
-        "1": { "title": "Vol de précision RTK", "desc": "Le double RTK maintient la position et l'attitude précises pour des trajectoires de nettoyage cohérentes et répétables." },
-        "2": { "title": "Haut degré d'automatisation", "desc": "Les trajectoires planifiées sur la station sont exécutées automatiquement, sans contrôle manuel en temps réel." },
-        "3": { "title": "Opération à distance", "desc": "L'opérateur surveille et contrôle le drone depuis le sol, à l'écart de la zone de nettoyage." }
+        "0": {
+          "title": "Couverture totale planifiée",
+          "desc": "Les missions sont planifiées par site et par hauteur, évitant omissions et angles morts sur toute l'installation."
+        },
+        "1": {
+          "title": "Vol de précision RTK",
+          "desc": "Le double RTK maintient la position et l'attitude précises pour des trajectoires de nettoyage cohérentes et répétables."
+        },
+        "2": {
+          "title": "Haut degré d'automatisation",
+          "desc": "Les trajectoires planifiées sur la station sont exécutées automatiquement, sans contrôle manuel en temps réel."
+        },
+        "3": {
+          "title": "Opération à distance",
+          "desc": "L'opérateur surveille et contrôle le drone depuis le sol, à l'écart de la zone de nettoyage."
+        }
       }
     },
     "safety": {
@@ -618,9 +1095,18 @@
       "title": "Opérations en hauteur sans personnel, protégées par double RTK.",
       "lead": "Le D50R garde les ouvriers au sol pendant que les capteurs embarqués sécurisent chaque vol au-dessus de l'installation.",
       "cards": {
-        "0": { "title": "Remplace le travail manuel en hauteur", "desc": "La télécommande élimine les risques de chute du nettoyage sur toitures et accès suspendus." },
-        "1": { "title": "Double RTK haute précision", "desc": "Les modules double RTK intégrés fournissent un positionnement centimétrique pour un vol précis et fiable." },
-        "2": { "title": "Évitement intelligent des obstacles", "desc": "Le radar frontal détecte les obstacles en temps réel et maintient une distance de sécurité." }
+        "0": {
+          "title": "Remplace le travail manuel en hauteur",
+          "desc": "La télécommande élimine les risques de chute du nettoyage sur toitures et accès suspendus."
+        },
+        "1": {
+          "title": "Double RTK haute précision",
+          "desc": "Les modules double RTK intégrés fournissent un positionnement centimétrique pour un vol précis et fiable."
+        },
+        "2": {
+          "title": "Évitement intelligent des obstacles",
+          "desc": "Le radar frontal détecte les obstacles en temps réel et maintient une distance de sécurité."
+        }
       }
     },
     "multiangle": {
@@ -628,10 +1114,22 @@
       "title": "Stable en hauteur, flexible sous tous les angles.",
       "lead": "Les supports modulaires et le choix de buses permettent au D50R de couvrir dessus, dessous et les angles difficiles d'accès.",
       "items": {
-        "0": { "title": "Opération stable en hauteur", "desc": "Le double RTK et la boucle perception-décision-exécution maintiennent le lavage stable à la hauteur de travail." },
-        "1": { "title": "Extension multi-modules", "desc": "Réservoir, bras et buses se configurent selon les différentes tâches de nettoyage." },
-        "2": { "title": "Compatible avec plusieurs buses", "desc": "Buses haute pression standard pour les interstices et les taches sur tous types de panneaux." },
-        "3": { "title": "Couverture grand angle", "desc": "Des bras oscillant de 0° à 45° couvrent faces supérieures et inférieures en moins de passages." }
+        "0": {
+          "title": "Opération stable en hauteur",
+          "desc": "Le double RTK et la boucle perception-décision-exécution maintiennent le lavage stable à la hauteur de travail."
+        },
+        "1": {
+          "title": "Extension multi-modules",
+          "desc": "Réservoir, bras et buses se configurent selon les différentes tâches de nettoyage."
+        },
+        "2": {
+          "title": "Compatible avec plusieurs buses",
+          "desc": "Buses haute pression standard pour les interstices et les taches sur tous types de panneaux."
+        },
+        "3": {
+          "title": "Couverture grand angle",
+          "desc": "Des bras oscillant de 0° à 45° couvrent faces supérieures et inférieures en moins de passages."
+        }
       }
     },
     "compare": {
@@ -640,19 +1138,55 @@
       "colD15r": "Partdro D50R",
       "colManual": "Nettoyage PV manuel",
       "rows": {
-        "0": { "label": "Sécurité", "d15r": "Le drone travaille en hauteur tandis que l'équipe reste au sol", "manual": "Les ouvriers nettoient les toitures et les installations en personne" },
-        "1": { "label": "Efficacité", "d15r": "5 500 m² par jour avec une équipe de 2 personnes", "manual": "Moins de 900 m² par personne et par jour, projets de plus d'un mois" },
-        "2": { "label": "Coût", "d15r": "Un seul investissement matériel à faible coût d'exploitation", "manual": "De grandes équipes récurrentes à chaque lavage" },
-        "3": { "label": "Qualité de nettoyage", "d15r": "Un rinçage haute pression de 8-10 MPa élimine les salissures tenaces", "manual": "Interstices et saleté incrustée difficiles à nettoyer à fond" },
-        "4": { "label": "Délai", "d15r": "18 jours pour une centrale de 100 000 m²", "manual": "Plus d'un mois pour la même surface" },
-        "5": { "label": "Production", "d15r": "La production augmente de 12-15% après nettoyage", "manual": "Les pertes liées à la saleté persistent entre les lavages" }
+        "0": {
+          "label": "Sécurité",
+          "d15r": "Le drone travaille en hauteur tandis que l'équipe reste au sol",
+          "manual": "Les ouvriers nettoient les toitures et les installations en personne"
+        },
+        "1": {
+          "label": "Efficacité",
+          "d15r": "5 500 m² par jour avec une équipe de 2 personnes",
+          "manual": "Moins de 900 m² par personne et par jour, projets de plus d'un mois"
+        },
+        "2": {
+          "label": "Coût",
+          "d15r": "Un seul investissement matériel à faible coût d'exploitation",
+          "manual": "De grandes équipes récurrentes à chaque lavage"
+        },
+        "3": {
+          "label": "Qualité de nettoyage",
+          "d15r": "Un rinçage haute pression de 8-10 MPa élimine les salissures tenaces",
+          "manual": "Interstices et saleté incrustée difficiles à nettoyer à fond"
+        },
+        "4": {
+          "label": "Délai",
+          "d15r": "18 jours pour une centrale de 100 000 m²",
+          "manual": "Plus d'un mois pour la même surface"
+        },
+        "5": {
+          "label": "Production",
+          "d15r": "La production augmente de 12-15% après nettoyage",
+          "manual": "Les pertes liées à la saleté persistent entre les lavages"
+        }
       }
     },
     "scenarios": {
-      "0": { "title": "Centrales photovoltaïques au sol", "desc": "Nettoyage rangée par rangée pour les grandes centrales solaires." },
-      "1": { "title": "Toitures commerciales et industrielles", "desc": "Nettoyez le PV en toiture en toute sécurité, sans ouvrier sur le toit." },
-      "2": { "title": "Centrales PV aquacoles", "desc": "Rinçage à l'eau de 8-10 MPa adapté aux panneaux au-dessus des bassins d'aquaculture." },
-      "3": { "title": "PV résidentiel et distribué", "desc": "Des vols compacts adaptés aux systèmes distribués et aux toitures résidentielles." }
+      "0": {
+        "title": "Centrales photovoltaïques au sol",
+        "desc": "Nettoyage rangée par rangée pour les grandes centrales solaires."
+      },
+      "1": {
+        "title": "Toitures commerciales et industrielles",
+        "desc": "Nettoyez le PV en toiture en toute sécurité, sans ouvrier sur le toit."
+      },
+      "2": {
+        "title": "Centrales PV aquacoles",
+        "desc": "Rinçage à l'eau de 8-10 MPa adapté aux panneaux au-dessus des bassins d'aquaculture."
+      },
+      "3": {
+        "title": "PV résidentiel et distribué",
+        "desc": "Des vols compacts adaptés aux systèmes distribués et aux toitures résidentielles."
+      }
     },
     "video": {
       "eyebrow": "Voyez-le à l'œuvre",
@@ -664,20 +1198,62 @@
       "title": "Le D50R en un coup d'œil.",
       "lead": "Les caractéristiques clés du drone de nettoyage photovoltaïque D50R.",
       "items": {
-        "0": { "label": "Modèle", "value": "D50R" },
-        "1": { "label": "Catégorie", "value": "Drone intelligent de nettoyage photovoltaïque" },
-        "2": { "label": "Capacité du réservoir", "value": "50 L" },
-        "3": { "label": "Pression de nettoyage", "value": "8-10 MPa (rinçage à l'eau haute pression)" },
-        "4": { "label": "Système de pulvérisation", "value": "Double bras oscillants, 0-45°" },
-        "5": { "label": "Buses", "value": "Haute pression standard, jet ponctuel 0°" },
-        "6": { "label": "Positionnement", "value": "Double RTK haute précision" },
-        "7": { "label": "Détection d'obstacles", "value": "Radar frontal" },
-        "8": { "label": "Automatisation", "value": "Nettoyage de bout en bout avec planification des trajectoires" },
-        "9": { "label": "Exploitation", "value": "1 pilote + 1 opérateur au sol" },
-        "10": { "label": "Surface par vol", "value": "138 m²" },
-        "11": { "label": "Nettoyage par jour", "value": "Jusqu'à 5 500 m²" },
-        "12": { "label": "Plateformes de vol", "value": "Intégration personnalisée pour plusieurs plateformes" },
-        "13": { "label": "Applications", "value": "Centrales au sol, en toiture, distribuées et aquacoles" }
+        "0": {
+          "label": "Modèle",
+          "value": "D50R"
+        },
+        "1": {
+          "label": "Catégorie",
+          "value": "Drone intelligent de nettoyage photovoltaïque"
+        },
+        "2": {
+          "label": "Capacité du réservoir",
+          "value": "50 L"
+        },
+        "3": {
+          "label": "Pression de nettoyage",
+          "value": "8-10 MPa (rinçage à l'eau haute pression)"
+        },
+        "4": {
+          "label": "Système de pulvérisation",
+          "value": "Double bras oscillants, 0-45°"
+        },
+        "5": {
+          "label": "Buses",
+          "value": "Haute pression standard, jet ponctuel 0°"
+        },
+        "6": {
+          "label": "Positionnement",
+          "value": "Double RTK haute précision"
+        },
+        "7": {
+          "label": "Détection d'obstacles",
+          "value": "Radar frontal"
+        },
+        "8": {
+          "label": "Automatisation",
+          "value": "Nettoyage de bout en bout avec planification des trajectoires"
+        },
+        "9": {
+          "label": "Exploitation",
+          "value": "1 pilote + 1 opérateur au sol"
+        },
+        "10": {
+          "label": "Surface par vol",
+          "value": "138 m²"
+        },
+        "11": {
+          "label": "Nettoyage par jour",
+          "value": "Jusqu'à 5 500 m²"
+        },
+        "12": {
+          "label": "Plateformes de vol",
+          "value": "Intégration personnalisée pour plusieurs plateformes"
+        },
+        "13": {
+          "label": "Applications",
+          "value": "Centrales au sol, en toiture, distribuées et aquacoles"
+        }
       }
     },
     "cta": {
