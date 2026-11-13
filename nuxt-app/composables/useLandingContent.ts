@@ -26,7 +26,6 @@ import {
 const IMAGES_KEY = '__images'
 const VIDEOS_KEY = '__videos'
 const LAYOUT_KEY = '__layout'
-const STATIC: Record<string, any> = { en, es, de, fr }
 // cache key: `${ns}::${lang}`
 const cache = new Map<string, any>()
 
