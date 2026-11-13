@@ -10,18 +10,18 @@
     </div>
     <div class="container hero__content">
       <div class="hero__text">
-        <div class="hero__eyebrow"><span></span> INDUSTRIAL DRONE SYSTEMS</div>
+        <div class="hero__eyebrow"><span></span> {{ t("hero.eyebrow") }}</div>
         <h1 :data-edit-key="'hero.title'">{{ t("hero.title") }}</h1>
         <p :data-edit-key="'hero.subtitle'">{{ t("hero.subtitle") }}</p>
         <div class="hero__buttons">
-          <a-button type="primary" size="large" @click="$router.push('/contact')">
+          <a-button type="primary" size="large" @click="$router.push(lp('/contact'))">
             <span :data-edit-key="'hero.cta'">{{ t("hero.cta") }}</span>
           </a-button>
-          <a-button size="large" ghost @click="$router.push('/products')">
+          <a-button size="large" ghost @click="$router.push(lp('/products'))">
             <span :data-edit-key="'hero.ctaSecondary'">{{ t("hero.ctaSecondary") }}</span>
           </a-button>
         </div>
-        <div class="hero__proof"><span>RTK PRECISION</span><span>GLOBAL DELIVERY</span><span>24/7 SUPPORT</span></div>
+        <div class="hero__proof"><span>{{ t("hero.precision") }}</span><span>{{ t("hero.delivery") }}</span><span>{{ t("hero.support") }}</span></div>
       </div>
       <div class="hero__product-wrapper">
         <img :src="imgEdit('/d15r_hero.jpeg', 'hero.productImg')" alt="Partdro D15R Cleaning Drone" class="hero__product-img" data-edit-img="hero.productImg" />
@@ -33,8 +33,10 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { imgOverridesByLang } from "../../composables/useLandingContent";
+import { useLocalePath } from "../../composables/useLocalePath";
 
 const { t, locale } = useI18n();
+const lp = useLocalePath();
 
 // 通用图片覆盖：key 命中则用覆盖值（完整 URL / / 路径 / 纯文件名）
 function imgEdit(defaultSrc: string, key: string): string {
