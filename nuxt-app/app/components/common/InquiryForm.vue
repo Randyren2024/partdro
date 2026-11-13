@@ -22,6 +22,10 @@
         <a-form-item name="message" :rules="[{ required: true, whitespace: true }]">
           <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :aria-label="t('contact.message')" :rows="4" />
         </a-form-item>
+        <div class="inquiry-form__honeypot" aria-hidden="true">
+          <label for="inquiry-website">Website</label>
+          <input id="inquiry-website" v-model="form.website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
         <a-form-item>
           <a-button type="primary" html-type="submit" block size="large" :loading="loading" :disabled="loading">
             {{ t('contact.submit') }}
@@ -38,7 +42,6 @@
 import { computed, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { supabase } from '../../supabase/client'
 import { trackEvent } from '../../composables/useTracking'
 import { attributionFields } from '../../composables/useAttribution'
 
@@ -48,7 +51,6 @@ const loading = ref(false)
 const success = ref(false)
 const errorMsg = ref('')
 
-// 当前页面属于哪个产品（非产品页为 null）。
 const productSlug = computed<string | null>(() => {
   const slug = route.params.slug
   return typeof slug === 'string' && slug ? slug : null
@@ -60,6 +62,7 @@ const form = reactive({
   phone: '',
   type: 'contact' as 'contact' | 'booking' | 'franchise',
   message: '',
+  website: '',
 })
 
 const handleSubmit = async () => {
@@ -67,24 +70,31 @@ const handleSubmit = async () => {
   success.value = false
   errorMsg.value = ''
   try {
-    const { error } = await supabase.from('inquiries').insert({
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      type: form.type,
-      message: form.message,
-      ...attributionFields(route.path, productSlug.value),
+    const result = await $fetch<{ ok: boolean; spam?: boolean }>('/api/inquiry', {
+      method: 'POST',
+      body: {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        type: form.type,
+        message: form.message,
+        website: form.website,
+        ...attributionFields(route.path, productSlug.value),
+      },
     })
-    if (error) {
-      console.error('[contact form] insert failed:', error.code, error.message)
+
+    if (!result.ok) {
       errorMsg.value = t('contact.error')
       return
     }
-    trackEvent('contact_form_submission', { form_type: form.type })
+
+    if (!result.spam) {
+      trackEvent('contact_form_submission', { form_type: form.type })
+    }
     success.value = true
-    Object.assign(form, { name: '', email: '', phone: '', type: 'contact', message: '' })
+    Object.assign(form, { name: '', email: '', phone: '', type: 'contact', message: '', website: '' })
   } catch (e) {
-    console.error('[contact form] unexpected error:', e)
+    console.error('[contact form] server submission failed:', e)
     errorMsg.value = t('contact.error')
   } finally {
     loading.value = false
@@ -115,5 +125,12 @@ const handleSubmit = async () => {
   margin-bottom: 20px;
   text-align: center;
   color: var(--color-dark);
+}
+.inquiry-form__honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 </style>
