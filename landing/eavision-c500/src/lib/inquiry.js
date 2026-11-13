@@ -17,14 +17,17 @@ export function buildInquiryPayload(form, packageLabel) {
     name: form.name.trim(),
     email: form.email.trim(),
     phone: form.phone.trim() || null,
+    company: form.company.trim() || null,
+    country: form.region.trim() || null,
     type: 'contact',
     message: lines.join('\n'),
     ...attributionFields(path, PRODUCT_SLUG),
+    website: form.website || '',
   }
 }
 
 export async function submitInquiry(form, packageLabel) {
   const payload = buildInquiryPayload(form, packageLabel)
-  await insertInquiry(payload)
-  return payload
+  const result = await insertInquiry(payload)
+  return { spam: Boolean(result.spam) }
 }

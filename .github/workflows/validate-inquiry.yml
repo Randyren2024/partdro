@@ -1,0 +1,78 @@
+name: Validate public inquiry pipeline
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'fc/**'
+      - 'netlify/functions/inquiry.ts'
+      - 'netlify/shared/verifyAdmin.ts'
+      - 'src/components/common/InquiryForm.vue'
+      - 'src/composables/useAttribution.ts'
+      - 'landing/u15/**'
+      - 'landing/vf50p/**'
+      - 'landing/eavision-c500/**'
+      - 'scripts/build-fc.mjs'
+      - 'scripts/test-fc-handler.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/validate-inquiry.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: validate-inquiry-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Build main Vite site
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run build
+
+      - name: Build C500 landing
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run landing:c500:build
+
+      - name: Build U15 landing
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run landing:u15:build
+
+      - name: Build VF50P landing
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: npm run landing:vf50p:build
+
+      - name: Build Aliyun FC bundle
+        env:
+          ALIYUN_OSS_BUCKET: ci-validation-bucket
+          ALIYUN_OSS_REGION: cn-hongkong
+        run: node scripts/build-fc.mjs
+
+      - name: Test FC routes and inquiry method guards
+        run: node scripts/test-fc-handler.mjs

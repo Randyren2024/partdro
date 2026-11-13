@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 /**
  * Public inquiry endpoint. Supabase service-role credentials stay server-side.
  * Validate and normalize all user-controlled fields before inserting.
@@ -68,6 +69,20 @@ function readTimestamp(value: unknown, field: string): string | null {
   return new Date(timestamp).toISOString()
 }
 
+async function consumeRateLimit(supabase: ReturnType<typeof getSupabaseServer>, key: string, limit: number, windowSeconds: number): Promise<boolean> {
+  const keyHash = createHash('sha256').update(key).digest('hex')
+  const { data, error } = await supabase.rpc('consume_inquiry_rate_limit', {
+    p_key_hash: keyHash,
+    p_limit: limit,
+    p_window_seconds: windowSeconds,
+  })
+  if (error) {
+    console.error('[inquiry] rate-limit check failed:', error.message)
+    throw createError({ statusCode: 503, statusMessage: 'Inquiry protection is temporarily unavailable. Please try again shortly.' })
+  }
+  return data === true
+}
+
 export default defineEventHandler(async (event) => {
   assertMethod(event, ['POST'])
   const body = await readBody<InquiryBody>(event)
@@ -103,6 +118,13 @@ export default defineEventHandler(async (event) => {
   }
 
   const supabase = getSupabaseServer(event)
+  const clientIp = getHeader(event, 'cf-connecting-ip') || getRequestIP(event)
+  if (clientIp && !(await consumeRateLimit(supabase, `ip:${clientIp}`, 12, 600))) {
+    throw createError({ statusCode: 429, statusMessage: 'Too many submissions. Please wait a few minutes and try again.' })
+  }
+  if (!(await consumeRateLimit(supabase, `email:${email}`, 4, 3600))) {
+    throw createError({ statusCode: 429, statusMessage: 'Too many submissions for this email address. Please try again later.' })
+  }
   const { data, error } = await supabase.from('inquiries').insert({
     name,
     email,
