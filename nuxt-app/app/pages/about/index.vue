@@ -779,4 +779,60 @@ const statItems = computed(() =>
     font-size: 16px;
   }
 }
+
+/* Partdro design-system pass: keep the About page on shared surfaces and type. */
+.about { color:var(--pd-ink); background:var(--pd-bg); font-family:var(--pd-font); }
+.about .hero-section { height:clamp(320px,42vw,500px); margin-bottom:0; }
+.about .hero-image-container::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(17,19,21,.78),rgba(17,19,21,.24)); }
+.about .hero-overlay { align-items:flex-start; text-align:left; padding:clamp(28px,7vw,100px); background:linear-gradient(90deg,rgba(17,19,21,.5),rgba(17,19,21,.05)); }
+.about .hero-title { max-width:900px; color:#fff; background:none; -webkit-text-fill-color:#fff; font-family:var(--pd-font-display); font-size:clamp(38px,5.2vw,68px); line-height:1.02; letter-spacing:var(--pd-tracking-display); }
+.about .hero-subtitle { max-width:650px; color:rgba(255,255,255,.82); font-size:clamp(16px,1.7vw,21px); line-height:1.65; }
+.about .intro-section,.about .team-section,.about .stats-section { background:var(--pd-bg-soft); }
+.about .values-section { background:var(--pd-bg); }
+.about .intro-section,.about .timeline-section,.about .team-section,.about .values-section,.about .stats-section { padding:clamp(54px,7vw,88px) 0; }
+.about .section-container { width:min(var(--pd-container),calc(100% - 48px)); }
+.about .section-header { margin-bottom:clamp(28px,4vw,48px); }
+.about .section-title { margin:0 0 12px; color:var(--pd-ink); background:none; -webkit-text-fill-color:currentColor; font-family:var(--pd-font-display); font-size:clamp(30px,3.6vw,44px); line-height:1.06; letter-spacing:var(--pd-tracking-display); }
+.about .section-subtitle { max-width:68ch; margin-inline:auto; color:var(--pd-ink-soft); font-size:clamp(15px,1.4vw,18px); line-height:1.7; }
+.about .intro-content { gap:clamp(28px,5vw,64px); }
+.about .intro-text { min-width:min(100%,300px); }
+.about .intro-paragraph { color:var(--pd-ink-soft); font-size:clamp(15px,1.35vw,17px); line-height:1.85; }
+.about .intro-image img { display:block; width:100%; max-height:440px; object-fit:cover; border-radius:var(--pd-radius-lg); box-shadow:var(--pd-shadow); }
+.about .timeline::before { background:var(--pd-line-strong); }
+.about .timeline-logo { background:var(--pd-primary); border:4px solid var(--pd-bg); box-shadow:0 0 0 1px var(--pd-line); }
+.about .timeline-logo-icon { color:var(--pd-on-primary); }
+.about .timeline-year { background:var(--pd-primary); color:var(--pd-on-primary); border:0; box-shadow:none; }
+.about .timeline-content { background:var(--pd-surface); border:1px solid var(--pd-line); border-left:3px solid var(--pd-primary); border-radius:var(--pd-radius); box-shadow:var(--pd-shadow-sm); }
+.about .timeline-title,.about .team-name,.about .value-title,.about .stat-title { color:var(--pd-ink); font-family:var(--pd-font-display); }
+.about .timeline-description,.about .team-bio,.about .value-description,.about .stat-description { color:var(--pd-ink-soft); }
+.about .team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(18px,2.4vw,30px); }
+.about .team-card,.about .value-card,.about .stat-card { background:var(--pd-surface); border:1px solid var(--pd-line); border-radius:var(--pd-radius-lg); box-shadow:var(--pd-shadow-sm); }
+.about .team-image { background:var(--pd-bg-soft); }
+.about .team-info { padding:clamp(22px,3vw,36px); }
+.about .team-position { color:var(--pd-primary); }
+.about .team-bio { line-height:1.75; }
+.about .value-card { padding:clamp(26px,3vw,38px) 22px; transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+.about .value-card:hover,.about .stat-card:hover { transform:translateY(-4px); border-color:color-mix(in srgb,var(--pd-primary) 42%,var(--pd-line)); box-shadow:var(--pd-shadow); }
+.about .value-icon,.about .value-1,.about .value-2,.about .value-3,.about .value-4 { background:color-mix(in srgb,var(--pd-primary) 11%,var(--pd-surface)); }
+.about .value-icon .anticon,.about .stat-icon .anticon { color:var(--pd-primary); }
+.about .stats-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(14px,2vw,24px); }
+.about .stat-card { padding:clamp(22px,2.6vw,32px) 18px; }
+.about .contact-section { padding:clamp(54px,7vw,88px) 24px; background:var(--pd-bg); }
+.about .contact-content { max-width:1120px; padding:clamp(34px,5vw,64px); border:1px solid rgba(255,255,255,.12); border-radius:var(--pd-radius-lg); background:radial-gradient(circle at 90% 0%,rgba(232,93,42,.18),transparent 36%),linear-gradient(125deg,#111315,#202426); box-shadow:var(--pd-shadow); }
+.about .contact-title { color:#fff; font-family:var(--pd-font-display); font-size:clamp(30px,4vw,46px); }
+.about .contact-description,.about .contact-detail { color:rgba(248,247,244,.72); }
+.about .contact-btn { background:var(--pd-primary)!important; border-color:var(--pd-primary)!important; color:var(--pd-on-primary)!important; }
+.about .secondary-btn { background:transparent!important; border-color:rgba(255,255,255,.28)!important; color:#fff!important; }
+@media(max-width:900px) { .about .team-grid { grid-template-columns:1fr; max-width:680px; } .about .stats-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:640px) {
+ .about .hero-section { height:360px; }
+ .about .hero-overlay { padding:24px; }
+ .about .hero-title { font-size:clamp(32px,9vw,44px); }
+ .about .section-container { width:calc(100% - 32px); }
+ .about .intro-section,.about .timeline-section,.about .team-section,.about .values-section,.about .stats-section { padding:52px 0; }
+ .about .team-grid,.about .values-grid,.about .stats-grid { grid-template-columns:1fr; }
+ .about .team-image { height:280px; }
+ .about .contact-content { padding:30px 22px; }
+}
+
 </style>
