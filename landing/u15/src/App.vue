@@ -126,17 +126,11 @@ function onWhatsappClick() {
 async function submitQuote() {
   if (submitting.value || submitted.value) return
 
-  // Honeypot: pretend success, but never create a lead or a conversion.
-  if (quoteForm.website) {
-    submitted.value = true
-    return
-  }
-
   submitting.value = true
   quoteError.value = false
 
   try {
-    await submitInquiry(
+    const inquiryResult = await submitInquiry(
       {
         name: quoteForm.name,
         email: quoteForm.email,
@@ -148,7 +142,7 @@ async function submitQuote() {
       selectedEditionLabel.value
     )
     submitted.value = true
-    trackEvent('contact_form_submission', { form_type: 'contact' })
+    if (!inquiryResult.spam) trackEvent('contact_form_submission', { form_type: 'contact' })
     nextTick(() => successPanel.value?.focus())
   } catch (error) {
     quoteError.value = true
