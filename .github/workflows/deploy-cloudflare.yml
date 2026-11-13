@@ -43,7 +43,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # wrangler 4.161 requires Node >= 22.12; Node 20 makes it refuse to run.
+          node-version: 22
           cache: npm
           cache-dependency-path: nuxt-app/package-lock.json
 
@@ -113,7 +114,10 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT_ID }}
         run: |
-          # wrangler 4.x has no --output-json; the deployment URL is printed to stdout.
+          # pipefail is essential: `| tee` otherwise makes the step exit with tee's
+          # status (0) and hides a wrangler failure — a run can look green while
+          # nothing was deployed.
+          set -o pipefail
           npx wrangler pages deploy dist \
             --project-name "${{ env.CF_PROJECT_NAME }}" \
             --branch "${GITHUB_REF_NAME}" \
