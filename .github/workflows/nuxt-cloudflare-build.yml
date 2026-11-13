@@ -1,17 +1,14 @@
 name: Nuxt Cloudflare Pages Build and PR Preview
 
 on:
+  # Live Cloudflare Preview is opt-in: add the "preview-required" PR label
+  # only for routing, data, form, or deployment-sensitive changes.
   pull_request:
+    types: [labeled]
     paths:
       - "nuxt-app/**"
       - ".github/workflows/nuxt-cloudflare-build.yml"
       - ".github/workflows/validate-nuxt.yml"
-      - ".github/workflows/deploy-cloudflare.yml"
-  push:
-    branches: [main]
-    paths:
-      - "nuxt-app/**"
-      - ".github/workflows/nuxt-cloudflare-build.yml"
       - ".github/workflows/deploy-cloudflare.yml"
 
 concurrency:
@@ -24,6 +21,7 @@ env:
 
 jobs:
   build:
+    if: contains(github.event.pull_request.labels.*.name, 'preview-required')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     defaults:
