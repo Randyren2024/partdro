@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { EnvironmentOutlined } from '@ant-design/icons-vue'
-import { useCases } from '../composables/useSupabase'
+import { useCases } from '~/composables/useSupabase'
 
 const { t } = useI18n()
 const { data: cases } = useCases()
