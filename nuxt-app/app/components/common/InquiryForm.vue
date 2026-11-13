@@ -2,15 +2,15 @@
   <section class="inquiry-form">
     <a-card :bordered="false" class="inquiry-form__card">
       <h3 :data-edit-key="'contact.formTitle'">{{ t('contact.formTitle') }}</h3>
-      <a-form :model="form" layout="vertical" @finish="handleSubmit">
-        <a-form-item name="name" :rules="[{ required: true }]">
+      <a-form :model="form" layout="vertical" @finish="handleSubmit" :validate-trigger="['blur', 'change']">
+        <a-form-item name="name" :rules="[{ required: true, whitespace: true }]">
           <a-input v-model:value="form.name" :placeholder="t('contact.name')" :aria-label="t('contact.name')" autocomplete="name" />
         </a-form-item>
         <a-form-item name="email" :rules="[{ required: true, type: 'email' }]">
-          <a-input v-model:value="form.email" :placeholder="t('contact.email')" :aria-label="t('contact.email')" autocomplete="email" />
+          <a-input v-model:value="form.email" type="email" :placeholder="t('contact.email')" :aria-label="t('contact.email')" autocomplete="email" />
         </a-form-item>
         <a-form-item name="phone">
-          <a-input v-model:value="form.phone" :placeholder="t('contact.phone')" :aria-label="t('contact.phone')" autocomplete="tel" />
+          <a-input v-model:value="form.phone" type="tel" :placeholder="t('contact.phone')" :aria-label="t('contact.phone')" autocomplete="tel" />
         </a-form-item>
         <a-form-item name="type">
           <a-select v-model:value="form.type" :placeholder="t('contact.type')" :aria-label="t('contact.type')">
@@ -19,17 +19,17 @@
             <a-select-option value="franchise">{{ t('contact.typeFranchise') }}</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item name="message" :rules="[{ required: true }]">
-          <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :aria-label="t('contact.message')" :rows="3" />
+        <a-form-item name="message" :rules="[{ required: true, whitespace: true }]">
+          <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :aria-label="t('contact.message')" :rows="4" />
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" html-type="submit" block :loading="loading">
+          <a-button type="primary" html-type="submit" block size="large" :loading="loading" :disabled="loading">
             {{ t('contact.submit') }}
           </a-button>
         </a-form-item>
       </a-form>
-      <a-alert v-if="success" type="success" :message="t('contact.success')" show-icon style="margin-top: 12px" />
-      <a-alert v-if="errorMsg" type="error" :message="errorMsg" show-icon style="margin-top: 12px" />
+      <a-alert v-if="success" role="status" aria-live="polite" type="success" :message="t('contact.success')" show-icon style="margin-top: 12px" />
+      <a-alert v-if="errorMsg" role="alert" type="error" :message="errorMsg" show-icon style="margin-top: 12px" />
     </a-card>
   </section>
 </template>
@@ -96,6 +96,18 @@ const handleSubmit = async () => {
 .inquiry-form__card {
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.inquiry-form__card :deep(.ant-input),
+.inquiry-form__card :deep(.ant-input-affix-wrapper),
+.inquiry-form__card :deep(.ant-select-selector) {
+  min-height: 46px;
+}
+.inquiry-form__card :deep(textarea.ant-input) {
+  min-height: 112px;
+}
+.inquiry-form__card :deep(.ant-btn) {
+  min-height: 48px;
+  font-weight: 700;
 }
 .inquiry-form__card h3 {
   font-size: 20px;

@@ -232,7 +232,8 @@ function clearFilters() {
   margin-bottom: 30px;
 }
 .product-filter__tab {
-  padding: 8px 18px;
+  min-height: 44px;
+  padding: 10px 18px;
   border: 1px solid var(--pd-line);
   border-radius: 999px;
   background: var(--pd-surface);
@@ -345,6 +346,7 @@ function clearFilters() {
 }
 .product-card__link {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   gap: 8px;
   margin-top: auto;
