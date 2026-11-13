@@ -66,6 +66,7 @@ const form = reactive({
 })
 
 const handleSubmit = async () => {
+  if (loading.value) return
   loading.value = true
   success.value = false
   errorMsg.value = ''

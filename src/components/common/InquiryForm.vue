@@ -2,15 +2,15 @@
   <section class="inquiry-form">
     <a-card :bordered="false" class="inquiry-form__card">
       <h3 :data-edit-key="'contact.formTitle'">{{ t('contact.formTitle') }}</h3>
-      <a-form :model="form" layout="vertical" @finish="handleSubmit">
-        <a-form-item name="name" :rules="[{ required: true }]">
-          <a-input v-model:value="form.name" :placeholder="t('contact.name')" />
+      <a-form :model="form" layout="vertical" @finish="handleSubmit" :validate-trigger="['blur', 'change']">
+        <a-form-item name="name" :rules="[{ required: true, whitespace: true }, { min: 2 }]">
+          <a-input v-model:value="form.name" :placeholder="t('contact.name')" :aria-label="t('contact.name')" autocomplete="name" maxlength="120" />
         </a-form-item>
         <a-form-item name="email" :rules="[{ required: true, type: 'email' }]">
-          <a-input v-model:value="form.email" :placeholder="t('contact.email')" />
+          <a-input v-model:value="form.email" type="email" :placeholder="t('contact.email')" :aria-label="t('contact.email')" autocomplete="email" maxlength="254" />
         </a-form-item>
         <a-form-item name="phone">
-          <a-input v-model:value="form.phone" :placeholder="t('contact.phone')" />
+          <a-input v-model:value="form.phone" type="tel" :placeholder="t('contact.phone')" :aria-label="t('contact.phone')" autocomplete="tel" maxlength="40" />
         </a-form-item>
         <a-form-item name="type">
           <a-select v-model:value="form.type" :placeholder="t('contact.type')">
@@ -19,11 +19,15 @@
             <a-select-option value="franchise">{{ t('contact.typeFranchise') }}</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item name="message" :rules="[{ required: true }]">
-          <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :rows="3" />
+        <a-form-item name="message" :rules="[{ required: true, whitespace: true }, { min: 5 }]">
+          <a-textarea v-model:value="form.message" :placeholder="t('contact.message')" :aria-label="t('contact.message')" :rows="4" :maxlength="5000" />
         </a-form-item>
+        <div class="inquiry-form__honeypot" aria-hidden="true">
+          <label for="legacy-inquiry-website">Website</label>
+          <input id="legacy-inquiry-website" v-model="form.website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
         <a-form-item>
-          <a-button type="primary" html-type="submit" block :loading="loading">
+          <a-button type="primary" html-type="submit" block :loading="loading" :disabled="loading">
             {{ t('contact.submit') }}
           </a-button>
         </a-form-item>
@@ -60,13 +64,20 @@ const form = reactive({
   phone: '',
   type: 'contact' as 'contact' | 'booking' | 'franchise',
   message: '',
+  website: '',
 })
 
 const handleSubmit = async () => {
+  if (loading.value) return
   loading.value = true
   success.value = false
   errorMsg.value = ''
   try {
+    // Honeypot submissions receive a neutral success state but never create a lead or conversion.
+    if (form.website) {
+      success.value = true
+      return
+    }
     const { error } = await supabase.from('inquiries').insert({
       name: form.name,
       email: form.email,
@@ -82,7 +93,7 @@ const handleSubmit = async () => {
     }
     trackEvent('contact_form_submission', { form_type: form.type })
     success.value = true
-    Object.assign(form, { name: '', email: '', phone: '', type: 'contact', message: '' })
+    Object.assign(form, { name: '', email: '', phone: '', type: 'contact', message: '', website: '' })
   } catch (e) {
     console.error('[contact form] unexpected error:', e)
     errorMsg.value = t('contact.error')
@@ -96,6 +107,13 @@ const handleSubmit = async () => {
 .inquiry-form__card {
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.inquiry-form__honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .inquiry-form__card h3 {
   font-size: 20px;
