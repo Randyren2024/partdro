@@ -17,6 +17,8 @@ export function buildInquiryPayload(form, packageLabel) {
     name: form.name.trim(),
     email: form.email.trim(),
     phone: form.phone.trim() || null,
+    company: form.company.trim() || null,
+    country: form.region.trim() || null,
     type: 'contact',
     message: lines.join('\n'),
     ...attributionFields(path, PRODUCT_SLUG),
