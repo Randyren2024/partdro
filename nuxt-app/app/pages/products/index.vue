@@ -307,10 +307,10 @@ function clearFilters() {
   top: 14px;
   left: 14px;
   padding: 6px 11px;
-  border: 1px solid rgba(255,255,255,.22);
+  border: 1px solid rgba(255,255,255,.24);
   border-radius: 999px;
   color: #fff;
-  background: rgba(8, 35, 40, .82);
+  background: rgba(23, 26, 28, .86);
   font-size: 10px;
   font-weight: 750;
   letter-spacing: .09em;

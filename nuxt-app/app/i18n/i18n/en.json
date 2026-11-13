@@ -43,7 +43,11 @@
     "title": "Professional Drone Cleaning Solutions",
     "subtitle": "Professional D15R window cleaning drone with RTK precision positioning and 20MPa pressure.",
     "cta": "Get a Quote",
-    "ctaSecondary": "Learn More"
+    "ctaSecondary": "Learn More",
+    "eyebrow": "INDUSTRIAL DRONE SYSTEMS",
+    "precision": "RTK PRECISION",
+    "delivery": "GLOBAL DELIVERY",
+    "support": "24/7 SUPPORT"
   },
   "stats": {
     "countries": "Countries Served",
@@ -88,7 +92,8 @@
     "readMore": "Read More",
     "viewAll": "View All News",
     "relatedProducts": "Related Products",
-    "relatedArticles": "Related Articles"
+    "relatedArticles": "Related Articles",
+    "backToNews": "Back to News"
   },
   "contact": {
     "title": "Contact Us",

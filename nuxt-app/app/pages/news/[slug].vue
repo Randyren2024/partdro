@@ -13,8 +13,8 @@
       </div>
     </div>
     <div class="page-section">
-      <div class="container" style="max-width: 800px">
-        <img :src="post.image_url" :alt="post.title" style="width: 100%; border-radius: 12px; margin-bottom: 32px" />
+      <div class="container article-container">
+        <img :src="post.image_url" :alt="post.title" class="article-hero-image" />
         <div class="article-content">
           <p>{{ post.summary }}</p>
           <div v-html="post.content" />
@@ -43,9 +43,9 @@
             </router-link>
           </div>
         </section>
-        <a-button type="link" @click="$router.back()">
-          <LeftOutlined /> Back to News
-        </a-button>
+        <router-link :to="lp('/news')" class="article-back-link">
+          <LeftOutlined /> {{ t('news.backToNews') }}
+        </router-link>
       </div>
     </div>
   </div>
@@ -223,3 +223,37 @@ watch(post, (p) => {
 
 
 </script>
+
+
+<style scoped>
+.article-container { max-width:860px; }
+.article-hero-image { display:block; width:100%; max-height:520px; object-fit:cover; border:1px solid var(--pd-line); border-radius:var(--pd-radius-lg); margin-bottom:clamp(26px,4vw,42px); box-shadow:var(--pd-shadow-sm); }
+.article-content { color:var(--pd-ink); font-size:16px; line-height:1.85; overflow-wrap:anywhere; }
+.article-content :deep(> p:first-child) { color:var(--pd-ink-soft); font-size:18px; line-height:1.75; }
+.article-content :deep(h2), .article-content :deep(h3) { margin:2em 0 .7em; color:var(--pd-ink); font-family:var(--pd-font-display); line-height:1.2; }
+.article-content :deep(p), .article-content :deep(ul), .article-content :deep(ol) { margin:0 0 1.2em; }
+.article-content :deep(a) { color:var(--pd-primary); text-decoration:underline; text-underline-offset:3px; }
+.article-content :deep(img), .article-content :deep(video), .article-content :deep(iframe) { max-width:100%; border-radius:12px; }
+.article-content :deep(blockquote) { margin:1.5em 0; padding:16px 20px; border-left:3px solid var(--pd-primary); background:var(--pd-bg-soft); color:var(--pd-ink-soft); }
+.related-articles, .related-products { margin-top:clamp(42px,6vw,64px); padding-top:30px; border-top:1px solid var(--pd-line); }
+.related-articles__title, .related-products__title { margin:0 0 20px; color:var(--pd-ink); font-family:var(--pd-font-display); font-size:26px; }
+.related-articles__list { display:grid; gap:0; margin:0; padding:0; list-style:none; }
+.related-articles__list li { display:flex; justify-content:space-between; gap:18px; padding:14px 0; border-bottom:1px solid var(--pd-line); }
+.related-articles__link { color:var(--pd-ink); font-weight:650; }
+.related-articles__link:hover { color:var(--pd-primary); }
+.related-articles__date { flex:0 0 auto; color:var(--pd-ink-muted); font-size:12px; }
+.related-products__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.related-products__card { display:grid; grid-template-columns:96px minmax(0,1fr); gap:4px 14px; padding:12px; border:1px solid var(--pd-line); border-radius:var(--pd-radius); background:var(--pd-surface); transition:border-color .2s,transform .2s; }
+.related-products__card:hover { transform:translateY(-2px); border-color:var(--pd-primary); }
+.related-products__img { grid-row:span 2; width:96px; height:82px; object-fit:cover; border-radius:10px; background:var(--pd-bg-soft); }
+.related-products__name { align-self:end; color:var(--pd-ink); font-weight:700; }
+.related-products__desc { color:var(--pd-ink-soft); font-size:12px; line-height:1.5; }
+.article-back-link { display:inline-flex; align-items:center; gap:8px; margin-top:34px; color:var(--pd-primary); font-weight:700; }
+@media(max-width:640px) {
+ .article-container { width:min(var(--pd-container),calc(100% - 32px)); }
+ .related-products__grid { grid-template-columns:1fr; }
+ .related-articles__list li { flex-direction:column; gap:4px; }
+ .article-content { font-size:15px; }
+}
+</style>
+
