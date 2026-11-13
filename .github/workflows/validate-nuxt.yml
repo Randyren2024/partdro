@@ -105,12 +105,12 @@ jobs:
           walk('dist')
 
           const unresolved = []
-          const keyPattern = /\\b(?:nav|hero|stats|products|cases|news|contact|about|documents|footer|topBar|meta)\\.[A-Za-z][A-Za-z0-9_.]*/g
+          const keyPattern = /\b(?:nav|hero|stats|products|cases|news|contact|about|documents|footer|topBar|meta)\.[A-Za-z][A-Za-z0-9_.]*/g
           for (const file of files) {
             const html = readFileSync(file, 'utf8')
             const visibleText = html
-              .replace(/<script\\b[^>]*>[\\s\\S]*?<\\/script>/gi, ' ')
-              .replace(/<style\\b[^>]*>[\\s\\S]*?<\\/style>/gi, ' ')
+              .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+              .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
               .replace(/<[^>]+>/g, ' ')
               .replace(/&(?:amp|lt|gt|quot|#39|#x20);/g, ' ')
             const matches = [...new Set(visibleText.match(keyPattern) || [])]
