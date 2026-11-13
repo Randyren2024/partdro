@@ -33,10 +33,14 @@ export function getI18n(): any {
 
 // Also provide a default export for code that does `import i18nInstance from '../i18n'`
 export default {
+  // In Composition API mode useI18n() returns the Composer itself; in legacy
+  // mode callers may pass the i18n instance with a .global Composer.
   get global() {
-    return getI18n()?.global
+    const instance = getI18n()
+    return instance?.global ?? instance
   },
   get locale() {
-    return getI18n()?.locale
+    const instance = getI18n()
+    return instance?.global?.locale ?? instance?.locale
   },
 }
