@@ -236,7 +236,8 @@
     "error": "Veuillez réessayer dans un instant.",
     "emptyTitle": "Aucun document disponible pour le moment",
     "empty": "Les documents techniques apparaîtront ici dès leur publication.",
-    "unavailable": "Fichier indisponible"
+    "unavailable": "Fichier indisponible",
+    "retry": "Réessayer"
   },
   "footer": {
     "company": "Entreprise",
