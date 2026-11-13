@@ -32,26 +32,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch } from 'vue'
+import { computed, onMounted, provide, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
-import { buildBreadcrumbLd, buildProductLd, injectJsonLd } from '../seo/structuredData'
-import { productSeo } from '../seo/productMeta'
+import { useAuthStore } from '~/stores/auth'
+import { buildBreadcrumbLd, buildProductLd, injectJsonLd } from '~/utils/structuredData'
+import { productSeo } from '~/utils/productMeta'
 import {
   imgOverridesByLang,
   videoOverridesByLang,
   registerProductNamespace,
   getSectionLayout,
   setSectionLayout,
-} from '../composables/useLandingContent'
-import { trackEvent } from '../composables/useTracking'
-import { parseVideoUrl } from '../composables/useVideo'
-import { landingSectionKey } from '../components/product/sectionContext'
-import { SECTION_COMPONENTS } from '../components/product/sectionRegistry'
-import SectionPanel from '../components/product/SectionPanel.vue'
-import type { SectionLayoutItem } from '../components/product/sectionIds'
-import '../components/product/landing.css'
+} from '~/composables/useLandingContent'
+import { trackEvent } from '~/composables/useTracking'
+import { parseVideoUrl } from '~/composables/useVideo'
+import { landingSectionKey } from '~/components/product/sectionContext'
+import { SECTION_COMPONENTS } from '~/components/product/sectionRegistry'
+import SectionPanel from '~/components/product/SectionPanel.vue'
+import type { SectionLayoutItem } from '~/components/product/sectionIds'
+import '~/components/product/landing.css'
 
 const auth = useAuthStore()
 const route = useRoute()
@@ -60,10 +60,16 @@ const { t, locale } = useI18n()
 // ====== 主题（深色 / 浅色） ======
 type Theme = 'dark' | 'light'
 const THEME_KEY = 'lp-theme'
-const theme = ref<Theme>((localStorage.getItem(THEME_KEY) as Theme) || 'light')
+const theme = ref<Theme>('light')
+onMounted(() => {
+  const saved = localStorage.getItem(THEME_KEY)
+  if (saved === 'dark' || saved === 'light') theme.value = saved
+})
+watch(theme, (value) => {
+  if (import.meta.client) localStorage.setItem(THEME_KEY, value)
+})
 function toggleTheme() {
   theme.value = theme.value === 'dark' ? 'light' : 'dark'
-  localStorage.setItem(THEME_KEY, theme.value)
 }
 
 // 编辑模式下禁用 lightbox（点击用于编辑而非放大）
@@ -301,7 +307,6 @@ provide(landingSectionKey, {
 
 
 // @ts-ignore - Nuxt macro
-definePrerenderRoutes(async () =ignore - Nuxt macro
 definePrerenderRoutes(async () => {
   const PRESET_SLUGS = [
     'd15r', 'c500-delivery-drone', 'y160-delivery-drone',
