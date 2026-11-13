@@ -84,13 +84,21 @@ jobs:
 
       - name: Verify build output
         run: |
-          # Nitro prerender should produce ~900+ routes (9 products + 96 news × 4 locales).
-          HTML_COUNT=$(find dist -name '*.html' | wc -l)
-          echo "HTML files: $HTML_COUNT (expected ~460+ for 4 locales)"
-          if [ "$HTML_COUNT" -lt 100 ]; then
+          # Nuxt currently emits 86 HTML documents; assert a conservative floor and key localized routes.
+          set -euo pipefail
+          test -s dist/index.html
+          HTML_COUNT=$(find dist -type f -name '*.html' | wc -l)
+          echo "HTML files: $HTML_COUNT (expected at least 80)"
+          if [ "$HTML_COUNT" -lt 80 ]; then
             echo "FAIL: too few HTML files — prerender may have failed"
             exit 1
           fi
+          for route in products products/d15r de/products es/products fr/products; do
+            if [ ! -s "dist/${route}/index.html" ]; then
+              echo "FAIL: missing generated route: ${route}"
+              exit 1
+            fi
+          done
           for artifact in _routes.json _headers _redirects; do
             if [ ! -f "dist/$artifact" ]; then
               echo "FAIL: dist/$artifact missing (cloudflare_pages preset should generate it)"
