@@ -20,11 +20,12 @@ export function buildInquiryPayload(form, packageLabel) {
     type: 'contact',
     message: lines.join('\n'),
     ...attributionFields(path, PRODUCT_SLUG),
+    website: form.website || '',
   }
 }
 
 export async function submitInquiry(form, packageLabel) {
   const payload = buildInquiryPayload(form, packageLabel)
-  await insertInquiry(payload)
-  return payload
+  const result = await insertInquiry(payload)
+  return { spam: Boolean(result.spam) }
 }
