@@ -301,7 +301,6 @@ provide(landingSectionKey, {
 
 
 // @ts-ignore - Nuxt macro
-definePrerenderRoutes(async () =ignore - Nuxt macro
 definePrerenderRoutes(async () => {
   const PRESET_SLUGS = [
     'd15r', 'c500-delivery-drone', 'y160-delivery-drone',
