@@ -310,8 +310,14 @@ const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r
 
 @media (max-width: 576px) {
   .footer__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 20px;
   }
+  .footer__col:first-child,
+  .footer__col:last-child { grid-column: 1 / -1; }
+  .footer__col li { margin-bottom: 6px; }
+  .footer__col a { display: inline-flex; min-height: 40px; align-items: center; }
+  .footer__contact-list li { min-height: 40px; overflow-wrap: anywhere; }
   .footer-cta {
     padding: 60px 0 56px;
   }

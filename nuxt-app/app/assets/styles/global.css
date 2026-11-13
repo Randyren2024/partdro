@@ -288,3 +288,28 @@ select:focus-visible {
   .page-header { min-height: 250px; }
   .page-header h1 { font-size: clamp(2.45rem, 11vw, 3.6rem); }
 }
+
+
+/* Mobile-first refinements for the Nuxt main site. */
+@media (max-width: 640px) {
+  html, body, #__nuxt { max-width: 100%; overflow-x: clip; }
+  body { font-size: 16px; }
+  .container { width: calc(100% - 32px); }
+  .page-section { padding-block: 48px; }
+  .page-header { min-height: 0; padding: 104px 0 42px; }
+  .page-header h1 { font-size: clamp(2.25rem, 10.5vw, 3.25rem); line-height: 1.02; overflow-wrap: anywhere; }
+  .page-header p { font-size: 16px; line-height: 1.65; }
+  .ant-input,
+  .ant-input-affix-wrapper input,
+  .ant-select-selection-search-input,
+  .ant-picker-input input,
+  .ant-input-number-input,
+  textarea.ant-input { font-size: 16px !important; }
+  .ant-btn { min-height: 44px; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+}
+
+@media (max-width: 380px) {
+  .container { width: calc(100% - 28px); }
+  .page-section { padding-block: 40px; }
+}

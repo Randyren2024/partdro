@@ -414,5 +414,19 @@ function clearFilters() {
   .catalog-search { width: 100%; }
   .catalog-count { text-align: right; }
   .product-grid { grid-template-columns: 1fr; }
+  .product-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin-inline: -16px;
+    padding: 4px 16px 12px;
+  }
+  .product-filter::-webkit-scrollbar { display: none; }
+  .product-filter__tab { flex: 0 0 auto; scroll-snap-align: start; }
+  .product-solutions { gap: 10px 14px; line-height: 1.6; }
+  .product-card__body h3 { font-size: 20px; }
 }
 </style>

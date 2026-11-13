@@ -194,5 +194,24 @@ function imgEdit(defaultSrc: string, key: string): string {
     max-width: 420px;
   }
 }
-@media (max-width:576px) { .hero__proof { justify-content:center; gap:11px; } .hero__proof span { font-size:9px; } }
+@media (max-width: 640px) {
+  .hero { min-height: 0; }
+  .hero__content { gap: 28px; padding: 88px 16px 48px; }
+  .hero__text { width: 100%; }
+  .hero__eyebrow { justify-content: center; margin-bottom: 14px; font-size: 10px; }
+  .hero__text h1 { font-size: clamp(2.35rem, 10.5vw, 3.5rem); line-height: 1.02; margin-bottom: 16px; }
+  .hero__text p { max-width: 34rem; margin: 0 auto 24px; font-size: 16px; line-height: 1.65; }
+  .hero__buttons { gap: 10px; flex-wrap: wrap; }
+  .hero__buttons :deep(.ant-btn) { min-height: 48px; height: auto; padding-inline: 18px; }
+  .hero__proof { justify-content: center; gap: 10px 14px; margin-top: 24px; }
+  .hero__proof span { font-size: 9px; letter-spacing: .08em; }
+  .hero__product-wrapper { max-width: 320px; }
+  .hero__product-img { max-height: 240px; object-fit: contain; }
+  .hero__product-img { animation: none; }
+  .hero__overlay { background: linear-gradient(180deg, rgba(12,14,15,.88), rgba(20,23,24,.76)); }
+}
+@media (max-width: 360px) {
+  .hero__buttons { flex-direction: column; }
+  .hero__buttons :deep(.ant-btn) { width: 100%; }
+}
 </style>

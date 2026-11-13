@@ -61,6 +61,13 @@
         </button>
       </div>
     </div>
+    <button
+      v-if="mobileOpen"
+      class="header__backdrop"
+      type="button"
+      aria-label="Close navigation menu"
+      @click="closeMenu"
+    ></button>
     <div
       v-if="mobileOpen"
       id="partdro-mobile-navigation"
@@ -116,6 +123,10 @@ function handleKeydown(event: KeyboardEvent) {
 
 watch(() => route.fullPath, closeMenu)
 
+watch(mobileOpen, (isOpen) => {
+  if (import.meta.client) document.body.style.overflow = isOpen ? 'hidden' : ''
+})
+
 onMounted(() => {
   handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
@@ -125,6 +136,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
   window.removeEventListener('keydown', handleKeydown)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -321,8 +333,19 @@ onUnmounted(() => {
   font-size: 17px;
   cursor: pointer;
 }
+.header__backdrop {
+  position: fixed;
+  z-index: 1;
+  inset: 74px 0 0;
+  width: 100%;
+  border: 0;
+  background: rgba(0, 0, 0, .58);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
 .header__mobile-panel {
   position: absolute;
+  z-index: 2;
   top: 100%;
   left: 0;
   right: 0;
@@ -353,16 +376,27 @@ onUnmounted(() => {
   .header__mobile-toggle { display: inline-flex; }
 }
 @media (max-width: 640px) {
+  .header__backdrop { inset-block-start: 64px; }
   .header, .header__inner { min-height: 64px; }
   .header__inner { width: calc(100% - 32px); gap: 12px; }
   .header__logo { gap: 9px; }
   .header__logo img { height: 21px; max-width: 132px; }
   .header__brand-divider { height: 18px; }
-  .header__brand-label { font-size: 8px; letter-spacing: .1em; }
+  .header__brand-label { display: none; }
+  .header__brand-divider { display: none; }
+  .header__logo img { max-width: 118px; }
   .header__actions { gap: 6px; }
+  .header__actions :deep(.language-select) { max-width: 76px; }
+  .header__mobile-toggle { width: 38px; height: 38px; }
   .header__actions :deep(.theme-toggle) { width: 30px; height: 30px; }
   .header__contact { display: none; }
   .header__mobile-panel { max-height: calc(100dvh - 64px); padding-inline: 18px; }
+}
+@media (max-width: 360px) {
+  .header__inner { width: calc(100% - 24px); gap: 8px; }
+  .header__logo img { max-width: 106px; }
+  .header__actions { gap: 4px; }
+  .header__actions :deep(.theme-toggle) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .header, .header__nav-item, .header__contact { transition: none; }
