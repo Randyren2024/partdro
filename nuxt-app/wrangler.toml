@@ -1,6 +1,7 @@
 # Cloudflare Pages deployment.
-# Build: NITRO_PRESET=cloudflare_pages npm run build  (output: dist/)
-# Dashboard: root dir = nuxt-app, build command as above, output dir = dist.
+# Build command: npm run build
+# Build output directory: dist/
+# Cloudflare Pages Root directory: nuxt-app
 
 name = "partdro-nuxt"
 pages_build_output_dir = "dist"

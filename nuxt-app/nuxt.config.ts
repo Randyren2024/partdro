@@ -109,12 +109,10 @@ export default defineNuxtConfig({
       '/admin/editor': { redirect: '/products/d15r', statusCode: 302 },
     },
     prerender: {
-      // 注意：不要把 '/' 显式列进来——Nitro prerenderer 用 unstorage 存缓存，
-      // 它不接受 '/' 作为 key（已知 bug）。用 '/index.html' 替代。
       // 动态路由（products/:slug, news/:slug, solutions/:solution）会在 pages/[slug].vue 里用
       // definePrerenderRoutes() 或 hooks 自动补，或靠 crawl 发现。
       routes: [
-        '/index.html',
+        '/',
         // 默认语言 en（无前缀）
         '/products', '/cases', '/news', '/documents', '/about', '/contact',
         // de

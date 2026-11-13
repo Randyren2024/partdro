@@ -1,0 +1,45 @@
+name: Nuxt Cloudflare Pages Build
+
+on:
+  pull_request:
+    paths:
+      - "nuxt-app/**"
+      - ".github/workflows/nuxt-cloudflare-build.yml"
+  push:
+    branches: [main]
+    paths:
+      - "nuxt-app/**"
+      - ".github/workflows/nuxt-cloudflare-build.yml"
+
+concurrency:
+  group: nuxt-cloudflare-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nuxt-app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: nuxt-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for Cloudflare Pages
+        run: npm run build
+
+      - name: Verify deployment artifacts
+        run: |
+          test -s dist/index.html
+          test -s dist/_worker.js
+          echo "Cloudflare Pages artifacts are present."
