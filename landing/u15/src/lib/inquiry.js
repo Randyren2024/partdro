@@ -5,7 +5,7 @@ import { insertInquiry } from './supabase'
 export function buildInquiryPayload(form, packageLabel) {
   const path = window.location.pathname
   const lines = [
-    'C500 quote request',
+    'U15 quote request',
     `Package: ${packageLabel || 'Not specified'}`,
     `Company: ${form.company || '-'}`,
     `Country / region: ${form.region}`,
