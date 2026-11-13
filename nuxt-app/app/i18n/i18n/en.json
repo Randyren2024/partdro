@@ -236,7 +236,8 @@
     "error": "Please try again in a moment.",
     "emptyTitle": "No documents available yet",
     "empty": "Technical documents will appear here when they are published.",
-    "unavailable": "File unavailable"
+    "unavailable": "File unavailable",
+    "retry": "Retry"
   },
   "footer": {
     "company": "Company",
