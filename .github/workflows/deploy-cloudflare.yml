@@ -2,7 +2,7 @@ name: Deploy Nuxt 4 to Cloudflare Pages
 
 on:
   push:
-    branches: [trae_nuxt_cf]
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -110,7 +110,7 @@ jobs:
           set -o pipefail
           npx wrangler pages deploy dist \
             --project-name "${{ env.CF_PROJECT_NAME }}" \
-            --branch "${GITHUB_REF_NAME}" \
+            --branch "trae_nuxt_cf" \
             --commit-dirty=true 2>&1 | tee deploy.log
 
       - name: Report preview URL
