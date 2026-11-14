@@ -1,20 +1,17 @@
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
-import { readdir } from 'node:fs/promises'
+import { readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { chromium } from 'playwright'
-import { contentFor as c500Content } from '../landing/eavision-c500/src/lib/i18n.js'
-import { contentFor as vf50pContent } from '../landing/vf50p/src/lib/i18n.js'
-import { contentFor as u15Content } from '../landing/u15/src/lib/i18n.js'
 
 const ORIGIN = 'http://127.0.0.1:8793'
 const SITE_ORIGIN = 'https://www.droneworld.tech'
 const LOCALES = ['en', 'de', 'es', 'fr']
 const PRODUCTS = [
-  { slug: 'c500-partdro-eavision', formId: 'c500-quote', content: c500Content, heroSelector: 'img.overview__technology', hasFaq: false },
-  { slug: 'vf50p-long-endurance-vtol-uav', formId: 'vf50p-quote', content: vf50pContent, heroSelector: 'img.hero__media', hasFaq: true },
-  { slug: 'u15-multi-mission-drone', formId: 'u15-quote', content: u15Content, heroSelector: 'img.hero__media', hasFaq: true },
+  { slug: 'c500-partdro-eavision', formId: 'c500-quote', contentDir: 'landing/eavision-c500/src/data/content', heroSelector: 'img.overview__technology', hasFaq: false },
+  { slug: 'vf50p-long-endurance-vtol-uav', formId: 'vf50p-quote', contentDir: 'landing/vf50p/src/data/content', heroSelector: 'img.hero__media', hasFaq: true },
+  { slug: 'u15-multi-mission-drone', formId: 'u15-quote', contentDir: 'landing/u15/src/data/content', heroSelector: 'img.hero__media', hasFaq: true },
 ]
 
 const server = spawn('npx', ['wrangler', 'pages', 'dev', 'dist', '--ip', '127.0.0.1', '--port', '8793'], {
@@ -35,6 +32,23 @@ function pass(label) {
 
 function localePath(locale, slug) {
   return `${locale === 'en' ? '' : `/${locale}`}/products/${slug}`
+}
+
+function mergeContent(base, override) {
+  if (Array.isArray(override)) return override
+  if (!override || typeof override !== 'object') return override
+  const merged = { ...(base || {}) }
+  for (const [key, value] of Object.entries(override)) {
+    merged[key] = mergeContent(base?.[key], value)
+  }
+  return merged
+}
+
+async function loadContent(contentDir, locale) {
+  const base = JSON.parse(await readFile(join(contentDir, 'en.json'), 'utf8'))
+  if (locale === 'en') return base
+  const localized = JSON.parse(await readFile(join(contentDir, `${locale}.json`), 'utf8'))
+  return mergeContent(base, localized)
 }
 
 function normalize(value) {
@@ -148,7 +162,7 @@ async function openProductPage(context, product, locale, viewportLabel) {
     clientWidth: document.documentElement.clientWidth,
   }))
 
-  const expected = product.content(locale)
+  const expected = await loadContent(product.contentDir, locale)
   assert.ok(actual.lang.toLowerCase().startsWith(locale), `${product.slug} ${locale}: wrong html lang ${actual.lang}`)
   assert.equal(normalize(actual.title), normalize(expected.meta.title), `${product.slug} ${locale}: title mismatch`)
   assert.equal(normalize(actual.description), normalize(expected.meta.description), `${product.slug} ${locale}: description mismatch`)
