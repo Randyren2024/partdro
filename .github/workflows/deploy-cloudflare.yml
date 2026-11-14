@@ -182,8 +182,14 @@ jobs:
               grep -Fq "id=\"${form_ids[$slug]}\"" "$html"
               grep -Fq 'hreflang="x-default"' "$html"
               grep -Fq 'og:image:alt' "$html"
+              grep -Fq 'og:image:secure_url' "$html"
+              grep -Fq 'og:image:width' "$html"
+              grep -Fq 'og:image:height' "$html"
+              grep -Fq 'og:locale:alternate' "$html"
+              grep -Fq 'twitter:image:alt' "$html"
               grep -Fq 'application/ld+json' "$html"
-              grep -Fq '"@type":"Organization"' "$html"
+              grep -Fq '"@type":"Product"' "$html"
+              grep -Fq '"@id":"https://www.droneworld.tech/#organization"' "$html"
               if [ "$slug" != "c500-partdro-eavision" ]; then
                 grep -Fq '"@type":"FAQPage"' "$html"
               fi
