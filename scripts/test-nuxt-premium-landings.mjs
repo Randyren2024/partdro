@@ -148,6 +148,51 @@ async function openProductPage(context, product, locale, viewportLabel) {
   return page
 }
 
+async function openContactPage(context, locale, viewportLabel) {
+  const page = await context.newPage()
+  const pageErrors = []
+  page.on('pageerror', error => pageErrors.push(error.message))
+  const path = locale === 'en' ? '/contact' : `/${locale}/contact`
+  const query = new URLSearchParams({
+    gclid: `qa-gclid-contact-${locale}`,
+    utm_source: 'acceptance-qa',
+    utm_medium: 'test',
+    utm_campaign: 'nuxt-migration-contact',
+  })
+  await page.goto(`${ORIGIN}${path}?${query}`, { waitUntil: 'domcontentloaded', timeout: 30000 })
+  await page.locator('.inquiry-form__card').waitFor({ state: 'visible', timeout: 20000 })
+  await page.waitForFunction(() => Boolean(document.getElementById('partdro-google-tag-manager')), null, { timeout: 15000 })
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+
+  const actual = await page.evaluate(() => ({
+    lang: document.documentElement.lang,
+    title: document.title,
+    form: Boolean(document.querySelector('.inquiry-form__card form')),
+    name: Boolean(document.querySelector('.inquiry-form__card input[autocomplete="name"]')),
+    email: Boolean(document.querySelector('.inquiry-form__card input[autocomplete="email"]')),
+    message: Boolean(document.querySelector('.inquiry-form__card textarea')),
+    footer: Boolean(document.querySelector('footer.site-footer')),
+    scrollWidth: document.documentElement.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }))
+  assert.ok(actual.lang.toLowerCase().startsWith(locale), `contact ${locale}: wrong html lang ${actual.lang}`)
+  assert.ok(actual.title, `contact ${locale}: page title missing`)
+  assert.ok(actual.form && actual.name && actual.email && actual.message, `contact ${locale}: inquiry form fields missing`)
+  assert.ok(actual.footer, `contact ${locale}: footer missing`)
+  assert.ok(actual.scrollWidth <= actual.clientWidth + 2, `contact ${locale}: horizontal overflow ${actual.scrollWidth} > ${actual.clientWidth}`)
+  assert.deepEqual(pageErrors, [], `contact ${locale}: browser errors: ${pageErrors.join('; ')}`)
+  pass(`${viewportLabel} ${locale} contact: localized form, footer and no overflow`)
+  return page
+}
+
+async function submitContactForm(page) {
+  const card = page.locator('.inquiry-form__card')
+  await card.locator('input[autocomplete="name"]').fill('Acceptance QA Lead')
+  await card.locator('input[autocomplete="email"]').fill('acceptance-qa@example.com')
+  await card.locator('textarea').fill('Automated contact form test; no real inquiry is stored.')
+  await card.locator('button[type="submit"]').click()
+}
+
 async function fillAndSubmit(page, product) {
   const section = page.locator(`#${product.formId}`)
   await section.scrollIntoViewIfNeeded()
@@ -187,7 +232,13 @@ try {
 
   browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] })
 
-  console.log('\\n[1/3] Mobile route acceptance: all products and locales')
+  console.log('\\n[1/3] Mobile route acceptance: contact plus all products/locales')
+  for (const locale of LOCALES) {
+    const { context } = await createContext({ width: 390, height: 844 })
+    const page = await openContactPage(context, locale, 'mobile')
+    await page.close()
+    await context.close()
+  }
   for (const product of PRODUCTS) {
     for (const locale of LOCALES) {
       const { context } = await createContext({ width: 390, height: 844 })
@@ -197,7 +248,13 @@ try {
     }
   }
 
-  console.log('\\n[2/3] Desktop route acceptance: all three products')
+  console.log('\\n[2/3] Desktop route acceptance: contact plus all three products')
+  {
+    const { context } = await createContext({ width: 1440, height: 1000 })
+    const page = await openContactPage(context, 'en', 'desktop')
+    await page.close()
+    await context.close()
+  }
   for (const product of PRODUCTS) {
     const { context } = await createContext({ width: 1440, height: 1000 })
     const page = await openProductPage(context, product, 'en', 'desktop')
@@ -224,6 +281,19 @@ try {
     pass(`${product.slug}: mocked submit, country, product slug, GCLID/UTM and success event`)
     await context.close()
   }
+
+  const { context: contactContext, inquiryRequests: contactRequests } = await createContext({ width: 390, height: 844 }, 'success')
+  const contactPage = await openContactPage(contactContext, 'en', 'contact-submit')
+  await submitContactForm(contactPage)
+  await contactPage.locator('.inquiry-form__card [role="status"]').waitFor({ state: 'visible', timeout: 15000 })
+  assert.equal(contactRequests.length, 1, 'contact form: expected one inquiry request')
+  assert.equal(contactRequests[0].type, 'contact', 'contact form: wrong inquiry type')
+  assert.equal(contactRequests[0].gclid, 'qa-gclid-contact-en', 'contact form: GCLID attribution missing')
+  assert.equal(contactRequests[0].utm_source, 'acceptance-qa', 'contact form: UTM attribution missing')
+  const contactConversion = await contactPage.evaluate(() => (window.dataLayer || []).find(item => item.event === 'contact_form_submission'))
+  assert.equal(contactConversion?.form_type, 'contact', 'contact form: success conversion event missing')
+  pass('contact: mocked submit, attribution and success conversion event')
+  await contactContext.close()
 
   const failedProduct = PRODUCTS[2]
   const { context: failedContext, inquiryRequests: failedRequests } = await createContext({ width: 390, height: 844 }, 'failure')
