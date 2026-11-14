@@ -53,11 +53,11 @@ async function loadContent(contentDir, locale) {
 }
 
 function normalize(value) {
-  return String(value || '').replace(/\\s+/g, ' ').trim()
+  return String(value || '').replace(/\s+/g, ' ').trim()
 }
 
 function compact(value) {
-  return normalize(value).replace(/\\s+/g, '').toLowerCase()
+  return normalize(value).replace(/\s+/g, '').toLowerCase()
 }
 
 async function waitForServer() {
