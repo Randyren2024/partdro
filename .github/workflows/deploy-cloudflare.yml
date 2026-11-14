@@ -291,6 +291,9 @@ jobs:
           cat /tmp/partdro-pages-dev.log || true
           exit 1
 
+      - name: Browser-test premium Nuxt routes and mocked inquiry flows
+        run: npm run test:premium-landings
+
       - name: Deploy to Cloudflare Pages
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         env:
