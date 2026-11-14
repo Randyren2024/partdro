@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
+import { readdir } from 'node:fs/promises'
+import { join } from 'node:path'
 import { chromium } from 'playwright'
 import { contentFor as c500Content } from '../landing/eavision-c500/src/lib/i18n.js'
 import { contentFor as vf50pContent } from '../landing/vf50p/src/lib/i18n.js'
@@ -252,6 +254,14 @@ async function fillAndSubmit(page, product) {
 
 try {
   await waitForServer()
+
+  for (const product of PRODUCTS) {
+    const imageFiles = await readdir(join('dist', 'products', product.slug, 'images'))
+    const videoFiles = await readdir(join('dist', 'products', product.slug, 'video'))
+    assert.ok(imageFiles.length > 0, `${product.slug}: images directory is empty`)
+    assert.ok(videoFiles.length > 0, `${product.slug}: video directory is empty`)
+    pass(`${product.slug}: original image and video assets are present in Nuxt output`)
+  }
 
   const invalidResponse = await fetch(`${ORIGIN}/api/inquiry`, {
     method: 'POST',
