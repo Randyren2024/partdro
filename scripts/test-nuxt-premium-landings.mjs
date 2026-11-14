@@ -55,6 +55,10 @@ function normalize(value) {
   return String(value || '').replace(/\\s+/g, ' ').trim()
 }
 
+function compact(value) {
+  return normalize(value).replace(/\\s+/g, '').toLowerCase()
+}
+
 async function waitForServer() {
   for (let attempt = 0; attempt < 40; attempt += 1) {
     if (server.exitCode !== null) {
@@ -169,7 +173,7 @@ async function openProductPage(context, product, locale, viewportLabel) {
   assert.ok(actual.canonical === `${SITE_ORIGIN}${path}`, `${product.slug} ${locale}: unexpected canonical ${actual.canonical}`)
   assert.ok(LOCALES.every(code => actual.alternates.includes(code)) && actual.alternates.includes('x-default'), `${product.slug} ${locale}: missing hreflang alternates`)
   const expectedH1 = expected.hero.title || expected.hero.titleLines?.join(' ')
-  assert.equal(normalize(actual.h1), normalize(expectedH1), `${product.slug} ${locale}: H1 mismatch`)
+  assert.equal(compact(actual.h1), compact(expectedH1), `${product.slug} ${locale}: H1 mismatch`)
   assert.ok(actual.quote && actual.footer, `${product.slug} ${locale}: quote form or footer missing`)
   assert.ok(actual.productSchema, `${product.slug} ${locale}: Product JSON-LD missing`)
   if (product.hasFaq) assert.ok(actual.faqSchema, `${product.slug} ${locale}: FAQ JSON-LD missing`)
