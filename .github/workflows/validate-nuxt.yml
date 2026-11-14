@@ -100,6 +100,23 @@ jobs:
           NODE
           echo "Nuxt static generation and route assertions passed."
           # Assert all 12 premium product routes are genuinely SSR-rendered by Nuxt.
+          assert_html_language() {
+            local html_file="$1"
+            local locale="$2"
+            local allowed
+            case "$locale" in
+              en) allowed='en|en-US' ;;
+              de) allowed='de|de-DE' ;;
+              es) allowed='es|es-ES' ;;
+              fr) allowed='fr|fr-FR' ;;
+              *) echo "::error::Unknown locale $locale"; exit 1 ;;
+            esac
+            if ! grep -Eq "<html[^>]*lang=\"($allowed)\"" "$html_file"; then
+              echo "::error::Missing expected html lang for $locale in $html_file"
+              grep -oE '<html[^>]*>' "$html_file" | head -n 1 || true
+              exit 1
+            fi
+          }
           assert_html_contains() {
             local html_file="$1"
             local expected="$2"
