@@ -55,10 +55,8 @@ jobs:
           NITRO_PRESET: cloudflare_pages
         run: npm run build
 
-      # These three product pages are intentionally bespoke Vue 3 + Vite
-      # experiences. Build them from their original sources and merge their
-      # static output into Nuxt's generated site; do not replace them with the
-      # generic Nuxt product detail template.
+      # VF50P and U15 remain bespoke Vite experiences for now. C500 is now
+      # rendered by its Nuxt route and must not be overlaid by a Vite build.
       - name: Install original landing-page dependencies
         working-directory: .
         run: npm install --include=optional --no-audit --no-fund
@@ -70,7 +68,6 @@ jobs:
       - name: Build the three premium product landing pages
         working-directory: .
         run: |
-          npm run landing:c500:build
           npm run landing:vf50p:build
           npm run landing:u15:build
 
@@ -78,10 +75,8 @@ jobs:
         working-directory: .
         run: |
           set -euo pipefail
-          test -s dist-landing/c500/site/products/c500-partdro-eavision/index.html
           test -s dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/index.html
           test -s dist-landing/u15/site/products/u15-multi-mission-drone/index.html
-          cp -a dist-landing/c500/site/. dist/
           cp -a dist-landing/vf50p/site/. dist/
           cp -a dist-landing/u15/site/. dist/
           echo "Premium product landing pages merged into dist"
@@ -156,6 +151,16 @@ jobs:
               fi
               echo "verified $route"
             done
+          done
+          # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
+          for locale in en es de fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}products/c500-partdro-eavision/index.html"
+            grep -Fq 'id="c500-quote"' "$html"
+            grep -Fq 'C500' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            echo "verified Nuxt-rendered C500 SEO and quote form: $html"
           done
           for artifact in _routes.json _headers _redirects; do
             if [ ! -f "dist/$artifact" ]; then

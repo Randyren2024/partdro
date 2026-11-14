@@ -11,16 +11,17 @@ import VideoModal from './components/VideoModal.vue'
 import { motionReady, reducedMotion, videoOpen } from './composables/state'
 import { heroVideo, media } from './data/media'
 import { contentFor, localeFromPath } from './lib/i18n'
+import { captureAttribution } from './lib/attribution'
 import { CONTACT_EMAIL, WHATSAPP_E164 } from './lib/contact'
 import { submitInquiry } from './lib/inquiry'
 import { trackEvent } from './lib/tracking'
 
-const locale = localeFromPath()
+const props = defineProps({
+  locale: { type: String, default: '' }
+})
+const locale = props.locale || localeFromPath(typeof window !== 'undefined' ? window.location.pathname : '/')
 const content = contentFor(locale)
-const search = window.location.search
-
-reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-motionReady.value = !reducedMotion.value
+const search = typeof window !== 'undefined' ? window.location.search : ''
 
 const heroReady = ref(false)
 const main = ref(null)
@@ -169,6 +170,11 @@ let revealObserver = null
 let fabObserver = null
 
 onMounted(() => {
+  // Capture first-touch and campaign attribution in the browser only.
+  captureAttribution()
+  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  motionReady.value = !reducedMotion.value
+
   requestAnimationFrame(() => {
     heroReady.value = true
   })
