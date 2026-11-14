@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import U15Landing from '../../../landing/u15/src/App.vue'
 import { contentFor } from '../../../landing/u15/src/lib/i18n'
-import { media, ogImage } from '../../../landing/u15/src/data/media'
+import { imageSize, media, ogImage } from '../../../landing/u15/src/data/media'
 import '../../../landing/u15/src/styles/base.css'
 import '../../../landing/u15/src/styles/shell.css'
 import '../../../landing/u15/src/styles/u15.css'
@@ -25,6 +25,8 @@ const search = computed(() => {
   return index >= 0 ? fullPath.slice(index) : ''
 })
 const absoluteOgImage = `${origin}${ogImage}`
+const ogDimensions = imageSize('og')
+const allContent = Object.fromEntries(locales.map(code => [code, contentFor(code)]))
 
 const structuredData = computed(() => ({
   '@context': 'https://schema.org',
@@ -98,11 +100,17 @@ useHead(() => ({
     { property: 'og:url', content: `${origin}${localizedPath.value}` },
     { property: 'og:image', content: absoluteOgImage },
     { property: 'og:image:secure_url', content: absoluteOgImage },
+    { property: 'og:image:type', content: 'image/jpeg' },
+    { property: 'og:image:width', content: String(ogDimensions.width) },
+    { property: 'og:image:height', content: String(ogDimensions.height) },
+    { property: 'og:image:alt', content: content.value.hero.imageAlt },
     { property: 'og:locale', content: content.value.meta.ogLocale },
+    ...locales.filter(code => code !== localeCode.value).map(code => ({ property: 'og:locale:alternate', content: allContent[code].meta.ogLocale })),
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: content.value.meta.title },
     { name: 'twitter:description', content: content.value.meta.description },
-    { name: 'twitter:image', content: absoluteOgImage }
+    { name: 'twitter:image', content: absoluteOgImage },
+    { name: 'twitter:image:alt', content: content.value.hero.imageAlt }
   ],
   link: [
     { rel: 'canonical', href: `${origin}${localizedPath.value}` },
