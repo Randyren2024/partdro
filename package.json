@@ -17,6 +17,7 @@
     "sitemap": "node scripts/generate-sitemap.mjs",
     "prerender": "node scripts/prerender.mjs",
     "generate-favicons": "node scripts/generate-favicons.js",
+    "test:premium-landings": "node scripts/test-nuxt-premium-landings.mjs",
     "netlify:dev": "netlify dev",
     "landing:c500:dev": "vite --config landing/eavision-c500/vite.config.mjs",
     "landing:c500:build": "vite build --config landing/eavision-c500/vite.config.mjs && node landing/eavision-c500/scripts/postbuild.mjs && node landing/eavision-c500/scripts/prerender.mjs",
