@@ -16,6 +16,7 @@ const PRODUCTS = [
 
 const server = spawn('npx', ['wrangler', 'pages', 'dev', 'dist', '--ip', '127.0.0.1', '--port', '8793'], {
   stdio: ['ignore', 'pipe', 'pipe'],
+  detached: true,
   env: { ...process.env, NO_COLOR: '1' },
 })
 let serverOutput = ''
@@ -430,5 +431,9 @@ try {
   process.exitCode = 1
 } finally {
   if (browser) await browser.close().catch(() => {})
-  if (server.exitCode === null) server.kill('SIGTERM')
+  if (server.exitCode === null) {
+    // Wrangler Pages spawns workerd/esbuild children. Kill the whole process
+    // group so a failed assertion cannot leave orphaned workers holding CI open.
+    try { process.kill(-server.pid, 'SIGTERM') } catch { server.kill('SIGTERM') }
+  }
 }
