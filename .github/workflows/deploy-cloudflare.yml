@@ -55,8 +55,7 @@ jobs:
           NITRO_PRESET: cloudflare_pages
         run: npm run build
 
-      # VF50P and U15 remain bespoke Vite experiences for now. C500 is now
-      # rendered by its Nuxt route and must not be overlaid by a Vite build.
+      # VF50P and U15 retain their original Vite asset pipelines; Nuxt renders VF50P and C500 HTML routes.
       - name: Install original landing-page dependencies
         working-directory: .
         run: npm install --include=optional --no-audit --no-fund
@@ -77,7 +76,10 @@ jobs:
           set -euo pipefail
           test -s dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/index.html
           test -s dist-landing/u15/site/products/u15-multi-mission-drone/index.html
-          cp -a dist-landing/vf50p/site/. dist/
+          # Keep original VF50P media but let Nuxt own the HTML route.
+          mkdir -p dist/products/vf50p-long-endurance-vtol-uav/images dist/products/vf50p-long-endurance-vtol-uav/video
+          cp -a dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/images/. dist/products/vf50p-long-endurance-vtol-uav/images/
+          cp -a dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/video/. dist/products/vf50p-long-endurance-vtol-uav/video/
           cp -a dist-landing/u15/site/. dist/
           echo "Premium product landing pages merged into dist"
 

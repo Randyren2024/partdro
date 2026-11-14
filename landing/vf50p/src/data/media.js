@@ -1,6 +1,7 @@
 import manifest from './image-manifest.json'
 
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+const viteBase = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+const base = viteBase.startsWith('/products/vf50p-long-endurance-vtol-uav/') ? viteBase : '/products/vf50p-long-endurance-vtol-uav/'
 
 export const demoVideo = `${base}video/vf50p-demo-flight.mp4`
 

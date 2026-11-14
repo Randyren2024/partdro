@@ -6,17 +6,18 @@ import ScrollIndicator from './components/ScrollIndicator.vue'
 import VideoModal from './components/VideoModal.vue'
 import { motionReady, reducedMotion, videoOpen } from './composables/state'
 import { demoVideo, media } from './data/media'
-import { contentFor, localeFromPath } from './lib/i18n'
+import { contentFor } from './lib/i18n'
+import { captureAttribution } from './lib/attribution'
 import { CONTACT_EMAIL, WHATSAPP_E164 } from './lib/contact'
 import { submitInquiry } from './lib/inquiry'
 import { trackEvent } from './lib/tracking'
 
-const locale = localeFromPath()
+const props = defineProps({ locale: { type: String, default: 'en' }, search: { type: String, default: '' } })
+const locale = props.locale
 const content = contentFor(locale)
-const search = window.location.search
-
-reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-motionReady.value = !reducedMotion.value
+const search = props.search
+reducedMotion.value = false
+motionReady.value = false
 
 const heroReady = ref(false)
 const main = ref(null)
@@ -128,6 +129,9 @@ let revealObserver = null
 let fabObserver = null
 
 onMounted(() => {
+  captureAttribution()
+  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  motionReady.value = !reducedMotion.value
   requestAnimationFrame(() => {
     heroReady.value = true
   })
@@ -627,7 +631,7 @@ onBeforeUnmount(() => {
   <SiteFooter
     :content="content.footer"
     :whatsapp-aria="content.whatsapp.aria"
-    locale="en"
+    :locale="locale"
   />
 
   <a
