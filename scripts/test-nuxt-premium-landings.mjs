@@ -122,7 +122,7 @@ async function openProductPage(context, product, locale, viewportLabel) {
     alternates: [...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(node => node.hreflang),
     h1: document.querySelector('h1')?.textContent || '',
     quote: Boolean(document.querySelector('form.quote__form')),
-    footer: Boolean(document.querySelector('footer.site-footer')),
+    footer: Boolean(document.querySelector('.site-footer')),
     productSchema: [...document.querySelectorAll('script[type="application/ld+json"]')].some(node => node.textContent.includes('"@type":"Product"')),
     faqSchema: [...document.querySelectorAll('script[type="application/ld+json"]')].some(node => node.textContent.includes('"@type":"FAQPage"')),
     imageCount: document.images.length,
