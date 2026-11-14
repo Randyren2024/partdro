@@ -10,9 +10,9 @@ const ORIGIN = 'http://127.0.0.1:8793'
 const SITE_ORIGIN = 'https://www.droneworld.tech'
 const LOCALES = ['en', 'de', 'es', 'fr']
 const PRODUCTS = [
-  { slug: 'c500-partdro-eavision', formId: 'c500-quote', content: c500Content, hasFaq: false },
-  { slug: 'vf50p-long-endurance-vtol-uav', formId: 'vf50p-quote', content: vf50pContent, hasFaq: true },
-  { slug: 'u15-multi-mission-drone', formId: 'u15-quote', content: u15Content, hasFaq: true },
+  { slug: 'c500-partdro-eavision', formId: 'c500-quote', content: c500Content, heroSelector: 'img.overview__technology', hasFaq: false },
+  { slug: 'vf50p-long-endurance-vtol-uav', formId: 'vf50p-quote', content: vf50pContent, heroSelector: 'img.hero__media', hasFaq: true },
+  { slug: 'u15-multi-mission-drone', formId: 'u15-quote', content: u15Content, heroSelector: 'img.hero__media', hasFaq: true },
 ]
 
 const server = spawn('npx', ['wrangler', 'pages', 'dev', 'dist', '--ip', '127.0.0.1', '--port', '8793'], {
@@ -112,7 +112,13 @@ async function openProductPage(context, product, locale, viewportLabel) {
   await page.locator(`#${product.formId} form.quote__form`).waitFor({ state: 'attached', timeout: 20000 })
   await page.waitForFunction(() => Boolean(document.getElementById('partdro-google-tag-manager')), null, { timeout: 15000 })
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
-  await page.waitForFunction(() => [...document.images].some(image => image.complete && image.naturalWidth > 0), null, { timeout: 15000 })
+  const heroImage = page.locator(product.heroSelector)
+  await heroImage.scrollIntoViewIfNeeded()
+  await page.waitForFunction(selector => {
+    const image = document.querySelector(selector)
+    return Boolean(image && image.complete && image.naturalWidth > 0)
+  }, product.heroSelector, { timeout: 15000 })
+  await page.evaluate(() => window.scrollTo(0, 0))
 
   const actual = await page.evaluate(() => ({
     lang: document.documentElement.lang,
