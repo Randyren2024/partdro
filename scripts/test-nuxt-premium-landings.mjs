@@ -86,6 +86,14 @@ async function createContext(viewport, responseMode = 'success') {
   return { context, inquiryRequests }
 }
 
+async function assertNoSlashCanonical(path, label) {
+  const response = await fetch(`${ORIGIN}${path}/`, { redirect: 'manual' })
+  assert.equal(response.status, 308, `${label}: trailing-slash URL should redirect with 308`)
+  const location = response.headers.get('location')
+  assert.ok(location, `${label}: trailing-slash redirect missing Location header`)
+  assert.equal(new URL(location, ORIGIN).pathname, path, `${label}: trailing-slash redirect target is not canonical`)
+}
+
 async function openProductPage(context, product, locale, viewportLabel) {
   const page = await context.newPage()
   const pageErrors = []
@@ -111,6 +119,8 @@ async function openProductPage(context, product, locale, viewportLabel) {
     utm_content: product.slug,
   })
   await page.goto(`${ORIGIN}${path}?${query}`, { waitUntil: 'domcontentloaded', timeout: 30000 })
+  assert.equal(new URL(page.url()).pathname, path, `${product.slug} ${locale}: no-slash URL unexpectedly redirected`)
+  await assertNoSlashCanonical(path, `${product.slug} ${locale}`)
   await page.locator(`#${product.formId} form.quote__form`).waitFor({ state: 'attached', timeout: 20000 })
   await page.waitForFunction(() => Boolean(document.getElementById('partdro-google-tag-manager')), null, { timeout: 15000 })
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
@@ -169,6 +179,8 @@ async function openContactPage(context, locale, viewportLabel) {
     utm_campaign: 'nuxt-migration-contact',
   })
   await page.goto(`${ORIGIN}${path}?${query}`, { waitUntil: 'domcontentloaded', timeout: 30000 })
+  assert.equal(new URL(page.url()).pathname, path, `contact ${locale}: no-slash URL unexpectedly redirected`)
+  await assertNoSlashCanonical(path, `contact ${locale}`)
   await page.locator('.inquiry-form__card').waitFor({ state: 'visible', timeout: 20000 })
   await page.waitForFunction(() => Boolean(document.getElementById('partdro-google-tag-manager')), null, { timeout: 15000 })
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
@@ -206,6 +218,8 @@ async function openProductDetailPage(context, viewportLabel) {
     utm_campaign: 'nuxt-migration-product-detail',
   })
   await page.goto(`${ORIGIN}${path}?${query}`, { waitUntil: 'domcontentloaded', timeout: 30000 })
+  assert.equal(new URL(page.url()).pathname, path, 'product detail: no-slash URL unexpectedly redirected')
+  await assertNoSlashCanonical(path, 'product detail d15r')
   await page.locator('#quote .inquiry-form__card').waitFor({ state: 'visible', timeout: 20000 })
   await page.waitForFunction(() => Boolean(document.getElementById('partdro-google-tag-manager')), null, { timeout: 15000 })
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
