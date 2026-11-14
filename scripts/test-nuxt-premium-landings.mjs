@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
-import { readFile, readdir } from 'node:fs/promises'
+import { mkdir, readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { chromium } from 'playwright'
 
 const ORIGIN = 'http://127.0.0.1:8793'
 const SITE_ORIGIN = 'https://www.droneworld.tech'
+const SCREENSHOT_DIR = 'artifacts/premium-qa'
 const LOCALES = ['en', 'de', 'es', 'fr']
 const PRODUCTS = [
   { slug: 'c500-partdro-eavision', formId: 'c500-quote', contentDir: 'landing/eavision-c500/src/data/content', heroSelector: 'img.overview__technology', hasFaq: false },
@@ -173,7 +174,9 @@ async function openProductPage(context, product, locale, viewportLabel) {
   assert.equal(normalize(actual.description), normalize(expected.meta.description), `${product.slug} ${locale}: description mismatch`)
   assert.ok(actual.canonical === `${SITE_ORIGIN}${path}`, `${product.slug} ${locale}: unexpected canonical ${actual.canonical}`)
   assert.ok(LOCALES.every(code => actual.alternates.includes(code)) && actual.alternates.includes('x-default'), `${product.slug} ${locale}: missing hreflang alternates`)
-  const expectedH1 = expected.hero.title || expected.hero.titleLines?.join(' ')
+  // The original landing page renders titleLines as the visible H1 when present;
+  // hero.title is the SEO/content title and may intentionally use a different word order.
+  const expectedH1 = expected.hero.titleLines?.join(' ') || expected.hero.title
   assert.equal(compact(actual.h1), compact(expectedH1), `${product.slug} ${locale}: H1 mismatch`)
   assert.ok(actual.quote && actual.footer, `${product.slug} ${locale}: quote form or footer missing`)
   assert.ok(actual.productSchema, `${product.slug} ${locale}: Product JSON-LD missing`)
@@ -182,6 +185,13 @@ async function openProductPage(context, product, locale, viewportLabel) {
   assert.ok(actual.scrollWidth <= actual.clientWidth + 2, `${product.slug} ${locale}: horizontal overflow ${actual.scrollWidth} > ${actual.clientWidth}`)
   assert.deepEqual(pageErrors, [], `${product.slug} ${locale}: browser errors: ${pageErrors.join('; ')}`)
   assert.deepEqual(failedLocalAssets, [], `${product.slug} ${locale}: failed local media: ${failedLocalAssets.join('; ')}`)
+  if (['mobile', 'desktop'].includes(viewportLabel) && locale === 'en') {
+    await page.screenshot({
+      path: join(SCREENSHOT_DIR, `${viewportLabel}-${product.slug}.png`),
+      fullPage: viewportLabel === 'desktop',
+      animations: 'disabled',
+    })
+  }
   pass(`${viewportLabel} ${locale} ${product.slug}: localized SSR, SEO, form, footer and no overflow`)
   return page
 }
@@ -221,6 +231,13 @@ async function openContactPage(context, locale, viewportLabel) {
   assert.ok(actual.footer, `contact ${locale}: footer missing`)
   assert.ok(actual.scrollWidth <= actual.clientWidth + 2, `contact ${locale}: horizontal overflow ${actual.scrollWidth} > ${actual.clientWidth}`)
   assert.deepEqual(pageErrors, [], `contact ${locale}: browser errors: ${pageErrors.join('; ')}`)
+  if (['mobile', 'desktop'].includes(viewportLabel) && locale === 'en') {
+    await page.screenshot({
+      path: join(SCREENSHOT_DIR, `${viewportLabel}-contact.png`),
+      fullPage: viewportLabel === 'desktop',
+      animations: 'disabled',
+    })
+  }
   pass(`${viewportLabel} ${locale} contact: localized form, footer and no overflow`)
   return page
 }
@@ -286,6 +303,7 @@ async function fillAndSubmit(page, product) {
 }
 
 try {
+  await mkdir(SCREENSHOT_DIR, { recursive: true })
   await waitForServer()
 
   for (const product of PRODUCTS) {
@@ -340,10 +358,10 @@ try {
   }
   await mobileContext.close()
 
-  console.log('\\n[2/3] Desktop route acceptance: contact plus all three products')
+  console.log('\\n[2/3] Desktop route acceptance: all locales plus D15R')
   const { context: desktopContext } = await createContext({ width: 1440, height: 1000 })
-  {
-    const page = await openContactPage(desktopContext, 'en', 'desktop')
+  for (const locale of LOCALES) {
+    const page = await openContactPage(desktopContext, locale, 'desktop')
     await page.close()
   }
   {
@@ -351,8 +369,10 @@ try {
     await page.close()
   }
   for (const product of PRODUCTS) {
-    const page = await openProductPage(desktopContext, product, 'en', 'desktop')
-    await page.close()
+    for (const locale of LOCALES) {
+      const page = await openProductPage(desktopContext, product, locale, 'desktop')
+      await page.close()
+    }
   }
   await desktopContext.close()
 
