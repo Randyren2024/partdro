@@ -48,7 +48,7 @@ async function fetchSlugs(url: string, key: string, table: string): Promise<stri
 }
 
 export default defineNuxtConfig({
-  // Nuxt 4 application source lives in nuxt-app/app/.
+  // Nuxt 4 application source lives in the repository root app/ directory.
   srcDir: 'app/',
 
   compatibilityDate: '2025-07-15',

@@ -7,8 +7,11 @@ on:
       - 'fc/**'
       - 'netlify/functions/inquiry.ts'
       - 'netlify/shared/verifyAdmin.ts'
-      - 'src/components/common/InquiryForm.vue'
-      - 'src/composables/useAttribution.ts'
+      - 'legacy-vite/src/components/common/InquiryForm.vue'
+      - 'legacy-vite/src/composables/useAttribution.ts'
+      - 'app/components/common/InquiryForm.vue'
+      - 'app/composables/useAttribution.ts'
+      - 'server/api/inquiry.post.ts'
       - 'landing/u15/**'
       - 'landing/vf50p/**'
       - 'landing/eavision-c500/**'
@@ -31,11 +34,11 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --include=optional --no-audit --no-fund
 
       - name: Install Chromium and system dependencies
         run: npx playwright install --with-deps chromium
@@ -45,7 +48,7 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || secrets.VITE_SUPABASE_ANON_KEY }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-        run: npm run build
+        run: npm run build:legacy
 
       - name: Build C500 landing
         env:

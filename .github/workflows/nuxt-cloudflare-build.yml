@@ -6,7 +6,14 @@ on:
   pull_request:
     types: [labeled]
     paths:
-      - "nuxt-app/**"
+      - "app/**"
+      - "server/**"
+      - "public/**"
+      - "landing/**"
+      - "nuxt.config.ts"
+      - "package.json"
+      - "package-lock.json"
+      - "wrangler.toml"
       - ".github/workflows/nuxt-cloudflare-build.yml"
       - ".github/workflows/validate-nuxt.yml"
       - ".github/workflows/deploy-cloudflare.yml"
@@ -24,9 +31,6 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'preview-required')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: nuxt-app
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,7 +40,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: nuxt-app/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm install --include=optional --no-audit --no-fund
@@ -44,7 +48,27 @@ jobs:
       - name: Build for Cloudflare Pages
         env:
           NITRO_PRESET: cloudflare_pages
-        run: npm run generate
+        run: npm run build
+
+      - name: Install Chromium for product landing prerender
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the three premium product landings
+        run: |
+          npm run landing:c500:build
+          npm run landing:vf50p:build
+          npm run landing:u15:build
+
+      - name: Merge product landings into Nuxt output
+        run: |
+          set -euo pipefail
+          test -s dist-landing/c500/site/products/c500-partdro-eavision/index.html
+          test -s dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/index.html
+          test -s dist-landing/u15/site/products/u15-multi-mission-drone/index.html
+          cp -a dist-landing/c500/site/. dist/
+          cp -a dist-landing/vf50p/site/. dist/
+          cp -a dist-landing/u15/site/. dist/
+          echo "Merged all three localized product landing pages."
 
       - name: Verify Cloudflare Pages artifacts and localized routes
         run: |
@@ -65,13 +89,46 @@ jobs:
               exit 1
             fi
           done
-          for artifact in _routes.json _headers _redirects; do
+          for locale in en es de fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
+              route="dist/${prefix}products/${slug}/index.html"
+              if [ ! -s "$route" ]; then
+                echo "::error::Missing premium landing page: $route"
+                exit 1
+              fi
+            done
+          done
+          for artifact in _routes.json _headers _redirects _worker.js; do
             if [ ! -s "dist/${artifact}" ]; then
               echo "::error::dist/${artifact} is missing or empty."
               exit 1
             fi
           done
           echo "Cloudflare Pages build artifacts verified."
+
+      - name: Normalize Cloudflare Pages routes manifest
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs'
+          const file = 'dist/_routes.json'
+          const routes = JSON.parse(readFileSync(file, 'utf8'))
+          if (routes.version !== 1) throw new Error('Unsupported _routes.json version')
+          // Match the production workflow: only API requests invoke the Worker.
+          routes.include = ['/api/*']
+          routes.exclude = []
+          const rules = [...routes.include, ...routes.exclude]
+          const tooLong = rules.filter(rule => rule.length > 100)
+          if (tooLong.length) throw new Error('Cloudflare route rules exceed 100 chars: ' + tooLong.join(', '))
+          if (rules.length > 100) throw new Error('Cloudflare route rule count exceeds 100: ' + rules.length)
+          writeFileSync(file, JSON.stringify(routes, null, 2))
+          const verified = JSON.parse(readFileSync(file, 'utf8'))
+          if (JSON.stringify(verified.include) !== JSON.stringify(['/api/*']) || verified.exclude.length !== 0) {
+            throw new Error('Failed to normalize Cloudflare Pages routes manifest')
+          }
+          console.log('Normalized Cloudflare Pages routes: only /api/* invokes the Worker')
+          NODE
 
       - name: Compress oversized media for Cloudflare Pages
         if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'preview-required')
