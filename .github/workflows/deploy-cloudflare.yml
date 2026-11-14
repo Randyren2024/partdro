@@ -167,7 +167,7 @@ jobs:
             html="dist/${prefix}products/c500-partdro-eavision.html"
             grep -Fq 'id="c500-quote"' "$html"
             grep -Fq 'C500' "$html"
-            assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
+            grep -Fq 'hreflang="x-default"' "$html"
             echo "verified Nuxt-rendered C500 SEO and quote form: $html"
           done
           # All three Nuxt-rendered product pages must contain their own SSR form,
