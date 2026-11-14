@@ -19,6 +19,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4
@@ -297,6 +298,7 @@ jobs:
           exit 1
 
       - name: Browser-test premium Nuxt routes and mocked inquiry flows
+        timeout-minutes: 12
         run: npm run test:premium-landings
 
       - name: Deploy to Cloudflare Pages
