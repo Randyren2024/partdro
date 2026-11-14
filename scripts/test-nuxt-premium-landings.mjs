@@ -210,7 +210,7 @@ async function openContactPage(context, locale, viewportLabel) {
     name: Boolean(document.querySelector('.inquiry-form__card input[autocomplete="name"]')),
     email: Boolean(document.querySelector('.inquiry-form__card input[autocomplete="email"]')),
     message: Boolean(document.querySelector('.inquiry-form__card textarea')),
-    footer: Boolean(document.querySelector('footer.site-footer')),
+    footer: Boolean(document.querySelector('.site-footer footer.footer')),
     scrollWidth: document.documentElement.scrollWidth,
     clientWidth: document.documentElement.clientWidth,
   }))
