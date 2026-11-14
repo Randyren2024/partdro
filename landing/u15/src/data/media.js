@@ -1,6 +1,6 @@
 import manifest from './image-manifest.json'
 
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+const base = '/products/u15-multi-mission-drone/'
 
 export const demoVideo = `${base}video/u15-water-sampling.mp4`
 
