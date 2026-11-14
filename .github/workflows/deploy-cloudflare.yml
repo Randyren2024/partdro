@@ -168,6 +168,15 @@ jobs:
           done
           # All three Nuxt-rendered product pages must contain their own SSR form,
           # localized document metadata, complete SEO graph and the expected schema types.
+          assert_html_contains() {
+            local html_file="$1"
+            local expected="$2"
+            local label="$3"
+            if ! grep -Fq "$expected" "$html_file"; then
+              echo "::error::Missing $label ($expected) in $html_file"
+              exit 1
+            fi
+          }
           declare -A form_ids=(
             [c500-partdro-eavision]="c500-quote"
             [vf50p-long-endurance-vtol-uav]="vf50p-quote"
