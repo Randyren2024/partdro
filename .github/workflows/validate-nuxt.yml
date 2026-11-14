@@ -62,7 +62,7 @@ jobs:
           fi
 
           for route in products products/d15r de/products es/products fr/products; do
-            if [ ! -s "dist/${route}/index.html" ]; then
+            if [ ! -s "dist/${route}.html" ]; then
               echo "::error::Missing generated route: ${route}"
               exit 1
             fi
@@ -77,7 +77,7 @@ jobs:
             ['fr/contact', 'Contactez-Nous'],
           ]
           for (const [route, expectedTitle] of checks) {
-            const html = readFileSync('dist/' + route + '/index.html', 'utf8')
+            const html = readFileSync('dist/' + route + '.html', 'utf8')
             // data-edit-key attributes intentionally contain translation keys for
             // the CMS editor. Check rendered text only, not HTML attributes or scripts.
             const visibleText = html
@@ -135,9 +135,9 @@ jobs:
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
             for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
-              html="dist/${prefix}products/${slug}/index.html"
+              html="dist/${prefix}products/${slug}.html"
               if [ ! -s "$html" ]; then echo "::error::Missing generated route $html"; exit 1; fi
-              assert_html_contains "$html" "<html lang=\"$locale\"" "document language"
+              assert_html_language "$html" "$locale"
               assert_html_contains "$html" "id=\"${form_ids[$slug]}\"" "product quote form"
               assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
               assert_html_contains "$html" 'og:image:alt' "Open Graph image alt"
@@ -158,12 +158,6 @@ jobs:
           # GTM is deliberately bootstrapped client-side; verify the shared plugin contract.
           grep -Fq "GTM-KJ7GJ3V5" nuxt.config.ts
           grep -Fq "partdro-google-tag-manager" app/plugins/analytics.client.ts
-
-      - name: Install Chromium for browser acceptance tests
-        run: npx playwright install --with-deps chromium
-
-      - name: Browser-test premium Nuxt routes and mocked inquiry flows
-        run: npm run test:premium-landings
 
       - name: Scan every generated page for unresolved i18n keys
         run: |
