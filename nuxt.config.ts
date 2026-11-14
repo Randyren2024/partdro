@@ -113,7 +113,6 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
       titleTemplate: '%s | Partdro - Drone Cleaning & Delivery Solutions',
       meta: [
         { charset: 'utf-8' },
