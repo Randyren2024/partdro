@@ -323,8 +323,10 @@ try {
   // Reuse one browser context per viewport. Creating a fresh Chromium context for
   // every URL adds substantial CI overhead without increasing route coverage.
   const { context: mobileContext } = await createContext({ width: 390, height: 844 })
-  for (const locale of LOCALES) {
-    const page = await openContactPage(mobileContext, locale, 'mobile')
+  // Exercise the mobile layout on the primary locale; localized route/SEO output
+  // is covered by static-generation checks, avoiding 3 duplicate mobile launches.
+  {
+    const page = await openContactPage(mobileContext, 'en', 'mobile')
     await page.close()
   }
   {
@@ -332,10 +334,8 @@ try {
     await page.close()
   }
   for (const product of PRODUCTS) {
-    for (const locale of LOCALES) {
-      const page = await openProductPage(mobileContext, product, locale, 'mobile')
-      await page.close()
-    }
+    const page = await openProductPage(mobileContext, product, 'en', 'mobile')
+    await page.close()
   }
   await mobileContext.close()
 
