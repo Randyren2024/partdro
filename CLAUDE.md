@@ -6,23 +6,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm install
-npm run dev        # Vite dev server, port 5173; also starts the C500 landing on 5174
-npm run build      # production build; THIS is the type check
-npm run preview
-npm run netlify:dev # local Netlify Functions + SPA proxy (targetPort 5173)
+npm run dev          # Nuxt 4 root application, http://localhost:3000
+npm run build        # Nuxt production build
+npm run generate     # static generation
+npm run typecheck    # Nuxt type check
 
-# C500 EAVision static landing (independent of the 175-page main build)
-npm run landing:c500:dev      # standalone landing dev server on 5174 (debug only)
-npm run landing:c500:build    # Vite + localized SEO + Playwright prerender (4 pages)
-npm run landing:c500:test     # local E2E/SEO/inquiry/attribution checks
-npm run landing:c500:serve    # serve dist-landing/c500/site with FC routing rules
+# Temporary legacy Vite SPA compatibility build (rollback only)
+npm run dev:legacy
+npm run build:legacy
+
+# Three standalone product landings (temporary until migrated into Nuxt)
+npm run landing:c500:dev
+npm run landing:c500:build
+npm run landing:u15:build
+npm run landing:vf50p:build
 ```
 
-- Copy `.env.example` → `.env` for local work. `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` are required by the build and prerender step. Never expose `SUPABASE_SERVICE_ROLE_KEY` to the client.
-- The C500 EAVision landing source of truth is `landing/eavision-c500/` (see its README). It builds to `dist-landing/` and is merged into `dist/` by CI after the main build; do not expect `npm run build` alone to update that page.
-- `npm run build` = `playwright install chromium` + Vite build + `scripts/inject-seo-links.mjs` + `scripts/prerender.mjs` + `scripts/generate-sitemap.mjs`. It needs network for Playwright and Supabase.
-- `vue-tsc` is broken on the current Node version; the build is the type check. There is no lint script/config.
-- Broken npm script: `optimize-images` (`scripts/optimize-images.js` does not exist). `generate-favicons` does exist (`scripts/generate-favicons.js`).
+- Nuxt is the only primary website application. New pages, components, API routes and features belong in root `app/` and `server/`; do not add new site functionality to `legacy-vite/`.
+- `legacy-vite/` preserves the former Vite SPA solely for rollback and the temporary Aliyun OSS build chain. Remove it only after Nuxt production cutover and the rollback window.
+- The three `landing/*` product experiences are still built separately for now. They must be migrated into Nuxt before their Vite sources/build steps are removed.
+- Copy `.env.example` → `.env`. `NUXT_SUPABASE_SERVICE_ROLE_KEY` is server-only; never expose it to the client. The legacy build still uses public `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
 
 ### Tests / verification
 
@@ -44,7 +47,7 @@ node fc/<function>/test-local.mjs
 
 ### Deploying
 
-- Production deploys run through `.github/workflows/deploy-aliyun.yml` on push to `main`: build the site, build the four-locale C500 landing and merge it into `dist/` ( guarding `id="c500-quote"`, `GTM-KJ7GJ3V5`, `hreflang="x-default"` per locale), sync `dist/` to OSS, build/upload the FC bundle, update the `partdro-api` function, then deploy the report functions. Prefer this over manual deploys.
+- The temporary Aliyun compatibility workflow runs on push to `main`: it builds `legacy-vite/` with `npm run build:legacy`, builds and merges C500/U15/VF50P, syncs the snapshot to OSS, updates `partdro-api`, then deploys the report functions. Keep this chain until Nuxt production cutover is verified.
 - `node scripts/build-fc.mjs` bundles `fc/index.ts` → `dist-fc/index.js` (handler `index.handler`). For production the bundle needs `ALIYUN_OSS_BUCKET=partdro-site` / `ALIYUN_OSS_REGION=cn-hongkong`; otherwise the static server has no bucket.
 - For a manual FC update: back up the existing `oss://partdro-site/fc-code.zip`, build with the production bucket, zip `index.js` at the zip root, upload to `oss://partdro-site/fc-code.zip`, then update `partdro-api` code. Use only the Aliyun profile/account that can see that function.
 
@@ -62,16 +65,16 @@ node fc/<function>/test-local.mjs
 
 ## Frontend architecture
 
-Vue 3 + TypeScript + Ant Design Vue + Pinia + vue-i18n SPA, with Supabase as the content source. Locales are `en/es/de/fr`; English is unprefixed, and `/en/...` redirects to the unprefixed path. The URL prefix drives the active locale.
+The primary website is Nuxt 4 at the repository root (`app/`, `server/`, `public/`) with Vue 3, TypeScript, Ant Design Vue, Pinia, vue-i18n and Supabase. `legacy-vite/` is a temporary rollback snapshot of the former Vite SPA; new site features must be implemented in Nuxt. Locales are `en/es/de/fr`; English is unprefixed, and `/en/...` redirects to the unprefixed path. The URL prefix drives the active locale.
 
-Router (`src/router/index.ts`):
+Legacy rollback router (`legacy-vite/src/router/index.ts`):
 
 - A `/:locale?` wrapper contains the site routes; `/products/:slug` uses `ProductDetailView.vue`. **The main SPA has no `/products/c500-partdro-eavision` route**: that URL is the standalone landing in `landing/eavision-c500/`, served by the dev proxy in `vite.config.ts` (5173 → 5174) and as static HTML in production. Catalog links to it must be plain `<a href>`, not `router-link`.
 - Admin routes: `/admin/login`, `/admin/products`; `/admin/editor` redirects to `/products/d15r`.
 - `ProductDetailView.vue` is a **parameterized landing renderer**, not D15R-only: the i18n namespace is `route.params.slug` (default `d15r`), text comes from `<ns>.*`, images from `/images/<ns>/` (D15R has its own `/d15r/images/` sets). The separate `c500-delivery-drone` product page still uses this renderer; the C500 EAVision landing does not.
 - Direct requests for `/products/c500` are 301'd by FC; the Vue router also has a client-side redirect for in-app navigation.
 
-Content model: `products`, `posts`, `cases`, `documents` each have a `<table>_langs` child table with one row per language. `src/composables/useSupabase.ts` fetches `*, *_langs(...)`, merges the current locale row (fallback `en`), and refetches on locale change. `useProduct` is exported but unused; listing/home views use `useProducts`, `usePosts`, etc. Product categories are the literal strings `'agricultural' | 'cargo' | 'cleaning'`.
+Content model: `products`, `posts`, `cases`, `documents` each have a `<table>_langs` child table with one row per language. `legacy-vite/src/composables/useSupabase.ts` fetches `*, *_langs(...)`, merges the current locale row (fallback `en`), and refetches on locale change. `useProduct` is exported but unused; listing/home views use `useProducts`, `usePosts`, etc. Product categories are the literal strings `'agricultural' | 'cargo' | 'cleaning'`.
 
 ## CMS and admin
 
@@ -110,7 +113,7 @@ Content model: `products`, `posts`, `cases`, `documents` each have a `<table>_la
 
 ## Known issues / stale docs
 
-- `README.md` describes the old `partdro_vue` (port 3001, no Supabase/i18n).
+- `README.md` documents the root Nuxt application and the temporary legacy build boundary.
 - `AGENTS.md` documents a previous "landing-page-from-source" workflow and references a `CLAUDE.md`/`scripts/` from the old `~/Desktop/partdro_final` repo. Trust the code and this file; use AGENTS.md only for its image-audit/ordering lessons.
 - `node scripts/build-fc.mjs` + `node scripts/test-fc-handler.mjs` is the reliable local routing test. `scripts/prerender.test.mjs` is broken on Node 24 (see Tests).
 - Image editing in the admin editor is local-only: IOPaint (`VITE_IOPAINT_URL`, default `:8080`) and the Flux/wanx Flask service (`VITE_FLUX_EDIT_URL`, default `:5000`); browsers call them directly, not through production.

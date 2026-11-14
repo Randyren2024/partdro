@@ -1,3 +1,5 @@
+> **Repository architecture note (2026-11-14):** Nuxt 4 is the primary application at the repository root. New site pages/features belong in root `app/` and APIs in `server/`. `legacy-vite/` is retained only as a temporary rollback/build source; do not add new product pages there. The three `landing/*` Vite experiences are temporary and will be migrated into Nuxt before their sources are removed. This document's older Vite-specific product-ingestion workflow applies only when explicitly maintaining the legacy fallback.
+
 # AGENTS.md
 
 This file documents the **landing-page-from-source workflow** used in this repo. Codex (Codex.ai/code) should follow these phases end-to-end when asked to build a product page from an external source.
@@ -23,7 +25,7 @@ URL / Upload (image·text·PDF)
 [4] Code-gen ───────────── products.ts + hardcoded maps
         │
         ▼
-[5] Build verify ───────── npm run build
+[5] Build verify ───────── npm run build:legacy
         │
         ▼
 [6] Render & Screenshot ── Playwright 1440×900 + 390×844
@@ -64,7 +66,7 @@ Prompt templates for WebFetch should request "保留完整 URL", "标注 hero/fe
 
 Decide upfront:
 - **Product id / code / name**: short alphanumeric id (e.g. `lumenfly-mini` / `LM-MINI`), human-readable name. Avoid double-stamping the same word (we shipped "Mini Camera Drone" then noticed "LM-MINI Mini Camera Drone" had "Mini" twice — fix to "Camera Drone").
-- **Category**: pick from the 5 in `categories[]`. New categories need entries in `src/data/products.ts`.
+- **Category**: pick from the 5 in `categories[]`. New categories need entries in `legacy-vite/src/data/products.ts`.
 - **Brand rewrite**: any third-party brand in the source (e.g. "SKYROVER") must be replaced with the target brand throughout the data, AND visually removed from images (see phase 3).
 - **In-stock / best-seller / new** flags: default `inStock: true`, `isNew: true`, `isBestSeller: false` for new product launches.
 
@@ -94,7 +96,7 @@ Do NOT execute these modifications yet — they happen in Phase 8.
 ## Phase 4 — Code Generation
 
 1. **`src/data/products.ts`** — append a new `Product` entry. Fill every field that has a corresponding source extraction. Don't leave empty arrays for sections the source had content for.
-2. **`src/views/ProductDetailView.vue`** has TWO hardcoded maps that need updating when adding a product:
+2. **`legacy-vite/src/views/ProductDetailView.vue`** has TWO hardcoded maps that need updating when adding a product:
    - `badgeStyleProducts` (line ~914) — product codes whose `features` render as badge chips. Add if your features are short labels (≤30 chars).
    - `appImageMap` (line ~895) — application-name → image-path. Add one entry per unique `applications[]` string so the carousel shows real photos instead of generic icons.
 

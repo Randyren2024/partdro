@@ -4,7 +4,13 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'nuxt-app/**'
+      - 'app/**'
+      - 'server/**'
+      - 'public/**'
+      - 'nuxt.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'wrangler.toml'
       - '.github/workflows/validate-nuxt.yml'
   workflow_dispatch:
 
@@ -15,9 +21,6 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: nuxt-app
 
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +29,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: nuxt-app/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm install --include=optional --no-audit --no-fund

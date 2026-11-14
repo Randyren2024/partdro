@@ -2,10 +2,11 @@ import { defineConfig, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { spawn, type ChildProcess } from 'node:child_process'
 import { createConnection } from 'node:net'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url))
+const repoRoot = resolve(projectRoot, '..')
 const C500_LANDING_PORT = 5174
 const U15_LANDING_PORT = 5175
 const VF50P_LANDING_PORT = 5176
@@ -41,16 +42,16 @@ function landingDevServer(name: string, port: number, config: string): Plugin {
       child = spawn(
         process.execPath,
         [
-          join(projectRoot, 'node_modules', 'vite', 'bin', 'vite.js'),
+          join(repoRoot, 'node_modules', 'vite', 'bin', 'vite.js'),
           '--config',
-          join(projectRoot, config),
+          join(repoRoot, config),
           '--port',
           String(port),
           '--strictPort',
           '--clearScreen',
           'false'
         ],
-        { cwd: projectRoot, stdio: 'inherit' }
+        { cwd: repoRoot, stdio: 'inherit' }
       )
       child.once('exit', () => {
         child = undefined
@@ -62,6 +63,9 @@ function landingDevServer(name: string, port: number, config: string): Plugin {
 }
 
 export default defineConfig({
+  root: projectRoot,
+  envDir: repoRoot,
+  publicDir: 'public',
   plugins: [
     vue(),
     landingDevServer('c500-landing-dev-server', C500_LANDING_PORT, 'landing/eavision-c500/vite.config.mjs'),
@@ -110,7 +114,8 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: 'dist',
+    outDir: resolve(repoRoot, 'dist'),
+    emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
       output: {

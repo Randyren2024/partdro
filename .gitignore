@@ -21,8 +21,8 @@ extracted_*.json
 /w20-*.png
 # Large original source images (use .webp versions instead)
 public/images/*.jpg
-public/images/*.JPG
-public/images/Taurus 80e*.png
+legacy-vite/public/images/*.JPG
+legacy-vite/public/images/Taurus 80e*.png
 
 # Local Netlify folder
 .netlify
@@ -46,10 +46,16 @@ google_api/
 # C500 EAVision 独立落地页构建产物（CI 合并进 dist/）
 dist-landing/
 
-# Nuxt 4 build artifacts
-nuxt-app/.nuxt/
-nuxt-app/dist/
-nuxt-app/.output/
-nuxt-app/node_modules/
-nuxt-app/.wrangler/
-nuxt-app/.DS_Store
+# Nuxt 4 root application build artifacts
+.nuxt/
+.output/
+.data/
+.nitro/
+.cache/
+.wrangler/
+node_modules/
+.DS_Store
+
+# Temporary legacy Vite application
+legacy-vite/node_modules/
+legacy-vite/.vite/
