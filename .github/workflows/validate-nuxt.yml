@@ -7,6 +7,8 @@ on:
       - 'app/**'
       - 'server/**'
       - 'public/**'
+      - 'legacy-vite/**'
+      - 'scripts/**'
       - 'nuxt.config.ts'
       - 'package.json'
       - 'package-lock.json'
@@ -33,6 +35,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install --include=optional --no-audit --no-fund
+
+      - name: Smoke-build legacy Vite fallback
+        run: |
+          npx vite build --config legacy-vite/vite.config.ts --outDir /tmp/partdro-legacy-build
+          test -s /tmp/partdro-legacy-build/index.html
 
       - name: Generate static site
         env:
