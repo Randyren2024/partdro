@@ -167,6 +167,24 @@ async function fillAndSubmit(page, product) {
 
 try {
   await waitForServer()
+
+  const invalidResponse = await fetch(`${ORIGIN}/api/inquiry`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({}),
+  })
+  assert.equal(invalidResponse.status, 400, 'inquiry API must reject an empty payload before database access')
+  pass('API rejects invalid inquiry payload without touching Supabase')
+
+  const honeypotResponse = await fetch(`${ORIGIN}/api/inquiry`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ website: 'automated-bot-test' }),
+  })
+  assert.equal(honeypotResponse.status, 200, 'honeypot submissions should be silently accepted')
+  assert.deepEqual(await honeypotResponse.json(), { ok: true, spam: true })
+  pass('API honeypot short-circuits without database access')
+
   browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] })
 
   console.log('\\n[1/3] Mobile route acceptance: all products and locales')
