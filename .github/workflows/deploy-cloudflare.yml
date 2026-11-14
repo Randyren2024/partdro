@@ -163,7 +163,7 @@ jobs:
             html="dist/${prefix}products/c500-partdro-eavision/index.html"
             grep -Fq 'id="c500-quote"' "$html"
             grep -Fq 'C500' "$html"
-            grep -Fq 'hreflang="x-default"' "$html"
+            assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
             echo "verified Nuxt-rendered C500 SEO and quote form: $html"
           done
           # All three Nuxt-rendered product pages must contain their own SSR form,
@@ -187,20 +187,20 @@ jobs:
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
             for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
               html="dist/${prefix}products/${slug}/index.html"
-              grep -Fq "<html lang=\"$locale\"" "$html"
-              grep -Fq "id=\"${form_ids[$slug]}\"" "$html"
-              grep -Fq 'hreflang="x-default"' "$html"
-              grep -Fq 'og:image:alt' "$html"
-              grep -Fq 'og:image:secure_url' "$html"
-              grep -Fq 'og:image:width' "$html"
-              grep -Fq 'og:image:height' "$html"
-              grep -Fq 'og:locale:alternate' "$html"
-              grep -Fq 'twitter:image:alt' "$html"
-              grep -Fq 'application/ld+json' "$html"
-              grep -Fq '"@type":"Product"' "$html"
-              grep -Fq '"@id":"https://www.droneworld.tech/#organization"' "$html"
+              assert_html_contains "$html" "<html lang=\"$locale\"" "document language"
+              assert_html_contains "$html" "id=\"${form_ids[$slug]}\"" "product quote form"
+              assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
+              assert_html_contains "$html" 'og:image:alt' "Open Graph image alt"
+              assert_html_contains "$html" 'og:image:secure_url' "Open Graph secure image"
+              assert_html_contains "$html" 'og:image:width' "Open Graph image width"
+              assert_html_contains "$html" 'og:image:height' "Open Graph image height"
+              assert_html_contains "$html" 'og:locale:alternate' "alternate Open Graph locale"
+              assert_html_contains "$html" 'twitter:image:alt' "Twitter image alt"
+              assert_html_contains "$html" 'application/ld+json' "structured data"
+              assert_html_contains "$html" '"@type":"Product"' "Product schema"
+              assert_html_contains "$html" '"@id":"https://www.droneworld.tech/#organization"' "Organization schema"
               if [ "$slug" != "c500-partdro-eavision" ]; then
-                grep -Fq '"@type":"FAQPage"' "$html"
+                assert_html_contains "$html" '"@type":"FAQPage"' "FAQPage schema"
               fi
               echo "verified Nuxt SSR form, locale and SEO schema: $html"
             done
