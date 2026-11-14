@@ -384,6 +384,16 @@ try {
   pass('product detail: mocked submit, product slug, attribution and conversion event')
   await detailContext.close()
 
+  const { context: failedContactContext, inquiryRequests: failedContactRequests } = await createContext({ width: 390, height: 844 }, 'failure')
+  const failedContactPage = await openContactPage(failedContactContext, 'en', 'contact-failure')
+  await submitContactForm(failedContactPage)
+  await failedContactPage.locator('.inquiry-form__card [role="alert"]').waitFor({ state: 'visible', timeout: 15000 })
+  assert.equal(failedContactRequests.length, 1, 'contact failure: expected one inquiry request')
+  const failedContactConversion = await failedContactPage.evaluate(() => (window.dataLayer || []).some(item => item.event === 'contact_form_submission'))
+  assert.equal(failedContactConversion, false, 'contact failure: conversion fired despite failed inquiry')
+  pass('contact: failed inquiry shows an error and does not fire a conversion')
+  await failedContactContext.close()
+
   const failedProduct = PRODUCTS[2]
   const { context: failedContext, inquiryRequests: failedRequests } = await createContext({ width: 390, height: 844 }, 'failure')
   const failedPage = await openProductPage(failedContext, failedProduct, 'en', 'failure-test')
