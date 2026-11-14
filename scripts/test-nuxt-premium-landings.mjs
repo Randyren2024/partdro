@@ -94,6 +94,11 @@ async function openProductPage(context, product, locale, viewportLabel) {
       failedLocalAssets.push(request.url())
     }
   })
+  page.on('response', response => {
+    if (response.url().startsWith(ORIGIN) && response.status() >= 400 && /\\.(png|jpe?g|webp|svg|mp4)(\\?|$)/i.test(response.url())) {
+      failedLocalAssets.push(`${response.status()} ${response.url()}`)
+    }
+  })
 
   const path = localePath(locale, product.slug)
   const query = new URLSearchParams({
@@ -105,6 +110,9 @@ async function openProductPage(context, product, locale, viewportLabel) {
   })
   await page.goto(`${ORIGIN}${path}?${query}`, { waitUntil: 'domcontentloaded', timeout: 30000 })
   await page.locator(`#${product.formId} form.quote__form`).waitFor({ state: 'attached', timeout: 20000 })
+  await page.waitForFunction(() => Boolean(document.getElementById('partdro-google-tag-manager')), null, { timeout: 15000 })
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  await page.waitForFunction(() => [...document.images].some(image => image.complete && image.naturalWidth > 0), null, { timeout: 15000 })
 
   const actual = await page.evaluate(() => ({
     lang: document.documentElement.lang,
