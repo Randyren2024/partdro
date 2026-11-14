@@ -157,13 +157,13 @@ export default defineNuxtConfig({
       routes: [
         '/index.html',
         // 默认语言 en（无前缀）
-        '/products', '/cases', '/news', '/documents', '/about', '/contact',
+        '/products', '/products/c500-partdro-eavision', '/cases', '/news', '/documents', '/about', '/contact',
         // de
-        '/de', '/de/products', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
+        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
         // es
-        '/es', '/es/products', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
+        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
         // fr
-        '/fr', '/fr/products', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
+        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
         // 3 个 solutions 预设路径（每种语言 × 3）
         '/solutions/facade-cleaning', '/solutions/solar-panel-cleaning', '/solutions/heavy-lift-logistics',
         '/de/solutions/facade-cleaning', '/de/solutions/solar-panel-cleaning', '/de/solutions/heavy-lift-logistics',

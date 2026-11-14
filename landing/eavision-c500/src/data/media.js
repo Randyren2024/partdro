@@ -1,6 +1,6 @@
 import manifest from './image-manifest.json'
 
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/')
+const base = '/products/c500-partdro-eavision/'
 
 export const VIDEO_BASE =
   'https://eavision-front-prod.oss-cn-hangzhou.aliyuncs.com/guanwang/products/new/c500/video/'
