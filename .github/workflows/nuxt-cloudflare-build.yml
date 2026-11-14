@@ -9,6 +9,7 @@ on:
       - "app/**"
       - "server/**"
       - "public/**"
+      - "landing/**"
       - "nuxt.config.ts"
       - "package.json"
       - "package-lock.json"
@@ -47,7 +48,27 @@ jobs:
       - name: Build for Cloudflare Pages
         env:
           NITRO_PRESET: cloudflare_pages
-        run: npm run generate
+        run: npm run build
+
+      - name: Install Chromium for product landing prerender
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the three premium product landings
+        run: |
+          npm run landing:c500:build
+          npm run landing:vf50p:build
+          npm run landing:u15:build
+
+      - name: Merge product landings into Nuxt output
+        run: |
+          set -euo pipefail
+          test -s dist-landing/c500/site/products/c500-partdro-eavision/index.html
+          test -s dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/index.html
+          test -s dist-landing/u15/site/products/u15-multi-mission-drone/index.html
+          cp -a dist-landing/c500/site/. dist/
+          cp -a dist-landing/vf50p/site/. dist/
+          cp -a dist-landing/u15/site/. dist/
+          echo "Merged all three localized product landing pages."
 
       - name: Verify Cloudflare Pages artifacts and localized routes
         run: |
@@ -68,7 +89,18 @@ jobs:
               exit 1
             fi
           done
-          for artifact in _routes.json _headers _redirects; do
+          for locale in en es de fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
+              route="dist/${prefix}products/${slug}/index.html"
+              if [ ! -s "$route" ]; then
+                echo "::error::Missing premium landing page: $route"
+                exit 1
+              fi
+            done
+          done
+          for artifact in _routes.json _headers _redirects _worker.js; do
             if [ ! -s "dist/${artifact}" ]; then
               echo "::error::dist/${artifact} is missing or empty."
               exit 1
