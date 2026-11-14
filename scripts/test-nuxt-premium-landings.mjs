@@ -174,7 +174,9 @@ async function openProductPage(context, product, locale, viewportLabel) {
   assert.equal(normalize(actual.description), normalize(expected.meta.description), `${product.slug} ${locale}: description mismatch`)
   assert.ok(actual.canonical === `${SITE_ORIGIN}${path}`, `${product.slug} ${locale}: unexpected canonical ${actual.canonical}`)
   assert.ok(LOCALES.every(code => actual.alternates.includes(code)) && actual.alternates.includes('x-default'), `${product.slug} ${locale}: missing hreflang alternates`)
-  const expectedH1 = expected.hero.title || expected.hero.titleLines?.join(' ')
+  // The original landing page renders titleLines as the visible H1 when present;
+  // hero.title is the SEO/content title and may intentionally use a different word order.
+  const expectedH1 = expected.hero.titleLines?.join(' ') || expected.hero.title
   assert.equal(compact(actual.h1), compact(expectedH1), `${product.slug} ${locale}: H1 mismatch`)
   assert.ok(actual.quote && actual.footer, `${product.slug} ${locale}: quote form or footer missing`)
   assert.ok(actual.productSchema, `${product.slug} ${locale}: Product JSON-LD missing`)
