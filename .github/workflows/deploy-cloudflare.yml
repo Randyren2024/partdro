@@ -8,8 +8,9 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-cloudflare
-  cancel-in-progress: false
+  # Cancel superseded PR builds, but never cancel a main-branch deployment.
+  group: deploy-cloudflare-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   CF_PROJECT_NAME: partdro-nuxt
