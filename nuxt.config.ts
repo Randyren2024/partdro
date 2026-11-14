@@ -113,7 +113,6 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
       titleTemplate: '%s | Partdro - Drone Cleaning & Delivery Solutions',
       meta: [
         { charset: 'utf-8' },
@@ -150,6 +149,9 @@ export default defineNuxtConfig({
       '/admin/editor': { redirect: '/products/d15r', statusCode: 302 },
     },
     prerender: {
+      // Cloudflare Pages serves route/index.html with a trailing slash.
+      // Emit route.html so our existing no-slash canonical URLs resolve directly.
+      autoSubfolderIndex: false,
       // 注意：不要把 '/' 显式列进来——Nitro prerenderer 用 unstorage 存缓存，
       // 它不接受 '/' 作为 key（已知 bug）。用 '/index.html' 替代。
       // 动态路由（products/:slug, news/:slug, solutions/:solution）会在 pages/[slug].vue 里用

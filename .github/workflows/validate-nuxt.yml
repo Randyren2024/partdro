@@ -8,12 +8,14 @@ on:
       - 'server/**'
       - 'public/**'
       - 'legacy-vite/**'
+      - 'landing/**'
       - 'scripts/**'
       - 'nuxt.config.ts'
       - 'package.json'
       - 'package-lock.json'
       - 'wrangler.toml'
       - '.github/workflows/validate-nuxt.yml'
+      - '.github/workflows/deploy-cloudflare.yml'
   workflow_dispatch:
 
 concurrency:
@@ -60,7 +62,7 @@ jobs:
           fi
 
           for route in products products/d15r de/products es/products fr/products; do
-            if [ ! -s "dist/${route}/index.html" ]; then
+            if [ ! -s "dist/${route}.html" ]; then
               echo "::error::Missing generated route: ${route}"
               exit 1
             fi
@@ -75,7 +77,7 @@ jobs:
             ['fr/contact', 'Contactez-Nous'],
           ]
           for (const [route, expectedTitle] of checks) {
-            const html = readFileSync('dist/' + route + '/index.html', 'utf8')
+            const html = readFileSync('dist/' + route + '.html', 'utf8')
             // data-edit-key attributes intentionally contain translation keys for
             // the CMS editor. Check rendered text only, not HTML attributes or scripts.
             const visibleText = html
@@ -97,6 +99,65 @@ jobs:
           }
           NODE
           echo "Nuxt static generation and route assertions passed."
+          # Assert all 12 premium product routes are genuinely SSR-rendered by Nuxt.
+          assert_html_language() {
+            local html_file="$1"
+            local locale="$2"
+            local allowed
+            case "$locale" in
+              en) allowed='en|en-US' ;;
+              de) allowed='de|de-DE' ;;
+              es) allowed='es|es-ES' ;;
+              fr) allowed='fr|fr-FR' ;;
+              *) echo "::error::Unknown locale $locale"; exit 1 ;;
+            esac
+            if ! grep -Eq "<html[^>]*lang=\"($allowed)\"" "$html_file"; then
+              echo "::error::Missing expected html lang for $locale in $html_file"
+              grep -oE '<html[^>]*>' "$html_file" | head -n 1 || true
+              exit 1
+            fi
+          }
+          assert_html_contains() {
+            local html_file="$1"
+            local expected="$2"
+            local label="$3"
+            if ! grep -Fq "$expected" "$html_file"; then
+              echo "::error::Missing $label ($expected) in $html_file"
+              exit 1
+            fi
+          }
+          declare -A form_ids=(
+            [c500-partdro-eavision]="c500-quote"
+            [vf50p-long-endurance-vtol-uav]="vf50p-quote"
+            [u15-multi-mission-drone]="u15-quote"
+          )
+          for locale in en es de fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
+              html="dist/${prefix}products/${slug}.html"
+              if [ ! -s "$html" ]; then echo "::error::Missing generated route $html"; exit 1; fi
+              assert_html_language "$html" "$locale"
+              assert_html_contains "$html" "id=\"${form_ids[$slug]}\"" "product quote form"
+              assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
+              assert_html_contains "$html" 'og:image:alt' "Open Graph image alt"
+              assert_html_contains "$html" 'og:image:secure_url' "Open Graph secure image"
+              assert_html_contains "$html" 'og:image:width' "Open Graph image width"
+              assert_html_contains "$html" 'og:image:height' "Open Graph image height"
+              assert_html_contains "$html" 'og:locale:alternate' "alternate Open Graph locale"
+              assert_html_contains "$html" 'twitter:image:alt' "Twitter image alt"
+              assert_html_contains "$html" 'application/ld+json' "structured data"
+              assert_html_contains "$html" '"@type":"Product"' "Product schema"
+              assert_html_contains "$html" '"@id":"https://www.droneworld.tech/#organization"' "Organization schema"
+              if [ "$slug" != "c500-partdro-eavision" ]; then
+                assert_html_contains "$html" '"@type":"FAQPage"' "FAQPage schema"
+              fi
+              echo "Premium SSR route passed: /${prefix}products/${slug}"
+            done
+          done
+          # GTM is deliberately bootstrapped client-side; verify the shared plugin contract.
+          grep -Fq "GTM-KJ7GJ3V5" nuxt.config.ts
+          grep -Fq "partdro-google-tag-manager" app/plugins/analytics.client.ts
 
       - name: Scan every generated page for unresolved i18n keys
         run: |

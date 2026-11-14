@@ -3,6 +3,11 @@ import { theme as antdThemeTools, ConfigProvider } from 'ant-design-vue'
 
 const colorMode = useColorMode()
 
+// Keep the document language synchronized with the active /de, /es and /fr route.
+// A hard-coded htmlAttrs.lang in nuxt.config overrides locale-aware SEO metadata.
+const localeHead = useLocaleHead({ addDirAttribute: true, addSeoAttributes: false })
+useHead(() => ({ htmlAttrs: localeHead.value.htmlAttrs }))
+
 useHead({
   meta: [{
     name: 'theme-color',

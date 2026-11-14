@@ -8,8 +8,9 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-cloudflare
-  cancel-in-progress: false
+  # Cancel superseded PR builds, but never cancel a main-branch deployment.
+  group: deploy-cloudflare-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   CF_PROJECT_NAME: partdro-nuxt
@@ -18,6 +19,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4
@@ -83,7 +85,11 @@ jobs:
           mkdir -p dist/products/u15-multi-mission-drone/images dist/products/u15-multi-mission-drone/video
           cp -a dist-landing/u15/site/products/u15-multi-mission-drone/images/. dist/products/u15-multi-mission-drone/images/
           cp -a dist-landing/u15/site/products/u15-multi-mission-drone/video/. dist/products/u15-multi-mission-drone/video/
-          echo "Premium product landing pages merged into dist"
+          # Nitro emits flat .html files to preserve no-slash canonicals. Redirect
+          # slash variants back to those canonical URLs before Pages asset routing.
+          { printf '/*/ /:splat 308\\n'; cat dist/_redirects; } > dist/_redirects.tmp
+          mv dist/_redirects.tmp dist/_redirects
+          echo "Premium product media merged; no-slash canonical redirects configured"
 
       - name: Compress oversized media (Cloudflare Pages 25 MiB per-file limit)
         run: |
@@ -123,7 +129,7 @@ jobs:
             exit 1
           fi
           for route in products products/d15r de/products es/products fr/products; do
-            if [ ! -s "dist/${route}/index.html" ]; then
+            if [ ! -s "dist/${route}.html" ]; then
               echo "FAIL: missing generated route: ${route}"
               exit 1
             fi
@@ -132,7 +138,7 @@ jobs:
           for check in "de:Kontakt" "es:Contáctenos" "fr:Contactez-Nous"; do
             locale="${check%%:*}"
             label="${check#*:}"
-            html="dist/${locale}/contact/index.html"
+            html="dist/${locale}/contact.html"
             if ! grep -Fq "${label}" "${html}"; then
               echo "FAIL: expected localized contact label '${label}' in ${html}"
               exit 1
@@ -148,7 +154,7 @@ jobs:
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
             for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
-              route="dist/${prefix}products/${slug}/index.html"
+              route="dist/${prefix}products/${slug}.html"
               if [ ! -s "$route" ]; then
                 echo "FAIL: missing premium landing page: $route"
                 exit 1
@@ -160,11 +166,67 @@ jobs:
           for locale in en es de fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
-            html="dist/${prefix}products/c500-partdro-eavision/index.html"
+            html="dist/${prefix}products/c500-partdro-eavision.html"
             grep -Fq 'id="c500-quote"' "$html"
             grep -Fq 'C500' "$html"
             grep -Fq 'hreflang="x-default"' "$html"
             echo "verified Nuxt-rendered C500 SEO and quote form: $html"
+          done
+          # All three Nuxt-rendered product pages must contain their own SSR form,
+          # localized document metadata, complete SEO graph and the expected schema types.
+          assert_html_language() {
+            local html_file="$1"
+            local locale="$2"
+            local allowed
+            case "$locale" in
+              en) allowed='en|en-US' ;;
+              de) allowed='de|de-DE' ;;
+              es) allowed='es|es-ES' ;;
+              fr) allowed='fr|fr-FR' ;;
+              *) echo "::error::Unknown locale $locale"; exit 1 ;;
+            esac
+            if ! grep -Eq "<html[^>]*lang=\"($allowed)\"" "$html_file"; then
+              echo "::error::Missing expected html lang for $locale in $html_file"
+              grep -oE '<html[^>]*>' "$html_file" | head -n 1 || true
+              exit 1
+            fi
+          }
+          assert_html_contains() {
+            local html_file="$1"
+            local expected="$2"
+            local label="$3"
+            if ! grep -Fq "$expected" "$html_file"; then
+              echo "::error::Missing $label ($expected) in $html_file"
+              exit 1
+            fi
+          }
+          declare -A form_ids=(
+            [c500-partdro-eavision]="c500-quote"
+            [vf50p-long-endurance-vtol-uav]="vf50p-quote"
+            [u15-multi-mission-drone]="u15-quote"
+          )
+          for locale in en es de fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
+              html="dist/${prefix}products/${slug}.html"
+              assert_html_language "$html" "$locale"
+              assert_html_contains "$html" "id=\"${form_ids[$slug]}\"" "product quote form"
+              assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
+              assert_html_contains "$html" 'og:image:alt' "Open Graph image alt"
+              assert_html_contains "$html" 'og:image:secure_url' "Open Graph secure image"
+              assert_html_contains "$html" 'og:image:width' "Open Graph image width"
+              assert_html_contains "$html" 'og:image:height' "Open Graph image height"
+              assert_html_contains "$html" 'og:locale:alternate' "alternate Open Graph locale"
+              assert_html_contains "$html" 'twitter:image:alt' "Twitter image alt"
+              assert_html_contains "$html" 'application/ld+json' "structured data"
+              assert_html_contains "$html" '"@type":"Product"' "Product schema"
+              assert_html_contains "$html" '"@id":"https://www.droneworld.tech/#organization"' "Organization schema"
+              if [ "$slug" != "c500-partdro-eavision" ]; then
+                assert_html_contains "$html" '"@type":"FAQPage"' "FAQPage schema"
+              fi
+              echo "verified Nuxt SSR form, locale and SEO schema: $html"
+            done
           done
           for artifact in _routes.json _headers _redirects; do
             if [ ! -f "dist/$artifact" ]; then
@@ -234,6 +296,10 @@ jobs:
           echo "FAIL: /api/inquiry did not become available (last HTTP status: ${STATUS:-none})"
           cat /tmp/partdro-pages-dev.log || true
           exit 1
+
+      - name: Browser-test premium Nuxt routes and mocked inquiry flows
+        timeout-minutes: 12
+        run: npm run test:premium-landings
 
       - name: Deploy to Cloudflare Pages
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
