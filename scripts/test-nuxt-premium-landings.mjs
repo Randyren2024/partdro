@@ -320,46 +320,40 @@ try {
   browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] })
 
   console.log('\\n[1/3] Mobile route acceptance: contact plus all products/locales')
+  // Reuse one browser context per viewport. Creating a fresh Chromium context for
+  // every URL adds substantial CI overhead without increasing route coverage.
+  const { context: mobileContext } = await createContext({ width: 390, height: 844 })
   for (const locale of LOCALES) {
-    const { context } = await createContext({ width: 390, height: 844 })
-    const page = await openContactPage(context, locale, 'mobile')
+    const page = await openContactPage(mobileContext, locale, 'mobile')
     await page.close()
-    await context.close()
   }
   {
-    const { context } = await createContext({ width: 390, height: 844 })
-    const page = await openProductDetailPage(context, 'mobile')
+    const page = await openProductDetailPage(mobileContext, 'mobile')
     await page.close()
-    await context.close()
   }
   for (const product of PRODUCTS) {
     for (const locale of LOCALES) {
-      const { context } = await createContext({ width: 390, height: 844 })
-      const page = await openProductPage(context, product, locale, 'mobile')
+      const page = await openProductPage(mobileContext, product, locale, 'mobile')
       await page.close()
-      await context.close()
     }
   }
+  await mobileContext.close()
 
   console.log('\\n[2/3] Desktop route acceptance: contact plus all three products')
+  const { context: desktopContext } = await createContext({ width: 1440, height: 1000 })
   {
-    const { context } = await createContext({ width: 1440, height: 1000 })
-    const page = await openContactPage(context, 'en', 'desktop')
+    const page = await openContactPage(desktopContext, 'en', 'desktop')
     await page.close()
-    await context.close()
   }
   {
-    const { context } = await createContext({ width: 1440, height: 1000 })
-    const page = await openProductDetailPage(context, 'desktop')
+    const page = await openProductDetailPage(desktopContext, 'desktop')
     await page.close()
-    await context.close()
   }
   for (const product of PRODUCTS) {
-    const { context } = await createContext({ width: 1440, height: 1000 })
-    const page = await openProductPage(context, product, 'en', 'desktop')
+    const page = await openProductPage(desktopContext, product, 'en', 'desktop')
     await page.close()
-    await context.close()
   }
+  await desktopContext.close()
 
   console.log('\\n[3/3] Mocked inquiry submission and conversion-event acceptance')
   for (const product of PRODUCTS) {
