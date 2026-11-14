@@ -159,6 +159,12 @@ jobs:
           grep -Fq "GTM-KJ7GJ3V5" nuxt.config.ts
           grep -Fq "partdro-google-tag-manager" app/plugins/analytics.client.ts
 
+      - name: Install Chromium for browser acceptance tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser-test premium Nuxt routes and mocked inquiry flows
+        run: npm run test:premium-landings
+
       - name: Scan every generated page for unresolved i18n keys
         run: |
           node --input-type=module <<'NODE'
