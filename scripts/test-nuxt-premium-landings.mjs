@@ -246,7 +246,7 @@ async function openProductDetailPage(context, viewportLabel) {
     title: document.title,
     h1: document.querySelector('h1')?.textContent || '',
     form: Boolean(document.querySelector('#quote .inquiry-form__card form')),
-    footer: Boolean(document.querySelector('footer.site-footer')),
+    footer: Boolean(document.querySelector('.site-footer footer.footer')),
     scrollWidth: document.documentElement.scrollWidth,
     clientWidth: document.documentElement.clientWidth,
   }))
