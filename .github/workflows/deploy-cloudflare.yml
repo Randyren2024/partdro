@@ -55,7 +55,7 @@ jobs:
           NITRO_PRESET: cloudflare_pages
         run: npm run build
 
-      # VF50P and U15 retain their original Vite asset pipelines; Nuxt renders VF50P and C500 HTML routes.
+      # VF50P and U15 retain their original Vite media pipelines; Nuxt renders all three premium product HTML routes.
       - name: Install original landing-page dependencies
         working-directory: .
         run: npm install --include=optional --no-audit --no-fund
@@ -76,11 +76,13 @@ jobs:
           set -euo pipefail
           test -s dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/index.html
           test -s dist-landing/u15/site/products/u15-multi-mission-drone/index.html
-          # Keep original VF50P media but let Nuxt own the HTML route.
+          # Keep original VF50P and U15 media, but let Nuxt own both HTML routes.
           mkdir -p dist/products/vf50p-long-endurance-vtol-uav/images dist/products/vf50p-long-endurance-vtol-uav/video
           cp -a dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/images/. dist/products/vf50p-long-endurance-vtol-uav/images/
           cp -a dist-landing/vf50p/site/products/vf50p-long-endurance-vtol-uav/video/. dist/products/vf50p-long-endurance-vtol-uav/video/
-          cp -a dist-landing/u15/site/. dist/
+          mkdir -p dist/products/u15-multi-mission-drone/images dist/products/u15-multi-mission-drone/video
+          cp -a dist-landing/u15/site/products/u15-multi-mission-drone/images/. dist/products/u15-multi-mission-drone/images/
+          cp -a dist-landing/u15/site/products/u15-multi-mission-drone/video/. dist/products/u15-multi-mission-drone/video/
           echo "Premium product landing pages merged into dist"
 
       - name: Compress oversized media (Cloudflare Pages 25 MiB per-file limit)
