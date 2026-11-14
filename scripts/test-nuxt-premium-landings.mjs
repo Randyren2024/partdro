@@ -185,6 +185,39 @@ async function openContactPage(context, locale, viewportLabel) {
   return page
 }
 
+async function openProductDetailPage(context, viewportLabel) {
+  const page = await context.newPage()
+  const pageErrors = []
+  page.on('pageerror', error => pageErrors.push(error.message))
+  const path = '/products/d15r'
+  const query = new URLSearchParams({
+    gclid: 'qa-gclid-product-detail',
+    utm_source: 'acceptance-qa',
+    utm_medium: 'test',
+    utm_campaign: 'nuxt-migration-product-detail',
+  })
+  await page.goto(`${ORIGIN}${path}?${query}`, { waitUntil: 'domcontentloaded', timeout: 30000 })
+  await page.locator('#quote .inquiry-form__card').waitFor({ state: 'visible', timeout: 20000 })
+  await page.waitForFunction(() => Boolean(document.getElementById('partdro-google-tag-manager')), null, { timeout: 15000 })
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  const actual = await page.evaluate(() => ({
+    lang: document.documentElement.lang,
+    title: document.title,
+    h1: document.querySelector('h1')?.textContent || '',
+    form: Boolean(document.querySelector('#quote .inquiry-form__card form')),
+    footer: Boolean(document.querySelector('footer.site-footer')),
+    scrollWidth: document.documentElement.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }))
+  assert.ok(actual.lang.toLowerCase().startsWith('en'), `product detail: wrong html lang ${actual.lang}`)
+  assert.ok(actual.title && normalize(actual.h1), 'product detail: title or H1 missing')
+  assert.ok(actual.form && actual.footer, 'product detail: quote form or footer missing')
+  assert.ok(actual.scrollWidth <= actual.clientWidth + 2, `product detail: horizontal overflow ${actual.scrollWidth} > ${actual.clientWidth}`)
+  assert.deepEqual(pageErrors, [], `product detail: browser errors: ${pageErrors.join('; ')}`)
+  pass(`${viewportLabel} product detail d15r: shared inquiry form and no overflow`)
+  return page
+}
+
 async function submitContactForm(page) {
   const card = page.locator('.inquiry-form__card')
   await card.locator('input[autocomplete="name"]').fill('Acceptance QA Lead')
@@ -239,6 +272,12 @@ try {
     await page.close()
     await context.close()
   }
+  {
+    const { context } = await createContext({ width: 390, height: 844 })
+    const page = await openProductDetailPage(context, 'mobile')
+    await page.close()
+    await context.close()
+  }
   for (const product of PRODUCTS) {
     for (const locale of LOCALES) {
       const { context } = await createContext({ width: 390, height: 844 })
@@ -252,6 +291,12 @@ try {
   {
     const { context } = await createContext({ width: 1440, height: 1000 })
     const page = await openContactPage(context, 'en', 'desktop')
+    await page.close()
+    await context.close()
+  }
+  {
+    const { context } = await createContext({ width: 1440, height: 1000 })
+    const page = await openProductDetailPage(context, 'desktop')
     await page.close()
     await context.close()
   }
@@ -294,6 +339,19 @@ try {
   assert.equal(contactConversion?.form_type, 'contact', 'contact form: success conversion event missing')
   pass('contact: mocked submit, attribution and success conversion event')
   await contactContext.close()
+
+  const { context: detailContext, inquiryRequests: detailRequests } = await createContext({ width: 390, height: 844 }, 'success')
+  const detailPage = await openProductDetailPage(detailContext, 'detail-submit')
+  await submitContactForm(detailPage)
+  await detailPage.locator('.inquiry-form__card [role="status"]').waitFor({ state: 'visible', timeout: 15000 })
+  assert.equal(detailRequests.length, 1, 'product detail form: expected one inquiry request')
+  assert.equal(detailRequests[0].product_slug, 'd15r', 'product detail form: product slug missing')
+  assert.equal(detailRequests[0].gclid, 'qa-gclid-product-detail', 'product detail form: GCLID attribution missing')
+  assert.equal(detailRequests[0].utm_source, 'acceptance-qa', 'product detail form: UTM attribution missing')
+  const detailConversion = await detailPage.evaluate(() => (window.dataLayer || []).find(item => item.event === 'contact_form_submission'))
+  assert.equal(detailConversion?.form_type, 'contact', 'product detail form: success conversion event missing')
+  pass('product detail: mocked submit, product slug, attribution and conversion event')
+  await detailContext.close()
 
   const failedProduct = PRODUCTS[2]
   const { context: failedContext, inquiryRequests: failedRequests } = await createContext({ width: 390, height: 844 }, 'failure')
