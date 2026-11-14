@@ -100,6 +100,15 @@ jobs:
           NODE
           echo "Nuxt static generation and route assertions passed."
           # Assert all 12 premium product routes are genuinely SSR-rendered by Nuxt.
+          assert_html_contains() {
+            local html_file="$1"
+            local expected="$2"
+            local label="$3"
+            if ! grep -Fq "$expected" "$html_file"; then
+              echo "::error::Missing $label ($expected) in $html_file"
+              exit 1
+            fi
+          }
           declare -A form_ids=(
             [c500-partdro-eavision]="c500-quote"
             [vf50p-long-endurance-vtol-uav]="vf50p-quote"
