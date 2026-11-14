@@ -108,6 +108,28 @@ jobs:
           done
           echo "Cloudflare Pages build artifacts verified."
 
+      - name: Normalize Cloudflare Pages routes manifest
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs'
+          const file = 'dist/_routes.json'
+          const routes = JSON.parse(readFileSync(file, 'utf8'))
+          if (routes.version !== 1) throw new Error('Unsupported _routes.json version')
+          // Match the production workflow: only API requests invoke the Worker.
+          routes.include = ['/api/*']
+          routes.exclude = []
+          const rules = [...routes.include, ...routes.exclude]
+          const tooLong = rules.filter(rule => rule.length > 100)
+          if (tooLong.length) throw new Error('Cloudflare route rules exceed 100 chars: ' + tooLong.join(', '))
+          if (rules.length > 100) throw new Error('Cloudflare route rule count exceeds 100: ' + rules.length)
+          writeFileSync(file, JSON.stringify(routes, null, 2) + '\\n')
+          const verified = JSON.parse(readFileSync(file, 'utf8'))
+          if (JSON.stringify(verified.include) !== JSON.stringify(['/api/*']) || verified.exclude.length !== 0) {
+            throw new Error('Failed to normalize Cloudflare Pages routes manifest')
+          }
+          console.log('Normalized Cloudflare Pages routes: only /api/* invokes the Worker')
+          NODE
+
       - name: Compress oversized media for Cloudflare Pages
         if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'preview-required')
         run: |
