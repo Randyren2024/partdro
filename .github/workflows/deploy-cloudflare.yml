@@ -83,7 +83,11 @@ jobs:
           mkdir -p dist/products/u15-multi-mission-drone/images dist/products/u15-multi-mission-drone/video
           cp -a dist-landing/u15/site/products/u15-multi-mission-drone/images/. dist/products/u15-multi-mission-drone/images/
           cp -a dist-landing/u15/site/products/u15-multi-mission-drone/video/. dist/products/u15-multi-mission-drone/video/
-          echo "Premium product landing pages merged into dist"
+          # Nitro emits flat .html files to preserve no-slash canonicals. Redirect
+          # slash variants back to those canonical URLs before Pages asset routing.
+          { printf '/*/ /:splat 308\\n'; cat dist/_redirects; } > dist/_redirects.tmp
+          mv dist/_redirects.tmp dist/_redirects
+          echo "Premium product media merged; no-slash canonical redirects configured"
 
       - name: Compress oversized media (Cloudflare Pages 25 MiB per-file limit)
         run: |
@@ -123,7 +127,7 @@ jobs:
             exit 1
           fi
           for route in products products/d15r de/products es/products fr/products; do
-            if [ ! -s "dist/${route}/index.html" ]; then
+            if [ ! -s "dist/${route}.html" ]; then
               echo "FAIL: missing generated route: ${route}"
               exit 1
             fi
@@ -132,7 +136,7 @@ jobs:
           for check in "de:Kontakt" "es:Contáctenos" "fr:Contactez-Nous"; do
             locale="${check%%:*}"
             label="${check#*:}"
-            html="dist/${locale}/contact/index.html"
+            html="dist/${locale}/contact.html"
             if ! grep -Fq "${label}" "${html}"; then
               echo "FAIL: expected localized contact label '${label}' in ${html}"
               exit 1
@@ -148,7 +152,7 @@ jobs:
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
             for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
-              route="dist/${prefix}products/${slug}/index.html"
+              route="dist/${prefix}products/${slug}.html"
               if [ ! -s "$route" ]; then
                 echo "FAIL: missing premium landing page: $route"
                 exit 1
@@ -160,7 +164,7 @@ jobs:
           for locale in en es de fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
-            html="dist/${prefix}products/c500-partdro-eavision/index.html"
+            html="dist/${prefix}products/c500-partdro-eavision.html"
             grep -Fq 'id="c500-quote"' "$html"
             grep -Fq 'C500' "$html"
             assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
@@ -203,8 +207,8 @@ jobs:
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
             for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
-              html="dist/${prefix}products/${slug}/index.html"
-              assert_html_contains "$html" "<html lang=\"$locale\"" "document language"
+              html="dist/${prefix}products/${slug}.html"
+              assert_html_language "$html" "$locale"
               assert_html_contains "$html" "id=\"${form_ids[$slug]}\"" "product quote form"
               assert_html_contains "$html" 'hreflang="x-default"' "x-default hreflang"
               assert_html_contains "$html" 'og:image:alt' "Open Graph image alt"
