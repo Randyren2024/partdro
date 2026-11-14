@@ -8,12 +8,14 @@ on:
       - 'server/**'
       - 'public/**'
       - 'legacy-vite/**'
+      - 'landing/**'
       - 'scripts/**'
       - 'nuxt.config.ts'
       - 'package.json'
       - 'package-lock.json'
       - 'wrangler.toml'
       - '.github/workflows/validate-nuxt.yml'
+      - '.github/workflows/deploy-cloudflare.yml'
   workflow_dispatch:
 
 concurrency:
@@ -97,6 +99,33 @@ jobs:
           }
           NODE
           echo "Nuxt static generation and route assertions passed."
+          # Assert all 12 premium product routes are genuinely SSR-rendered by Nuxt.
+          declare -A form_ids=(
+            [c500-partdro-eavision]="c500-quote"
+            [vf50p-long-endurance-vtol-uav]="vf50p-quote"
+            [u15-multi-mission-drone]="u15-quote"
+          )
+          for locale in en es de fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
+              html="dist/${prefix}products/${slug}/index.html"
+              test -s "$html"
+              grep -Fq "<html lang=\"$locale\"" "$html"
+              grep -Fq "id=\"${form_ids[$slug]}\"" "$html"
+              grep -Fq 'hreflang="x-default"' "$html"
+              grep -Fq 'og:image:alt' "$html"
+              grep -Fq 'application/ld+json' "$html"
+              grep -Fq '"@type":"Organization"' "$html"
+              if [ "$slug" != "c500-partdro-eavision" ]; then
+                grep -Fq '"@type":"FAQPage"' "$html"
+              fi
+              echo "Premium SSR route passed: /${prefix}products/${slug}"
+            done
+          done
+          # GTM is deliberately bootstrapped client-side; verify the shared plugin contract.
+          grep -Fq "GTM-KJ7GJ3V5" nuxt.config.ts
+          grep -Fq "partdro-google-tag-manager" app/plugins/analytics.client.ts
 
       - name: Scan every generated page for unresolved i18n keys
         run: |
