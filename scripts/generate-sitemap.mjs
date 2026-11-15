@@ -29,8 +29,15 @@ function loadEnv() {
 }
 
 async function fetchSlugs(env, table) {
-  const url = env.VITE_SUPABASE_URL || env.SUPABASE_URL
-  const anonKey = env.VITE_SUPABASE_ANON_KEY || env.SUPABASE_ANON_KEY
+  // Nuxt 构建（Cloudflare Pages）只注入 NUXT_PUBLIC_*；旧的 Vite 构建用 VITE_*。
+  // 两者都认，最后兜底到 nuxt.config.ts 里的生产公开值，保证 CI 不传变量也能生成。
+  const url =
+    env.NUXT_PUBLIC_SUPABASE_URL || env.VITE_SUPABASE_URL || env.SUPABASE_URL || 'https://uphfcvquglafkszqqxiq.supabase.co'
+  const anonKey =
+    env.NUXT_PUBLIC_SUPABASE_ANON_KEY ||
+    env.VITE_SUPABASE_ANON_KEY ||
+    env.SUPABASE_ANON_KEY ||
+    'sb_publishable_gZ5lDMIYJBTn7TfhN_ASzg_1DytunFt'
   if (!url || !anonKey) return []
   try {
     // posts 额外取 post_langs(lang)：sitemap 只登记真实存在的翻译
@@ -142,8 +149,10 @@ const body =
   `\n</urlset>\n`
 
 if (!existsSync(DIST)) {
-  console.error('[sitemap] dist/ 不存在，请先执行 vite build')
-  process.exit(1)
+  // 本地 `nuxt build`（node-server preset）产物在 .output/，没有 dist/。
+  // 那种构建不需要 sitemap，跳过而不是让构建失败。
+  console.warn('[sitemap] dist/ 不存在（非 Cloudflare Pages 构建），跳过')
+  process.exit(0)
 }
 writeFileSync(join(DIST, 'sitemap.xml'), body, 'utf8')
 // newsEntries 每项是一篇文章，可能含多条 <url>（多语言翻译），按实际 <url> 数统计

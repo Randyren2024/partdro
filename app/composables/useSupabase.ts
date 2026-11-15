@@ -1,85 +1,8 @@
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '../supabase/client'
+import { mapCase, mapDocument, mapPost, mapProduct } from '~/utils/contentMap'
 import type { Product, Post, Case, Document, Lang, ProductCategory } from '../types'
-
-/* ============================================================
- * 内部工具：根据当前语言合并 Lang 子表到主记录
- * ============================================================ */
-
-type LangRow = Record<string, any> & { lang: string }
-
-function pickLang<T extends LangRow>(langs: T[] | undefined, locale: Lang): T | undefined {
-  if (!langs?.length) return undefined
-  return langs.find((l) => l.lang === locale) ?? langs.find((l) => l.lang === 'en')
-}
-
-function mapProduct(row: any, locale: Lang): Product {
-  const lang = pickLang<any>(row.product_langs, locale)
-  return {
-    id: row.id,
-    slug: row.slug,
-    category: row.category,
-    image_url: row.image_url,
-    gallery: row.gallery ?? [],
-    specs: row.specs ?? {},
-    features: row.features ?? [],
-    sort_order: row.sort_order,
-    published: row.published,
-    created_at: row.created_at,
-    name: lang?.name ?? row.slug,
-    description: lang?.description ?? '',
-    short_desc: lang?.short_desc ?? '',
-  }
-}
-
-function mapPost(row: any, locale: Lang): Post {
-  const lang = pickLang<any>(row.post_langs, locale)
-  const availableLangs = [...new Set<string>((row.post_langs ?? []).map((l: LangRow) => l.lang))]
-  if (!availableLangs.includes('en')) availableLangs.unshift('en')
-  return {
-    id: row.id,
-    slug: row.slug,
-    category: row.category,
-    image_url: row.image_url,
-    published: row.published,
-    published_at: row.published_at,
-    created_at: row.created_at,
-    title: lang?.title ?? row.slug,
-    summary: lang?.summary ?? '',
-    content: lang?.content ?? '',
-    availableLangs,
-  }
-}
-
-function mapCase(row: any, locale: Lang): Case {
-  const lang = pickLang<any>(row.case_langs, locale)
-  return {
-    id: row.id,
-    slug: row.slug,
-    image_url: row.image_url,
-    product_id: row.product_id,
-    published: row.published,
-    created_at: row.created_at,
-    title: lang?.title ?? row.slug,
-    description: lang?.description ?? '',
-    location: lang?.location ?? '',
-  }
-}
-
-function mapDocument(row: any, locale: Lang): Document {
-  const lang = pickLang<any>(row.document_langs, locale)
-  return {
-    id: row.id,
-    file_url: row.file_url,
-    file_size: row.file_size,
-    product_id: row.product_id,
-    published: row.published,
-    created_at: row.created_at,
-    title: lang?.title ?? '',
-    description: lang?.description ?? '',
-  }
-}
 
 /* ============================================================
  * 组合式 API：以 ref 返回数据 + loading + error
