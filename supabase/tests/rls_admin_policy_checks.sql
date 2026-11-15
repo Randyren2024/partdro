@@ -92,6 +92,23 @@ BEGIN
       'A policy applying to authenticated users is missing an admin membership predicate';
   END IF;
 
+  -- Landing-content writes must be authenticated and admin-gated, not PUBLIC.
+  SELECT * INTO p
+  FROM pg_policies
+  WHERE schemaname = 'public'
+    AND tablename = 'landing_content'
+    AND policyname = 'admin write landing_content'
+    AND cmd = 'ALL'
+    AND roles = ARRAY['authenticated']::name[];
+
+  IF NOT FOUND OR p.qual IS NULL OR p.with_check IS NULL
+     OR position('admins' IN p.qual) = 0
+     OR position('auth.uid' IN p.qual) = 0
+     OR position('admins' IN p.with_check) = 0
+     OR position('auth.uid' IN p.with_check) = 0 THEN
+    RAISE EXCEPTION 'landing_content ALL policy is not restricted to authenticated admins';
+  END IF;
+
   -- The broad PUBLIC landing-content read must be gone. Anonymous reads remain.
   IF EXISTS (
     SELECT 1 FROM pg_policies
