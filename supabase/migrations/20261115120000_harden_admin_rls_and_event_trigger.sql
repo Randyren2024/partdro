@@ -90,6 +90,20 @@ CREATE POLICY "public read landing_content" ON public.landing_content
   FOR SELECT TO anon
   USING (true);
 
+-- The previous ALL policy already checked admins but targeted PUBLIC.
+-- Narrow its role to authenticated as defense in depth.
+DROP POLICY IF EXISTS "admin write landing_content" ON public.landing_content;
+CREATE POLICY "admin write landing_content" ON public.landing_content
+  FOR ALL TO authenticated
+  USING (EXISTS (
+    SELECT 1 FROM public.admins a
+    WHERE a.user_id = (SELECT auth.uid())
+  ))
+  WITH CHECK (EXISTS (
+    SELECT 1 FROM public.admins a
+    WHERE a.user_id = (SELECT auth.uid())
+  ));
+
 DROP POLICY IF EXISTS "authenticated_select_landing_content" ON public.landing_content;
 CREATE POLICY "authenticated_select_landing_content" ON public.landing_content
   FOR SELECT TO authenticated
