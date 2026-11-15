@@ -120,12 +120,12 @@ async function openProductPage(context, product, locale, viewportLabel) {
   const failedLocalAssets = []
   page.on('pageerror', error => pageErrors.push(error.message))
   page.on('requestfailed', request => {
-    if (request.url().startsWith(ORIGIN) && /\\.(png|jpe?g|webp|svg|mp4)(\\?|$)/i.test(request.url())) {
+    if (request.url().startsWith(ORIGIN) && ['.png', '.jpg', '.jpeg', '.webp', '.svg', '.mp4'].some(extension => request.url().toLowerCase().includes(extension))) {
       failedLocalAssets.push(request.url())
     }
   })
   page.on('response', response => {
-    if (response.url().startsWith(ORIGIN) && response.status() >= 400 && /\\.(png|jpe?g|webp|svg|mp4)(\\?|$)/i.test(response.url())) {
+    if (response.url().startsWith(ORIGIN) && response.status() >= 400 && ['.png', '.jpg', '.jpeg', '.webp', '.svg', '.mp4'].some(extension => response.url().toLowerCase().includes(extension))) {
       failedLocalAssets.push(`${response.status()} ${response.url()}`)
     }
   })
