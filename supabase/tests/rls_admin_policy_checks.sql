@@ -1,6 +1,6 @@
 -- Assertion-based, read-only verification for the admin RLS hardening migration.
 -- Run only against a disposable/non-production Supabase branch after applying
--- the migration. This checks policy shape and grants; it does not replace
+-- the migrations. This checks policy shape and grants; it does not replace
 -- authenticated end-to-end CRUD tests using real admin/non-admin JWTs.
 
 DO $$
@@ -66,8 +66,7 @@ BEGIN
   END LOOP;
 
   -- Catch any additional permissive policy that applies to authenticated users
-  -- through either PUBLIC or authenticated and is not admin-gated. This prevents
-  -- a duplicate USING (true) policy from silently bypassing the named policies.
+  -- through either PUBLIC or authenticated and is not admin-gated.
   IF EXISTS (
     SELECT 1
     FROM pg_policies
@@ -140,14 +139,17 @@ BEGIN
     RAISE EXCEPTION 'Duplicate authenticated product SELECT policy remains';
   END IF;
 
-  -- Event trigger remains installed/enabled; its callback is not an API RPC.
+  -- The custom RLS event trigger must be present and retain its exact DDL scope.
   IF NOT EXISTS (
     SELECT 1
     FROM pg_event_trigger e
-    WHERE e.evtfoid = 'public.rls_auto_enable()'::regprocedure
-      AND e.evtenabled <> 'D'
+    WHERE e.evtname = 'ensure_rls'
+      AND e.evtevent = 'ddl_command_end'
+      AND e.evttags = ARRAY['CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO']::text[]
+      AND e.evtfoid = 'public.rls_auto_enable()'::regprocedure
+      AND e.evtenabled = 'O'
   ) THEN
-    RAISE EXCEPTION 'rls_auto_enable event trigger is missing or disabled';
+    RAISE EXCEPTION 'ensure_rls event trigger is missing, disabled, or has changed scope';
   END IF;
 
   IF has_function_privilege('anon', 'public.rls_auto_enable()', 'EXECUTE')
@@ -169,5 +171,5 @@ $$;
 -- 1. Sign in as the real admin and verify expected dashboard reads/writes.
 -- 2. Sign in as a non-admin and verify private editorial/CRM rows are denied.
 -- 3. Verify anonymous published-content reads and inquiry submissions.
--- 4. Verify the event trigger fires on a newly-created test table in the
---    disposable branch, then remove that test table.
+-- 4. In a disposable branch, create a test public table and verify RLS is
+--    enabled automatically by ensure_rls; then remove that test table.
