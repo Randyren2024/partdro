@@ -34,14 +34,29 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { RightOutlined } from '@ant-design/icons-vue'
-import { usePosts } from '~/composables/useSupabase'
+import { useContentApi } from '~/composables/useContentApi'
 import { useLocalePath } from '~/composables/useLocalePath'
-import { DEFAULT_LOCALE } from '~/i18n'
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '~/i18n'
 import type { Post } from '~/types'
 
 const { t, locale } = useI18n()
 const lp = useLocalePath()
-const { data: posts } = usePosts()
+const api = useContentApi()
+
+const runtimeConfig = useRuntimeConfig()
+const SITE_URL = runtimeConfig.public.siteUrl || 'https://www.droneworld.tech'
+
+/**
+ * 列表也在构建期由服务端取数：静态 HTML 里必须有全部文章卡片链接，
+ * 否则 Google 只能通过 sitemap 发现文章，站内权重传不过去。
+ */
+const { data: postsData } = await useAsyncData(
+  () => `news-list:${locale.value}`,
+  () => api.fetchPosts(locale.value as any),
+  { default: () => [] as Post[], watch: [locale] },
+)
+
+const posts = computed<Post[]>(() => postsData.value ?? [])
 
 /**
  * 文章链接：只有确实存在该语言翻译时才生成 /de|es|fr/news/...。
@@ -53,6 +68,54 @@ const articlePath = (post: Post) =>
   locale.value === DEFAULT_LOCALE || post.availableLangs?.includes(locale.value)
     ? lp(`/news/${post.slug}`)
     : `/news/${post.slug}`
+
+const canonicalUrl = computed(() =>
+  locale.value === DEFAULT_LOCALE ? `${SITE_URL}/news` : `${SITE_URL}/${locale.value}/news`,
+)
+
+useHead(() => ({
+  title: `${t('news.title')} | Partdro`,
+  titleTemplate: '%s',
+  htmlAttrs: { lang: locale.value },
+  link: [
+    { rel: 'canonical', href: canonicalUrl.value },
+    ...SUPPORTED_LOCALES.map((lang) => ({
+      rel: 'alternate',
+      hreflang: lang,
+      href: lang === DEFAULT_LOCALE ? `${SITE_URL}/news` : `${SITE_URL}/${lang}/news`,
+    })),
+    { rel: 'alternate', hreflang: 'x-default', href: `${SITE_URL}/news` },
+  ],
+  meta: [
+    { name: 'description', content: t('news.subtitle') },
+    { name: 'robots', content: 'index, follow, max-image-preview:large' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: t('news.title') },
+    { property: 'og:description', content: t('news.subtitle') },
+    { property: 'og:url', content: canonicalUrl.value },
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: t('news.title'),
+        description: t('news.subtitle'),
+        url: canonicalUrl.value,
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: posts.value.slice(0, 30).map((p, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            url: `${SITE_URL}${locale.value === DEFAULT_LOCALE ? '' : `/${locale.value}`}/news/${p.slug}`,
+            name: p.title,
+          })),
+        },
+      }),
+    },
+  ],
+}))
 </script>
 
 <style scoped>
