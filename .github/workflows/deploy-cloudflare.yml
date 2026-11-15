@@ -301,6 +301,15 @@ jobs:
         timeout-minutes: 12
         run: npm run test:premium-landings
 
+      - name: Upload premium landing visual QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: premium-landing-qa-screenshots
+          path: artifacts/premium-qa/
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Deploy to Cloudflare Pages
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         env:
