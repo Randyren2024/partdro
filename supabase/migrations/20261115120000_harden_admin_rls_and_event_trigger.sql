@@ -61,6 +61,15 @@ CREATE POLICY "authenticated_select_document_langs" ON public.document_langs
   ));
 
 -- Inquiry CRM: anonymous visitors may still submit; only admins may read/update CRM rows.
+-- UPDATE also requires SELECT visibility for rows being updated.
+DROP POLICY IF EXISTS "authenticated_select_inquiries" ON public.inquiries;
+CREATE POLICY "authenticated_select_inquiries" ON public.inquiries
+  FOR SELECT TO authenticated
+  USING (EXISTS (
+    SELECT 1 FROM public.admins a
+    WHERE a.user_id = (SELECT auth.uid())
+  ));
+
 DROP POLICY IF EXISTS "admins update inquiries product_id" ON public.inquiries;
 CREATE POLICY "admins update inquiries product_id" ON public.inquiries
   FOR UPDATE TO authenticated
@@ -74,6 +83,13 @@ CREATE POLICY "admins update inquiries product_id" ON public.inquiries
   ));
 
 -- Editorial content.
+-- The public read policy must not target PUBLIC: that role also includes
+-- authenticated users and would bypass the admin-only SELECT policy.
+DROP POLICY IF EXISTS "public read landing_content" ON public.landing_content;
+CREATE POLICY "public read landing_content" ON public.landing_content
+  FOR SELECT TO anon
+  USING (true);
+
 DROP POLICY IF EXISTS "authenticated_select_landing_content" ON public.landing_content;
 CREATE POLICY "authenticated_select_landing_content" ON public.landing_content
   FOR SELECT TO authenticated
@@ -115,13 +131,9 @@ CREATE POLICY "admins select all products" ON public.products
     WHERE a.user_id = (SELECT auth.uid())
   ));
 
+-- Keep one authenticated SELECT policy; the admins_select policy above
+-- already supplies the required membership check.
 DROP POLICY IF EXISTS "authenticated_select_products" ON public.products;
-CREATE POLICY "authenticated_select_products" ON public.products
-  FOR SELECT TO authenticated
-  USING (EXISTS (
-    SELECT 1 FROM public.admins a
-    WHERE a.user_id = (SELECT auth.uid())
-  ));
 
 DROP POLICY IF EXISTS "admins insert products" ON public.products;
 CREATE POLICY "admins insert products" ON public.products
@@ -159,13 +171,9 @@ CREATE POLICY "admins select all product_langs" ON public.product_langs
     WHERE a.user_id = (SELECT auth.uid())
   ));
 
+-- Keep one authenticated SELECT policy; the admins_select policy above
+-- already supplies the required membership check.
 DROP POLICY IF EXISTS "authenticated_select_product_langs" ON public.product_langs;
-CREATE POLICY "authenticated_select_product_langs" ON public.product_langs
-  FOR SELECT TO authenticated
-  USING (EXISTS (
-    SELECT 1 FROM public.admins a
-    WHERE a.user_id = (SELECT auth.uid())
-  ));
 
 DROP POLICY IF EXISTS "admins insert product_langs" ON public.product_langs;
 CREATE POLICY "admins insert product_langs" ON public.product_langs
