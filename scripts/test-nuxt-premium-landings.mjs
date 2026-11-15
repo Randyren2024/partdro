@@ -150,7 +150,14 @@ async function openProductPage(context, product, locale, viewportLabel) {
     const image = document.querySelector(selector)
     return Boolean(image && image.complete && image.naturalWidth > 0)
   }, product.heroSelector, { timeout: 15000 })
-  await page.evaluate(() => window.scrollTo(0, 0))
+  await page.evaluate(() => {
+    // Override site-level smooth scrolling so the QA screenshot always starts at
+    // the real top of the page instead of capturing an intermediate scroll frame.
+    document.documentElement.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+  })
+  await page.waitForFunction(() => window.scrollY === 0, null, { timeout: 5000 })
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
 
   if (['mobile', 'desktop'].includes(viewportLabel) && locale === 'en') {
     const mediaCheck = await page.evaluate(async origin => {
@@ -185,6 +192,19 @@ async function openProductPage(context, product, locale, viewportLabel) {
       const rect = node.getBoundingClientRect()
       return { left: rect.left, right: rect.right, center: rect.left + rect.width / 2, width: rect.width }
     })(),
+    heroHeading: (() => {
+      const node = document.querySelector('h1')
+      if (!node) return null
+      const rect = node.getBoundingClientRect()
+      const style = getComputedStyle(node)
+      return {
+        top: rect.top,
+        bottom: rect.bottom,
+        text: node.textContent.trim(),
+        visible: style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0,
+      }
+    })(),
+    scrollY: window.scrollY,
     scrollWidth: document.documentElement.scrollWidth,
     clientWidth: document.documentElement.clientWidth,
   }))
@@ -203,6 +223,11 @@ async function openProductPage(context, product, locale, viewportLabel) {
   assert.ok(actual.productSchema, `${product.slug} ${locale}: Product JSON-LD missing`)
   if (product.hasFaq) assert.ok(actual.faqSchema, `${product.slug} ${locale}: FAQ JSON-LD missing`)
   assert.ok(actual.imageCount > 0, `${product.slug} ${locale}: no images rendered`)
+  if (viewportLabel === 'mobile' && locale === 'en') {
+    assert.equal(actual.scrollY, 0, `${product.slug}: mobile screenshot was not reset to the top of the page`)
+    assert.ok(actual.heroHeading?.visible && actual.heroHeading.text, `${product.slug}: mobile hero heading is not visible`)
+    assert.ok(actual.heroHeading.top < 844 && actual.heroHeading.bottom > 0, `${product.slug}: mobile hero heading is outside the first viewport (${JSON.stringify(actual.heroHeading)})`)
+  }
   if (product.slug === 'u15-multi-mission-drone' && viewportLabel === 'mobile') {
     assert.ok(actual.heroCopy, 'U15 mobile: hero copy container missing')
     assert.ok(actual.heroCopy.left >= -1 && actual.heroCopy.right <= actual.clientWidth + 1, `U15 mobile: hero copy clipped horizontally (${JSON.stringify(actual.heroCopy)})`)
