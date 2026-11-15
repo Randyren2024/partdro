@@ -128,6 +128,8 @@ async function submitQuote() {
 }
 
 let revealObserver = null
+let revealMutation = null
+let revealSweep = null
 let fabObserver = null
 
 onMounted(() => {
@@ -138,25 +140,53 @@ onMounted(() => {
     heroReady.value = true
   })
 
-  const targets = main.value?.querySelectorAll('.reveal')
-  if (targets?.length) {
-    if (!('IntersectionObserver' in window)) {
-      targets.forEach((el) => el.classList.add('is-visible'))
-    } else {
-      revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible')
-              revealObserver.unobserve(entry.target)
-            }
-          })
-        },
-        { threshold: 0.08 }
-      )
+  // threshold 0 + 负 rootMargin：只要区块顶部进入视口就显示。
+  // 之前用 threshold: 0.08，移动端超高区块（报价表单）永远达不到比例阈值，
+  // 会一直停在 opacity: 0，表现为页面底部一大片黑色。
+  const reveal = (el) => {
+    if (!el.classList.contains('is-visible')) el.classList.add('is-visible')
+    revealObserver?.unobserve(el)
+  }
+
+  const observeReveals = () => {
+    const targets = main.value?.querySelectorAll('.reveal:not(.is-visible)')
+    if (!targets?.length) return
+    if (revealObserver) {
       targets.forEach((el) => revealObserver.observe(el))
+    } else {
+      targets.forEach(reveal)
     }
   }
+
+  if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) reveal(entry.target)
+        })
+      },
+      { threshold: 0, rootMargin: '0px 0px -8% 0px' }
+    )
+  }
+  observeReveals()
+
+  // 兜底：个别移动端浏览器在布局抖动时会漏掉 IntersectionObserver 回调，
+  // 这里按几何位置再检查一遍，保证内容不会永久不可见。
+  const sweepReveals = () => {
+    main.value?.querySelectorAll('.reveal:not(.is-visible)').forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) reveal(el)
+    })
+  }
+  revealSweep = sweepReveals
+  window.addEventListener('scroll', revealSweep, { passive: true })
+  window.addEventListener('resize', revealSweep)
+  window.addEventListener('orientationchange', revealSweep)
+  requestAnimationFrame(revealSweep)
+
+  // 水合修复或条件渲染可能重建节点，重建出来的 .reveal 需要重新纳入观察。
+  revealMutation = new MutationObserver(() => observeReveals())
+  if (main.value) revealMutation.observe(main.value, { childList: true, subtree: true })
 
   const covered = new Set()
   const coveredRegions = [
@@ -180,6 +210,12 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   revealObserver?.disconnect()
+  revealMutation?.disconnect()
+  if (revealSweep) {
+    window.removeEventListener('scroll', revealSweep)
+    window.removeEventListener('resize', revealSweep)
+    window.removeEventListener('orientationchange', revealSweep)
+  }
   fabObserver?.disconnect()
   document.body.style.overflow = ''
 })
