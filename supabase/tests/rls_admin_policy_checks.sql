@@ -6,7 +6,6 @@
 DO $$
 DECLARE
   p record;
-  expected record;
   expected_selects constant text[][] := ARRAY[
     ARRAY['cases', 'authenticated_select_cases'],
     ARRAY['case_langs', 'authenticated_select_case_langs'],
@@ -65,6 +64,34 @@ BEGIN
         expected_updates[i][1], expected_updates[i][2];
     END IF;
   END LOOP;
+
+  -- Catch any additional permissive policy that applies to authenticated users
+  -- through either PUBLIC or authenticated and is not admin-gated. This prevents
+  -- a duplicate USING (true) policy from silently bypassing the named policies.
+  IF EXISTS (
+    SELECT 1
+    FROM pg_policies
+    WHERE schemaname = 'public'
+      AND tablename IN (
+        'cases', 'case_langs',
+        'documents', 'document_langs',
+        'inquiries', 'landing_content',
+        'posts', 'post_langs',
+        'products', 'product_langs'
+      )
+      AND roles && ARRAY['public', 'authenticated']::name[]
+      AND (
+        position(
+          'admins' IN coalesce(qual, '') || ' ' || coalesce(with_check, '')
+        ) = 0
+        OR position(
+          'auth.uid' IN coalesce(qual, '') || ' ' || coalesce(with_check, '')
+        ) = 0
+      )
+  ) THEN
+    RAISE EXCEPTION
+      'A policy applying to authenticated users is missing an admin membership predicate';
+  END IF;
 
   -- The broad PUBLIC landing-content read must be gone. Anonymous reads remain.
   IF EXISTS (
