@@ -24,7 +24,20 @@
         </div>
         <figure v-if="demoVideo" id="demo-video" class="article-demo-video" data-article-demo-video>
           <h2 class="article-demo-video__title">{{ demoVideo.title }}</h2>
+          <iframe
+            v-if="demoVideo.provider === 'youtube'"
+            class="article-demo-video__player"
+            :src="demoVideo.src"
+            :title="demoVideo.title"
+            width="1280"
+            height="720"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          />
           <video
+            v-else
             class="article-demo-video__player"
             controls
             playsinline
@@ -42,6 +55,15 @@
           </video>
           <figcaption class="article-demo-video__caption">
             <span class="article-demo-video__desc">{{ demoVideo.caption }}</span>
+            <a
+              v-if="demoVideo.watchUrl"
+              :href="demoVideo.watchUrl"
+              class="article-demo-video__link"
+              target="_blank"
+              rel="noopener"
+            >
+              Watch on YouTube ↗
+            </a>
             <router-link :to="lp(`/products/${demoVideo.productSlug}`)" class="article-demo-video__link">
               View full product specifications →
             </router-link>
@@ -308,9 +330,10 @@ function buildJsonLd() {
     })
   }
 
-  // 仓库里为该文章挂的同源 MP4 演示视频（无需第三方播放器，Google 可直抓）
+  // 该文章挂的演示视频：YouTube 嵌入时用 embedUrl + url，同源 MP4 时用 contentUrl
   const v = demoVideo.value
   if (v) {
+    const isYouTube = v.provider === 'youtube'
     graph.push({
       '@type': 'VideoObject',
       '@id': `${url}#demo-video`,
@@ -318,8 +341,9 @@ function buildJsonLd() {
       description: v.caption,
       thumbnailUrl: [absUrl(v.poster)].filter(Boolean),
       uploadDate: v.uploadDate,
-      duration: v.duration,
-      contentUrl: absUrl(v.src),
+      ...(v.duration ? { duration: v.duration } : {}),
+      embedUrl: absUrl(v.src),
+      ...(isYouTube && v.watchUrl ? { url: v.watchUrl } : { contentUrl: absUrl(v.src) }),
       publisher: { '@type': 'Organization', name: 'Partdro', url: SITE_URL },
     })
   }
@@ -345,7 +369,7 @@ function buildJsonLd() {
 .article-content :deep(blockquote) { margin:1.5em 0; padding:16px 20px; border-left:3px solid var(--pd-primary); background:var(--pd-bg-soft); color:var(--pd-ink-soft); }
 .article-demo-video { margin:clamp(36px,5vw,52px) 0 0; padding-top:26px; border-top:1px solid var(--pd-line); }
 .article-demo-video__title { margin:0 0 16px; color:var(--pd-ink); font-family:var(--pd-font-display); font-size:clamp(20px,2.4vw,26px); line-height:1.3; }
-.article-demo-video__player { display:block; width:100%; height:auto; aspect-ratio:16/9; background:#000; border-radius:var(--pd-radius-lg); box-shadow:var(--pd-shadow-sm); }
+.article-demo-video__player { display:block; width:100%; height:auto; aspect-ratio:16/9; background:#000; border:0; border-radius:var(--pd-radius-lg); box-shadow:var(--pd-shadow-sm); }
 .article-demo-video__caption { display:flex; flex-direction:column; gap:8px; margin-top:14px; color:var(--pd-ink-soft); font-size:14px; line-height:1.7; }
 .article-demo-video__link { color:var(--pd-primary); font-weight:700; }
 .related-articles, .related-products { margin-top:clamp(42px,6vw,64px); padding-top:30px; border-top:1px solid var(--pd-line); }
