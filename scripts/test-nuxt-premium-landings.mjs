@@ -10,7 +10,7 @@ const SITE_ORIGIN = 'https://www.droneworld.tech'
 const SCREENSHOT_DIR = 'artifacts/premium-qa'
 const LOCALES = ['en', 'de', 'es', 'fr']
 const PRODUCTS = [
-  { slug: 'c500-partdro-eavision', formId: 'c500-quote', contentDir: 'landing/eavision-c500/src/data/content', heroSelector: 'img.overview__technology', hasFaq: false },
+  { slug: 'c500-partdro-eavision', formId: 'c500-quote', contentDir: 'landing/eavision-c500/src/data/content', heroSelector: '.hero__media img', hasFaq: false },
   { slug: 'vf50p-long-endurance-vtol-uav', formId: 'vf50p-quote', contentDir: 'landing/vf50p/src/data/content', heroSelector: 'img.hero__media', hasFaq: true },
   { slug: 'u15-multi-mission-drone', formId: 'u15-quote', contentDir: 'landing/u15/src/data/content', heroSelector: 'img.hero__media', hasFaq: true },
 ]
@@ -153,8 +153,9 @@ async function openProductPage(context, product, locale, viewportLabel) {
   await page.evaluate(() => {
     // Override site-level smooth scrolling so the QA screenshot always starts at
     // the real top of the page instead of capturing an intermediate scroll frame.
-    document.documentElement.style.scrollBehavior = 'auto'
-    window.scrollTo(0, 0)
+    document.documentElement.style.setProperty('scroll-behavior', 'auto', 'important')
+    document.body.style.setProperty('scroll-behavior', 'auto', 'important')
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
   })
   await page.waitForFunction(() => window.scrollY === 0, null, { timeout: 5000 })
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
@@ -193,7 +194,7 @@ async function openProductPage(context, product, locale, viewportLabel) {
       return { left: rect.left, right: rect.right, center: rect.left + rect.width / 2, width: rect.width }
     })(),
     heroHeading: (() => {
-      const node = document.querySelector('h1')
+      const node = document.querySelector('.hero h1')
       if (!node) return null
       const rect = node.getBoundingClientRect()
       const style = getComputedStyle(node)
