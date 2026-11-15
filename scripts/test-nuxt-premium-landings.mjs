@@ -120,12 +120,12 @@ async function openProductPage(context, product, locale, viewportLabel) {
   const failedLocalAssets = []
   page.on('pageerror', error => pageErrors.push(error.message))
   page.on('requestfailed', request => {
-    if (request.url().startsWith(ORIGIN) && /\\.(png|jpe?g|webp|svg|mp4)(\\?|$)/i.test(request.url())) {
+    if (request.url().startsWith(ORIGIN) && ['.png', '.jpg', '.jpeg', '.webp', '.svg', '.mp4'].some(extension => request.url().toLowerCase().includes(extension))) {
       failedLocalAssets.push(request.url())
     }
   })
   page.on('response', response => {
-    if (response.url().startsWith(ORIGIN) && response.status() >= 400 && /\\.(png|jpe?g|webp|svg|mp4)(\\?|$)/i.test(response.url())) {
+    if (response.url().startsWith(ORIGIN) && response.status() >= 400 && ['.png', '.jpg', '.jpeg', '.webp', '.svg', '.mp4'].some(extension => response.url().toLowerCase().includes(extension))) {
       failedLocalAssets.push(`${response.status()} ${response.url()}`)
     }
   })
@@ -152,6 +152,21 @@ async function openProductPage(context, product, locale, viewportLabel) {
   }, product.heroSelector, { timeout: 15000 })
   await page.evaluate(() => window.scrollTo(0, 0))
 
+  if (['mobile', 'desktop'].includes(viewportLabel) && locale === 'en') {
+    const mediaCheck = await page.evaluate(async origin => {
+      const images = [...document.images]
+      images.forEach(image => { image.loading = 'eager' })
+      await Promise.all(images.map(image => image.decode().catch(() => null)))
+      return images
+        .filter(image => {
+          const url = new URL(image.currentSrc || image.src, location.href)
+          return url.origin === origin && (!image.complete || image.naturalWidth === 0)
+        })
+        .map(image => image.currentSrc || image.src)
+    }, ORIGIN)
+    assert.deepEqual(mediaCheck, [], `${product.slug}: broken local images after eager media load: ${mediaCheck.join('; ')}`)
+  }
+
   const actual = await page.evaluate(() => ({
     lang: document.documentElement.lang,
     title: document.title,
@@ -164,6 +179,12 @@ async function openProductPage(context, product, locale, viewportLabel) {
     productSchema: [...document.querySelectorAll('script[type="application/ld+json"]')].some(node => node.textContent.includes('"@type":"Product"')),
     faqSchema: [...document.querySelectorAll('script[type="application/ld+json"]')].some(node => node.textContent.includes('"@type":"FAQPage"')),
     imageCount: document.images.length,
+    heroCopy: (() => {
+      const node = document.querySelector('.hero__copy')
+      if (!node) return null
+      const rect = node.getBoundingClientRect()
+      return { left: rect.left, right: rect.right, center: rect.left + rect.width / 2, width: rect.width }
+    })(),
     scrollWidth: document.documentElement.scrollWidth,
     clientWidth: document.documentElement.clientWidth,
   }))
@@ -182,6 +203,11 @@ async function openProductPage(context, product, locale, viewportLabel) {
   assert.ok(actual.productSchema, `${product.slug} ${locale}: Product JSON-LD missing`)
   if (product.hasFaq) assert.ok(actual.faqSchema, `${product.slug} ${locale}: FAQ JSON-LD missing`)
   assert.ok(actual.imageCount > 0, `${product.slug} ${locale}: no images rendered`)
+  if (product.slug === 'u15-multi-mission-drone' && viewportLabel === 'mobile') {
+    assert.ok(actual.heroCopy, 'U15 mobile: hero copy container missing')
+    assert.ok(actual.heroCopy.left >= -1 && actual.heroCopy.right <= actual.clientWidth + 1, `U15 mobile: hero copy clipped horizontally (${JSON.stringify(actual.heroCopy)})`)
+    assert.ok(Math.abs(actual.heroCopy.center - actual.clientWidth / 2) <= 2, `U15 mobile: hero copy is not centered (${JSON.stringify(actual.heroCopy)})`)
+  }
   assert.ok(actual.scrollWidth <= actual.clientWidth + 2, `${product.slug} ${locale}: horizontal overflow ${actual.scrollWidth} > ${actual.clientWidth}`)
   assert.deepEqual(pageErrors, [], `${product.slug} ${locale}: browser errors: ${pageErrors.join('; ')}`)
   assert.deepEqual(failedLocalAssets, [], `${product.slug} ${locale}: failed local media: ${failedLocalAssets.join('; ')}`)

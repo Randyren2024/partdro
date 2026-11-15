@@ -1687,3 +1687,21 @@ h3 {
     font-size: 14.5px;
   }
 }
+
+
+/* Keep the U15 hero copy centered on small screens.
+   u15.css loads after shell.css, so this explicit mobile rule must win the cascade. */
+@media (max-width: 900px) {
+  .hero__copy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    width: calc(100% - 32px);
+    max-width: 780px;
+    margin: 0;
+    padding: 0;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
