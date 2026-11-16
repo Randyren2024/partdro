@@ -219,6 +219,19 @@ jobs:
               echo "verified supplier backlink in $html"
             done
           done
+          # Wuhu United Aircraft profile: localized subsidiary identity, catalogue and evidence.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/wuhu-united-aircraft.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing Wuhu supplier profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq 'TD550D' "$html"
+            grep -Fq 'R6000' "$html"
+            grep -Fq 'Government source' "$html" || grep -Fq 'Fuente gubernamental' "$html" || grep -Fq 'Source gouvernementale' "$html" || grep -Fq 'Behördliche Quelle' "$html"
+            echo "verified Wuhu United Aircraft profile $html"
+          done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
           for locale in en es de fr; do
             prefix=""
