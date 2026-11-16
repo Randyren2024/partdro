@@ -17,7 +17,7 @@ const linkedSlugs = ['y160-delivery-drone', 'fp800-agricultural-drone', 'c15']
 const isLinked = computed(() => linkedSlugs.includes(props.productSlug))
 const labels: Record<string, string> = {
   en: 'Company catalogue',
-  de: 'Unternehmens katalog',
+  de: 'Unternehmenskatalog',
   es: 'Catálogo de la empresa',
   fr: 'Catalogue de l’entreprise',
 }
