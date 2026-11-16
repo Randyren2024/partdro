@@ -27,7 +27,7 @@ export interface SupplierProfile {
   families: SupplierProductFamily[]
   linkedProducts: SupplierProductLink[]
   catalogueModels: string[]
-  sources: { label: string; url: string; type: 'official_company' | 'official_product' }[]
+  sources: { label: string; url: string; type: 'official_company' | 'official_product' | 'government_source' }[]
 }
 
 export const SUPPLIER_PROFILES: SupplierProfile[] = [
@@ -51,10 +51,10 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
         id: 'helicopters',
         title: { en: 'Heavy-lift unmanned helicopters', de: 'Schwerlast-Drohnenhubschrauber', es: 'Helicópteros no tripulados de carga pesada', fr: 'Hélicoptères sans pilote à forte charge utile' },
         summary: {
-          en: 'Coaxial and tandem-rotor aircraft for heavy logistics, emergency response, powerline work and specialist missions.',
-          de: 'Koaxiale und Tandemrotor-Fluggeräte für Schwerlastlogistik, Notfälle, Arbeiten an Stromleitungen und Spezialmissionen.',
-          es: 'Aeronaves coaxiales y de rotores en tándem para logística pesada, emergencias y misiones especializadas.',
-          fr: 'Aéronefs coaxiaux et à rotors en tandem pour la logistique lourde, les urgences et les missions spécialisées.',
+          en: 'TD550D received a type certificate in March 2025; Wuhu municipal sources report 200 kg maximum payload and operation up to 6,500 m for this variant. The family also includes TD220 (350 kg maximum take-off weight, 60 kg payload, 5 h at 35 kg) and the 1,400 kg-class T1400 tandem helicopter.',
+          de: 'TD550D erhielt im März 2025 eine Musterzulassung; Quellen der Stadt Wuhu nennen für diese Variante 200 kg maximale Nutzlast und einen Einsatz bis 6.500 m. Zur Familie gehören außerdem TD220 (350 kg maximales Startgewicht, 60 kg Nutzlast, 5 h bei 35 kg) und der T1400-Tandemhubschrauber der 1.400-kg-Klasse.',
+          es: 'TD550D obtuvo un certificado de tipo en marzo de 2025; fuentes municipales de Wuhu indican 200 kg de carga útil máxima y operación hasta 6.500 m para esta variante. La familia también incluye TD220 (350 kg de peso máximo al despegue, 60 kg de carga útil, 5 h con 35 kg) y el helicóptero en tándem T1400 de clase 1.400 kg.',
+          fr: 'TD550D a obtenu un certificat de type en mars 2025 ; des sources municipales de Wuhu indiquent 200 kg de charge utile maximale et une exploitation jusqu’à 6 500 m pour cette variante. La famille comprend aussi le TD220 (350 kg de masse maximale au décollage, 60 kg de charge utile, 5 h avec 35 kg) et l’hélicoptère tandem T1400 de classe 1 400 kg.',
         },
         items: ['TD220', 'TD550 / TD550D', '铂影 T1400'],
       },
@@ -62,10 +62,10 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
         id: 'tiltrotor',
         title: { en: 'Tiltrotor aircraft', de: 'Kipprotor-Fluggeräte', es: 'Aeronaves de rotor basculante', fr: 'Aéronefs à rotors basculants' },
         summary: {
-          en: 'The six-ton-class Lanying R6000 combines vertical take-off and landing with high-speed cruise.',
-          de: 'Der Kipprotor Lanying R6000 der Sechs-Tonnen-Klasse verbindet Senkrechtstart und -landung mit schnellem Reiseflug.',
-          es: 'El convertiplano Lanying R6000 de seis toneladas combina despegue vertical con crucero de alta velocidad.',
-          fr: 'Le convertiplane Lanying R6000 de six tonnes associe le décollage vertical à une croisière rapide.',
+          en: 'The six-ton-class Lanying R6000 combines vertical take-off and landing with high-speed cruise; official figures include 6,100 kg maximum take-off weight, 2,000 kg commercial payload, 550 km/h cruise speed and 4,000 km maximum range.',
+          de: 'Der Kipprotor Lanying R6000 der Sechs-Tonnen-Klasse verbindet Senkrechtstart und -landung mit schnellem Reiseflug; offizielle Angaben nennen 6.100 kg maximales Startgewicht, 2.000 kg kommerzielle Nutzlast, 550 km/h Reisegeschwindigkeit und 4.000 km maximale Reichweite.',
+          es: 'El convertiplano Lanying R6000 de seis toneladas combina despegue vertical con crucero de alta velocidad; las cifras oficiales incluyen 6.100 kg de peso máximo al despegue, 2.000 kg de carga comercial, 550 km/h de crucero y 4.000 km de alcance máximo.',
+          fr: 'Le convertiplane Lanying R6000 de six tonnes associe le décollage vertical à une croisière rapide ; les données officielles indiquent 6 100 kg de masse maximale au décollage, 2 000 kg de charge commerciale, 550 km/h en croisière et 4 000 km de portée maximale.',
         },
         items: ['镧影 R6000'],
       },
@@ -98,7 +98,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
       { label: 'Wuhu subsidiary profile and official address', url: 'https://www.uatair.com/about/company/2.html', type: 'official_company' },
       { label: 'United Aircraft Group official product catalogue', url: 'https://www.uatair.com/product.html', type: 'official_company' },
       { label: 'TD550D type certificate announcement', url: 'https://www.uatair.com/news/424.html', type: 'official_company' },
-      { label: 'TD550D payload and high-altitude operating information', url: 'https://www.wuhu.gov.cn/xwzx/zwyw/40583539.html', type: 'official_product' },
+      { label: 'TD550D payload and high-altitude operating information', url: 'https://www.wuhu.gov.cn/xwzx/zwyw/40583539.html', type: 'government_source' },
       { label: 'TD220 official product specifications', url: 'https://www.uatair.com/en/product/info/39.html', type: 'official_product' },
       { label: 'T1400 official product specifications', url: 'https://www.uatair.com/news/427.html', type: 'official_product' },
       { label: 'R6000 official product specifications', url: 'https://www.uatair.com/product/info/69.html', type: 'official_product' },
