@@ -159,13 +159,13 @@ export default defineNuxtConfig({
       routes: [
         '/index.html',
         // 默认语言 en（无前缀）
-        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/cases', '/news', '/documents', '/about', '/contact',
+        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/suppliers', '/suppliers/north', '/suppliers/yangtze-river-delta', '/suppliers/pearl-river-delta', '/suppliers/company/topxgun', '/suppliers/company/wuhu-united-aircraft', '/suppliers/company/wuhu-tengden-aviation', '/suppliers/company/zero-gravity-aircraft', '/cases', '/news', '/documents', '/about', '/contact',
         // de
-        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
+        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/suppliers', '/de/suppliers/north', '/de/suppliers/yangtze-river-delta', '/de/suppliers/pearl-river-delta', '/de/suppliers/company/topxgun', '/de/suppliers/company/wuhu-united-aircraft', '/de/suppliers/company/wuhu-tengden-aviation', '/de/suppliers/company/zero-gravity-aircraft', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
         // es
-        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/products/vf50p-long-endurance-vtol-uav', '/es/products/u15-multi-mission-drone', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
+        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/products/vf50p-long-endurance-vtol-uav', '/es/products/u15-multi-mission-drone', '/es/suppliers', '/es/suppliers/north', '/es/suppliers/yangtze-river-delta', '/es/suppliers/pearl-river-delta', '/es/suppliers/company/topxgun', '/es/suppliers/company/wuhu-united-aircraft', '/es/suppliers/company/wuhu-tengden-aviation', '/es/suppliers/company/zero-gravity-aircraft', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
         // fr
-        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/products/vf50p-long-endurance-vtol-uav', '/fr/products/u15-multi-mission-drone', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
+        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/products/vf50p-long-endurance-vtol-uav', '/fr/products/u15-multi-mission-drone', '/fr/suppliers', '/fr/suppliers/north', '/fr/suppliers/yangtze-river-delta', '/fr/suppliers/pearl-river-delta', '/fr/suppliers/company/topxgun', '/fr/suppliers/company/wuhu-united-aircraft', '/fr/suppliers/company/wuhu-tengden-aviation', '/fr/suppliers/company/zero-gravity-aircraft', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
         // 3 个 solutions 预设路径（每种语言 × 3）
         '/solutions/facade-cleaning', '/solutions/solar-panel-cleaning', '/solutions/heavy-lift-logistics',
         '/de/solutions/facade-cleaning', '/de/solutions/solar-panel-cleaning', '/de/solutions/heavy-lift-logistics',
