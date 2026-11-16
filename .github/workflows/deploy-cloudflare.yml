@@ -24,6 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Validate supplier directory data integrity
+        run: node scripts/validate-suppliers.mjs
+
       - name: Preflight — required secrets present
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
