@@ -28,7 +28,7 @@
             <p>{{ family.summary[localeKey] }}</p>
             <div class="model-list">
               <template v-for="model in family.items" :key="model">
-                <NuxtLink v-if="findLinkedProduct(model)" :to="lp('/products/' + findLinkedProduct(model)!.slug)" class="model-pill model-pill--linked">{{ model }} ↗</NuxtLink>
+                <NuxtLink v-if="findLinkedProduct(model)" :to="linkedProductPath(model)" class="model-pill model-pill--linked">{{ model }} ↗</NuxtLink>
                 <span v-else class="model-pill">{{ model }}</span>
               </template>
             </div>
@@ -82,6 +82,11 @@ if (!supplier || !profile) throw createError({ statusCode: 404, statusMessage: '
 
 function findLinkedProduct(model: string) {
   return profile.linkedProducts.find((product) => product.model === model || (product.model === 'C15' && model.startsWith('C15')))
+}
+
+function linkedProductPath(model: string) {
+  const product = findLinkedProduct(model)
+  return product ? lp('/products/' + product.slug) : ''
 }
 
 const localeKey = computed(() => (['de', 'es', 'fr'].includes(locale.value) ? locale.value : 'en') as 'en' | 'de' | 'es' | 'fr')
