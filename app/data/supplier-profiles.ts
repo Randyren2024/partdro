@@ -120,6 +120,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
       { label: 'Official company website and product catalogue', url: 'https://www.topxgun.com/', type: 'official_company' },
       { label: 'Company profile and development history', url: 'https://www.topxgun.com/h-col-101.html', type: 'official_company' },
       { label: 'Y160 official product information', url: 'https://www.topxgun.com/h-col-149.html', type: 'official_product' },
+      { label: 'Yunpeng 800 official product information', url: 'https://www.topxgun.com/h-col-141.html', type: 'official_product' },
       { label: 'Fengpeng 800 official product information', url: 'https://www.topxgun.com/h-col-179.html', type: 'official_product' },
       { label: 'Official catalogue and product-family navigation', url: 'https://www.topxgun.com/', type: 'official_company' },
     ],
