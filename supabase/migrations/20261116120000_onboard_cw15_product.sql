@@ -14,7 +14,7 @@ end;
 $$;
 
 insert into public.suppliers (id,name,name_en,region,province,city,district,segment,category,category_label,note,product_models,website,contact_email,status,source_file)
-values ('supplier-250','成都纵横自动化技术股份有限公司','Chengdu JOUAV Automation Tech Co., Ltd.','长三角','四川','成都','高新区','工业VTOL固定翼无人机','industrial','Industrial & Enterprise','官方产品与交易所资料已核验；仅供内部来源追溯。',array['CW-15'],'https://www.jouav.com/','contact@jouav.com','verified','official_company_and_product_sources')
+values ('supplier-250','成都纵横自动化技术股份有限公司','Chengdu JOUAV Automation Tech Co., Ltd.','西部','四川','成都','高新区','工业VTOL固定翼无人机','industrial','Industrial & Enterprise','官方产品与交易所资料已核验；仅供内部来源追溯。',array['CW-15'],'https://www.jouav.com/','contact@jouav.com','verified','official_company_and_product_sources')
 on conflict (id) do update set name=excluded.name,name_en=excluded.name_en,region=excluded.region,province=excluded.province,city=excluded.city,district=excluded.district,segment=excluded.segment,category=excluded.category,category_label=excluded.category_label,note=excluded.note,product_models=excluded.product_models,website=excluded.website,contact_email=excluded.contact_email,status=excluded.status,updated_at=now();
 
 insert into public.supplier_profiles (supplier_id,slug,website,address,founded_year,verified_at,profile_data)
@@ -24,7 +24,7 @@ on conflict (supplier_id) do update set slug=excluded.slug,website=excluded.webs
 
 with p as (
  insert into public.products (slug,category,image_url,gallery,specs,features,sort_order,published)
- values ('cw-15-vtol-mapping-drone','industrial','/images/cw-15-technical-illustration.svg',array['/images/cw-15-technical-illustration.svg'],
+ values ('cw-15-vtol-mapping-drone','EVTOL','/images/cw-15-technical-illustration.svg',array['/images/cw-15-technical-illustration.svg'],
  jsonb_build_object('payload','3 kg','endurance_empty','180 min','endurance_with_mg120e','120 min','cruise_speed','61 km/h','wind_resistance','10.8–13.8 m/s','practical_ceiling','6500 m','max_takeoff_altitude','4500 m','fuselage_length','2.06 m','wingspan','3.54 m','takeoff_landing','VTOL','performance_note','Manufacturer-published theoretical values under specific test conditions; actual performance varies by configuration and operating conditions.'),
  jsonb_build_array(
  jsonb_build_object('icon','plane','title','VTOL fixed-wing platform','description','Vertical take-off and landing with fixed-wing cruise efficiency.'),
