@@ -57,7 +57,7 @@
               <span class="supplier-card__category">{{ categoryLabels[supplier.category] || supplier.category_label }}</span>
               <span class="supplier-card__status">{{ copy.listed }}</span>
             </div>
-            <h2>{{ supplier.name }}</h2>
+            <h2><NuxtLink v-if="supplierProfilePath(supplier.id)" :to="supplierProfilePath(supplier.id)">{{ supplier.name }}</NuxtLink><template v-else>{{ supplier.name }}</template></h2>
             <p class="supplier-card__location">{{ supplier.province }} · {{ supplier.city }}<span v-if="supplier.district && supplier.district !== '—'"> · {{ supplier.district }}</span></p>
             <p class="supplier-card__segment"><strong>{{ copy.capability }}:</strong> {{ supplier.segment }}</p>
             <p v-if="supplier.note" class="supplier-card__note">{{ supplier.note }}</p>
@@ -86,6 +86,7 @@ import {
   SUPPLIERS, SUPPLIER_UPDATED, SUPPLIER_REGIONS, SUPPLIER_UI,
   SUPPLIER_CATEGORY_LABELS, SUPPLIER_CATEGORIES,
 } from '~/data/supplier-directory'
+import { SUPPLIER_PROFILES } from '~/data/supplier-profiles'
 import type { SupplierRecord } from '~/data/supplier-directory'
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '~/i18n'
 
@@ -114,6 +115,11 @@ const filteredSuppliers = computed(() => {
     return searchable.includes(query)
   })
 })
+
+function supplierProfilePath(id: string) {
+  const profile = SUPPLIER_PROFILES.find((item) => item.supplierId === id)
+  return profile ? lp('/suppliers/company/' + profile.slug) : ''
+}
 
 function clearFilters() {
   search.value = ''
@@ -187,6 +193,8 @@ useHead(() => ({
 .supplier-card__top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:16px; }
 .supplier-card__category { padding:5px 9px; border-radius:999px; color:var(--pd-primary); background:color-mix(in srgb,var(--pd-primary) 10%,var(--pd-surface)); font-size:11px; font-weight:750; }
 .supplier-card__status { color:var(--pd-ink-muted); font-size:10px; }
+.supplier-card h2 :deep(a) { color:inherit; text-decoration:none; }
+.supplier-card h2 :deep(a:hover) { color:var(--pd-primary); }
 .supplier-card h2 { margin:0 0 9px; color:var(--pd-ink); font-size:18px; line-height:1.4; }
 .supplier-card__location { margin:0 0 12px; color:var(--pd-ink-muted); font-size:12px; }
 .supplier-card__segment { margin:0; color:var(--pd-ink-soft); font-size:13px; line-height:1.7; }
