@@ -1,6 +1,6 @@
 begin;
 
-select plan(14);
+select plan(15);
 
 select ok(
   exists (
@@ -76,6 +76,16 @@ select ok(
 select ok(
   has_table_privilege('anon', 'public.product_langs', 'SELECT'),
   'public visitors retain translated product read access'
+);
+
+select ok(
+  exists (
+    select 1 from pg_trigger
+    where tgrelid = 'private.product_sources'::regclass
+      and tgname = 'product_sources_set_updated_at'
+      and not tgisinternal
+  ),
+  'updated_at maintenance trigger exists'
 );
 
 select * from finish();
