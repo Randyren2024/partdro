@@ -167,9 +167,9 @@ jobs:
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
             for entry in "suppliers:249" "suppliers/north:70" "suppliers/yangtze-river-delta:123" "suppliers/pearl-river-delta:56"; do
-              route="\${entry%%:*}"
-              expected="\${entry#*:}"
-              html="dist/\${prefix}\${route}.html"
+              route="${entry%%:*}"
+              expected="${entry#*:}"
+              html="dist/${prefix}${route}.html"
               if [ ! -s "$html" ]; then echo "FAIL: missing supplier route $html"; exit 1; fi
               grep -Fq 'rel="canonical"' "$html"
               grep -Fq 'hreflang="x-default"' "$html"
@@ -184,8 +184,21 @@ jobs:
             done
           done
           # Supplier directory canonical routes must also be present in the sitemap.
-          for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta; do
+          for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun; do
             grep -Fq "https://www.droneworld.tech/$route" dist/sitemap.xml
+          done
+          # TopXGun company profile: localized, source-backed company/product links.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/topxgun.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing supplier company profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq '"@type":"Organization"' "$html"
+            grep -Fq 'Y160' "$html"
+            grep -Fq 'fp800-agricultural-drone' "$html"
+            echo "verified TopXGun company profile $html"
           done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
           for locale in en es de fr; do
