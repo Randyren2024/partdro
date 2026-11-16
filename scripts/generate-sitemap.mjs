@@ -107,6 +107,7 @@ const localizedPaths = [
   '/suppliers/yangtze-river-delta',
   '/suppliers/pearl-river-delta',
   '/suppliers/company/topxgun',
+  '/suppliers/company/wuhu-united-aircraft',
   // 商业意图 hub（router 静态路由，不在 products 表）
   '/solutions/facade-cleaning',
   '/solutions/solar-panel-cleaning',
