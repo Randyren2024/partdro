@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
 import supplierSource from '../../app/data/suppliers.json'
-import { SUPPLIER_PROFILES } from '../../app/data/supplier-profiles'
 
 /**
  * Public, read-only supplier data endpoint.
