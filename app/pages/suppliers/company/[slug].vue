@@ -147,7 +147,9 @@ useHead(() => ({
 <style scoped>
 .back-link { display:inline-flex; margin-bottom:22px; color:rgba(255,255,255,.72); font-size:13px; text-decoration:none; }
 .supplier-eyebrow { margin:0 0 14px; color:#ff8a4c; font-size:11px; font-weight:750; letter-spacing:.2em; }
-.supplier-brand { margin:8px 0 0; color:var(--pd-primary); font-size:14px; font-weight:700; }\n.supplier-location { margin:12px 0 4px; color:rgba(255,255,255,.65); font-size:13px; }\n.supplier-address { margin:0; color:rgba(255,255,255,.58); font-size:12px; }
+.supplier-brand { margin:8px 0 0; color:var(--pd-primary); font-size:14px; font-weight:700; }
+.supplier-location { margin:12px 0 4px; color:rgba(255,255,255,.65); font-size:13px; }
+.supplier-address { margin:0; color:rgba(255,255,255,.58); font-size:12px; }
 .supplier-intro { max-width:850px; color:rgba(255,255,255,.82); font-size:17px; line-height:1.8; }
 .supplier-actions { display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center; margin-top:24px; color:rgba(255,255,255,.62); font-size:12px; }
 .supplier-actions a { color:#ff9a62; font-weight:700; }
