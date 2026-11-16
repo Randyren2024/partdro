@@ -3,7 +3,7 @@
     <section class="page-header">
       <div class="container">
         <p class="supplier-eyebrow">DRONEWORLD REGIONAL DIRECTORY</p>
-        <h1>{{ region.names[localeKey] }} UAV Companies</h1>
+        <h1>{{ region.titles[localeKey] }}</h1>
         <p>{{ region.descriptions[localeKey] }}</p>
         <div class="supplier-hero-stats">
           <strong>{{ regionSuppliers.length }}</strong>
@@ -117,7 +117,7 @@ const alternates = SUPPORTED_LOCALES.map((language) => ({
 }))
 
 useHead(() => ({
-  title: region.names[localeKey.value] + ' UAV Companies | Droneworld.tech',
+  title: region.titles[localeKey.value] + ' | Droneworld.tech',
   titleTemplate: '%s',
   htmlAttrs: { lang: locale.value },
   link: [
@@ -129,7 +129,7 @@ useHead(() => ({
     { name: 'description', content: region.descriptions[localeKey.value] },
     { name: 'robots', content: 'index, follow, max-image-preview:large' },
     { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: region.names[localeKey.value] + ' UAV Companies' },
+    { property: 'og:title', content: region.titles[localeKey.value] },
     { property: 'og:description', content: region.descriptions[localeKey.value] },
     { property: 'og:url', content: canonical.value },
   ],
