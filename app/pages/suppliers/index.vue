@@ -110,10 +110,12 @@ const filteredSuppliers = computed(() => {
     if (regionFilter.value && supplier.region !== regionFilter.value) return false
     if (categoryFilter.value && supplier.category !== categoryFilter.value) return false
     if (!query) return true
+    const profile = SUPPLIER_PROFILES.find((item) => item.supplierId === supplier.id)
     const searchable = [
       supplier.name, supplier.name_en, supplier.region, supplier.province, supplier.city,
       supplier.district, supplier.segment, supplier.category_label, supplier.note,
       ...(supplier.product_models || []),
+      ...(profile?.catalogueModels || []),
     ].filter(Boolean).join(' ').toLocaleLowerCase()
     return searchable.includes(query)
   })
