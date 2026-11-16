@@ -7,7 +7,7 @@
         <h1>{{ supplier.name }}</h1>
         <p class="supplier-brand">{{ profile.displayName[localeKey] }}</p>
         <p class="supplier-location">{{ supplier.province }} · {{ supplier.city }} · {{ supplier.district }}</p>
-        <p class="supplier-address">{{ profile.address }}</p>
+        <p class="supplier-address">{{ profile.address }} · {{ copy.founded }} {{ profile.foundedYear }}</p>
         <p class="supplier-intro">{{ profile.description[localeKey] }}</p>
         <div class="supplier-actions">
           <a :href="profile.website" target="_blank" rel="noopener noreferrer">{{ copy.website }} ↗</a>
@@ -88,6 +88,7 @@ const localeKey = computed(() => (['de', 'es', 'fr'].includes(locale.value) ? lo
 const copy = computed(() => ({
   back: ({ en: '← All suppliers', de: '← Alle Anbieter', es: '← Todos los proveedores', fr: '← Tous les fournisseurs' })[localeKey.value],
   website: ({ en: 'Official website', de: 'Offizielle Website', es: 'Sitio web oficial', fr: 'Site officiel' })[localeKey.value],
+  founded: ({ en: 'Founded', de: 'Gegründet', es: 'Fundada en', fr: 'Fondée en' })[localeKey.value],
   verified: ({ en: 'Sources checked', de: 'Quellen geprüft', es: 'Fuentes verificadas', fr: 'Sources vérifiées' })[localeKey.value],
   catalogue: ({ en: 'OFFICIAL PRODUCT RANGE', de: 'OFFIZIELLES PRODUKTPORTFOLIO', es: 'GAMA OFICIAL DE PRODUCTOS', fr: 'GAMME DE PRODUITS OFFICIELLE' })[localeKey.value],
   familiesTitle: ({ en: 'Product families', de: 'Produktfamilien', es: 'Familias de productos', fr: 'Familles de produits' })[localeKey.value],
@@ -136,6 +137,7 @@ useHead(() => ({
       '@type': 'Organization',
       name: profile.displayName[localeKey.value],
       alternateName: supplier.name,
+      foundingDate: String(profile.foundedYear),
       url: profile.website,
       address: {
         '@type': 'PostalAddress',
