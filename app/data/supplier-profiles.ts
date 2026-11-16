@@ -73,7 +73,10 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
       },
     ],
     catalogueModels: ['擎天80', 'Y160', '运鹏800', '丰鹏800', 'A80', '丰鹏700', '丰鹏300E', '丰鹏600', 'C15清洗无人机', 'KT100电系留', 'Y160消防', '星辰-15', '星辰-40E', '星辰-40F', '星辰-100F', '星辰-650'],
-    // YP800 is intentionally not linked yet: the existing Partdro YP800 record lists 62 kg payload,\n    // while TopXGun's official Yunpeng 800 page currently states 50 kg lifting / 30 kg cargo-box load.\n    // Reconcile model identity and source specs before connecting these records.\n    linkedProducts: [
+    // YP800 is intentionally not linked yet: the existing Partdro YP800 record lists 62 kg payload.
+    // TopXGun's official Yunpeng 800 page states 50 kg lifting / 30 kg cargo-box load.
+    // Reconcile model identity and source specs before connecting these records.
+    linkedProducts: [
       {
         model: 'Y160',
         slug: 'y160-delivery-drone',
