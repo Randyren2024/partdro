@@ -107,7 +107,7 @@ const filteredSuppliers = computed(() => {
 })
 
 function supplierProfilePath(id: string) {
-  const profile = SUPPLIER_PROFILES.find((item) => item.supplierId === id)
+  const profile = profiles.value.find((item) => item.supplierId === id)
   return profile ? lp('/suppliers/company/' + profile.slug) : ''
 }
 
