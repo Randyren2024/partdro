@@ -162,6 +162,31 @@ jobs:
               echo "verified $route"
             done
           done
+          # Supplier directory: all 4 routes × 4 locales must be statically rendered and indexed.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for entry in "suppliers:249" "suppliers/north:70" "suppliers/yangtze-river-delta:123" "suppliers/pearl-river-delta:56"; do
+              route="\${entry%%:*}"
+              expected="\${entry#*:}"
+              html="dist/\${prefix}\${route}.html"
+              if [ ! -s "$html" ]; then echo "FAIL: missing supplier route $html"; exit 1; fi
+              grep -Fq 'rel="canonical"' "$html"
+              grep -Fq 'hreflang="x-default"' "$html"
+              grep -Fq '"@type":"CollectionPage"' "$html"
+              grep -Fq '"@type":"ItemList"' "$html"
+              actual=$(grep -o 'data-supplier-id=' "$html" | wc -l)
+              if [ "$actual" -ne "$expected" ]; then
+                echo "FAIL: $html contains $actual supplier cards; expected $expected"
+                exit 1
+              fi
+              echo "verified supplier route $html ($actual records)"
+            done
+          done
+          # Supplier directory canonical routes must also be present in the sitemap.
+          for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta; do
+            grep -Fq "https://www.droneworld.tech/$route" dist/sitemap.xml
+          done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
           for locale in en es de fr; do
             prefix=""
