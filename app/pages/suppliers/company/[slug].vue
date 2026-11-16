@@ -10,7 +10,7 @@
         <p class="supplier-address">{{ profile.address }} · {{ copy.founded }} {{ profile.foundedYear }}</p>
         <p class="supplier-intro">{{ profile.description[localeKey] }}</p>
         <div class="supplier-actions">
-          <a :href="profile.website" target="_blank" rel="noopener noreferrer">{{ copy.website }} ↗</a>
+          <a :href="profile.website" target="_blank" rel="noopener noreferrer">{{ profile.websiteLabel?.[localeKey] || copy.website }} ↗</a>
           <span>{{ copy.verified }}: {{ profile.verifiedAt }}</span>
         </div>
       </div>
