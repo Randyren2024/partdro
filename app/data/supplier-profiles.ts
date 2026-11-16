@@ -34,6 +34,46 @@ export interface SupplierProfile {
 export const SUPPLIER_PROFILES: SupplierProfile[] = [
 
   {
+    supplierId: 'supplier-240',
+    slug: 'wuhu-tengden-aviation',
+    website: 'https://www.tengden.com/',
+    websiteLabel: { en: 'Parent group website', de: 'Website der Muttergesellschaft', es: 'Sitio web del grupo matriz', fr: 'Site web du groupe parent' },
+    address: '安徽省芜湖市湾沚区安徽新芜经济开发区北航通航创新园5号楼9层',
+    foundedYear: 2023,
+    displayName: { en: '芜湖腾盾航空科技有限公司', de: '芜湖腾盾航空科技有限公司', es: '芜湖腾盾航空科技有限公司', fr: '芜湖腾盾航空科技有限公司' },
+    verifiedAt: '2026-11-16',
+    description: {
+      en: 'Wuhu Tengden Aviation Technology Co., Ltd. is a wholly owned subsidiary of Sichuan Tengden Sci-Tech Innovation Co., Ltd. established in Wuhu. Wuhu municipal sources directly attribute the D18 modular large commercial UAV development and assembly line to this local subsidiary. The parent group publishes a broader UAV portfolio, but this profile lists only D18 because it is the model directly evidenced for the Wuhu entity.',
+      de: 'Wuhu Tengden Aviation Technology Co., Ltd. ist eine in Wuhu gegründete hundertprozentige Tochtergesellschaft von Sichuan Tengden Sci-Tech Innovation Co., Ltd. Kommunale Quellen aus Wuhu ordnen die Entwicklung und Endmontagelinie des modularen Großraum-Transport-UAV D18 direkt dieser lokalen Tochtergesellschaft zu. Die Muttergesellschaft veröffentlicht ein breiteres UAV-Portfolio; dieses Profil führt nur D18 auf, da dieses Modell für die Wuhu-Gesellschaft direkt belegt ist.',
+      es: 'Wuhu Tengden Aviation Technology Co., Ltd. es una filial de propiedad total de Sichuan Tengden Sci-Tech Innovation Co., Ltd. establecida en Wuhu. Fuentes municipales de Wuhu atribuyen directamente a esta filial local el desarrollo y la línea de ensamblaje del UAV comercial modular D18. El grupo matriz publica una cartera más amplia, pero este perfil solo incluye D18 porque es el modelo documentado directamente para la entidad de Wuhu.',
+      fr: 'Wuhu Tengden Aviation Technology Co., Ltd. est une filiale détenue à 100 % par Sichuan Tengden Sci-Tech Innovation Co., Ltd., établie à Wuhu. Les sources municipales de Wuhu attribuent directement à cette filiale locale le développement et la ligne d’assemblage du grand UAV commercial modulaire D18. Le groupe parent publie un portefeuille plus large, mais ce profil ne présente que le D18, seul modèle directement documenté pour l’entité de Wuhu.',
+    },
+    families: [
+      {
+        id: 'd18-commercial',
+        title: { en: 'Modular large commercial UAV', de: 'Modulares großes kommerzielles UAV', es: 'UAV comercial modular de gran tamaño', fr: 'Grand UAV commercial modulaire' },
+        summary: {
+          en: 'D18 is a four-engine fixed-wing cargo UAV with a modular cargo bay. Wuhu official sources report a 4.35-tonne maximum take-off weight, 1.8-tonne maximum payload and more than 600 km range at full load. A separate Wuhu source reports over 1,500 km range with a 1.5-tonne payload. Missions include cargo transport, airdrop, emergency response and weather modification.',
+          de: 'D18 ist ein viermotoriges Starrflügel-Fracht-UAV mit modularem Frachtraum. Offizielle Quellen aus Wuhu nennen 4,35 t maximales Startgewicht, 1,8 t maximale Nutzlast und mehr als 600 km Reichweite bei voller Last. Eine separate Quelle aus Wuhu nennt über 1.500 km Reichweite bei 1,5 t Nutzlast. Einsatzbereiche sind Frachttransport, Abwurf, Notfallhilfe und Wetterbeeinflussung.',
+          es: 'D18 es un UAV de carga de ala fija con cuatro motores y bodega modular. Fuentes oficiales de Wuhu indican 4,35 toneladas de peso máximo al despegue, 1,8 toneladas de carga útil máxima y más de 600 km de alcance a plena carga. Otra fuente de Wuhu informa de más de 1.500 km con 1,5 toneladas de carga útil. Sus misiones incluyen transporte, lanzamiento de suministros, respuesta a emergencias y modificación meteorológica.',
+          fr: 'Le D18 est un UAV cargo à voilure fixe et quatre moteurs, doté d’une soute modulaire. Les sources officielles de Wuhu indiquent une masse maximale au décollage de 4,35 tonnes, une charge utile maximale de 1,8 tonne et plus de 600 km de portée à pleine charge. Une autre source de Wuhu indique plus de 1 500 km avec une charge utile de 1,5 tonne. Les missions comprennent le transport, le largage de matériel, les interventions d’urgence et la modification météorologique.',
+        },
+        items: ['D18'],
+      },
+    ],
+    linkedProducts: [],
+    catalogueModels: ['D18'],
+    sources: [
+      { label: 'Sichuan Tengden official group website', url: 'https://www.tengden.com/', type: 'official_company' },
+      { label: 'Sichuan Tengden official company profile', url: 'https://www.tengden.com/about.html', type: 'official_company' },
+      { label: 'Wuhu municipal report: D18 assembly line and local subsidiary relationship', url: 'https://kjj.wuhu.gov.cn/gg/xqkj/8810527.html', type: 'government_source' },
+      { label: 'Wuhu municipal report: D18 first flight and specifications', url: 'https://kjj.wuhu.gov.cn/gg/kjyw/8849909.html', type: 'government_source' },
+      { label: 'Wuhu investment promotion report: D18 heavy-payload airdrop test', url: 'https://tzcjzx.wuhu.gov.cn/zsdt/gzdt/8865027.html', type: 'government_source' },
+      { label: 'Shenzhen Stock Exchange filing: Wuhu subsidiary registration and address', url: 'https://reportdocs.static.szse.cn/UpFiles/rasinfodisc1/202606/RAS_202606_161935627E1A9C0B0848B3AE740A8FF48C0397.pdf', type: 'government_source' },
+    ],
+  },
+
+  {
     supplierId: 'supplier-239',
     slug: 'wuhu-united-aircraft',
     website: 'https://www.uatair.com/about/company/2.html',
