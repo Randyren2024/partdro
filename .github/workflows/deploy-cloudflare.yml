@@ -187,11 +187,11 @@ jobs:
               echo "verified supplier route $html ($actual records)"
             done
           done
-          # Verify all 28 canonical supplier URLs (7 directory/profile routes × 4 locales) in the sitemap.
+          # Verify all 32 canonical supplier URLs (8 directory/profile routes × 4 locales) in the sitemap.
           for locale in en de es fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
-            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun suppliers/company/wuhu-united-aircraft suppliers/company/wuhu-tengden-aviation; do
+            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun suppliers/company/wuhu-united-aircraft suppliers/company/wuhu-tengden-aviation suppliers/company/zero-gravity-aircraft; do
               grep -Fq "https://www.droneworld.tech/${prefix}${route}" dist/sitemap.xml
             done
           done
@@ -243,6 +243,20 @@ jobs:
             grep -Fq 'D18' "$html"
             grep -Fq 'Parent group website' "$html" || grep -Fq 'Website der Muttergesellschaft' "$html" || grep -Fq 'Sitio web del grupo matriz' "$html" || grep -Fq 'Site web du groupe parent' "$html"
             echo "verified Wuhu Tengden profile $html"
+          done
+          # Zero Gravity Aircraft profile: certification states and product-family pages must remain source-grounded.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/zero-gravity-aircraft.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing Zero Gravity supplier profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq 'RX1E-A' "$html"
+            grep -Fq 'ZG-ONE' "$html"
+            grep -Fq 'ZG-T6' "$html"
+            grep -Fq '650 kg' "$html" || grep -Fq '650 kg' "$html"
+            echo "verified Zero Gravity Aircraft profile $html"
           done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
           for locale in en es de fr; do
