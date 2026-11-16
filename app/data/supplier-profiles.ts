@@ -17,6 +17,8 @@ export interface SupplierProfile {
   supplierId: string
   slug: string
   website: string
+  address: string
+  displayName: Record<'en' | 'de' | 'es' | 'fr', string>
   verifiedAt: string
   description: Record<'en' | 'de' | 'es' | 'fr', string>
   families: SupplierProductFamily[]
@@ -30,6 +32,8 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
     supplierId: 'supplier-201',
     slug: 'topxgun',
     website: 'https://www.topxgun.com/',
+    address: '南京市江宁区吉印大道3118号',
+    displayName: { en: 'TopXGun (Nanjing) Robotics Co., Ltd.', de: 'TopXGun (Nanjing) Robotics Co., Ltd.', es: 'TopXGun (Nanjing) Robotics Co., Ltd.', fr: 'TopXGun (Nanjing) Robotics Co., Ltd.' },
     verifiedAt: '2026-11-16',
     description: {
       en: 'TopXGun (Nanjing) Robotics Co., Ltd. develops UAV autopilot technology and low-altitude digital operations. Its official catalogue covers cargo transport, smart agriculture, industrial applications, aircraft systems, payloads and software.',
@@ -104,8 +108,12 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
       { label: 'Company profile and development history', url: 'https://www.topxgun.com/h-col-101.html', type: 'official_company' },
       { label: 'Y160 official product information', url: 'https://www.topxgun.com/h-col-149.html', type: 'official_product' },
       { label: 'Fengpeng 800 official product information', url: 'https://www.topxgun.com/h-col-179.html', type: 'official_product' },
+      { label: 'Official catalogue and product-family navigation', url: 'https://www.topxgun.com/', type: 'official_company' },
     ],
   },
 ]
 
 export const getSupplierProfile = (slug: string) => SUPPLIER_PROFILES.find((profile) => profile.slug === slug)
+
+export const getSupplierProfileByProductSlug = (productSlug: string) =>
+  SUPPLIER_PROFILES.find((profile) => profile.linkedProducts.some((product) => product.slug === productSlug))
