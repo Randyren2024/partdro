@@ -5,6 +5,7 @@ export interface SupplierProductLink {
   names: Record<'en' | 'de' | 'es' | 'fr', string>
   sourceUrl: string
   sourceType: 'official_product' | 'official_catalogue'
+  highlights: Record<'en' | 'de' | 'es' | 'fr', string>
 }
 
 export interface SupplierProductFamily {
@@ -102,6 +103,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
         names: { en: 'Y160 Delivery Drone', de: 'Y160 Transportdrohne', es: 'Dron de transporte Y160', fr: 'Drone de transport Y160' },
         sourceUrl: 'https://www.topxgun.com/h-col-149.html',
         sourceType: 'official_product',
+        highlights: { en: 'Up to 165 kg payload · heavy-lift cargo transport', de: 'Bis zu 165 kg Nutzlast · Schwerlasttransport', es: 'Hasta 165 kg de carga útil · transporte pesado', fr: 'Jusqu’à 165 kg de charge utile · transport lourd' },
       },
       {
         model: '丰鹏800',
@@ -110,22 +112,26 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
         names: { en: 'Fengpeng 800 Agricultural Drone', de: 'Fengpeng 800 Landwirtschaftsdrohne', es: 'Dron agrícola Fengpeng 800', fr: 'Drone agricole Fengpeng 800' },
         sourceUrl: 'https://www.topxgun.com/h-col-179.html',
         sourceType: 'official_product',
+        highlights: { en: '80 L spray · 120 L spreading · 85 kg lifting load', de: '80 l Sprühen · 120 l Streuen · 85 kg Hubkraft', es: '80 L de pulverización · 120 L de esparcido · 85 kg de elevación', fr: 'Pulvérisation 80 L · épandage 120 L · levage 85 kg' },
       },
       {
         model: 'C15',
         slug: 'c15',
         category: 'cleaning',
         names: { en: 'C15 Cleaning Drone', de: 'C15 Reinigungsdrohne', es: 'Dron de limpieza C15', fr: 'Drone de nettoyage C15' },
-        sourceUrl: 'https://www.topxgun.com/',
-        sourceType: 'official_catalogue',
+        sourceUrl: 'https://www.topxgun.com/h-col-163.html',
+        sourceType: 'official_product',
+        highlights: { en: '16 MPa max pressure · 20 L/min · 120 m hose · 100 m working height', de: '16 MPa Maximaldruck · 20 l/min · 120 m Schlauch · 100 m Arbeitshöhe', es: '16 MPa de presión máxima · 20 L/min · manguera de 120 m · 100 m de altura de trabajo', fr: 'Pression max. 16 MPa · 20 L/min · tuyau de 120 m · hauteur de travail de 100 m' },
       },
     ],
     sources: [
       { label: 'Official company website and product catalogue', url: 'https://www.topxgun.com/', type: 'official_company' },
       { label: 'Company profile and development history', url: 'https://www.topxgun.com/h-col-101.html', type: 'official_company' },
       { label: 'Y160 official product information', url: 'https://www.topxgun.com/h-col-149.html', type: 'official_product' },
+      { label: 'Y160 payload and application information', url: 'https://www.topxgun.com/h-nd-40.html', type: 'official_product' },
       { label: 'Yunpeng 800 official product information', url: 'https://www.topxgun.com/h-col-141.html', type: 'official_product' },
       { label: 'Fengpeng 800 official product information', url: 'https://www.topxgun.com/h-col-179.html', type: 'official_product' },
+      { label: 'C15 official cleaning drone product information', url: 'https://www.topxgun.com/h-col-163.html', type: 'official_product' },
       { label: 'Official catalogue and product-family navigation', url: 'https://www.topxgun.com/', type: 'official_company' },
     ],
   },
