@@ -1,7 +1,10 @@
 <template>
-  <aside v-if="isLinked" class="supplier-attribution">
+  <aside v-if="profile" class="supplier-attribution">
     <span>{{ label }}</span>
-    <NuxtLink :to="lp('/suppliers/company/topxgun')">拓攻（南京）机器人有限公司 <span aria-hidden="true">→</span></NuxtLink>
+    <NuxtLink :to="lp('/suppliers/company/' + profile.slug)">
+      {{ profile.displayName[localeKey] }}
+      <span aria-hidden="true">→</span>
+    </NuxtLink>
   </aside>
 </template>
 
@@ -9,19 +12,20 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '~/composables/useLocalePath'
+import { getSupplierProfileByProductSlug } from '~/data/supplier-profiles'
 
 const props = defineProps<{ productSlug: string }>()
 const { locale } = useI18n()
 const lp = useLocalePath()
-const linkedSlugs = ['y160-delivery-drone', 'fp800-agricultural-drone', 'c15']
-const isLinked = computed(() => linkedSlugs.includes(props.productSlug))
+const localeKey = computed(() => (['de', 'es', 'fr'].includes(locale.value) ? locale.value : 'en') as 'en' | 'de' | 'es' | 'fr')
+const profile = computed(() => getSupplierProfileByProductSlug(props.productSlug))
 const labels: Record<string, string> = {
   en: 'Company catalogue',
   de: 'Unternehmenskatalog',
   es: 'Catálogo de la empresa',
   fr: 'Catalogue de l’entreprise',
 }
-const label = computed(() => labels[locale.value] || labels.en)
+const label = computed(() => labels[localeKey.value])
 </script>
 
 <style scoped>
