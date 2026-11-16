@@ -50,7 +50,7 @@ export const SUPPLIER_REGIONS = [
   {
     slug: 'pearl-river-delta',
     key: '珠三角',
-    names: { en: 'Pearl River Delta', de: 'Perlflussdelta', es: 'Delta del río Perla', fr: 'Entreprises de drones du delta de la rivière des Perles' },
+    names: { en: 'Pearl River Delta', de: 'Perlflussdelta', es: 'Delta del río Perla', fr: 'Delta de la rivière des Perles' },
     titles: { en: 'UAV Companies in the Pearl River Delta', de: 'UAV-Unternehmen im Perlflussdelta', es: 'Empresas de UAV del delta del río Perla', fr: 'Entreprises de drones du delta de la rivière des Perles' },
     descriptions: {
       en: 'Browse the UAV companies listed in the Pearl River Delta, including aircraft, industrial systems, components and specialist services.',
