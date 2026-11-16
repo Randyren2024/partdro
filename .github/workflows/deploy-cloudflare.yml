@@ -187,7 +187,7 @@ jobs:
               echo "verified supplier route $html ($actual records)"
             done
           done
-          # Supplier directory canonical routes must be present in every localized sitemap entry.
+          # Verify all 28 canonical supplier URLs (7 directory/profile routes × 4 locales) in the sitemap.
           for locale in en de es fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
