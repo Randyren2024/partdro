@@ -70,15 +70,15 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '~/composables/useLocalePath'
-import { SUPPLIERS } from '~/data/supplier-directory'
-import { getSupplierProfile } from '~/data/supplier-profiles'
+import { useSupplierDirectory } from '~/composables/useSupplierDirectory'
 import { DEFAULT_LOCALE } from '~/i18n'
 
 const route = useRoute()
 const { locale } = useI18n()
 const lp = useLocalePath()
-const profile = getSupplierProfile(String(route.params.slug))
-const supplier = profile ? SUPPLIERS.find((item) => item.id === profile.supplierId) : undefined
+const { suppliers, profiles } = await useSupplierDirectory()
+const profile = profiles.value.find((item) => item.slug === String(route.params.slug))
+const supplier = profile ? suppliers.value.find((item) => item.id === profile.supplierId) : undefined
 if (!supplier || !profile) throw createError({ statusCode: 404, statusMessage: 'Supplier not found' })
 
 function findLinkedProduct(model: string) {
