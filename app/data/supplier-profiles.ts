@@ -10,7 +10,7 @@ export interface SupplierProductFamily {
   id: string
   title: Record<'en' | 'de' | 'es' | 'fr', string>
   summary: Record<'en' | 'de' | 'es' | 'fr', string>
-  models: string[]
+  items: string[]
 }
 
 export interface SupplierProfile {
@@ -51,18 +51,18 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
           es: 'UAV de carga para logística a baja altitud y operaciones de elevación. El catálogo oficial incluye Qingtian 80, Y160 y Yunpeng 800.',
           fr: 'Drones cargo pour la logistique à basse altitude et les opérations de levage. Le catalogue officiel répertorie Qingtian 80, Y160 et Yunpeng 800.',
         },
-        models: ['擎天80', 'Y160', '运鹏800'],
+        items: ['擎天80', 'Y160', '运鹏800'],
       },
       {
         id: 'agriculture',
         title: { en: 'Smart agriculture solutions', de: 'Lösungen für intelligente Landwirtschaft', es: 'Soluciones de agricultura inteligente', fr: 'Solutions d’agriculture intelligente' },
         summary: {
-          en: 'Agricultural aircraft for spraying, spreading, seeding and farm logistics. The official catalogue lists Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E and Fengpeng 600.',
-          de: 'Landwirtschaftliche UAVs zum Sprühen, Streuen, Säen und für landwirtschaftliche Logistik. Der offizielle Katalog führt Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E und Fengpeng 600.',
-          es: 'Aeronaves agrícolas para pulverización, esparcido, siembra y logística rural. El catálogo oficial incluye Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E y Fengpeng 600.',
-          fr: 'Aéronefs agricoles pour la pulvérisation, l’épandage, le semis et la logistique agricole. Le catalogue officiel répertorie Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E et Fengpeng 600.',
+          en: 'Agricultural aircraft for spraying, spreading, lifting and other farm operations. The official catalogue lists Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E and Fengpeng 600.',
+          de: 'Landwirtschaftliche UAVs zum Sprühen, Streuen, Heben und für weitere landwirtschaftliche Einsätze. Der offizielle Katalog führt Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E und Fengpeng 600.',
+          es: 'Aeronaves agrícolas para pulverización, esparcido, elevación y otras operaciones agrícolas. El catálogo oficial incluye Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E y Fengpeng 600.',
+          fr: 'Aéronefs agricoles pour la pulvérisation, l’épandage, le levage et d’autres opérations agricoles. Le catalogue officiel répertorie Fengpeng 800, A80, Fengpeng 700, Fengpeng 300E et Fengpeng 600.',
         },
-        models: ['丰鹏800', 'A80', '丰鹏700', '丰鹏300E', '丰鹏600'],
+        items: ['丰鹏800', 'A80', '丰鹏700', '丰鹏300E', '丰鹏600'],
       },
       {
         id: 'industrial',
@@ -73,7 +73,18 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
           es: 'Limpieza industrial, respuesta a emergencias y plataformas UAV de mayor tamaño, además de sistemas especializados de control de vuelo, aviónica, cargas útiles y software.',
           fr: 'Nettoyage industriel, intervention d’urgence et plateformes UAV de grande taille, ainsi que des systèmes dédiés de commande de vol, d’avionique, de charges utiles et de logiciels.',
         },
-        models: ['C15清洗无人机', 'KT100电系留', 'Y160消防', '星辰-15', '星辰-40E', '星辰-40F', '星辰-100F', '星辰-650'],
+        items: ['C15清洗无人机', 'KT100电系留', 'Y160消防', '星辰-15', '星辰-40E', '星辰-40F', '星辰-100F', '星辰-650'],
+      },
+      {
+        id: 'systems',
+        title: { en: 'Specialist hardware and software systems', de: 'Spezialisierte Hardware- und Softwaresysteme', es: 'Sistemas especializados de hardware y software', fr: 'Systèmes matériels et logiciels spécialisés' },
+        summary: {
+          en: 'The official catalogue also lists dedicated flight-control systems, avionics hardware, mission payload equipment and industry software. These are presented as solution areas rather than aircraft models.',
+          de: 'Der offizielle Katalog führt außerdem spezielle Flugsteuerungssysteme, Avionik-Hardware, Missionsnutzlasten und Branchensoftware auf. Diese werden als Lösungsbereiche und nicht als Flugzeugmodelle dargestellt.',
+          es: 'El catálogo oficial también incluye sistemas especializados de control de vuelo, hardware de aviónica, cargas útiles de misión y software sectorial. Se presentan como áreas de solución, no como modelos de aeronaves.',
+          fr: 'Le catalogue officiel répertorie également des systèmes spécialisés de commande de vol, du matériel avionique, des charges utiles de mission et des logiciels sectoriels. Ils sont présentés comme des domaines de solution, et non comme des modèles d’aéronefs.',
+        },
+        items: ['专业化飞控系统', '航电硬件', '任务载荷', '行业软件'],
       },
     ],
     catalogueModels: ['擎天80', 'Y160', '运鹏800', '丰鹏800', 'A80', '丰鹏700', '丰鹏300E', '丰鹏600', 'C15清洗无人机', 'KT100电系留', 'Y160消防', '星辰-15', '星辰-40E', '星辰-40F', '星辰-100F', '星辰-650'],
