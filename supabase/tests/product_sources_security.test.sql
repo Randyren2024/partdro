@@ -1,6 +1,6 @@
 begin;
 
-select plan(10);
+select plan(14);
 
 select ok(
   exists (
@@ -56,6 +56,26 @@ select ok(
   not has_table_privilege('anon', 'public.supplier_profiles', 'SELECT')
   and not has_table_privilege('authenticated', 'public.supplier_profiles', 'SELECT'),
   'neither client role can read supplier profiles'
+);
+
+select ok(
+  has_schema_privilege('service_role', 'private', 'USAGE'),
+  'trusted service_role can access the private schema'
+);
+
+select ok(
+  has_table_privilege('service_role', 'private.product_sources', 'SELECT'),
+  'trusted service_role can read product source evidence'
+);
+
+select ok(
+  has_table_privilege('anon', 'public.products', 'SELECT'),
+  'public visitors retain product table read access'
+);
+
+select ok(
+  has_table_privilege('anon', 'public.product_langs', 'SELECT'),
+  'public visitors retain translated product read access'
 );
 
 select * from finish();
