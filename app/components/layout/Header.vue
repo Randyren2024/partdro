@@ -106,7 +106,8 @@ import type { ProductCategory } from '../../types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning', 'EVTOL']
 const { t, locale } = useI18n({ useScope: 'global' })
-const supplierNavLabel = computed(() => ({ en: 'Suppliers', de: 'Anbieter', es: 'Proveedores', fr: 'Fournisseurs' }[locale.value] || 'Suppliers'))
+const supplierNavLabels: Record<string, string> = { en: 'Suppliers', de: 'Anbieter', es: 'Proveedores', fr: 'Fournisseurs' }
+const supplierNavLabel = computed(() => supplierNavLabels[locale.value] || 'Suppliers')
 const route = useRoute()
 const lp = useLocalePath()
 const scrolled = ref(false)
