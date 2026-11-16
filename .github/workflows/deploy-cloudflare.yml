@@ -255,7 +255,7 @@ jobs:
             grep -Fq 'RX1E-A' "$html"
             grep -Fq 'ZG-ONE' "$html"
             grep -Fq 'ZG-T6' "$html"
-            grep -Fq '650 kg' "$html" || grep -Fq '650 kg' "$html"
+            grep -Fq '650 kg' "$html"
             echo "verified Zero Gravity Aircraft profile $html"
           done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
