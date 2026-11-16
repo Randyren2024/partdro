@@ -191,7 +191,7 @@ jobs:
           for locale in en de es fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
-            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun suppliers/company/wuhu-united-aircraft; do
+            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun suppliers/company/wuhu-united-aircraft suppliers/company/wuhu-tengden-aviation; do
               grep -Fq "https://www.droneworld.tech/${prefix}${route}" dist/sitemap.xml
             done
           done
@@ -231,6 +231,18 @@ jobs:
             grep -Fq 'R6000' "$html"
             grep -Fq 'Government source' "$html" || grep -Fq 'Fuente gubernamental' "$html" || grep -Fq 'Source gouvernementale' "$html" || grep -Fq 'Behördliche Quelle' "$html"
             echo "verified Wuhu United Aircraft profile $html"
+          done
+          # Wuhu Tengden profile: D18 is tied specifically to the Wuhu subsidiary by municipal sources.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/wuhu-tengden-aviation.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing Wuhu Tengden profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq 'D18' "$html"
+            grep -Fq 'Parent group website' "$html" || grep -Fq 'Website der Muttergesellschaft' "$html" || grep -Fq 'Sitio web del grupo matriz' "$html" || grep -Fq 'Site web du groupe parent' "$html"
+            echo "verified Wuhu Tengden profile $html"
           done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
           for locale in en es de fr; do
