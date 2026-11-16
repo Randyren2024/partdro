@@ -19,6 +19,7 @@ export interface SupplierProfile {
   supplierId: string
   slug: string
   website: string
+  websiteLabel?: Record<'en' | 'de' | 'es' | 'fr', string>
   address: string
   foundedYear: number
   displayName: Record<'en' | 'de' | 'es' | 'fr', string>
@@ -35,7 +36,8 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
   {
     supplierId: 'supplier-239',
     slug: 'wuhu-united-aircraft',
-    website: 'https://www.uatair.com/',
+    website: 'https://www.uatair.com/about/company/2.html',
+    websiteLabel: { en: 'Official subsidiary profile', de: 'Offizielles Tochtergesellschaftsprofil', es: 'Perfil oficial de la filial', fr: 'Profil officiel de la filiale' },
     address: '安徽省芜湖市湾沚区安徽新芜经济开发区北航芜湖通航创新园',
     foundedYear: 2021,
     displayName: { en: 'Wuhu United Aircraft Technology Co., Ltd.', de: 'Wuhu United Aircraft Technology Co., Ltd.', es: 'Wuhu United Aircraft Technology Co., Ltd.', fr: 'Wuhu United Aircraft Technology Co., Ltd.' },
