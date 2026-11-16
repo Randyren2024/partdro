@@ -31,6 +31,80 @@ export interface SupplierProfile {
 }
 
 export const SUPPLIER_PROFILES: SupplierProfile[] = [
+
+  {
+    supplierId: 'supplier-239',
+    slug: 'wuhu-united-aircraft',
+    website: 'https://www.uatair.com/',
+    address: '安徽省芜湖市湾沚区安徽新芜经济开发区北航芜湖通航创新园',
+    foundedYear: 2021,
+    displayName: { en: 'Wuhu United Aircraft Technology Co., Ltd.', de: 'Wuhu United Aircraft Technology Co., Ltd.', es: 'Wuhu United Aircraft Technology Co., Ltd.', fr: 'Wuhu United Aircraft Technology Co., Ltd.' },
+    verifiedAt: '2026-11-16',
+    description: {
+      en: 'Wuhu United Aircraft Technology Co., Ltd. is a wholly owned subsidiary of United Aircraft Group and its strategic base in East China. It focuses on aircraft R&D, manufacturing, testing, flight trials, maintenance, training and support. The catalogue below represents the parent group portfolio, not proof that every model is manufactured at the Wuhu site.',
+      de: 'Wuhu United Aircraft Technology Co., Ltd. ist eine hundertprozentige Tochtergesellschaft der United Aircraft Group und deren strategischer Standort in Ostchina. Das Unternehmen konzentriert sich auf Forschung und Entwicklung, Fertigung, Tests, Flugerprobung, Wartung, Schulung und Support. Der Katalog zeigt das Portfolio der Muttergesellschaft und bestätigt nicht, dass jedes Modell in Wuhu gefertigt wird.',
+      es: 'Wuhu United Aircraft Technology Co., Ltd. es una filial de propiedad total de United Aircraft Group y su base estratégica en el este de China. Se dedica a I+D, fabricación, pruebas, ensayos de vuelo, mantenimiento, formación y soporte. El catálogo representa el portafolio del grupo matriz, no confirma que todos los modelos se fabriquen en Wuhu.',
+      fr: 'Wuhu United Aircraft Technology Co., Ltd. est une filiale détenue à 100 % par United Aircraft Group et sa base stratégique en Chine orientale. Elle se concentre sur la R&D, la fabrication, les essais, les essais en vol, la maintenance, la formation et le support. Le catalogue représente le portefeuille du groupe parent et ne confirme pas que chaque modèle soit fabriqué à Wuhu.',
+    },
+    families: [
+      {
+        id: 'helicopters',
+        title: { en: 'Heavy-lift unmanned helicopters', de: 'Schwerlast-Drohnenhubschrauber', es: 'Helicópteros no tripulados de carga pesada', fr: 'Hélicoptères sans pilote à forte charge utile' },
+        summary: {
+          en: 'Coaxial and tandem-rotor aircraft for heavy logistics, emergency response, powerline work and specialist missions.',
+          de: 'Koaxiale und Tandemrotor-Fluggeräte für Schwerlastlogistik, Notfälle, Arbeiten an Stromleitungen und Spezialmissionen.',
+          es: 'Aeronaves coaxiales y de rotores en tándem para logística pesada, emergencias y misiones especializadas.',
+          fr: 'Aéronefs coaxiaux et à rotors en tandem pour la logistique lourde, les urgences et les missions spécialisées.',
+        },
+        items: ['TD220', 'TD550 / TD550D', '铂影 T1400'],
+      },
+      {
+        id: 'tiltrotor',
+        title: { en: 'Tiltrotor aircraft', de: 'Kipprotor-Fluggeräte', es: 'Aeronaves de rotor basculante', fr: 'Aéronefs à rotors basculants' },
+        summary: {
+          en: 'The six-ton-class Lanying R6000 combines vertical take-off and landing with high-speed cruise.',
+          de: 'Der Kipprotor Lanying R6000 der Sechs-Tonnen-Klasse verbindet Senkrechtstart und -landung mit schnellem Reiseflug.',
+          es: 'El convertiplano Lanying R6000 de seis toneladas combina despegue vertical con crucero de alta velocidad.',
+          fr: 'Le convertiplane Lanying R6000 de six tonnes associe le décollage vertical à une croisière rapide.',
+        },
+        items: ['镧影 R6000'],
+      },
+      {
+        id: 'multirotor',
+        title: { en: 'Multirotor and agricultural UAVs', de: 'Multikopter und Landwirtschafts-UAVs', es: 'UAV multirrotor y agrícolas', fr: 'UAV multirotors et agricoles' },
+        summary: {
+          en: 'The group catalogue also lists the Leiying Q20 intelligent flight platform and Q100P agricultural UAV.',
+          de: 'Der Gruppenkatalog führt auch die intelligente Flugplattform Leiying Q20 und das Landwirtschafts-UAV Q100P auf.',
+          es: 'El catálogo del grupo también incluye la plataforma Leiying Q20 y el UAV agrícola Q100P.',
+          fr: 'Le catalogue du groupe comprend également la plateforme Leiying Q20 et le drone agricole Q100P.',
+        },
+        items: ['镭影 Q20', 'Q100P'],
+      },
+      {
+        id: 'systems',
+        title: { en: 'Airborne and ground systems', de: 'Bord- und Bodensysteme', es: 'Sistemas embarcados y terrestres', fr: 'Systèmes embarqués et au sol' },
+        summary: {
+          en: 'Flight-control computers, servo systems, ground-control equipment, rotor blades and composite products.',
+          de: 'Flugsteuerungscomputer, Servosysteme, Bodensteuerungsausrüstung, Rotorblätter und Verbundwerkstoffprodukte.',
+          es: 'Ordenadores de control de vuelo, servosistemas, equipos de control terrestre, palas de rotor y productos compuestos.',
+          fr: 'Calculateurs de commande de vol, servosystèmes, équipements de contrôle au sol, pales de rotor et produits composites.',
+        },
+        items: ['多余度飞行控制计算机', '双余度伺服控制器', '车载 / 地面控制站', '旋翼桨叶', '复合材料产品'],
+      },
+    ],
+    linkedProducts: [],
+    catalogueModels: ['TD220', 'TD550', 'TD550D', 'T1400', 'R6000', 'Q20', 'Q100P'],
+    sources: [
+      { label: 'Wuhu subsidiary profile and official address', url: 'https://www.uatair.com/about/company/2.html', type: 'official_company' },
+      { label: 'United Aircraft Group official product catalogue', url: 'https://www.uatair.com/product.html', type: 'official_company' },
+      { label: 'TD550D type certificate announcement', url: 'https://www.uatair.com/news/424.html', type: 'official_company' },
+      { label: 'TD550D payload and high-altitude operating information', url: 'https://www.wuhu.gov.cn/xwzx/zwyw/40583539.html', type: 'official_product' },
+      { label: 'TD220 official product specifications', url: 'https://www.uatair.com/en/product/info/39.html', type: 'official_product' },
+      { label: 'T1400 official product specifications', url: 'https://www.uatair.com/news/427.html', type: 'official_product' },
+      { label: 'R6000 official product specifications', url: 'https://www.uatair.com/product/info/69.html', type: 'official_product' },
+      { label: 'Company development history', url: 'https://www.uatair.com/about/develop.html', type: 'official_company' },
+    ],
+  },
   {
     supplierId: 'supplier-201',
     slug: 'topxgun',
