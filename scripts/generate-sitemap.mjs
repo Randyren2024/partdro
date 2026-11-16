@@ -86,6 +86,7 @@ const standaloneProductSlugs = new Set([
   'c500-partdro-eavision',
   'u15-multi-mission-drone',
   'vf50p-long-endurance-vtol-uav',
+  'cw-15-vtol-mapping-drone', // noindex preview until approved product imagery and configuration are cleared
 ])
 const productSlugs = productRows
   .map((r) => r.slug)
