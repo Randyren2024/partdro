@@ -98,7 +98,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
       { label: 'Wuhu subsidiary profile and official address', url: 'https://www.uatair.com/about/company/2.html', type: 'official_company' },
       { label: 'United Aircraft Group official product catalogue', url: 'https://www.uatair.com/product.html', type: 'official_company' },
       { label: 'TD550D type certificate announcement', url: 'https://www.uatair.com/news/424.html', type: 'official_company' },
-      { label: 'TD550D payload and high-altitude operating information', url: 'https://www.wuhu.gov.cn/xwzx/zwyw/40583539.html', type: 'government_source' },
+      { label: 'TD550D payload and high-altitude operating information', url: 'https://cczx.wuhu.gov.cn/cxzx/cxyw/8743817.html', type: 'government_source' },
       { label: 'TD220 official product specifications', url: 'https://www.uatair.com/en/product/info/39.html', type: 'official_product' },
       { label: 'T1400 official product specifications', url: 'https://www.uatair.com/news/427.html', type: 'official_product' },
       { label: 'R6000 official product specifications', url: 'https://www.uatair.com/product/info/69.html', type: 'official_product' },
