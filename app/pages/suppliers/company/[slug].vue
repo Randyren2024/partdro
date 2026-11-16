@@ -55,7 +55,7 @@
           <ul>
             <li v-for="source in profile.sources" :key="source.url">
               <a :href="source.url" target="_blank" rel="noopener noreferrer">{{ source.label }} ↗</a>
-              <span>{{ source.type === 'official_product' ? copy.productSource : copy.companySource }}</span>
+              <span>{{ source.type === 'government_source' ? copy.governmentSource : (source.type === 'official_product' ? copy.productSource : copy.companySource) }}</span>
             </li>
           </ul>
           <p>{{ copy.disclaimer }}</p>
