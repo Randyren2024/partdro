@@ -33,6 +33,7 @@
             </div>
           </div>
 
+          <NuxtLink :to="lp('/suppliers')" class="header__nav-item" @click="closeMenu">{{ supplierNavLabel }}</NuxtLink>
           <NuxtLink :to="lp('/cases')" class="header__nav-item" @click="closeMenu">{{ t('nav.cases') }}</NuxtLink>
           <NuxtLink :to="lp('/documents')" class="header__nav-item" @click="closeMenu">{{ t('nav.documents') }}</NuxtLink>
           <NuxtLink :to="lp('/news')" class="header__nav-item" @click="closeMenu">{{ t('nav.news') }}</NuxtLink>
@@ -84,6 +85,7 @@
       >
         {{ t(`products.category.${cat}`) }}
       </NuxtLink>
+      <NuxtLink :to="lp('/suppliers')" @click="closeMenu">{{ supplierNavLabel }}</NuxtLink>
       <NuxtLink :to="lp('/cases')" @click="closeMenu">{{ t('nav.cases') }}</NuxtLink>
       <NuxtLink :to="lp('/documents')" @click="closeMenu">{{ t('nav.documents') }}</NuxtLink>
       <NuxtLink :to="lp('/news')" @click="closeMenu">{{ t('nav.news') }}</NuxtLink>
@@ -94,7 +96,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { MenuOutlined, CloseOutlined, RightOutlined } from '@ant-design/icons-vue'
 import LangSwitcher from '../common/LangSwitcher.vue'
@@ -103,7 +105,8 @@ import { useLocalePath } from '../../composables/useLocalePath'
 import type { ProductCategory } from '../../types'
 
 const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning', 'EVTOL']
-const { t } = useI18n({ useScope: 'global' })
+const { t, locale } = useI18n({ useScope: 'global' })
+const supplierNavLabel = computed(() => ({ en: 'Suppliers', de: 'Anbieter', es: 'Proveedores', fr: 'Fournisseurs' }[locale.value] || 'Suppliers'))
 const route = useRoute()
 const lp = useLocalePath()
 const scrolled = ref(false)
