@@ -9,9 +9,9 @@
           <strong>249</strong>
           <span>{{ copy.count }}</span>
           <span class="supplier-stat-divider"></span>
-          <span>3 regional indexes</span>
+          <span>3 {{ copy.regionsStat }}</span>
           <span class="supplier-stat-divider"></span>
-          <span>12 industry categories</span>
+          <span>12 {{ copy.categoriesStat }}</span>
         </div>
       </div>
     </section>
