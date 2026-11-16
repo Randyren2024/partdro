@@ -45,7 +45,7 @@
             <div class="linked-product__meta">{{ product.model }}</div>
             <h3>{{ product.names[localeKey] }}</h3>
             <NuxtLink :to="lp('/products/' + product.slug)">{{ copy.viewProduct }} →</NuxtLink>
-            <a :href="product.sourceUrl" target="_blank" rel="noopener noreferrer">{{ copy.officialSource }} ↗</a>
+            <a :href="product.sourceUrl" target="_blank" rel="noopener noreferrer">{{ product.sourceType === 'official_product' ? copy.officialSource : copy.catalogueSource }} ↗</a>
           </article>
         </div>
 
@@ -96,7 +96,8 @@ const copy = computed(() => ({
   linkedTitle: ({ en: 'Products with existing detail pages', de: 'Produkte mit vorhandenen Detailseiten', es: 'Productos con páginas de detalle existentes', fr: 'Produits avec pages détaillées existantes' })[localeKey.value],
   linkedIntro: ({ en: 'These entries connect the company catalogue to existing Partdro product records. No duplicate product records or new product URLs are created.', de: 'Diese Einträge verbinden den Unternehmenskatalog mit bestehenden Partdro-Produktdatensätzen. Es werden keine doppelten Produktdatensätze oder neuen Produkt-URLs erstellt.', es: 'Estas entradas conectan el catálogo de la empresa con registros de productos existentes de Partdro. No se crean registros duplicados ni nuevas URL de productos.', fr: 'Ces entrées relient le catalogue de l’entreprise aux fiches produits Partdro existantes. Aucun doublon ni nouvelle URL produit n’est créé.' })[localeKey.value],
   viewProduct: ({ en: 'View product', de: 'Produkt ansehen', es: 'Ver producto', fr: 'Voir le produit' })[localeKey.value],
-  officialSource: ({ en: 'Official product source', de: 'Offizielle Produktquelle', es: 'Fuente oficial del producto', fr: 'Source officielle du produit' })[localeKey.value],
+  officialSource: ({ en: 'Official product page', de: 'Offizielle Produktseite', es: 'Página oficial del producto', fr: 'Page produit officielle' })[localeKey.value],
+  catalogueSource: ({ en: 'Official catalogue', de: 'Offizieller Katalog', es: 'Catálogo oficial', fr: 'Catalogue officiel' })[localeKey.value],
   sourcesTitle: ({ en: 'Sources and verification', de: 'Quellen und Überprüfung', es: 'Fuentes y verificación', fr: 'Sources et vérification' })[localeKey.value],
   productSource: ({ en: 'Official product page', de: 'Offizielle Produktseite', es: 'Página oficial del producto', fr: 'Page produit officielle' })[localeKey.value],
   companySource: ({ en: 'Official company source', de: 'Offizielle Unternehmensquelle', es: 'Fuente oficial de la empresa', fr: 'Source officielle de l’entreprise' })[localeKey.value],
