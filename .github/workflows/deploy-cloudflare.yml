@@ -191,7 +191,7 @@ jobs:
           for locale in en de es fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
-            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun; do
+            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun suppliers/company/wuhu-united-aircraft; do
               grep -Fq "https://www.droneworld.tech/${prefix}${route}" dist/sitemap.xml
             done
           done
