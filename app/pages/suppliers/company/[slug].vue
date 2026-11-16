@@ -44,6 +44,7 @@
           <article v-for="product in profile.linkedProducts" :key="product.slug" class="linked-product">
             <div class="linked-product__meta">{{ product.model }}</div>
             <h3>{{ product.names[localeKey] }}</h3>
+            <p class="linked-product__highlight">{{ product.highlights[localeKey] }}</p>
             <NuxtLink :to="lp('/products/' + product.slug)">{{ copy.viewProduct }} →</NuxtLink>
             <a :href="product.sourceUrl" target="_blank" rel="noopener noreferrer">{{ product.sourceType === 'official_product' ? copy.officialSource : copy.catalogueSource }} ↗</a>
           </article>
@@ -183,7 +184,8 @@ useHead(() => ({
 .linked-products { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:16px; }
 .linked-product { display:flex; flex-direction:column; align-items:flex-start; min-height:190px; }
 .linked-product__meta { margin-bottom:12px; color:var(--pd-primary); font-size:12px; font-weight:800; }
-.linked-product h3 { margin-bottom:20px; }
+.linked-product h3 { margin-bottom:10px; }
+.linked-product__highlight { margin:0 0 18px; color:var(--pd-ink-soft); font-size:12px; line-height:1.6; }
 .linked-product a { margin-top:auto; color:var(--pd-primary); font-size:13px; font-weight:700; text-decoration:none; }
 .linked-product a + a { margin-top:12px; color:var(--pd-ink-muted); font-weight:600; }
 .source-panel { margin-top:56px; padding:26px; border:1px solid var(--pd-line); border-radius:var(--pd-radius-lg); background:var(--pd-bg-soft); }
