@@ -6,7 +6,7 @@
         <h1>{{ copy.title }}</h1>
         <p>{{ copy.subtitle }}</p>
         <div class="supplier-hero-stats">
-          <strong>249</strong>
+          <strong>{{ suppliers.length }}</strong>
           <span>{{ copy.count }}</span>
           <span class="supplier-stat-divider"></span>
           <span>3 {{ copy.regionsStat }}</span>
@@ -48,7 +48,7 @@
 
         <div class="supplier-results-heading">
           <p aria-live="polite"><strong>{{ filteredSuppliers.length }}</strong> {{ copy.count }}</p>
-          <span>{{ copy.updated }}: {{ SUPPLIER_UPDATED }}</span>
+          <span>{{ copy.updated }}: {{ updated }}</span>
         </div>
 
         <div v-if="filteredSuppliers.length" class="supplier-grid">
@@ -83,20 +83,21 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '~/composables/useLocalePath'
 import {
-  SUPPLIERS, SUPPLIER_UPDATED, SUPPLIER_REGIONS, SUPPLIER_UI,
+  SUPPLIER_REGIONS, SUPPLIER_UI,
   SUPPLIER_CATEGORY_LABELS, SUPPLIER_CATEGORIES,
 } from '~/data/supplier-directory'
-import { SUPPLIER_PROFILES } from '~/data/supplier-profiles'
+import { useSupplierDirectory } from '~/composables/useSupplierDirectory'
 import type { SupplierRecord } from '~/data/supplier-directory'
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '~/i18n'
 
 const { locale } = useI18n()
+const { suppliers, profiles, updated } = await useSupplierDirectory()
 const lp = useLocalePath()
 const route = useRoute()
 const localeKey = computed(() => (['de', 'es', 'fr'].includes(locale.value) ? locale.value : 'en') as 'en' | 'de' | 'es' | 'fr')
 const copy = computed(() => ({
   ...SUPPLIER_UI[localeKey.value],
-  subtitle: SUPPLIER_UI[localeKey.value].subtitle.replace(/\d+/, String(SUPPLIERS.length)),
+  subtitle: SUPPLIER_UI[localeKey.value].subtitle.replace(/\d+/, String(suppliers.value.length)),
 }))
 const categoryLabels = computed(() => SUPPLIER_CATEGORY_LABELS[localeKey.value])
 const search = ref(typeof route.query.q === 'string' ? route.query.q : '')
@@ -106,11 +107,11 @@ const categories = Object.keys(SUPPLIER_CATEGORIES)
 
 const filteredSuppliers = computed(() => {
   const query = search.value.trim().toLocaleLowerCase()
-  return SUPPLIERS.filter((supplier: SupplierRecord) => {
+  return suppliers.value.filter((supplier: SupplierRecord) => {
     if (regionFilter.value && supplier.region !== regionFilter.value) return false
     if (categoryFilter.value && supplier.category !== categoryFilter.value) return false
     if (!query) return true
-    const profile = SUPPLIER_PROFILES.find((item) => item.supplierId === supplier.id)
+    const profile = profiles.value.find((item) => item.supplierId === supplier.id)
     const searchable = [
       supplier.name, supplier.name_en, supplier.region, supplier.province, supplier.city,
       supplier.district, supplier.segment, supplier.category_label, supplier.note,
@@ -122,7 +123,7 @@ const filteredSuppliers = computed(() => {
 })
 
 function supplierProfilePath(id: string) {
-  const profile = SUPPLIER_PROFILES.find((item) => item.supplierId === id)
+  const profile = profiles.value.find((item) => item.supplierId === id)
   return profile ? lp('/suppliers/company/' + profile.slug) : ''
 }
 

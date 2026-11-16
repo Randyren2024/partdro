@@ -35,7 +35,7 @@
         </div>
         <div class="supplier-results-heading">
           <p aria-live="polite"><strong>{{ filteredSuppliers.length }}</strong> {{ copy.count }}</p>
-          <span>{{ copy.updated }}: {{ SUPPLIER_UPDATED }}</span>
+          <span>{{ copy.updated }}: {{ updated }}</span>
         </div>
         <div v-if="filteredSuppliers.length" class="supplier-grid">
           <article v-for="supplier in filteredSuppliers" :key="supplier.id" class="supplier-card" :data-supplier-id="supplier.id">
@@ -68,15 +68,16 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useLocalePath } from '~/composables/useLocalePath'
 import {
-  SUPPLIERS, SUPPLIER_UPDATED, SUPPLIER_REGIONS, SUPPLIER_UI,
+  SUPPLIER_REGIONS, SUPPLIER_UI,
   SUPPLIER_CATEGORY_LABELS, SUPPLIER_CATEGORIES,
 } from '~/data/supplier-directory'
-import { SUPPLIER_PROFILES } from '~/data/supplier-profiles'
+import { useSupplierDirectory } from '~/composables/useSupplierDirectory'
 import type { SupplierRecord } from '~/data/supplier-directory'
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '~/i18n'
 
 const route = useRoute()
 const { locale } = useI18n()
+const { suppliers, profiles, updated } = await useSupplierDirectory()
 const lp = useLocalePath()
 const region = SUPPLIER_REGIONS.find((item) => item.slug === String(route.params.region))
 if (!region) throw createError({ statusCode: 404, statusMessage: 'Supplier region not found' })
@@ -85,7 +86,7 @@ const localeKey = computed(() => (['de', 'es', 'fr'].includes(locale.value) ? lo
 const copy = computed(() => SUPPLIER_UI[localeKey.value])
 const categoryLabels = computed(() => SUPPLIER_CATEGORY_LABELS[localeKey.value])
 const categories = Object.keys(SUPPLIER_CATEGORIES)
-const regionSuppliers = computed(() => SUPPLIERS.filter((supplier) => supplier.region === region.key))
+const regionSuppliers = computed(() => suppliers.value.filter((supplier) => supplier.region === region.key))
 const search = ref('')
 const categoryFilter = ref('')
 
@@ -94,7 +95,7 @@ const filteredSuppliers = computed(() => {
   return regionSuppliers.value.filter((supplier: SupplierRecord) => {
     if (categoryFilter.value && supplier.category !== categoryFilter.value) return false
     if (!query) return true
-    const profile = SUPPLIER_PROFILES.find((item) => item.supplierId === supplier.id)
+    const profile = profiles.value.find((item) => item.supplierId === supplier.id)
     const searchable = [
       supplier.name, supplier.name_en, supplier.region, supplier.province, supplier.city,
       supplier.district, supplier.segment, supplier.category_label, supplier.note,
@@ -106,7 +107,7 @@ const filteredSuppliers = computed(() => {
 })
 
 function supplierProfilePath(id: string) {
-  const profile = SUPPLIER_PROFILES.find((item) => item.supplierId === id)
+  const profile = profiles.value.find((item) => item.supplierId === id)
   return profile ? lp('/suppliers/company/' + profile.slug) : ''
 }
 
