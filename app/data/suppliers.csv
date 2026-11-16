@@ -1,0 +1,250 @@
+﻿id,name,name_en,region,province,city,district,segment,category,category_label,note,product_models,website,contact_email,status
+supplier-001,一飞智控（天津）科技有限公司,,北方,天津,天津,滨海新区,飞控系统与编队无人机,flight_control,Flight Control & Avionics,累计申请专利500余项,,,,listed
+supplier-002,中国科学院沈阳自动化研究所（所属企业）,,北方,辽宁,沈阳,浑南区,无人机技术研发,other,Other,科研机构,,,,listed
+supplier-003,中电科蓝天科技股份有限公司,,北方,天津,天津,滨海新区,工业无人机与航空电源,industrial,Industrial & Enterprise,,,,,listed
+supplier-004,中航机载系统股份有限公司,,北方,北京,北京,大兴区,航空机载系统,flight_control,Flight Control & Avionics,央企,,,,listed
+supplier-005,中航通飞华北飞机工业有限公司,,北方,河北,石家庄,栾城区,通用航空飞机,other,Other,,,,,listed
+supplier-006,光智科技股份有限公司,,北方,黑龙江,哈尔滨,—,铝合金材料与无人机部件,components,Components & Materials,上市公司,,,,listed
+supplier-007,北京中航智科技有限公司,,北方,北京,北京,海淀区,无人直升机整机与飞控,helicopter,Unmanned Helicopter,TD系列无人直升机,,,,listed
+supplier-008,北京京东世纪贸易有限公司,,北方,北京,北京,大兴区,物流无人机,logistics,Logistics & Delivery,京东物流,,,,listed
+supplier-009,北京卓翼智能科技有限公司,,北方,北京,北京,海淀区,系留无人机与飞控,flight_control,Flight Control & Avionics,,,,,listed
+supplier-010,北京多弗海龙飞控科技有限公司,,北方,北京,北京,西城区,飞行控制系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-011,北京星网宇达科技股份有限公司,,北方,北京,北京,大兴区,惯导与无人系统,flight_control,Flight Control & Avionics,上市公司,,,,listed
+supplier-012,北京航天三发高科技有限公司,,北方,北京,北京,丰台区,无人机动力系统,components,Components & Materials,,,,,listed
+supplier-013,北京航景创新科技有限公司,,北方,北京,北京,房山区,大载荷无人直升机,helicopter,Unmanned Helicopter,FWH-1500/3000；2026年完成数亿元C轮,FWH-1500,,,listed
+supplier-014,北京远度互联科技有限公司,,北方,北京,北京,延庆区,复合翼无人机,fixed_wing,Fixed-Wing & VTOL,,,,,listed
+supplier-015,北京飞米科技有限公司,,北方,北京,北京,海淀区,消费级航拍无人机,consumer,Consumer & Aerial,小米生态链,,,,listed
+supplier-016,吉林龙航无人机科技服务有限公司,,北方,吉林,长春,九台区,无人机培训与研发,services,Training & Services,东北唯一AOPA全机型培训机构,,,,listed
+supplier-017,哈尔滨智兀科技有限公司,,北方,黑龙江,哈尔滨,南岗区,无人机测绘与机器人,industrial,Industrial & Enterprise,,,,,listed
+supplier-018,哈尔滨联合飞机科技有限公司,,北方,黑龙江,哈尔滨,平房区,大型无人直升机,helicopter,Unmanned Helicopter,投资25亿元；铂影T1400、TD550、Q100P,Q100P|T1400|TD550,,,listed
+supplier-019,哈尔滨飞机工业集团,,北方,黑龙江,哈尔滨,—,航空整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-020,大连天隼无人机科技有限公司,,北方,辽宁,大连,金州区,工业无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-021,天津中翔腾航科技股份有限公司,,北方,天津,天津,东丽区,无人机整机与地面系统,industrial,Industrial & Enterprise,,,,,listed
+supplier-022,天津云圣智能科技有限责任公司,,北方,天津,天津,滨海新区,工业无人机与全自动机场,industrial,Industrial & Enterprise,,,,,listed
+supplier-023,天津云翔无人机科技有限公司,,北方,天津,天津,滨海新区,无人机软件算法与反制,defense,Defense & Security,,,,,listed
+supplier-024,天津全华时代航天科技发展有限公司,,北方,天津,天津,滨海新区,无人机整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-025,天津直升机有限责任公司,,北方,天津,天津,东丽区,无人直升机,helicopter,Unmanned Helicopter,,,,,listed
+supplier-026,威海光威复合材料股份有限公司,,北方,山东,威海,—,碳纤维复合材料,components,Components & Materials,全国六成碳纤维出自威海,,,,listed
+supplier-027,安阳全丰航空植保科技股份有限公司,,北方,河南,安阳,北关区,农业植保无人机,agricultural,Agricultural Spraying,新三板挂牌（839329）,,,,listed
+supplier-028,小熊飞机制造有限公司,,北方,辽宁,大连,金州区,通用航空飞机,other,Other,,,,,listed
+supplier-029,山东天眸科技创新有限公司,,北方,山东,滨州,经开区,特种无人机,industrial,Industrial & Enterprise,公安、消防、应急应用,,,,listed
+supplier-030,山西元工通用航空技术有限公司,,北方,山西,太原,尖草坪区,无人机电机,components,Components & Materials,,,,,listed
+supplier-031,山西喆航航空工业有限公司,,北方,山西,太原,尖草坪区,无人机整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-032,山西天鹰无人机科技有限公司,,北方,山西,运城,永济市,航电与工业无人机,flight_control,Flight Control & Avionics,,,,,listed
+supplier-033,山西菲特智能科技集团有限公司,,北方,山西,太原,小店区,工业无人机,industrial,Industrial & Enterprise,应急救援与能源巡检,,,,listed
+supplier-034,山西迪奥普无人机科技有限公司,,北方,山西,晋中,榆次区,工业无人机与测绘,industrial,Industrial & Enterprise,,,,,listed
+supplier-035,广联航空工业股份有限公司,,北方,黑龙江,哈尔滨,—,航空复合材料与无人机,components,Components & Materials,上市公司，专精特新“小巨人”,,,,listed
+supplier-036,广联航空（晋城）有限公司,,北方,山西,晋城,城区,航空金属材料,components,Components & Materials,,,,,listed
+supplier-037,暗剑智航科技（大连）有限公司,,北方,辽宁,大连,甘井子区,工业无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-038,森思泰克河北科技有限公司,,北方,河北,石家庄,鹿泉区,毫米波雷达（感知避障）,components,Components & Materials,,,,,listed
+supplier-039,汉来（滨州）无人机系统有限公司,,北方,山东,滨州,高新区,H713-500混合翼无人机,other,Other,,,,,listed
+supplier-040,沈阳无距科技有限公司,,北方,辽宁,沈阳,浑南区,飞控系统与无人机整机,flight_control,Flight Control & Avionics,辽宁省潜在独角兽，“THEONE”飞控,,,,listed
+supplier-041,河北必合司空航空科技有限公司,,北方,河北,石家庄,高新区,无人机培训与测绘,services,Training & Services,AOPA认证机构,,,,listed
+supplier-042,河北翔拓航空科技有限公司,,北方,河北,石家庄,鹿泉区,工业无人机与光电吊舱,components,Components & Materials,,,,,listed
+supplier-043,河北雄安泓源无人机科技有限公司,,北方,河北,雄安新区,容城县,无人机整机,industrial,Industrial & Enterprise,雄安新区,,,,listed
+supplier-044,河北风航无人机科技有限公司,,北方,河北,石家庄,高新区,巡检、应急与培训,services,Training & Services,大疆河北省总代理,,,,listed
+supplier-045,河南三和航空工业有限公司,,北方,河南,郑州,上街区,载人与无人飞行器,evtol,eVTOL & Flying Car,,,,,listed
+supplier-046,河南通航无人机科技有限公司,,北方,河南,郑州,上街区,低空物流与农业无人机,agricultural,Agricultural Spraying,,,,,listed
+supplier-047,滨州长空科技有限公司,,北方,山东,滨州,高新区,无人机整机与试飞服务,industrial,Industrial & Enterprise,南航共建；山东首个民用无人机试飞基地,,,,listed
+supplier-048,灵翼飞航（天津）科技有限公司,,北方,天津,天津,滨海新区,无人机动力测试系统,components,Components & Materials,2025年营收6731.60万元,,,,listed
+supplier-049,烟台睿创微纳技术股份有限公司,,北方,山东,烟台,—,红外热成像载荷,components,Components & Materials,大疆90%红外热成像设备来自烟台,,,,listed
+supplier-050,石家庄飞机工业有限责任公司,,北方,河北,石家庄,栾城区,航空整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-051,致导科技（北京）有限公司,,北方,北京,北京,海淀区,飞控与航电系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-052,航天神舟飞行器有限公司,,北方,天津,天津,滨海新区,无人机整机与复合材料,components,Components & Materials,航天科技系,,,,listed
+supplier-053,蜂巢航宇科技（北京）有限公司,,北方,北京,北京,丰台区,工业无人机与无人机场,industrial,Industrial & Enterprise,双总部（北京+台州），滨州设生产基地,,,,listed
+supplier-054,蜂巢航宇（滨州）生产基地,,北方,山东,滨州,高新区,工业无人机与机巢,industrial,Industrial & Enterprise,HC-526E入选省低空装备重点产品,HC-526E,,,listed
+supplier-055,西安因诺航空科技股份有限公司,,北方,陕西,西安,高新区,工业无人机与智能机库,industrial,Industrial & Enterprise,链主企业，D+轮,,,,listed
+supplier-056,西安天翼智飞科技集团有限公司,,北方,陕西,西安,阎良区,工业无人机,industrial,Industrial & Enterprise,“天巡”系列,,,,listed
+supplier-057,西安爱生技术集团有限公司,,北方,陕西,西安,高新区,无人机整机与试验测试,industrial,Industrial & Enterprise,陕西无人机产业链链主,,,,listed
+supplier-058,西安羚控电子科技有限公司,,北方,陕西,西安,高新区,工业级无人机,industrial,Industrial & Enterprise,国家级专精特新“小巨人”,,,,listed
+supplier-059,西安迅影光电科技有限公司,,北方,陕西,西安,雁塔区,巡检与应急无人机,industrial,Industrial & Enterprise,2024年建低空产业园,,,,listed
+supplier-060,西安通飞航空科技有限责任公司,,北方,陕西,西安,航天基地,农业与长航时无人机,agricultural,Agricultural Spraying,“云雀”SLK植保机,,,,listed
+supplier-061,西安韦德沃德航空科技有限公司,,北方,陕西,西安,高新区,农业植保无人机,agricultural,Agricultural Spraying,SLK系列，124项专利,,,,listed
+supplier-062,观典防务技术股份有限公司,,北方,北京,北京,东城区,禁毒与安防无人机,defense,Defense & Security,A股上市公司,,,,listed
+supplier-063,郑州亚柏智能科技有限公司,,北方,河南,郑州,新郑市,工业无人机与固定翼,fixed_wing,Fixed-Wing & VTOL,,,,,listed
+supplier-064,酷黑科技（北京）有限公司,,北方,北京,北京,昌平区,涵道式无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-065,长光卫星技术股份有限公司,,北方,吉林,长春,—,遥感卫星与星机协同,other,Other,“吉林一号”星座153颗,,,,listed
+supplier-066,长春长光博翔无人机有限公司,,北方,吉林,长春,北湖科技开发区,双飞翼垂起固定翼无人机,fixed_wing,Fixed-Wing & VTOL,年产能3000套，产值3亿—5亿元,,,,listed
+supplier-067,零度智控（北京）智能科技有限公司,,北方,北京,北京,海淀区,无人机整机与飞控,consumer,Consumer & Aerial,航拍与专业无人机,,,,listed
+supplier-068,青岛世天创新航空科技有限公司,,北方,山东,青岛,城阳区,农业植保无人机,agricultural,Agricultural Spraying,,,,,listed
+supplier-069,青岛航鹏无人机科技有限公司,,北方,山东,青岛,城阳区,多旋翼无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-070,青岛风向标航空科技发展有限公司,,北方,山东,青岛,黄岛区,工业无人机与培训,services,Training & Services,自有“智航飞鹰”品牌,,,,listed
+supplier-071,三洋驱动技术（广东）有限公司,,珠三角,佛山,佛山,高明区,重载无人机（150-1500公斤级）,other,Other,2026年投资2.5亿元建三洋无人机智造基地,,,,listed
+supplier-072,东莞市驭舟精密科技有限公司,,珠三角,东莞,东莞,—,无人机转轴,components,Components & Materials,,,,,listed
+supplier-073,东莞市鸿沣机械有限公司,,珠三角,东莞,东莞,—,无人机壳体CNC精密加工,components,Components & Materials,,,,,listed
+supplier-074,中信海洋直升机股份有限公司,,珠三角,深圳,深圳,罗湖区,通用航空、低空运营,services,Training & Services,上市公司,,,,listed
+supplier-075,中山恒达精密制造有限公司,,珠三角,中山,中山,—,无人机结构件、零部件,components,Components & Materials,,,,,listed
+supplier-076,丰翼科技（深圳）有限公司,,珠三角,深圳,深圳,宝安区,物流无人机,logistics,Logistics & Delivery,顺丰旗下，大湾区航线超400条,,,,listed
+supplier-077,乐迪航空（东莞）有限公司,,珠三角,东莞,东莞,凤岗镇,竞技、消费级无人机,consumer,Consumer & Aerial,,,,,listed
+supplier-078,亿航智能设备（广州）有限公司,,珠三角,广州,广州,黄埔区,载人eVTOL,evtol,eVTOL & Flying Car,EH216-S全球首款集齐四证,EH216-S,,,listed
+supplier-079,光启技术股份有限公司,,珠三角,深圳,深圳,南山区,超材料、无人机蜂群,components,Components & Materials,上市公司,,,,listed
+supplier-080,全球鹰（深圳）无人机有限公司,,珠三角,深圳,深圳,龙岗区,无人机培训、教育,services,Training & Services,,,,,listed
+supplier-081,全空间无人体系现代化产业园,,珠三角,东莞,东莞,凤岗镇,低空经济产业平台,other,Other,首期规划59亩，2027年投用,,,,listed
+supplier-082,哈瓦国际航空技术（深圳）有限公司,,珠三角,深圳,深圳,龙华区,工业无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-083,广东万虹科技有限公司,,珠三角,广州,广州,天河区,无人机整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-084,广东伟涛普自动化设备有限公司,,珠三角,惠州,惠州,惠城区,无人机总装线、自动化产线,other,Other,,,,,listed
+supplier-085,广州三飞航空科技有限公司,,珠三角,广州,广州,天河区,无人机整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-086,广州天海翔航空科技有限公司,,珠三角,广州,广州,—,军用、民用无人机,defense,Defense & Security,2006年成立,,,,listed
+supplier-087,广州小鹏汇天,,珠三角,广州,广州,黄埔区,分体式飞行汽车（陆地航母）,evtol,eVTOL & Flying Car,,,,,listed
+supplier-088,广州成至智能机器科技有限公司,,珠三角,广州,广州,天河区,无人机任务载荷,components,Components & Materials,国家级专精特新“小巨人”,,,,listed
+supplier-089,广州星驰无人机有限责任公司,,珠三角,广州,广州,天河区,无人机整机,industrial,Industrial & Enterprise,2024年成立,,,,listed
+supplier-090,广州极飞科技股份有限公司,,珠三角,广州,广州,黄埔区,农业无人机、无人车,agricultural,Agricultural Spraying,2025年营收1.62亿美元，交付3.2万台,,,,listed
+supplier-091,广州燎疆科技创新有限公司,,珠三角,广州,广州,—,无人机技术研发,other,Other,,,,,listed
+supplier-092,广州迪飞无人机科技有限公司,,珠三角,广州,广州,番禺区,民用无人机,other,Other,2017年成立,,,,listed
+supplier-093,广州飞云无人机信息科技有限公司,,珠三角,广州,广州,南沙区,民用无人机,other,Other,2019年成立,,,,listed
+supplier-094,影石创新科技股份有限公司（Insta360）,,珠三角,深圳,深圳,南山区,全景航拍无人机,consumer,Consumer & Aerial,影翎A1全景无人机，科创板上市,,,,listed
+supplier-095,昊睿电子（东莞）有限公司,,珠三角,东莞,东莞,凤岗镇,无人机核心零部件,other,Other,,,,,listed
+supplier-096,深圳一电科技有限公司,,珠三角,深圳,深圳,福田区,无人机系统,industrial,Industrial & Enterprise,,,,,listed
+supplier-097,深圳一电航空技术有限公司,,珠三角,深圳,深圳,福田区,无人机系统及设备,industrial,Industrial & Enterprise,,,,,listed
+supplier-098,深圳大漠大智控技术有限公司,,珠三角,深圳,深圳,龙华区,无人机编队表演,services,Training & Services,,,,,listed
+supplier-099,深圳天神无人机发展有限公司,,珠三角,深圳,深圳,南山区,农业无人机,agricultural,Agricultural Spraying,,,,,listed
+supplier-100,深圳天鹰兄弟无人机创新有限公司,,珠三角,深圳,深圳,龙岗区,植保无人机,agricultural,Agricultural Spraying,,,,,listed
+supplier-101,深圳好盈科技股份有限公司,,珠三角,深圳,深圳,南山区,无人机电机电控,components,Components & Materials,,,,,listed
+supplier-102,深圳尼恩光电技术有限公司,,珠三角,深圳,深圳,宝安区,光电载荷,components,Components & Materials,,,,,listed
+supplier-103,深圳市东部通用航空有限公司,,珠三角,深圳,深圳,盐田区,低空旅游、通航,other,Other,,,,,listed
+supplier-104,深圳市大疆创新科技有限公司,,珠三角,深圳,深圳,南山区,消费级及行业无人机,consumer,Consumer & Aerial,全球消费级无人机份额超70%，2025年营收约112亿美元,,,,listed
+supplier-105,深圳市天鹰装备有限公司,,珠三角,深圳,深圳,南山区,整机降落伞,components,Components & Materials,国内首张人用降落伞适航证书,,,,listed
+supplier-106,深圳市慧明捷科技有限公司,,珠三角,深圳,深圳,龙岗区,应急通信、无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-107,深圳市畅天游智能科技有限公司,,珠三角,深圳,深圳,龙华区,低空旅游,other,Other,,,,,listed
+supplier-108,深圳市科卫泰实业发展有限公司,,珠三角,深圳,深圳,宝安区,应急、巡检无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-109,深圳市科比特航空技术有限公司,,珠三角,深圳,深圳,宝安区,工业级多旋翼无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-110,深圳市道通智能航空技术股份有限公司,,珠三角,深圳,深圳,南山区,行业无人机（应急/巡检/测绘）,industrial,Industrial & Enterprise,,,,,listed
+supplier-111,深圳市高巨创新科技开发有限公司,,珠三角,深圳,深圳,龙岗区,无人机编队表演,services,Training & Services,覆盖50多个国家和地区，演出超3万场,,,,listed
+supplier-112,深圳市鹏锦科技有限公司,,珠三角,深圳,深圳,龙岗区,测绘,industrial,Industrial & Enterprise,,,,,listed
+supplier-113,深圳智航无人机有限公司,,珠三角,深圳,深圳,宝安区,复合翼、工业无人机,fixed_wing,Fixed-Wing & VTOL,,,,,listed
+supplier-114,深圳联合飞机科技有限公司,,珠三角,深圳,深圳,龙岗区,无人直升机,helicopter,Unmanned Helicopter,,,,,listed
+supplier-115,深圳赛尔智控科技有限公司,,珠三角,深圳,深圳,南山区,测绘、行业无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-116,深圳飞马机器人股份有限公司,,珠三角,深圳,深圳,南山区,测绘无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-117,珠海云洲智能科技股份有限公司,,珠三角,珠海,珠海,高新区,无人船艇、水面机器人,other,Other,上市公司,,,,listed
+supplier-118,珠海天际航空科技有限公司,,珠三角,珠海,珠海,金湾区,载人飞行器,evtol,eVTOL & Flying Car,2025年成立，总投资约3亿元,,,,listed
+supplier-119,珠海市双捷科技有限公司,,珠三角,珠海,珠海,香洲区,系留无人机、系留供电,industrial,Industrial & Enterprise,专精特新“小巨人”，系留无人机专利量居全球首位,,,,listed
+supplier-120,珠海紫燕无人飞行器有限公司,,珠三角,珠海,珠海,高新区,电动无人直升机,helicopter,Unmanned Helicopter,全国首张中型无人直升机特殊适航证,,,,listed
+supplier-121,珠海羽人无人机科技有限公司,,珠三角,珠海,珠海,—,农业植保无人机,agricultural,Agricultural Spraying,,,,,listed
+supplier-122,珠海翔顺智能科技有限公司,,珠三角,珠海,珠海,—,飞行控制系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-123,珠海览众创新科技有限公司,,珠三角,珠海,珠海,高新区,微型共轴双旋翼无人机,other,Other,2023年成立，X300机型,X300,,,listed
+supplier-124,珠海银通无人机科技有限公司,,珠三角,珠海,珠海,平沙镇,植保无人机,agricultural,Agricultural Spraying,2013年成立,,,,listed
+supplier-125,腾云航空科技（深圳）有限公司,,珠三角,深圳,深圳,龙岗区,无人机教育,services,Training & Services,,,,,listed
+supplier-126,锐川机器人（深圳）有限公司,,珠三角,深圳,深圳,南山区,应急无人机,industrial,Industrial & Enterprise,,,,,listed
+supplier-127,万丰航空工业有限公司,,长三角,浙江,浙江,绍兴市新昌县,通航/eVTOL,evtol,eVTOL & Flying Car,入选长三角产业链名录,,,,listed
+supplier-128,上海中科神光光电产业有限公司,,长三角,上海,上海,嘉定区,感知避障,other,Other,,,,,listed
+supplier-129,上海华测导航技术股份有限公司,,长三角,上海,上海,青浦区,导航/航电,flight_control,Flight Control & Avionics,高精度定位上市公司,,,,listed
+supplier-130,上海寰鹰航空技术有限公司,,长三角,上海,上海,闵行区,飞行控制系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-131,上海峰飞航空科技有限公司,,长三角,上海,上海,浦东新区/金山,eVTOL整机,evtol,eVTOL & Flying Car,"2吨级复合翼""盛世龙""，V2000CG获吨级""适航三证""",V2000CG,,,listed
+supplier-132,上海斯塔娜航空科技有限公司,,长三角,上海,上海,上海,复材螺旋桨,components,Components & Materials,LSA细分市场份额超60%,,,,listed
+supplier-133,上海时的科技有限公司,,长三角,上海,上海,闵行区,eVTOL整机,evtol,eVTOL & Flying Car,倾转旋翼E20，与阿联酋签10亿美元订单,E20,,,listed
+supplier-134,上海普利特复合材料股份有限公司,,长三角,上海,上海,青浦区,复合材料,components,Components & Materials,航空工程塑料,,,,listed
+supplier-135,上海歌尔泰克机器人有限公司,,长三角,上海,上海,上海,教育无人机,services,Training & Services,"品牌""小鸟飞飞""",,,,listed
+supplier-136,上海沃兰特航空科技股份有限公司,,长三角,上海,上海,闵行区,eVTOL整机,evtol,eVTOL & Flying Car,"复合翼VE25-100""天行""，累计订单超千架",VE25-100,,,listed
+supplier-137,上海磐拓航空科技服务有限公司,,长三角,上海,上海,长宁区,eVTOL整机/飞控,evtol,eVTOL & Flying Car,,,,,listed
+supplier-138,上海禾赛科技有限公司,,长三角,上海,上海,嘉定区,感知避障,flight_control,Flight Control & Avionics,车载/机载激光雷达龙头,,,,listed
+supplier-139,上海私迪航空科技有限公司,,长三角,上海,上海,松江区,无人机编队表演/服务,services,Training & Services,无人机综合服务商,,,,listed
+supplier-140,上海航裕电源科技有限公司,,长三角,上海,上海,松江区,航空电源系统,other,Other,,,,,listed
+supplier-141,中创航空科技（浙江）有限公司,,长三角,浙江,浙江,嘉兴市南湖区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-142,中国航发动力控制股份有限公司,,长三角,江苏,江苏,无锡市滨湖区,动力控制,components,Components & Materials,中国航发系,,,,listed
+supplier-143,中电科芜湖钻石飞机有限公司,,长三角,安徽,安徽,芜湖市湾沚区,通航飞机+物流无人机,logistics,Logistics & Delivery,翔云V载重2000公斤,,,,listed
+supplier-144,中科晶锐（苏州）科技有限公司,,长三角,江苏,江苏,苏州市高新区,超微型无人直升机,helicopter,Unmanned Helicopter,"""翼蜂""整机仅65克",,,,listed
+supplier-145,中航机载系统有限公司,,长三角,上海,上海,闵行区,飞控/机载系统,flight_control,Flight Control & Avionics,航空工业集团旗下机载系统核心企业,,,,listed
+supplier-146,中航金城无人系统有限公司,,长三角,江苏,江苏,南京市,无人机整机,fixed_wing,Fixed-Wing & VTOL,央企系，AR-120FH复合翼,AR-120FH,,,listed
+supplier-147,丰羽顺途无人机科技（上海）有限公司,,长三角,上海,上海,上海,物流无人机,logistics,Logistics & Delivery,顺丰丰翼科技系,,,,listed
+supplier-148,亿维特（南京）航空科技有限公司,,长三角,江苏,江苏,南京市雨花台区,eVTOL整机,evtol,eVTOL & Flying Car,ET9复合翼，最大起飞重量2.2吨,,,,listed
+supplier-149,北航长鹰航空科技（台州）有限公司,,长三角,浙江,浙江,台州市路桥区,飞控/整机,flight_control,Flight Control & Avionics,北航系,,,,listed
+supplier-150,华设低空科技（苏州）有限公司,,长三角,江苏,江苏,苏州市姑苏区,低空基建/检测,other,Other,低空产业投资并购基金,,,,listed
+supplier-151,南京大漠大航空科技有限公司,,长三角,江苏,江苏,南京市江宁区,无人机编队表演,services,Training & Services,大漠大智控系,,,,listed
+supplier-152,南京大翼航空科技有限公司,,长三角,江苏,江苏,南京市浦口区,无人机管理系统,other,Other,"自研""风筝线""系统",,,,listed
+supplier-153,南京奇蛙智能科技有限公司,,长三角,江苏,江苏,南京市江宁区,飞控/整机,flight_control,Flight Control & Avionics,,,,,listed
+supplier-154,南京开天眼无人机科技有限公司,,长三角,江苏,江苏,南京市建邺区,两栖特种无人机,industrial,Industrial & Enterprise,飞行救生圈入选全国推广案例,,,,listed
+supplier-155,南京拓兴智控科技有限公司,,长三角,江苏,江苏,南京市江宁区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-156,南京飞鹰智能装备有限公司,,长三角,江苏,江苏,南京市秦淮区,系留无人机,industrial,Industrial & Enterprise,与南航下属研究院合资,,,,listed
+supplier-157,南通因诺航空科技有限公司,,长三角,江苏,江苏,南通市,无人机,other,Other,,,,,listed
+supplier-158,卧龙电气驱动集团股份有限公司,,长三角,浙江,浙江,绍兴市上虞区,无人机电机,components,Components & Materials,上市公司,,,,listed
+supplier-159,合肥佧森航空技术有限公司,,长三角,安徽,安徽,合肥市,核心部件,components,Components & Materials,入选长三角产业链名录,,,,listed
+supplier-160,合肥合翼航空有限公司,,长三角,安徽,安徽,合肥市,载人航空器运营,evtol,eVTOL & Flying Car,与亿航智能合资，全球首张载人运营合格证,,,,listed
+supplier-161,合肥德智航创科技有限公司,,长三角,安徽,安徽,合肥市高新区,垂起固定翼无人机,fixed_wing,Fixed-Wing & VTOL,"""白鸟CYGNUS""",,,,listed
+supplier-162,合肥翼飞特科技有限公司,,长三角,安徽,安徽,合肥市经开区,植保无人机,agricultural,Agricultural Spraying,智能农机,,,,listed
+supplier-163,合肥联合飞机科技有限公司,,长三角,安徽,安徽,合肥市,无人机整机,industrial,Industrial & Enterprise,"专精特新""小巨人""",,,,listed
+supplier-164,合肥蜂景智能科技有限公司,,长三角,安徽,安徽,合肥市,无人机智能集群,other,Other,,,,,listed
+supplier-165,合肥览翌航空科技有限公司,,长三角,安徽,安徽,合肥市包河区,eVTOL整机,evtol,eVTOL & Flying Car,LE200客运eVTOL,LE200,,,listed
+supplier-166,合肥赛为智能科技股份有限公司,,长三角,安徽,安徽,合肥市高新区,工业级无人机,industrial,Industrial & Enterprise,上市公司,,,,listed
+supplier-167,嘉兴微金精密电机有限公司,,长三角,浙江,浙江,嘉兴市平湖市,无人机电机,components,Components & Materials,,,,,listed
+supplier-168,复亚智能技术发展（江苏）有限公司,,长三角,江苏,江苏,南通市海门区,无人机全自动运营,services,Training & Services,,,,,listed
+supplier-169,天巡智控,,长三角,江苏,江苏,苏州市高新区,低空政务系统,other,Other,多光谱AI相机VD200,VD200,,,listed
+supplier-170,天翎科航空科技（上海）有限公司,,长三角,上海,上海,闵行区,eVTOL整机,evtol,eVTOL & Flying Car,"倾转涵道翼路线，上海eVTOL""五小龙""之一",,,,listed
+supplier-171,天能电池集团股份有限公司,,长三角,浙江,浙江,湖州市长兴县,无人机电池,components,Components & Materials,,,,,listed
+supplier-172,宁波小智无人机有限公司,,长三角,浙江,浙江,宁波市海曙区,小型无人机整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-173,宁波电翼无人机有限公司,,长三角,浙江,浙江,宁波市镇海区,无人机电机,components,Components & Materials,,,,,listed
+supplier-174,宁波翔羽无人机科技有限公司,,长三角,浙江,浙江,宁波市余姚市,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-175,安庆希甲航天科技有限公司,,长三角,安徽,安徽,安庆市迎江区,霍尔推进器,components,Components & Materials,年产500套,,,,listed
+supplier-176,安庆极铂飞航无人机科技有限公司,,长三角,安徽,安徽,安庆市经开区,飞控/低空物流,logistics,Logistics & Delivery,桐城有亿元级组装项目,,,,listed
+supplier-177,安庆纵横无人机科技有限公司,,长三角,安徽,安徽,安庆市岳西县,工业无人机,industrial,Industrial & Enterprise,纵横股份全资子公司,,,,listed
+supplier-178,安徽佳力奇先进复合材料科技股份公司,,长三角,安徽,安徽,芜湖市,航空复合材料,components,Components & Materials,,,,,listed
+supplier-179,安徽劲旋风航空科技有限公司,,长三角,安徽,安徽,芜湖市,螺旋桨,components,Components & Materials,核心部件本地配套,,,,listed
+supplier-180,安徽华明航空电子系统有限公司,,长三角,安徽,安徽,芜湖市,航电系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-181,安徽天机翼无人机科技有限公司,,长三角,安徽,安徽,安庆市岳西县,工业无人机/培训,services,Training & Services,,,,,listed
+supplier-182,安徽安怀达航天科技有限公司,,长三角,安徽,安徽,安庆市迎江区,高速机电伺服,components,Components & Materials,供中大型无人机,,,,listed
+supplier-183,安徽恩三航空科技有限公司,,长三角,安徽,安徽,安徽省,航空制造,other,Other,入选长三角产业链名录,,,,listed
+supplier-184,安徽时的科技有限公司,,长三角,安徽,安徽,芜湖市湾沚区,eVTOL整机,evtol,eVTOL & Flying Car,,,,,listed
+supplier-185,安徽皓翔航空科技有限公司,,长三角,安徽,安徽,安庆市岳西县,碳纤维工业无人机整机,components,Components & Materials,HX-330、HX-3800系列,HX-330|HX-3800,,,listed
+supplier-186,安徽省大数航空工业有限公司,,长三角,安徽,安徽,合肥市长丰县,eVTOL整机,evtol,eVTOL & Flying Car,QT-ONE裸机115公斤、QT-5X吨级,,,,listed
+supplier-187,安徽航瑞航空动力装备有限公司,,长三角,安徽,安徽,芜湖市,重油航空发动机,other,Other,,,,,listed
+supplier-188,安徽蓝天国际飞行学院有限责任公司,,长三角,安徽,安徽,安徽省,飞行培训,services,Training & Services,入选长三角产业链名录,,,,listed
+supplier-189,安徽蓝盾光电子股份有限公司,,长三角,安徽,安徽,安徽省,光电/无人机反制,defense,Defense & Security,上市公司,,,,listed
+supplier-190,安徽蜂鸟通用航空有限公司,,长三角,安徽,安徽,安徽省,通航运营,services,Training & Services,入选长三角产业链名录,,,,listed
+supplier-191,安徽阿拉丁航空航天科技有限公司,,长三角,安徽,安徽,安庆市岳西县,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-192,安徽飞鸿无人机科技有限公司,,长三角,安徽,安徽,安庆市岳西县,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-193,安费诺（常州）连接系统有限公司,,长三角,江苏,江苏,常州市,连接器,components,Components & Materials,,,,,listed
+supplier-194,峰飞航空科技（昆山）有限公司,,长三角,江苏,江苏,苏州市昆山市,eVTOL/工业无人机,evtol,eVTOL & Flying Car,峰飞制造基地,,,,listed
+supplier-195,常州丰飞智控科技有限公司,,长三角,江苏,江苏,常州市武进区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-196,常州艾飞韦尔智能科技有限公司,,长三角,江苏,江苏,常州市武进区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-197,常州雷利电机科技股份有限公司,,长三角,江苏,江苏,常州市,无人机电机,components,Components & Materials,微特电机上市公司,,,,listed
+supplier-198,御风未来飞行科技（广东）有限公司,,长三角,上海,上海,闵行区,eVTOL整机,evtol,eVTOL & Flying Car,2吨级载人eVTOL M1已首飞,,,,listed
+supplier-199,扬州德可达科技有限公司,,长三角,江苏,江苏,扬州市广陵区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-200,拓恒技术有限公司,,长三角,江苏,江苏,南京市江宁区,工业无人机+无人机机场,industrial,Industrial & Enterprise,2024年中标江宁智慧应用1168.99万元,,,,listed
+supplier-201,拓攻（南京）机器人有限公司,,长三角,江苏,江苏,南京市江宁区,飞控/植保无人机整机,agricultural,Agricultural Spraying,"国家级专精特新""小巨人""",,,,listed
+supplier-202,无锡汉和航空技术有限公司,,长三角,江苏,江苏,无锡市,植保无人机,agricultural,Agricultural Spraying,汉和Hanhe品牌,,,,listed
+supplier-203,时代飞鹏科技有限公司,,长三角,江苏,江苏,苏州市昆山市,大型无人运输机,logistics,Logistics & Delivery,航天时代飞鹏，低空经济领航企业,,,,listed
+supplier-204,昊翔电能运动科技（昆山）有限公司,,长三角,江苏,江苏,苏州市昆山市,消费级无人机,consumer,Consumer & Aerial,品牌Yuneec,,,,listed
+supplier-205,杭州启飞智能科技有限公司,,长三角,浙江,浙江,杭州市钱塘区,植保无人机,agricultural,Agricultural Spraying,整机+飞控+RTK,,,,listed
+supplier-206,杭州微光电子股份有限公司,,长三角,浙江,浙江,杭州市临平区,无人机电机,components,Components & Materials,,,,,listed
+supplier-207,杭州昊舜视讯科技有限公司,,长三角,浙江,浙江,杭州市余杭区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-208,杭州海康威视数字技术股份有限公司,,长三角,浙江,浙江,杭州市滨江区,感知/视觉,defense,Defense & Security,安防龙头,,,,listed
+supplier-209,杭州牧星科技有限公司,,长三角,浙江,浙江,杭州市西湖区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-210,杭州纵横通信股份有限公司,,长三角,浙江,浙江,杭州市滨江区,飞控/通信,flight_control,Flight Control & Avionics,上市公司,,,,listed
+supplier-211,杭州迅蚁网络科技有限公司,,长三角,浙江,浙江,杭州市余杭区,物流无人机运营,logistics,Logistics & Delivery,"""中国飞谷""代表企业",,,,listed
+supplier-212,杭州零零科技有限公司,,长三角,浙江,浙江,杭州市余杭区,消费级无人机,consumer,Consumer & Aerial,,,,,listed
+supplier-213,正曜智控（杭州）科技有限公司,,长三角,浙江,浙江,杭州市余杭区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-214,江苏伊卡洛斯智能科技有限公司,,长三角,江苏,江苏,南通市,无人机,other,Other,,,,,listed
+supplier-215,江苏大成航空科技有限公司,,长三角,江苏,江苏,徐州市沛县,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-216,江苏数字鹰科技股份有限公司,,长三角,江苏,江苏,无锡市滨湖区,整机/飞控,flight_control,Flight Control & Avionics,,,,,listed
+supplier-217,江苏科比特航空设备有限公司,,长三角,江苏,江苏,盐城市盐都区,无人机,other,Other,科比特系,,,,listed
+supplier-218,江苏芯灵智能科技有限公司,,长三角,江苏,江苏,宿迁市经开区,无人机侦测反制,defense,Defense & Security,,,,,listed
+supplier-219,江苏蒲公英无人机有限公司,,长三角,江苏,江苏,徐州市铜山区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-220,浙江万丰奥威汽轮股份有限公司,,长三角,浙江,浙江,绍兴市新昌县,整机/轻量化部件,industrial,Industrial & Enterprise,万丰系上市公司,,,,listed
+supplier-221,浙江上云航空科技有限公司,,长三角,浙江,浙江,温州市瓯海区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-222,浙江东田科技有限公司,,长三角,浙江,浙江,金华市,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-223,浙江冠宇电池有限公司,,长三角,浙江,浙江,嘉兴市海盐县,无人机电池,components,Components & Materials,,,,,listed
+supplier-224,浙江华奕航空科技有限公司,,长三角,浙江,浙江,杭州市建德市,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-225,浙江嘉创空天动力技术有限公司,,长三角,浙江,浙江,嘉兴市海宁市,动力系统,components,Components & Materials,,,,,listed
+supplier-226,浙江大华技术股份有限公司,,长三角,浙江,浙江,杭州市滨江区,感知/视觉,defense,Defense & Security,安防龙头,,,,listed
+supplier-227,浙江容祺科技有限公司,,长三角,浙江,浙江,丽水市莲都区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-228,浙江时空道宇科技有限公司,,长三角,浙江,浙江,杭州市滨江区,卫星/飞控,flight_control,Flight Control & Avionics,吉利系,,,,listed
+supplier-229,淮安航空产业研究院有限公司,,长三角,江苏,江苏,淮安市涟水县,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-230,温州多弗航空产业集团有限公司,,长三角,浙江,浙江,温州市龙湾区,通航/无人机,other,Other,,,,,listed
+supplier-231,牧羽航空科技（江苏）有限公司,,长三角,江苏,江苏,无锡市新吴区,无人机电机,components,Components & Materials,,,,,listed
+supplier-232,科比特创新科技股份有限公司,,长三角,浙江,浙江,嘉兴市嘉善县,工业级多旋翼无人机整机,industrial,Industrial & Enterprise,全球最大工业级无人机制造商,,,,listed
+supplier-233,纵横智飞（南京）无人机科技有限公司,,长三角,江苏,江苏,南京市建邺区,消防长航时无人机,other,Other,纵横股份全资子公司,,,,listed
+supplier-234,舟山巨洋技术开发有限公司,,长三角,浙江,浙江,舟山市定海区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-235,航天彩虹无人机股份有限公司,,长三角,浙江,浙江,台州市路桥区,无人机整机,industrial,Industrial & Enterprise,上市公司,,,,listed
+supplier-236,芜湖万户航空航天科技有限公司,,长三角,安徽,安徽,芜湖市湾沚区,飞控系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-237,芜湖中科飞机有限公司,,长三角,安徽,安徽,芜湖市湾沚区,通航飞机,other,Other,,,,,listed
+supplier-238,芜湖幻飞无人机科技有限公司,,长三角,安徽,安徽,芜湖市弋江区,无人机整机,industrial,Industrial & Enterprise,,,,,listed
+supplier-239,芜湖联合飞机科技有限公司,,长三角,安徽,安徽,芜湖市湾沚区,无人直升机,helicopter,Unmanned Helicopter,TD550取得型号合格证,TD550,,,listed
+supplier-240,芜湖腾盾航空科技有限公司,,长三角,安徽,安徽,芜湖市湾沚区,大型商用无人机,other,Other,D18最大起飞重量4.35吨,D18,,,listed
+supplier-241,芜湖鸠兹航空科技有限公司,,长三角,安徽,安徽,芜湖市湾沚区,飞控系统/整机,flight_control,Flight Control & Avionics,,,,,listed
+supplier-242,苏州创飞智能科技有限公司,,长三角,江苏,江苏,苏州市工业园区,飞控/整机,flight_control,Flight Control & Avionics,,,,,listed
+supplier-243,苏州极目机器人科技有限公司,,长三角,江苏,江苏,苏州市工业园区,植保无人机,agricultural,Agricultural Spraying,极目EAVISION品牌主体,,,,listed
+supplier-244,苏州长风航空电子有限公司,,长三角,江苏,江苏,苏州市虎丘区,航电系统,flight_control,Flight Control & Avionics,,,,,listed
+supplier-245,苏州领航空间技术有限公司,,长三角,江苏,江苏,苏州市高新区,态势感知导航,other,Other,发布第一代航空态势感知导航系统,,,,listed
+supplier-246,蓝色向量,,长三角,浙江,浙江,杭州市,eVTOL整机,evtol,eVTOL & Flying Car,SKYLA V30，签30架海外预售,V30,,,listed
+supplier-247,追梦空天,,长三角,浙江,浙江,杭州市萧山区,eVTOL整机,evtol,eVTOL & Flying Car,eVTOL整机总部落户萧山经开区,,,,listed
+supplier-248,零重力飞机工业（合肥）有限公司,,长三角,安徽,安徽,合肥市高新区,eVTOL/eCTOL整机,evtol,eVTOL & Flying Car,"RX1E-A国内首款取证电动飞机，ZG-ONE""鹊飞""",,,,listed
+supplier-249,雷擎科技（杭州）,,长三角,浙江,浙江,杭州市,无人机反制,defense,Defense & Security,雷鹰GD003等,GD003,,,listed
