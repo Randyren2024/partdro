@@ -55,7 +55,7 @@
           <article v-for="supplier in filteredSuppliers" :key="supplier.id" class="supplier-card" :data-supplier-id="supplier.id">
             <div class="supplier-card__top">
               <span class="supplier-card__category">{{ categoryLabels[supplier.category] || supplier.category_label }}</span>
-              <span class="supplier-card__status">{{ copy.listed }}</span>
+              <span class="supplier-card__status">{{ supplierProfilePath(supplier.id) ? copy.profileLinked : copy.listed }}</span>
             </div>
             <h2><NuxtLink v-if="supplierProfilePath(supplier.id)" :to="supplierProfilePath(supplier.id)">{{ supplier.name }}</NuxtLink><template v-else>{{ supplier.name }}</template></h2>
             <p class="supplier-card__location">{{ supplier.province }} · {{ supplier.city }}<span v-if="supplier.district && supplier.district !== '—'"> · {{ supplier.district }}</span></p>
@@ -71,7 +71,7 @@
 
         <aside class="supplier-source-note">
           <strong>{{ copy.note }}:</strong> {{ copy.source }}
-          <span>{{ copy.updated }}: {{ SUPPLIER_UPDATED }}. Company websites and contact details are not supplied in the source dataset and are therefore not displayed.</span>
+          <span>{{ copy.updated }}: {{ SUPPLIER_UPDATED }}. {{ copy.sourceDetail }}</span>
         </aside>
       </div>
     </section>
