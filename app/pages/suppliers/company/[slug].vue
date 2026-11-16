@@ -27,7 +27,10 @@
             <h3>{{ family.title[localeKey] }}</h3>
             <p>{{ family.summary[localeKey] }}</p>
             <div class="model-list">
-              <span v-for="model in family.models" :key="model">{{ model }}</span>
+              <template v-for="model in family.models" :key="model">
+                <NuxtLink v-if="findLinkedProduct(model)" :to="lp('/products/' + findLinkedProduct(model)!.slug)" class="model-pill model-pill--linked">{{ model }} ↗</NuxtLink>
+                <span v-else class="model-pill">{{ model }}</span>
+              </template>
             </div>
           </article>
         </div>
@@ -76,6 +79,10 @@ const lp = useLocalePath()
 const profile = getSupplierProfile(String(route.params.slug))
 const supplier = profile ? SUPPLIERS.find((item) => item.id === profile.supplierId) : undefined
 if (!supplier || !profile) throw createError({ statusCode: 404, statusMessage: 'Supplier not found' })
+
+function findLinkedProduct(model: string) {
+  return profile.linkedProducts.find((product) => product.model === model || (product.model === 'C15' && model.startsWith('C15')))
+}
 
 const localeKey = computed(() => (['de', 'es', 'fr'].includes(locale.value) ? locale.value : 'en') as 'en' | 'de' | 'es' | 'fr')
 const copy = computed(() => ({
@@ -161,7 +168,9 @@ useHead(() => ({
 .family-card h3,.linked-product h3 { margin:0 0 12px; color:var(--pd-ink); font-size:19px; }
 .family-card p { min-height:88px; color:var(--pd-ink-soft); font-size:14px; line-height:1.75; }
 .model-list { display:flex; flex-wrap:wrap; gap:8px; }
-.model-list span { padding:6px 10px; border:1px solid var(--pd-line); border-radius:999px; color:var(--pd-ink-muted); font-size:12px; }
+.model-pill { display:inline-flex; align-items:center; padding:6px 10px; border:1px solid var(--pd-line); border-radius:999px; color:var(--pd-ink-muted); font-size:12px; text-decoration:none; }
+.model-pill--linked { border-color:color-mix(in srgb,var(--pd-primary) 40%,var(--pd-line)); color:var(--pd-primary); font-weight:700; }
+.model-pill--linked:hover { background:color-mix(in srgb,var(--pd-primary) 9%,var(--pd-surface)); }
 .linked-heading { margin-top:64px; }
 .linked-products { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:16px; }
 .linked-product { display:flex; flex-direction:column; align-items:flex-start; min-height:190px; }
