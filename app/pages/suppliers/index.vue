@@ -96,7 +96,7 @@ const route = useRoute()
 const localeKey = computed(() => (['de', 'es', 'fr'].includes(locale.value) ? locale.value : 'en') as 'en' | 'de' | 'es' | 'fr')
 const copy = computed(() => ({
   ...SUPPLIER_UI[localeKey.value],
-  subtitle: SUPPLIER_UI[localeKey.value].subtitle.replace(/\\d+/, String(SUPPLIERS.length)),
+  subtitle: SUPPLIER_UI[localeKey.value].subtitle.replace(/\d+/, String(SUPPLIERS.length)),
 }))
 const categoryLabels = computed(() => SUPPLIER_CATEGORY_LABELS[localeKey.value])
 const search = ref(typeof route.query.q === 'string' ? route.query.q : '')
