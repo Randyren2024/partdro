@@ -18,6 +18,7 @@ export interface SupplierProfile {
   slug: string
   website: string
   address: string
+  foundedYear: number
   displayName: Record<'en' | 'de' | 'es' | 'fr', string>
   verifiedAt: string
   description: Record<'en' | 'de' | 'es' | 'fr', string>
@@ -33,6 +34,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
     slug: 'topxgun',
     website: 'https://www.topxgun.com/',
     address: '南京市江宁区吉印大道3118号',
+    foundedYear: 2015,
     displayName: { en: 'TopXGun (Nanjing) Robotics Co., Ltd.', de: 'TopXGun (Nanjing) Robotics Co., Ltd.', es: 'TopXGun (Nanjing) Robotics Co., Ltd.', fr: 'TopXGun (Nanjing) Robotics Co., Ltd.' },
     verifiedAt: '2026-11-16',
     description: {
