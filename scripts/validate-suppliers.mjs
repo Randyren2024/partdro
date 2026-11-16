@@ -66,6 +66,16 @@ for (const row of rows) {
   }
 }
 
+const profileSource = fs.readFileSync(path.join(root, 'app/data/supplier-profiles.ts'), 'utf8')
+const profileIds = [...profileSource.matchAll(/supplierId:\s*'([^']+)'/g)].map(match => match[1])
+const profileSlugs = [...profileSource.matchAll(/slug:\s*'([^']+)'/g)].map(match => match[1])
+if (profileIds.length === 0) fail('supplier-profiles.ts must contain at least one researched profile')
+if (new Set(profileIds).size !== profileIds.length) fail('duplicate supplier profile supplierId')
+if (new Set(profileSlugs).size !== profileSlugs.length) fail('duplicate supplier profile slug')
+for (const id of profileIds) {
+  if (!ids.has(id)) fail('supplier profile references unknown supplier id: ' + id)
+}
+
 const csvLines = csvText.split(/\r?\n/).filter(Boolean)
 const headers = parseCsvLine(csvLines.shift())
 const csvRows = new Map()
