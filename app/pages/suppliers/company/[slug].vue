@@ -5,7 +5,9 @@
         <NuxtLink class="back-link" :to="lp('/suppliers')">{{ copy.back }}</NuxtLink>
         <p class="supplier-eyebrow">DRONEWORLD COMPANY PROFILE</p>
         <h1>{{ supplier.name }}</h1>
+        <p class="supplier-brand">{{ profile.displayName[localeKey] }}</p>
         <p class="supplier-location">{{ supplier.province }} · {{ supplier.city }} · {{ supplier.district }}</p>
+        <p class="supplier-address">{{ profile.address }}</p>
         <p class="supplier-intro">{{ profile.description[localeKey] }}</p>
         <div class="supplier-actions">
           <a :href="profile.website" target="_blank" rel="noopener noreferrer">{{ copy.website }} ↗</a>
@@ -104,7 +106,7 @@ const alternates = localePaths.map((language) => ({
 }))
 
 useHead(() => ({
-  title: supplier.name + ' | UAV Company Profile | Droneworld.tech',
+  title: profile.displayName[localeKey.value] + ' | UAV Company Profile | Droneworld.tech',
   titleTemplate: '%s',
   htmlAttrs: { lang: locale.value },
   link: [
@@ -116,7 +118,7 @@ useHead(() => ({
     { name: 'description', content: profile.description[localeKey.value] },
     { name: 'robots', content: 'index, follow, max-image-preview:large' },
     { property: 'og:type', content: 'profile' },
-    { property: 'og:title', content: supplier.name + ' | UAV Company Profile' },
+    { property: 'og:title', content: profile.displayName[localeKey.value] + ' | UAV Company Profile' },
     { property: 'og:description', content: profile.description[localeKey.value] },
     { property: 'og:url', content: canonical.value },
   ],
@@ -125,10 +127,12 @@ useHead(() => ({
     innerHTML: JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: supplier.name,
+      name: profile.displayName[localeKey.value],
+      alternateName: supplier.name,
       url: profile.website,
       address: {
         '@type': 'PostalAddress',
+        streetAddress: profile.address,
         addressLocality: supplier.city,
         addressRegion: supplier.province,
         addressCountry: 'CN',
@@ -143,7 +147,7 @@ useHead(() => ({
 <style scoped>
 .back-link { display:inline-flex; margin-bottom:22px; color:rgba(255,255,255,.72); font-size:13px; text-decoration:none; }
 .supplier-eyebrow { margin:0 0 14px; color:#ff8a4c; font-size:11px; font-weight:750; letter-spacing:.2em; }
-.supplier-location { margin:12px 0; color:rgba(255,255,255,.65); font-size:13px; }
+.supplier-brand { margin:8px 0 0; color:var(--pd-primary); font-size:14px; font-weight:700; }\n.supplier-location { margin:12px 0 4px; color:rgba(255,255,255,.65); font-size:13px; }\n.supplier-address { margin:0; color:rgba(255,255,255,.58); font-size:12px; }
 .supplier-intro { max-width:850px; color:rgba(255,255,255,.82); font-size:17px; line-height:1.8; }
 .supplier-actions { display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center; margin-top:24px; color:rgba(255,255,255,.62); font-size:12px; }
 .supplier-actions a { color:#ff9a62; font-weight:700; }
