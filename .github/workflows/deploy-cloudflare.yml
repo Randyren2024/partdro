@@ -166,7 +166,8 @@ jobs:
           for locale in en de es fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
-            for entry in "suppliers:249" "suppliers/north:70" "suppliers/yangtze-river-delta:123" "suppliers/pearl-river-delta:56"; do
+            supplier_routes=$(node -e "const rows=require('./app/data/suppliers.json').suppliers; const count=(region)=>rows.filter(row=>row.region===region).length; console.log([['suppliers',rows.length],['suppliers/north',count('北方')],['suppliers/yangtze-river-delta',count('长三角')],['suppliers/pearl-river-delta',count('珠三角')]].map(([route,n])=>route+':'+n).join(' '))")
+            for entry in $supplier_routes; do
               route="${entry%%:*}"
               expected="${entry#*:}"
               html="dist/${prefix}${route}.html"
@@ -183,9 +184,13 @@ jobs:
               echo "verified supplier route $html ($actual records)"
             done
           done
-          # Supplier directory canonical routes must also be present in the sitemap.
-          for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun; do
-            grep -Fq "https://www.droneworld.tech/$route" dist/sitemap.xml
+          # Supplier directory canonical routes must be present in every localized sitemap entry.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun; do
+              grep -Fq "https://www.droneworld.tech/${prefix}${route}" dist/sitemap.xml
+            done
           done
           # TopXGun company profile: localized, source-backed company/product links.
           for locale in en de es fr; do
