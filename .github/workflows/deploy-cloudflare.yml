@@ -200,6 +200,17 @@ jobs:
             grep -Fq 'fp800-agricultural-drone' "$html"
             echo "verified TopXGun company profile $html"
           done
+          # Linked TopXGun product pages must point back to the company profile.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for slug in y160-delivery-drone fp800-agricultural-drone c15; do
+              html="dist/${prefix}products/${slug}.html"
+              if [ ! -s "$html" ]; then echo "FAIL: missing linked TopXGun product page $html"; exit 1; fi
+              grep -Fq 'suppliers/company/topxgun' "$html"
+              echo "verified supplier backlink in $html"
+            done
+          done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
           for locale in en es de fr; do
             prefix=""
