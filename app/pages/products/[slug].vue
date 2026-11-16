@@ -21,6 +21,8 @@
       </template>
     </main>
 
+    <SupplierProductAttribution :product-slug="ns" />
+
     <!-- Lightbox -->
     <div class="lightbox" :class="{ open: !!lightboxSrc }" @click.self="closeLightbox">
       <div class="lightbox-inner">
@@ -51,6 +53,7 @@ import { parseVideoUrl } from '~/composables/useVideo'
 import { landingSectionKey } from '~/components/product/sectionContext'
 import { SECTION_COMPONENTS } from '~/components/product/sectionRegistry'
 import SectionPanel from '~/components/product/SectionPanel.vue'
+import SupplierProductAttribution from '~/components/supplier/SupplierProductAttribution.vue'
 import type { SectionLayoutItem } from '~/components/product/sectionIds'
 import '~/components/product/landing.css'
 

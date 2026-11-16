@@ -31,6 +31,7 @@
             <h4>{{ t('footer.products') }}</h4>
             <ul>
               <li><router-link :to="lp('/products')">{{ t('nav.products') }}</router-link></li>
+              <li><router-link :to="lp('/suppliers')">{{ localeSupplierLabel }}</router-link></li>
               <li><router-link :to="lp('/cases')">{{ t('nav.cases') }}</router-link></li>
             </ul>
           </div>
@@ -81,11 +82,13 @@ import {
 import { trackEvent } from '../../composables/useTracking'
 import { stripLocalePrefix, useLocalePath } from '../../composables/useLocalePath'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const route = useRoute()
 const lp = useLocalePath()
 const currentYear = computed(() => new Date().getFullYear())
 const mail = computed(() => t('footer.cta.mail'))
+const supplierLabels: Record<string, string> = { en: 'Suppliers', de: 'Anbieter', es: 'Proveedores', fr: 'Fournisseurs' }
+const localeSupplierLabel = computed(() => supplierLabels[locale.value] || 'Suppliers')
 // D15R 落地页自带同款 lp-cta 收尾卡，全局 CTA 对其隐藏避免重复（按去前缀后的裸路径判断）
 const showCta = computed(() => stripLocalePrefix(route.path) !== '/products/d15r')
 </script>

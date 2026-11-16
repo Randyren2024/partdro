@@ -44,6 +44,9 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
+      - name: Validate supplier directory data integrity
+        run: node scripts/validate-suppliers.mjs
+
       - name: Install dependencies
         run: |
           # Use `npm install`, not `npm ci`. The lockfile was generated on Windows
@@ -161,6 +164,99 @@ jobs:
               fi
               echo "verified $route"
             done
+          done
+          # Supplier directory: all 4 routes × 4 locales must be statically rendered and indexed.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            supplier_routes=$(node -e "const rows=require('./app/data/suppliers.json').suppliers; const count=(region)=>rows.filter(row=>row.region===region).length; console.log([['suppliers',rows.length],['suppliers/north',count('北方')],['suppliers/yangtze-river-delta',count('长三角')],['suppliers/pearl-river-delta',count('珠三角')]].map(([route,n])=>route+':'+n).join(' '))")
+            for entry in $supplier_routes; do
+              route="${entry%%:*}"
+              expected="${entry#*:}"
+              html="dist/${prefix}${route}.html"
+              if [ ! -s "$html" ]; then echo "FAIL: missing supplier route $html"; exit 1; fi
+              grep -Fq 'rel="canonical"' "$html"
+              grep -Fq 'hreflang="x-default"' "$html"
+              grep -Fq '"@type":"CollectionPage"' "$html"
+              grep -Fq '"@type":"ItemList"' "$html"
+              actual=$(grep -o 'data-supplier-id=' "$html" | wc -l)
+              if [ "$actual" -ne "$expected" ]; then
+                echo "FAIL: $html contains $actual supplier cards; expected $expected"
+                exit 1
+              fi
+              echo "verified supplier route $html ($actual records)"
+            done
+          done
+          # Verify all 32 canonical supplier URLs (8 directory/profile routes × 4 locales) in the sitemap.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for route in suppliers suppliers/north suppliers/yangtze-river-delta suppliers/pearl-river-delta suppliers/company/topxgun suppliers/company/wuhu-united-aircraft suppliers/company/wuhu-tengden-aviation suppliers/company/zero-gravity-aircraft; do
+              grep -Fq "https://www.droneworld.tech/${prefix}${route}" dist/sitemap.xml
+            done
+          done
+          # TopXGun company profile: localized, source-backed company/product links.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/topxgun.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing supplier company profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq '"@type":"Organization"' "$html"
+            grep -Fq 'Y160' "$html"
+            grep -Fq 'fp800-agricultural-drone' "$html"
+            echo "verified TopXGun company profile $html"
+          done
+          # Linked TopXGun product pages must point back to the company profile.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            for slug in y160-delivery-drone fp800-agricultural-drone c15; do
+              html="dist/${prefix}products/${slug}.html"
+              if [ ! -s "$html" ]; then echo "FAIL: missing linked TopXGun product page $html"; exit 1; fi
+              grep -Fq 'suppliers/company/topxgun' "$html"
+              echo "verified supplier backlink in $html"
+            done
+          done
+          # Wuhu United Aircraft profile: localized subsidiary identity, catalogue and evidence.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/wuhu-united-aircraft.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing Wuhu supplier profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq 'TD550D' "$html"
+            grep -Fq 'R6000' "$html"
+            grep -Fq 'Government source' "$html" || grep -Fq 'Fuente gubernamental' "$html" || grep -Fq 'Source gouvernementale' "$html" || grep -Fq 'Behördliche Quelle' "$html"
+            echo "verified Wuhu United Aircraft profile $html"
+          done
+          # Wuhu Tengden profile: D18 is tied specifically to the Wuhu subsidiary by municipal sources.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/wuhu-tengden-aviation.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing Wuhu Tengden profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq 'D18' "$html"
+            grep -Fq 'Parent group website' "$html" || grep -Fq 'Website der Muttergesellschaft' "$html" || grep -Fq 'Sitio web del grupo matriz' "$html" || grep -Fq 'Site web du groupe parent' "$html"
+            echo "verified Wuhu Tengden profile $html"
+          done
+          # Zero Gravity Aircraft profile: certification states and product-family pages must remain source-grounded.
+          for locale in en de es fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}suppliers/company/zero-gravity-aircraft.html"
+            if [ ! -s "$html" ]; then echo "FAIL: missing Zero Gravity supplier profile $html"; exit 1; fi
+            grep -Fq 'rel="canonical"' "$html"
+            grep -Fq 'hreflang="x-default"' "$html"
+            grep -Fq 'RX1E-A' "$html"
+            grep -Fq 'ZG-ONE' "$html"
+            grep -Fq 'ZG-T6' "$html"
+            grep -Fq '650 kg' "$html"
+            echo "verified Zero Gravity Aircraft profile $html"
           done
           # C500 is now a Nuxt-rendered route: verify real SSR content and localized metadata.
           for locale in en es de fr; do
