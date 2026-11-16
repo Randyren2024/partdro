@@ -27,7 +27,7 @@
             <h3>{{ family.title[localeKey] }}</h3>
             <p>{{ family.summary[localeKey] }}</p>
             <div class="model-list">
-              <template v-for="model in family.models" :key="model">
+              <template v-for="model in family.items" :key="model">
                 <NuxtLink v-if="findLinkedProduct(model)" :to="lp('/products/' + findLinkedProduct(model)!.slug)" class="model-pill model-pill--linked">{{ model }} ↗</NuxtLink>
                 <span v-else class="model-pill">{{ model }}</span>
               </template>
