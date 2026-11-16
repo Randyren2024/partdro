@@ -4,6 +4,7 @@ export interface SupplierProductLink {
   category: 'cargo' | 'agricultural' | 'cleaning'
   names: Record<'en' | 'de' | 'es' | 'fr', string>
   sourceUrl: string
+  sourceType: 'official_product' | 'official_catalogue'
 }
 
 export interface SupplierProductFamily {
@@ -100,6 +101,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
         category: 'cargo',
         names: { en: 'Y160 Delivery Drone', de: 'Y160 Transportdrohne', es: 'Dron de transporte Y160', fr: 'Drone de transport Y160' },
         sourceUrl: 'https://www.topxgun.com/h-col-149.html',
+        sourceType: 'official_product',
       },
       {
         model: '丰鹏800',
@@ -107,6 +109,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
         category: 'agricultural',
         names: { en: 'Fengpeng 800 Agricultural Drone', de: 'Fengpeng 800 Landwirtschaftsdrohne', es: 'Dron agrícola Fengpeng 800', fr: 'Drone agricole Fengpeng 800' },
         sourceUrl: 'https://www.topxgun.com/h-col-179.html',
+        sourceType: 'official_product',
       },
       {
         model: 'C15',
@@ -114,6 +117,7 @@ export const SUPPLIER_PROFILES: SupplierProfile[] = [
         category: 'cleaning',
         names: { en: 'C15 Cleaning Drone', de: 'C15 Reinigungsdrohne', es: 'Dron de limpieza C15', fr: 'Drone de nettoyage C15' },
         sourceUrl: 'https://www.topxgun.com/',
+        sourceType: 'official_catalogue',
       },
     ],
     sources: [
