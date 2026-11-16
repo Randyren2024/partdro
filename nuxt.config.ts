@@ -159,7 +159,7 @@ export default defineNuxtConfig({
       routes: [
         '/index.html',
         // 默认语言 en（无前缀）
-        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/suppliers', '/suppliers/north', '/suppliers/yangtze-river-delta', '/suppliers/pearl-river-delta', '/cases', '/news', '/documents', '/about', '/contact',
+        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/suppliers', '/suppliers/north', '/suppliers/yangtze-river-delta', '/suppliers/pearl-river-delta', '/suppliers/company/topxgun', '/cases', '/news', '/documents', '/about', '/contact',
         // de
         '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/suppliers', '/de/suppliers/north', '/de/suppliers/yangtze-river-delta', '/de/suppliers/pearl-river-delta', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
         // es
