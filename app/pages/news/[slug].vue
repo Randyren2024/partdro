@@ -19,23 +19,37 @@
       <div class="container article-container">
         <figure v-if="galleryImages.length" class="article-gallery">
           <img
-            :src="galleryImages[activeImage]"
+            v-if="activeGalleryImage"
+            :src="activeGalleryImage"
             :alt="post.title"
             class="article-gallery__hero"
             width="1200"
             height="630"
+            fetchpriority="high"
+            decoding="async"
+            @error="markGalleryImageFailed(activeGalleryImage)"
           />
-          <div v-if="galleryImages.length > 1" class="article-gallery__thumbs" role="tablist">
+          <p v-else class="article-gallery__fallback" role="status">
+            Article images are currently unavailable.
+          </p>
+          <div v-if="availableGalleryImages.length > 1" class="article-gallery__thumbs" aria-label="Article image gallery">
             <button
-              v-for="(src, i) in galleryImages"
-              :key="src + i"
+              v-for="(src, i) in availableGalleryImages"
+              :key="src"
               type="button"
               class="article-gallery__thumb"
-              :class="{ 'is-active': i === activeImage }"
-              :aria-label="`Photo ${i + 1}`"
-              @click="activeImage = i"
+              :class="{ 'is-active': src === activeGalleryImage }"
+              :aria-label="`Show photo ${i + 1}`"
+              :aria-pressed="src === activeGalleryImage"
+              @click="activeGalleryImage = src"
             >
-              <img :src="src" alt="" />
+              <img
+                :src="src"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                @error="markGalleryImageFailed(src)"
+              />
             </button>
           </div>
         </figure>
@@ -196,13 +210,34 @@ const articlesReady = computed(() => 'true')
 
 const demoVideo = computed(() => (post.value ? getArticleDemoVideo(post.value.slug) : null))
 
-const activeImage = ref(0)
+const activeGalleryImage = ref<string | null>(null)
+const failedGalleryImages = ref<Set<string>>(new Set())
 const galleryImages = computed(() => {
-  const images = (post.value?.gallery ?? []).filter(Boolean)
-  if (images.length) return images
-  return post.value?.image_url ? [post.value.image_url] : []
+  if (!post.value) return []
+  const candidates = [post.value.image_url, ...(post.value.gallery ?? [])]
+  return [...new Set(candidates
+    .filter((src): src is string => typeof src === 'string' && src.trim().length > 0)
+    .map((src) => src.trim()))]
 })
-watch(galleryImages, () => { activeImage.value = 0 })
+const availableGalleryImages = computed(() =>
+  galleryImages.value.filter((src) => !failedGalleryImages.value.has(src)),
+)
+
+function markGalleryImageFailed(src: string | null) {
+  if (!src || failedGalleryImages.value.has(src)) return
+  failedGalleryImages.value = new Set([...failedGalleryImages.value, src])
+}
+
+watch(availableGalleryImages, (images) => {
+  if (!activeGalleryImage.value || !images.includes(activeGalleryImage.value)) {
+    activeGalleryImage.value = images[0] ?? null
+  }
+}, { immediate: true })
+
+watch(post, () => {
+  failedGalleryImages.value = new Set()
+  activeGalleryImage.value = galleryImages.value[0] ?? null
+})
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -367,6 +402,7 @@ function buildJsonLd() {
 .article-gallery__thumb { flex:0 0 92px; height:64px; padding:0; border:2px solid transparent; border-radius:10px; background:var(--pd-bg-soft); overflow:hidden; cursor:pointer; }
 .article-gallery__thumb.is-active { border-color:var(--pd-primary); }
 .article-gallery__thumb img { display:block; width:100%; height:100%; object-fit:cover; }
+.article-gallery__fallback { margin:0; padding:28px 16px; color:var(--pd-ink-soft); text-align:center; border:1px solid var(--pd-line); border-radius:var(--pd-radius-lg); background:var(--pd-bg-soft); }
 .article-content { color:var(--pd-ink); font-size:16px; line-height:1.85; overflow-wrap:anywhere; }
 .article-content :deep(> p:first-child) { color:var(--pd-ink-soft); font-size:18px; line-height:1.75; }
 .article-content :deep(h2), .article-content :deep(h3) { margin:2em 0 .7em; color:var(--pd-ink); font-family:var(--pd-font-display); line-height:1.2; }
