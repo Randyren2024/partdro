@@ -14,7 +14,43 @@
     </div>
     <div class="page-section">
       <div class="container" style="max-width: 800px">
-        <img :src="post.image_url" :alt="post.title" style="width: 100%; border-radius: 12px; margin-bottom: 32px" />
+        <section v-if="galleryImages.length" class="news-gallery" aria-label="Article image gallery">
+          <div class="news-gallery__main">
+            <img
+              v-if="activeGalleryImage"
+              :src="activeGalleryImage"
+              :alt="post.title"
+              class="news-gallery__hero"
+              fetchpriority="high"
+              decoding="async"
+              @error="markGalleryImageFailed(activeGalleryImage)"
+            />
+            <p v-else class="news-gallery__fallback" role="status">Article images are currently unavailable.</p>
+          </div>
+          <div v-if="availableGalleryImages.length > 1" class="news-gallery__thumbs" aria-label="Choose an article image">
+            <button
+              v-for="(image, index) in availableGalleryImages"
+              :key="image"
+              type="button"
+              class="news-gallery__thumb"
+              :class="{ 'is-active': image === activeGalleryImage }"
+              :aria-label="`Show article image ${index + 1}`"
+              :aria-pressed="image === activeGalleryImage"
+              @click="selectedGalleryImage = image"
+            >
+              <img
+                :src="image"
+                :alt="`${post.title} — image ${index + 1}`"
+                loading="lazy"
+                decoding="async"
+                @error="markGalleryImageFailed(image)"
+              />
+            </button>
+          </div>
+        </section>
+        <p v-else-if="post.image_url" class="news-gallery__fallback" role="status">
+          Article image is currently unavailable.
+        </p>
         <div class="article-content">
           <p>{{ post.summary }}</p>
           <div v-html="post.content" />
@@ -60,7 +96,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
@@ -75,6 +111,39 @@ const slug = () => route.params.slug as string
 const { t, locale } = useI18n()
 const lp = useLocalePath()
 const { data: post, loading, error, reload } = usePost(slug)
+
+/** Keep the cover image first, then show every unique image supplied by posts.gallery. */
+const selectedGalleryImage = ref<string | null>(null)
+const failedGalleryImages = ref<Set<string>>(new Set())
+
+const galleryImages = computed(() => {
+  if (!post.value) return []
+  const candidates = [post.value.image_url, ...(post.value.gallery ?? [])]
+  return [...new Set(candidates
+    .filter((url): url is string => typeof url === 'string' && url.trim().length > 0)
+    .map((url) => url.trim()))]
+})
+
+const availableGalleryImages = computed(() =>
+  galleryImages.value.filter((url) => !failedGalleryImages.value.has(url)),
+)
+
+const activeGalleryImage = computed(() => {
+  const selected = selectedGalleryImage.value
+  return selected && availableGalleryImages.value.includes(selected)
+    ? selected
+    : availableGalleryImages.value[0] ?? null
+})
+
+function markGalleryImageFailed(url: string | null) {
+  if (!url || failedGalleryImages.value.has(url)) return
+  failedGalleryImages.value = new Set([...failedGalleryImages.value, url])
+}
+
+watch(post, (value) => {
+  selectedGalleryImage.value = value?.image_url || value?.gallery?.[0] || null
+  failedGalleryImages.value = new Set()
+}, { immediate: true })
 
 /**
  * 文章 category → 相关产品 slug 映射。
@@ -220,6 +289,86 @@ watch(post, (p) => {
 </script>
 
 <style scoped>
+.news-gallery {
+  margin-bottom: 32px;
+}
+
+.news-gallery__main {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  overflow: hidden;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  background: #101214;
+}
+
+.news-gallery__hero {
+  display: block;
+  width: 100%;
+  max-height: min(68vh, 680px);
+  object-fit: contain;
+}
+
+.news-gallery__thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding: 2px 2px 8px;
+  scrollbar-width: thin;
+}
+
+.news-gallery__thumb {
+  flex: 0 0 112px;
+  width: 112px;
+  height: 80px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 9px;
+  background: #101214;
+  cursor: pointer;
+  opacity: 0.78;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.news-gallery__thumb:hover,
+.news-gallery__thumb.is-active {
+  border-color: var(--color-primary, #ff6a00);
+  opacity: 1;
+}
+
+.news-gallery__thumb:focus-visible {
+  outline: 2px solid var(--color-primary, #ff6a00);
+  outline-offset: 3px;
+}
+
+.news-gallery__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-gallery__fallback {
+  padding: 24px;
+  color: var(--color-text-light, #777);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .news-gallery__main {
+    min-height: 180px;
+  }
+
+  .news-gallery__thumb {
+    flex-basis: 88px;
+    width: 88px;
+    height: 66px;
+  }
+}
+
 .article-content {
   font-size: 16px;
   line-height: 1.9;
