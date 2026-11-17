@@ -30,6 +30,8 @@ export interface Post {
   slug: string
   category: string
   image_url: string
+  /** Public image URLs for the article gallery. image_url stays the list/OG cover. */
+  gallery: string[]
   published: boolean
   published_at: string
   created_at: string
