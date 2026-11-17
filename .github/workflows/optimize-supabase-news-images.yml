@@ -1,0 +1,45 @@
+name: Optimize Supabase news images
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_id:
+        description: Supabase posts.id to optimize
+        required: true
+        default: "200"
+        type: string
+      dry_run:
+        description: Analyze only; do not upload or update Supabase
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: optimize-news-images-${{ inputs.post_id }}
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install image processor
+        run: npm install --no-save sharp
+      - name: Compress and optionally publish images
+        env:
+          SUPABASE_URL: https://uphfcvquglafkszqqxiq.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          POST_ID: ${{ inputs.post_id }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          MAX_EDGE: "1920"
+          WEBP_QUALITY: "82"
+        run: node scripts/optimize-supabase-news-images.mjs
