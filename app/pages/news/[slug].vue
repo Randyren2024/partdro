@@ -17,7 +17,28 @@
     </div>
     <div class="page-section">
       <div class="container article-container">
-        <img :src="post.image_url" :alt="post.title" class="article-hero-image" width="1200" height="630" />
+        <figure v-if="galleryImages.length" class="article-gallery">
+          <img
+            :src="galleryImages[activeImage]"
+            :alt="post.title"
+            class="article-gallery__hero"
+            width="1200"
+            height="630"
+          />
+          <div v-if="galleryImages.length > 1" class="article-gallery__thumbs" role="tablist">
+            <button
+              v-for="(src, i) in galleryImages"
+              :key="src + i"
+              type="button"
+              class="article-gallery__thumb"
+              :class="{ 'is-active': i === activeImage }"
+              :aria-label="`Photo ${i + 1}`"
+              @click="activeImage = i"
+            >
+              <img :src="src" alt="" />
+            </button>
+          </div>
+        </figure>
         <div class="article-content">
           <p>{{ post.summary }}</p>
           <div v-html="post.content" />
@@ -110,7 +131,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { LeftOutlined } from '@ant-design/icons-vue'
 import { useRoute } from 'vue-router'
@@ -128,14 +149,6 @@ const { t, locale } = useI18n()
 const lp = useLocalePath()
 const api = useContentApi()
 
-/**
- * 文章 category → 相关产品 slug 映射。
- * 高商业意图查询（crop protection drone / fertilizer application drone /
- * high-rise drone cleaning 等）当前落在 /news 博客页，而非产品落地页；
- * 在文章末尾给出「相关产品」区块，把权重与点击引到可转化的产品页。
- * category 取值来自线上 posts 表：Agriculture / Logistics / Cleaning Drone /
- * Cleaning / Cargo Drone / Company News / Industry News。
- */
 const CATEGORY_PRODUCT_SLUGS: Record<string, string[]> = {
   Agriculture: ['fp800-agricultural-drone'],
   Logistics: ['y160-delivery-drone', 'c500-delivery-drone'],
@@ -144,11 +157,6 @@ const CATEGORY_PRODUCT_SLUGS: Record<string, string[]> = {
   Cleaning: ['d15r', 'c15'],
 }
 
-/**
- * 关键改动：内容改在构建期由服务端抓取（useAsyncData），而不是浏览器里
- * 才去 Supabase 拉。这样 nuxt generate 落盘的静态 HTML 里就带完整正文、
- * h1 和内链，Google / GSC 不执行 JS 也能索引这篇文章。
- */
 const {
   data: post,
   pending,
@@ -183,29 +191,30 @@ const { data: relatedProductsData } = await useAsyncData(
 const relatedPosts = computed<Post[]>(() => relatedPostsData.value ?? [])
 const relatedProducts = computed<Product[]>(() => relatedProductsData.value ?? [])
 
-// 预渲染等待标记：现在数据是 SSR 抓的，落盘时一定已就绪
 const productsReady = computed(() => 'true')
 const articlesReady = computed(() => 'true')
 
 const demoVideo = computed(() => (post.value ? getArticleDemoVideo(post.value.slug) : null))
 
+const activeImage = ref(0)
+const galleryImages = computed(() => {
+  const images = (post.value?.gallery ?? []).filter(Boolean)
+  if (images.length) return images
+  return post.value?.image_url ? [post.value.image_url] : []
+})
+watch(galleryImages, () => { activeImage.value = 0 })
+
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
 
-// 与 NewsView 一致：没有当前语言翻译的文章链回英语正文，避免落到会被 301 的本地化 URL
 const newsPath = (p: Post) =>
   locale.value === DEFAULT_LOCALE || p.availableLangs?.includes(locale.value as any)
     ? lp(`/news/${p.slug}`)
     : `/news/${p.slug}`
 
-// 绝对 URL：图片多存为 /images/... 相对路径，og/JSON-LD 需要完整 URL
 const absUrl = (u?: string | null) =>
   u ? (u.startsWith('http') ? u : `${SITE_URL}${u.startsWith('/') ? '' : '/'}${u}`) : undefined
 
-/**
- * 没有该语言翻译时，正文回退为英语；canonical 必须指向英语原文，
- * 否则 /de/news/<slug> 会声明一个内容并不存在的本地化版本（重复内容）。
- */
 const canonicalPath = computed(() => {
   const p = post.value
   if (!p) return `${SITE_URL}/news`
@@ -213,7 +222,6 @@ const canonicalPath = computed(() => {
   return hasTranslation ? `${SITE_URL}${route.path}` : `${SITE_URL}/news/${p.slug}`
 })
 
-/** 只对真实有翻译的语言输出 hreflang，避免指向 301 的本地化 URL */
 const alternates = computed(() => {
   const p = post.value
   if (!p) return []
@@ -233,7 +241,6 @@ const metaDescription = computed(() => {
   return p.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155)
 })
 
-/** 当前语言是否有该文章的真实翻译（没有则正文回退英语） */
 const contentLang = computed(() => {
   const p = post.value
   if (!p) return DEFAULT_LOCALE
@@ -249,7 +256,6 @@ const heroImage = computed(() => absUrl(post.value?.image_url))
 useHead(() => ({
   title: seoTitle.value === 'News' ? seoTitle.value : `${seoTitle.value} | Partdro`,
   titleTemplate: '%s',
-  // 没有本地化翻译时正文是英语，<html lang> 也跟着回退，避免语言标记与内容不符
   htmlAttrs: { lang: contentLang.value },
   link: [
     { rel: 'canonical', href: canonicalUrl.value },
@@ -258,7 +264,6 @@ useHead(() => ({
   ],
   meta: [
     { name: 'description', content: metaDescription.value },
-    // 文章不存在时（脏 URL / 已下架）不让 Google 收录空壳
     { name: 'robots', content: post.value ? 'index, follow, max-image-preview:large' : 'noindex, follow' },
     { property: 'og:type', content: 'article' },
     { property: 'og:site_name', content: 'Partdro' },
@@ -277,7 +282,6 @@ useHead(() => ({
   script: buildJsonLd(),
 }))
 
-/** Article + Breadcrumb + （可选）VideoObject，全部在构建期写进静态 HTML */
 function buildJsonLd() {
   const p = post.value
   if (!p) return []
@@ -315,7 +319,6 @@ function buildJsonLd() {
 
   const graph: Record<string, unknown>[] = [article, breadcrumb]
 
-  // 正文内嵌 YouTube 时保留原有逻辑，争取视频富结果
   const videoId = p.content?.match(/youtube\.com\/embed\/([\w-]+)/)?.[1]
   if (videoId) {
     graph.push({
@@ -330,7 +333,6 @@ function buildJsonLd() {
     })
   }
 
-  // 该文章挂的演示视频：YouTube 嵌入时用 embedUrl + url，同源 MP4 时用 contentUrl
   const v = demoVideo.value
   if (v) {
     const isYouTube = v.provider === 'youtube'
@@ -359,7 +361,12 @@ function buildJsonLd() {
 
 <style scoped>
 .article-container { max-width:860px; }
-.article-hero-image { display:block; width:100%; max-height:520px; object-fit:cover; border:1px solid var(--pd-line); border-radius:var(--pd-radius-lg); margin-bottom:clamp(26px,4vw,42px); box-shadow:var(--pd-shadow-sm); }
+.article-gallery { margin:0 0 clamp(26px,4vw,42px); }
+.article-gallery__hero { display:block; width:100%; max-height:640px; object-fit:contain; background:var(--pd-bg-soft); border:1px solid var(--pd-line); border-radius:var(--pd-radius-lg); box-shadow:var(--pd-shadow-sm); }
+.article-gallery__thumbs { display:flex; gap:8px; margin-top:10px; overflow-x:auto; }
+.article-gallery__thumb { flex:0 0 92px; height:64px; padding:0; border:2px solid transparent; border-radius:10px; background:var(--pd-bg-soft); overflow:hidden; cursor:pointer; }
+.article-gallery__thumb.is-active { border-color:var(--pd-primary); }
+.article-gallery__thumb img { display:block; width:100%; height:100%; object-fit:cover; }
 .article-content { color:var(--pd-ink); font-size:16px; line-height:1.85; overflow-wrap:anywhere; }
 .article-content :deep(> p:first-child) { color:var(--pd-ink-soft); font-size:18px; line-height:1.75; }
 .article-content :deep(h2), .article-content :deep(h3) { margin:2em 0 .7em; color:var(--pd-ink); font-family:var(--pd-font-display); line-height:1.2; }
