@@ -37,11 +37,15 @@ export function mapPost(row: any, locale: Lang): Post {
   const lang = pickLang<any>(row.post_langs, locale)
   const availableLangs = [...new Set<string>((row.post_langs ?? []).map((l: LangRow) => l.lang))]
   if (!availableLangs.includes('en')) availableLangs.unshift('en')
+  const gallery = Array.isArray(row.gallery)
+    ? row.gallery.filter((url: unknown): url is string => typeof url === 'string' && url.length > 0)
+    : []
   return {
     id: row.id,
     slug: row.slug,
     category: row.category,
     image_url: row.image_url,
+    gallery,
     published: row.published,
     published_at: row.published_at,
     created_at: row.created_at,
