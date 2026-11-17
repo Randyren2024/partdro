@@ -42,9 +42,6 @@ function mapPost(row: any, locale: Lang): Post {
     slug: row.slug,
     category: row.category,
     image_url: row.image_url,
-    gallery: Array.isArray(row.gallery)
-      ? row.gallery.filter((url: unknown): url is string => typeof url === 'string' && url.trim().length > 0)
-      : [],
     published: row.published,
     published_at: row.published_at,
     created_at: row.created_at,
