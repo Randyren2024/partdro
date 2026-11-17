@@ -30,6 +30,8 @@ export interface Post {
   slug: string
   category: string
   image_url: string
+  /** Supabase Storage image URLs associated with this article. */
+  gallery: string[]
   published: boolean
   published_at: string
   created_at: string
