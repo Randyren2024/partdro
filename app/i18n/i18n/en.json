@@ -67,7 +67,13 @@
       "agricultural": "Agricultural Drone",
       "cargo": "Delivery Drone",
       "cleaning": "Cleaning Drone",
-      "EVTOL": "EVTOL"
+      "EVTOL": "EVTOL",
+      "helicopter": "Unmanned Helicopter",
+      "fixed_wing": "Fixed-Wing UAV",
+      "components": "UAV Systems",
+      "defense": "Counter-UAV",
+      "industrial": "Industrial UAV",
+      "other": "UAV Platform"
     },
     "u15": {
       "name": "U15 Multi-Mission Drone",

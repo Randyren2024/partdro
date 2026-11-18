@@ -83,6 +83,17 @@ Content model: `products`, `posts`, `cases`, `documents` each have a `<table>_la
 - Admin auth: Supabase Auth + the `admins` table (the real gate); login maps username → `<username>@admin.partdro.com`; client-side 5-fail/60s lock. A Supabase user without an `admins` row is signed out.
 - `/api/admin-products` handles product CRUD; delete goes through the `admin_delete_product` RPC (`scripts/admin-functions.sql` must be run once in Supabase).
 
+## Supplier product onboarding
+
+Supplier identity and upstream evidence stay private; only public product content ships to clients.
+
+- **Source of truth:** `public.suppliers.product_models` (service_role only). Read/write it through `supabase db query "<sql>" --linked --project-ref uphfcvquglafkszqqxiq` (Management API, no database password needed). Always clear the stale `HTTP_PROXY/HTTPS_PROXY` env first.
+- **Pipeline script:** `node scripts/onboard-supplier-products.mjs` (dry-run) or `--apply`. It expands supplier models into `products` drafts (`published=false`, placeholder image, empty `specs`/`features`), writes four localized `product_langs` rows, and records `private.product_sources` evidence links. Existing products are matched through `MODEL_ALIASES`, which only adds source links and never overwrites curated copy.
+- **Never invent specifications.** `specs`/`features` stay empty until verified against a manufacturer source; media must be rights-cleared before publishing (see `docs/supplier-onboarding-cw15.md`).
+- **Publish gate:** flip `published` to `true` only when the product has verified specs, at least one rights-cleared image, and real landing copy. A `products` row alone does not render a usable page: `app/pages/products/[slug].vue` resolves copy from the i18n namespace named after the slug, so publishing without content produces a page full of raw i18n keys.
+- **Categories:** `ProductCategory` is `agricultural | cargo | cleaning | EVTOL | helicopter | fixed_wing | components | defense | industrial | other`. The DB constraint is kept in sync by `supabase/migrations/20261118100000_extend_product_categories.sql`.
+- **Status snapshot (2026-11-18):** 250 suppliers, 18 with models, 35 model entries → 29 draft products (TD550 appears under two suppliers and is deduplicated) plus 5 existing products linked to their suppliers.
+
 ## Inquiry / lead pipeline
 
 - `InquiryForm.vue` inserts directly into Supabase `inquiries`. `useAttribution.ts` keeps first landing/referrer plus latest UTM/gclid in `localStorage` for 90 days and writes attribution fields on submit (product slug, page path, landing page, referrer, UTM, gclid).

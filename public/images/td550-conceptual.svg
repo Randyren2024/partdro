@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Conceptual illustration of a coaxial unmanned helicopter">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#16233a"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8eef7"/>
+      <stop offset="1" stop-color="#9fb2c9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <g stroke="#2b3c55" stroke-width="1" opacity="0.5">
+    <path d="M0 620 H1200 M0 540 H1200 M0 700 H1200"/>
+  </g>
+  <!-- rotor -->
+  <ellipse cx="600" cy="250" rx="330" ry="26" fill="none" stroke="#7fd1c1" stroke-width="6" opacity="0.85"/>
+  <ellipse cx="600" cy="286" rx="300" ry="22" fill="none" stroke="#4d9be6" stroke-width="4" opacity="0.6"/>
+  <line x1="600" y1="250" x2="600" y2="300" stroke="#7fd1c1" stroke-width="8"/>
+  <!-- fuselage -->
+  <path d="M600 300 C520 300 470 340 440 400 C420 440 420 470 435 495 C470 540 540 560 600 560 C660 560 730 540 765 495 C780 470 780 440 760 400 C730 340 680 300 600 300 Z"
+        fill="url(#body)" stroke="#7d93ad" stroke-width="3"/>
+  <!-- canopy -->
+  <path d="M520 380 C560 350 640 350 680 380 C650 420 550 420 520 380 Z" fill="#243a55" opacity="0.9"/>
+  <!-- engine housing -->
+  <rect x="560" y="430" width="80" height="60" rx="12" fill="#c7d4e3" stroke="#7d93ad" stroke-width="3"/>
+  <!-- tail -->
+  <path d="M760 470 L900 440 L905 462 L765 500 Z" fill="#b9c8da" stroke="#7d93ad" stroke-width="3"/>
+  <path d="M895 420 L940 400 L945 415 L900 438 Z" fill="#9fb2c9" stroke="#7d93ad" stroke-width="3"/>
+  <!-- skids -->
+  <line x1="500" y1="575" x2="700" y2="575" stroke="#9fb2c9" stroke-width="10" stroke-linecap="round"/>
+  <line x1="540" y1="560" x2="540" y2="590" stroke="#7d93ad" stroke-width="8"/>
+  <line x1="660" y1="560" x2="660" y2="590" stroke="#7d93ad" stroke-width="8"/>
+  <!-- labels -->
+  <g fill="#9fb2c9" font-family="Inter, system-ui, sans-serif" font-size="26">
+    <text x="72" y="110" fill="#e8eef7" font-size="34" font-weight="600">TD550</text>
+    <text x="72" y="150">Coaxial unmanned helicopter</text>
+    <text x="72" y="740" font-size="20" opacity="0.7">Conceptual illustration — not a photograph of the aircraft</text>
+  </g>
+</svg>

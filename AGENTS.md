@@ -188,3 +188,77 @@ Repeat 8a → screenshot → audit → 8b until the user signals done ("好了" 
 ## Reference: shared with CLAUDE.md
 
 Build commands, routing, image strategy, git-push, and the AllyNav / Skyrover image-source notes are in `CLAUDE.md`. Read both files at the start of any task.
+
+---
+
+# Supplier product onboarding (Nuxt, current workflow)
+
+The Vite workflow above is legacy. Supplier products now flow from the private supplier register into
+Nuxt, in four gated stages. Do not skip a gate.
+
+```
+suppliers.product_models (18 suppliers / 35 models)
+        │
+        ▼
+[1] Read  ── supabase db query ... --linked --project-ref <ref>
+        │      (Management API; no DB password)
+        ▼
+[2] Draft ── node scripts/onboard-supplier-products.mjs --apply
+        │      products(published=false) + 4×product_langs + private.product_sources
+        ▼
+[3] Enrich ─ verified specs + rights-cleared media + landing copy (per product)
+        │
+        ▼
+[4] Publish ─ published=true, then sitemap/indexing
+```
+
+## Stage 1 — Read the register
+
+- `public.suppliers` and `private.product_sources` are service_role only; never expose supplier identity,
+  supplier IDs or upstream URLs in public HTML, JSON-LD, sitemap, APIs or client payloads.
+- Use `supabase db query "<sql>" --linked --project-ref uphfcvquglafkszqqxiq --output json`.
+  Clear `HTTP_PROXY` / `HTTPS_PROXY` first — a stale local proxy makes the CLI hang or transport-error.
+
+## Stage 2 — Draft insert
+
+`node scripts/onboard-supplier-products.mjs` (dry-run) or `--apply`:
+
+- expands each `product_models` entry into a `products` row with `published=false`,
+  `/images/placeholder.svg`, empty `specs` / `features`, and `sort_order` from 200;
+- writes `en/de/es/fr` `product_langs` rows (model code + localized category label + honest
+  "verification pending" description);
+- records one `private.product_sources` row per (product, supplier, model) with
+  `verification_status='pending'`;
+- deduplicates by slug; models already sold as products are listed in `MODEL_ALIASES` and receive
+  only a source link — their curated copy is never overwritten.
+
+Hard rules:
+
+- **Never invent specifications.** Empty `specs` is correct until a manufacturer source is verified.
+- **No manufacturer imagery without rights.** A conceptual illustration or owned asset is acceptable;
+  hotlinking or copying official product photos is not.
+- Catalogue categories are the full `ProductCategory` union; the DB check constraint is synced by
+  `supabase/migrations/20261118100000_extend_product_categories.sql`.
+
+## Stage 3 — Enrich (per product)
+
+1. Verify specs against the official product page / datasheet, and store the evidence in
+   `private.product_sources` (`source_url`, `extracted_facts`, `verified_at`).
+2. Fill `products.specs` / `features` / `gallery` / `image_url` only with verified values and
+   rights-cleared media.
+3. Add the landing copy: `app/pages/products/[slug].vue` renders the i18n namespace named after the
+   slug, so a product without copy publishes a page of raw i18n keys. Either register the namespace
+   in `app/i18n/i18n/*.json` or ship a dedicated page like
+   `app/pages/products/cw-15-vtol-mapping-drone.vue`.
+
+## Stage 4 — Publish
+
+- Set `published=true` only when specs, at least one image and landing copy exist.
+- Then add the route to the sitemap build and verify the live page in all four locales.
+- Drafts are invisible to `/products` because `useProducts` filters `published=true`.
+
+## Current state (2026-11-18)
+
+250 suppliers, 18 with models, 35 model entries → 29 draft products (TD550 appears under two
+suppliers and was deduplicated) plus 5 existing products linked to their suppliers. Four models are
+flagged for manual review (`X300`, `VD200`, `D18`, `星辰-15`).

@@ -34,7 +34,7 @@
             {{ t('products.all') }}
           </button>
           <button
-            v-for="cat in CATEGORIES"
+            v-for="cat in availableCategories"
             :key="cat"
             class="product-filter__tab"
             :class="{ 'product-filter__tab--active': activeCategory === cat }"
@@ -116,7 +116,18 @@ import { SOLUTIONS, SOLUTION_SLUGS, SOLUTION_UI } from '~/data/solutions'
 import { DEFAULT_LOCALE, isLocale } from '~/i18n'
 import type { ProductCategory, Lang } from '~/types'
 
-const CATEGORIES: ProductCategory[] = ['agricultural', 'cargo', 'cleaning', 'EVTOL']
+const CATEGORIES: ProductCategory[] = [
+  'agricultural',
+  'cargo',
+  'cleaning',
+  'EVTOL',
+  'helicopter',
+  'fixed_wing',
+  'components',
+  'defense',
+  'industrial',
+  'other',
+]
 const C500_SLUG = 'c500-delivery-drone'
 const C500_LANDING_PATH = '/products/c500-partdro-eavision'
 const U15_LANDING_PATH = '/products/u15-multi-mission-drone'
@@ -143,6 +154,13 @@ const activeCategory = computed<ProductCategory | null>(() =>
     ? (route.query.category as ProductCategory)
     : null,
 )
+
+// 只显示真的有已发布产品的分类，避免空标签
+const availableCategories = computed(() => {
+  const present = new Set((products.value ?? []).map((p) => p.category))
+  if (activeCategory.value) present.add(activeCategory.value)
+  return CATEGORIES.filter((cat) => present.has(cat))
+})
 
 watch(() => route.query.q, (value) => {
   searchQuery.value = typeof value === 'string' ? value : ''
