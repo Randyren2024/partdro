@@ -465,6 +465,7 @@ try {
     await card.locator('[role="status"]').waitFor({ state: 'visible', timeout: 15000 })
     assert.equal(inquiryRequests.length, 1, 'CW-15: expected one inquiry request')
     assert.ok(String(inquiryRequests[0].page_path).includes('cw-15-vtol-mapping-drone'), 'CW-15: page_path attribution missing')
+    assert.equal(inquiryRequests[0].product_slug, 'cw-15-vtol-mapping-drone', 'CW-15: product slug attribution missing')
     assert.equal(inquiryRequests[0].utm_source, 'cw15-qa', 'CW-15: UTM attribution missing')
     const conversion = await page.evaluate(() => (window.dataLayer || []).find(item => item.event === 'contact_form_submission'))
     assert.equal(conversion?.form_type, 'contact', 'CW-15: success conversion event missing')
