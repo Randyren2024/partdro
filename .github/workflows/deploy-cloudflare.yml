@@ -156,7 +156,7 @@ jobs:
           for locale in en es de fr; do
             prefix=""
             if [ "$locale" != "en" ]; then prefix="$locale/"; fi
-            for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone; do
+            for slug in c500-partdro-eavision vf50p-long-endurance-vtol-uav u15-multi-mission-drone cw-15-vtol-mapping-drone; do
               route="dist/${prefix}products/${slug}.html"
               if [ ! -s "$route" ]; then
                 echo "FAIL: missing premium landing page: $route"
