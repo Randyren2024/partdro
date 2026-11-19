@@ -117,6 +117,7 @@ useHead(() => ({
 </script>
 
 <template>
+  <!-- CW-15 premium landing page: localized content, shared inquiry flow and verified-source specifications. -->
   <main class="cw15-page">
     <section class="hero"><div class="wrap hero-grid">
       <div><NuxtLink :to="lp('/products')" class="back">← {{ c.backLabel }}</NuxtLink><p class="eyebrow">{{ c.eyebrow }}</p><h1>{{ c.title }}</h1><p class="lead">{{ c.lead }}</p>
