@@ -303,6 +303,49 @@ async function openProductDetailPage(context, viewportLabel) {
   return page
 }
 
+
+async function openCw15Page(context, locale, viewportLabel) {
+  const page = await context.newPage()
+  const pageErrors = []
+  page.on('pageerror', error => pageErrors.push(error.message))
+  const path = localePath(locale, 'cw-15-vtol-mapping-drone')
+  await page.goto(`${ORIGIN}${path}?utm_source=cw15-qa&utm_medium=test`, { waitUntil: 'domcontentloaded', timeout: 30000 })
+  await page.locator('.inquiry-form__card form').waitFor({ state: 'visible', timeout: 20000 })
+  await page.locator('.visual img').waitFor({ state: 'visible' })
+  await page.waitForFunction(() => {
+    const image = document.querySelector('.visual img')
+    return Boolean(image && image.complete && image.naturalWidth > 0)
+  }, null, { timeout: 15000 })
+  const actual = await page.evaluate(() => ({
+    lang: document.documentElement.lang,
+    title: document.title,
+    robots: document.querySelector('meta[name="robots"]')?.content || '',
+    canonical: document.querySelector('link[rel="canonical"]')?.href || '',
+    h1: document.querySelector('h1')?.textContent || '',
+    faqCount: document.querySelectorAll('.faq-list details').length,
+    productSchema: [...document.querySelectorAll('script[type="application/ld+json"]')].some(node => node.textContent.includes('"@type":"Product"')),
+    faqSchema: [...document.querySelectorAll('script[type="application/ld+json"]')].some(node => node.textContent.includes('"@type":"FAQPage"')),
+    form: Boolean(document.querySelector('.inquiry-form__card form')),
+    footer: Boolean(document.querySelector('footer.footer')),
+    scrollWidth: document.documentElement.scrollWidth,
+    clientWidth: document.documentElement.clientWidth,
+  }))
+  assert.ok(actual.lang.toLowerCase().startsWith(locale), `CW-15 ${locale}: wrong html lang ${actual.lang}`)
+  assert.ok(actual.title && normalize(actual.h1), `CW-15 ${locale}: title or H1 missing`)
+  assert.ok(actual.robots.includes('index,follow'), `CW-15 ${locale}: page is not indexable`)
+  assert.equal(actual.canonical, `${SITE_ORIGIN}${path}`, `CW-15 ${locale}: unexpected canonical ${actual.canonical}`)
+  assert.equal(actual.faqCount, 5, `CW-15 ${locale}: expected five visible FAQs`)
+  assert.ok(actual.productSchema && actual.faqSchema, `CW-15 ${locale}: Product/FAQ structured data missing`)
+  assert.ok(actual.form && actual.footer, `CW-15 ${locale}: inquiry form or footer missing`)
+  assert.ok(actual.scrollWidth <= actual.clientWidth + 2, `CW-15 ${locale}: horizontal overflow ${actual.scrollWidth} > ${actual.clientWidth}`)
+  assert.deepEqual(pageErrors, [], `CW-15 ${locale}: browser errors: ${pageErrors.join('; ')}`)
+  if (['mobile', 'desktop'].includes(viewportLabel) && locale === 'en') {
+    await page.screenshot({ path: join(SCREENSHOT_DIR, `${viewportLabel}-cw15.png`), fullPage: viewportLabel === 'desktop', animations: 'disabled' })
+  }
+  pass(`${viewportLabel} ${locale} CW-15: localized SEO, FAQ, concept visual, inquiry form and no overflow`)
+  return page
+}
+
 async function submitContactForm(page) {
   const card = page.locator('.inquiry-form__card')
   await card.locator('input[autocomplete="name"]').fill('Acceptance QA Lead')
