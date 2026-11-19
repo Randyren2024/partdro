@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { attributionFields, captureAttribution } from '~/composables/useAttribution'
+import { attributionFields } from '~/composables/useAttribution'
 import { trackEvent } from '~/composables/useTracking'
 const route = useRoute()
 const form = reactive({ name:'', email:'', phone:'', company:'', country:'', type:'contact', message:'', website:'' })
 const loading = ref(false)
 const success = ref(false)
 const errorMessage = ref('')
-onMounted(captureAttribution)
 async function submit() {
   if (loading.value) return
   loading.value = true; success.value = false; errorMessage.value = ''
   try {
-    const result = await $fetch<{ok:boolean,spam?:boolean}>('/api/inquiry', { method:'POST', body:{...form,...attributionFields(route.path, typeof route.params.slug === 'string' ? route.params.slug : null)} })
+    const productSlug = typeof route.query.product === 'string' ? route.query.product : null
+    const result = await $fetch<{ok:boolean,spam?:boolean}>('/api/inquiry', { method:'POST', body:{...form,...attributionFields(route.path, productSlug)} })
     if (!result.ok) throw new Error('Unable to submit inquiry')
     success.value = true
-    if (!result.spam) trackEvent('contact_form_submission', { form_type: form.type })
+    if (!result.spam) trackEvent('contact_form_submission', { form_type: form.type, product_slug: productSlug })
     Object.assign(form,{name:'',email:'',phone:'',company:'',country:'',type:'contact',message:'',website:''})
   } catch (error:any) { errorMessage.value = error?.data?.statusMessage || 'We could not receive your message. Please try again.' }
   finally { loading.value = false }
@@ -26,6 +26,7 @@ useSeoMeta({ title:'Contact Drone World', description:'Contact Drone World about
   <section class="section"><div class="contact-grid">
     <form class="form-panel" @submit.prevent="submit">
       <h2>Send an inquiry</h2>
+      <p v-if="route.query.product" class="tag">Product: {{ route.query.product }}</p>
       <div class="form-field"><label for="name">Name *</label><input id="name" v-model="form.name" required minlength="2" maxlength="120" autocomplete="name"></div>
       <div class="form-field"><label for="email">Email *</label><input id="email" v-model="form.email" type="email" required maxlength="254" autocomplete="email"></div>
       <div class="form-field"><label for="phone">Phone</label><input id="phone" v-model="form.phone" type="tel" maxlength="40" autocomplete="tel"></div>

@@ -7,7 +7,7 @@ if (gtmId) {
   useHead({
     script: [{
       key: 'gtm-loader',
-      innerHTML: `window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id='${gtmId};document.head.appendChild(s);`
+      innerHTML: `window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=${gtmId}';document.head.appendChild(s);`
     }]
   })
 }
