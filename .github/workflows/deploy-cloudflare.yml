@@ -324,6 +324,21 @@ jobs:
               echo "verified Nuxt SSR form, locale and SEO schema: $html"
             done
           done
+          # CW-15 uses the shared Nuxt inquiry form and a clearly labeled concept visual
+          # until JOUAV image-use permission is documented.
+          for locale in en es de fr; do
+            prefix=""
+            if [ "$locale" != "en" ]; then prefix="$locale/"; fi
+            html="dist/${prefix}products/cw-15-vtol-mapping-drone.html"
+            assert_html_language "$html" "$locale"
+            assert_html_contains "$html" 'class="inquiry-form__card"' "CW-15 inquiry form"
+            assert_html_contains "$html" '"@type":"Product"' "CW-15 Product schema"
+            assert_html_contains "$html" '"@type":"FAQPage"' "CW-15 FAQ schema"
+            assert_html_contains "$html" 'index,follow' "CW-15 indexable robots directive"
+            assert_html_contains "$html" 'hreflang="x-default"' "CW-15 x-default hreflang"
+            assert_html_contains "$html" 'cw-15-technical-illustration.svg' "CW-15 labeled concept visual"
+            echo "verified CW-15 localized inquiry form, FAQ and SEO: $html"
+          done
           for artifact in _routes.json _headers _redirects; do
             if [ ! -f "dist/$artifact" ]; then
               echo "FAIL: dist/$artifact missing (cloudflare_pages preset should generate it)"
