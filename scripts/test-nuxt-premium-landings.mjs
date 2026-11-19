@@ -421,6 +421,10 @@ try {
     const page = await openProductDetailPage(mobileContext, 'mobile')
     await page.close()
   }
+  {
+    const page = await openCw15Page(mobileContext, 'en', 'mobile')
+    await page.close()
+  }
   for (const product of PRODUCTS) {
     const page = await openProductPage(mobileContext, product, 'en', 'mobile')
     await page.close()
@@ -437,6 +441,10 @@ try {
     const page = await openProductDetailPage(desktopContext, 'desktop')
     await page.close()
   }
+  for (const locale of LOCALES) {
+    const page = await openCw15Page(desktopContext, locale, 'desktop')
+    await page.close()
+  }
   for (const product of PRODUCTS) {
     for (const locale of LOCALES) {
       const page = await openProductPage(desktopContext, product, locale, 'desktop')
@@ -446,6 +454,24 @@ try {
   await desktopContext.close()
 
   console.log('\\n[3/3] Mocked inquiry submission and conversion-event acceptance')
+  {
+    const { context, inquiryRequests } = await createContext({ width: 390, height: 844 }, 'success')
+    const page = await openCw15Page(context, 'en', 'form-test')
+    const card = page.locator('.inquiry-form__card')
+    await card.locator('input[autocomplete="name"]').fill('Acceptance QA Lead')
+    await card.locator('input[autocomplete="email"]').fill('acceptance-qa@example.com')
+    await card.locator('textarea').fill('Automated CW-15 inquiry test; no real inquiry is stored.')
+    await card.locator('button[type="submit"]').click()
+    await card.locator('[role="status"]').waitFor({ state: 'visible', timeout: 15000 })
+    assert.equal(inquiryRequests.length, 1, 'CW-15: expected one inquiry request')
+    assert.ok(String(inquiryRequests[0].page_path).includes('cw-15-vtol-mapping-drone'), 'CW-15: page_path attribution missing')
+    assert.equal(inquiryRequests[0].utm_source, 'cw15-qa', 'CW-15: UTM attribution missing')
+    const conversion = await page.evaluate(() => (window.dataLayer || []).find(item => item.event === 'contact_form_submission'))
+    assert.equal(conversion?.form_type, 'contact', 'CW-15: success conversion event missing')
+    pass('CW-15: mocked inquiry submission, page attribution and conversion event')
+    await context.close()
+  }
+
   for (const product of PRODUCTS) {
     const { context, inquiryRequests } = await createContext({ width: 390, height: 844 }, 'success')
     const page = await openProductPage(context, product, 'en', 'form-test')
