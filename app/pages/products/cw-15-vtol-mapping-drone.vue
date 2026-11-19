@@ -102,7 +102,7 @@ useHead(() => ({
     { property:'og:url', content:origin + localizedPath.value },
     { name:'twitter:card', content:'summary_large_image' }
   ],
-  script: [{ key:'cw15-product-jsonld', type:'application/ld+json', innerHTML:JSON.stringify(structuredData.value).replace(/</g, '\\\\u003c') }],
+  script: [{ key:'cw15-product-jsonld', type:'application/ld+json', innerHTML:JSON.stringify(structuredData.value).replace(/</g, '\\u003c') }],
   link: [
     { rel:'canonical', href:origin + localizedPath.value },
     ...(['en','de','es','fr'].map(code => ({ rel:'alternate', hreflang:code, href:origin + (code === 'en' ? path : '/' + code + path) }))),
