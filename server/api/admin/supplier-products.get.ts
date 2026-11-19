@@ -6,7 +6,7 @@ const VERIFICATION = new Set(['unverified', 'partially_verified', 'verified', 'd
 
 export default defineEventHandler(async (event) => {
   const authorization = getHeader(event, 'authorization') || ''
-  const token = authorization.match(/^Bearer\\s+(.+)$/i)?.[1]
+  const token = authorization.match(/^Bearer\s+(.+)$/i)?.[1]
   if (!token) {
     throw createError({ statusCode: 401, statusMessage: 'Authentication required' })
   }
@@ -52,8 +52,8 @@ export default defineEventHandler(async (event) => {
   if (verification) request = request.eq('verification_status', verification)
   if (supplierId) request = request.eq('supplier_id', supplierId)
   if (search) {
-    const safe = search.replace(/[,%()]/g, ' ').replace(/\\s+/g, ' ').trim()
-    if (safe) request = request.or(`name.ilike.%${safe}%,name_en.ilike.%${safe}%,model.ilike.%${safe}%,brand.ilike.%${safe}%`)
+    const safe = search.replace(/[^\p{L}\p{N}\s-]/gu, ' ').replace(/\s+/g, ' ').trim()
+    if (safe) request = request.or(\`name.ilike.%\${safe}%,name_en.ilike.%\${safe}%,model.ilike.%\${safe}%,brand.ilike.%\${safe}%\`)
   }
 
   const { data, error, count } = await request
