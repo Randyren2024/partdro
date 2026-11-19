@@ -440,8 +440,9 @@ jobs:
           retention-days: 7
 
       - name: Deploy to Cloudflare Pages
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         env:
+          DEPLOY_BRANCH: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'main' }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ env.CF_ACCOUNT_ID }}
         run: |
@@ -451,7 +452,7 @@ jobs:
           set -o pipefail
           npx wrangler pages deploy dist \
             --project-name "${{ env.CF_PROJECT_NAME }}" \
-            --branch "main" \
+            --branch "$DEPLOY_BRANCH" \
             --commit-dirty=true 2>&1 | tee deploy.log
 
       - name: Report deployment URL
