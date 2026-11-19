@@ -4,6 +4,7 @@
       <h1>Products</h1>
       <div class="admin-products__bar-actions">
         <a-button @click="$router.push('/products/d15r')">D15R landing page</a-button>
+        <a-button @click="$router.push('/admin/supplier-products')">Supplier catalogue</a-button>
         <a-button type="primary" @click="openCreate">+ New product</a-button>
         <a-button danger @click="onLogout">Sign out</a-button>
       </div>
