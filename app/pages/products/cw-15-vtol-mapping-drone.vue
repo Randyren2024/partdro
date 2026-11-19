@@ -135,7 +135,6 @@ useHead(() => ({
     <section class="section soft"><div class="wrap"><p class="eyebrow">{{ c.technicalEyebrow }}</p><h2>{{ c.specs }}</h2><dl class="specs"><div v-for="(label,i) in c.labels" :key="label"><dt>{{ label }}</dt><dd>{{ c.values[i] }}</dd></div></dl><p class="caveat">{{ c.caveat }}</p></div></section>
     <section class="section faq-section"><div class="wrap"><p class="eyebrow">{{ c.faqEyebrow }}</p><h2>{{ c.faqTitle }}</h2><div class="faq-list"><details v-for="item in faq" :key="item.q"><summary>{{ item.q }}</summary><p>{{ item.a }}</p></details></div><p class="source-note">{{ c.sourceNote }} <a href="https://www.jouav.com/products/cw-15.html" target="_blank" rel="noopener noreferrer">JOUAV</a>.</p></div></section>
     <section id="cw15-inquiry" class="section inquiry-section"><div class="wrap inquiry-grid"><div><p class="eyebrow">{{ c.inquiryEyebrow }}</p><h2>{{ c.inquiryTitle }}</h2><p class="intro">{{ c.inquiryText }}</p><p class="note">{{ c.disclaimer }}</p></div><div class="inquiry-panel"><InquiryForm product-slug="cw-15-vtol-mapping-drone" /></div></div></section>
-    <div class="wrap disclaimer">{{ c.disclaimer }}</div>
   </main>
 </template>
 
