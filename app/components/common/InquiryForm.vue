@@ -45,13 +45,15 @@ import { useRoute } from 'vue-router'
 import { trackEvent } from '../../composables/useTracking'
 import { attributionFields } from '../../composables/useAttribution'
 
+const props = defineProps<{ productSlug?: string }>()
 const { t } = useI18n({ useScope: 'global' })
 const route = useRoute()
 const loading = ref(false)
 const success = ref(false)
 const errorMsg = ref('')
 
-const productSlug = computed<string | null>(() => {
+const resolvedProductSlug = computed<string | null>(() => {
+  if (props.productSlug) return props.productSlug
   const slug = route.params.slug
   return typeof slug === 'string' && slug ? slug : null
 })
@@ -80,7 +82,7 @@ const handleSubmit = async () => {
         type: form.type,
         message: form.message,
         website: form.website,
-        ...attributionFields(route.path, productSlug.value),
+        ...attributionFields(route.path, resolvedProductSlug.value),
       },
     })
 
