@@ -1,237 +1,38 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-// 对齐 shopify-vesper/web 的结构，但后端用 Supabase 而不是 Shopify。
-
-// 动态 prerender：从 Supabase 拉产品/新闻 slug，生成所有语言版本路由
-const PRESET_PRODUCTS = [
-  'd15r', 'c500-delivery-drone', 'y160-delivery-drone',
-  's200-agricultural-drone', 's300-agricultural-drone', 'x160-delivery-drone',
-  'x160-lite-delivery-drone', 'd15r-pro', 'd15r-max',
-]
-const PRESET_NEWS = ['drone-cleaning-industry-trends-2026', 'c500-first-flight-tests']
-const ALL_LOCALES = ['', '/de', '/es', '/fr']
-
-/**
- * 构建期兜底值（Supabase 项目 URL + anon key）。
- *
- * 这两个值本来就是公开的：NUXT_PUBLIC_* 会被序列化进客户端 bundle，任何访客
- * 都能在浏览器里看到。把它们做成「构建缺了就出 86 页薄站」的必填 secret，
- * 只会增加一个失败模式而不增加任何安全性。
- * 真正需要保密的是 service_role key（只在 Nitro 服务端用，走 Cloudflare
- * Pages 的运行时环境变量）。
- * 环境变量存在时仍然优先，方便切换项目。
- */
-const PUBLIC_SUPABASE_URL = 'https://uphfcvquglafkszqqxiq.supabase.co'
-const PUBLIC_SUPABASE_ANON_KEY = 'sb_publishable_gZ5lDMIYJBTn7TfhN_ASzg_1DytunFt'
-
-async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
-  if (!url || !key) {
-    console.warn(`[prerender] ${table}: SUPABASE_URL / anon key missing — falling back to presets`)
-    return []
-  }
-  try {
-    const res = await fetch(`${url}/rest/v1/${table}?select=slug&order=created_at.desc`, {
-      headers: { apikey: key, Authorization: `Bearer ${key}` },
-    })
-    if (!res.ok) {
-      // Never swallow this: a 401 here silently turns a 96-article site into a 2-article one.
-      console.warn(`[prerender] ${table}: HTTP ${res.status} — ${(await res.text()).slice(0, 200)}`)
-      return []
-    }
-    const rows: { slug: string | null }[] = await res.json()
-    const slugs = rows.map((r) => r.slug || '').filter(Boolean)
-    console.log(`[prerender] ${table}: fetched ${slugs.length} slugs`)
-    return slugs
-  } catch (e) {
-    console.warn(`[prerender] ${table}: fetch failed — ${(e as Error).message}`)
-    return []
-  }
-}
-
 export default defineNuxtConfig({
-  // Nuxt 4 application source lives in the repository root app/ directory.
   srcDir: 'app/',
-
   compatibilityDate: '2025-07-15',
-
   devtools: { enabled: false },
-
-  modules: ['@nuxtjs/i18n', '@nuxtjs/color-mode', '@pinia/nuxt'],
-
-  colorMode: {
-    preference: 'dark',
-    fallback: 'dark',
-    classSuffix: '',
-  },
-
-  css: [
-    'ant-design-vue/dist/reset.css',
-    '~/assets/styles/variables.css',
-    '~/assets/styles/global.css',
-  ],
-
-  /**
-   * Supabase service_role key 只出现在服务端。所有 API 调用走 Nitro
-   * server/api/ 路由（见 server/utils/supabase.ts），绝不把密钥序列化到客户端。
-   */
+  css: ['~/assets/css/main.css'],
   runtimeConfig: {
-    // 服务端 only（不会进客户端 bundle）
     supabaseUrl: '',
     supabaseServiceRoleKey: '',
-    // DirectMail（阿里云）
-    directmailAccessKeyId: '',
-    directmailAccessKeySecret: '',
-    directmailAccount: '',
-    directmailRegion: 'cn-hangzhou',
-    inquiryNotifyTo: 'info@droneworld.tech',
-    inquiryWebhookSecret: '',
-    // 飞书
-    feishuAppId: '',
-    feishuAppSecret: '',
-    feishuOpenId: '',
-    // Lead analysis（保留原 FC 链路，迁完后可选改 Nuxt server route）
-    inquiryAnalysisUrl: '',
-    inquiryReplyUrl: '',
-    // 百炼（AI 起草回复）
-    dashscopeApiKey: '',
-
     public: {
-      // 客户端可见
+      supabaseUrl: '',
+      supabasePublishableKey: '',
       siteUrl: 'https://www.droneworld.tech',
-      // anon key 本来就是公开值（会进浏览器 bundle），默认值避免漏配导致客户端无数据
-      supabaseUrl: PUBLIC_SUPABASE_URL,
-      supabaseAnonKey: PUBLIC_SUPABASE_ANON_KEY,
-      gtmId: 'GTM-KJ7GJ3V5',
-      // Ads 转化（客户端用）
-      adsConversionId: '',
-      adsConversionLabel: '',
-      // 联系信息
-      whatsapp: '',
-      email: 'info@droneworld.tech',
-      phone: '',
-    },
+      gtmId: ''
+    }
   },
-
   app: {
     head: {
-      titleTemplate: '%s | Partdro - Drone Cleaning & Delivery Solutions',
+      title: 'Drone World | Professional UAV Catalogue',
+      titleTemplate: '%s | Drone World',
       meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#101315' },
+        { name: 'description', content: 'Explore professional UAVs, cargo drones, agricultural aircraft and industrial drone solutions from specialist manufacturers.' },
+        { name: 'theme-color', content: '#102c2b' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/droneworld_logo.svg' },
+        { rel: 'icon', href: '/droneworld_favicon.png' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap' },
-      ],
-    },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap' }
+      ]
+    }
   },
-
   nitro: {
-    compressPublicAssets: true,
-    // All application pages are prerendered as static HTML. Only API endpoints
-    // need the Pages Worker; routing every request through it makes Nitro emit
-    // one exclusion per generated file, which can exceed Cloudflare's 100-char
-    // per-rule limit for long product slugs.
-    cloudflare: {
-      pages: {
-        routes: {
-          include: ['/api/*'],
-          exclude: [],
-        },
-      },
-    },
-    // Cloudflare Pages 部署时设 NITRO_PRESET=cloudflare_pages
-    routeRules: {
-      // 旧路径 redirect（保留历史 Google Ads finalUrl 和内部收藏链接）
-      '/products/c500': { redirect: '/products/c500-delivery-drone', statusCode: 308 },
-      '/admin/editor': { redirect: '/products/d15r', statusCode: 302 },
-    },
-    prerender: {
-      // Cloudflare Pages serves route/index.html with a trailing slash.
-      // Emit route.html so our existing no-slash canonical URLs resolve directly.
-      autoSubfolderIndex: false,
-      // 注意：不要把 '/' 显式列进来——Nitro prerenderer 用 unstorage 存缓存，
-      // 它不接受 '/' 作为 key（已知 bug）。用 '/index.html' 替代。
-      // 动态路由（products/:slug, news/:slug, solutions/:solution）会在 pages/[slug].vue 里用
-      // definePrerenderRoutes() 或 hooks 自动补，或靠 crawl 发现。
-      routes: [
-        '/index.html',
-        // 默认语言 en（无前缀）
-        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/suppliers', '/suppliers/north', '/suppliers/yangtze-river-delta', '/suppliers/pearl-river-delta', '/suppliers/company/topxgun', '/suppliers/company/wuhu-united-aircraft', '/suppliers/company/wuhu-tengden-aviation', '/suppliers/company/zero-gravity-aircraft', '/cases', '/news', '/documents', '/about', '/contact',
-        // de
-        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/suppliers', '/de/suppliers/north', '/de/suppliers/yangtze-river-delta', '/de/suppliers/pearl-river-delta', '/de/suppliers/company/topxgun', '/de/suppliers/company/wuhu-united-aircraft', '/de/suppliers/company/wuhu-tengden-aviation', '/de/suppliers/company/zero-gravity-aircraft', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
-        // es
-        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/products/vf50p-long-endurance-vtol-uav', '/es/products/u15-multi-mission-drone', '/es/suppliers', '/es/suppliers/north', '/es/suppliers/yangtze-river-delta', '/es/suppliers/pearl-river-delta', '/es/suppliers/company/topxgun', '/es/suppliers/company/wuhu-united-aircraft', '/es/suppliers/company/wuhu-tengden-aviation', '/es/suppliers/company/zero-gravity-aircraft', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
-        // fr
-        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/products/vf50p-long-endurance-vtol-uav', '/fr/products/u15-multi-mission-drone', '/fr/suppliers', '/fr/suppliers/north', '/fr/suppliers/yangtze-river-delta', '/fr/suppliers/pearl-river-delta', '/fr/suppliers/company/topxgun', '/fr/suppliers/company/wuhu-united-aircraft', '/fr/suppliers/company/wuhu-tengden-aviation', '/fr/suppliers/company/zero-gravity-aircraft', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
-        // 3 个 solutions 预设路径（每种语言 × 3）
-        '/solutions/facade-cleaning', '/solutions/solar-panel-cleaning', '/solutions/heavy-lift-logistics',
-        '/de/solutions/facade-cleaning', '/de/solutions/solar-panel-cleaning', '/de/solutions/heavy-lift-logistics',
-        '/es/solutions/facade-cleaning', '/es/solutions/solar-panel-cleaning', '/es/solutions/heavy-lift-logistics',
-        '/fr/solutions/facade-cleaning', '/fr/solutions/solar-panel-cleaning', '/fr/solutions/heavy-lift-logistics',
-      ],
-    },
+    preset: 'cloudflare_pages',
+    cloudflare: { pages: { routes: { include: ['/api/*', '/sitemap.xml'], exclude: [] } } }
   },
-
-  typescript: {
-    strict: true,
-    typeCheck: false,
-  },
-
-  i18n: {
-    locales: [
-      { code: 'en', language: 'en-US', name: 'English' },
-      { code: 'de', language: 'de-DE', name: 'Deutsch' },
-      { code: 'es', language: 'es-ES', name: 'Español' },
-      { code: 'fr', language: 'fr-FR', name: 'Français' },
-    ],
-    // Load all four message bundles from one explicit config module. This
-    // avoids relying on generated langDir paths in the Nuxt 4 app directory.
-    restructureDir: 'app/i18n',
-    vueI18n: './i18n.config.ts',
-    defaultLocale: 'en',
-    // If a locale bundle is missing a key at runtime, render the English value
-    // instead of exposing raw keys such as "nav.contact" in the public header.
-    fallbackLocale: 'en',
-    strategy: 'prefix_except_default',
-    lazy: false,
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-    },
-  },
-
-  // 动态 prerender：在 build:before hook 里 push 动态路由到 nitro.options.prerender.routes
-  hooks: {
-    async 'nitro:build:before'(nitro) {
-      // 直接用公开常量，不读环境变量：secret 里存过一个失效的旧 anon key，
-      // 一旦覆盖就静默退化成 86 页薄站。公开值不值得为它引入这个失败模式。
-      const url = PUBLIC_SUPABASE_URL
-      const key = PUBLIC_SUPABASE_ANON_KEY
-      let productSlugs = PRESET_PRODUCTS
-      let newsSlugs = PRESET_NEWS
-
-      if (url && key) {
-        const ps = await fetchSlugs(url, key, 'products')
-        const ns = await fetchSlugs(url, key, 'posts')
-        if (ps.length) productSlugs = ps
-        if (ns.length) newsSlugs = ns
-      } else {
-        console.warn('[prerender] Supabase env not set, using hardcoded slug lists')
-      }
-
-      const routes = nitro.options.prerender.routes as string[]
-      if (Array.isArray(routes)) {
-        for (const l of ALL_LOCALES) {
-          for (const slug of productSlugs) routes.push(`${l}/products/${slug}`)
-          for (const slug of newsSlugs) routes.push(`${l}/news/${slug}`)
-        }
-        console.log(`[prerender] products: ${productSlugs.length} × 4 locales = ${productSlugs.length * 4}`)
-        console.log(`[prerender] news: ${newsSlugs.length} × 4 locales = ${newsSlugs.length * 4}`)
-      }
-    },
-  },
+  typescript: { strict: true, typeCheck: true }
 })

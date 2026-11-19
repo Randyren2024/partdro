@@ -1,58 +1,13 @@
-node_modules
-dist
-dist-fc
-*.log
-.DS_Store
-*.pyc
-.vscode
-.idea
-extracted_*.json
-*_page.html
-# Environment variables
-.env
-.env.local
-.env.*.local
-# Temp debug screenshots (root level)
-/audit-full.png
-/review-full.png
-/screenshot-full.png
-/af718-*.png
-/w20-*.png
-# Large original source images (use .webp versions instead)
-public/images/*.jpg
-legacy-vite/public/images/*.JPG
-legacy-vite/public/images/Taurus 80e*.png
-
-# Local Netlify folder
-.netlify
-# Python venv (iopaint) and browser debug snapshots
-iopaint/.venv/
-iopaint/start.log
-.playwright-mcp/
-# netlify dev Edge Functions bootstrap
-deno.lock
-
-# 本地密钥/调试临时文件（webhook secret、阿里云 AK 等）
-.tmp/
-
-# Google service account keys (defense in depth; prefer .tmp/)
-artful-striker-*.json
-*-service-account*.json
-
-
-# C500 EAVision 独立落地页构建产物（CI 合并进 dist/）
-dist-landing/
-
-# Nuxt 4 root application build artifacts
+node_modules/
 .nuxt/
 .output/
-.data/
-.nitro/
-.cache/
+.dist/
+dist/
 .wrangler/
-node_modules/
+.env
+.env.*
+!.env.example
+*.log
 .DS_Store
-
-# Temporary legacy Vite application
-legacy-vite/node_modules/
-legacy-vite/.vite/
+.vscode/
+.idea/

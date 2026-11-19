@@ -1,33 +1,26 @@
-# Partdro
+# Drone World Catalogue
 
-Partdro is a lightweight B2B UAV catalogue and lead-generation website.
+A lightweight B2B UAV catalogue and lead-generation website, aligned with [partdro_csv_suppliers](https://github.com/Randyren2024/partdro_csv_suppliers).
 
-## Architecture
+## Stack
 
-The target architecture follows [partdro_csv_suppliers](https://github.com/Randyren2024/partdro_csv_suppliers):
+- Nuxt 4 + Vue 3 + TypeScript
+- Supabase PostgreSQL
+- Cloudflare Pages
+- GitHub source control; Cloudflare Pages Git integration owns builds and deployments
 
-- Nuxt 4, Vue 3 and TypeScript for the website.
-- Supabase PostgreSQL as the source of truth for products and suppliers.
-- Public, RLS-protected catalogue views for anonymous website reads.
-- Cloudflare Pages for hosting and deployment.
-- GitHub as the source repository; Cloudflare Pages Git integration handles builds and deployments.
+## Application
 
-The production application remains in this repository. This alignment is incremental: existing product, supplier, landing-page, inquiry, SEO and analytics capabilities must be audited before legacy code or dependencies are removed.
-
-## Deployment
-
-The intended deployment flow is Cloudflare Pages Git integration, with `main` as the production branch and non-main branches as previews.
-
-**Migration prerequisite:** configure and verify the Cloudflare Pages Git integration for this repository before merging the workflow-removal change into `main`. Until that is done, do not assume pushes will trigger Cloudflare builds.
-
-The current Cloudflare Pages project/build settings must be confirmed against the target app before changing its production project, domain, build command or output directory. Do not change DNS or production domains as part of this cleanup.
+- Home
+- Published product directory and product details
+- Listed supplier directory and supplier profiles
+- Contact / inquiry form
 
 ## Data and security
 
-- Supabase is the source of truth; do not reintroduce hardcoded product or supplier catalogues in frontend code.
-- Public pages must read only published/listed records through approved public catalogue views or equivalent RLS-protected access.
-- Supplier private notes, contact details, source URLs and verification metadata must never be exposed to anonymous visitors.
-- Never place a Supabase service-role key in client code or public runtime configuration.
+Supabase is the source of truth. Public catalogue reads use only the RLS-protected `catalogue_products` and `catalogue_suppliers` views through server API routes. Do not add static product/supplier fallbacks or expose internal supplier notes, contact details, source URLs, or verification metadata.
+
+The public runtime uses only the Supabase URL and publishable/anon key. The service-role key is server-only and used by the inquiry endpoint. Never place it in client code or `NUXT_PUBLIC_*` variables.
 
 ## Local development
 
@@ -37,4 +30,17 @@ cp .env.example .env
 npm run dev
 ```
 
-Use the public Supabase URL and publishable/anon key for public catalogue reads. Keep all privileged operations server-side and protected.
+Open http://localhost:3000.
+
+## Cloudflare Pages
+
+Use the existing `partdro-nuxt` Pages project. Production branch: `main`; non-main branches should create previews. Build command: `npm run build`; output directory: `dist`.
+
+Configure the environment variables from `.env.example` in Cloudflare Pages. Verify Git integration and a preview deployment before merging. Do not change DNS, production domains, or Supabase schema as part of routine application cleanup.
+
+## Development principles
+
+- Keep the app small: Nuxt pages, server API routes, and one Supabase utility.
+- Keep all product and supplier facts in Supabase.
+- Do not add a second Vite/legacy build pipeline or GitHub Actions deployment workflow.
+- Preserve inquiry validation, rate limiting, attribution capture, SEO metadata, and GTM support.

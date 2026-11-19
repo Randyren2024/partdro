@@ -1,7 +1,6 @@
-# Cloudflare Pages deployment.
-# Build: NITRO_PRESET=cloudflare_pages npm run build  (output: dist/)
-# Cloudflare Pages root directory = repository root (.), build command as above, output dir = dist.
-
+# Cloudflare Pages. Keep the existing production project name.
+# Build command: npm run build
+# Nuxt Cloudflare Pages output: dist/
 name = "partdro-nuxt"
 pages_build_output_dir = "dist"
 compatibility_date = "2025-07-15"

@@ -1,2 +1,0 @@
-*部署we0项目到腾讯云+modelmixhub.com
-*准备与we0团队对接。
