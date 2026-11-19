@@ -13,6 +13,78 @@ const messages = {
   fr: { eyebrow:'PLATEFORME VTOL À AILE FIXE', title:'Couvrez plus de terrain. Collectez de meilleures données.', lead:'Une plateforme UAV électrique VTOL à aile fixe destinée à la cartographie, à l’inspection des infrastructures et à la surveillance de vastes zones.', cta:'Parler de votre mission', overview:'Décollage vertical. Couverture à aile fixe.', intro:'Associez la flexibilité du décollage et de l’atterrissage verticaux à l’efficacité d’un aéronef à aile fixe pour couvrir de vastes zones ou des sites difficiles d’accès sans piste conventionnelle.', applications:'Une plateforme. Plusieurs flux de travail.', app1:'Cartographie & topographie', app2:'Inspection des infrastructures', app3:'Sécurité publique & surveillance', payload:'Adaptez l’aéronef à la mission.', payloadText:'Les charges utiles proposées comprennent LiDAR, caméras aériennes industrielles, imagerie oblique, nacelles stabilisées et SAR. Compatibilité et autonomie doivent être confirmées pour chaque mission.', specs:'Principales spécifications publiées', labels:['Charge utile maximale','Autonomie · à vide','Autonomie · avec MG-120E','Vitesse de croisière','Résistance au vent','Plafond pratique','Altitude maximale de décollage','Longueur du fuselage','Envergure','Décollage / atterrissage'], values:['3 kg','180 min','120 min','61 km/h','10,8–13,8 m/s','6 500 m','4 500 m','2,06 m','3,54 m','VTOL'], caveat:'Valeurs théoriques publiées par le fabricant dans des conditions d’essai spécifiques. Charge utile, capteurs, logiciel, météo, altitude et profil de mission influencent les performances réelles. Confirmez la configuration et les critères de réception avant achat.', ctaTitle:'Définissons la configuration adaptée.', ctaText:'Indiquez-nous la zone à couvrir, les données attendues, la charge utile et l’environnement opérationnel. Notre équipe peut vous aider à définir la configuration et le déploiement.', ctaButton:'Demander un conseil sur le CW-15', visual:'Schéma de la plateforme', visualNote:'Illustration conceptuelle · visuels définitifs en attente d’autorisation', disclaimer:'Les informations DroneWorld sont préparées à partir de documentation technique publiée. Disponibilité, configuration, autorisations, formation et livraison sont confirmées individuellement.' }
 }
 const c = computed(() => messages[lang.value as keyof typeof messages] || messages.en)
+const faqByLocale = {
+  en: [
+    { q:'How is the published endurance measured?', a:'The manufacturer lists up to 180 minutes without payload and up to 120 minutes with the MG-120E configuration. These are configuration-specific published figures, not a guarantee for every mission.' },
+    { q:'What is the maximum payload?', a:'The published maximum payload is 3 kg. Payload compatibility, power, mounting and endurance should be confirmed for the exact sensor package.' },
+    { q:'Can the CW-15 operate without a runway?', a:'Its VTOL architecture supports vertical take-off and landing, reducing dependence on a conventional runway. A suitable clear operating area and safe procedures are still required.' },
+    { q:'Which mission payloads are available?', a:'Manufacturer materials list options such as LiDAR, industrial aerial cameras, oblique camera systems, gimbal cameras and SAR. Availability and integration must be confirmed for each configuration.' },
+    { q:'Will actual flight time match the published figure?', a:'Not necessarily. Payload, battery condition, weather, wind, altitude, flight profile and operating procedures can affect actual endurance. Confirm acceptance criteria with the supplier.' }
+  ],
+  de: [
+    { q:'Wie wird die angegebene Flugzeit gemessen?', a:'Der Hersteller nennt bis zu 180 Minuten ohne Nutzlast und bis zu 120 Minuten mit der MG-120E-Konfiguration. Diese Werte gelten für bestimmte Konfigurationen und sind keine Garantie für jeden Einsatz.' },
+    { q:'Wie hoch ist die maximale Nutzlast?', a:'Die veröffentlichte maximale Nutzlast beträgt 3 kg. Kompatibilität, Stromversorgung, Montage und Flugzeit müssen für das konkrete Sensorsystem bestätigt werden.' },
+    { q:'Kann die CW-15 ohne Startbahn betrieben werden?', a:'Die VTOL-Auslegung ermöglicht senkrechten Start und senkrechte Landung. Ein geeigneter freier Betriebsbereich und sichere Verfahren bleiben erforderlich.' },
+    { q:'Welche Missionsnutzlasten sind verfügbar?', a:'Der Hersteller nennt unter anderem LiDAR, Industriekameras, Schrägbildkameras, Gimbal-Kameras und SAR. Verfügbarkeit und Integration sind je Konfiguration zu bestätigen.' },
+    { q:'Entspricht die tatsächliche Flugzeit dem veröffentlichten Wert?', a:'Nicht unbedingt. Nutzlast, Batteriezustand, Wetter, Wind, Höhe, Flugprofil und Betriebsverfahren beeinflussen die tatsächliche Flugzeit.' }
+  ],
+  es: [
+    { q:'¿Cómo se mide la autonomía publicada?', a:'El fabricante indica hasta 180 minutos sin carga útil y hasta 120 minutos con la configuración MG-120E. Son cifras publicadas para configuraciones concretas, no una garantía para todas las misiones.' },
+    { q:'¿Cuál es la carga útil máxima?', a:'La carga útil máxima publicada es de 3 kg. La compatibilidad, alimentación, montaje y autonomía deben confirmarse para cada conjunto de sensores.' },
+    { q:'¿Puede operar el CW-15 sin pista?', a:'Su arquitectura VTOL permite el despegue y aterrizaje verticales, reduciendo la dependencia de una pista convencional. Sigue siendo necesaria una zona despejada y procedimientos seguros.' },
+    { q:'¿Qué cargas de misión se ofrecen?', a:'El fabricante enumera opciones como LiDAR, cámaras aéreas industriales, cámaras oblicuas, cámaras con gimbal y SAR. La disponibilidad y la integración deben confirmarse para cada configuración.' },
+    { q:'¿La autonomía real será igual a la cifra publicada?', a:'No necesariamente. La carga útil, el estado de la batería, el clima, el viento, la altitud, el perfil de vuelo y los procedimientos afectan a la autonomía real.' }
+  ],
+  fr: [
+    { q:'Comment l’autonomie publiée est-elle mesurée ?', a:'Le fabricant indique jusqu’à 180 minutes sans charge utile et jusqu’à 120 minutes avec la configuration MG-120E. Ces chiffres concernent des configurations précises et ne garantissent pas chaque mission.' },
+    { q:'Quelle est la charge utile maximale ?', a:'La charge utile maximale publiée est de 3 kg. La compatibilité, l’alimentation, le montage et l’autonomie doivent être confirmés pour chaque ensemble de capteurs.' },
+    { q:'Le CW-15 peut-il fonctionner sans piste ?', a:'Son architecture VTOL permet le décollage et l’atterrissage verticaux. Une zone d’exploitation dégagée et des procédures de sécurité restent nécessaires.' },
+    { q:'Quelles charges utiles de mission sont proposées ?', a:'Le fabricant cite notamment le LiDAR, les caméras aériennes industrielles, les systèmes de prise de vue oblique, les caméras stabilisées et le SAR. Disponibilité et intégration sont à confirmer.' },
+    { q:'L’autonomie réelle correspond-elle à la valeur publiée ?', a:'Pas nécessairement. La charge utile, l’état de la batterie, la météo, le vent, l’altitude, le profil de vol et les procédures influencent l’autonomie réelle.' }
+  ]
+}
+const faq = computed(() => faqByLocale[lang.value as keyof typeof faqByLocale] || faqByLocale.en)
+const structuredData = computed(() => ({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Product',
+      '@id': origin + localizedPath.value + '#product',
+      name: 'JOUAV CW-15 Long-Endurance VTOL Fixed-Wing UAV',
+      model: 'CW-15',
+      brand: { '@type': 'Brand', name: 'JOUAV' },
+      manufacturer: { '@type': 'Organization', name: 'JOUAV', url: 'https://www.jouav.com/' },
+      description: c.value.lead,
+      url: origin + localizedPath.value,
+      additionalProperty: [
+        { '@type': 'PropertyValue', name: 'Maximum payload', value: '3 kg' },
+        { '@type': 'PropertyValue', name: 'Endurance without payload', value: '180 min' },
+        { '@type': 'PropertyValue', name: 'Endurance with MG-120E', value: '120 min' },
+        { '@type': 'PropertyValue', name: 'Cruise speed', value: '61 km/h' },
+        { '@type': 'PropertyValue', name: 'Wingspan', value: '3.54 m' },
+        { '@type': 'PropertyValue', name: 'Fuselage length', value: '2.06 m' },
+        { '@type': 'PropertyValue', name: 'Service ceiling', value: '6,500 m' }
+      ]
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': origin + localizedPath.value + '#faq',
+      mainEntity: faq.value.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a }
+      }))
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: origin + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Products', item: origin + '/products' },
+        { '@type': 'ListItem', position: 3, name: 'CW-15', item: origin + localizedPath.value }
+      ]
+    }
+  ]
+}))
 const origin = 'https://www.droneworld.tech'
 const path = '/products/cw-15-vtol-mapping-drone'
 const localizedPath = computed(() => lang.value === 'en' ? path : '/' + lang.value + path)
@@ -22,14 +94,15 @@ useHead(() => ({
   htmlAttrs: { lang: lang.value },
   meta: [
     { name:'description', content:c.value.lead },
-    { name:'robots', content:'noindex,follow' },
+    { name:'robots', content:'index,follow,max-image-preview:large,max-snippet:-1' },
     { property:'og:type', content:'product' },
     { property:'og:site_name', content:'DroneWorld' },
     { property:'og:title', content:pageTitle.value },
     { property:'og:description', content:c.value.lead },
     { property:'og:url', content:origin + localizedPath.value },
-    { name:'twitter:card', content:'summary' }
+    { name:'twitter:card', content:'summary_large_image' }
   ],
+  script: [{ key:'cw15-product-jsonld', type:'application/ld+json', innerHTML:JSON.stringify(structuredData.value).replace(/</g, '\\\\u003c') }],
   link: [
     { rel:'canonical', href:origin + localizedPath.value },
     ...(['en','de','es','fr'].map(code => ({ rel:'alternate', hreflang:code, href:origin + (code === 'en' ? path : '/' + code + path) }))),
@@ -54,11 +127,12 @@ useHead(() => ({
     <section class="section soft"><div class="wrap"><p class="eyebrow">MISSION PROFILES</p><h2>{{ c.applications }}</h2><div class="cards"><article><b>⌁</b><h3>{{ c.app1 }}</h3><p>Collect aerial imagery and geospatial data for corridor mapping, site documentation and land development.</p></article><article><b>⌖</b><h3>{{ c.app2 }}</h3><p>Support inspection planning across power, oil and gas, transport and other linear assets.</p></article><article><b>◉</b><h3>{{ c.app3 }}</h3><p>Provide an aerial perspective for situational awareness, search support and wide-area observation.</p></article></div></div></section>
     <section class="section"><div class="wrap payload"><div><p class="eyebrow">CONFIGURATION</p><h2>{{ c.payload }}</h2><p class="intro">{{ c.payloadText }}</p></div><div class="tags"><span>LiDAR</span><span>Aerial mapping camera</span><span>Oblique imaging</span><span>EO/IR gimbal</span><span>SAR</span></div></div></section>
     <section class="section soft"><div class="wrap"><p class="eyebrow">TECHNICAL OVERVIEW</p><h2>{{ c.specs }}</h2><dl class="specs"><div v-for="(label,i) in c.labels" :key="label"><dt>{{ label }}</dt><dd>{{ c.values[i] }}</dd></div></dl><p class="caveat">{{ c.caveat }}</p></div></section>
+    <section class="section faq-section"><div class="wrap"><p class="eyebrow">SUPPORT & PROCUREMENT</p><h2>Frequently asked questions</h2><div class="faq-list"><details v-for="item in faq" :key="item.q"><summary>{{ item.q }}</summary><p>{{ item.a }}</p></details></div><p class="source-note">Technical information is based on the <a href="https://www.jouav.com/products/cw-15.html" target="_blank" rel="noopener noreferrer">JOUAV official CW-15 product page</a>. Confirm current specifications, configuration and availability with the manufacturer before procurement.</p></div></section>
     <section class="cta"><div class="wrap cta-inner"><div><p class="eyebrow">PLAN YOUR NEXT MISSION</p><h2>{{ c.ctaTitle }}</h2><p>{{ c.ctaText }}</p></div><NuxtLink :to="{ path: lp('/contact'), query:{ product:'CW-15', source:'product-landing' } }" class="button light">{{ c.ctaButton }} ↗</NuxtLink></div></section>
     <div class="wrap disclaimer">{{ c.disclaimer }}</div>
   </main>
 </template>
 
 <style scoped>
-.cw15-page{--ink:#f2f5f7;--muted:#a8b3bc;--line:rgba(255,255,255,.12);background:#0a1016;color:var(--ink);font-family:Barlow,Arial,sans-serif}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}.hero{padding:76px 0 66px;background:radial-gradient(ellipse at 78% 25%,rgba(31,111,145,.22),transparent 38%),linear-gradient(135deg,#0a1016,#111d27 58%,#0a1016)}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}.back{display:inline-block;margin-bottom:34px;color:var(--muted);font-size:13px;text-decoration:none}.eyebrow{margin:0 0 16px;color:#76c5e7;font-size:12px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}.hero h1{margin:0 0 22px;font-size:clamp(42px,5.3vw,70px);font-weight:760;letter-spacing:-.045em;line-height:1.02}.lead,.intro{max-width:720px;color:#c2ccd3;font-size:18px;line-height:1.7}.button{display:inline-flex;min-height:52px;align-items:center;margin:28px 0;padding:0 22px;border-radius:4px;background:#72c6e8;color:#07121a;font-size:14px;font-weight:750;text-decoration:none}.button:hover{background:#9bdbf2}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:24px;border-top:1px solid var(--line)}.stats div{display:flex;flex-direction:column;gap:5px}.stats strong{font-size:25px}.stats span{color:var(--muted);font-size:11px;line-height:1.4}.note,.caveat{color:#8796a0;font-size:12px;line-height:1.7}.visual{position:relative;padding:12px;border:1px solid rgba(137,202,229,.2);border-radius:8px;background:#101b24}.visual img{display:block;width:100%;height:auto}.visual>span{position:absolute;left:22px;bottom:42px;padding:8px 10px;background:rgba(5,12,18,.82);font-size:10px;letter-spacing:.12em;text-transform:uppercase}.visual small{display:block;padding:8px 4px 0;color:#81909a;text-align:right}.section{padding:88px 0}.section h2,.cta h2{max-width:800px;margin:0 0 18px;font-size:clamp(32px,4vw,48px);font-weight:730;letter-spacing:-.035em;line-height:1.1}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}.cards article{min-height:190px;padding:26px;border:1px solid var(--line);border-radius:6px;background:#111b24}.cards b{color:#72c6e8;font-size:13px}.cards h3{margin:24px 0 10px;font-size:20px}.cards p{margin:0;color:#aab7c0;font-size:14px;line-height:1.7}.soft{background:#101922}.soft .cards article{background:#0c141c}.payload{display:grid;grid-template-columns:1.2fr .8fr;gap:42px;align-items:center}.tags{display:flex;flex-wrap:wrap;gap:10px}.tags span{padding:12px 14px;border:1px solid rgba(114,198,232,.3);border-radius:3px;color:#c8e8f5;background:rgba(114,198,232,.06);font-size:13px}.specs{display:grid;grid-template-columns:repeat(2,1fr);margin:34px 0 0;border-top:1px solid var(--line);border-left:1px solid var(--line)}.specs div{display:flex;justify-content:space-between;gap:16px;padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.specs dt{color:#aab7c0;font-size:14px}.specs dd{margin:0;font-weight:700;text-align:right}.cta{padding:76px 0;background:linear-gradient(110deg,#17394b,#0e2634)}.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:44px}.cta-inner>div{max-width:700px}.cta-inner p:last-child{color:#c0d0d9;line-height:1.7}.button.light{flex-shrink:0;background:#e8f5fa}.disclaimer{padding:20px 0 28px;color:#788792;font-size:11px;line-height:1.6}@media(max-width:900px){.hero-grid,.payload{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.cta-inner{align-items:flex-start;flex-direction:column}}@media(max-width:560px){.wrap{width:calc(100% - 32px)}.hero{padding:42px 0}.section{padding:64px 0}.stats{gap:9px}.stats strong{font-size:20px}.stats span{font-size:10px}.specs{grid-template-columns:1fr}.specs div{padding:15px}.hero h1{font-size:42px}}
+.cw15-page{--ink:#f2f5f7;--muted:#a8b3bc;--line:rgba(255,255,255,.12);background:#0a1016;color:var(--ink);font-family:Barlow,Arial,sans-serif}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}.hero{padding:76px 0 66px;background:radial-gradient(ellipse at 78% 25%,rgba(31,111,145,.22),transparent 38%),linear-gradient(135deg,#0a1016,#111d27 58%,#0a1016)}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}.back{display:inline-block;margin-bottom:34px;color:var(--muted);font-size:13px;text-decoration:none}.eyebrow{margin:0 0 16px;color:#76c5e7;font-size:12px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}.hero h1{margin:0 0 22px;font-size:clamp(42px,5.3vw,70px);font-weight:760;letter-spacing:-.045em;line-height:1.02}.lead,.intro{max-width:720px;color:#c2ccd3;font-size:18px;line-height:1.7}.button{display:inline-flex;min-height:52px;align-items:center;margin:28px 0;padding:0 22px;border-radius:4px;background:#72c6e8;color:#07121a;font-size:14px;font-weight:750;text-decoration:none}.button:hover{background:#9bdbf2}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:24px;border-top:1px solid var(--line)}.stats div{display:flex;flex-direction:column;gap:5px}.stats strong{font-size:25px}.stats span{color:var(--muted);font-size:11px;line-height:1.4}.note,.caveat{color:#8796a0;font-size:12px;line-height:1.7}.visual{position:relative;padding:12px;border:1px solid rgba(137,202,229,.2);border-radius:8px;background:#101b24}.visual img{display:block;width:100%;height:auto}.visual>span{position:absolute;left:22px;bottom:42px;padding:8px 10px;background:rgba(5,12,18,.82);font-size:10px;letter-spacing:.12em;text-transform:uppercase}.visual small{display:block;padding:8px 4px 0;color:#81909a;text-align:right}.section{padding:88px 0}.section h2,.cta h2{max-width:800px;margin:0 0 18px;font-size:clamp(32px,4vw,48px);font-weight:730;letter-spacing:-.035em;line-height:1.1}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}.cards article{min-height:190px;padding:26px;border:1px solid var(--line);border-radius:6px;background:#111b24}.cards b{color:#72c6e8;font-size:13px}.cards h3{margin:24px 0 10px;font-size:20px}.cards p{margin:0;color:#aab7c0;font-size:14px;line-height:1.7}.soft{background:#101922}.soft .cards article{background:#0c141c}.payload{display:grid;grid-template-columns:1.2fr .8fr;gap:42px;align-items:center}.tags{display:flex;flex-wrap:wrap;gap:10px}.tags span{padding:12px 14px;border:1px solid rgba(114,198,232,.3);border-radius:3px;color:#c8e8f5;background:rgba(114,198,232,.06);font-size:13px}.specs{display:grid;grid-template-columns:repeat(2,1fr);margin:34px 0 0;border-top:1px solid var(--line);border-left:1px solid var(--line)}.specs div{display:flex;justify-content:space-between;gap:16px;padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.specs dt{color:#aab7c0;font-size:14px}.specs dd{margin:0;font-weight:700;text-align:right}.faq-list{margin-top:32px;border-top:1px solid var(--line)}.faq-list details{padding:22px 4px;border-bottom:1px solid var(--line)}.faq-list summary{cursor:pointer;font-size:18px;font-weight:700;list-style:none}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary:after{content:'+';float:right;color:#72c6e8;font-size:22px}.faq-list details[open] summary:after{content:'−'}.faq-list details p{max-width:850px;margin:16px 0 0;color:#aab7c0;font-size:15px;line-height:1.8}.source-note{margin-top:28px;color:#8796a0;font-size:12px;line-height:1.7}.source-note a{color:#8bd4f0}.cta{padding:76px 0;background:linear-gradient(110deg,#17394b,#0e2634)}.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:44px}.cta-inner>div{max-width:700px}.cta-inner p:last-child{color:#c0d0d9;line-height:1.7}.button.light{flex-shrink:0;background:#e8f5fa}.disclaimer{padding:20px 0 28px;color:#788792;font-size:11px;line-height:1.6}@media(max-width:900px){.hero-grid,.payload{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.cta-inner{align-items:flex-start;flex-direction:column}}@media(max-width:560px){.wrap{width:calc(100% - 32px)}.hero{padding:42px 0}.section{padding:64px 0}.stats{gap:9px}.stats strong{font-size:20px}.stats span{font-size:10px}.specs{grid-template-columns:1fr}.specs div{padding:15px}.hero h1{font-size:42px}}
 </style>
