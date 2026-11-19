@@ -50,7 +50,12 @@ export default defineEventHandler(async (event) => {
   if (verification) request = request.eq('verification_status', verification)
   if (supplierId) request = request.eq('supplier_id', supplierId)
   if (search) {
-    const safe = search.split('').filter((char) => char !== ',' && char !== '(' && char !== ')' && char !== '%' && char !== '.' && char !== '*').join('').trim()
+    const safe = [...search].filter((char) => {
+      const code = char.codePointAt(0) ?? 0
+      return (code >= 48 && code <= 57) || (code >= 65 && code <= 90) ||
+        (code >= 97 && code <= 122) || (code >= 0x4e00 && code <= 0x9fff) ||
+        char === ' ' || char === '-'
+    }).join('').trim()
     if (safe) {
       request = request.or(
         'name.ilike.%' + safe + '%,name_en.ilike.%' + safe + '%,model.ilike.%' + safe + '%,brand.ilike.%' + safe + '%',
