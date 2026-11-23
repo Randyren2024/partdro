@@ -19,10 +19,12 @@ const PRODUCT_SELECT = '*,product_langs(lang,name,description,short_desc)'
 export function useContentApi() {
   const config = useRuntimeConfig()
   const base = String(config.public.supabaseUrl || '').replace(/\/+$/, '')
-  const key = String(config.public.supabaseAnonKey || '')
+  const key = String(
+    config.public.supabasePublishableKey || config.public.supabaseAnonKey || '',
+  )
 
   async function rest<T = any>(table: string, params: Record<string, string>): Promise<T> {
-    if (!base || !key) throw new Error('Supabase public URL / anon key 未配置')
+    if (!base || !key) throw new Error('Supabase public URL / publishable key 未配置')
     const qs = new URLSearchParams(params).toString()
     const res = await fetch(`${base}/rest/v1/${table}?${qs}`, {
       headers: { apikey: key, Authorization: `Bearer ${key}` },

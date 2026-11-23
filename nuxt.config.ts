@@ -11,17 +11,20 @@ const PRESET_NEWS = ['drone-cleaning-industry-trends-2026', 'c500-first-flight-t
 const ALL_LOCALES = ['', '/de', '/es', '/fr']
 
 /**
- * 构建期兜底值（Supabase 项目 URL + anon key）。
+ * 构建期兜底值（Supabase 项目 URL + publishable key）。
  *
  * 这两个值本来就是公开的：NUXT_PUBLIC_* 会被序列化进客户端 bundle，任何访客
  * 都能在浏览器里看到。把它们做成「构建缺了就出 86 页薄站」的必填 secret，
  * 只会增加一个失败模式而不增加任何安全性。
- * 真正需要保密的是 service_role key（只在 Nitro 服务端用，走 Cloudflare
- * Pages 的运行时环境变量）。
- * 环境变量存在时仍然优先，方便切换项目。
+ * 真正需要保密的是 secret key（sb_secret_...，替代 service_role），只在 Nitro
+ * 服务端用，走运行时环境变量。环境变量存在时仍然优先，方便切换到本地 WSL 实例。
  */
-const PUBLIC_SUPABASE_URL = 'https://uphfcvquglafkszqqxiq.supabase.co'
-const PUBLIC_SUPABASE_ANON_KEY = 'sb_publishable_gZ5lDMIYJBTn7TfhN_ASzg_1DytunFt'
+const PUBLIC_SUPABASE_URL =
+  process.env.NUXT_PUBLIC_SUPABASE_URL || 'https://uphfcvquglafkszqqxiq.supabase.co'
+const PUBLIC_SUPABASE_PUBLISHABLE_KEY =
+  process.env.NUXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY ||
+  'sb_publishable_gZ5lDMIYJBTn7TfhN_ASzg_1DytunFt'
 
 async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
   if (!url || !key) {
@@ -76,6 +79,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // 服务端 only（不会进客户端 bundle）
     supabaseUrl: '',
+    // 新式 secret key（sb_secret_...），对应 NUXT_SUPABASE_SECRET_KEY
+    supabaseSecretKey: '',
+    // legacy service_role key（2027 年初退役），仅作兼容回退
     supabaseServiceRoleKey: '',
     // DirectMail（阿里云）
     directmailAccessKeyId: '',
@@ -97,9 +103,11 @@ export default defineNuxtConfig({
     public: {
       // 客户端可见
       siteUrl: 'https://www.droneworld.tech',
-      // anon key 本来就是公开值（会进浏览器 bundle），默认值避免漏配导致客户端无数据
+      // publishable key 本来就是公开值（会进浏览器 bundle），默认值避免漏配导致客户端无数据
       supabaseUrl: PUBLIC_SUPABASE_URL,
-      supabaseAnonKey: PUBLIC_SUPABASE_ANON_KEY,
+      supabasePublishableKey: PUBLIC_SUPABASE_PUBLISHABLE_KEY,
+      // 兼容旧字段名（2027 年前 anon key 退役，届时可删除）
+      supabaseAnonKey: PUBLIC_SUPABASE_PUBLISHABLE_KEY,
       gtmId: 'GTM-KJ7GJ3V5',
       // Ads 转化（客户端用）
       adsConversionId: '',
@@ -130,6 +138,24 @@ export default defineNuxtConfig({
 
   nitro: {
     compressPublicAssets: true,
+    // The U15 premium landing (app/pages/products/u15-multi-mission-drone.vue)
+    // imports landing/u15/src/App.vue, whose media paths are absolute under
+    // /products/u15-multi-mission-drone/. Serve that app's public/ tree there
+    // so dev and Nuxt builds resolve the images and demo video. The baseURLs
+    // are the media subpaths only: mounting the whole public dir on the page
+    // path would shadow the Nuxt route itself.
+    publicAssets: [
+      {
+        dir: 'landing/u15/public/images',
+        baseURL: '/products/u15-multi-mission-drone/images',
+        maxAge: 60 * 60 * 24,
+      },
+      {
+        dir: 'landing/u15/public/video',
+        baseURL: '/products/u15-multi-mission-drone/video',
+        maxAge: 60 * 60 * 24,
+      },
+    ],
     // All application pages are prerendered as static HTML. Only API endpoints
     // need the Pages Worker; routing every request through it makes Nitro emit
     // one exclusion per generated file, which can exceed Cloudflare's 100-char
@@ -210,7 +236,7 @@ export default defineNuxtConfig({
       // 直接用公开常量，不读环境变量：secret 里存过一个失效的旧 anon key，
       // 一旦覆盖就静默退化成 86 页薄站。公开值不值得为它引入这个失败模式。
       const url = PUBLIC_SUPABASE_URL
-      const key = PUBLIC_SUPABASE_ANON_KEY
+      const key = PUBLIC_SUPABASE_PUBLISHABLE_KEY
       let productSlugs = PRESET_PRODUCTS
       let newsSlugs = PRESET_NEWS
 

@@ -1,7 +1,6 @@
 import { watch, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { supabase } from '../supabase/client'
-import { callFunction } from '../lib/netlifyApi'
 import i18nInstance, { setI18nInstance } from '../i18n'
 // NOTE: Static JSON imports replaced with dynamic fetch to avoid vite-json plugin errors.
 // Translation files live at i18n/i18n/{en,de,es,fr}.json — Nuxt i18n module loads them
@@ -39,9 +38,6 @@ export const EDITABLE_NAMESPACES = [
 const dynamicNamespaces = new Set<string>()
 const allNamespaces = () => [...EDITABLE_NAMESPACES, ...dynamicNamespaces]
 
-const staticNs = (lang: string, ns: string) =>
-  STATIC[lang]?.[ns] ?? (dynamicNamespaces.has(ns) ? defaultLandingTemplate() : {})
-
 // 图片/视频覆盖：按 lang 分组的 reactive 对象，组件直接读写
 export const imgOverridesByLang = reactive<Record<string, Record<string, string>>>({})
 export const videoOverridesByLang = reactive<Record<string, Record<string, string>>>({})
@@ -64,10 +60,6 @@ export function getSectionLayout(ns: string): SectionLayoutItem[] {
   }
   // 其余新产品默认空白（由 /admin/editor 排版后保存 __layout）
   return defaultSectionLayout()
-}
-
-export function setSectionLayout(ns: string, items: SectionLayoutItem[]) {
-  layoutByNs[ns] = items.map((it) => ({ ...it }))
 }
 
 function isPlainObject(v: any): v is Record<string, any> {
@@ -288,87 +280,4 @@ export function useLandingContent() {
 
   const { locale } = i18n
   watch(locale, (l) => { void loadAndMerge(l) }, { immediate: true, flush: 'pre' })
-}
-
-/** 计算相对静态默认值的差异（只存被改动过的叶子），跳过 __images/__videos 键。 */
-function diffAgainst(base: any, edited: any): any {
-  if (edited === null || typeof edited !== 'object') {
-    return edited !== base ? edited : undefined
-  }
-  const out: any = Array.isArray(edited) ? [] : {}
-  let changed = false
-  for (const k of Object.keys(edited)) {
-    if (k === IMAGES_KEY || k === VIDEOS_KEY || k === LAYOUT_KEY) continue
-    const v = diffAgainst(base?.[k], edited[k])
-    if (v !== undefined) {
-      out[k] = v
-      changed = true
-    }
-  }
-  return changed ? out : undefined
-}
-
-/** 管理员：保存单个命名空间（diff 仅存差异 + 图片/视频覆盖序列化到 __images/__videos）。 */
-export async function saveEditableNamespace(
-  ns: string,
-  lang: string,
-  editedText: object,
-  images?: Record<string, string>,
-  videos?: Record<string, string>,
-): Promise<void> {
-  const diff = diffAgainst(staticNs(lang, ns), editedText) ?? {}
-  // 仅保留属于该命名空间的覆盖（key 以 ns. 开头）
-  if (images) {
-    const nsImages = Object.fromEntries(
-      Object.entries(images).filter(([k]) => k === ns || k.startsWith(ns + '.')),
-    )
-    if (Object.keys(nsImages).length > 0) diff[IMAGES_KEY] = nsImages
-  }
-  if (videos) {
-    const nsVideos = Object.fromEntries(
-      Object.entries(videos).filter(([k]) => k === ns || k.startsWith(ns + '.')),
-    )
-    if (Object.keys(nsVideos).length > 0) diff[VIDEOS_KEY] = nsVideos
-  }
-  // 区块布局：仅当该 ns 有已存布局或已偏离默认时写入
-  const layout = layoutByNs[ns]
-  if (layout) {
-    diff[LAYOUT_KEY] = layout
-  }
-  // 空保存保护：无任何差异且数据库也没有已存内容时跳过（防清空/防冗余行）
-  const prev = cache.get(`${ns}::${lang}`)
-  if (Object.keys(diff).length === 0 && (!prev || Object.keys(prev).length === 0)) return
-  await callFunction('landing-content', { namespace: ns, lang, content: diff })
-  cache.set(`${ns}::${lang}`, diff)
-  applyNamespaceOverrides(lang, ns, diff)
-}
-
-/** 兼容旧调用：保存 d15r 命名空间。 */
-export async function saveEditableD15r(
-  lang: string,
-  editedText: object,
-  images?: Record<string, string>,
-  videos?: Record<string, string>,
-): Promise<void> {
-  return saveEditableNamespace('d15r', lang, editedText, images, videos)
-}
-
-/** 一次性保存所有命名空间。收集当前 i18n 消息树中所有可编辑 ns 的改动。 */
-export async function saveAllNamespaces(
-  lang: string,
-  videos?: Record<string, string>,
-): Promise<void> {
-  const msgs = i18nInstance.global.getLocaleMessage(lang) as any
-  const allImages = imgOverridesByLang[lang] || {}
-  for (const ns of allNamespaces()) {
-    // 用 ?? {} 而不是 continue：某语言只改图/视频不改文时，改动不能丢
-    const tree = msgs?.[ns] ?? {}
-    await saveEditableNamespace(
-      ns,
-      lang,
-      JSON.parse(JSON.stringify(tree)),
-      allImages,
-      videos,
-    )
-  }
 }

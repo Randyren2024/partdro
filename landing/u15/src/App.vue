@@ -789,11 +789,10 @@ onBeforeUnmount(() => {
               <a :href="fallbackMailto">{{ content.quote.form.fallbackLink }}</a>
             </p>
 
+            <!-- Keep this text-only: browsers parse element children inside
+                 <noscript> as raw text, which breaks Vue SSR hydration. -->
             <noscript>
-              <p class="quote__noscript">
-                {{ content.quote.form.noscript }}
-                <a :href="fallbackMailto">{{ CONTACT_EMAIL }}</a>
-              </p>
+              {{ content.quote.form.noscript }} {{ CONTACT_EMAIL }}
             </noscript>
           </form>
         </div>

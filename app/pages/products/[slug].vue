@@ -10,8 +10,6 @@
       <span>{{ theme === 'dark' ? 'Light' : 'Dark' }}</span>
     </button>
 
-    <SectionPanel v-if="editMode" v-model="sectionLayout" />
-
     <main id="top">
       <template v-for="item in sectionLayout" :key="item.id">
         <component
@@ -32,10 +30,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, provide, ref, watch } from 'vue'
+import { computed, provide, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { useAuthStore } from '~/stores/auth'
 import { buildBreadcrumbLd, buildProductLd, injectJsonLd } from '~/utils/structuredData'
 import { productSeo } from '~/utils/productMeta'
 import {
@@ -44,14 +41,11 @@ import {
   registerProductNamespace,
   useLandingContent,
   getSectionLayout,
-  setSectionLayout,
 } from '~/composables/useLandingContent'
 import { trackEvent } from '~/composables/useTracking'
 import { parseVideoUrl } from '~/composables/useVideo'
 import { landingSectionKey } from '~/components/product/sectionContext'
 import { SECTION_COMPONENTS } from '~/components/product/sectionRegistry'
-import SectionPanel from '~/components/product/SectionPanel.vue'
-import type { SectionLayoutItem } from '~/components/product/sectionIds'
 import '~/components/product/landing.css'
 
 const route = useRoute()
@@ -69,14 +63,8 @@ function toggleTheme() {
   colorMode.preference = theme.value === 'dark' ? 'light' : 'dark'
 }
 
-// 编辑模式下禁用 lightbox（点击用于编辑而非放大）
-const editMode = ref(false)
-onMounted(async () => {
-  // Admin state is browser-session state; do not instantiate Pinia auth during SSG.
-  const auth = useAuthStore()
-  await auth.init()
-  editMode.value = auth.isLoggedIn
-})
+// 编辑模式已移除（admin 模块重建中）：恒为 false，保留给各区块组件使用
+const editMode = computed(() => false)
 
 // ====== 按路由 slug 参数化：i18n namespace + 图片目录 ======
 const ns = computed(() => (route.params.slug as string) || 'd15r')
@@ -284,11 +272,8 @@ function closeLightbox() {
   lightboxSrc.value = ''
 }
 
-// ====== 区块布局（Elementor 式排序 / 显隐） ======
-const sectionLayout = computed({
-  get: () => getSectionLayout(ns.value),
-  set: (items: SectionLayoutItem[]) => setSectionLayout(ns.value, items),
-})
+// ====== 区块布局（读取已保存顺序 / 显隐） ======
+const sectionLayout = computed(() => getSectionLayout(ns.value))
 
 // ====== 向子区块提供共享上下文 ======
 provide(landingSectionKey, {
