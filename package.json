@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "postbuild": "node scripts/generate-sitemap.mjs",
+    "postbuild": "node scripts/fix-pages-dist.mjs",
     "preview": "nuxt preview",
     "deploy": "wrangler pages deploy dist",
     "typecheck": "nuxt typecheck",

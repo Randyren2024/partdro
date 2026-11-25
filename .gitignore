@@ -26,6 +26,8 @@ legacy-vite/public/images/Taurus 80e*.png
 
 # Local Netlify folder
 .netlify
+# Supabase local sync state (contains pooler URL / credentials)
+supabase/.temp/
 # Python venv (iopaint) and browser debug snapshots
 iopaint/.venv/
 iopaint/start.log

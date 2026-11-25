@@ -9,12 +9,19 @@ import { createClient } from '@supabase/supabase-js'
 
 export function getSupabaseServer(event: any = null) {
   const config = event ? useRuntimeConfig(event) : useRuntimeConfig()
-  const secretKey = config.supabaseSecretKey || config.supabaseServiceRoleKey
-  if (!config.supabaseUrl || !secretKey) {
+  const cfEnv = event?.context?.cloudflare?.env || {}
+  const supabaseUrl =
+    config.supabaseUrl || process.env.SUPABASE_URL || cfEnv.SUPABASE_URL
+  const secretKey =
+    config.supabaseSecretKey ||
+    config.supabaseServiceRoleKey ||
+    process.env.SUPABASE_SECRET_KEY ||
+    cfEnv.SUPABASE_SECRET_KEY
+  if (!supabaseUrl || !secretKey) {
     throw new Error(
       'Supabase 服务端凭据未配置: NUXT_SUPABASE_URL / NUXT_SUPABASE_SECRET_KEY' +
         '（legacy: NUXT_SUPABASE_SERVICE_ROLE_KEY）',
     )
   }
-  return createClient(config.supabaseUrl, secretKey)
+  return createClient(supabaseUrl, secretKey)
 }

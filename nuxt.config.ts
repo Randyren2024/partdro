@@ -20,11 +20,14 @@ const ALL_LOCALES = ['', '/de', '/es', '/fr']
  * 服务端用，走运行时环境变量。环境变量存在时仍然优先，方便切换到本地 WSL 实例。
  */
 const PUBLIC_SUPABASE_URL =
-  process.env.NUXT_PUBLIC_SUPABASE_URL || 'https://uphfcvquglafkszqqxiq.supabase.co'
+  process.env.NUXT_PUBLIC_SUPABASE_URL ||
+  process.env.SUPABASE_URL ||
+  'https://npxpxlosubxgkgsbyfnv.supabase.co'
 const PUBLIC_SUPABASE_PUBLISHABLE_KEY =
   process.env.NUXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
   process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY ||
-  'sb_publishable_gZ5lDMIYJBTn7TfhN_ASzg_1DytunFt'
+  process.env.SUPABASE_PUBLISHABLE_KEY ||
+  ''
 
 async function fetchSlugs(url: string, key: string, table: string): Promise<string[]> {
   if (!url || !key) {
@@ -185,13 +188,13 @@ export default defineNuxtConfig({
       routes: [
         '/index.html',
         // 默认语言 en（无前缀）
-        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/cases', '/news', '/documents', '/about', '/contact',
+        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/products/cw-15-vtol-mapping-drone', '/cases', '/news', '/documents', '/about', '/contact',
         // de
-        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
+        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/products/cw-15-vtol-mapping-drone', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
         // es
-        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/products/vf50p-long-endurance-vtol-uav', '/es/products/u15-multi-mission-drone', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
+        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/products/vf50p-long-endurance-vtol-uav', '/es/products/u15-multi-mission-drone', '/es/products/cw-15-vtol-mapping-drone', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
         // fr
-        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/products/vf50p-long-endurance-vtol-uav', '/fr/products/u15-multi-mission-drone', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
+        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/products/vf50p-long-endurance-vtol-uav', '/fr/products/u15-multi-mission-drone', '/fr/products/cw-15-vtol-mapping-drone', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
         // 3 个 solutions 预设路径（每种语言 × 3）
         '/solutions/facade-cleaning', '/solutions/solar-panel-cleaning', '/solutions/heavy-lift-logistics',
         '/de/solutions/facade-cleaning', '/de/solutions/solar-panel-cleaning', '/de/solutions/heavy-lift-logistics',
@@ -242,9 +245,7 @@ export default defineNuxtConfig({
 
       if (url && key) {
         const ps = await fetchSlugs(url, key, 'products')
-        const ns = await fetchSlugs(url, key, 'posts')
         if (ps.length) productSlugs = ps
-        if (ns.length) newsSlugs = ns
       } else {
         console.warn('[prerender] Supabase env not set, using hardcoded slug lists')
       }
