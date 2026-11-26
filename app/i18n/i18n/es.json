@@ -78,7 +78,12 @@
     "results": "productos",
     "noResults": "No se encontraron drones coincidentes",
     "noResultsHint": "Pruebe otro modelo, categoría o capacidad, o contáctenos para recibir ayuda.",
-    "clearFilters": "Borrar filtros"
+    "clearFilters": "Borrar filtros",
+    "c80": {
+      "name": "EAUAV Vertex C80/C80P Dron de limpieza de fachadas",
+      "category": "Dron de limpieza",
+      "desc": "Sistema de limpieza de fachadas con agua para edificios de hasta 120 m — 45 min de autonomía, hasta 1.000 m²/h, boquillas de espuma y presión."
+    }
   },
   "cases": {
     "title": "Casos de Aplicación",

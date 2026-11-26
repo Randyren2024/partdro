@@ -57,7 +57,7 @@
         </nav>
 
         <div v-if="productsLoading && !products.length" class="catalog-loading"><a-spin size="large" /></div>
-        <div v-else-if="filteredProducts.length || showU15" class="product-grid">
+        <div v-else-if="filteredProducts.length || showU15 || showC80" class="product-grid">
           <div class="product-card" v-for="product in filteredProducts" :key="product.slug">
             <div class="product-card__image">
               <img :src="product.image_url" :alt="product.name" loading="lazy" decoding="async" width="640" height="420" />
@@ -75,6 +75,20 @@
               <router-link v-else :to="lp('/products/' + product.slug)" class="product-card__link">
                 {{ t('products.viewDetails') }} <RightOutlined />
               </router-link>
+            </div>
+          </div>
+
+          <div v-if="showC80" class="product-card">
+            <div class="product-card__image">
+              <img :src="C80_IMAGE" :alt="t('products.c80.name')" loading="lazy" decoding="async" width="640" height="420" />
+              <div class="product-card__category">{{ t('products.c80.category') }}</div>
+            </div>
+            <div class="product-card__body">
+              <h3>{{ t('products.c80.name') }}</h3>
+              <p>{{ t('products.c80.desc') }}</p>
+              <a :href="lp(C80_LANDING_PATH)" class="product-card__link">
+                {{ t('products.viewDetails') }} <RightOutlined />
+              </a>
             </div>
           </div>
 
@@ -122,6 +136,9 @@ const C500_LANDING_PATH = '/products/c500-partdro-eavision'
 const U15_LANDING_PATH = '/products/u15-multi-mission-drone'
 const U15_IMAGE = `${U15_LANDING_PATH}/images/hero.webp`
 const U15_VISIBLE_IN: ProductCategory[] = ['cargo']
+const C80_LANDING_PATH = '/products/vertex-c80-facade-cleaning-drone'
+const C80_IMAGE = '/images/c80/hero.jpg'
+const C80_VISIBLE_IN: ProductCategory[] = ['cleaning']
 const VF50P_SLUG = 'vf50p-long-endurance-vtol-uav'
 const VF50P_LANDING_PATH = '/products/vf50p-long-endurance-vtol-uav'
 
@@ -181,7 +198,16 @@ const showU15 = computed(() => {
   ])
 })
 
-const resultCount = computed(() => filteredProducts.value.length + (showU15.value ? 1 : 0))
+const showC80 = computed(() => {
+  const categoryMatches = !activeCategory.value || C80_VISIBLE_IN.includes(activeCategory.value)
+  return categoryMatches && matchesQuery([
+    t('products.c80.name'),
+    t('products.c80.category'),
+    t('products.c80.desc'),
+    'EAUAV Vertex C80 C80P facade cleaning drone water-fed high-rise window roof 120m',
+  ])
+})
+const resultCount = computed(() => filteredProducts.value.length + (showU15.value ? 1 : 0) + (showC80.value ? 1 : 0))
 
 function applySearch() {
   const query = searchQuery.value.trim()

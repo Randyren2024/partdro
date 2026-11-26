@@ -78,7 +78,12 @@
     "results": "Produkte",
     "noResults": "Keine passenden Drohnen gefunden",
     "noResultsHint": "Versuchen Sie ein anderes Modell, eine andere Kategorie oder Funktion – oder kontaktieren Sie uns.",
-    "clearFilters": "Filter zurücksetzen"
+    "clearFilters": "Filter zurücksetzen",
+    "c80": {
+      "name": "EAUAV Vertex C80/C80P Fassadenreinigungsdrohne",
+      "category": "Reinigungsdrohne",
+      "desc": "Wassergeführtes Fassadenreinigungssystem für Gebäude bis 120 m — 45 Min. Flugzeit, bis 1.000 m²/h, Schaum- und Druckdüsen."
+    }
   },
   "cases": {
     "title": "Fallstudien",

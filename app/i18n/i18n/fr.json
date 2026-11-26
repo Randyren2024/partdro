@@ -78,7 +78,12 @@
     "results": "produits",
     "noResults": "Aucun drone correspondant trouvé",
     "noResultsHint": "Essayez un autre modèle, une autre catégorie ou capacité, ou contactez-nous.",
-    "clearFilters": "Effacer les filtres"
+    "clearFilters": "Effacer les filtres",
+    "c80": {
+      "name": "EAUAV Vertex C80/C80P Drone de nettoyage de façades",
+      "category": "Drone de nettoyage",
+      "desc": "Système de nettoyage de façades à eau pour bâtiments jusqu’à 120 m — 45 min d’autonomie, jusqu’à 1 000 m²/h, buses mousse et pression."
+    }
   },
   "cases": {
     "title": "Études de Cas",

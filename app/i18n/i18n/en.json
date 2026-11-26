@@ -78,7 +78,12 @@
     "results": "products",
     "noResults": "No matching drones found",
     "noResultsHint": "Try another model, category or capability, or contact us for help.",
-    "clearFilters": "Clear filters"
+    "clearFilters": "Clear filters",
+    "c80": {
+      "name": "EAUAV Vertex C80/C80P Facade Cleaning Drone",
+      "category": "Cleaning Drone",
+      "desc": "Water-fed facade cleaning system for buildings up to 120 m — 45 min endurance, up to 1,000 m²/h, foam and pressure nozzles."
+    }
   },
   "cases": {
     "title": "Application Cases",

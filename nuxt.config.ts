@@ -158,6 +158,20 @@ export default defineNuxtConfig({
         baseURL: '/products/u15-multi-mission-drone/video',
         maxAge: 60 * 60 * 24,
       },
+      // The VF50P premium landing (app/pages/products/vf50p-long-endurance-vtol-uav.vue)
+      // imports landing/vf50p/src/App.vue, whose media + og image paths are absolute
+      // under /products/vf50p-long-endurance-vtol-uav/. Serve that app's public/ tree
+      // there so dev and Nuxt builds resolve the images, og preview and demo video.
+      {
+        dir: 'landing/vf50p/public/images',
+        baseURL: '/products/vf50p-long-endurance-vtol-uav/images',
+        maxAge: 60 * 60 * 24,
+      },
+      {
+        dir: 'landing/vf50p/public/video',
+        baseURL: '/products/vf50p-long-endurance-vtol-uav/video',
+        maxAge: 60 * 60 * 24,
+      },
     ],
     // All application pages are prerendered as static HTML. Only API endpoints
     // need the Pages Worker; routing every request through it makes Nitro emit
@@ -188,13 +202,13 @@ export default defineNuxtConfig({
       routes: [
         '/index.html',
         // 默认语言 en（无前缀）
-        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/products/cw-15-vtol-mapping-drone', '/cases', '/news', '/documents', '/about', '/contact',
+        '/products', '/products/c500-partdro-eavision', '/products/vf50p-long-endurance-vtol-uav', '/products/u15-multi-mission-drone', '/products/vertex-c80-facade-cleaning-drone', '/cases', '/news', '/documents', '/about', '/contact',
         // de
-        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/products/cw-15-vtol-mapping-drone', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
+        '/de', '/de/products', '/de/products/c500-partdro-eavision', '/de/products/vf50p-long-endurance-vtol-uav', '/de/products/u15-multi-mission-drone', '/de/products/vertex-c80-facade-cleaning-drone', '/de/cases', '/de/news', '/de/documents', '/de/about', '/de/contact',
         // es
-        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/products/vf50p-long-endurance-vtol-uav', '/es/products/u15-multi-mission-drone', '/es/products/cw-15-vtol-mapping-drone', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
+        '/es', '/es/products', '/es/products/c500-partdro-eavision', '/es/products/vf50p-long-endurance-vtol-uav', '/es/products/u15-multi-mission-drone', '/es/products/vertex-c80-facade-cleaning-drone', '/es/cases', '/es/news', '/es/documents', '/es/about', '/es/contact',
         // fr
-        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/products/vf50p-long-endurance-vtol-uav', '/fr/products/u15-multi-mission-drone', '/fr/products/cw-15-vtol-mapping-drone', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
+        '/fr', '/fr/products', '/fr/products/c500-partdro-eavision', '/fr/products/vf50p-long-endurance-vtol-uav', '/fr/products/u15-multi-mission-drone', '/fr/products/vertex-c80-facade-cleaning-drone', '/fr/cases', '/fr/news', '/fr/documents', '/fr/about', '/fr/contact',
         // 3 个 solutions 预设路径（每种语言 × 3）
         '/solutions/facade-cleaning', '/solutions/solar-panel-cleaning', '/solutions/heavy-lift-logistics',
         '/de/solutions/facade-cleaning', '/de/solutions/solar-panel-cleaning', '/de/solutions/heavy-lift-logistics',
